@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+:root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+@layer base {
+  :root {
+    --primary: hsla(30, 100%, 60%, 1);
+    /* --secondary: hsla(55, 61%, 33%, 1); */
+    --neutral: hsla(201, 64%, 4%, 1);
+  }
+}
+
+.rounded {
+  @apply p-10 rounded-[2.5rem];
+}
