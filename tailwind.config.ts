@@ -13,7 +13,7 @@ const config = {
     extend: {
       container: {
         center: true,
-        padding: "3rem",
+        padding: "5rem",
         screens: {
           xl: "1440px",
         },
