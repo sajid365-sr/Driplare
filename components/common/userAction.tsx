@@ -9,12 +9,16 @@ const UserAction = async () => {
   return (
     <div>
       {user ? (
-        <UserButton />
+        <UserButton afterSignOutUrl="/sign-in" />
       ) : (
-        <div>
-          <Link href="sign-in">Login</Link>
+        <div className="flex gap-2">
+          <Link className="hover:underline" href="sign-in">
+            Login
+          </Link>
           {"/"}
-          <Link href="sign-up">Register</Link>
+          <Link className="hover:underline" href="sign-up">
+            Register
+          </Link>
         </div>
       )}
     </div>

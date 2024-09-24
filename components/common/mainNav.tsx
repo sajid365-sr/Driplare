@@ -57,10 +57,11 @@ const MainNav = () => {
 
   return (
     <div>
-      <NavigationMenu className="w-3/5">
+      <NavigationMenu className="font-primary">
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuLink
+              datatype="active"
               href="/"
               className={cn(navigationMenuTriggerStyle())}
             >

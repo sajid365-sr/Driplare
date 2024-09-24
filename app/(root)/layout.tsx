@@ -4,7 +4,7 @@ import React from "react";
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <div className="h-[200vh]">
       <Navbar />
       {children}
       <Footer />
