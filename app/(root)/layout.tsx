@@ -7,7 +7,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="h-[200vh]">
       <Navbar />
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
