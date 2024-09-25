@@ -3,11 +3,8 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 
-export async function POST(res: any) {
+export async function POST(res) {
   try {
-    // Save the email to your database here
-
-    // Send a confirmation email
     await resend.emails.send({
       from: "Your Company <onboarding@resend.dev>",
       to: res.body.email,
