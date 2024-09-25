@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Montserrat, Forum } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Driplare",
@@ -44,7 +45,10 @@ export default function RootLayout({
       }}
     >
       <html lang="en" className={` ${montserrat.variable} ${forum.variable}`}>
-        <body>{children}</body>
+        <body>
+          {children}
+          <Toaster />
+        </body>
       </html>
     </ClerkProvider>
   );

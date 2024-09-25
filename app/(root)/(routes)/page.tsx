@@ -5,7 +5,7 @@ const Homepage = () => {
   const environment = process.env.NEXT_PUBLIC_ENVIRONMENT;
 
   return (
-    <section className="container ">
+    <section>
       {environment === "development" && <UnderConstruction />}
 
       {environment === "production" && (

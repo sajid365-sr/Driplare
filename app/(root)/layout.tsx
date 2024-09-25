@@ -3,11 +3,12 @@ import Navbar from "@/components/common/navbar";
 import React from "react";
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
+  const environment = process.env.NEXT_PUBLIC_ENVIRONMENT;
   return (
-    <div className="h-[200vh]">
-      <Navbar />
+    <div>
+      {environment === "production" && <Navbar />}
       {children}
-      {/* <Footer /> */}
+      {environment === "production" && <Footer />}
     </div>
   );
 };

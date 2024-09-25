@@ -16,9 +16,9 @@ const MainNav = () => {
 
   const menuItem = [
     {
-      href: `/projects`,
-      label: "Projects",
-      active: pathName === `/projects`,
+      href: `/portfolio`,
+      label: "Portfolio",
+      active: pathName === `/portfolio`,
     },
     {
       href: `/teams`,
@@ -26,9 +26,9 @@ const MainNav = () => {
       active: pathName === `/teams`,
     },
     {
-      href: `/about-us`,
-      label: "About Us",
-      active: pathName === `/about-us`,
+      href: `/contact-us`,
+      label: "Contact Us",
+      active: pathName === `/contact-us`,
     },
   ];
 
@@ -65,7 +65,7 @@ const MainNav = () => {
               href="/"
               className={cn(navigationMenuTriggerStyle())}
             >
-              Overview
+              Home
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
