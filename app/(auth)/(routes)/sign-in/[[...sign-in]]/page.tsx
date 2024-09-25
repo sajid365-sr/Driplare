@@ -6,7 +6,7 @@ import logo from "@/assets/logo.png";
 
 const SignInPage = () => {
   return (
-    <section className="h-screen lg:container">
+    <section className=" lg:container">
       <Link href="/" className="xs:pl-5 pt-5 inline-block">
         <Image
           src={logo}
