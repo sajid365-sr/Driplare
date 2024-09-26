@@ -1,5 +1,8 @@
 import path from "path";
 
+// Define possible database clients as a type
+type DatabaseClient = "mysql" | "postgres" | "sqlite";
+
 // Define the type for env function
 interface Env {
   (key: string, defaultValue?: string | number | boolean): string;
@@ -8,9 +11,10 @@ interface Env {
 }
 
 export default ({ env }: { env: Env }) => {
-  const client = env("DATABASE_CLIENT", "sqlite");
+  // Explicitly cast the client as one of the valid types
+  const client = env("DATABASE_CLIENT", "sqlite") as DatabaseClient;
 
-  const connections = {
+  const connections: Record<DatabaseClient, any> = {
     mysql: {
       connection: {
         host: env("DATABASE_HOST", "localhost"),
@@ -77,6 +81,7 @@ export default ({ env }: { env: Env }) => {
   return {
     connection: {
       client,
+      // Ensure the client type is used to index into the connections object
       ...connections[client],
       acquireConnectionTimeout: env.int("DATABASE_CONNECTION_TIMEOUT", 60000),
     },
