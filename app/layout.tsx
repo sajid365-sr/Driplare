@@ -3,6 +3,8 @@ import "./globals.css";
 import { Montserrat, Forum } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Driplare",
@@ -48,6 +50,8 @@ export default function RootLayout({
         <body>
           {children}
           <Toaster />
+          <Analytics />
+          <SpeedInsights />
         </body>
       </html>
     </ClerkProvider>
