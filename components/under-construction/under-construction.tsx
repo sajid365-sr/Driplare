@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Hammer, Mail, Facebook, Twitter, Linkedin } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
