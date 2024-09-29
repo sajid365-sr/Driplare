@@ -1,26 +1,20 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Montserrat, Forum } from "next/font/google";
+import { Raleway } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 export const metadata: Metadata = {
   title: "Driplare",
   description: "Your digital evolution starts here",
 };
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-montserrat",
-});
-const forum = Forum({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-forum",
+const raleway = Raleway({
   weight: "400",
+  subsets: ["latin"],
 });
 
 export default function RootLayout({
@@ -46,12 +40,19 @@ export default function RootLayout({
         },
       }}
     >
-      <html lang="en" className={` ${montserrat.variable} ${forum.variable}`}>
+      <html lang="en" className={raleway.className}>
         <body>
-          {children}
-          <Toaster />
-          <Analytics />
-          <SpeedInsights />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+            <Analytics />
+            <SpeedInsights />
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

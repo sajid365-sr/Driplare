@@ -3,25 +3,30 @@ import { currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
+import { ThemeToggle } from "./theme.toggle";
 
 const UserAction = async () => {
   const user = await currentUser();
 
   return (
-    <div>
+    <div className="flex justify-center items-center gap-3 ">
       {user ? (
-        <UserButton afterSignOutUrl="/sign-in" />
+        <div>
+          <UserButton afterSignOutUrl="/sign-in" />
+        </div>
       ) : (
-        <div className="flex gap-2">
-          <Link className="hover:underline" href="sign-in">
+        <div className=" gap-2 hidden md:flex">
+          <Link href="sign-in">
             <Button variant="outline">Sign In</Button>
           </Link>
 
-          <Link className="hover:underline" href="sign-up">
+          <Link href="sign-up">
             <Button className="bg-neutral text-white">Create Account</Button>
           </Link>
         </div>
       )}
+
+      <ThemeToggle />
     </div>
   );
 };

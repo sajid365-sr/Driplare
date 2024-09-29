@@ -3,17 +3,24 @@ import logo from "@/assets/logo.png";
 import UserAction from "./userAction";
 import MainNav from "./mainNav";
 import Link from "next/link";
+import { getServicesRoute } from "@/actions/get-services-route";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const serviceRoute = await getServicesRoute();
+
   return (
-    <section className="flex justify-between container py-3">
-      <Link href="/" className="w-1/5 flex justify-start">
-        <Image src={logo} alt="Driplare Logo" width={150} />
+    <section className="flex justify-between px-3 items-center lg:container py-3">
+      <Link href="/">
+        <Image
+          className="w-[140px] md:w-[150px] lg:w-[160px]"
+          src={logo}
+          alt="Driplare Logo"
+        />
       </Link>
-      <MainNav />
-      <div className="w-1/5 flex justify-end">
-        <UserAction />
-      </div>
+
+      <MainNav services={serviceRoute} />
+
+      <UserAction />
     </section>
   );
 };
