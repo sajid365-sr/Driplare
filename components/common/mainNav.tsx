@@ -36,7 +36,7 @@ function DesktopDropdown({
             transition={{ duration: 0.3 }}
             className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
           >
-            <div className="py-1">
+            <div className="py-1 font-semibold">
               {services.map((service) => (
                 <Link
                   key={service.href}
@@ -140,7 +140,7 @@ const MainNav: React.FC<ServicesProps> = ({ services }) => {
     <nav className="">
       <div className=" w-full px-4 sm:px-6 ">
         <div className="flex justify-between h-16">
-          <div className="hidden items-center justify-center sm:ml-6 sm:flex sm:space-x-8">
+          <div className="hidden  items-center justify-center sm:ml-6 sm:flex sm:space-x-8">
             {menuItem.map((item) =>
               item.dropdown ? (
                 <DesktopDropdown
@@ -153,7 +153,7 @@ const MainNav: React.FC<ServicesProps> = ({ services }) => {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "hover:border-gray-700 hover:border-b",
+                    "hover:border-gray-700 font-semibold hover:border-b",
                     pathName === item.href &&
                       "text-primary hover:border-b hover:border-primary"
                   )}

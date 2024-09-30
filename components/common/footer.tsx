@@ -23,7 +23,7 @@ const Footer = async () => {
   const serviceRoute = await getServicesRoute();
 
   return (
-    <footer className="bg-gray-100  bottom-0 dark:bg-gray-900">
+    <footer className="bg-gray-100 container bottom-0 dark:bg-gray-900">
       <div className="container mx-auto px-6 py-8">
         <div className="flex space-y-5   lg:space-x-5 items-center flex-col md:flex-row">
           {/* Section 1: About Driplare */}

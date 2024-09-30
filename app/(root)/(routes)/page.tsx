@@ -1,11 +1,15 @@
-import { getTeams } from "@/actions/get-teams";
+"use client";
+
 import UnderConstruction from "@/components/under-construction/under-construction";
+import { LiveChatWidget, EventHandlerPayload } from "@livechat/widget-react";
 
 import React from "react";
 
-const Homepage = async () => {
+const Homepage = () => {
   const environment = process.env.NEXT_PUBLIC_ENVIRONMENT;
-  const teams = await getTeams();
+  function handleNewEvent(event: EventHandlerPayload<"onNewEvent">) {
+    console.log("LiveChatWidget.onNewEvent", event);
+  }
 
   return (
     <section>
@@ -17,6 +21,11 @@ const Homepage = async () => {
           eligendi aspernatur at asperiores saepe placeat unde porro, sed
           accusamus doloremque temporibus perspiciatis commodi dolores ex.
           Facere excepturi aliquid corporis voluptas?
+          <LiveChatWidget
+            license="12345678"
+            visibility="maximized"
+            onNewEvent={handleNewEvent}
+          />
         </div>
       )}
     </section>
