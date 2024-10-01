@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/providers/theme-provider";
+import WhatsAppProvider from "@/providers/whatsapp-provider";
 
 export const metadata: Metadata = {
   title: "Driplare",
@@ -52,6 +53,7 @@ export default function RootLayout({
             <Toaster />
             <Analytics />
             <SpeedInsights />
+            <WhatsAppProvider />
           </ThemeProvider>
         </body>
       </html>

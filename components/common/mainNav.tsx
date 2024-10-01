@@ -23,7 +23,7 @@ function DesktopDropdown({
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <button className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium  hover:text-gray-700  ">
+      <button className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm   hover:text-gray-700  ">
         {item.label}
         <ChevronDown className="ml-1 h-4 w-4" />
       </button>
@@ -36,7 +36,7 @@ function DesktopDropdown({
             transition={{ duration: 0.3 }}
             className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
           >
-            <div className="py-1 font-semibold">
+            <div className="py-1 ">
               {services.map((service) => (
                 <Link
                   key={service.href}
@@ -66,7 +66,7 @@ function MobileDropdown({
   return (
     <div>
       <button
-        className="w-full flex justify-between items-center pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300"
+        className="w-full flex justify-between items-center pl-3 pr-4 py-2 border-l-4 border-transparent text-base  text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300"
         onClick={() => setIsOpen(!isOpen)}
       >
         {item.label}
@@ -87,7 +87,7 @@ function MobileDropdown({
               <Link
                 key={service.href}
                 href={service.href}
-                className="block pl-8 pr-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+                className="block pl-8 pr-4 py-2 text-base  text-gray-500 hover:text-gray-800 hover:bg-gray-100"
               >
                 {service.label}
               </Link>
@@ -153,7 +153,7 @@ const MainNav: React.FC<ServicesProps> = ({ services }) => {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "hover:border-gray-700 font-semibold hover:border-b",
+                    "hover:border-gray-700  hover:border-b",
                     pathName === item.href &&
                       "text-primary hover:border-b hover:border-primary"
                   )}
@@ -197,7 +197,7 @@ const MainNav: React.FC<ServicesProps> = ({ services }) => {
                         key={item.href}
                         href={item.href}
                         className={cn(
-                          "block pl-3 pr-4 py-2 border-l-4 text-base font-medium",
+                          "block pl-3 pr-4 py-2 border-l-4 text-base ",
                           pathName === item.href
                             ? "bg-indigo-50 border-indigo-500 text-indigo-700"
                             : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"

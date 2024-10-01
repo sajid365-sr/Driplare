@@ -21,7 +21,7 @@ const UserAction = async () => {
           </Link>
 
           <Link href="sign-up">
-            <Button className="bg-neutral text-white">Create Account</Button>
+            <Button className="bg-primary font-semibold">Create Account</Button>
           </Link>
         </div>
       )}

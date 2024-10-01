@@ -5,13 +5,21 @@ import logo from "@/assets/logo.png";
 import { getServicesRoute } from "@/actions/get-services-route";
 
 const socialLinks = [
-  { name: "Facebook", icon: Facebook, href: "#" },
-  { name: "LinkedIn", icon: Linkedin, href: "#" },
+  {
+    name: "Facebook",
+    icon: Facebook,
+    href: "https://www.facebook.com/driplare/",
+  },
+  {
+    name: "LinkedIn",
+    icon: Linkedin,
+    href: "https://www.linkedin.com/company/driplare",
+  },
   { name: "Twitter", icon: Twitter, href: "#" },
-  { name: "WhatsApp", icon: Phone, href: "#" },
 ];
 
 const importantLinks = [
+  { name: "Affiliate", href: "/affiliate" },
   { name: "Client Review", href: "/client-review" },
   { name: "Our Portfolio", href: "/portfolio" },
   { name: "Terms & Conditions", href: "/terms-conditions" },
@@ -89,6 +97,7 @@ const Footer = async () => {
                 <Link
                   key={link.name}
                   href={link.href}
+                  target="_blank"
                   className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
                 >
                   <link.icon className="h-6 w-6" />

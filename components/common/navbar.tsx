@@ -7,12 +7,11 @@ import { getServicesRoute } from "@/actions/get-services-route";
 
 const Navbar = async () => {
   const serviceRoute = await getServicesRoute();
-
   return (
     <section className="flex justify-between px-3 items-center lg:container py-3">
       <Link href="/">
         <Image
-          className="w-[140px] md:w-[150px] lg:w-[160px]"
+          className="w-[140px]  md:w-[150px] lg:w-[160px]"
           src={logo}
           alt="Driplare Logo"
         />
