@@ -11,9 +11,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import useDarkMode from "@/hooks/use-dark-mode";
 
 export function ThemeToggle() {
   const { setTheme } = useTheme();
+  const { setIsDark } = useDarkMode();
 
   return (
     <DropdownMenu>
@@ -27,13 +29,19 @@ export function ThemeToggle() {
       <DropdownMenuContent align="end" className="bg-white dark:bg-neutral">
         <DropdownMenuItem
           className="hover:bg-gray-100 hover:dark:bg-gray-800"
-          onClick={() => setTheme("light")}
+          onClick={() => {
+            setTheme("light");
+            setIsDark(false);
+          }}
         >
           Light
         </DropdownMenuItem>
         <DropdownMenuItem
           className="hover:bg-gray-100 hover:dark:bg-gray-800"
-          onClick={() => setTheme("dark")}
+          onClick={() => {
+            setIsDark(true);
+            setTheme("dark");
+          }}
         >
           Dark
         </DropdownMenuItem>

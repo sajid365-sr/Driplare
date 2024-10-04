@@ -8,7 +8,7 @@ import { getServicesRoute } from "@/actions/get-services-route";
 const Navbar = async () => {
   const serviceRoute = await getServicesRoute();
   return (
-    <section className="flex justify-between px-3 items-center lg:container py-3">
+    <section className="flex justify-between px-3 items-center lg:container py-3 z-50">
       <Link href="/">
         <Image
           className="w-[140px]  md:w-[150px] lg:w-[160px]"
