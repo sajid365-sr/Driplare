@@ -112,17 +112,17 @@ const Footer = async () => {
                 Contact
               </h2>
               <ul className="space-y-2 ">
-                <li className="flex items-center justify-center lg:justify-start text-gray-600 dark:text-gray-400">
+                <li className="flex flex-col md:flex-row items-center justify-center lg:justify-start text-gray-600 dark:text-gray-400">
                   <Phone className="h-5 w-5 mr-2" />
                   <span>+880 1608331365</span>
                 </li>
-                <li className="flex items-center justify-center lg:justify-start text-gray-600 dark:text-gray-400">
+                <li className="flex flex-col md:flex-row items-center justify-center lg:justify-start text-gray-600 dark:text-gray-400">
                   <Mail className="h-5 w-5 mr-2" />
                   <a href="mailto:info@driplare.com">info@driplare.com</a>
                 </li>
-                <li className="flex items-center justify-center lg:justify-start text-gray-600 dark:text-gray-400">
+                <li className="flex flex-col md:flex-row items-center justify-center lg:justify-start text-gray-600 dark:text-gray-400">
                   <MapPin className="h-5 w-5 mr-2" />
-                  <span>Gazipur, Dhaka, Bangladesh</span>
+                  <span className="">Gazipur, Dhaka, Bangladesh</span>
                 </li>
               </ul>
             </div>

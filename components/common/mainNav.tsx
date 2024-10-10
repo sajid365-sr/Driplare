@@ -7,6 +7,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
+import useMediaQuery from "@/hooks/use-media-query";
 
 function DesktopDropdown({
   item,
@@ -66,7 +67,7 @@ function MobileDropdown({
   return (
     <div>
       <button
-        className="w-full flex justify-between items-center pl-3 pr-4 py-2 border-l-4 border-transparent text-base  text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300"
+        className="w-full flex justify-between items-center pl-3 pr-4 py-2 border-l-4 border-transparent text-base dark:text-white dark:bg-neutral  text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300"
         onClick={() => setIsOpen(!isOpen)}
       >
         {item.label}
@@ -81,13 +82,13 @@ function MobileDropdown({
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="bg-gray-50"
+            className="dark:bg-gray-800"
           >
             {services.map((service) => (
               <Link
                 key={service.href}
                 href={service.href}
-                className="block pl-8 pr-4 py-2 text-base  text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+                className="block pl-8 pr-4 py-2 text-base dark:text-gray-200 text-gray-500 hover:text-gray-800 hover:bg-gray-100"
               >
                 {service.label}
               </Link>
@@ -106,6 +107,8 @@ interface ServicesProps {
 const MainNav: React.FC<ServicesProps> = ({ services }) => {
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  const isMobile = useMediaQuery("(max-width:450px)");
 
   const menuItem = [
     {
@@ -137,83 +140,83 @@ const MainNav: React.FC<ServicesProps> = ({ services }) => {
   ];
 
   return (
-    <nav className="">
-      <div className=" w-full px-4 sm:px-6 ">
-        <div className="flex justify-between h-16">
-          <div className="hidden  items-center justify-center sm:ml-6 sm:flex sm:space-x-8">
-            {menuItem.map((item) =>
-              item.dropdown ? (
-                <DesktopDropdown
-                  key={item.label}
-                  item={item}
-                  services={services}
-                />
-              ) : (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "hover:border-gray-700  hover:border-b",
-                    pathName === item.href &&
-                      "text-primary hover:border-b hover:border-primary"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              )
-            )}
-          </div>
-
-          {/* Mobile Menu */}
-
-          <div className="-mr-2 flex items-center sm:hidden ">
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                >
-                  {isOpen ? (
-                    <X className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Menu
-                      className="block h-6 w-6 fixed right-16"
-                      aria-hidden="true"
-                    />
-                  )}
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="sm:hidden bg-white">
-                <div className="pt-2 pb-3 space-y-1">
-                  {menuItem.map((item) =>
-                    item.dropdown ? (
-                      <MobileDropdown
-                        key={item.label}
-                        item={item}
-                        services={services}
-                      />
-                    ) : (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={cn(
-                          "block pl-3 pr-4 py-2 border-l-4 text-base ",
-                          pathName === item.href
-                            ? "bg-indigo-50 border-indigo-500 text-indigo-700"
-                            : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
-                        )}
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {item.label}
-                      </Link>
-                    )
-                  )}
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+    <nav className="flex justify-center items-center flex-wrap">
+      {!isMobile && (
+        <div className="  items-center justify-center sm:ml-6 sm:flex sm:space-x-8">
+          {menuItem.map((item) =>
+            item.dropdown ? (
+              <DesktopDropdown
+                key={item.label}
+                item={item}
+                services={services}
+              />
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "hover:border-gray-700  hover:border-b",
+                  pathName === item.href &&
+                    "text-primary hover:border-b hover:border-primary"
+                )}
+              >
+                {item.label}
+              </Link>
+            )
+          )}
         </div>
-      </div>
+      )}
+
+      {/* Mobile Menu */}
+
+      {isMobile && (
+        <div className="relative">
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild className="absolute left-16 -bottom-5 ">
+              <Button
+                variant="ghost"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+              >
+                {isOpen ? (
+                  <X className="block h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <Menu className="block h-6 w-6 " aria-hidden="true" />
+                )}
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              side="right"
+              className="sm:hidden bg-white dark:bg-neutral"
+            >
+              <div className="pt-2 pb-3 space-y-1">
+                {menuItem.map((item) =>
+                  item.dropdown ? (
+                    <MobileDropdown
+                      key={item.label}
+                      item={item}
+                      services={services}
+                    />
+                  ) : (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        "block pl-3 pr-4 py-2 border-l-4 text-base ",
+                        pathName === item.href
+                          ? "dark:bg-gray-800 bg-gray-100 border-primary text-primary"
+                          : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 dark:text-white hover:text-gray-700"
+                      )}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      )}
     </nav>
   );
 };
