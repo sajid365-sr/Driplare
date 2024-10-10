@@ -1,9 +1,9 @@
 "use client";
-import { FloatingWhatsApp } from "react-floating-whatsapp";
 import useDarkMode from "@/hooks/use-dark-mode";
+import { FloatingWhatsApp } from "react-floating-whatsapp";
 
 const WhatsAppProvider = () => {
-  const { isDark } = useDarkMode();
+  const isDarkMode = useDarkMode();
   return (
     <div>
       <FloatingWhatsApp
@@ -12,7 +12,7 @@ const WhatsAppProvider = () => {
         avatar="d-logo.png"
         chatMessage={"Hi there.\nLet's build a business."}
         placeholder="Let's talk."
-        // darkMode={true}
+        darkMode={isDarkMode}
         allowEsc={true}
         notificationDelay={5}
         notificationLoop={3}
