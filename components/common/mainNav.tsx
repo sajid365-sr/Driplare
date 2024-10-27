@@ -8,52 +8,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
 import useMediaQuery from "@/hooks/use-media-query";
-
-function DesktopDropdown({
-  item,
-  services,
-}: {
-  item: { label: string; href: string };
-  services: { label: string; href: string }[];
-}) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div
-      className="relative"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-    >
-      <button className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm   hover:text-gray-700  ">
-        {item.label}
-        <ChevronDown className="ml-1 h-4 w-4" />
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
-          >
-            <div className="py-1 ">
-              {services.map((service) => (
-                <Link
-                  key={service.href}
-                  href={service.href}
-                  className="block px-4 py-2 text-sm  hover:bg-gray-100"
-                >
-                  {service.label}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 function MobileDropdown({
   item,
@@ -101,7 +62,7 @@ function MobileDropdown({
 }
 
 interface ServicesProps {
-  services: { label: string; href: string }[];
+  services: { label: string; href: string; description: string }[];
 }
 
 const MainNav: React.FC<ServicesProps> = ({ services }) => {
@@ -139,25 +100,61 @@ const MainNav: React.FC<ServicesProps> = ({ services }) => {
     },
   ];
 
+  const Dropdown = () => {
+    return (
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <AnimatePresence>
+                <motion.ul
+                  initial={{ opacity: 0, y: -100 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -100 }}
+                  transition={{ duration: 0.2 }}
+                  className="grid bg-white dark:bg-neutral  w-[400px] gap-4 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] "
+                >
+                  {services.map(({ href, label, description }) => (
+                    <li key={href}>
+                      <Link
+                        href={href}
+                        className={cn(
+                          "block rounded-md px-4 py-2 transition-colors dark:hover:bg-gray-800 hover:bg-gray-100"
+                        )}
+                      >
+                        <div className="text-sm mb-2 font-semibold  ">
+                          {label}
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          {description}
+                        </p>
+                      </Link>
+                    </li>
+                  ))}
+                </motion.ul>
+              </AnimatePresence>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+    );
+  };
+
   return (
-    <nav className="flex justify-center items-center flex-wrap">
+    <nav className="flex justify-center items-center flex-wrap z-[999]">
       {!isMobile && (
         <div className="  items-center justify-center sm:ml-6 sm:flex sm:space-x-8">
           {menuItem.map((item) =>
             item.dropdown ? (
-              <DesktopDropdown
-                key={item.label}
-                item={item}
-                services={services}
-              />
+              <Dropdown key={item.label} />
             ) : (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "hover:border-gray-700  hover:border-b",
-                  pathName === item.href &&
-                    "text-primary hover:border-b hover:border-primary"
+                  "hover:bg-gray-50 px-3 py-2 rounded-sm",
+                  pathName === item.href && "text-primary"
                 )}
               >
                 {item.label}
@@ -191,11 +188,14 @@ const MainNav: React.FC<ServicesProps> = ({ services }) => {
               <div className="pt-2 pb-3 space-y-1">
                 {menuItem.map((item) =>
                   item.dropdown ? (
-                    <MobileDropdown
-                      key={item.label}
-                      item={item}
-                      services={services}
-                    />
+                    // (
+                    // <MobileDropdown
+                    //   key={item.label}
+                    //   item={item}
+                    //   services={services}
+                    // />
+                    // )
+                    <Dropdown key={item.label} />
                   ) : (
                     <Link
                       key={item.href}

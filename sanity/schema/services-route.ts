@@ -16,6 +16,11 @@ export const servicesRoute = defineType({
       type: "string",
     }),
     defineField({
+      name: "description",
+      title: "Description",
+      type: "string",
+    }),
+    defineField({
       name: "serial",
       title: "Serial Number",
       type: "number",

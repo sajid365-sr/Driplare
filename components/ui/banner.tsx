@@ -2,14 +2,15 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import useDarkMode from "@/hooks/use-dark-mode";
+import Link from "next/link";
 
 export default function Banner() {
   const isDarkMode = useDarkMode();
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white bg-opacity-90 relative overflow-hidden">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white bg-opacity-90 relative overflow-hidden z-0">
       <div
-        className="absolute inset-0 z-0 dark:bg-neutral dark:bg- "
+        className="absolute inset-0 z-0 dark:bg-neutral "
         style={{
           backgroundImage: `
             linear-gradient(to right, ${isDarkMode ? "#222831" : "#eee"}  1px, transparent 1px),
@@ -18,7 +19,7 @@ export default function Banner() {
           backgroundSize: "80px 80px",
         }}
       />
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto  relative z-10">
         <div className="text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -42,9 +43,11 @@ export default function Banner() {
             whileTap={{ scale: 0.95 }}
             className="inline-block"
           >
-            <Button size="lg" className="bg-primary text-neutral">
-              Get Started
-            </Button>
+            <Link href="contact-us">
+              <Button size="lg" className="bg-primary text-neutral">
+                Get Started
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </div>
