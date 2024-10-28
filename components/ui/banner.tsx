@@ -25,6 +25,8 @@ export default function Banner() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
+            whileInView="visible"
+            viewport={{ once: true }}
             className="text-4xl sm:text-5xl md:text-7xl font-semibold  mb-10 leading-tight"
           >
             Empowering Your Digital Presence.
@@ -33,6 +35,8 @@ export default function Banner() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9 }}
+            whileInView="visible"
+            viewport={{ once: true }}
             className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-200  mb-8 max-w-5xl mx-auto"
           >
             Driplare delivers innovative web solutions and striking visuals to

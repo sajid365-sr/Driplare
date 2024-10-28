@@ -3,6 +3,7 @@ import { services } from "@/constants/data";
 import React from "react";
 import { Tilt } from "react-tilt";
 import { ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -30,13 +31,29 @@ const Services = () => {
   return (
     <section className="lg:container px-5 mt-32 flex flex-col gap-10">
       <div className="text-center">
-        <h1 className="lg:text-6xl text-4xl font-semibold">We Offer</h1>
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="lg:text-6xl text-4xl font-semibold"
+        >
+          We Offer
+        </motion.h1>
         <p className="lg:text-xl  mt-5">
           Boost your business with custom, responsive web design and development
           that drives results.
         </p>
       </div>
-      <div className="bg-orange-50 dark:bg-[#161616] rounded-2xl lg:px-16 pl-5 pb-24">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="bg-orange-50 dark:bg-[#161616] rounded-2xl lg:px-16 pl-5 pb-24"
+      >
         <Carousel
           opts={{
             align: "start",
@@ -80,7 +97,7 @@ const Services = () => {
             <CarouselNext />
           </div>
         </Carousel>
-      </div>
+      </motion.div>
     </section>
   );
 };

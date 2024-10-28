@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 
 const AnimatedTextWord = ({
@@ -46,8 +45,9 @@ const AnimatedTextWord = ({
       style={{ overflow: "hidden", display: "flex", flexWrap: "wrap" }}
       variants={container}
       initial="hidden"
-      animate="visible"
       className={className}
+      whileInView="visible"
+      viewport={{ once: true }}
     >
       {words.map((word, index) => (
         <motion.span variants={child} className="lg:mr-8 mr-7" key={index}>
