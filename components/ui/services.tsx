@@ -36,7 +36,7 @@ const Services = () => {
           that drives results.
         </p>
       </div>
-      <div className="bg-orange-50 rounded-2xl lg:pl-20 pl-5 pb-24">
+      <div className="bg-orange-50 dark:bg-[#161616] rounded-2xl lg:px-16 pl-5 pb-24">
         <Carousel
           opts={{
             align: "start",
@@ -47,7 +47,7 @@ const Services = () => {
             {services.map(({ id, title, thumbnail, description }) => (
               <CarouselItem key={id} className="md:basis-1/2 lg:basis-1/3">
                 <Tilt options={defaultOptions}>
-                  <Card className=" h-[400px] w-[350px]  relative bg-white border-0">
+                  <Card className=" h-[400px] w-[350px]  relative dark:bg-neutral bg-white border-0">
                     <CardContent className="p-5">
                       <div className="mb-5 grid place-items-center rounded-md bg-orange-50">
                         <Image
