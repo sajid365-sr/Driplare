@@ -1,12 +1,17 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import AnimatedTextWord from "./AnimatedTextWord";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { fadeIn } from "./variants";
 
 export default function RevealAnimation() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerHeight, setContainerHeight] = useState(0);
+  const isInView = useInView(containerRef, {
+    once: true,
+    margin: "0px 0px -50% 0px",
+  });
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -18,31 +23,28 @@ export default function RevealAnimation() {
     }
   }, []);
 
-  const scale = useTransform(scrollYProgress, [0, 1], [0, 20]);
-
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  // Scale and opacity animations controlled by scroll position and visibility
+  const scale = useTransform(scrollYProgress, [0, 1], [isInView ? 1 : 0, 20]);
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.5],
+    [0, isInView ? 1 : 0]
+  );
 
   return (
-    <div ref={containerRef} className="relative  min-h-screen bg-white">
-      <motion.div
-        className="absolute inset-0 flex items-center overflow-hidden justify-center pointer-events-none "
-        style={{ scale }}
-      >
-        <div className="w-[200px] h-[200px] bg-black rounded-full" />
-      </motion.div>
-      <motion.div
-        className="relative  z-50 flex items-center justify-center"
-        style={{ opacity }}
-      >
-        {/* <AnimatedTextWord
-          text="At Driplare, we are committed to pushing the boundaries of what's possible."
-          className="lg:container text-white px-5 my-20 text-4xl lg:text-8xl"
-        /> */}
-        <h1 className="lg:container text-white px-5 my-20 text-4xl lg:text-8xl">
+    <div ref={containerRef} className="relative   max-w-screen-xl ">
+      <div className="grid place-items-center  ">
+        <motion.div
+          style={{ scale }}
+          className="h-52 w-52 bg-black z-40 absolute rounded-full"
+        />
+      </div>
+      <div className="z-50  lg:container px-5 ">
+        <h1 className="  text-orange-300   text-4xl lg:text-8xl">
           At Driplare, we are committed to pushing the boundaries of what is
           possible.
         </h1>
-      </motion.div>
+      </div>
     </div>
   );
 }

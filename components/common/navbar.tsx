@@ -10,7 +10,7 @@ const Navbar = async () => {
   const serviceRoute = await getServicesRoute();
 
   return (
-    <div className="flex justify-between px-3 items-center lg:container py-3 md:py-6 z-50">
+    <div className="flex justify-between px-3 items-center lg:container py-3 md:py-6 z-30 fixed bg-gray-50">
       <Link href="/">
         <Image
           className="w-[140px]  md:w-[150px] lg:w-[160px]"

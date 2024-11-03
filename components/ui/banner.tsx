@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import useDarkMode from "@/hooks/use-dark-mode";
 import Link from "next/link";
+import { fadeIn } from "@/components/motion/variants";
 
 export default function Banner() {
   const isDarkMode = useDarkMode();
@@ -22,21 +23,19 @@ export default function Banner() {
       <div className="max-w-6xl mx-auto  relative z-10">
         <div className="text-center">
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            whileInView="visible"
-            viewport={{ once: true }}
+            variants={fadeIn("up", 40, 0)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.7 }}
             className="text-4xl sm:text-5xl md:text-7xl font-semibold  mb-10 leading-tight"
           >
             Empowering Your Digital Presence.
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            whileInView="visible"
-            viewport={{ once: true }}
+            variants={fadeIn("right", 60, 0)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.7 }}
             className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-200  mb-8 max-w-5xl mx-auto"
           >
             Driplare delivers innovative web solutions and striking visuals to

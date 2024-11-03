@@ -42,7 +42,7 @@ export default function RootLayout({
       }}
     >
       <html lang="en" className={raleway.className}>
-        <body>
+        <body className="max-w-screen-xl mx-auto">
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

@@ -15,7 +15,6 @@ export function ServiceCarousel() {
       opts={{
         align: "start",
       }}
-      //   className="w-full max-w-sm"
     >
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (

@@ -4,6 +4,7 @@ import React from "react";
 import { Tilt } from "react-tilt";
 import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { fadeIn } from "../motion/variants";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -32,11 +33,10 @@ const Services = () => {
     <section className="lg:container px-5 mt-32 flex flex-col gap-10">
       <div className="text-center">
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          whileInView="visible"
-          viewport={{ once: true }}
+          variants={fadeIn("right", 80, 0)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.7 }}
           className="lg:text-6xl text-4xl font-semibold"
         >
           We Offer
@@ -47,12 +47,11 @@ const Services = () => {
         </p>
       </div>
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="bg-orange-50 dark:bg-[#161616] rounded-2xl lg:px-16 pl-5 pb-24"
+        variants={fadeIn("up", 60, 0)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.7 }}
+        className="bg-gray-50 dark:bg-[#161616] rounded-2xl lg:px-16 pl-5 pb-24"
       >
         <Carousel
           opts={{
@@ -66,7 +65,7 @@ const Services = () => {
                 <Tilt options={defaultOptions}>
                   <Card className=" h-[400px] w-[350px]  relative dark:bg-neutral bg-white border-0">
                     <CardContent className="p-5">
-                      <div className="mb-5 grid place-items-center rounded-md bg-orange-50">
+                      <div className="mb-5 grid place-items-center rounded-md bg-gray-50">
                         <Image
                           src={thumbnail}
                           height={150}
