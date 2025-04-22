@@ -10,7 +10,9 @@ export function LoadingScreen() {
       setIsLoading(false);
     }, 1200);
 
-    return () => clearTimeout(timer);
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   if (!isLoading) return null;

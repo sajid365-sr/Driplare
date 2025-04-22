@@ -4,26 +4,36 @@ import { ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function ScrollToTop() {
+  // Initialize with false to avoid initial rendering
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
+    // Check if window is defined to ensure we're in a browser environment
+    if (typeof window !== 'undefined') {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
     }
   };
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    // Check if window is defined to ensure we're in a browser environment
+    if (typeof window !== 'undefined') {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    // Check if window is defined to ensure we're in a browser environment
+    if (typeof window !== 'undefined') {
+      window.addEventListener("scroll", toggleVisibility);
+      return () => window.removeEventListener("scroll", toggleVisibility);
+    }
   }, []);
 
   return (

@@ -20,6 +20,9 @@ export function StatsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
+    // Ensure we're in a browser environment
+    if (typeof window === 'undefined' || !document) return;
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
