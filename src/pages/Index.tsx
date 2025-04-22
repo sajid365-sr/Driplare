@@ -2,10 +2,13 @@
 import { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
-import { FeaturesSection } from "@/components/FeaturesSection";
-import { CaseStudiesSection } from "@/components/CaseStudiesSection";
-import { StatsSection } from "@/components/StatsSection";
-import { NewsletterSection } from "@/components/NewsletterSection";
+import { CoreSolutionsSection } from "@/components/CoreSolutionsSection";
+import { AISpotlightSection } from "@/components/AISpotlightSection";
+import { PortfolioTeaserSection } from "@/components/PortfolioTeaserSection";
+import { HowWeWorkSection } from "@/components/HowWeWorkSection";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { InsightsPreviewSection } from "@/components/InsightsPreviewSection";
+import { ContactNewsletterSection } from "@/components/ContactNewsletterSection";
 import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { LoadingScreen } from "@/components/LoadingScreen";
@@ -13,6 +16,8 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 const Index = () => {
   // Handle the scroll animations
   useEffect(() => {
+    if (typeof window === 'undefined' || !document) return;
+    
     const handleScroll = () => {
       const elements = document.querySelectorAll(".fade-in, .slide-up");
       
@@ -43,10 +48,13 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <FeaturesSection />
-        <CaseStudiesSection />
-        <StatsSection />
-        <NewsletterSection />
+        <CoreSolutionsSection />
+        <AISpotlightSection />
+        <PortfolioTeaserSection />
+        <HowWeWorkSection />
+        <TestimonialsSection />
+        <InsightsPreviewSection />
+        <ContactNewsletterSection />
       </main>
       <Footer />
       <ScrollToTop />
