@@ -6,11 +6,10 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import WebDesign from "./pages/WebDesign";
 import DigitalMarketing from "./pages/DigitalMarketing";
-import AIServices from "./pages/AIServices"; 
+import AIServices from "./pages/AIServices";
 import Portfolio from "./pages/Portfolio";
 import Insights from "./pages/Insights";
 import Contact from "./pages/Contact";
-import PortfolioShowcase from "./pages/PortfolioShowcase";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +24,6 @@ const App = () => (
           <Route path="/digital-marketing" element={<DigitalMarketing />} />
           <Route path="/ai-services" element={<AIServices />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/showcase" element={<PortfolioShowcase />} />
           <Route path="/insights" element={<Insights />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
@@ -12,38 +11,40 @@ import { ContactNewsletterSection } from "@/components/ContactNewsletterSection"
 import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { LoadingScreen } from "@/components/LoadingScreen";
+import AnimatedGridBg from "@/components/AnimatedGridBg";
 
 const Index = () => {
   // Handle the scroll animations
   useEffect(() => {
-    if (typeof window === 'undefined' || !document) return;
-    
+    if (typeof window === "undefined" || !document) return;
+
     const handleScroll = () => {
       const elements = document.querySelectorAll(".fade-in, .slide-up");
-      
-      elements.forEach(element => {
+
+      elements.forEach((element) => {
         const elementPosition = element.getBoundingClientRect().top;
         const screenPosition = window.innerHeight * 0.85;
-        
+
         if (elementPosition < screenPosition) {
           element.classList.add("appear");
         }
       });
     };
-    
+
     // Initial check on load
     handleScroll();
-    
+
     // Add scroll event listener
     window.addEventListener("scroll", handleScroll);
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
+
   return (
     <div className="min-h-screen flex flex-col">
+      <AnimatedGridBg />
       <LoadingScreen />
       <Navbar />
       <main>
