@@ -207,8 +207,7 @@ export default function DigitalMarketing() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button 
-                className="bg-primary hover:bg-primary/90 text-lg px-8 h-12 shadow-xl"
+              <motion.div
                 animate={{ 
                   boxShadow: ["0 0 0 0 rgba(248, 130, 32, 0.4)", "0 0 0 12px rgba(248, 130, 32, 0)", "0 0 0 0 rgba(248, 130, 32, 0)"]
                 }}
@@ -218,8 +217,12 @@ export default function DigitalMarketing() {
                   repeatType: "loop"
                 }}
               >
-                Request a Free Audit
-              </Button>
+                <Button 
+                  className="bg-primary hover:bg-primary/90 text-lg px-8 h-12 shadow-xl"
+                >
+                  Request a Free Audit
+                </Button>
+              </motion.div>
             </motion.div>
           </div>
         </section>
