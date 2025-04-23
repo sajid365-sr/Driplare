@@ -1,9 +1,8 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import AnimatedGridBg from "@/components/AnimatedGridBg";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { Search, Target, Users, LineChart, PieChart, TrendingUp, BarChart2 } from "lucide-react";
@@ -15,9 +14,8 @@ import { Typewriter } from "@/components/Typewriter";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-// Mock data for the charts
 const performanceData = [
   { name: "Jan", value: 30 },
   { name: "Feb", value: 40 },
@@ -116,7 +114,6 @@ export default function DigitalMarketing() {
         {/* Hero & Value Proposition */}
         <section className="relative min-h-[90vh] flex items-center justify-center py-20 md:py-0">
           <div className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-20">
-            {/* Animated data background SVG */}
             <motion.svg 
               width="100%" 
               height="100%" 
@@ -212,7 +209,6 @@ export default function DigitalMarketing() {
             >
               <Button 
                 className="bg-primary hover:bg-primary/90 text-lg px-8 h-12 shadow-xl"
-                // Subtle pulse animation
                 animate={{ 
                   boxShadow: ["0 0 0 0 rgba(248, 130, 32, 0.4)", "0 0 0 12px rgba(248, 130, 32, 0)", "0 0 0 0 rgba(248, 130, 32, 0)"]
                 }}
@@ -262,10 +258,7 @@ export default function DigitalMarketing() {
         <section className="py-20 container">
           <h2 className="text-xl md:text-2xl font-bold mb-10 text-center">Our Approach</h2>
           <div className="relative max-w-3xl mx-auto">
-            {/* Center circle */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-24 md:h-24 rounded-full bg-primary/10 border border-primary/20 z-0"></div>
-            
-            {/* Approach steps in a circle */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {approachSteps.map((step, idx) => (
                 <motion.div
@@ -291,8 +284,6 @@ export default function DigitalMarketing() {
                 </motion.div>
               ))}
             </div>
-
-            {/* Connecting lines */}
             <svg className="absolute top-0 left-0 w-full h-full z-[-1] hidden md:block">
               <motion.path
                 d="M 150,100 H 350 M 150,300 H 350 M 100,150 V 250 M 400,150 V 250"
@@ -502,15 +493,31 @@ export default function DigitalMarketing() {
   );
 }
 
-// Counter component for animated metrics
 const CountUpDisplay = ({ value }: { value: number }) => {
   const [count, setCount] = useState(0);
   
-  motion.useAnimationFrame(() => {
-    if (count < value) {
-      setCount(Math.min(count + Math.ceil(value / 50), value));
-    }
-  });
+  useEffect(() => {
+    let animationFrameId: number;
+    let lastTime = 0;
+    
+    const animate = (time: number) => {
+      if (lastTime === 0) lastTime = time;
+      const deltaTime = time - lastTime;
+      lastTime = time;
+      
+      if (count < value) {
+        setCount(Math.min(count + Math.ceil(value / 50), value));
+      }
+      
+      if (count < value) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+    
+    animationFrameId = requestAnimationFrame(animate);
+    
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [count, value]);
   
   return <>{count}</>;
 };
