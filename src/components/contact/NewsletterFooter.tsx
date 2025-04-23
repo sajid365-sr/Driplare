@@ -42,15 +42,19 @@ export function NewsletterFooter() {
             className="rounded-md w-full md:w-auto focus-visible:ring-2 focus-visible:ring-[#F88220] transition-all"
             disabled={submitted}
           />
-          <Button
-            type="submit"
-            className="px-8 h-11 bg-[#F88220] hover:bg-[#fa973a] text-lg font-semibold rounded-md shadow-lg transition-transform transition-shadow focus:ring-2 focus:ring-[#F88220] focus:outline-none"
-            style={{ boxShadow: submitted ? "0 4px 20px 0 #F8822099" : "0 2px 20px 0 #F8822066" }}
-            disabled={submitted}
+          <motion.div
             animate={{ scale: submitted ? 1.08 : 1 }}
+            transition={{ duration: 0.2 }}
           >
-            {submitted ? "Subscribed!" : "Subscribe"}
-          </Button>
+            <Button
+              type="submit"
+              className="px-8 h-11 bg-[#F88220] hover:bg-[#fa973a] text-lg font-semibold rounded-md shadow-lg transition-transform transition-shadow focus:ring-2 focus:ring-[#F88220] focus:outline-none"
+              style={{ boxShadow: submitted ? "0 4px 20px 0 #F8822099" : "0 2px 20px 0 #F8822066" }}
+              disabled={submitted}
+            >
+              {submitted ? "Subscribed!" : "Subscribe"}
+            </Button>
+          </motion.div>
         </form>
       </div>
     </motion.div>
