@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
@@ -151,6 +150,16 @@ const Portfolio = () => {
             </TabsContent>
           </Tabs>
         </div>
+        <section className="py-12">
+          <div className="flex justify-center">
+            <a
+              href="/showcase"
+              className="bg-[#F88220] hover:bg-[#fa973a] text-white font-bold px-6 py-3 rounded-lg shadow-md transition hover:scale-105"
+            >
+              New: See Interactive Showcase Page
+            </a>
+          </div>
+        </section>
       </main>
       <Footer />
       <ScrollToTop />
