@@ -10,23 +10,28 @@ import AIServices from "./pages/AIServices";
 import Portfolio from "./pages/Portfolio";
 import Insights from "./pages/Insights";
 import Contact from "./pages/Contact";
+import { ThemeToggle } from "./components/common/ThemeToggle";
+import Layout from "./components/common/layout/Layout";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <ThemeToggle />
     <TooltipProvider>
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/web-design" element={<WebDesign />} />
-          <Route path="/digital-marketing" element={<DigitalMarketing />} />
-          <Route path="/ai-services" element={<AIServices />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/insights" element={<Insights />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Index />} />
+            <Route path="/web-design" element={<WebDesign />} />
+            <Route path="/digital-marketing" element={<DigitalMarketing />} />
+            <Route path="/ai-services" element={<AIServices />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/insights" element={<Insights />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

@@ -1,8 +1,5 @@
-
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { ScrollToTop } from "@/components/ScrollToTop";
-import AnimatedGridBg from "@/components/AnimatedGridBg";
+import { Navbar } from "@/components/common/navigation/Navbar";
+import AnimatedGridBg from "@/components/common/AnimatedGridBg";
 import { HeroSection } from "@/components/contact/HeroSection";
 import { ContactFormWithDetails } from "@/components/contact/ContactFormWithDetails";
 import { TeamGalleryCarousel } from "@/components/contact/TeamGalleryCarousel";
@@ -27,8 +24,6 @@ const Contact = () => {
         </div>
       </main>
       <NewsletterFooter />
-      <Footer />
-      <ScrollToTop />
     </div>
   );
 };

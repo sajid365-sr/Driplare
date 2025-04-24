@@ -1,8 +1,6 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "./ThemeToggle";
 import { MobileMenu } from "./MobileMenu";
 import {
   NavigationMenu,
@@ -14,7 +12,14 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { Code, BarChart2, Brain, MessageSquareCode, UserRound, SlidersHorizontal, ArrowRight } from "lucide-react";
+import {
+  Code,
+  BarChart2,
+  Brain,
+  MessageSquareCode,
+  UserRound,
+  SlidersHorizontal,
+} from "lucide-react";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -33,18 +38,18 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300  ${
         scrolled
           ? "bg-background/80 backdrop-blur-md shadow-sm py-3"
           : "bg-transparent py-5"
       }`}
     >
-      <div className="container flex items-center justify-between">
+      <div className="container flex items-center justify-between ">
         <Link to="/" className="text-2xl font-bold">
-          <span className="text-primary">Drip</span>lare
+          <img src="logo-white.png" alt="Driplare Logo" width={120} />
         </Link>
-        
-        <div className="flex items-center space-x-1">
+
+        <div className="flex items-center space-x-1 ">
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -54,11 +59,11 @@ export function Navbar() {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
-              
+
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
                         <Link
@@ -70,52 +75,76 @@ export function Navbar() {
                             AI Solutions
                           </div>
                           <p className="text-sm leading-tight text-white/90">
-                            Leverage cutting-edge AI technology to transform your business capabilities.
+                            Leverage cutting-edge AI technology to transform
+                            your business capabilities.
                           </p>
                         </Link>
                       </NavigationMenuLink>
                     </li>
                     <li>
-                      <Link to="/web-design" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                      <Link
+                        to="/web-design"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/25 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                      >
                         <div className="flex items-center space-x-2">
                           <Code className="h-5 w-5 text-primary" />
-                          <div className="text-sm font-medium leading-none">Web Design & Development</div>
+                          <div className="text-sm font-medium leading-none">
+                            Web Design & Development
+                          </div>
                         </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                          Beautiful, responsive websites that convert visitors to customers.
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground hover:text-gray-50">
+                          Beautiful, responsive websites that convert visitors
+                          to customers.
                         </p>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/digital-marketing" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                      <Link
+                        to="/digital-marketing"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/25 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                      >
                         <div className="flex items-center space-x-2">
                           <BarChart2 className="h-5 w-5 text-primary" />
-                          <div className="text-sm font-medium leading-none">Digital Marketing</div>
+                          <div className="text-sm font-medium leading-none">
+                            Digital Marketing
+                          </div>
                         </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                          Strategic campaigns that drive growth and increase visibility.
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground hover:text-gray-50">
+                          Strategic campaigns that drive growth and increase
+                          visibility.
                         </p>
                       </Link>
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
                         <div className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none">
-                          <div className="text-sm font-medium mb-2 text-muted-foreground">AI Services</div>
+                          <div className="text-sm font-medium mb-2 text-muted-foreground">
+                            AI Services
+                          </div>
                           <ul className="space-y-2">
                             <li>
-                              <Link to="/ai-services#chatbot" className="flex items-center space-x-2 text-sm hover:text-primary transition-colors">
+                              <Link
+                                to="/ai-services#chatbot"
+                                className="flex items-center space-x-2 text-sm hover:text-primary transition-colors"
+                              >
                                 <MessageSquareCode className="h-4 w-4" />
                                 <span>Chatbot Integration</span>
                               </Link>
                             </li>
                             <li>
-                              <Link to="/ai-services#agents" className="flex items-center space-x-2 text-sm hover:text-primary transition-colors">
+                              <Link
+                                to="/ai-services#agents"
+                                className="flex items-center space-x-2 text-sm hover:text-primary transition-colors"
+                              >
                                 <UserRound className="h-4 w-4" />
                                 <span>Custom AI Agents</span>
                               </Link>
                             </li>
                             <li>
-                              <Link to="/ai-services#automation" className="flex items-center space-x-2 text-sm hover:text-primary transition-colors">
+                              <Link
+                                to="/ai-services#automation"
+                                className="flex items-center space-x-2 text-sm hover:text-primary transition-colors"
+                              >
                                 <SlidersHorizontal className="h-4 w-4" />
                                 <span>AI Automation</span>
                               </Link>
@@ -127,7 +156,7 @@ export function Navbar() {
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
-              
+
               <NavigationMenuItem>
                 <Link to="/portfolio">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -135,7 +164,7 @@ export function Navbar() {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
-              
+
               <NavigationMenuItem>
                 <Link to="/insights">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -143,7 +172,7 @@ export function Navbar() {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
-              
+
               <NavigationMenuItem>
                 <Link to="/contact">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -153,9 +182,11 @@ export function Navbar() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          
-          <ThemeToggle />
-          <Button className="ml-4 bg-primary hover:bg-primary/90 hidden md:inline-flex" size="sm">
+
+          <Button
+            className="ml-4 bg-primary hover:bg-primary/90 hidden md:inline-flex"
+            size="sm"
+          >
             Get Started
           </Button>
           <MobileMenu />

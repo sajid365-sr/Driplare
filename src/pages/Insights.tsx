@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { ScrollToTop } from "@/components/ScrollToTop";
+import { Navbar } from "@/components/common/navigation/Navbar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Search } from "lucide-react";
-import AnimatedGridBg from "@/components/AnimatedGridBg";
+import AnimatedGridBg from "@/components/common/AnimatedGridBg";
 
 const insightPosts = [
   {
@@ -270,8 +268,6 @@ const Insights = () => {
           </motion.div>
         </div>
       </main>
-      <Footer />
-      <ScrollToTop />
     </div>
   );
 };

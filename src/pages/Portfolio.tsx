@@ -1,10 +1,6 @@
-
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { ScrollToTop } from "@/components/ScrollToTop";
-import AnimatedGridBg from "@/components/AnimatedGridBg";
+import { useEffect } from "react";
+import { Navbar } from "@/components/common/navigation/Navbar";
+import AnimatedGridBg from "@/components/common/AnimatedGridBg";
 import { HeroShowcase } from "@/components/portfolio/HeroShowcase";
 import { ProjectGrid } from "@/components/portfolio/ProjectGrid";
 import { FeaturedCaseStudy } from "@/components/portfolio/FeaturedCaseStudy";
@@ -37,8 +33,6 @@ const Portfolio = () => {
         </section>
         <CollaborateBanner />
       </main>
-      <Footer />
-      <ScrollToTop />
     </div>
   );
 };

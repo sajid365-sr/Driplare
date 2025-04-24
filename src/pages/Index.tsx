@@ -1,17 +1,17 @@
 import { useEffect } from "react";
-import { Navbar } from "@/components/Navbar";
-import { HeroSection } from "@/components/HeroSection";
-import { CoreSolutionsSection } from "@/components/CoreSolutionsSection";
-import { AISpotlightSection } from "@/components/AISpotlightSection";
-import { PortfolioTeaserSection } from "@/components/PortfolioTeaserSection";
-import { HowWeWorkSection } from "@/components/HowWeWorkSection";
-import { TestimonialsSection } from "@/components/TestimonialsSection";
-import { InsightsPreviewSection } from "@/components/InsightsPreviewSection";
-import { ContactNewsletterSection } from "@/components/ContactNewsletterSection";
-import { Footer } from "@/components/Footer";
-import { ScrollToTop } from "@/components/ScrollToTop";
+import { Navbar } from "@/components/common/navigation/Navbar";
+import { HeroSection } from "@/components/home/HeroSection";
+import { CoreSolutionsSection } from "@/components/home/CoreSolutionsSection";
+import { AISpotlightSection } from "@/components/home/AISpotlightSection";
+import { PortfolioTeaserSection } from "@/components/home/PortfolioTeaserSection";
+import { HowWeWorkSection } from "@/components/home/HowWeWorkSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { InsightsPreviewSection } from "@/components/home/InsightsPreviewSection";
+import { ContactNewsletterSection } from "@/components/home/ContactNewsletterSection";
+import { Footer } from "@/components/common/Footer";
+import { ScrollToTopButton } from "@/components/common/ScrollToTopButton";
 import { LoadingScreen } from "@/components/LoadingScreen";
-import AnimatedGridBg from "@/components/AnimatedGridBg";
+import AnimatedGridBg from "@/components/common/AnimatedGridBg";
 
 const Index = () => {
   // Handle the scroll animations
@@ -58,7 +58,7 @@ const Index = () => {
         <ContactNewsletterSection />
       </main>
       <Footer />
-      <ScrollToTop />
+      <ScrollToTopButton />
     </div>
   );
 };

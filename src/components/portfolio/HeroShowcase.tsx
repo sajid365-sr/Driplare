@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Typewriter } from "@/components/Typewriter";
@@ -7,14 +6,17 @@ import { Typewriter } from "@/components/Typewriter";
 const images = [
   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600",
   "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?q=80&w=600",
-  "https://images.unsplash.com/photo-1677442135136-760c813dfc5c?q=80&w=600"
+  "https://images.unsplash.com/photo-1677442135136-760c813dfc5c?q=80&w=600",
 ];
 
 export function HeroShowcase() {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => setActive((i) => (i + 1) % images.length), 3200);
+    const timer = setInterval(
+      () => setActive((i) => (i + 1) % images.length),
+      3200
+    );
     return () => clearInterval(timer);
   }, []);
 
@@ -38,7 +40,9 @@ export function HeroShowcase() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: active === i ? 1 : 0 }}
                 transition={{ duration: 0.7 }}
-                style={{ filter: active === i ? "brightness(1)" : "brightness(0.7)" }}
+                style={{
+                  filter: active === i ? "brightness(1)" : "brightness(0.7)",
+                }}
               />
             ))}
           </div>
@@ -59,7 +63,10 @@ export function HeroShowcase() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.7 }}
           >
-            <Typewriter text="Cutting-edge projects powered by AI and innovation." speed={20} />
+            <Typewriter
+              text="Cutting-edge projects powered by AI and innovation."
+              speed={20}
+            />
           </motion.p>
         </div>
       </div>
@@ -68,4 +75,4 @@ export function HeroShowcase() {
 }
 
 // AnimatedGridBg is reused from the existing component
-import AnimatedGridBg from "@/components/AnimatedGridBg";
+import AnimatedGridBg from "@/components/common/AnimatedGridBg";

@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -10,11 +9,13 @@ export function HeroSection() {
       <div className="container relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight leading-tight fade-in slide-up">
-            Empower Your Brand with<br className="hidden md:block" />
+            Empower Your Brand with
+            <br className="hidden md:block" />
             <span className="text-primary">AI-Driven Digital Excellence</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto fade-in slide-up">
-            Cutting-edge solutions that transform how businesses connect with their audience.
+            Cutting-edge solutions that transform how businesses connect with
+            their audience.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 fade-in slide-up">
             <Button className="bg-primary hover:bg-primary/90 h-12 px-8 text-lg">
@@ -27,7 +28,7 @@ export function HeroSection() {
           </div>
         </div>
       </div>
-      
+
       {/* Abstract graphic elements */}
       <div className="absolute -bottom-16 -right-16 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
       <div className="absolute -top-24 -left-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>

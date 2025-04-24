@@ -1,15 +1,32 @@
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { ScrollToTop } from "@/components/ScrollToTop";
+import { Navbar } from "@/components/common/navigation/Navbar";
 import { Button } from "@/components/ui/button";
 import { motion, useAnimation } from "framer-motion";
-import AnimatedGridBg from "@/components/AnimatedGridBg";
+import AnimatedGridBg from "@/components/common/AnimatedGridBg";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import { Search, Target, Users, LineChart, PieChart, TrendingUp, BarChart2 } from "lucide-react";
+import {
+  Search,
+  Target,
+  Users,
+  LineChart,
+  PieChart,
+  TrendingUp,
+  BarChart2,
+} from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import TestimonialSlider from "@/components/TestimonialSlider";
-import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Typewriter } from "@/components/Typewriter";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -71,34 +88,34 @@ const metrics = [
     value: 120,
     label: "organic traffic in 6 months",
     prefix: "+",
-    suffix: "%"
+    suffix: "%",
   },
   {
     value: 30,
     label: "CPC reduced by",
-    suffix: "%"
+    suffix: "%",
   },
   {
     value: 50,
     label: "Engagement rates",
     prefix: "",
-    suffix: "%↑"
-  }
+    suffix: "%↑",
+  },
 ];
 
 const testimonials = [
   {
     quote: "Driplare's strategy doubled our lead generation in just 3 months.",
-    author: "Alex Chen, TechStart"
+    author: "Alex Chen, TechStart",
   },
   {
     quote: "Our PPC campaign ROI increased 4x after switching to Driplare.",
-    author: "Sophia Martinez, GrowthBrand"
+    author: "Sophia Martinez, GrowthBrand",
   },
   {
     quote: "SEO rankings jumped from page 3 to page 1 in competitive keywords.",
-    author: "James Wilson, MarketEdge"
-  }
+    author: "James Wilson, MarketEdge",
+  },
 ];
 
 export default function DigitalMarketing() {
@@ -110,76 +127,104 @@ export default function DigitalMarketing() {
       <AnimatedGridBg />
       <Navbar />
       <main className="flex-1 flex flex-col z-10">
-
         {/* Hero & Value Proposition */}
         <section className="relative min-h-[90vh] flex items-center justify-center py-20 md:py-0">
           <div className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-20">
-            <motion.svg 
-              width="100%" 
-              height="100%" 
-              viewBox="0 0 100 100" 
+            <motion.svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 100 100"
               className="w-full h-full"
               initial={{ opacity: 0.2 }}
               animate={{ opacity: 0.4 }}
-              transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
             >
-              <motion.rect 
-                x="10" 
-                y="10" 
-                width="80" 
-                height="10" 
-                rx="2" 
-                fill="#F88220" 
+              <motion.rect
+                x="10"
+                y="10"
+                width="80"
+                height="10"
+                rx="2"
+                fill="#F88220"
                 fillOpacity="0.3"
                 initial={{ width: 0 }}
                 animate={{ width: 80 }}
-                transition={{ duration: 2.5, repeat: Infinity, repeatType: "loop", repeatDelay: 1 }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  repeatDelay: 1,
+                }}
               />
-              <motion.rect 
-                x="10" 
-                y="30" 
-                width="65" 
-                height="10" 
-                rx="2" 
-                fill="#F88220" 
+              <motion.rect
+                x="10"
+                y="30"
+                width="65"
+                height="10"
+                rx="2"
+                fill="#F88220"
                 fillOpacity="0.3"
                 initial={{ width: 0 }}
                 animate={{ width: 65 }}
-                transition={{ duration: 3, repeat: Infinity, repeatType: "loop", repeatDelay: 0.5 }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  repeatDelay: 0.5,
+                }}
               />
-              <motion.rect 
-                x="10" 
-                y="50" 
-                width="40" 
-                height="10" 
-                rx="2" 
-                fill="#F88220" 
+              <motion.rect
+                x="10"
+                y="50"
+                width="40"
+                height="10"
+                rx="2"
+                fill="#F88220"
                 fillOpacity="0.3"
                 initial={{ width: 0 }}
                 animate={{ width: 40 }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: "loop", repeatDelay: 1.5 }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  repeatDelay: 1.5,
+                }}
               />
-              <motion.rect 
-                x="10" 
-                y="70" 
-                width="75" 
-                height="10" 
-                rx="2" 
-                fill="#F88220" 
+              <motion.rect
+                x="10"
+                y="70"
+                width="75"
+                height="10"
+                rx="2"
+                fill="#F88220"
                 fillOpacity="0.3"
                 initial={{ width: 0 }}
                 animate={{ width: 75 }}
-                transition={{ duration: 3.5, repeat: Infinity, repeatType: "loop", repeatDelay: 0.75 }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  repeatDelay: 0.75,
+                }}
               />
-              <motion.circle 
-                cx="85" 
-                cy="40" 
-                r="10" 
-                fill="#F88220" 
+              <motion.circle
+                cx="85"
+                cy="40"
+                r="10"
+                fill="#F88220"
                 fillOpacity="0.3"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ duration: 1.5, repeat: Infinity, repeatType: "loop", repeatDelay: 2 }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  repeatDelay: 2,
+                }}
               />
             </motion.svg>
           </div>
@@ -208,18 +253,20 @@ export default function DigitalMarketing() {
               whileTap={{ scale: 0.95 }}
             >
               <motion.div
-                animate={{ 
-                  boxShadow: ["0 0 0 0 rgba(248, 130, 32, 0.4)", "0 0 0 12px rgba(248, 130, 32, 0)", "0 0 0 0 rgba(248, 130, 32, 0)"]
+                animate={{
+                  boxShadow: [
+                    "0 0 0 0 rgba(248, 130, 32, 0.4)",
+                    "0 0 0 12px rgba(248, 130, 32, 0)",
+                    "0 0 0 0 rgba(248, 130, 32, 0)",
+                  ],
                 }}
-                transition={{ 
+                transition={{
                   duration: 2,
                   repeat: Infinity,
-                  repeatType: "loop"
+                  repeatType: "loop",
                 }}
               >
-                <Button 
-                  className="bg-primary hover:bg-primary/90 text-lg px-8 h-12 shadow-xl"
-                >
+                <Button className="bg-primary hover:bg-primary/90 text-lg px-8 h-12 shadow-xl">
                   Request a Free Audit
                 </Button>
               </motion.div>
@@ -230,27 +277,36 @@ export default function DigitalMarketing() {
         {/* Core Capabilities */}
         <section className="py-20 bg-muted/50">
           <div className="container">
-            <h2 className="text-xl md:text-2xl font-bold mb-8 text-center">Core Capabilities</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-8 text-center">
+              Core Capabilities
+            </h2>
             <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-4 px-4">
               {capabilities.map((capability, idx) => (
-                <motion.div 
+                <motion.div
                   key={capability.title}
                   className="flex-1 bg-background rounded-xl shadow-lg p-6 flex flex-col items-center"
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5, delay: idx * 0.2 }}
-                  whileHover={{ y: -8, boxShadow: "0 10px 25px -5px rgba(248, 130, 32, 0.3)" }}
+                  whileHover={{
+                    y: -8,
+                    boxShadow: "0 10px 25px -5px rgba(248, 130, 32, 0.3)",
+                  }}
                 >
-                  <motion.div 
+                  <motion.div
                     className="mb-4"
                     whileHover={{ scale: 1.2, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     {capability.icon}
                   </motion.div>
-                  <h3 className="text-lg font-semibold mb-2">{capability.title}</h3>
-                  <p className="text-center text-muted-foreground">{capability.desc}</p>
+                  <h3 className="text-lg font-semibold mb-2">
+                    {capability.title}
+                  </h3>
+                  <p className="text-center text-muted-foreground">
+                    {capability.desc}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -259,7 +315,9 @@ export default function DigitalMarketing() {
 
         {/* Our Approach */}
         <section className="py-20 container">
-          <h2 className="text-xl md:text-2xl font-bold mb-10 text-center">Our Approach</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-10 text-center">
+            Our Approach
+          </h2>
           <div className="relative max-w-3xl mx-auto">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-24 md:h-24 rounded-full bg-primary/10 border border-primary/20 z-0"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -275,9 +333,12 @@ export default function DigitalMarketing() {
                   onMouseEnter={() => setActiveApproach(idx)}
                 >
                   <div className="flex items-center mb-3">
-                    <motion.div 
+                    <motion.div
                       className="p-2 rounded-full bg-primary/10"
-                      whileHover={{ scale: 1.1, backgroundColor: "rgba(248, 130, 32, 0.2)" }}
+                      whileHover={{
+                        scale: 1.1,
+                        backgroundColor: "rgba(248, 130, 32, 0.2)",
+                      }}
                     >
                       {step.icon}
                     </motion.div>
@@ -307,7 +368,9 @@ export default function DigitalMarketing() {
         {/* Success Metrics */}
         <section className="py-20 bg-muted/50">
           <div className="container">
-            <h2 className="text-xl md:text-2xl font-bold mb-10 text-center">Success Metrics</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-10 text-center">
+              Success Metrics
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {metrics.map((metric, idx) => (
                 <motion.div
@@ -317,14 +380,16 @@ export default function DigitalMarketing() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.6, delay: idx * 0.2 }}
-                  whileHover={{ 
-                    scale: 1.05, 
-                    boxShadow: "0 10px 30px -5px rgba(248, 130, 32, 0.2)"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 10px 30px -5px rgba(248, 130, 32, 0.2)",
                   }}
                 >
                   <div className="flex items-center justify-center">
-                    <span className="text-muted-foreground">{metric.prefix || ""}</span>
-                    <motion.span 
+                    <span className="text-muted-foreground">
+                      {metric.prefix || ""}
+                    </span>
+                    <motion.span
                       className="text-4xl md:text-5xl font-bold text-primary"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
@@ -333,9 +398,13 @@ export default function DigitalMarketing() {
                     >
                       <CountUpDisplay value={metric.value} />
                     </motion.span>
-                    <span className="text-xl font-semibold">{metric.suffix || ""}</span>
+                    <span className="text-xl font-semibold">
+                      {metric.suffix || ""}
+                    </span>
                   </div>
-                  <p className="text-center text-muted-foreground mt-3">{metric.label}</p>
+                  <p className="text-center text-muted-foreground mt-3">
+                    {metric.label}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -344,7 +413,9 @@ export default function DigitalMarketing() {
 
         {/* Case Study Spotlight */}
         <section className="py-20 container">
-          <h2 className="text-xl md:text-2xl font-bold mb-10 text-center">Case Study Spotlight</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-10 text-center">
+            Case Study Spotlight
+          </h2>
           <div className="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
             <motion.div
               className="flex flex-col"
@@ -360,13 +431,15 @@ export default function DigitalMarketing() {
               <div className="mb-6">
                 <h4 className="font-semibold mb-2">Challenge</h4>
                 <p className="text-muted-foreground">
-                  Struggling with high PPC costs and low organic visibility in a competitive market.
+                  Struggling with high PPC costs and low organic visibility in a
+                  competitive market.
                 </p>
               </div>
               <div className="mb-6">
                 <h4 className="font-semibold mb-2">Solution</h4>
                 <p className="text-muted-foreground">
-                  Integrated SEO content strategy with targeted paid campaigns and conversion rate optimization.
+                  Integrated SEO content strategy with targeted paid campaigns
+                  and conversion rate optimization.
                 </p>
               </div>
               <div>
@@ -378,7 +451,7 @@ export default function DigitalMarketing() {
                 </ul>
               </div>
             </motion.div>
-            
+
             <motion.div
               className="bg-background/90 p-6 rounded-xl shadow-lg"
               initial={{ opacity: 0, x: 30 }}
@@ -386,18 +459,20 @@ export default function DigitalMarketing() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h4 className="font-semibold mb-4 text-center">Campaign Performance</h4>
+              <h4 className="font-semibold mb-4 text-center">
+                Campaign Performance
+              </h4>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={performanceData}>
                   <XAxis dataKey="name" />
                   <YAxis />
-                  <motion.g 
+                  <motion.g
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, delay: 0.5 }}
                   >
-                    <Bar 
-                      dataKey="value" 
+                    <Bar
+                      dataKey="value"
                       fill="#F88220"
                       animationDuration={2000}
                       radius={[4, 4, 0, 0]}
@@ -411,7 +486,9 @@ export default function DigitalMarketing() {
 
         {/* Client Testimonials */}
         <section className="py-20 bg-muted/50">
-          <h2 className="text-xl md:text-2xl font-bold mb-12 text-center">Client Testimonials</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-12 text-center">
+            Client Testimonials
+          </h2>
           <TestimonialSlider />
         </section>
 
@@ -419,7 +496,7 @@ export default function DigitalMarketing() {
         <section className="py-24 container flex justify-center">
           <Drawer>
             <DrawerTrigger asChild>
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-full max-w-md"
@@ -431,7 +508,9 @@ export default function DigitalMarketing() {
             </DrawerTrigger>
             <DrawerContent className="px-6 pb-8">
               <div className="mx-auto w-full max-w-md">
-                <h2 className="text-xl font-bold mb-6 mt-4 text-center">Tell Us About Your Project</h2>
+                <h2 className="text-xl font-bold mb-6 mt-4 text-center">
+                  Tell Us About Your Project
+                </h2>
                 <form className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
@@ -439,12 +518,17 @@ export default function DigitalMarketing() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" placeholder="you@example.com" type="email" />
+                    <Input
+                      id="email"
+                      placeholder="you@example.com"
+                      type="email"
+                    />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="service">Service Interest</Label>
-                    <select 
-                      id="service" 
+                    <select
+                      title="text"
+                      id="service"
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                     >
                       <option>SEO & Content Strategy</option>
@@ -455,8 +539,9 @@ export default function DigitalMarketing() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="budget">Budget Range</Label>
-                    <select 
-                      id="budget" 
+                    <select
+                      title="text"
+                      id="budget"
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                     >
                       <option>Less than $5,000</option>
@@ -467,8 +552,8 @@ export default function DigitalMarketing() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea 
-                      id="message" 
+                    <Textarea
+                      id="message"
                       placeholder="Tell us about your marketing goals..."
                       className="min-h-[120px]"
                     />
@@ -490,37 +575,35 @@ export default function DigitalMarketing() {
           </Button>
         </section>
       </main>
-      <Footer />
-      <ScrollToTop />
     </div>
   );
 }
 
 const CountUpDisplay = ({ value }: { value: number }) => {
   const [count, setCount] = useState(0);
-  
+
   useEffect(() => {
     let animationFrameId: number;
     let lastTime = 0;
-    
+
     const animate = (time: number) => {
       if (lastTime === 0) lastTime = time;
       const deltaTime = time - lastTime;
       lastTime = time;
-      
+
       if (count < value) {
         setCount(Math.min(count + Math.ceil(value / 50), value));
       }
-      
+
       if (count < value) {
         animationFrameId = requestAnimationFrame(animate);
       }
     };
-    
+
     animationFrameId = requestAnimationFrame(animate);
-    
+
     return () => cancelAnimationFrame(animationFrameId);
   }, [count, value]);
-  
+
   return <>{count}</>;
 };
