@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/common/navigation/Navbar";
+
 import AnimatedGridBg from "@/components/common/AnimatedGridBg";
 import { HeroSection } from "@/components/contact/HeroSection";
 import { ContactFormWithDetails } from "@/components/contact/ContactFormWithDetails";
@@ -10,7 +10,6 @@ const Contact = () => {
   return (
     <div className="relative min-h-screen flex flex-col bg-[#1A1F2C] text-white overflow-x-hidden">
       <AnimatedGridBg />
-      <Navbar />
       <main className="flex-1 pt-0 relative z-10">
         <HeroSection />
         <div className="container my-20 max-w-6xl mx-auto">
