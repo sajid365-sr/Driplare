@@ -3,10 +3,36 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { sendContactNotificationToAdmin } from "@/utils/email-service";
 
 export function NewsletterFooter() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      // Use the generic form submission since we don't have enough fields for newsletter
+      await sendContactNotificationToAdmin(
+        "Footer Newsletter Subscriber",
+        email,
+        "N/A",
+        "Newsletter",
+        "New footer newsletter subscription"
+      );
+      
+      toast.success("You've been subscribed to our newsletter!");
+      setEmail("");
+    } catch (error) {
+      console.error("Error subscribing to newsletter:", error);
+      toast.error("There was a problem with your subscription. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <motion.div
@@ -25,12 +51,7 @@ export function NewsletterFooter() {
 
         <form
           className="flex-1 flex flex-col sm:flex-row items-center md:justify-end gap-3"
-          onSubmit={e => {
-            e.preventDefault();
-            setSubmitted(true);
-            setTimeout(() => setSubmitted(false), 2400);
-            setEmail("");
-          }}
+          onSubmit={handleSubmit}
         >
           <Input
             type="email"
@@ -40,19 +61,19 @@ export function NewsletterFooter() {
             value={email}
             onChange={e => setEmail(e.target.value)}
             className="rounded-md w-full md:w-auto focus-visible:ring-2 focus-visible:ring-[#F88220] transition-all"
-            disabled={submitted}
+            disabled={isSubmitting}
           />
           <motion.div
-            animate={{ scale: submitted ? 1.08 : 1 }}
+            animate={{ scale: isSubmitting ? 1.08 : 1 }}
             transition={{ duration: 0.2 }}
           >
             <Button
               type="submit"
               className="px-8 h-11 bg-[#F88220] hover:bg-[#fa973a] text-lg font-semibold rounded-md shadow-lg transition-transform transition-shadow focus:ring-2 focus:ring-[#F88220] focus:outline-none"
-              style={{ boxShadow: submitted ? "0 4px 20px 0 #F8822099" : "0 2px 20px 0 #F8822066" }}
-              disabled={submitted}
+              style={{ boxShadow: isSubmitting ? "0 4px 20px 0 #F8822099" : "0 2px 20px 0 #F8822066" }}
+              disabled={isSubmitting}
             >
-              {submitted ? "Subscribed!" : "Subscribe"}
+              {isSubmitting ? "Subscribing..." : "Subscribe"}
             </Button>
           </motion.div>
         </form>

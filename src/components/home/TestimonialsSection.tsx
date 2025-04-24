@@ -38,7 +38,7 @@ export function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard
               key={index}

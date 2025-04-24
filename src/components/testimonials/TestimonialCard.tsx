@@ -28,11 +28,12 @@ export function TestimonialCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
+      className="flex-1"
     >
       <Collapsible
         open={isOpen}
         onOpenChange={setIsOpen}
-        className="relative bg-[#FFF4F0] rounded-3xl p-6 overflow-hidden transition-all duration-300 hover:shadow-lg cursor-pointer"
+        className={`relative bg-[#FFF4F0] rounded-3xl p-6 transition-all duration-300 hover:shadow-lg cursor-pointer ${isOpen ? 'md:col-span-3' : ''}`}
       >
         <CollapsibleTrigger className="w-full text-left">
           <div className="relative flex-1">
@@ -40,7 +41,7 @@ export function TestimonialCard({
               <Quote className="h-12 w-12 text-primary/20" />
             </div>
             <div className="mb-6">
-              <img src={image} alt={name} className="w-[300px] h-[300px] object-cover rounded-2xl" />
+              <img src={image} alt={name} className="w-full h-[300px] object-cover rounded-2xl" />
             </div>
             <p className="text-xl font-medium mb-4">{quote}</p>
             <div>

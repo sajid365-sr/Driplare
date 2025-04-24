@@ -1,5 +1,6 @@
+
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,30 +13,82 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { sendContactFormConfirmation, sendContactNotificationToAdmin } from "@/utils/email-service";
 
 export function ContactNewsletterSection() {
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactMessage, setContactMessage] = useState("");
+  const [company, setCompany] = useState("");
+  const [serviceInterest, setServiceInterest] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [newsletterName, setNewsletterName] = useState("");
   const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thanks for contacting us! We'll get back to you soon.");
-    setContactName("");
-    setContactEmail("");
-    setContactMessage("");
+    setIsSubmitting(true);
+    
+    try {
+      // Send confirmation to the user
+      await sendContactFormConfirmation(
+        contactName,
+        contactEmail,
+        contactMessage
+      );
+      
+      // Send notification to admin
+      await sendContactNotificationToAdmin(
+        contactName,
+        contactEmail,
+        company,
+        serviceInterest,
+        contactMessage
+      );
+      
+      toast.success("Thanks for contacting us! We'll get back to you soon.");
+      
+      // Reset form
+      setContactName("");
+      setContactEmail("");
+      setContactMessage("");
+      setCompany("");
+      setServiceInterest("");
+    } catch (error) {
+      console.error("Error sending contact emails:", error);
+      toast.error("There was a problem sending your message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("You've been subscribed to our newsletter!");
-    setNewsletterName("");
-    setNewsletterEmail("");
-    setRole("");
+    setIsSubscribing(true);
+    
+    try {
+      // Use the generic form submission since we don't have enough fields for newsletter
+      const formData = {
+        email: newsletterEmail,
+      };
+      
+      await sendContactNotificationToAdmin(
+        "Newsletter Subscriber",
+        newsletterEmail,
+        "N/A",
+        "Newsletter",
+        "New newsletter subscription"
+      );
+      
+      toast.success("You've been subscribed to our newsletter!");
+      setNewsletterEmail("");
+    } catch (error) {
+      console.error("Error subscribing to newsletter:", error);
+      toast.error("There was a problem with your subscription. Please try again.");
+    } finally {
+      setIsSubscribing(false);
+    }
   };
 
   return (
@@ -76,6 +129,26 @@ export function ContactNewsletterSection() {
                       />
                     </div>
                     <div>
+                      <Input
+                        placeholder="Company (Optional)"
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <Select value={serviceInterest} onValueChange={setServiceInterest}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Service Interest" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="web-design">Web Design</SelectItem>
+                          <SelectItem value="ai-services">AI Services</SelectItem>
+                          <SelectItem value="digital-marketing">Digital Marketing</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
                       <Textarea
                         placeholder="Tell us about your project..."
                         className="min-h-32"
@@ -87,81 +160,15 @@ export function ContactNewsletterSection() {
                     <Button
                       type="submit"
                       className="w-full bg-primary hover:bg-primary/90"
+                      disabled={isSubmitting}
                     >
-                      Send Message
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </div>
                 </form>
               </CardContent>
             </Card>
           </div>
-
-          {/* <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 fade-in slide-up">Stay Ahead with AI Insights</h2>
-            <p className="text-muted-foreground mb-6 fade-in slide-up">
-              Subscribe to our newsletter for the latest trends, tips, and insights in AI and digital innovation.
-            </p>
-            
-            <Card>
-              <CardContent className="pt-6">
-                <form onSubmit={handleNewsletterSubmit}>
-                  <div className="space-y-4">
-                    <div>
-                      <Input 
-                        placeholder="Name" 
-                        value={newsletterName}
-                        onChange={(e) => setNewsletterName(e.target.value)}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Input 
-                        type="email" 
-                        placeholder="Email" 
-                        value={newsletterEmail}
-                        onChange={(e) => setNewsletterEmail(e.target.value)}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Select value={role} onValueChange={setRole}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your role" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="business-owner">Business Owner</SelectItem>
-                          <SelectItem value="marketing">Marketing Professional</SelectItem>
-                          <SelectItem value="developer">Developer</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
-                      Subscribe
-                    </Button>
-                  </div>
-                </form>
-              </CardContent>
-            </Card>
-            
-            <div className="mt-6 p-6 rounded-xl bg-primary/10">
-              <h3 className="text-xl font-bold mb-2">Why Subscribe?</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>Exclusive AI and digital transformation insights</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>Early access to new tools and case studies</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>Monthly digital strategy tips</span>
-                </li>
-              </ul>
-            </div>
-          </div> */}
 
           {/* Newsletter Signup */}
           <motion.div
@@ -179,15 +186,23 @@ export function ContactNewsletterSection() {
                 Subscribe to receive the latest insights on AI, web design, and
                 digital marketing directly to your inbox.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3">
+              <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3">
                 <Input
                   placeholder="Enter your email"
                   className="h-12 bg-background"
+                  type="email"
+                  required
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
                 />
-                <Button className="h-12 bg-primary hover:bg-primary/90">
-                  Subscribe
+                <Button 
+                  className="h-12 bg-primary hover:bg-primary/90"
+                  type="submit"
+                  disabled={isSubscribing}
+                >
+                  {isSubscribing ? "Subscribing..." : "Subscribe"}
                 </Button>
-              </div>
+              </form>
             </div>
           </motion.div>
         </div>

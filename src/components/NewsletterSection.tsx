@@ -9,6 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "sonner";
+import { sendContactNotificationToAdmin } from "@/utils/email-service";
 
 export function NewsletterSection() {
   const [formData, setFormData] = useState({
@@ -16,6 +18,7 @@ export function NewsletterSection() {
     email: "",
     role: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,12 +29,27 @@ export function NewsletterSection() {
     setFormData(prev => ({ ...prev, role: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Reset form
-    setFormData({ name: "", email: "", role: "" });
-    // You would typically send this data to your backend here
+    setIsSubmitting(true);
+    
+    try {
+      await sendContactNotificationToAdmin(
+        formData.name || "Newsletter Subscriber",
+        formData.email,
+        "N/A",
+        formData.role || "Not specified",
+        "New newsletter subscription from Newsletter Section"
+      );
+      
+      toast.success("You've been subscribed to our newsletter!");
+      setFormData({ name: "", email: "", role: "" });
+    } catch (error) {
+      console.error("Error submitting newsletter form:", error);
+      toast.error("There was a problem with your subscription. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -56,7 +74,6 @@ export function NewsletterSection() {
                 placeholder="Your name"
                 value={formData.name}
                 onChange={handleChange}
-                required
               />
             </div>
             
@@ -93,8 +110,12 @@ export function NewsletterSection() {
               </Select>
             </div>
             
-            <Button type="submit" className="w-full md:w-auto bg-primary hover:bg-primary/90">
-              Subscribe
+            <Button 
+              type="submit" 
+              className="w-full md:w-auto bg-primary hover:bg-primary/90"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Subscribing..." : "Subscribe"}
             </Button>
           </form>
         </div>

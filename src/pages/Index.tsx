@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { Navbar } from "@/components/common/navigation/Navbar";
 import { HeroSection } from "@/components/home/HeroSection";
@@ -53,10 +54,10 @@ const Index = () => {
         <HowWeWorkSection />
         <TestimonialsSection />
         <InsightsPreviewSection />
-{/*         <ContactNewsletterSection /> */}
+        <ContactNewsletterSection />
       </main>
     </div>
   );
-};
+}
 
 export default Index;
