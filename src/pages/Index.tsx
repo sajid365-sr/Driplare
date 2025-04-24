@@ -8,8 +8,6 @@ import { HowWeWorkSection } from "@/components/home/HowWeWorkSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { InsightsPreviewSection } from "@/components/home/InsightsPreviewSection";
 import { ContactNewsletterSection } from "@/components/home/ContactNewsletterSection";
-import { Footer } from "@/components/common/Footer";
-import { ScrollToTopButton } from "@/components/common/ScrollToTopButton";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import AnimatedGridBg from "@/components/common/AnimatedGridBg";
 
@@ -57,8 +55,6 @@ const Index = () => {
         <InsightsPreviewSection />
         <ContactNewsletterSection />
       </main>
-      <Footer />
-      <ScrollToTopButton />
     </div>
   );
 };
