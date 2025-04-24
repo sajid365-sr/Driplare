@@ -1,7 +1,7 @@
 
 import { toast } from "sonner";
 
-let resendApiKey: string | null = null;
+let resendApiKey: string | null = re_cy4tD9PC_MDjHH82iBD3mQZsFmbEbek2n;
 
 export const setResendApiKey = (key: string) => {
   if (!key.startsWith('re_')) {
