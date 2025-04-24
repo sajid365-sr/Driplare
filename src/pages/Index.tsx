@@ -11,6 +11,7 @@ import { InsightsPreviewSection } from "@/components/home/InsightsPreviewSection
 import { ContactNewsletterSection } from "@/components/home/ContactNewsletterSection";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import AnimatedGridBg from "@/components/common/AnimatedGridBg";
+import { Toaster } from "sonner";
 
 const Index = () => {
   // Handle the scroll animations
@@ -56,6 +57,7 @@ const Index = () => {
         <InsightsPreviewSection />
         <ContactNewsletterSection />
       </main>
+      <Toaster position="top-center" />
     </div>
   );
 }

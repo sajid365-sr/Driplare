@@ -4,16 +4,33 @@ import { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { NewsletterConfirmationEmail } from '@/components/emails/NewsletterConfirmationEmail';
 import { ContactConfirmationEmail } from '@/components/emails/ContactConfirmationEmail';
+import { toast } from 'sonner';
 
 // Initialize Resend with API key from environment variable
-const resend = new Resend(import.meta.env.VITE_RESEND_API_KEY);
+// Add safety check for missing API key
+const apiKey = import.meta.env.VITE_RESEND_API_KEY;
+const resend = apiKey ? new Resend(apiKey) : null;
+
+// Helper function to check if Resend is properly initialized
+const isResendConfigured = () => {
+  if (!resend) {
+    console.error("Resend API key is missing. Email functionality is disabled.");
+    toast.error("Email service is not configured. Please contact support.");
+    return false;
+  }
+  return true;
+};
 
 export const sendNewsletterConfirmation = async (name: string, email: string) => {
+  if (!isResendConfigured()) {
+    return { success: false, error: "Email service not configured" };
+  }
+
   try {
     const emailComponent = NewsletterConfirmationEmail({ name });
     const emailHtml = renderToString(emailComponent as ReactElement);
     
-    const data = await resend.emails.send({
+    const data = await resend!.emails.send({
       from: 'Driplare <hello@driplare.com>',
       to: email,
       subject: 'Welcome to the Driplare Newsletter!',
@@ -33,11 +50,15 @@ export const sendContactFormConfirmation = async (
   email: string,
   message: string
 ) => {
+  if (!isResendConfigured()) {
+    return { success: false, error: "Email service not configured" };
+  }
+
   try {
     const emailComponent = ContactConfirmationEmail({ name, message });
     const emailHtml = renderToString(emailComponent as ReactElement);
     
-    const data = await resend.emails.send({
+    const data = await resend!.emails.send({
       from: 'Driplare <hello@driplare.com>',
       to: email,
       subject: 'We received your message - Driplare',
@@ -59,6 +80,10 @@ export const sendContactNotificationToAdmin = async (
   serviceInterest: string,
   message: string
 ) => {
+  if (!isResendConfigured()) {
+    return { success: false, error: "Email service not configured" };
+  }
+
   try {
     const adminEmailContent = `
       <div>
@@ -71,7 +96,7 @@ export const sendContactNotificationToAdmin = async (
       </div>
     `;
     
-    const data = await resend.emails.send({
+    const data = await resend!.emails.send({
       from: 'Driplare Website <no-reply@driplare.com>',
       to: 'info@driplare.com', // Your admin email
       subject: 'New Contact Form Submission',
@@ -90,6 +115,10 @@ export const sendGenericFormSubmissionToAdmin = async (
   formType: string,
   formData: Record<string, string>
 ) => {
+  if (!isResendConfigured()) {
+    return { success: false, error: "Email service not configured" };
+  }
+
   try {
     // Create form data rows
     const formDataRows = Object.entries(formData).map(
@@ -114,7 +143,7 @@ export const sendGenericFormSubmissionToAdmin = async (
       </div>
     `;
     
-    const data = await resend.emails.send({
+    const data = await resend!.emails.send({
       from: 'Driplare Website <no-reply@driplare.com>',
       to: 'info@driplare.com', // Your admin email
       subject: `New ${formType} Submission`,

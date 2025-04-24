@@ -5,6 +5,7 @@ import { ContactFormWithDetails } from "@/components/contact/ContactFormWithDeta
 import { TeamGalleryCarousel } from "@/components/contact/TeamGalleryCarousel";
 import { InteractiveMapSection } from "@/components/contact/InteractiveMapSection";
 import { NewsletterFooter } from "@/components/contact/NewsletterFooter";
+import { Toaster } from "sonner";
 
 const Contact = () => {
   return (
@@ -23,6 +24,7 @@ const Contact = () => {
         </div>
       </main>
       <NewsletterFooter />
+      <Toaster position="top-center" />
     </div>
   );
 };
