@@ -10,7 +10,7 @@ const resend = new Resend(import.meta.env.VITE_RESEND_API_KEY);
 
 export const sendNewsletterConfirmation = async (name: string, email: string) => {
   try {
-    const emailComponent = <NewsletterConfirmationEmail name={name} />;
+    const emailComponent = NewsletterConfirmationEmail({ name });
     const emailHtml = renderToString(emailComponent as ReactElement);
     
     const data = await resend.emails.send({
@@ -34,7 +34,7 @@ export const sendContactFormConfirmation = async (
   message: string
 ) => {
   try {
-    const emailComponent = <ContactConfirmationEmail name={name} message={message} />;
+    const emailComponent = ContactConfirmationEmail({ name, message });
     const emailHtml = renderToString(emailComponent as ReactElement);
     
     const data = await resend.emails.send({
