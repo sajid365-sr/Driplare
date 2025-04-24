@@ -19,7 +19,7 @@ export function TestimonialCard({
   title, 
   image, 
   delay = 0,
-  fullReview = "The complete experience was outstanding. Their attention to detail and commitment to delivering exceptional results truly sets them apart. Working with them has been transformative for our business." 
+  fullReview = "" 
 }: TestimonialCardProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,25 +28,22 @@ export function TestimonialCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
-      className="flex-1"
+      className="w-full"
     >
       <Collapsible
         open={isOpen}
         onOpenChange={setIsOpen}
-        className={`relative bg-[#FFF4F0] rounded-3xl p-6 transition-all duration-300 hover:shadow-lg cursor-pointer ${isOpen ? 'md:col-span-3' : ''}`}
+        className={`relative bg-[#FFF4F0] rounded-3xl transition-all duration-300 hover:shadow-lg cursor-pointer 
+          ${isOpen ? 'col-span-3 w-[200%]' : 'w-full'}`}
       >
-        <CollapsibleTrigger className="w-full text-left">
-          <div className="relative flex-1">
-            <div className="absolute -right-4 -top-4">
-              <Quote className="h-12 w-12 text-primary/20" />
-            </div>
-            <div className="mb-6">
-              <img src={image} alt={name} className="w-full h-[300px] object-cover rounded-2xl" />
-            </div>
-            <p className="text-xl font-medium mb-4">{quote}</p>
+        <CollapsibleTrigger className="w-full text-left p-6">
+          <div className="relative">
+            <Quote className="absolute -right-2 -top-2 h-8 w-8 text-primary/20" />
+            <p className="text-lg font-medium mb-4">{quote}</p>
             <div>
-              <h4 className="font-bold text-lg">{name}</h4>
-              <p className="text-muted-foreground">{title}</p>
+              <img src={image} alt={name} className="w-16 h-16 rounded-full object-cover mb-2" />
+              <h4 className="font-bold">{name}</h4>
+              <p className="text-muted-foreground text-sm">{title}</p>
             </div>
           </div>
         </CollapsibleTrigger>
@@ -56,9 +53,9 @@ export function TestimonialCard({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="mt-6 pt-6 border-t border-primary/10"
+            className="px-6 pb-6 pt-2 border-t border-primary/10"
           >
-            <p className="text-lg leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground">
               {fullReview}
             </p>
           </motion.div>

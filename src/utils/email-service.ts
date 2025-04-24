@@ -5,17 +5,19 @@ import { renderToString } from 'react-dom/server';
 import { NewsletterConfirmationEmail } from '@/components/emails/NewsletterConfirmationEmail';
 import { ContactConfirmationEmail } from '@/components/emails/ContactConfirmationEmail';
 import { toast } from 'sonner';
+import { getResendApiKey } from './api-key-manager';
 
-// Initialize Resend with API key from environment variable
-// Add safety check for missing API key
-const apiKey = import.meta.env.VITE_RESEND_API_KEY;
-const resend = apiKey ? new Resend(apiKey) : null;
+const createResendInstance = () => {
+  const apiKey = getResendApiKey();
+  return apiKey ? new Resend(apiKey) : null;
+};
 
 // Helper function to check if Resend is properly initialized
 const isResendConfigured = () => {
+  const resend = createResendInstance();
   if (!resend) {
     console.error("Resend API key is missing. Email functionality is disabled.");
-    toast.error("Email service is not configured. Please contact support.");
+    toast.error("Email service is not configured. Please set your API key.");
     return false;
   }
   return true;

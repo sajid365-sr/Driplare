@@ -7,6 +7,7 @@ import { AISpotlightSection } from "@/components/home/AISpotlightSection";
 import { PortfolioTeaserSection } from "@/components/home/PortfolioTeaserSection";
 import { HowWeWorkSection } from "@/components/home/HowWeWorkSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { WhyChooseSection } from "@/components/home/WhyChooseSection";
 import { InsightsPreviewSection } from "@/components/home/InsightsPreviewSection";
 import { ContactNewsletterSection } from "@/components/home/ContactNewsletterSection";
 import { LoadingScreen } from "@/components/LoadingScreen";
@@ -54,6 +55,7 @@ const Index = () => {
         <PortfolioTeaserSection />
         <HowWeWorkSection />
         <TestimonialsSection />
+        <WhyChooseSection />
         <InsightsPreviewSection />
         <ContactNewsletterSection />
       </main>

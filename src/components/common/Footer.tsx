@@ -28,154 +28,174 @@ export function Footer() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-t border-border">
-          <div>
-            <h3 className="font-bold mb-4">Solutions</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  to="/web-design"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Web Design & Development
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/digital-marketing"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Digital Marketing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/ai-services"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  AI Solutions
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/ai-services#chatbot"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Chatbot Integration
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/ai-services#agents"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Custom AI Agents
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/ai-services#automation"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  AI Automation
-                </Link>
-              </li>
-            </ul>
+          <div className="col-span-2 md:col-span-3 grid grid-cols-3 gap-8">
+            <div>
+              <h3 className="font-bold mb-4">Solutions</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    to="/web-design"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Web Design & Development
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/digital-marketing"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Digital Marketing
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/ai-services"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    AI Solutions
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/ai-services#chatbot"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Chatbot Integration
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/ai-services#agents"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Custom AI Agents
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/ai-services#automation"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    AI Automation
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-bold mb-4">Company</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    to="/about"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/team"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Team
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/careers"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Careers
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/portfolio"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Portfolio
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/insights"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Insights
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contact"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-bold mb-4">Legal</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    to="/privacy"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/terms"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Terms of Service
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/cookies"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Cookie Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/gdpr"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    GDPR
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
-          <div>
-            <h3 className="font-bold mb-4">Company</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  to="/about"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/team"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Team
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/careers"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/portfolio"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Portfolio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/insights"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Insights
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/contact"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-bold mb-4">Legal</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  to="/privacy"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/terms"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/cookies"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Cookie Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/gdpr"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  GDPR
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-bold mb-4">Contact</h3>
+          <div className="col-span-2 md:col-span-1">
+            <h3 className="font-bold mb-4">Newsletter</h3>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              // Add newsletter submission logic
+            }} className="space-y-4">
+              <input
+                type="email"
+                placeholder="Your email"
+                className="w-full px-4 py-2 rounded-md bg-background border border-border"
+              />
+              <button
+                type="submit"
+                className="w-full bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md transition-colors"
+              >
+                Subscribe
+              </button>
+            </form>
+            
+            <h3 className="font-bold mb-4 mt-8">Contact</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <Mail className="h-5 w-5 text-primary mr-2 mt-0.5" />
