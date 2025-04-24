@@ -60,24 +60,22 @@ export const sendContactNotificationToAdmin = async (
   message: string
 ) => {
   try {
-    const adminEmailComponent = (
+    const adminEmailContent = `
       <div>
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> {name}</p>
-        <p><strong>Email:</strong> {email}</p>
-        <p><strong>Company:</strong> {company}</p>
-        <p><strong>Service Interest:</strong> {serviceInterest}</p>
-        <p><strong>Message:</strong> {message}</p>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Company:</strong> ${company}</p>
+        <p><strong>Service Interest:</strong> ${serviceInterest}</p>
+        <p><strong>Message:</strong> ${message}</p>
       </div>
-    );
-    
-    const adminEmailHtml = renderToString(adminEmailComponent as ReactElement);
+    `;
     
     const data = await resend.emails.send({
       from: 'Driplare Website <no-reply@driplare.com>',
       to: 'info@driplare.com', // Your admin email
       subject: 'New Contact Form Submission',
-      html: adminEmailHtml,
+      html: adminEmailContent,
     });
 
     console.log('Admin notification email sent:', data);
@@ -96,31 +94,31 @@ export const sendGenericFormSubmissionToAdmin = async (
     // Create form data rows
     const formDataRows = Object.entries(formData).map(
       ([key, value]) => `<tr><td>${key}</td><td>${value}</td></tr>`
-    );
+    ).join('');
 
-    const genericEmailComponent = (
+    const genericEmailContent = `
       <div>
-        <h2>New Form Submission: {formType}</h2>
-        <table border="1" cellPadding="5" style={{ borderCollapse: 'collapse' }}>
+        <h2>New Form Submission: ${formType}</h2>
+        <table border="1" cellPadding="5" style="border-collapse: collapse">
           <thead>
             <tr>
               <th>Field</th>
               <th>Value</th>
             </tr>
           </thead>
-          <tbody dangerouslySetInnerHTML={{ __html: formDataRows.join('') }} />
+          <tbody>
+            ${formDataRows}
+          </tbody>
         </table>
-        <p>This submission was received on {new Date().toLocaleString()}</p>
+        <p>This submission was received on ${new Date().toLocaleString()}</p>
       </div>
-    );
-    
-    const genericEmailHtml = renderToString(genericEmailComponent as ReactElement);
+    `;
     
     const data = await resend.emails.send({
       from: 'Driplare Website <no-reply@driplare.com>',
       to: 'info@driplare.com', // Your admin email
       subject: `New ${formType} Submission`,
-      html: genericEmailHtml,
+      html: genericEmailContent,
     });
 
     console.log('Generic form submission email sent:', data);
