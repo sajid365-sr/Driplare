@@ -5,6 +5,9 @@ import documentImg from "/irs-doc.png"; // replace with your IRS doc image
 import waveLogo from "/wave-logo.png"; // replace with your Waves logo
 import rotaLogo from "/rota-logo.png"; // replace with your RotaShow logo
 import travelersLogo from "/travelers-logo.png"; // replace with your Travelers logo
+import { Link } from "react-router-dom";
+import { Button } from "../ui/button";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   const [company, setCompany] = useState("");
@@ -27,7 +30,7 @@ export default function Hero() {
             </p>
 
             {/* Form */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            {/* <div className="flex flex-col sm:flex-row gap-3">
               <select
                 title="text"
                 className="w-full sm:w-32 px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded focus:ring-2 focus:ring-green-500"
@@ -46,6 +49,19 @@ export default function Hero() {
               <button className="px-6 py-2 bg-green-500 dark:bg-green-400 text-white dark:text-gray-900 font-semibold rounded hover:bg-green-600 dark:hover:bg-green-500 transition">
                 Start Now
               </button>
+            </div> */}
+            <div className="flex flex-col sm:flex-row  gap-4 fade-in slide-up">
+              <Link to="/contact">
+                <Button className="bg-primary hover:bg-primary/90 h-12 px-8 text-lg">
+                  Let's Connect
+                </Button>
+              </Link>
+              <Link to="/portfolio">
+                <Button variant="outline" className="h-12 px-8 text-lg group">
+                  <span>Check Our Works</span>
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
             </div>
 
             {/* Notes */}
@@ -63,7 +79,7 @@ export default function Hero() {
           {/* Right Side */}
           <div className="relative flex justify-center lg:justify-end">
             {/* Background circle */}
-            <div className="absolute w-80 h-80 bg-purple-100 dark:bg-purple-800 rounded-full -top-16 -right-16" />
+            <div className="absolute w-80 h-80 bg-purple-100 dark:bg-purple-800 rounded-full -top-20 -right-10" />
 
             {/* Statue + Doc */}
             <div className="relative z-10">
