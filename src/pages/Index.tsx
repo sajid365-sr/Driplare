@@ -1,6 +1,4 @@
-
 import { useEffect } from "react";
-import { Navbar } from "@/components/common/navigation/Navbar";
 import { HeroSection } from "@/components/home/HeroSection";
 import { CoreSolutionsSection } from "@/components/home/CoreSolutionsSection";
 import { AISpotlightSection } from "@/components/home/AISpotlightSection";
@@ -9,10 +7,10 @@ import { HowWeWorkSection } from "@/components/home/HowWeWorkSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { WhyChooseSection } from "@/components/home/WhyChooseSection";
 import { InsightsPreviewSection } from "@/components/home/InsightsPreviewSection";
-import { ContactNewsletterSection } from "@/components/home/ContactNewsletterSection";
-import { LoadingScreen } from "@/components/LoadingScreen";
-import AnimatedGridBg from "@/components/common/AnimatedGridBg";
-import { Toaster } from "sonner";
+import IndustryWeServe from "@/components/home/IndustryWeServe";
+import CTA from "@/components/common/CTA";
+import Hero from "@/components/home/HeroSection2";
+import FlexSlider from "@/components/testimonials/FlexSlider";
 
 const Index = () => {
   // Handle the scroll animations
@@ -45,23 +43,22 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <AnimatedGridBg />
-      <LoadingScreen />
-      <Navbar />
       <main>
-        <HeroSection />
+        {/* <HeroSection /> */}
+        <Hero />
         <CoreSolutionsSection />
         <AISpotlightSection />
+        <CTA />
         <PortfolioTeaserSection />
-        <HowWeWorkSection />
         <TestimonialsSection />
+
         <WhyChooseSection />
+        <HowWeWorkSection />
+        <IndustryWeServe />
         <InsightsPreviewSection />
-        <ContactNewsletterSection />
       </main>
-      <Toaster position="top-center" />
     </div>
   );
-}
+};
 
 export default Index;

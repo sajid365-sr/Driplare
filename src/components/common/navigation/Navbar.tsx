@@ -20,6 +20,7 @@ import {
   UserRound,
   SlidersHorizontal,
 } from "lucide-react";
+import { ThemeToggle } from "../ThemeToggle";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -40,8 +41,8 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300  ${
         scrolled
-          ? "bg-background/80 backdrop-blur-md shadow-sm py-3"
-          : "bg-transparent py-5"
+          ? "bg-background/50 backdrop-blur-sm shadow-sm pt-3"
+          : "bg-transparent pt-5"
       }`}
     >
       <div className="container flex items-center justify-between ">
@@ -64,17 +65,17 @@ export function Navbar() {
                 <NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    <li className="row-span-3">
+                    <li className="row-span-3 bg-[url(ai-solution.png)] bg-cover">
                       <NavigationMenuLink asChild>
                         <Link
                           to="/ai-services"
-                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-primary/50 to-primary p-6 no-underline outline-none focus:shadow-md"
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-black/40 to-black/60 p-6 no-underline hover:bg-primary/25 hover:bg-to-primary/50 outline-none focus:shadow-md"
                         >
                           <Brain className="h-6 w-6 text-white" />
-                          <div className="mb-2 mt-4 text-lg font-medium text-white">
+                          <div className="mb-2 mt-4 text-lg font-medium hover:text-primary text-white">
                             AI Solutions
                           </div>
-                          <p className="text-sm leading-tight text-white/90">
+                          <p className="text-sm hover:text-accent leading-tight text-white/90">
                             Leverage cutting-edge AI technology to transform
                             your business capabilities.
                           </p>
@@ -182,13 +183,16 @@ export function Navbar() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+          <ThemeToggle />
 
-          <Button
-            className="ml-4 bg-primary hover:bg-primary/90 hidden md:inline-flex"
-            size="sm"
-          >
-            Get Started
-          </Button>
+          <Link to="/login">
+            <Button
+              className="ml-4 bg-primary hover:bg-primary/90 hidden md:inline-flex"
+              size="sm"
+            >
+              Login
+            </Button>
+          </Link>
           <MobileMenu />
         </div>
       </div>

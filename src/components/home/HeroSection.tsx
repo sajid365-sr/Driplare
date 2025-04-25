@@ -18,13 +18,17 @@ export function HeroSection() {
             their audience.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 fade-in slide-up">
-            <Button className="bg-primary hover:bg-primary/90 h-12 px-8 text-lg">
-              Get Started
-            </Button>
-            <Button variant="outline" className="h-12 px-8 text-lg group">
-              <span>View Our Work</span>
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
+            <Link to="/contact">
+              <Button className="bg-primary hover:bg-primary/90 h-12 px-8 text-lg">
+                Let's Connect
+              </Button>
+            </Link>
+            <Link to="/portfolio">
+              <Button variant="outline" className="h-12 px-8 text-lg group">
+                <span>Check Our Works</span>
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

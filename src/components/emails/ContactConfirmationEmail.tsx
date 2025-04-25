@@ -1,49 +1,51 @@
-
-import React from 'react';
+import React from "react";
 
 interface ContactConfirmationEmailProps {
   name: string;
   message: string;
 }
 
-export const ContactConfirmationEmail: React.FC<ContactConfirmationEmailProps> = ({ 
-  name,
-  message
-}) => {
+export const ContactConfirmationEmail: React.FC<
+  ContactConfirmationEmailProps
+> = ({ name, message }) => {
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto' }}>
-      <div style={{ background: 'linear-gradient(135deg, #1A1F2C 0%, #333B51 100%)', padding: '20px', textAlign: 'center', borderRadius: '8px 8px 0 0' }}>
-        <h1 style={{ color: '#F88220', margin: '0' }}>Driplare</h1>
+    <div className="font-family-mono max-w-600 mx-auto">
+      <div className="bg-gradient-to-r from-blue-500 to-blue-700 px-5 py-2 text-center rounded-t-lg">
+        <h1 className="text-orange-500 m-0">Driplare</h1>
       </div>
-      
-      <div style={{ padding: '25px', backgroundColor: '#f9f9f9', color: '#333' }}>
-        <h2>Thank You For Contacting Us, {name}!</h2>
+
+      <div className="px-6 py-4 bg-gray-100 text-gray-800">
+        <h2 className="text-lg font-semibold">
+          Thank You For Contacting Us, {name}!
+        </h2>
         <p>We have received your message:</p>
-        
-        <div style={{ 
-          backgroundColor: '#eee', 
-          padding: '15px', 
-          borderRadius: '5px',
-          border: '1px solid #ddd',
-          marginBottom: '20px',
-          fontStyle: 'italic'
-        }}>
+
+        <div className="bg-gray-200 px-4 py-2 rounded border border-gray-300 mb-5 italic">
           "{message}"
         </div>
-        
-        <p>Our team will review your inquiry and get back to you as soon as possible, typically within 24-48 business hours.</p>
-        
-        <p>In the meantime, feel free to explore our services and recent projects on our website.</p>
-        
-        <div style={{ marginTop: '30px', backgroundColor: '#F88220', padding: '15px', textAlign: 'center', borderRadius: '5px' }}>
-          <a href="https://driplare.com/portfolio" style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }}>
+
+        <p>
+          Our team will review your inquiry and get back to you as soon as
+          possible, typically within 24-48 business hours.
+        </p>
+
+        <p>
+          In the meantime, feel free to explore our services and recent projects
+          on our website.
+        </p>
+
+        <div className="mt-7.5 bg-orange-500 px-4 py-2 text-center rounded">
+          <a
+            href="https://driplare.com/portfolio"
+            className="text-white no-underline font-bold"
+          >
             EXPLORE OUR PORTFOLIO
           </a>
         </div>
       </div>
-      
-      <div style={{ backgroundColor: '#1A1F2C', color: 'white', padding: '15px', textAlign: 'center', borderRadius: '0 0 8px 8px' }}>
-        <p style={{ margin: '0', fontSize: '14px' }}>
+
+      <div className="bg-gray-800 text-white px-4 py-2 text-center rounded-b-lg">
+        <p className="m-0 text-sm">
           © {new Date().getFullYear()} Driplare. All rights reserved.
         </p>
       </div>
