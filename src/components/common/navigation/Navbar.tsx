@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { MobileMenu } from "./MobileMenu";
 import { ThemeToggle } from "../ThemeToggle";
-import { Admin } from "lucide-react";
+import { Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
@@ -82,7 +82,7 @@ export const Navbar = () => {
               ))}
               <Link to="/admin">
                 <Button variant="ghost" className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium">
-                  <Admin className="h-4 w-4" />
+                  <Settings className="h-4 w-4" />
                   Admin Area
                 </Button>
               </Link>
@@ -93,7 +93,7 @@ export const Navbar = () => {
           <div className="flex items-center">
             <Link to="/admin">
               <Button variant="ghost" size="icon">
-                <Admin className="h-5 w-5" />
+                <Settings className="h-5 w-5" />
               </Button>
             </Link>
             <ThemeToggle />
