@@ -4,7 +4,7 @@ import { renderToString } from "react-dom/server";
 import { NewsletterConfirmationEmail } from "@/components/emails/NewsletterConfirmationEmail";
 import { ContactConfirmationEmail } from "@/components/emails/ContactConfirmationEmail";
 
-const resend = new Resend(import.meta.env.VITE_REACT_RESEND_API_KEY);
+const resend = new Resend("Test Key");
 
 export const sendNewsletterConfirmation = async (
   name: string,
