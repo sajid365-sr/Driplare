@@ -1,20 +1,28 @@
+
 import { Resend } from "resend";
 import { ReactElement } from "react";
 import { renderToString } from "react-dom/server";
 import { NewsletterConfirmationEmail } from "@/components/emails/NewsletterConfirmationEmail";
 import { ContactConfirmationEmail } from "@/components/emails/ContactConfirmationEmail";
+import { toast } from "sonner";
+import { getResendApiKey, setResendApiKey } from "./api-key-manager";
 
-const resend = new Resend("Test Key");
+// Create a resend instance based on available API key
+const createResendInstance = () => {
+  const apiKey = getResendApiKey() || "Test Key";
+  return new Resend(apiKey);
+};
 
 export const sendNewsletterConfirmation = async (
   name: string,
   email: string
 ) => {
   try {
+    const resendInstance = createResendInstance();
     const emailComponent = NewsletterConfirmationEmail({ name });
     const emailHtml = renderToString(emailComponent as ReactElement);
 
-    const data = await resend.emails.send({
+    const data = await resendInstance.emails.send({
       from: "Driplare <hello@driplare.com>",
       to: email,
       subject: "Welcome to the Driplare Newsletter!",
@@ -39,10 +47,11 @@ export const sendContactFormConfirmation = async (
   message: string
 ) => {
   try {
+    const resendInstance = createResendInstance();
     const emailComponent = ContactConfirmationEmail({ name, message });
     const emailHtml = renderToString(emailComponent as ReactElement);
 
-    const data = await resend.emails.send({
+    const data = await resendInstance.emails.send({
       from: "Driplare <hello@driplare.com>",
       to: email,
       subject: "We received your message - Driplare",
@@ -69,6 +78,7 @@ export const sendContactNotificationToAdmin = async (
   message: string
 ) => {
   try {
+    const resendInstance = createResendInstance();
     const adminEmailContent = `
       <div>
         <h2>New Contact Form Submission</h2>
@@ -80,7 +90,7 @@ export const sendContactNotificationToAdmin = async (
       </div>
     `;
 
-    const data = await resend.emails.send({
+    const data = await resendInstance.emails.send({
       from: "Driplare Website <no-reply@driplare.com>",
       to: "info@driplare.com", // Your admin email
       subject: "New Contact Form Submission",
@@ -104,6 +114,7 @@ export const sendGenericFormSubmissionToAdmin = async (
   formData: Record<string, string>
 ) => {
   try {
+    const resendInstance = createResendInstance();
     // Create form data rows
     const formDataRows = Object.entries(formData)
       .map(([key, value]) => `<tr><td>${key}</td><td>${value}</td></tr>`)
@@ -127,7 +138,7 @@ export const sendGenericFormSubmissionToAdmin = async (
       </div>
     `;
 
-    const data = await resend.emails.send({
+    const data = await resendInstance.emails.send({
       from: "Driplare Website <no-reply@driplare.com>",
       to: "info@driplare.com", // Your admin email
       subject: `New ${formType} Submission`,
@@ -144,4 +155,14 @@ export const sendGenericFormSubmissionToAdmin = async (
     console.error("Failed to send generic form submission:", error);
     return { success: false, error };
   }
+};
+
+// Helper function to check and set API key status
+export const checkApiKeyStatus = () => {
+  const apiKey = getResendApiKey();
+  if (!apiKey || apiKey === "Test Key") {
+    toast.warning("Email functionality is limited. Please set a valid Resend API key.");
+    return false;
+  }
+  return true;
 };

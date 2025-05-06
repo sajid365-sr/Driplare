@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { HeroSection } from "@/components/home/HeroSection";
 import { CoreSolutionsSection } from "@/components/home/CoreSolutionsSection";
@@ -10,7 +11,6 @@ import { InsightsPreviewSection } from "@/components/home/InsightsPreviewSection
 import IndustryWeServe from "@/components/home/IndustryWeServe";
 import CTA from "@/components/common/CTA";
 import Hero from "@/components/home/HeroSection2";
-import FlexSlider from "@/components/testimonials/FlexSlider";
 
 const Index = () => {
   // Handle the scroll animations
@@ -51,7 +51,6 @@ const Index = () => {
         <CTA />
         <PortfolioTeaserSection />
         <TestimonialsSection />
-
         <WhyChooseSection />
         <HowWeWorkSection />
         <IndustryWeServe />

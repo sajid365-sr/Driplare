@@ -1,3 +1,4 @@
+
 @keyframes sk-cubemove {
   25% {
     transform: translateX(42px) rotate(-90deg) scale(0.5);
@@ -29,4 +30,47 @@
 .cube2 {
   animation: sk-cubemove 1.8s infinite ease-in-out;
   animation-delay: -0.9s;
+}
+
+/* New card flip animation */
+@keyframes card-flip {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+
+.card-flip {
+  perspective: 1000px;
+  transition: transform 0.6s;
+}
+
+.card-flip:hover {
+  transform: rotateY(15deg);
+}
+
+.card-flip.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Pulse animation for play button */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite ease-in-out;
 }
