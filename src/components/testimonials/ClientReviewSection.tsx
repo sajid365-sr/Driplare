@@ -58,12 +58,12 @@ const ClientReviewSection: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
 
-  // Auto-rotate slides
+  // Auto-rotate slides - changed from 7000ms to 5000ms (5 seconds)
   useEffect(() => {
     if (!isPaused) {
       intervalRef.current = setInterval(() => {
         setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-      }, 7000);
+      }, 5000);
     }
 
     return () => {
@@ -131,6 +131,41 @@ const ClientReviewSection: React.FC = () => {
     return diff;
   };
 
+  // Updated function to create the 3D perspective effect
+  const getCardStyle = (index: number) => {
+    const position = getCardPosition(index);
+    const isActive = index === activeIndex;
+    
+    // Base style for all cards
+    const style = {
+      zIndex: isActive ? 30 : 10,
+      opacity: isActive ? 1 : 0.6,
+      scale: isActive ? 1 : 0.85,
+      x: `${position * 80}%`,
+      rotateY: position * 30, // Increase rotation for more pronounced effect
+      perspective: 1000,
+      visible: true
+    };
+    
+    // For side cards, we want to make them partially visible
+    if (position !== 0) {
+      // Hide cards that aren't the immediate neighbors
+      if (Math.abs(position) > 1) {
+        style.visible = false;
+      }
+      
+      // The side cards should appear to be at a vertical angle
+      style.rotateY = position * 40; // More extreme rotation
+      style.opacity = 0.5; // More transparent
+      style.scale = 0.7; // Smaller size
+      
+      // Side cards are pulled back in the z-axis to create depth
+      style.x = `${position * 100}%`; // Move them further out
+    }
+    
+    return style;
+  };
+
   return (
     <section 
       className="py-20 overflow-hidden bg-gray-900 dark:bg-gray-900 text-white"
@@ -150,7 +185,7 @@ const ClientReviewSection: React.FC = () => {
 
         <div 
           ref={carouselRef}
-          className="relative h-[500px] md:h-[550px] mx-auto"
+          className="relative h-[500px] md:h-[550px] mx-auto perspective-1000"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onMouseDown={handleDragStart}
@@ -159,28 +194,35 @@ const ClientReviewSection: React.FC = () => {
           onTouchStart={handleDragStart}
           onTouchEnd={handleDragEnd}
         >
+          {/* 3D Stage for Cards */}
           <div className="absolute w-full h-full flex justify-center items-center">
             {testimonials.map((testimonial, index) => {
-              const position = getCardPosition(index);
+              const cardStyle = getCardStyle(index);
               const isActive = index === activeIndex;
+              
+              if (!cardStyle.visible) return null;
               
               return (
                 <motion.div
                   key={testimonial.id}
                   className={`absolute cursor-pointer bg-gray-800 dark:bg-gray-800 rounded-xl overflow-hidden shadow-xl
                              ${isActive ? 'z-30' : 'z-10'} md:max-w-xl`}
-                  style={{ width: isMobile ? '100%' : '80%', maxWidth: isMobile ? 'none' : '640px' }}
+                  style={{ 
+                    width: isMobile ? '100%' : '80%', 
+                    maxWidth: isMobile ? 'none' : '640px',
+                    transformStyle: "preserve-3d" 
+                  }}
                   initial={false}
                   animate={{
-                    x: `${position * 100}%`,
-                    scale: isActive ? 1 : 0.85,
-                    opacity: isActive ? 1 : 0.6,
-                    rotateY: position * 15, // 3D rotation effect
-                    zIndex: isActive ? 30 : 10,
+                    x: cardStyle.x,
+                    scale: cardStyle.scale,
+                    opacity: cardStyle.opacity,
+                    rotateY: cardStyle.rotateY,
+                    zIndex: cardStyle.zIndex,
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   onClick={() => !isActive && goToSlide(index)}
-                  whileHover={!isActive && !isMobile ? { scale: 0.9, opacity: 0.8 } : {}}
+                  whileHover={!isActive && !isMobile ? { scale: 0.8, opacity: 0.7 } : {}}
                 >
                   <div className="relative w-full aspect-video">
                     <img
