@@ -97,7 +97,7 @@ export const Navbar = () => {
               </Button>
             </Link>
             <ThemeToggle />
-            <MobileMenu links={navLinks} />
+            <MobileMenu />
           </div>
         )}
       </nav>
