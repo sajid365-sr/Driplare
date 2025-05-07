@@ -10,14 +10,12 @@ import AIServices from "./pages/AIServices";
 import Portfolio from "./pages/Portfolio";
 import Insights from "./pages/Insights";
 import Contact from "./pages/Contact";
-import { ThemeToggle } from "./components/common/ThemeToggle";
 import Layout from "./components/common/layout/Layout";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeToggle />
     <TooltipProvider>
       <Sonner />
       <BrowserRouter>

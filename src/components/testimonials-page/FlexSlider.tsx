@@ -63,15 +63,8 @@ export default function FlexSlider() {
               key={key}
               data-bg={bgImage}
               onClick={() => handleClick(key)}
-              className={`
-                flex-shrink-0 flex rounded-2xl mx-5
-                items-center justify-center text-white 
-                text-center cursor-pointer transition-[flex] duration-500
-                ${isActive ? "flex-[3]" : "flex-[1]"}
-              `}
-              style={{
-                background: `url(${bgImage}) center/cover no-repeat`,
-              }}
+              className={`flex-shrink-0 flex rounded-2xl mx-5 items-center justify-center text-white text-center cursor-pointer transition-[flex] duration-500 ${isActive ? "flex-[3]" : "flex-[1]"} bg-cover bg-center`}
+              style={{ backgroundImage: `url(${bgImage})` }}
             >
               <div
                 className={`transform rotate-90 text-6xl font-bold select-none transition-transform duration-500 ${
@@ -91,16 +84,6 @@ export default function FlexSlider() {
           );
         })}
       </div>
-
-      {/* Branding SVG Link */}
-      <a
-        className="fixed bottom-5 right-5 bg-white p-3 rounded-full shadow-lg"
-        href="https://cameronfitzwilliam.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {/* SVG here */}
-      </a>
     </div>
   );
 }

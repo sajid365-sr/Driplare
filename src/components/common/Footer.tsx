@@ -1,16 +1,55 @@
 import { Link } from "react-router-dom";
-import { Mail, Facebook, Twitter, Linkedin, X } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { Mail, Facebook, Linkedin } from "lucide-react";
 import { PiWhatsappLogo } from "react-icons/pi";
-import { FaXTwitter } from "react-icons/fa6";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const socials = [
+    {
+      title: "Mail",
+      url: "mailto:info-@driplare.com",
+      icon: Mail,
+    },
+    {
+      title: "Facebook",
+      url: "https://facebook.com/driplare",
+      icon: Facebook,
+    },
+    {
+      title: "LinkedIn",
+      url: "https://linkedin.com/company/driplare",
+      icon: Linkedin,
+    },
+    {
+      title: "Whatsapp",
+      url: "https://wa.me/+8801608331365",
+      icon: PiWhatsappLogo,
+    },
+  ];
+
   return (
     <footer className="bg-gradient-to-b  from-primary/5 to-primary/30">
+      {/* ================== Contact ===================== */}
+      <div className="border-2 border-gray-200 p-6 mx-5 md:max-w-4xl md:mx-auto rounded-md ">
+        <div className="grid grid-cols-2 md:grid-cols-4 justify-around ">
+          {socials.map((social) => (
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              to={social.url}
+              className="text-muted-foreground flex items-center  gap-2"
+            >
+              <social.icon className="h-8 w-8 hover:text-teal-400" />
+              <span className=" hover:text-primary transition-colors text-xl">
+                {social.title}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 py-12 border-t border-border">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 py-12 border-t border-border">
           <div>
             <img src="logo.png" alt="Driplare Logo" width={150} />
             <p className="mt-5">
@@ -126,61 +165,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          {/* ================== Contact ===================== */}
-          <div>
-            <h3 className="font-bold mb-4">Contact</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <Mail className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                <a
-                  href="mailto:info@driplare.com"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  info@driplare.com
-                </a>
-              </li>
-            </ul>
-
-            <div className="flex space-x-4 mt-6">
-              <a
-                href="https://facebook.com/driplare"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
-              </a>
-              <a
-                href="https://x.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <FaXTwitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </a>
-              <a
-                href="https://linkedin.com/company/driplare"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-              <a
-                href="https://wa.me/+8801608331365"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <PiWhatsappLogo className="h-6 w-6" />
-                <span className="sr-only">WhatsApp</span>
-              </a>
-            </div>
-          </div>
-
+          {/* ================== Newsletter ===================== */}
           <div className="col-span-2 md:col-span-1">
             <h3 className="font-bold mb-4">Newsletter</h3>
             <form
@@ -206,7 +191,7 @@ export function Footer() {
         </div>
 
         {/* ================== Bottom ===================== */}
-        <div className="border-t border-border border-gray-50 py-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-border border-gray-50 py-8 flex flex-col-reverse gap-5 md:flex-row justify-between items-center">
           <div className="text-gray-50">
             &copy; {currentYear} Driplare. All rights reserved.
           </div>

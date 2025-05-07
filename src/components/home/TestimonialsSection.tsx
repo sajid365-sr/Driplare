@@ -1,5 +1,5 @@
-import FlexSlider from "../testimonials/FlexSlider";
-import Testimonials from "../testimonials/TestimonialCard";
+import FlexSlider from "../testimonials-page/FlexSlider";
+import Testimonials from "../testimonials-page/TestimonialCard";
 
 const testimonials = [
   {

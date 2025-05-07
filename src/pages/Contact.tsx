@@ -1,10 +1,9 @@
-
 import AnimatedGridBg from "@/components/common/AnimatedGridBg";
-import { HeroSection } from "@/components/contact/HeroSection";
-import { ContactFormWithDetails } from "@/components/contact/ContactFormWithDetails";
-import { TeamGalleryCarousel } from "@/components/contact/TeamGalleryCarousel";
-import { InteractiveMapSection } from "@/components/contact/InteractiveMapSection";
-import { NewsletterFooter } from "@/components/contact/NewsletterFooter";
+import { HeroSection } from "@/components/contact-page/HeroSection";
+import { ContactFormWithDetails } from "@/components/contact-page/ContactFormWithDetails";
+import { TeamGalleryCarousel } from "@/components/contact-page/TeamGalleryCarousel";
+import { InteractiveMapSection } from "@/components/contact-page/InteractiveMapSection";
+import { NewsletterFooter } from "@/components/contact-page/NewsletterFooter";
 import { Toaster } from "sonner";
 
 const Contact = () => {

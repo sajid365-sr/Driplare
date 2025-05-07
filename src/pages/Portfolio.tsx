@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { Navbar } from "@/components/common/navigation/Navbar";
 import AnimatedGridBg from "@/components/common/AnimatedGridBg";
-import { HeroShowcase } from "@/components/portfolio/HeroShowcase";
-import { ProjectGrid } from "@/components/portfolio/ProjectGrid";
-import { FeaturedCaseStudy } from "@/components/portfolio/FeaturedCaseStudy";
-import { InsightsChart } from "@/components/portfolio/InsightsChart";
-import { ClientLogosCarousel } from "@/components/portfolio/ClientLogosCarousel";
-import { CollaborateBanner } from "@/components/portfolio/CollaborateBanner";
+import { HeroShowcase } from "@/components/portfolio-page/HeroShowcase";
+import { ProjectGrid } from "@/components/portfolio-page/ProjectGrid";
+import { FeaturedCaseStudy } from "@/components/portfolio-page/FeaturedCaseStudy";
+import { InsightsChart } from "@/components/portfolio-page/InsightsChart";
+import { ClientLogosCarousel } from "@/components/portfolio-page/ClientLogosCarousel";
+import { CollaborateBanner } from "@/components/portfolio-page/CollaborateBanner";
 
 const Portfolio = () => {
   useEffect(() => {

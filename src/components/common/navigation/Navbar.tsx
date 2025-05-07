@@ -50,7 +50,7 @@ export function Navbar() {
           <img src="logo-white.png" alt="Driplare Logo" width={120} />
         </Link>
 
-        <div className="flex items-center space-x-1 ">
+        <div className="flex relative items-center space-x-1 ">
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -64,7 +64,7 @@ export function Navbar() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className=" grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  <ul className=" grid w-[400px]  gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                     <li className="row-span-3 bg-[url(ai-solution.png)] bg-cover">
                       <NavigationMenuLink asChild>
                         <Link
@@ -173,26 +173,10 @@ export function Navbar() {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <Link to="/contact">
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Contact
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
           <ThemeToggle />
 
-          <Link to="/login">
-            <Button
-              className="ml-4 bg-primary hover:bg-primary/90 hidden md:inline-flex"
-              size="sm"
-            >
-              Login
-            </Button>
-          </Link>
           <MobileMenu />
         </div>
       </div>

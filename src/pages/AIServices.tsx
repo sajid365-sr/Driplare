@@ -1,12 +1,12 @@
 import { Navbar } from "@/components/common/navigation/Navbar";
 import AnimatedGridBg from "@/components/common/AnimatedGridBg";
-import { HeroSection } from "@/components/ai-services/HeroSection";
-import { WhyAISection } from "@/components/ai-services/WhyAISection";
-import { ChatbotIntegrationSection } from "@/components/ai-services/ChatbotIntegrationSection";
-import { CustomAgentsSection } from "@/components/ai-services/CustomAgentsSection";
-import { AIAutomationSection } from "@/components/ai-services/AIAutomationSection";
-import { SuccessStoriesSection } from "@/components/ai-services/SuccessStoriesSection";
-import { DemoFormSection } from "@/components/ai-services/DemoFormSection";
+import { HeroSection } from "@/components/ai-services-page/HeroSection";
+import { WhyAISection } from "@/components/ai-services-page/WhyAISection";
+import { ChatbotIntegrationSection } from "@/components/ai-services-page/ChatbotIntegrationSection";
+import { CustomAgentsSection } from "@/components/ai-services-page/CustomAgentsSection";
+import { AIAutomationSection } from "@/components/ai-services-page/AIAutomationSection";
+import { SuccessStoriesSection } from "@/components/ai-services-page/SuccessStoriesSection";
+import { DemoFormSection } from "@/components/ai-services-page/DemoFormSection";
 
 const AIServices = () => {
   return (
