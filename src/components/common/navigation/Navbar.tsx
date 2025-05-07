@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { MobileMenu } from "./MobileMenu";
 import {
   NavigationMenu,
@@ -11,7 +10,6 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { cn } from "@/lib/utils";
 import {
   Code,
   BarChart2,
@@ -170,6 +168,13 @@ export function Navbar() {
                 <Link to="/insights">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Insights
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/admin">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Admin Area
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>

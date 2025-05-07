@@ -51,7 +51,6 @@ const Index = () => {
         <CTA />
         <PortfolioTeaserSection />
         <TestimonialsSection />
-
         <WhyChooseSection />
         <CaseStudiesSection />
         <HowWeWorkSection />
