@@ -6,6 +6,7 @@ import { Footer } from "../Footer";
 import { ScrollToTopButton } from "../ScrollToTopButton";
 import ScrollToTop from "../ScrollToTop";
 import { Toaster } from "sonner";
+import { ChatbotWidget } from "../chatbot/ChatbotWidget";
 
 const Layout = () => {
   return (
@@ -19,6 +20,7 @@ const Layout = () => {
         <Outlet />
       </main>
       <Footer />
+      <ChatbotWidget />
     </div>
   );
 };

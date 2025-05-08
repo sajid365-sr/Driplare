@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MobileMenu } from "./MobileMenu";
@@ -18,11 +19,14 @@ import {
   UserRound,
   SlidersHorizontal,
   Settings,
+  Bell,
 } from "lucide-react";
 import { ThemeToggle } from "../ThemeToggle";
+import { NotificationsDropdown } from "../notifications/NotificationsDropdown";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +50,7 @@ export function Navbar() {
     >
       <div className="container flex items-center justify-between ">
         <Link to="/" className="text-2xl font-bold">
-          <img src="logo-white.png" alt="Driplare Logo" width={120} />
+          <img src="/logo-white.png" alt="Driplare Logo" width={120} />
         </Link>
 
         <div className="flex relative items-center space-x-1 ">
@@ -64,7 +68,7 @@ export function Navbar() {
                 <NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className=" grid w-[400px]  gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    <li className="row-span-3 bg-[url(ai-solution.png)] bg-cover">
+                    <li className="row-span-3 bg-[url(/ai-solution.png)] bg-cover">
                       <NavigationMenuLink asChild>
                         <Link
                           to="/ai-services"
@@ -175,14 +179,30 @@ export function Navbar() {
               <NavigationMenuItem>
                 <Link to="/admin">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    <Settings className="mr-1" size={16} />
                     Admin Area
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+          
+          {/* Notifications Bell */}
+          <div className="relative">
+            <button
+              className="p-1.5 rounded-md hover:bg-accent/50 transition-colors relative"
+              onClick={() => setShowNotifications(!showNotifications)}
+              aria-label="Notifications"
+            >
+              <Bell size={20} />
+              <span className="absolute top-0 right-0 w-2 h-2 bg-[#F88220] rounded-full"></span>
+            </button>
+            {showNotifications && (
+              <NotificationsDropdown onClose={() => setShowNotifications(false)} />
+            )}
+          </div>
+          
           <ThemeToggle />
-
           <MobileMenu />
         </div>
       </div>

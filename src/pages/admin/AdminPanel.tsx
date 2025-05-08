@@ -6,6 +6,7 @@ import AdminManagement from "./AdminManagement";
 import Analytics from "./Analytics";
 import AuditLogs from "./AuditLogs";
 import Settings from "./Settings";
+import Notifications from "./Notifications";
 
 export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -17,6 +18,7 @@ export default function AdminPanel() {
           <TabsTrigger value="dashboard">Submissions</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="admins">User Management</TabsTrigger>
+          <TabsTrigger value="notifications">Notifications</TabsTrigger>
           <TabsTrigger value="logs">Audit Logs</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
@@ -28,6 +30,9 @@ export default function AdminPanel() {
         </TabsContent>
         <TabsContent value="admins">
           <AdminManagement />
+        </TabsContent>
+        <TabsContent value="notifications">
+          <Notifications />
         </TabsContent>
         <TabsContent value="logs">
           <AuditLogs />

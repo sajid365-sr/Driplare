@@ -1,10 +1,11 @@
 
-import ClientReviewSection from "../testimonials/ClientReviewSection";
+import React from 'react';
+import { ClientReviewSection } from './ClientReviewSection';
 
-export function TestimonialsSection() {
+export const TestimonialsSection = () => {
   return (
-    <div className="perspective-1000">
+    <div>
       <ClientReviewSection />
     </div>
   );
-}
+};
