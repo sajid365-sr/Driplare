@@ -1,397 +1,432 @@
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Search, Trash, Bell, PlusCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Bell, FileText, MessageSquare } from "lucide-react";
+import { format } from "date-fns";
 import { toast } from "sonner";
-import { formatDistanceToNow } from "date-fns";
 
 interface Notification {
   id: string;
   title: string;
   message: string;
-  type: "chat_lead" | "form_submission" | "system";
-  recipient: "all" | string;
-  timestamp: Date;
+  type: "chat" | "submission" | "system";
+  timestamp: string;
   read: boolean;
+  recipient: string;
 }
 
 export default function Notifications() {
-  const [notifications, setNotifications] = useState<Notification[]>([
-    {
-      id: "1",
-      title: "New Contact Form Submission",
-      message: "Sarah Johnson has submitted a contact form",
-      type: "form_submission",
-      recipient: "all",
-      timestamp: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
-      read: false,
-    },
-    {
-      id: "2",
-      title: "New Chat Lead",
-      message: "Michael Brown requested information about AI Services",
-      type: "chat_lead",
-      recipient: "all",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
-      read: false,
-    },
-    {
-      id: "3",
-      title: "System Update",
-      message: "The website has been successfully updated to version 2.1",
-      type: "system",
-      recipient: "admin@driplare.com",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
-      read: true,
-    },
-  ]);
-
-  const [searchTerm, setSearchTerm] = useState("");
-  const [typeFilter, setTypeFilter] = useState("all");
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [selectedNotifications, setSelectedNotifications] = useState<string[]>([]);
-  const [createDialogOpen, setCreateDialogOpen] = useState(false);
+  const [filter, setFilter] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
   const [newNotification, setNewNotification] = useState({
     title: "",
     message: "",
-    type: "system" as const,
-    recipient: "all",
+    type: "system",
+    recipient: "all"
+  });
+  const [activeTab, setActiveTab] = useState("all");
+
+  // Load notifications on component mount
+  useEffect(() => {
+    loadNotifications();
+    
+    // Load and process chat logs
+    loadChatLogs();
+  }, []);
+  
+  // Load notifications from localStorage
+  const loadNotifications = () => {
+    const storedNotifications = localStorage.getItem('driplare_notifications');
+    if (storedNotifications) {
+      setNotifications(JSON.parse(storedNotifications));
+    }
+  };
+  
+  // Process chat logs and convert them to notifications
+  const loadChatLogs = () => {
+    const chatLogs = JSON.parse(localStorage.getItem('chat_logs') || '[]');
+    
+    // Process only lead captures
+    const leadNotifications = chatLogs
+      .filter((log: any) => log.type === 'lead')
+      .map((log: any) => ({
+        id: `chat-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+        title: `New Chat Lead: ${log.data.name}`,
+        message: `Email: ${log.data.email}`,
+        type: 'chat' as const,
+        timestamp: log.timestamp,
+        read: false,
+        recipient: 'all'
+      }));
+    
+    if (leadNotifications.length > 0) {
+      // Add to existing notifications
+      const updatedNotifications = [...notifications, ...leadNotifications];
+      setNotifications(updatedNotifications);
+      
+      // Save to localStorage
+      localStorage.setItem('driplare_notifications', JSON.stringify(updatedNotifications));
+    }
+  };
+
+  // Save notifications to localStorage
+  const saveNotifications = (updatedNotifications: Notification[]) => {
+    localStorage.setItem('driplare_notifications', JSON.stringify(updatedNotifications));
+    setNotifications(updatedNotifications);
+  };
+
+  // Filter notifications based on search and filter criteria
+  const filteredNotifications = notifications.filter(notification => {
+    const matchesSearch = searchTerm === "" || 
+      notification.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      notification.message.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const matchesFilter = 
+      filter === "all" || 
+      filter === "unread" && !notification.read ||
+      filter === notification.type;
+    
+    const matchesTab =
+      activeTab === "all" ||
+      (activeTab === "leads" && notification.type === "chat") ||
+      (activeTab === "submissions" && notification.type === "submission") ||
+      (activeTab === "system" && notification.type === "system");
+    
+    return matchesSearch && matchesFilter && matchesTab;
   });
 
-  // Filter notifications
-  const filteredNotifications = notifications.filter((notification) => {
-    // Filter by search term
-    if (
-      searchTerm &&
-      !notification.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !notification.message.toLowerCase().includes(searchTerm.toLowerCase())
-    ) {
-      return false;
-    }
+  // Handle notification selection
+  const toggleSelect = (id: string) => {
+    setSelectedNotifications(prev => 
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+    );
+  };
 
-    // Filter by type
-    if (typeFilter !== "all" && notification.type !== typeFilter) {
-      return false;
-    }
-
-    return true;
-  });
-
-  // Handle bulk selection
-  const toggleSelectAll = () => {
+  // Select all visible notifications
+  const selectAll = () => {
     if (selectedNotifications.length === filteredNotifications.length) {
       setSelectedNotifications([]);
     } else {
-      setSelectedNotifications(filteredNotifications.map((n) => n.id));
+      setSelectedNotifications(filteredNotifications.map(n => n.id));
     }
   };
 
-  const toggleSelect = (id: string) => {
-    setSelectedNotifications((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
-    );
-  };
-
-  // Handle bulk actions
+  // Mark notifications as read
   const markAsRead = () => {
-    if (selectedNotifications.length === 0) return;
-
-    setNotifications((prev) =>
-      prev.map((n) =>
-        selectedNotifications.includes(n.id) ? { ...n, read: true } : n
-      )
+    const updated = notifications.map(notification => 
+      selectedNotifications.includes(notification.id) 
+        ? { ...notification, read: true } 
+        : notification
     );
-
-    toast.success(`${selectedNotifications.length} notifications marked as read`);
+    
+    saveNotifications(updated);
     setSelectedNotifications([]);
+    toast.success("Notifications marked as read");
   };
 
+  // Delete selected notifications
   const deleteSelected = () => {
-    if (selectedNotifications.length === 0) return;
-
-    setNotifications((prev) =>
-      prev.filter((n) => !selectedNotifications.includes(n.id))
+    const updated = notifications.filter(notification => 
+      !selectedNotifications.includes(notification.id)
     );
-
-    toast.success(`${selectedNotifications.length} notifications deleted`);
+    
+    saveNotifications(updated);
     setSelectedNotifications([]);
+    toast.success("Notifications deleted");
   };
 
-  // Create new notification
-  const handleCreateNotification = () => {
+  // Create a new notification
+  const createNotification = (e: React.FormEvent) => {
+    e.preventDefault();
+    
     if (!newNotification.title || !newNotification.message) {
-      toast.error("Please fill in all fields");
+      toast.error("Please fill out all required fields");
       return;
     }
-
-    const newItem: Notification = {
+    
+    const notification: Notification = {
       id: Date.now().toString(),
-      title: newNotification.title,
-      message: newNotification.message,
-      type: newNotification.type,
-      recipient: newNotification.recipient,
-      timestamp: new Date(),
+      ...newNotification,
+      timestamp: new Date().toISOString(),
       read: false,
+      type: newNotification.type as "chat" | "submission" | "system"
     };
-
-    setNotifications((prev) => [newItem, ...prev]);
-    setCreateDialogOpen(false);
+    
+    const updated = [notification, ...notifications];
+    saveNotifications(updated);
+    
+    // Reset form
     setNewNotification({
       title: "",
       message: "",
       type: "system",
-      recipient: "all",
+      recipient: "all"
     });
-
-    toast.success("Notification created and sent");
+    
+    toast.success("Notification created");
   };
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Notifications Management</h1>
-
-      {/* Controls */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-between">
-        <div className="flex flex-col sm:flex-row gap-2">
-          <div className="relative w-full sm:w-64">
-            <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-            <Input
-              placeholder="Search notifications..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-8"
-            />
-          </div>
-
-          <Select value={typeFilter} onValueChange={setTypeFilter}>
-            <SelectTrigger className="w-full sm:w-40">
-              <SelectValue placeholder="Filter by type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="chat_lead">Chat Lead</SelectItem>
-              <SelectItem value="form_submission">Form Submission</SelectItem>
-              <SelectItem value="system">System Alert</SelectItem>
-            </SelectContent>
-          </Select>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold">Notifications</h1>
+          <p className="text-muted-foreground">
+            Manage chat leads, form submissions, and system notifications
+          </p>
         </div>
-
         <div className="flex gap-2">
-          <Button
-            variant="outline"
-            onClick={markAsRead}
-            disabled={selectedNotifications.length === 0}
-          >
-            Mark as Read
-          </Button>
-          <Button
-            variant="outline"
-            className="text-destructive hover:text-destructive"
-            onClick={deleteSelected}
-            disabled={selectedNotifications.length === 0}
-          >
-            <Trash className="h-4 w-4 mr-2" />
-            Delete
-          </Button>
-          <Button onClick={() => setCreateDialogOpen(true)}>
-            <PlusCircle className="h-4 w-4 mr-2" />
-            Create
-          </Button>
+          <Input
+            className="max-w-xs"
+            placeholder="Search notifications..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
       </div>
 
-      {/* Notifications Table */}
-      <div className="border rounded-md">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[40px]">
-                <Checkbox
-                  checked={
-                    selectedNotifications.length === filteredNotifications.length &&
-                    filteredNotifications.length > 0
-                  }
-                  onCheckedChange={toggleSelectAll}
-                  aria-label="Select all"
+      <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
+        <TabsList>
+          <TabsTrigger value="all">All Notifications</TabsTrigger>
+          <TabsTrigger value="leads">Chat Leads</TabsTrigger>
+          <TabsTrigger value="submissions">Form Submissions</TabsTrigger>
+          <TabsTrigger value="system">System</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="all" className="space-y-6">
+          <NotificationsTable />
+        </TabsContent>
+        
+        <TabsContent value="leads" className="space-y-6">
+          <NotificationsTable />
+        </TabsContent>
+        
+        <TabsContent value="submissions" className="space-y-6">
+          <NotificationsTable />
+        </TabsContent>
+        
+        <TabsContent value="system" className="space-y-6">
+          <NotificationsTable />
+        </TabsContent>
+      </Tabs>
+      
+      <Card className="mt-8">
+        <CardHeader>
+          <CardTitle>Create New Notification</CardTitle>
+          <CardDescription>
+            Create a notification to be sent to users
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={createNotification} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label htmlFor="title" className="text-sm font-medium">Title</label>
+                <Input
+                  id="title"
+                  value={newNotification.title}
+                  onChange={(e) => setNewNotification({...newNotification, title: e.target.value})}
+                  required
                 />
-              </TableHead>
-              <TableHead>Type</TableHead>
-              <TableHead>Title</TableHead>
-              <TableHead>Recipient</TableHead>
-              <TableHead>Time</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Message</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredNotifications.length > 0 ? (
-              filteredNotifications.map((notification) => (
-                <TableRow
-                  key={notification.id}
-                  className={!notification.read ? "bg-muted/10" : ""}
+              </div>
+              
+              <div className="space-y-2">
+                <label htmlFor="type" className="text-sm font-medium">Type</label>
+                <select
+                  id="type"
+                  className="w-full p-2 rounded-md border border-border bg-background"
+                  value={newNotification.type}
+                  onChange={(e) => setNewNotification({...newNotification, type: e.target.value as any})}
                 >
-                  <TableCell>
-                    <Checkbox
+                  <option value="system">System</option>
+                  <option value="submission">Submission</option>
+                  <option value="chat">Chat</option>
+                </select>
+              </div>
+              
+              <div className="space-y-2 md:col-span-2">
+                <label htmlFor="message" className="text-sm font-medium">Message</label>
+                <textarea
+                  id="message"
+                  className="w-full p-2 rounded-md border border-border bg-background min-h-[100px]"
+                  value={newNotification.message}
+                  onChange={(e) => setNewNotification({...newNotification, message: e.target.value})}
+                  required
+                ></textarea>
+              </div>
+              
+              <div className="space-y-2">
+                <label htmlFor="recipient" className="text-sm font-medium">Recipient</label>
+                <select
+                  id="recipient"
+                  className="w-full p-2 rounded-md border border-border bg-background"
+                  value={newNotification.recipient}
+                  onChange={(e) => setNewNotification({...newNotification, recipient: e.target.value})}
+                >
+                  <option value="all">All Users</option>
+                  <option value="admin">Admins Only</option>
+                </select>
+              </div>
+            </div>
+            
+            <div className="flex justify-end">
+              <Button type="submit">Create Notification</Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+  
+  // Notifications table component
+  function NotificationsTable() {
+    if (filteredNotifications.length === 0) {
+      return (
+        <Card>
+          <CardContent className="py-10">
+            <div className="text-center">
+              <Bell className="mx-auto h-12 w-12 text-muted-foreground/60" />
+              <h3 className="mt-4 text-lg font-medium">No notifications found</h3>
+              <p className="text-muted-foreground mt-2">
+                {searchTerm ? "Try different search terms" : "Notifications will appear here"}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+    
+    return (
+      <>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-2">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={selectAll}
+            >
+              {selectedNotifications.length === filteredNotifications.length
+                ? "Deselect All"
+                : "Select All"}
+            </Button>
+            
+            <select
+              className="px-2 py-1 rounded border border-border bg-background"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            >
+              <option value="all">All</option>
+              <option value="unread">Unread</option>
+              <option value="chat">Chat</option>
+              <option value="submission">Submission</option>
+              <option value="system">System</option>
+            </select>
+          </div>
+          
+          <div className="flex space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={markAsRead}
+              disabled={selectedNotifications.length === 0}
+            >
+              Mark Read
+            </Button>
+            <Button 
+              variant="destructive" 
+              size="sm"
+              onClick={deleteSelected}
+              disabled={selectedNotifications.length === 0}
+            >
+              Delete
+            </Button>
+          </div>
+        </div>
+      
+        <div className="border rounded-md">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[50px]"></TableHead>
+                <TableHead>Notification</TableHead>
+                <TableHead className="hidden md:table-cell">Type</TableHead>
+                <TableHead className="hidden md:table-cell">Date</TableHead>
+                <TableHead className="hidden md:table-cell">Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredNotifications.map((notification) => (
+                <TableRow key={notification.id} className={notification.read ? "" : "bg-secondary/20"}>
+                  <TableCell className="w-[50px]">
+                    <input
+                      type="checkbox"
                       checked={selectedNotifications.includes(notification.id)}
-                      onCheckedChange={() => toggleSelect(notification.id)}
+                      onChange={() => toggleSelect(notification.id)}
+                      className="rounded"
                     />
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`w-2 h-2 rounded-full ${
-                          notification.type === "chat_lead"
-                            ? "bg-blue-500"
-                            : notification.type === "form_submission"
-                            ? "bg-green-500"
-                            : "bg-orange-500"
-                        }`}
-                      ></span>
-                      <span className="capitalize">
-                        {notification.type === "chat_lead"
-                          ? "Chat Lead"
-                          : notification.type === "form_submission"
-                          ? "Form Submission"
-                          : "System Alert"}
-                      </span>
+                    <div className="font-medium">
+                      {notification.type === "chat" && (
+                        <MessageSquare className="inline-block mr-2 h-4 w-4 text-blue-500" />
+                      )}
+                      {notification.type === "submission" && (
+                        <FileText className="inline-block mr-2 h-4 w-4 text-green-500" />
+                      )}
+                      {notification.type === "system" && (
+                        <Bell className="inline-block mr-2 h-4 w-4 text-orange-500" />
+                      )}
+                      {notification.title}
                     </div>
+                    <p className="text-sm text-muted-foreground">{notification.message}</p>
                   </TableCell>
-                  <TableCell className="font-medium">{notification.title}</TableCell>
-                  <TableCell>{notification.recipient}</TableCell>
-                  <TableCell>
-                    {formatDistanceToNow(notification.timestamp, {
-                      addSuffix: true,
-                    })}
-                  </TableCell>
-                  <TableCell>
-                    <span
-                      className={`px-2 py-1 text-xs rounded-full ${
-                        notification.read
-                          ? "bg-muted/30 text-muted-foreground"
-                          : "bg-[#F88220]/10 text-[#F88220]"
-                      }`}
-                    >
-                      {notification.read ? "Read" : "Unread"}
+                  <TableCell className="hidden md:table-cell">
+                    <span className={`inline-block px-2 py-1 rounded-md text-xs ${
+                      notification.type === "chat" 
+                        ? "bg-blue-500/20 text-blue-700 dark:text-blue-300" 
+                        : notification.type === "submission"
+                        ? "bg-green-500/20 text-green-700 dark:text-green-300"
+                        : "bg-orange-500/20 text-orange-700 dark:text-orange-300"
+                    }`}>
+                      {notification.type === "chat" 
+                        ? "Chat Lead" 
+                        : notification.type === "submission"
+                        ? "Form Submission"
+                        : "System"}
                     </span>
                   </TableCell>
-                  <TableCell className="max-w-xs truncate">
-                    {notification.message}
+                  <TableCell className="hidden md:table-cell">
+                    {format(new Date(notification.timestamp), "MMM d, yyyy h:mm a")}
+                  </TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    <span className={`inline-block px-2 py-1 rounded-md text-xs ${
+                      notification.read 
+                        ? "bg-muted text-muted-foreground" 
+                        : "bg-primary/20 text-primary"
+                    }`}>
+                      {notification.read ? "Read" : "New"}
+                    </span>
                   </TableCell>
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={7} className="text-center py-6">
-                  No notifications found
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-
-      {/* Create Notification Dialog */}
-      <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
-        <DialogContent className="sm:max-w-[500px]">
-          <DialogHeader>
-            <DialogTitle>Create New Notification</DialogTitle>
-            <DialogDescription>
-              Create a notification that will be sent to users in real-time
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <Label htmlFor="title">Title</Label>
-              <Input
-                id="title"
-                value={newNotification.title}
-                onChange={(e) =>
-                  setNewNotification({ ...newNotification, title: e.target.value })
-                }
-                placeholder="Notification title"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="message">Message</Label>
-              <Input
-                id="message"
-                value={newNotification.message}
-                onChange={(e) =>
-                  setNewNotification({ ...newNotification, message: e.target.value })
-                }
-                placeholder="Notification message"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="type">Type</Label>
-                <Select
-                  value={newNotification.type}
-                  onValueChange={(value: any) =>
-                    setNewNotification({ ...newNotification, type: value })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="system">System Alert</SelectItem>
-                    <SelectItem value="chat_lead">Chat Lead</SelectItem>
-                    <SelectItem value="form_submission">Form Submission</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="recipient">Recipient</Label>
-                <Select
-                  value={newNotification.recipient}
-                  onValueChange={(value) =>
-                    setNewNotification({ ...newNotification, recipient: value })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select recipient" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Users</SelectItem>
-                    <SelectItem value="admin@driplare.com">Admin Only</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </div>
-
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setCreateDialogOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={handleCreateNotification}>Create & Send</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </div>
-  );
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </>
+    );
+  }
 }
