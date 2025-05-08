@@ -16,6 +16,14 @@ export default function AdminLayout() {
     if (!credentials) {
       setShowLoginModal(true);
     }
+    
+    // Apply dark mode to admin panel
+    document.documentElement.classList.add("dark");
+    
+    // Cleanup function to remove dark mode when leaving admin panel
+    return () => {
+      document.documentElement.classList.remove("dark");
+    };
   }, []);
 
   const handleLogout = () => {
@@ -30,7 +38,7 @@ export default function AdminLayout() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {/* Admin Header */}
-      <header className="border-b shadow-sm">
+      <header className="border-b shadow-sm bg-card">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2">
             <img

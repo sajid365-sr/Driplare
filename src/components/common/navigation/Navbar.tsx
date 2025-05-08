@@ -17,6 +17,7 @@ import {
   MessageSquareCode,
   UserRound,
   SlidersHorizontal,
+  Settings,
 } from "lucide-react";
 import { ThemeToggle } from "../ThemeToggle";
 
