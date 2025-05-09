@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -28,6 +29,7 @@ export default function AdminLoginModal({
   const [userId, setUserId] = useState("");
   const [apiKey, setApiKey] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,6 +49,12 @@ export default function AdminLoginModal({
       if (session) {
         toast.success("Login successful");
         onSuccess();
+        
+        // Add navigation to admin page after successful login
+        setTimeout(() => {
+          navigate('/admin');
+          setClose(false);
+        }, 500);
       } else {
         setIsSubmitting(false);
       }
