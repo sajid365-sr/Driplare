@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { BotMessageSquare, X } from "lucide-react";
+import React, { useState, useEffect, useRef } from 'react';
+import { MessageSquareText } from 'lucide-react';
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useGeminiAPI } from "@/hooks/use-gemini-api";
@@ -222,7 +222,7 @@ export const ChatbotWidget = () => {
         {isOpen ? (
           <X size={24} className="text-white" />
         ) : (
-          <BotMessageSquare size={24} className="text-white" />
+          <MessageSquareText size={24} className="text-white" />
         )}
       </Button>
 
@@ -239,7 +239,7 @@ export const ChatbotWidget = () => {
             {/* Chat Header */}
             <div className="bg-[#F88220] p-4 flex items-center">
               <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
-                <BotMessageSquare size={20} className="text-[#F88220]" />
+                <MessageSquareText size={20} className="text-[#F88220]" />
               </div>
               <div>
                 <h3 className="font-bold text-white">Driplare Assistant</h3>
@@ -411,7 +411,7 @@ export const ChatbotWidget = () => {
                         className="bg-[#F88220] text-white p-2 rounded-r-md"
                         disabled={!userMessage.trim()}
                       >
-                        <MessageSquare size={20} />
+                        <MessageSquareText size={20} />
                       </button>
                     </div>
                   </form>

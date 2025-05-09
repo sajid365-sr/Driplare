@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { MobileMenu } from "./MobileMenu";
 import {
@@ -23,7 +23,7 @@ import { ThemeToggle } from "../ThemeToggle";
 import { NotificationsDropdown } from "../notifications/NotificationsDropdown";
 import AdminLoginModal from "@/components/admin/AdminLoginModal";
 import { getNotifications } from "@/utils/notification-utils";
-import { Notification } from "@/utils/notification-utils";
+import { Notification as NotificationType } from "@/utils/notification-utils";
 
 interface Notification {
   id: string;
@@ -37,7 +37,7 @@ interface Notification {
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
-  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [notifications, setNotifications] = useState<NotificationType[]>([]);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {

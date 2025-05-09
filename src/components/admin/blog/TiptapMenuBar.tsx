@@ -2,7 +2,7 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
 import { 
-  Bold, Italic, Underline, List, Heading, Image, Link, Code
+  Bold, Italic, Underline, List, Heading, Image, Link as LinkIcon, Code
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { uploadEditorImage } from '@/utils/blog-utils';
@@ -120,7 +120,7 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
         onClick={setLink}
         className={editor.isActive('link') ? 'bg-muted' : ''}
       >
-        <Link className="h-4 w-4" />
+        <LinkIcon className="h-4 w-4" />
       </Button>
       
       <Button
