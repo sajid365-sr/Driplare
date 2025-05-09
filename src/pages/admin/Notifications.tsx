@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import {
   Table,
@@ -20,85 +21,53 @@ import {
 import { Bell, FileText, MessageSquare } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
-
-interface Notification {
-  id: string;
-  title: string;
-  message: string;
-  type: "chat" | "submission" | "system";
-  timestamp: string;
-  read: boolean;
-  recipient: string;
-}
+import { 
+  getNotifications, 
+  createNotification, 
+  markNotificationsAsRead, 
+  deleteNotifications,
+  Notification
+} from "@/utils/notification-utils";
+import { getAdminSession } from "@/utils/admin-auth";
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [selectedNotifications, setSelectedNotifications] = useState<string[]>(
-    []
-  );
+  const [selectedNotifications, setSelectedNotifications] = useState<string[]>([]);
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [newNotification, setNewNotification] = useState({
     title: "",
     message: "",
-    type: "system",
+    type: "system" as "chat" | "submission" | "system",
     recipient: "all",
   });
   const [activeTab, setActiveTab] = useState("all");
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Get current admin session
+  const adminSession = getAdminSession();
+  const currentUserId = adminSession?.userId || "system";
 
   // Load notifications on component mount
   useEffect(() => {
-    loadNotifications();
-
-    // Load and process chat logs
-    loadChatLogs();
+    fetchNotifications();
   }, []);
 
-  // Load notifications from localStorage
-  const loadNotifications = () => {
-    const storedNotifications = localStorage.getItem("driplare_notifications");
-    if (storedNotifications) {
-      setNotifications(JSON.parse(storedNotifications));
+  // Fetch notifications from Supabase
+  const fetchNotifications = async () => {
+    setIsLoading(true);
+    try {
+      const fetchedNotifications = await getNotifications();
+      setNotifications(fetchedNotifications);
+      
+      // Also update localStorage for compatibility with existing code
+      localStorage.setItem("driplare_notifications", JSON.stringify(fetchedNotifications));
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+      toast.error("Failed to load notifications");
+    } finally {
+      setIsLoading(false);
     }
-  };
-
-  // Process chat logs and convert them to notifications
-  const loadChatLogs = () => {
-    const chatLogs = JSON.parse(localStorage.getItem("chat_logs") || "[]");
-
-    // Process only lead captures
-    const leadNotifications = chatLogs
-      .filter((log: any) => log.type === "lead")
-      .map((log: any) => ({
-        id: `chat-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
-        title: `New Chat Lead: ${log.data.name}`,
-        message: `Email: ${log.data.email}`,
-        type: "chat" as const,
-        timestamp: log.timestamp,
-        read: false,
-        recipient: "all",
-      }));
-
-    if (leadNotifications.length > 0) {
-      // Add to existing notifications
-      const updatedNotifications = [...notifications, ...leadNotifications];
-      setNotifications(updatedNotifications);
-
-      // Save to localStorage
-      localStorage.setItem(
-        "driplare_notifications",
-        JSON.stringify(updatedNotifications)
-      );
-    }
-  };
-
-  // Save notifications to localStorage
-  const saveNotifications = (updatedNotifications: Notification[]) => {
-    localStorage.setItem(
-      "driplare_notifications",
-      JSON.stringify(updatedNotifications)
-    );
-    setNotifications(updatedNotifications);
   };
 
   // Filter notifications based on search and filter criteria
@@ -139,60 +108,89 @@ export default function Notifications() {
   };
 
   // Mark notifications as read
-  const markAsRead = () => {
-    const updated = notifications.map((notification) =>
-      selectedNotifications.includes(notification.id)
-        ? { ...notification, read: true }
-        : notification
-    );
-
-    saveNotifications(updated);
-    setSelectedNotifications([]);
-    toast.success("Notifications marked as read");
+  const handleMarkAsRead = async () => {
+    if (!selectedNotifications.length) return;
+    
+    try {
+      const success = await markNotificationsAsRead(selectedNotifications, currentUserId);
+      
+      if (success) {
+        // Update local state
+        const updatedNotifications = notifications.map((notification) =>
+          selectedNotifications.includes(notification.id)
+            ? { ...notification, read: true }
+            : notification
+        );
+        
+        setNotifications(updatedNotifications);
+        localStorage.setItem("driplare_notifications", JSON.stringify(updatedNotifications));
+        setSelectedNotifications([]);
+        toast.success("Notifications marked as read");
+      }
+    } catch (error) {
+      console.error("Error marking notifications as read:", error);
+      toast.error("Failed to update notifications");
+    }
   };
 
   // Delete selected notifications
-  const deleteSelected = () => {
-    const updated = notifications.filter(
-      (notification) => !selectedNotifications.includes(notification.id)
-    );
-
-    saveNotifications(updated);
-    setSelectedNotifications([]);
-    toast.success("Notifications deleted");
+  const handleDeleteSelected = async () => {
+    if (!selectedNotifications.length) return;
+    
+    try {
+      const success = await deleteNotifications(selectedNotifications, currentUserId);
+      
+      if (success) {
+        // Update local state
+        const updatedNotifications = notifications.filter(
+          (notification) => !selectedNotifications.includes(notification.id)
+        );
+        
+        setNotifications(updatedNotifications);
+        localStorage.setItem("driplare_notifications", JSON.stringify(updatedNotifications));
+        setSelectedNotifications([]);
+      }
+    } catch (error) {
+      console.error("Error deleting notifications:", error);
+    }
   };
 
   // Create a new notification
-  const createNotification = (e: React.FormEvent) => {
+  const handleCreateNotification = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log(newNotification);
 
     if (!newNotification.title || !newNotification.message) {
       toast.error("Please fill out all required fields");
       return;
     }
 
-    const notification: Notification = {
-      id: Date.now().toString(),
-      ...newNotification,
-      timestamp: new Date().toISOString(),
-      read: false,
-      type: newNotification.type as "chat" | "submission" | "system",
-    };
-
-    const updated = [notification, ...notifications];
-    saveNotifications(updated);
-
-    // Reset form
-    setNewNotification({
-      title: "",
-      message: "",
-      type: "system",
-      recipient: "all",
-    });
-
-    toast.success("Notification created");
+    try {
+      const success = await createNotification(
+        newNotification.title,
+        newNotification.message,
+        newNotification.type,
+        newNotification.recipient,
+        currentUserId
+      );
+      
+      if (success) {
+        // Refresh notifications list
+        fetchNotifications();
+        
+        // Reset form
+        setNewNotification({
+          title: "",
+          message: "",
+          type: "system",
+          recipient: "all",
+        });
+        
+        toast.success("Notification created");
+      }
+    } catch (error) {
+      console.error("Error creating notification:", error);
+      toast.error("Failed to create notification");
+    }
   };
 
   return (
@@ -211,6 +209,13 @@ export default function Notifications() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <Button 
+            variant="outline" 
+            onClick={fetchNotifications}
+            disabled={isLoading}
+          >
+            Refresh
+          </Button>
         </div>
       </div>
 
@@ -240,7 +245,7 @@ export default function Notifications() {
             <Button
               variant="outline"
               size="sm"
-              onClick={markAsRead}
+              onClick={handleMarkAsRead}
               disabled={selectedNotifications.length === 0}
             >
               Mark Read
@@ -248,7 +253,7 @@ export default function Notifications() {
             <Button
               variant="destructive"
               size="sm"
-              onClick={deleteSelected}
+              onClick={handleDeleteSelected}
               disabled={selectedNotifications.length === 0}
             >
               Delete
@@ -281,7 +286,7 @@ export default function Notifications() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={createNotification} className="space-y-4">
+          <form onSubmit={handleCreateNotification} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label htmlFor="title" className="text-sm font-medium">
@@ -311,7 +316,7 @@ export default function Notifications() {
                   onChange={(e) =>
                     setNewNotification({
                       ...newNotification,
-                      type: e.target.value as any,
+                      type: e.target.value as "chat" | "submission" | "system",
                     })
                   }
                 >
@@ -361,7 +366,11 @@ export default function Notifications() {
             </div>
 
             <div className="flex justify-end">
-              <Button type="submit">Create Notification</Button>
+              <Button 
+                type="submit"
+              >
+                Create Notification
+              </Button>
             </div>
           </form>
         </CardContent>
@@ -371,6 +380,18 @@ export default function Notifications() {
 
   // Notifications table component
   function NotificationsTable() {
+    if (isLoading) {
+      return (
+        <Card>
+          <CardContent className="py-10">
+            <div className="text-center">
+              <p>Loading notifications...</p>
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+
     if (filteredNotifications.length === 0) {
       return (
         <Card>

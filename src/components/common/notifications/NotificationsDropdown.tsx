@@ -1,66 +1,72 @@
+
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { formatDistanceToNow } from "date-fns";
-
-interface Notification {
-  id: string;
-  title: string;
-  message: string;
-  timestamp: Date;
-  read: boolean;
-  type: "chat_lead" | "form_submission" | "system";
-}
+import { getNotifications, markNotificationsAsRead } from "@/utils/notification-utils";
+import { Notification } from "@/utils/notification-utils";
 
 export const NotificationsDropdown = ({ onClose }: { onClose: () => void }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [readNotification, setReadNotification] = useState<Notification[]>([]);
-  const [refresh, setRefresh] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const notifications = JSON.parse(
-      localStorage.getItem("driplare_notifications")
-    );
+    fetchNotifications();
+  }, []);
 
-    setNotifications(notifications);
-  }, [refresh]);
+  const fetchNotifications = async () => {
+    setIsLoading(true);
+    try {
+      const fetchedNotifications = await getNotifications();
+      setNotifications(fetchedNotifications);
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const ref = useClickOutside<HTMLDivElement>(onClose);
 
-  console.log(notifications);
-
-  const handleMarkAsRead = (id: string) => {
-    const updatedNotifications = notifications.map((notification) => {
-      if (notification.id === id) {
-        return { ...notification, read: true };
+  const handleMarkAsRead = async (id: string) => {
+    try {
+      const success = await markNotificationsAsRead([id]);
+      
+      if (success) {
+        // Update local state
+        const updatedNotifications = notifications.map((notification) =>
+          notification.id === id ? { ...notification, read: true } : notification
+        );
+        
+        setNotifications(updatedNotifications);
       }
-      return notification;
-    });
-
-    console.log(updatedNotifications);
-
-    // Save to localStorage
-    localStorage.setItem(
-      "driplare_notifications",
-      JSON.stringify(updatedNotifications)
-    );
-
-    setRefresh(!refresh);
+    } catch (error) {
+      console.error("Error marking notification as read:", error);
+    }
   };
 
-  const handleMarkAllAsRead = () => {
-    setReadNotification(
-      notifications.map((notification) => ({
-        ...notification,
-        read: true,
-      }))
-    );
-
-    // Save to localStorage
-    localStorage.setItem(
-      "driplare_notifications",
-      JSON.stringify(readNotification)
-    );
+  const handleMarkAllAsRead = async () => {
+    const unreadIds = notifications
+      .filter(n => !n.read)
+      .map(n => n.id);
+    
+    if (!unreadIds.length) return;
+    
+    try {
+      const success = await markNotificationsAsRead(unreadIds);
+      
+      if (success) {
+        // Update local state
+        const updatedNotifications = notifications.map(notification => ({
+          ...notification,
+          read: true
+        }));
+        
+        setNotifications(updatedNotifications);
+      }
+    } catch (error) {
+      console.error("Error marking all as read:", error);
+    }
   };
 
   const unreadCount = notifications?.filter((n) => !n.read).length;
@@ -88,7 +94,11 @@ export const NotificationsDropdown = ({ onClose }: { onClose: () => void }) => {
         </div>
 
         <div className="max-h-[350px] overflow-y-auto">
-          {notifications?.length === 0 ? (
+          {isLoading ? (
+            <div className="py-6 text-center text-muted-foreground">
+              Loading notifications...
+            </div>
+          ) : notifications?.length === 0 ? (
             <div className="py-6 text-center text-muted-foreground">
               No notifications
             </div>
@@ -109,7 +119,7 @@ export const NotificationsDropdown = ({ onClose }: { onClose: () => void }) => {
                     )}
                   </h4>
                   <span className="text-xs text-muted-foreground">
-                    {formatDistanceToNow(notification.timestamp, {
+                    {formatDistanceToNow(new Date(notification.timestamp), {
                       addSuffix: true,
                     })}
                   </span>

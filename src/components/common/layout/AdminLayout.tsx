@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -6,11 +7,13 @@ import { ArrowRight, ChevronRight, LogOut } from "lucide-react";
 
 import AdminLoginModal from "../../admin/AdminLoginModal";
 import {
-  getAdminCredentials,
-  clearAdminCredentials,
-} from "@/utils/admin-utils";
+  getAdminSession,
+  clearAdminSession,
+  AdminSession
+} from "@/utils/admin-auth";
 import ScrollToTop from "../ScrollToTop";
 import { ChatbotWidget } from "../chatbot/ChatbotWidget";
+import { initializeNotificationsFromSupabase } from "@/utils/notification-utils";
 
 import Dashboard from "@/pages/admin/Dashboard";
 import Analytics from "@/pages/admin/Analytics";
@@ -22,28 +25,39 @@ import Settings from "@/pages/admin/Settings";
 export default function AdminLayout() {
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>("dashboard");
+  const [adminSession, setAdminSession] = useState<AdminSession | null>(null);
   const navigate = useNavigate();
-  const [adminCredential, setAdminCredential] = useState({});
 
   useEffect(() => {
-    const credentials = getAdminCredentials();
-    setAdminCredential(credentials);
+    // Load admin session and check if it exists
+    const session = getAdminSession();
+    setAdminSession(session);
 
-    if (!credentials) setShowLoginModal(true);
+    // Show login modal if no valid session exists
+    if (!session) setShowLoginModal(true);
+    
+    // Initialize notifications from Supabase
+    initializeNotificationsFromSupabase();
+    
+    // Apply dark mode to the admin panel
     document.documentElement.classList.add("dark");
     return () => document.documentElement.classList.remove("dark");
   }, []);
 
   const handleLogout = () => {
-    clearAdminCredentials();
+    clearAdminSession();
+    setAdminSession(null);
     setShowLoginModal(true);
   };
 
   const handleLoginSuccess = () => {
+    const session = getAdminSession();
+    setAdminSession(session);
     setShowLoginModal(false);
   };
 
-  // if (!adminCredential) return;
+  // Determine if the current user has permission to access certain tabs
+  const canAccessAdminManagement = adminSession?.permissions.canManageAdmins;
 
   return (
     <main className="min-h-screen flex flex-col md:px-5">
@@ -63,11 +77,21 @@ export default function AdminLayout() {
           <aside className="md:w-[20%] w-full md:border-r rounded-sm border-gray-800 pt-40 md:bg-gray-950 p-4 h-screen">
             <TabsList className="flex flex-row md:flex-col px-10 overflow-x-auto md:overflow-x-visible space-y-2">
               <TabsTrigger value="dashboard">Submissions</TabsTrigger>
-              <TabsTrigger value="analytics">Analytics</TabsTrigger>
-              <TabsTrigger value="admins">User Management</TabsTrigger>
-              <TabsTrigger value="notifications">Notifications</TabsTrigger>
-              <TabsTrigger value="logs">Audit Logs</TabsTrigger>
-              <TabsTrigger value="settings">Settings</TabsTrigger>
+              {adminSession?.permissions.canView && (
+                <TabsTrigger value="analytics">Analytics</TabsTrigger>
+              )}
+              {canAccessAdminManagement && (
+                <TabsTrigger value="admins">User Management</TabsTrigger>
+              )}
+              {adminSession?.permissions.canView && (
+                <TabsTrigger value="notifications">Notifications</TabsTrigger>
+              )}
+              {adminSession?.permissions.canView && (
+                <TabsTrigger value="logs">Audit Logs</TabsTrigger>
+              )}
+              {adminSession?.permissions.canEdit && (
+                <TabsTrigger value="settings">Settings</TabsTrigger>
+              )}
 
               <Link to="/">
                 <button

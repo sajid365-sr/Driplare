@@ -17,12 +17,13 @@ import {
   MessageSquareCode,
   UserRound,
   SlidersHorizontal,
-  Settings,
   Bell,
 } from "lucide-react";
 import { ThemeToggle } from "../ThemeToggle";
 import { NotificationsDropdown } from "../notifications/NotificationsDropdown";
 import AdminLoginModal from "@/components/admin/AdminLoginModal";
+import { getNotifications } from "@/utils/notification-utils";
+import { Notification } from "@/utils/notification-utils";
 
 interface Notification {
   id: string;
@@ -40,16 +41,24 @@ export function Navbar() {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
-    const notifications = JSON.parse(
-      localStorage.getItem("driplare_notifications")
-    );
-
-    setNotifications(notifications);
+    fetchNotifications();
+    
+    // Set up polling to check for new notifications periodically
+    const interval = setInterval(fetchNotifications, 30000); // every 30 seconds
+    
+    return () => clearInterval(interval);
   }, []);
 
-  const unreadCount = notifications?.filter((n) => !n.read).length;
+  const fetchNotifications = async () => {
+    try {
+      const fetchedNotifications = await getNotifications();
+      setNotifications(fetchedNotifications);
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+    }
+  };
 
-  console.log(unreadCount);
+  const unreadCount = notifications?.filter((n) => !n.read).length;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,10 +71,6 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
-
-  const handleLogout = () => {
-    setShowLoginModal(true);
-  };
 
   const handleLoginSuccess = () => {
     setShowLoginModal(false);
@@ -208,7 +213,7 @@ export function Navbar() {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link onClick={() => setShowLoginModal(true)} to="/admin">
+                <Link onClick={() => setShowLoginModal(true)} to="#">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Admin Area
                   </NavigationMenuLink>

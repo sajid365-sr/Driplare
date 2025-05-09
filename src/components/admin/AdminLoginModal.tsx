@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   Dialog,
@@ -9,10 +10,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { setAdminCredentials } from "@/utils/admin-utils";
 import { toast } from "sonner";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { Cross } from "lucide-react";
+import { verifyAdminCredentials } from "@/utils/admin-auth";
 
 interface AdminLoginModalProps {
   onSuccess: () => void;
@@ -29,18 +29,30 @@ export default function AdminLoginModal({
   const [apiKey, setApiKey] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // In a real app, you would validate these credentials against a backend
-    // For this example, we'll just store them and accept any non-empty values
-    if (userId.trim() && apiKey.trim()) {
-      setAdminCredentials(userId, apiKey);
-      toast.success("Login successful");
-      onSuccess();
-    } else {
-      toast.error("Please enter valid credentials");
+    try {
+      // Validate non-empty credentials
+      if (!userId.trim() || !apiKey.trim()) {
+        toast.error("Please enter valid credentials");
+        setIsSubmitting(false);
+        return;
+      }
+      
+      // Verify admin credentials against Supabase
+      const session = await verifyAdminCredentials(userId, apiKey);
+      
+      if (session) {
+        toast.success("Login successful");
+        onSuccess();
+      } else {
+        setIsSubmitting(false);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("Login failed. Please try again.");
       setIsSubmitting(false);
     }
   };

@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,13 +38,21 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { addAdmin, getAdmins, removeAdmin } from "@/utils/admin-utils";
+import { supabase } from "@/integrations/supabase/client";
+import { 
+  getAdminSession,
+  resetApiKey,
+  revokeAdmin,
+  updateAdminRole,
+  createAdmin
+} from "@/utils/admin-auth";
 
 // Extended admin interface with roles
 interface AdminWithRole {
-  userId: string;
-  apiKey: string;
+  id: string;
+  user_id: string;
   role: "Owner" | "Admin" | "Viewer";
+  created_at: string;
 }
 
 // Badge color mapping for roles
@@ -58,19 +66,48 @@ export default function AdminManagement() {
   const [newUserId, setNewUserId] = useState("");
   const [newApiKey, setNewApiKey] = useState("");
   const [newRole, setNewRole] = useState<"Owner" | "Admin" | "Viewer">("Admin");
-  
-  // Initial admins with mock roles added
-  const initialAdmins: AdminWithRole[] = getAdmins().map(admin => ({
-    ...admin, 
-    role: admin.userId.includes("admin") ? "Admin" : 
-          admin.userId.includes("owner") ? "Owner" : "Viewer"
-  }));
-  
-  const [admins, setAdmins] = useState<AdminWithRole[]>(initialAdmins);
+  const [admins, setAdmins] = useState<AdminWithRole[]>([]);
   const [adminToDelete, setAdminToDelete] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [resetKeyModal, setResetKeyModal] = useState<{open: boolean, userId: string, newKey: string | null}>({
+    open: false,
+    userId: "",
+    newKey: null
+  });
+
+  // Get current admin session
+  const adminSession = getAdminSession();
+  const currentUserId = adminSession?.userId || "";
+  const currentRole = adminSession?.role || "Viewer";
+  
+  // Fetch admins from Supabase on component mount
+  useEffect(() => {
+    fetchAdmins();
+  }, []);
+
+  const fetchAdmins = async () => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('admins')
+        .select('id, user_id, role, created_at')
+        .order('role', { ascending: true });
+      
+      if (error) {
+        throw error;
+      }
+      
+      setAdmins(data || []);
+    } catch (error) {
+      console.error('Error fetching admins:', error);
+      toast.error('Failed to load admin users');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Add a new admin
-  const handleAddAdmin = (e: React.FormEvent) => {
+  const handleAddAdmin = async (e: React.FormEvent) => {
     e.preventDefault();
     
     try {
@@ -79,47 +116,87 @@ export default function AdminManagement() {
         return;
       }
       
-      // Add to localStorage via admin-utils
-      addAdmin(newUserId, newApiKey);
+      // Check if admin already exists
+      const exists = admins.some(admin => admin.user_id === newUserId);
+      if (exists) {
+        toast.error("Admin with this User ID already exists");
+        return;
+      }
       
-      // Update local state with role information
-      setAdmins([
-        ...admins,
-        { userId: newUserId, apiKey: newApiKey, role: newRole }
-      ]);
+      const success = await createAdmin(
+        newUserId, 
+        newApiKey, 
+        newRole as "Admin" | "Viewer",
+        currentUserId,
+        currentRole
+      );
       
-      // Reset form
-      setNewUserId("");
-      setNewApiKey("");
-      setNewRole("Admin");
-      
-      toast.success("Admin added successfully");
+      if (success) {
+        // Reset form
+        setNewUserId("");
+        setNewApiKey("");
+        setNewRole("Admin");
+        
+        // Refresh admins list
+        fetchAdmins();
+      }
     } catch (error) {
-      toast.error((error as Error).message);
+      console.error("Error adding admin:", error);
+      toast.error("Failed to add admin user");
     }
   };
 
   // Delete admin confirmation
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async () => {
     if (adminToDelete) {
-      // Remove from localStorage
-      removeAdmin(adminToDelete);
-      
-      // Update local state
-      setAdmins(admins.filter(admin => admin.userId !== adminToDelete));
-      setAdminToDelete(null);
-      
-      toast.success("Admin removed successfully");
+      try {
+        const success = await revokeAdmin(adminToDelete, currentUserId, currentRole);
+        
+        if (success) {
+          // Refresh admins list
+          fetchAdmins();
+          setAdminToDelete(null);
+        }
+      } catch (error) {
+        console.error("Error revoking admin access:", error);
+        toast.error("Failed to revoke admin access");
+      }
     }
   };
   
-  // Change admin role
-  const handleRoleChange = (userId: string, newRole: "Owner" | "Admin" | "Viewer") => {
-    setAdmins(admins.map(admin => 
-      admin.userId === userId ? { ...admin, role: newRole } : admin
-    ));
-    
-    toast.success(`Role updated for ${userId}`);
+  // Handle admin role change
+  const handleRoleChange = async (userId: string, newRole: "Owner" | "Admin" | "Viewer") => {
+    try {
+      const success = await updateAdminRole(userId, newRole, currentUserId, currentRole);
+      
+      if (success) {
+        // Update local state to reflect change
+        setAdmins(admins.map(admin => 
+          admin.user_id === userId ? { ...admin, role: newRole } : admin
+        ));
+      }
+    } catch (error) {
+      console.error("Error updating role:", error);
+      toast.error("Failed to update admin role");
+    }
+  };
+
+  // Handle API key reset
+  const handleResetKey = async (userId: string) => {
+    try {
+      const newKey = await resetApiKey(userId, currentUserId, currentRole);
+      
+      if (newKey) {
+        setResetKeyModal({
+          open: true,
+          userId,
+          newKey
+        });
+      }
+    } catch (error) {
+      console.error("Error resetting API key:", error);
+      toast.error("Failed to reset API key");
+    }
   };
 
   return (
@@ -137,65 +214,79 @@ export default function AdminManagement() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>User ID</TableHead>
-                    <TableHead>Role</TableHead>
-                    <TableHead className="w-[150px]">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {admins.map((admin) => (
-                    <TableRow key={admin.userId}>
-                      <TableCell className="font-medium">{admin.userId}</TableCell>
-                      <TableCell>
-                        <Select 
-                          value={admin.role} 
-                          onValueChange={(val) => handleRoleChange(
-                            admin.userId, 
-                            val as "Owner" | "Admin" | "Viewer"
-                          )}
-                          disabled={admin.role === "Owner"}
-                        >
-                          <SelectTrigger className="w-28 h-8">
+              {isLoading ? (
+                <p className="text-center py-4">Loading admin users...</p>
+              ) : (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>User ID</TableHead>
+                      <TableHead>Role</TableHead>
+                      <TableHead className="w-[150px]">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {admins.map((admin) => (
+                      <TableRow key={admin.id}>
+                        <TableCell className="font-medium">{admin.user_id}</TableCell>
+                        <TableCell>
+                          {currentRole === "Owner" && admin.user_id !== currentUserId ? (
+                            <Select 
+                              value={admin.role} 
+                              onValueChange={(val) => handleRoleChange(
+                                admin.user_id, 
+                                val as "Owner" | "Admin" | "Viewer"
+                              )}
+                            >
+                              <SelectTrigger className="w-28 h-8">
+                                <Badge 
+                                  variant={roleBadgeVariants[admin.role] as any} 
+                                  className="font-normal"
+                                >
+                                  {admin.role}
+                                </Badge>
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="Owner">Owner</SelectItem>
+                                <SelectItem value="Admin">Admin</SelectItem>
+                                <SelectItem value="Viewer">Viewer</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          ) : (
                             <Badge 
                               variant={roleBadgeVariants[admin.role] as any} 
                               className="font-normal"
                             >
                               {admin.role}
                             </Badge>
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Owner">Owner</SelectItem>
-                            <SelectItem value="Admin">Admin</SelectItem>
-                            <SelectItem value="Viewer">Viewer</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex gap-2">
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            disabled={admin.role === "Owner"}
-                          >
-                            Reset Key
-                          </Button>
-                          <Button 
-                            variant="destructive" 
-                            size="sm"
-                            onClick={() => setAdminToDelete(admin.userId)}
-                            disabled={admin.role === "Owner"}
-                          >
-                            Revoke
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                          )}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex gap-2">
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              onClick={() => handleResetKey(admin.user_id)}
+                              disabled={admin.role === "Owner" && admin.user_id !== currentUserId}
+                            >
+                              Reset Key
+                            </Button>
+                            {currentRole === "Owner" && admin.user_id !== currentUserId && (
+                              <Button 
+                                variant="destructive" 
+                                size="sm"
+                                onClick={() => setAdminToDelete(admin.user_id)}
+                              >
+                                Revoke
+                              </Button>
+                            )}
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
             </CardContent>
           </Card>
           
@@ -296,6 +387,7 @@ export default function AdminManagement() {
                       <SelectValue placeholder="Select role" />
                     </SelectTrigger>
                     <SelectContent>
+                      {currentRole === "Owner" && <SelectItem value="Owner">Owner</SelectItem>}
                       <SelectItem value="Admin">Admin</SelectItem>
                       <SelectItem value="Viewer">Viewer</SelectItem>
                     </SelectContent>
@@ -319,7 +411,7 @@ export default function AdminManagement() {
         </div>
       </div>
       
-      {/* Confirmation Dialog */}
+      {/* Confirmation Dialog for Delete */}
       <AlertDialog open={!!adminToDelete} onOpenChange={() => setAdminToDelete(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -336,6 +428,32 @@ export default function AdminManagement() {
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
               Revoke Access
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      
+      {/* Reset Key Modal */}
+      <AlertDialog 
+        open={resetKeyModal.open} 
+        onOpenChange={(open) => setResetKeyModal({...resetKeyModal, open})}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>API Key Reset</AlertDialogTitle>
+            <AlertDialogDescription>
+              <p>A new API key has been generated for user "{resetKeyModal.userId}".</p>
+              <div className="mt-4 p-3 bg-muted rounded-md">
+                <p className="font-mono text-sm break-all">{resetKeyModal.newKey}</p>
+              </div>
+              <p className="mt-4 text-amber-500">
+                Save this key now. It will not be shown again for security reasons.
+              </p>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction>
+              I've Saved The Key
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

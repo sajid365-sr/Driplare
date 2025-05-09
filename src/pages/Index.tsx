@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { HeroSection } from "@/components/home/HeroSection";
 import { CoreSolutionsSection } from "@/components/home/CoreSolutionsSection";
@@ -11,11 +12,15 @@ import CTA from "@/components/common/CTA";
 import Hero from "@/components/home/HeroSection2";
 import { CaseStudiesSection } from "@/components/CaseStudiesSection";
 import ClientReviewSection from "@/components/home/ClientReviewSection";
+import { initializeNotificationsFromSupabase } from "@/utils/notification-utils";
 
 const Index = () => {
   // Handle the scroll animations
   useEffect(() => {
     if (typeof window === "undefined" || !document) return;
+
+    // Initialize notifications from Supabase
+    initializeNotificationsFromSupabase();
 
     const handleScroll = () => {
       const elements = document.querySelectorAll(".fade-in, .slide-up");
