@@ -1,4 +1,3 @@
-
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -12,7 +11,7 @@ import Portfolio from "./pages/Portfolio";
 import Insights from "./pages/Insights";
 import Contact from "./pages/Contact";
 import Layout from "./components/common/layout/Layout";
-import AdminLayout from "./components/admin/AdminLayout";
+import AdminLayout from "./components/common/layout/AdminLayout";
 import AdminPanel from "./pages/admin/AdminPanel";
 
 const queryClient = new QueryClient();
@@ -33,9 +32,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Route>
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<AdminPanel />} />
-          </Route>
+          <Route path="/admin" element={<AdminLayout />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

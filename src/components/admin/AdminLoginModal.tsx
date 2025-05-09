@@ -1,17 +1,30 @@
-
 import React, { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { setAdminCredentials } from "@/utils/admin-utils";
 import { toast } from "sonner";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { Cross } from "lucide-react";
 
 interface AdminLoginModalProps {
   onSuccess: () => void;
+  open: boolean;
+  setClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function AdminLoginModal({ onSuccess }: AdminLoginModalProps) {
+export default function AdminLoginModal({
+  onSuccess,
+  open,
+  setClose,
+}: AdminLoginModalProps) {
   const [userId, setUserId] = useState("");
   const [apiKey, setApiKey] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,12 +46,13 @@ export default function AdminLoginModal({ onSuccess }: AdminLoginModalProps) {
   };
 
   return (
-    <Dialog open={true}>
+    <Dialog open={open} onOpenChange={() => setClose(false)}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Admin Login</DialogTitle>
           <DialogDescription>
-            Please enter your Admin User ID and API Key to access the admin panel.
+            Please enter your Admin User ID and API Key to access the admin
+            panel.
           </DialogDescription>
         </DialogHeader>
 
@@ -53,7 +67,7 @@ export default function AdminLoginModal({ onSuccess }: AdminLoginModalProps) {
               required
             />
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="apiKey">API Key</Label>
             <Input
@@ -67,7 +81,7 @@ export default function AdminLoginModal({ onSuccess }: AdminLoginModalProps) {
           </div>
 
           <div className="flex justify-end">
-            <Button 
+            <Button
               type="submit"
               disabled={isSubmitting}
               className="bg-primary hover:bg-primary/90"

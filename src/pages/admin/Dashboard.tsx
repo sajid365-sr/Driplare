@@ -1,48 +1,47 @@
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { 
+import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
-import { 
+import {
   Table,
   TableBody,
   TableCaption,
   TableCell,
   TableHead,
   TableHeader,
-  TableRow 
+  TableRow,
 } from "@/components/ui/table";
-import { 
-  Download, 
-  Search, 
-  ChevronDown, 
+import {
+  Download,
+  Search,
+  ChevronDown,
   ChevronUp,
   Filter,
   Calendar,
   FileText,
-  Trash
+  Trash,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { 
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue 
+  SelectValue,
 } from "@/components/ui/select";
-import { 
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -69,9 +68,10 @@ const mockSubmissions: Submission[] = [
     email: "john@example.com",
     date: "2023-10-25",
     service: "Web Design",
-    message: "I need a new website for my business. Looking for a clean, modern design that's mobile friendly.",
+    message:
+      "I need a new website for my business. Looking for a clean, modern design that's mobile friendly.",
     status: "Pending",
-    tags: ["New Client", "High Priority"]
+    tags: ["New Client", "High Priority"],
   },
   {
     id: "2",
@@ -79,10 +79,11 @@ const mockSubmissions: Submission[] = [
     email: "jane@example.com",
     date: "2023-10-24",
     service: "AI Services",
-    message: "Interested in implementing a chatbot for my customer service department.",
+    message:
+      "Interested in implementing a chatbot for my customer service department.",
     status: "Reviewed",
     notes: "Follow up to discuss AI integration options",
-    tags: ["Existing Client"]
+    tags: ["Existing Client"],
   },
   {
     id: "3",
@@ -91,7 +92,7 @@ const mockSubmissions: Submission[] = [
     date: "2023-10-23",
     service: "Digital Marketing",
     message: "We need help improving our SEO and social media presence.",
-    status: "Pending"
+    status: "Pending",
   },
   {
     id: "4",
@@ -100,7 +101,7 @@ const mockSubmissions: Submission[] = [
     date: "2023-10-22",
     service: "Web Design",
     message: "Looking for a website redesign for our healthcare practice.",
-    status: "Archived"
+    status: "Archived",
   },
   {
     id: "5",
@@ -108,9 +109,10 @@ const mockSubmissions: Submission[] = [
     email: "michael@example.com",
     date: "2023-10-21",
     service: "AI Services",
-    message: "Need consultation on implementing AI in our data analysis workflow.",
+    message:
+      "Need consultation on implementing AI in our data analysis workflow.",
     status: "Reviewed",
-    notes: "Scheduled consultation for next week"
+    notes: "Scheduled consultation for next week",
   },
   {
     id: "6",
@@ -118,16 +120,17 @@ const mockSubmissions: Submission[] = [
     email: "emily@example.com",
     date: "2023-10-20",
     service: "Newsletter",
-    message: "Just subscribed to the newsletter. Looking forward to industry insights.",
-    status: "Archived"
-  }
+    message:
+      "Just subscribed to the newsletter. Looking forward to industry insights.",
+    status: "Archived",
+  },
 ];
 
 // Status badge colors
 const statusColors = {
-  "Pending": "secondary",
-  "Reviewed": "default",
-  "Archived": "outline"
+  Pending: "secondary",
+  Reviewed: "default",
+  Archived: "outline",
 };
 
 export default function Dashboard() {
@@ -141,37 +144,37 @@ export default function Dashboard() {
   const [selectedSubmissions, setSelectedSubmissions] = useState<string[]>([]);
   const [viewSubmission, setViewSubmission] = useState<Submission | null>(null);
   const [noteInput, setNoteInput] = useState("");
-  
+
   // Show a notification for new submissions
   useEffect(() => {
     const timer = setTimeout(() => {
       toast("New submission received", {
-        description: "Sarah Johnson has submitted a contact form"
+        description: "Sarah Johnson has submitted a contact form",
       });
     }, 5000);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
   // Filtered and sorted submissions
   const filteredSubmissions = submissions
-    .filter(sub => {
+    .filter((sub) => {
       // Filter by service
       if (filter !== "all" && sub.service !== filter) return false;
-      
+
       // Filter by status
       if (statusFilter !== "all" && sub.status !== statusFilter) return false;
-      
+
       // Filter by search term
       if (searchTerm) {
         const term = searchTerm.toLowerCase();
         return (
-          sub.name.toLowerCase().includes(term) || 
-          sub.email.toLowerCase().includes(term) || 
+          sub.name.toLowerCase().includes(term) ||
+          sub.email.toLowerCase().includes(term) ||
           sub.message.toLowerCase().includes(term)
         );
       }
-      
+
       return true;
     })
     .sort((a, b) => {
@@ -180,8 +183,8 @@ export default function Dashboard() {
         const dateB = new Date(b.date).getTime();
         return sortDirection === "asc" ? dateA - dateB : dateB - dateA;
       } else {
-        return sortDirection === "asc" 
-          ? a.name.localeCompare(b.name) 
+        return sortDirection === "asc"
+          ? a.name.localeCompare(b.name)
           : b.name.localeCompare(a.name);
       }
     });
@@ -203,10 +206,18 @@ export default function Dashboard() {
 
   // Export to CSV
   const exportToCSV = () => {
-    const headers = ["Name", "Email", "Date", "Service", "Status", "Message", "Notes"];
+    const headers = [
+      "Name",
+      "Email",
+      "Date",
+      "Service",
+      "Status",
+      "Message",
+      "Notes",
+    ];
     const csvRows = [headers.join(",")];
-    
-    filteredSubmissions.forEach(sub => {
+
+    filteredSubmissions.forEach((sub) => {
       const row = [
         `"${sub.name}"`,
         `"${sub.email}"`,
@@ -214,28 +225,26 @@ export default function Dashboard() {
         `"${sub.service}"`,
         `"${sub.status}"`,
         `"${sub.message.replace(/"/g, '""')}"`,
-        `"${sub.notes || ""}"`
+        `"${sub.notes || ""}"`,
       ];
       csvRows.push(row.join(","));
     });
-    
+
     const csvContent = "data:text/csv;charset=utf-8," + csvRows.join("\n");
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `driplare-submissions-${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute(
+      "download",
+      `driplare-submissions-${new Date().toISOString().split("T")[0]}.csv`
+    );
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
+
     toast.success("CSV file downloaded successfully");
   };
-  
-  // Export to Excel (simplified, in real app would use a library like exceljs)
-  const exportToExcel = () => {
-    toast.success("Excel file downloaded successfully");
-  };
-  
+
   // Export to PDF (simplified, in real app would use a library like jspdf)
   const exportToPDF = () => {
     toast.success("PDF file downloaded successfully");
@@ -246,73 +255,71 @@ export default function Dashboard() {
     return new Date(dateStr).toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
-      day: "numeric"
+      day: "numeric",
     });
   };
 
   // Truncate text
   const truncateText = (text: string, maxLength: number) => {
-    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
   };
-  
+
   // Handle checkbox selection
   const toggleSelectSubmission = (id: string) => {
-    setSelectedSubmissions(prev => 
-      prev.includes(id) 
-        ? prev.filter(i => i !== id) 
-        : [...prev, id]
+    setSelectedSubmissions((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
   };
-  
+
   // Select all submissions
   const toggleSelectAll = () => {
     if (selectedSubmissions.length === filteredSubmissions.length) {
       setSelectedSubmissions([]);
     } else {
-      setSelectedSubmissions(filteredSubmissions.map(sub => sub.id));
+      setSelectedSubmissions(filteredSubmissions.map((sub) => sub.id));
     }
   };
-  
+
   // Update status of selected submissions
   const updateStatus = (status: "Pending" | "Reviewed" | "Archived") => {
-    setSubmissions(prev => 
-      prev.map(sub => 
-        selectedSubmissions.includes(sub.id) 
-          ? { ...sub, status } 
-          : sub
+    setSubmissions((prev) =>
+      prev.map((sub) =>
+        selectedSubmissions.includes(sub.id) ? { ...sub, status } : sub
       )
     );
-    
-    toast.success(`${selectedSubmissions.length} submissions marked as ${status}`);
+
+    toast.success(
+      `${selectedSubmissions.length} submissions marked as ${status}`
+    );
     setSelectedSubmissions([]);
   };
-  
+
   // View submission details
   const handleViewSubmission = (submission: Submission) => {
     setViewSubmission(submission);
     setNoteInput(submission.notes || "");
   };
-  
+
   // Save notes
   const handleSaveNotes = () => {
     if (!viewSubmission) return;
-    
-    setSubmissions(prev => 
-      prev.map(sub => 
-        sub.id === viewSubmission.id 
-          ? { ...sub, notes: noteInput } 
-          : sub
+
+    setSubmissions((prev) =>
+      prev.map((sub) =>
+        sub.id === viewSubmission.id ? { ...sub, notes: noteInput } : sub
       )
     );
-    
+
     toast.success("Notes saved successfully");
     setViewSubmission(null);
   };
-  
+
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">Submissions Dashboard</h1>
-      
+
       {/* Search, Filter, and Export */}
       <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
@@ -325,7 +332,7 @@ export default function Dashboard() {
               className="pl-8"
             />
           </div>
-          
+
           <div className="flex gap-2">
             <Select value={filter} onValueChange={setFilter}>
               <SelectTrigger className="w-full sm:w-40">
@@ -334,12 +341,14 @@ export default function Dashboard() {
               <SelectContent>
                 <SelectItem value="all">All Services</SelectItem>
                 <SelectItem value="Web Design">Web Design</SelectItem>
-                <SelectItem value="Digital Marketing">Digital Marketing</SelectItem>
+                <SelectItem value="Digital Marketing">
+                  Digital Marketing
+                </SelectItem>
                 <SelectItem value="AI Services">AI Services</SelectItem>
                 <SelectItem value="Newsletter">Newsletter</SelectItem>
               </SelectContent>
             </Select>
-            
+
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="w-full sm:w-40">
                 <SelectValue placeholder="Filter by status" />
@@ -353,14 +362,11 @@ export default function Dashboard() {
             </Select>
           </div>
         </div>
-        
+
         <div className="flex gap-2 w-full sm:w-auto">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button 
-                variant="outline" 
-                className="w-full sm:w-auto"
-              >
+              <Button variant="outline" className="w-full sm:w-auto">
                 <Filter className="mr-2 h-4 w-4" />
                 Bulk Actions
               </Button>
@@ -368,19 +374,19 @@ export default function Dashboard() {
             <DropdownMenuContent>
               <DropdownMenuLabel>Status Update</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem 
+              <DropdownMenuItem
                 onClick={() => updateStatus("Pending")}
                 disabled={selectedSubmissions.length === 0}
               >
                 Mark as Pending
               </DropdownMenuItem>
-              <DropdownMenuItem 
+              <DropdownMenuItem
                 onClick={() => updateStatus("Reviewed")}
                 disabled={selectedSubmissions.length === 0}
               >
                 Mark as Reviewed
               </DropdownMenuItem>
-              <DropdownMenuItem 
+              <DropdownMenuItem
                 onClick={() => updateStatus("Archived")}
                 disabled={selectedSubmissions.length === 0}
               >
@@ -388,12 +394,10 @@ export default function Dashboard() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button 
-                className="bg-primary hover:bg-primary/90 w-full sm:w-auto"
-              >
+              <Button className="bg-primary hover:bg-primary/90 w-full sm:w-auto">
                 <Download className="mr-2 h-4 w-4" />
                 Export
               </Button>
@@ -403,10 +407,6 @@ export default function Dashboard() {
                 <FileText className="mr-2 h-4 w-4" />
                 CSV
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={exportToExcel}>
-                <FileText className="mr-2 h-4 w-4" />
-                Excel
-              </DropdownMenuItem>
               <DropdownMenuItem onClick={exportToPDF}>
                 <FileText className="mr-2 h-4 w-4" />
                 PDF
@@ -415,7 +415,7 @@ export default function Dashboard() {
           </DropdownMenu>
         </div>
       </div>
-      
+
       {/* Submissions Table */}
       <div className="border rounded-md">
         <Table>
@@ -423,33 +423,42 @@ export default function Dashboard() {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[40px]">
-                <Checkbox 
-                  checked={selectedSubmissions.length === filteredSubmissions.length && filteredSubmissions.length > 0}
+                <Checkbox
+                  checked={
+                    selectedSubmissions.length === filteredSubmissions.length &&
+                    filteredSubmissions.length > 0
+                  }
                   onCheckedChange={toggleSelectAll}
                   aria-label="Select all"
                 />
               </TableHead>
               <TableHead className="w-[180px]">
-                <button 
+                <button
                   onClick={() => toggleSort("name")}
                   className="flex items-center hover:text-primary transition-colors"
                 >
                   Name
-                  {sortBy === "name" && (
-                    sortDirection === "asc" ? <ChevronUp className="ml-1 h-4 w-4" /> : <ChevronDown className="ml-1 h-4 w-4" />
-                  )}
+                  {sortBy === "name" &&
+                    (sortDirection === "asc" ? (
+                      <ChevronUp className="ml-1 h-4 w-4" />
+                    ) : (
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    ))}
                 </button>
               </TableHead>
               <TableHead>Email</TableHead>
               <TableHead className="w-[120px]">
-                <button 
+                <button
                   onClick={() => toggleSort("date")}
                   className="flex items-center hover:text-primary transition-colors"
                 >
                   Date
-                  {sortBy === "date" && (
-                    sortDirection === "asc" ? <ChevronUp className="ml-1 h-4 w-4" /> : <ChevronDown className="ml-1 h-4 w-4" />
-                  )}
+                  {sortBy === "date" &&
+                    (sortDirection === "asc" ? (
+                      <ChevronUp className="ml-1 h-4 w-4" />
+                    ) : (
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    ))}
                 </button>
               </TableHead>
               <TableHead>Service</TableHead>
@@ -460,34 +469,40 @@ export default function Dashboard() {
           <TableBody>
             {filteredSubmissions.length > 0 ? (
               filteredSubmissions.map((submission) => (
-                <React.Fragment key={submission.id}>
-                  <TableRow 
-                    className="cursor-pointer hover:bg-secondary/20"
-                    onClick={() => handleViewSubmission(submission)}
+                <TableRow
+                  key={submission.id}
+                  className="cursor-pointer hover:bg-secondary/20"
+                  onClick={() => handleViewSubmission(submission)}
+                >
+                  <TableCell
+                    className="p-0 pl-4"
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    <TableCell className="p-0 pl-4" onClick={(e) => e.stopPropagation()}>
-                      <Checkbox 
-                        checked={selectedSubmissions.includes(submission.id)}
-                        onCheckedChange={() => toggleSelectSubmission(submission.id)}
-                        aria-label={`Select ${submission.name}`}
-                      />
-                    </TableCell>
-                    <TableCell className="font-medium">{submission.name}</TableCell>
-                    <TableCell>{submission.email}</TableCell>
-                    <TableCell>{formatDate(submission.date)}</TableCell>
-                    <TableCell>
-                      <span className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary">
-                        {submission.service}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={statusColors[submission.status] as any}>
-                        {submission.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>{truncateText(submission.message, 50)}</TableCell>
-                  </TableRow>
-                </React.Fragment>
+                    <Checkbox
+                      checked={selectedSubmissions.includes(submission.id)}
+                      onCheckedChange={() =>
+                        toggleSelectSubmission(submission.id)
+                      }
+                      aria-label={`Select ${submission.name}`}
+                    />
+                  </TableCell>
+                  <TableCell className="font-medium">
+                    {submission.name}
+                  </TableCell>
+                  <TableCell>{submission.email}</TableCell>
+                  <TableCell>{formatDate(submission.date)}</TableCell>
+                  <TableCell>
+                    <span className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary">
+                      {submission.service}
+                    </span>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={statusColors[submission.status] as any}>
+                      {submission.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>{truncateText(submission.message, 50)}</TableCell>
+                </TableRow>
               ))
             ) : (
               <TableRow>
@@ -499,48 +514,60 @@ export default function Dashboard() {
           </TableBody>
         </Table>
       </div>
-      
+
       {/* Submission Detail View Modal */}
-      <Dialog open={!!viewSubmission} onOpenChange={(open) => !open && setViewSubmission(null)}>
+      <Dialog
+        open={!!viewSubmission}
+        onOpenChange={(open) => !open && setViewSubmission(null)}
+      >
         <DialogContent className="max-w-3xl">
           <DialogHeader>
             <DialogTitle>Submission Details</DialogTitle>
             <DialogDescription>
-              Submitted on {viewSubmission && formatDate(viewSubmission.date)} by {viewSubmission?.name}
+              Submitted on {viewSubmission && formatDate(viewSubmission.date)}{" "}
+              by {viewSubmission?.name}
             </DialogDescription>
           </DialogHeader>
-          
+
           {viewSubmission && (
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <h4 className="text-sm font-medium text-muted-foreground">Full Name</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground">
+                    Full Name
+                  </h4>
                   <p>{viewSubmission.name}</p>
                 </div>
                 <div>
-                  <h4 className="text-sm font-medium text-muted-foreground">Email Address</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground">
+                    Email Address
+                  </h4>
                   <p>{viewSubmission.email}</p>
                 </div>
                 <div>
-                  <h4 className="text-sm font-medium text-muted-foreground">Service</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground">
+                    Service
+                  </h4>
                   <span className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary">
                     {viewSubmission.service}
                   </span>
                 </div>
                 <div>
-                  <h4 className="text-sm font-medium text-muted-foreground">Status</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground">
+                    Status
+                  </h4>
                   <div className="flex gap-2 mt-1">
-                    <Select 
-                      value={viewSubmission.status} 
+                    <Select
+                      value={viewSubmission.status}
                       onValueChange={(value) => {
-                        setSubmissions(prev => 
-                          prev.map(sub => 
-                            sub.id === viewSubmission.id 
-                              ? { ...sub, status: value as any } 
+                        setSubmissions((prev) =>
+                          prev.map((sub) =>
+                            sub.id === viewSubmission.id
+                              ? { ...sub, status: value as any }
                               : sub
                           )
                         );
-                        setViewSubmission(prev => 
+                        setViewSubmission((prev) =>
                           prev ? { ...prev, status: value as any } : null
                         );
                       }}
@@ -557,26 +584,44 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
-              
+
               <div>
-                <h4 className="text-sm font-medium text-muted-foreground">Message</h4>
+                <h4 className="text-sm font-medium text-muted-foreground">
+                  Message
+                </h4>
                 <div className="mt-1 p-3 bg-muted/50 rounded-md">
-                  <p className="whitespace-pre-wrap">{viewSubmission.message}</p>
+                  <p className="whitespace-pre-wrap">
+                    {viewSubmission.message}
+                  </p>
                 </div>
               </div>
-              
+
               <div>
-                <h4 className="text-sm font-medium text-muted-foreground">Tags</h4>
+                <h4 className="text-sm font-medium text-muted-foreground">
+                  Tags
+                </h4>
                 <div className="flex gap-2 mt-1">
-                  {viewSubmission.tags?.map(tag => (
-                    <Badge key={tag} variant="outline" className="bg-secondary/50">{tag}</Badge>
+                  {viewSubmission.tags?.map((tag) => (
+                    <Badge
+                      key={tag}
+                      variant="outline"
+                      className="bg-secondary/50"
+                    >
+                      {tag}
+                    </Badge>
                   ))}
-                  {!viewSubmission.tags?.length && <span className="text-sm text-muted-foreground">No tags</span>}
+                  {!viewSubmission.tags?.length && (
+                    <span className="text-sm text-muted-foreground">
+                      No tags
+                    </span>
+                  )}
                 </div>
               </div>
-              
+
               <div>
-                <h4 className="text-sm font-medium text-muted-foreground">Internal Notes</h4>
+                <h4 className="text-sm font-medium text-muted-foreground">
+                  Internal Notes
+                </h4>
                 <div className="mt-1">
                   <Input
                     value={noteInput}
@@ -588,14 +633,12 @@ export default function Dashboard() {
               </div>
             </div>
           )}
-          
+
           <DialogFooter>
             <Button variant="outline" onClick={() => setViewSubmission(null)}>
               Cancel
             </Button>
-            <Button onClick={handleSaveNotes}>
-              Save Changes
-            </Button>
+            <Button onClick={handleSaveNotes}>Save Changes</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

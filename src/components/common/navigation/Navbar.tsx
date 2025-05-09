@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MobileMenu } from "./MobileMenu";
@@ -23,10 +22,34 @@ import {
 } from "lucide-react";
 import { ThemeToggle } from "../ThemeToggle";
 import { NotificationsDropdown } from "../notifications/NotificationsDropdown";
+import AdminLoginModal from "@/components/admin/AdminLoginModal";
+
+interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  timestamp: Date;
+  read: boolean;
+  type: "chat_lead" | "form_submission" | "system";
+}
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  useEffect(() => {
+    const notifications = JSON.parse(
+      localStorage.getItem("driplare_notifications")
+    );
+
+    setNotifications(notifications);
+  }, []);
+
+  const unreadCount = notifications?.filter((n) => !n.read).length;
+
+  console.log(unreadCount);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +62,14 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
+
+  const handleLogout = () => {
+    setShowLoginModal(true);
+  };
+
+  const handleLoginSuccess = () => {
+    setShowLoginModal(false);
+  };
 
   return (
     <header
@@ -177,16 +208,15 @@ export function Navbar() {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/admin">
+                <Link onClick={() => setShowLoginModal(true)} to="/admin">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    <Settings className="mr-1" size={16} />
                     Admin Area
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          
+
           {/* Notifications Bell */}
           <div className="relative">
             <button
@@ -195,13 +225,23 @@ export function Navbar() {
               aria-label="Notifications"
             >
               <Bell size={20} />
-              <span className="absolute top-0 right-0 w-2 h-2 bg-[#F88220] rounded-full"></span>
+              {unreadCount ? (
+                <span className="absolute top-0 right-0 w-2 h-2 bg-[#F88220] rounded-full"></span>
+              ) : (
+                <></>
+              )}
             </button>
             {showNotifications && (
-              <NotificationsDropdown onClose={() => setShowNotifications(false)} />
+              <NotificationsDropdown
+                onClose={() => setShowNotifications(false)}
+              />
             )}
           </div>
-          
+          <AdminLoginModal
+            open={showLoginModal}
+            setClose={setShowLoginModal}
+            onSuccess={handleLoginSuccess}
+          />
           <ThemeToggle />
           <MobileMenu />
         </div>

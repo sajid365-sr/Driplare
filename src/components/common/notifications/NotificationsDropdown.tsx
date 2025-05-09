@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickOutside } from "@/hooks/use-click-outside";
@@ -14,50 +13,57 @@ interface Notification {
 }
 
 export const NotificationsDropdown = ({ onClose }: { onClose: () => void }) => {
-  const [notifications, setNotifications] = useState<Notification[]>([
-    {
-      id: "1",
-      title: "New Contact Form Submission",
-      message: "Sarah Johnson has submitted a contact form",
-      timestamp: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
-      read: false,
-      type: "form_submission",
-    },
-    {
-      id: "2",
-      title: "New Chat Lead",
-      message: "Michael Brown requested information about AI Services",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
-      read: false,
-      type: "chat_lead",
-    },
-    {
-      id: "3",
-      title: "System Update",
-      message: "The website has been successfully updated to version 2.1",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
-      read: true,
-      type: "system",
-    },
-  ]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [readNotification, setReadNotification] = useState<Notification[]>([]);
+  const [refresh, setRefresh] = useState<boolean>(false);
+
+  useEffect(() => {
+    const notifications = JSON.parse(
+      localStorage.getItem("driplare_notifications")
+    );
+
+    setNotifications(notifications);
+  }, [refresh]);
 
   const ref = useClickOutside<HTMLDivElement>(onClose);
 
+  console.log(notifications);
+
   const handleMarkAsRead = (id: string) => {
-    setNotifications(
-      notifications.map((notification) =>
-        notification.id === id ? { ...notification, read: true } : notification
-      )
+    const updatedNotifications = notifications.map((notification) => {
+      if (notification.id === id) {
+        return { ...notification, read: true };
+      }
+      return notification;
+    });
+
+    console.log(updatedNotifications);
+
+    // Save to localStorage
+    localStorage.setItem(
+      "driplare_notifications",
+      JSON.stringify(updatedNotifications)
     );
+
+    setRefresh(!refresh);
   };
 
   const handleMarkAllAsRead = () => {
-    setNotifications(
-      notifications.map((notification) => ({ ...notification, read: true }))
+    setReadNotification(
+      notifications.map((notification) => ({
+        ...notification,
+        read: true,
+      }))
+    );
+
+    // Save to localStorage
+    localStorage.setItem(
+      "driplare_notifications",
+      JSON.stringify(readNotification)
     );
   };
 
-  const unreadCount = notifications.filter((n) => !n.read).length;
+  const unreadCount = notifications?.filter((n) => !n.read).length;
 
   return (
     <AnimatePresence>
@@ -82,12 +88,12 @@ export const NotificationsDropdown = ({ onClose }: { onClose: () => void }) => {
         </div>
 
         <div className="max-h-[350px] overflow-y-auto">
-          {notifications.length === 0 ? (
+          {notifications?.length === 0 ? (
             <div className="py-6 text-center text-muted-foreground">
               No notifications
             </div>
           ) : (
-            notifications.map((notification) => (
+            notifications?.map((notification) => (
               <div
                 key={notification.id}
                 className={`p-3 border-b border-border hover:bg-muted/20 cursor-pointer transition-colors ${
