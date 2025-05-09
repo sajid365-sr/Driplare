@@ -96,7 +96,7 @@ export const saveBlogPost = async (
     };
     
     if (existingId) {
-      // Update existing post
+      // Update existing post - use "as any" to bypass type checking since we know the structure is correct
       const { error } = await supabase
         .from('blogs')
         .update(postData as any)
@@ -140,6 +140,7 @@ export const saveBlogPost = async (
 // Fetch a single blog post by ID - with type safety
 export const getBlogPost = async (id: string): Promise<BlogPost | null> => {
   try {
+    // Use "as any" to bypass type checking since we know the structure is correct
     const { data, error } = await supabase
       .from('blogs')
       .select('*')
@@ -181,6 +182,7 @@ export const getBlogPosts = async (
   filters: BlogFilters = {}
 ): Promise<PaginatedResponse<BlogPost>> => {
   try {
+    // Use "as any" to bypass type checking since we know the structure is correct
     let query = supabase
       .from('blogs')
       .select('*', { count: 'exact' }) as any;
@@ -233,6 +235,7 @@ export const getBlogPosts = async (
 // Delete a blog post
 export const deleteBlogPost = async (id: string): Promise<boolean> => {
   try {
+    // Use "as any" to bypass type checking since we know the structure is correct
     const { error } = await supabase
       .from('blogs')
       .delete()
@@ -256,6 +259,7 @@ export const deleteBlogPost = async (id: string): Promise<boolean> => {
 // Archive a blog post
 export const archiveBlogPost = async (id: string): Promise<boolean> => {
   try {
+    // Use "as any" to bypass type checking since we know the structure is correct
     const { error } = await supabase
       .from('blogs')
       .update({
@@ -285,6 +289,7 @@ export const getBlogCategories = async (): Promise<string[]> => {
   try {
     // We'll use the existing blogs to extract unique categories
     // If no blogs exist yet, we'll return default categories
+    // Use "as any" to bypass type checking since we know the structure is correct
     const { data, error } = await supabase
       .from('blogs')
       .select('category');
