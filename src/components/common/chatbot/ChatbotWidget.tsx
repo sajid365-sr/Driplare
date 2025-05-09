@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageSquareText } from 'lucide-react';
+import { MessageSquareText, X } from 'lucide-react';
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useGeminiAPI } from "@/hooks/use-gemini-api";

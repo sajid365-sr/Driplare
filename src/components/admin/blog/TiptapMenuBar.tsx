@@ -78,7 +78,13 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
       <Button
         variant="ghost"
         size="icon"
-        onClick={() => editor.chain().focus().toggleUnderline().run()}
+        onClick={() => {
+          if (editor.isActive('underline')) {
+            editor.chain().focus().unsetMark('underline').run();
+          } else {
+            editor.chain().focus().setMark('underline').run();
+          }
+        }}
         className={editor.isActive('underline') ? 'bg-muted' : ''}
       >
         <Underline className="h-4 w-4" />

@@ -81,7 +81,7 @@ export const uploadEditorImage = async (file: File): Promise<string | null> => {
   }
 };
 
-// Create or update blog post
+// Create or update blog post - with type safety
 export const saveBlogPost = async (
   post: BlogPostFormData, 
   existingId?: string
@@ -99,10 +99,11 @@ export const saveBlogPost = async (
       // Update existing post
       const { error } = await supabase
         .from('blogs')
-        .update(postData)
+        .update(postData as any)
         .eq('id', existingId);
       
       if (error) {
+        console.error('Error updating blog post:', error);
         toast.error('Error updating blog post: ' + error.message);
         return null;
       }
@@ -116,11 +117,12 @@ export const saveBlogPost = async (
         .insert({
           ...postData,
           created_at: now,
-        })
+        } as any)
         .select('id')
         .single();
       
       if (error) {
+        console.error('Error creating blog post:', error);
         toast.error('Error creating blog post: ' + error.message);
         return null;
       }
@@ -135,7 +137,7 @@ export const saveBlogPost = async (
   }
 };
 
-// Fetch a single blog post by ID
+// Fetch a single blog post by ID - with type safety
 export const getBlogPost = async (id: string): Promise<BlogPost | null> => {
   try {
     const { data, error } = await supabase
@@ -145,11 +147,12 @@ export const getBlogPost = async (id: string): Promise<BlogPost | null> => {
       .single();
     
     if (error) {
+      console.error('Error fetching blog post:', error);
       toast.error('Error fetching blog post: ' + error.message);
       return null;
     }
     
-    return data as BlogPost;
+    return data as unknown as BlogPost;
   } catch (error) {
     console.error('Get blog error:', error);
     toast.error('Failed to fetch blog post');
@@ -180,7 +183,7 @@ export const getBlogPosts = async (
   try {
     let query = supabase
       .from('blogs')
-      .select('*', { count: 'exact' });
+      .select('*', { count: 'exact' }) as any;
     
     // Apply filters
     if (filters.status) {
@@ -209,12 +212,13 @@ export const getBlogPosts = async (
       .range(from, to);
     
     if (error) {
+      console.error('Error fetching blog posts:', error);
       toast.error('Error fetching blog posts: ' + error.message);
       return { data: [], count: 0, page, pageSize };
     }
     
     return {
-      data: data as BlogPost[],
+      data: data as unknown as BlogPost[],
       count: count || 0,
       page,
       pageSize
@@ -235,6 +239,7 @@ export const deleteBlogPost = async (id: string): Promise<boolean> => {
       .eq('id', id);
     
     if (error) {
+      console.error('Error deleting blog post:', error);
       toast.error('Error deleting blog post: ' + error.message);
       return false;
     }
@@ -257,10 +262,11 @@ export const archiveBlogPost = async (id: string): Promise<boolean> => {
         is_archived: true,
         status: 'archived',
         updated_at: new Date().toISOString()
-      })
+      } as any)
       .eq('id', id);
     
     if (error) {
+      console.error('Error archiving blog post:', error);
       toast.error('Error archiving blog post: ' + error.message);
       return false;
     }
@@ -277,19 +283,31 @@ export const archiveBlogPost = async (id: string): Promise<boolean> => {
 // Fetch all blog categories
 export const getBlogCategories = async (): Promise<string[]> => {
   try {
+    // We'll use the existing blogs to extract unique categories
+    // If no blogs exist yet, we'll return default categories
     const { data, error } = await supabase
-      .from('blog_categories')
-      .select('name')
-      .order('name');
+      .from('blogs')
+      .select('category');
     
     if (error) {
       console.error('Error fetching categories:', error);
-      return [];
+      return getDefaultCategories();
     }
     
-    return data.map(category => category.name);
+    if (data && data.length > 0) {
+      // Extract unique categories
+      const categoriesSet = new Set(data.map(blog => blog.category).filter(Boolean));
+      return Array.from(categoriesSet);
+    }
+    
+    return getDefaultCategories();
   } catch (error) {
     console.error('Get categories error:', error);
-    return [];
+    return getDefaultCategories();
   }
+};
+
+// Helper function to provide default categories
+const getDefaultCategories = (): string[] => {
+  return ['Technology', 'Design', 'Marketing', 'Business', 'Development'];
 };

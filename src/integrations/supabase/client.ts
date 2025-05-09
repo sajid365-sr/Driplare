@@ -9,3 +9,17 @@ const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiO
 // import { supabase } from "@/integrations/supabase/client";
 
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+import { initDatabaseSchema } from './schema';
+
+// Initialize database schema when the client is initialized
+const initializeSchema = async () => {
+  try {
+    await initDatabaseSchema(supabase);
+  } catch (error) {
+    console.error('Failed to initialize database schema:', error);
+  }
+};
+
+// Attempt to initialize schema (this will run when the app starts)
+initializeSchema();
