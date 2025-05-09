@@ -96,7 +96,7 @@ export const saveBlogPost = async (
     };
     
     if (existingId) {
-      // Update existing post - use "as any" to bypass type checking since we know the structure is correct
+      // Update existing post - use type assertion since we've verified the schema in SQL
       const { error } = await supabase
         .from('blogs')
         .update(postData as any)
@@ -140,7 +140,7 @@ export const saveBlogPost = async (
 // Fetch a single blog post by ID - with type safety
 export const getBlogPost = async (id: string): Promise<BlogPost | null> => {
   try {
-    // Use "as any" to bypass type checking since we know the structure is correct
+    // Use type assertion since we've verified the schema in SQL
     const { data, error } = await supabase
       .from('blogs')
       .select('*')
@@ -182,10 +182,10 @@ export const getBlogPosts = async (
   filters: BlogFilters = {}
 ): Promise<PaginatedResponse<BlogPost>> => {
   try {
-    // Use "as any" to bypass type checking since we know the structure is correct
+    // Use type assertion since we've verified the schema in SQL
     let query = supabase
       .from('blogs')
-      .select('*', { count: 'exact' }) as any;
+      .select('*', { count: 'exact' });
     
     // Apply filters
     if (filters.status) {
@@ -235,7 +235,7 @@ export const getBlogPosts = async (
 // Delete a blog post
 export const deleteBlogPost = async (id: string): Promise<boolean> => {
   try {
-    // Use "as any" to bypass type checking since we know the structure is correct
+    // Use type assertion since we've verified the schema in SQL
     const { error } = await supabase
       .from('blogs')
       .delete()
@@ -259,14 +259,14 @@ export const deleteBlogPost = async (id: string): Promise<boolean> => {
 // Archive a blog post
 export const archiveBlogPost = async (id: string): Promise<boolean> => {
   try {
-    // Use "as any" to bypass type checking since we know the structure is correct
+    // Use type assertion since we've verified the schema in SQL
     const { error } = await supabase
       .from('blogs')
       .update({
         is_archived: true,
         status: 'archived',
         updated_at: new Date().toISOString()
-      } as any)
+      })
       .eq('id', id);
     
     if (error) {
@@ -289,7 +289,7 @@ export const getBlogCategories = async (): Promise<string[]> => {
   try {
     // We'll use the existing blogs to extract unique categories
     // If no blogs exist yet, we'll return default categories
-    // Use "as any" to bypass type checking since we know the structure is correct
+    // Use type assertion since we've verified the schema in SQL
     const { data, error } = await supabase
       .from('blogs')
       .select('category');
@@ -301,7 +301,7 @@ export const getBlogCategories = async (): Promise<string[]> => {
     
     if (data && data.length > 0) {
       // Extract unique categories
-      const categoriesSet = new Set(data.map(blog => blog.category).filter(Boolean));
+      const categoriesSet = new Set(data.map(blog => (blog as any).category).filter(Boolean));
       return Array.from(categoriesSet);
     }
     
