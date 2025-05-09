@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export function ScrollToTopButton() {
   // Initialize with false to avoid initial rendering
@@ -36,16 +37,21 @@ export function ScrollToTopButton() {
   }, []);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      {isVisible && (
-        <Button
-          onClick={scrollToTop}
-          className="rounded-full h-12 w-12 bg-primary hover:bg-primary/90 shadow-lg"
-          aria-label="Scroll to top"
-        >
-          <ArrowUp className="h-5 w-5" />
-        </Button>
-      )}
+    <div className="fixed bottom-5 right-1/2 z-50">
+      <Tooltip>
+        <TooltipTrigger>
+          <Button
+            onClick={scrollToTop}
+            className="rounded-full  animate-pulse h-10 w-10 bg-primary/30 hover:bg-primary/90 shadow-lg"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp className="h-5 w-5" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <div>Back to top</div>
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 }

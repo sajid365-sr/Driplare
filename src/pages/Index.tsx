@@ -4,13 +4,13 @@ import { CoreSolutionsSection } from "@/components/home/CoreSolutionsSection";
 import { AISpotlightSection } from "@/components/home/AISpotlightSection";
 import { PortfolioTeaserSection } from "@/components/home/featured project/PortfolioTeaserSection";
 import { HowWeWorkSection } from "@/components/home/HowWeWorkSection";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { WhyChooseSection } from "@/components/home/WhyChooseSection";
 import { InsightsPreviewSection } from "@/components/home/InsightsPreviewSection";
 import IndustryWeServe from "@/components/home/IndustryWeServe";
 import CTA from "@/components/common/CTA";
 import Hero from "@/components/home/HeroSection2";
 import { CaseStudiesSection } from "@/components/CaseStudiesSection";
+import ClientReviewSection from "@/components/home/ClientReviewSection";
 
 const Index = () => {
   // Handle the scroll animations
@@ -50,7 +50,7 @@ const Index = () => {
         <AISpotlightSection />
         <CTA />
         <PortfolioTeaserSection />
-        <TestimonialsSection />
+        <ClientReviewSection />
         <WhyChooseSection />
         <CaseStudiesSection />
         <HowWeWorkSection />
