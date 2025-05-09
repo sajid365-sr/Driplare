@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +14,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { EditorProvider, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
+import Underline from '@tiptap/extension-underline';
+import Link from '@tiptap/extension-link';
 import TiptapMenuBar from "./TiptapMenuBar";
 import { Image as TiptapImage } from '@tiptap/extension-image';
 
@@ -150,6 +152,8 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
       Placeholder.configure({
         placeholder: 'Start writing your blog content...',
       }),
+      Underline,
+      Link,
       TiptapImage.configure({
         allowBase64: true,
         inline: true,
@@ -314,6 +318,8 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
                     Placeholder.configure({
                       placeholder: 'Start writing your blog content...',
                     }),
+                    Underline,
+                    Link,
                     TiptapImage.configure({
                       allowBase64: true,
                       inline: true,

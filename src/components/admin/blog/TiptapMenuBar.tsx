@@ -35,11 +35,24 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
 
   const setLink = () => {
     const url = window.prompt('URL');
-    if (url) {
-      editor.chain().focus().setLink({ href: url }).run();
-    } else {
-      editor.chain().focus().unsetLink().run();
+    
+    // Cancelled
+    if (url === null) {
+      return;
     }
+    
+    // Empty
+    if (url === '') {
+      editor.chain().focus().extendMarkRange('link').unsetLink().run();
+      return;
+    }
+    
+    // Add https:// if no protocol is specified
+    const httpUrl = url.startsWith('http://') || url.startsWith('https://') 
+      ? url 
+      : `https://${url}`;
+      
+    editor.chain().focus().extendMarkRange('link').setLink({ href: httpUrl }).run();
   };
 
   return (
