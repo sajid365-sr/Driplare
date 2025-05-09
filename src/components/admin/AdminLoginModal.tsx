@@ -64,7 +64,7 @@ export default function AdminLoginModal({
           <DialogTitle>Admin Login</DialogTitle>
           <DialogDescription>
             Please enter your Admin User ID and API Key to access the admin
-            panel.
+            panel. Default login is user ID: "owner" and API Key: "encrypted-secret-key-1"
           </DialogDescription>
         </DialogHeader>
 

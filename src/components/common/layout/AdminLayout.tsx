@@ -21,6 +21,7 @@ import AdminManagement from "@/pages/admin/AdminManagement";
 import Notifications from "@/pages/admin/Notifications";
 import AuditLogs from "@/pages/admin/AuditLogs";
 import Settings from "@/pages/admin/Settings";
+import BlogManager from "@/pages/admin/BlogManager";
 
 export default function AdminLayout() {
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
@@ -83,6 +84,9 @@ export default function AdminLayout() {
               {canAccessAdminManagement && (
                 <TabsTrigger value="admins">User Management</TabsTrigger>
               )}
+              {adminSession?.permissions.canEdit && (
+                <TabsTrigger value="blogs">Blog Manager</TabsTrigger>
+              )}
               {adminSession?.permissions.canView && (
                 <TabsTrigger value="notifications">Notifications</TabsTrigger>
               )}
@@ -115,6 +119,9 @@ export default function AdminLayout() {
             </TabsContent>
             <TabsContent value="admins">
               <AdminManagement />
+            </TabsContent>
+            <TabsContent value="blogs">
+              <BlogManager />
             </TabsContent>
             <TabsContent value="notifications">
               <Notifications />
