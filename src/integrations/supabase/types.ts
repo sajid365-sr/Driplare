@@ -108,6 +108,57 @@ export type Database = {
         }
         Relationships: []
       }
+      form_submissions: {
+        Row: {
+          additional_info: string | null
+          budget: string | null
+          company: string | null
+          created_at: string | null
+          email: string
+          form_type: string
+          id: string
+          message: string | null
+          name: string
+          phone: string | null
+          service_type: string | null
+          status: string | null
+          subject: string | null
+          timeline: string | null
+        }
+        Insert: {
+          additional_info?: string | null
+          budget?: string | null
+          company?: string | null
+          created_at?: string | null
+          email: string
+          form_type: string
+          id?: string
+          message?: string | null
+          name: string
+          phone?: string | null
+          service_type?: string | null
+          status?: string | null
+          subject?: string | null
+          timeline?: string | null
+        }
+        Update: {
+          additional_info?: string | null
+          budget?: string | null
+          company?: string | null
+          created_at?: string | null
+          email?: string
+          form_type?: string
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+          service_type?: string | null
+          status?: string | null
+          subject?: string | null
+          timeline?: string | null
+        }
+        Relationships: []
+      }
       notifications: {
         Row: {
           created_at: string

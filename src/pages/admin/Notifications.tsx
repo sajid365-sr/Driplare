@@ -18,7 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Bell, FileText, MessageSquare } from "lucide-react";
+import { Bell, FileText, MessageSquare, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import { 
@@ -28,7 +28,6 @@ import {
   deleteNotifications,
   Notification
 } from "@/utils/notification-utils";
-import { getAdminSession } from "@/utils/admin-auth";
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -43,10 +42,7 @@ export default function Notifications() {
   });
   const [activeTab, setActiveTab] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
-  
-  // Get current admin session
-  const adminSession = getAdminSession();
-  const currentUserId = adminSession?.userId || "system";
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Load notifications on component mount
   useEffect(() => {
@@ -112,7 +108,7 @@ export default function Notifications() {
     if (!selectedNotifications.length) return;
     
     try {
-      const success = await markNotificationsAsRead(selectedNotifications, currentUserId);
+      const success = await markNotificationsAsRead(selectedNotifications);
       
       if (success) {
         // Update local state
@@ -138,7 +134,7 @@ export default function Notifications() {
     if (!selectedNotifications.length) return;
     
     try {
-      const success = await deleteNotifications(selectedNotifications, currentUserId);
+      const success = await deleteNotifications(selectedNotifications);
       
       if (success) {
         // Update local state
@@ -164,13 +160,14 @@ export default function Notifications() {
       return;
     }
 
+    setIsSubmitting(true);
+    
     try {
       const success = await createNotification(
         newNotification.title,
         newNotification.message,
         newNotification.type,
-        newNotification.recipient,
-        currentUserId
+        newNotification.recipient
       );
       
       if (success) {
@@ -190,6 +187,8 @@ export default function Notifications() {
     } catch (error) {
       console.error("Error creating notification:", error);
       toast.error("Failed to create notification");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -214,6 +213,9 @@ export default function Notifications() {
             onClick={fetchNotifications}
             disabled={isLoading}
           >
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin mr-2" />
+            ) : null}
             Refresh
           </Button>
         </div>
@@ -368,8 +370,15 @@ export default function Notifications() {
             <div className="flex justify-end">
               <Button 
                 type="submit"
+                disabled={isSubmitting}
               >
-                Create Notification
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creating...
+                  </>
+                ) : (
+                  "Create Notification"
+                )}
               </Button>
             </div>
           </form>
@@ -385,7 +394,8 @@ export default function Notifications() {
         <Card>
           <CardContent className="py-10">
             <div className="text-center">
-              <p>Loading notifications...</p>
+              <Loader2 className="mx-auto h-8 w-8 animate-spin text-primary" />
+              <p className="mt-2">Loading notifications...</p>
             </div>
           </CardContent>
         </Card>

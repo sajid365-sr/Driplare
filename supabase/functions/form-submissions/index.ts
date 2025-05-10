@@ -20,26 +20,26 @@ serve(async (req) => {
     );
 
     // Parse the request body
-    const { action, notificationIds, userId, title, message, type, recipient } = await req.json();
+    const { action, submissionIds, formData } = await req.json();
 
     // Handle different actions
     switch (action) {
       case 'get': {
         const { data, error } = await supabaseClient
-          .from('notifications')
+          .from('form_submissions')
           .select('*')
-          .order('timestamp', { ascending: false });
+          .order('created_at', { ascending: false });
         
         if (error) throw error;
         
         return new Response(
-          JSON.stringify({ success: true, notifications: data }),
+          JSON.stringify({ success: true, submissions: data }),
           { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
 
-      case 'create': {
-        if (!title || !message || !type) {
+      case 'submit': {
+        if (!formData || !formData.name || !formData.email || !formData.form_type) {
           return new Response(
             JSON.stringify({ success: false, message: 'Missing required fields' }),
             { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
@@ -47,63 +47,61 @@ serve(async (req) => {
         }
 
         const { data, error } = await supabaseClient
-          .from('notifications')
-          .insert({
-            title,
-            message,
-            type,
-            recipient: recipient || 'all',
-            read: false,
-          })
+          .from('form_submissions')
+          .insert(formData)
           .select()
           .single();
         
         if (error) throw error;
         
         return new Response(
-          JSON.stringify({ success: true, notification: data }),
+          JSON.stringify({ success: true, submission: data }),
           { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
 
-      case 'mark_read': {
-        if (!notificationIds || !Array.isArray(notificationIds) || notificationIds.length === 0) {
+      case 'update_status': {
+        const { id, status } = await req.json();
+        
+        if (!id || !status) {
           return new Response(
-            JSON.stringify({ success: false, message: 'No notification IDs provided' }),
+            JSON.stringify({ success: false, message: 'Missing required fields' }),
             { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
           );
         }
 
-        const { error } = await supabaseClient
-          .from('notifications')
-          .update({ read: true })
-          .in('id', notificationIds);
+        const { data, error } = await supabaseClient
+          .from('form_submissions')
+          .update({ status })
+          .eq('id', id)
+          .select()
+          .single();
         
         if (error) throw error;
         
         return new Response(
-          JSON.stringify({ success: true, message: 'Notifications marked as read' }),
+          JSON.stringify({ success: true, submission: data }),
           { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
 
       case 'delete': {
-        if (!notificationIds || !Array.isArray(notificationIds) || notificationIds.length === 0) {
+        if (!submissionIds || !Array.isArray(submissionIds) || submissionIds.length === 0) {
           return new Response(
-            JSON.stringify({ success: false, message: 'No notification IDs provided' }),
+            JSON.stringify({ success: false, message: 'No submission IDs provided' }),
             { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
           );
         }
 
         const { error } = await supabaseClient
-          .from('notifications')
+          .from('form_submissions')
           .delete()
-          .in('id', notificationIds);
+          .in('id', submissionIds);
         
         if (error) throw error;
         
         return new Response(
-          JSON.stringify({ success: true, message: 'Notifications deleted' }),
+          JSON.stringify({ success: true, message: 'Submissions deleted' }),
           { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }

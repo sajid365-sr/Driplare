@@ -21,9 +21,11 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
       if (input.files?.length) {
         const file = input.files[0];
         try {
+          toast.loading('Uploading image...');
           const imageUrl = await uploadEditorImage(file);
           if (imageUrl) {
             editor.chain().focus().setImage({ src: imageUrl }).run();
+            toast.success('Image uploaded successfully');
           }
         } catch (error) {
           toast.error('Failed to upload image');

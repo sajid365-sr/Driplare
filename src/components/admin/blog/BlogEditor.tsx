@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -5,18 +6,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { getBlogPost, saveBlogPost, generateSlug, uploadCoverImage, getBlogCategories } from "@/utils/blog-utils";
 import { Switch } from "@/components/ui/switch";
-import { Loader2, Image } from "lucide-react";
+import { Loader2, Image as ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 // Import Tiptap dependencies
-import { EditorProvider, useEditor } from '@tiptap/react';
+import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
 import Link from '@tiptap/extension-link';
 import TiptapMenuBar from "./TiptapMenuBar";
-import { Image as TiptapImage } from '@tiptap/extension-image';
+import { Image } from '@tiptap/extension-image';
 
 interface BlogEditorProps {
   blogId?: string | null;
@@ -41,6 +42,28 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
 
   const coverImageRef = useRef<HTMLInputElement>(null);
 
+  // Initialize the Tiptap editor
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Placeholder.configure({
+        placeholder: 'Start writing your blog content...',
+      }),
+      Underline,
+      Link.configure({
+        openOnClick: false,
+      }),
+      Image.configure({
+        allowBase64: true,
+        inline: true,
+      }),
+    ],
+    content: content,
+    onUpdate: ({ editor }) => {
+      setContent(editor.getHTML());
+    },
+  });
+
   // Fetch blog data if editing existing blog
   useEffect(() => {
     const fetchCategories = async () => {
@@ -59,16 +82,19 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
           setTitle(blog.title);
           setSlug(blog.slug);
           setCoverImage(blog.cover_image || "");
-          setTags(blog.tags);
+          setTags(blog.tags || []);
           setCategory(blog.category);
           setContent(blog.content);
+          if (editor) {
+            editor.commands.setContent(blog.content);
+          }
           setStatus(blog.status === 'published' ? 'published' : 'draft');
           setIsPublished(blog.status === 'published');
         }
         setIsLoading(false);
       });
     }
-  }, [blogId]);
+  }, [blogId, editor]);
 
   // Auto-generate slug from title
   useEffect(() => {
@@ -90,11 +116,18 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
     if (!file) return;
 
     setIsUploadingCover(true);
-    const imageUrl = await uploadCoverImage(file);
-    if (imageUrl) {
-      setCoverImage(imageUrl);
+    try {
+      const imageUrl = await uploadCoverImage(file);
+      if (imageUrl) {
+        setCoverImage(imageUrl);
+        toast.success("Cover image uploaded successfully");
+      }
+    } catch (error) {
+      toast.error("Failed to upload cover image");
+      console.error("Upload error:", error);
+    } finally {
+      setIsUploadingCover(false);
     }
-    setIsUploadingCover(false);
   };
 
   // Handle adding tags
@@ -136,33 +169,19 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
       is_archived: false
     };
 
-    const savedId = await saveBlogPost(blogData, blogId || undefined);
-    setIsSaving(false);
-    
-    if (savedId) {
-      onSaved();
+    try {
+      const savedId = await saveBlogPost(blogData, blogId || undefined);
+      setIsSaving(false);
+      
+      if (savedId) {
+        onSaved();
+      }
+    } catch (error) {
+      setIsSaving(false);
+      toast.error("Error saving blog post");
+      console.error(error);
     }
   };
-
-  // TipTap editor configuration
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Placeholder.configure({
-        placeholder: 'Start writing your blog content...',
-      }),
-      Underline,
-      Link,
-      TiptapImage.configure({
-        allowBase64: true,
-        inline: true,
-      }),
-    ],
-    content,
-    onUpdate: ({ editor }) => {
-      setContent(editor.getHTML());
-    },
-  });
 
   if (isLoading) {
     return (
@@ -235,7 +254,7 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
                     </>
                   ) : (
                     <>
-                      <Image className="h-6 w-6" />
+                      <ImageIcon className="h-6 w-6" />
                       <span>Upload Cover Image</span>
                     </>
                   )}
@@ -307,28 +326,10 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
           {/* Rich Text Editor */}
           <div className="mt-6">
             <Label>Content</Label>
-            <div className="mt-2 border rounded-md">
+            <div className="mt-2 border rounded-md min-h-[300px]">
               {editor && <TiptapMenuBar editor={editor} />}
               <div className="p-4 min-h-[300px]">
-                <EditorProvider 
-                  slotBefore={null} 
-                  extensions={[
-                    StarterKit,
-                    Placeholder.configure({
-                      placeholder: 'Start writing your blog content...',
-                    }),
-                    Underline,
-                    Link,
-                    TiptapImage.configure({
-                      allowBase64: true,
-                      inline: true,
-                    }),
-                  ]}
-                  content={content}
-                  onUpdate={({ editor }) => {
-                    setContent(editor.getHTML());
-                  }}
-                />
+                <EditorContent editor={editor} className="min-h-[300px] prose max-w-none" />
               </div>
             </div>
           </div>

@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Loader2 } from "lucide-react";
+import { submitForm } from "@/utils/form-utils";
 
 const projectTypes = [
   "Website Design",
@@ -20,8 +21,39 @@ export default function FloatingFormCard() {
     project: "",
     desc: ""
   });
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [focus, setFocus] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!fields.name || !fields.email || !fields.project) {
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    try {
+      const success = await submitForm({
+        form_type: 'quick_contact',
+        name: fields.name,
+        email: fields.email,
+        service_type: fields.project,
+        message: fields.desc
+      });
+      
+      if (success) {
+        setFields({
+          name: "",
+          email: "",
+          project: "",
+          desc: ""
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <motion.div
@@ -33,10 +65,7 @@ export default function FloatingFormCard() {
     >
       <form
         className="flex flex-col gap-5"
-        onSubmit={e => {
-          e.preventDefault();
-          alert("Thanks! We’ll be in touch soon.");
-        }}
+        onSubmit={handleSubmit}
       >
         <div>
           <label className="block text-sm mb-1 font-semibold text-foreground" htmlFor="web-inp-name">Name</label>
@@ -96,7 +125,19 @@ export default function FloatingFormCard() {
             placeholder="What would make your project a success?"
           />
         </div>
-        <Button className="bg-primary hover:bg-primary/90 text-lg h-11 mt-2">Send</Button>
+        <Button 
+          className="bg-primary hover:bg-primary/90 text-lg h-11 mt-2"
+          disabled={isSubmitting}
+          type="submit"
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...
+            </>
+          ) : (
+            "Send"
+          )}
+        </Button>
         <a href="/contact" className="block mt-3 text-primary text-center hover:underline font-semibold transition">Schedule a 15-min call</a>
       </form>
     </motion.div>
