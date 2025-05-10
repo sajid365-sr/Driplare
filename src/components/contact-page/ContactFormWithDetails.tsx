@@ -53,9 +53,15 @@ export function ContactFormWithDetails() {
     setIsSubmitting(true);
     
     try {
+      // Since values.name and values.email are guaranteed to exist due to the schema validation,
+      // we can safely pass them to the submitForm function
       const success = await submitForm({
         form_type: 'contact_form',
-        ...values
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        subject: values.subject,
+        message: values.message
       });
       
       if (success) {
