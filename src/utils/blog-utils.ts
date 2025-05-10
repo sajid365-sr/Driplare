@@ -1,3 +1,4 @@
+
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { slugify } from "@/lib/utils";
@@ -29,9 +30,8 @@ export const uploadCoverImage = async (file: File): Promise<string | null> => {
   try {
     const fileExt = file.name.split('.').pop();
     const fileName = `${crypto.randomUUID()}.${fileExt}`;
-    const filePath = `blogs/${fileName}`;
+    const filePath = `covers/${fileName}`;
 
-    // Use unauthenticated upload for now (RLS policies will handle permissions)
     const { error } = await supabase.storage
       .from('blog_images')
       .upload(filePath, file, {
@@ -64,6 +64,8 @@ export const uploadEditorImage = async (file: File): Promise<string | null> => {
     const fileName = `${crypto.randomUUID()}.${fileExt}`;
     const filePath = `editor/${fileName}`;
 
+    console.log("Uploading to storage path:", filePath);
+
     const { error } = await supabase.storage
       .from('blog_images')
       .upload(filePath, file, {
@@ -81,6 +83,7 @@ export const uploadEditorImage = async (file: File): Promise<string | null> => {
       .from('blog_images')
       .getPublicUrl(filePath);
 
+    console.log("Uploaded successfully, URL:", data.publicUrl);
     return data.publicUrl;
   } catch (error) {
     console.error('Upload error:', error);

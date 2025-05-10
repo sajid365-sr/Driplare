@@ -123,16 +123,6 @@ export default function Dashboard() {
     return matchesFilter && matchesSearch;
   });
   
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "new": return "bg-blue-500 hover:bg-blue-600";
-      case "in_progress": return "bg-yellow-500 hover:bg-yellow-600";
-      case "completed": return "bg-green-500 hover:bg-green-600";
-      case "spam": return "bg-red-500 hover:bg-red-600";
-      default: return "bg-gray-500 hover:bg-gray-600";
-    }
-  };
-
   const getBadgeVariant = (status: string) => {
     switch (status) {
       case "new": return "default";
@@ -153,16 +143,16 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6">
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
+        <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
           <div>
             <CardTitle>Form Submissions</CardTitle>
             <CardDescription>
               Manage and respond to form submissions
             </CardDescription>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 mt-4 sm:mt-0">
             <Button variant="outline" size="sm">
               <Download className="h-4 w-4 mr-2" />
               Export
@@ -228,7 +218,7 @@ export default function Dashboard() {
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
             </div>
           ) : filteredSubmissions.length > 0 ? (
-            <div className="rounded-md border overflow-hidden">
+            <div className="rounded-md border overflow-hidden overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>

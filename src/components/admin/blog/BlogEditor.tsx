@@ -16,8 +16,9 @@ import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
 import Link from '@tiptap/extension-link';
+import TextAlign from '@tiptap/extension-text-align';
+import Image from '@tiptap/extension-image';
 import TiptapMenuBar from "./TiptapMenuBar";
-import { Image } from '@tiptap/extension-image';
 
 interface BlogEditorProps {
   blogId?: string | null;
@@ -42,7 +43,7 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
 
   const coverImageRef = useRef<HTMLInputElement>(null);
 
-  // Initialize the Tiptap editor
+  // Initialize the Tiptap editor with enhanced functionality
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -52,6 +53,9 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
       Underline,
       Link.configure({
         openOnClick: false,
+      }),
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
       }),
       Image.configure({
         allowBase64: true,

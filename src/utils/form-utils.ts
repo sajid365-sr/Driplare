@@ -2,120 +2,115 @@
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
+/**
+ * Type definition for form submission data
+ */
 export interface FormSubmission {
-  form_type: string;
   name: string;
   email: string;
+  form_type: string;
   phone?: string;
-  company?: string;
-  message?: string;
   subject?: string;
+  message?: string;
+  company?: string;
   service_type?: string;
   budget?: string;
   timeline?: string;
   additional_info?: string;
 }
 
-// Submit a form and create a notification
-export const submitForm = async (formData: FormSubmission): Promise<boolean> => {
+/**
+ * Submit form data to Supabase
+ */
+export async function submitForm(data: FormSubmission): Promise<boolean> {
   try {
-    console.log("Submitting form data:", formData);
+    console.log("Submitting form:", data);
     
-    // Insert the form submission into the database
-    const { error: submissionError } = await supabase
-      .from('form_submissions')
-      .insert(formData);
-      
-    if (submissionError) {
-      console.error('Error submitting form to database:', submissionError);
-      toast.error('Error submitting form: ' + submissionError.message);
+    // Insert data into the form_submissions table
+    const { error } = await supabase.from('form_submissions').insert([data]);
+
+    if (error) {
+      console.error("Form submission error:", error);
+      toast.error("Failed to submit form. Please try again.");
       return false;
     }
-    
-    // Create a notification about the submission via the edge function
-    try {
-      const response = await supabase.functions.invoke('form-submissions', {
-        body: { action: 'submit', formData }
-      });
-      
-      if (response.error) {
-        console.error('Error creating notification:', response.error);
-        // Don't return false here - the form submission was successful
-      }
-    } catch (notificationError) {
-      console.error('Failed to create notification:', notificationError);
-      // Form was still submitted successfully even if notification failed
-    }
-    
-    toast.success('Form submitted successfully!');
+
+    toast.success("Form submitted successfully!");
     return true;
-  } catch (error) {
-    console.error('Form submission error:', error);
-    toast.error('Failed to submit form');
+  } catch (err) {
+    console.error("Form submission error:", err);
+    toast.error("An unexpected error occurred. Please try again.");
     return false;
   }
-};
+}
 
-// Get all form submissions
-export const getFormSubmissions = async (): Promise<any[]> => {
+/**
+ * Get all form submissions with optional pagination
+ */
+export async function getFormSubmissions(): Promise<any[]> {
   try {
     const { data, error } = await supabase
       .from('form_submissions')
       .select('*')
       .order('created_at', { ascending: false });
-      
+
     if (error) {
-      console.error('Error fetching form submissions:', error);
-      toast.error('Error fetching form submissions');
+      console.error("Error fetching form submissions:", error);
+      toast.error("Failed to load form submissions");
       return [];
     }
-    
+
     return data || [];
-  } catch (error) {
-    console.error('Failed to fetch form submissions:', error);
-    toast.error('Failed to load submissions');
+  } catch (err) {
+    console.error("Error fetching form submissions:", err);
     return [];
   }
-};
+}
 
-// Update form submission status
-export const updateSubmissionStatus = async (id: string, status: string): Promise<boolean> => {
+/**
+ * Update submission status
+ */
+export async function updateSubmissionStatus(id: string, status: string): Promise<boolean> {
   try {
     const { error } = await supabase
       .from('form_submissions')
       .update({ status })
       .eq('id', id);
-    
+
     if (error) {
-      console.error('Error updating submission status:', error);
+      console.error("Error updating submission status:", error);
+      toast.error("Failed to update status");
       return false;
     }
-    
-    toast.success('Submission status updated');
+
+    toast.success(`Status updated to ${status}`);
     return true;
-  } catch (error) {
-    console.error('Failed to update submission status:', error);
+  } catch (err) {
+    console.error("Error updating submission status:", err);
     return false;
   }
-};
+}
 
-// Delete form submissions
-export const deleteSubmissions = async (submissionIds: string[]): Promise<boolean> => {
+/**
+ * Delete submissions by ID
+ */
+export async function deleteSubmissions(ids: string[]): Promise<boolean> {
   try {
     const { error } = await supabase
       .from('form_submissions')
       .delete()
-      .in('id', submissionIds);
-    
+      .in('id', ids);
+
     if (error) {
-      console.error('Error deleting submissions:', error);
+      console.error("Error deleting submissions:", error);
+      toast.error("Failed to delete submissions");
       return false;
     }
-    
-    toast.success('Submissions deleted successfully');
+
+    toast.success(`${ids.length} submission(s) deleted`);
     return true;
-  } catch (error) {
-    console.error('Failed to delete submissions:', error);
+  } catch (err) {
+    console.error("Error deleting submissions:", err);
     return false;
   }
-};
+}

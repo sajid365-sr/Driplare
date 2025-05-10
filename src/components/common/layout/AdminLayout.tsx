@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ArrowRight, LogOut } from "lucide-react";
+import { ArrowRight, LogOut, Menu, X } from "lucide-react";
 
 import AdminLoginModal from "../../admin/AdminLoginModal";
 import {
@@ -14,6 +14,7 @@ import {
 import ScrollToTop from "../ScrollToTop";
 import { ChatbotWidget } from "../chatbot/ChatbotWidget";
 import { initializeNotificationsFromSupabase } from "@/utils/notification-utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 import Dashboard from "@/pages/admin/Dashboard";
 import Analytics from "@/pages/admin/Analytics";
@@ -24,11 +25,14 @@ import Settings from "@/pages/admin/Settings";
 import BlogManager from "@/pages/admin/BlogManager";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function AdminLayout() {
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>("dashboard");
   const [adminSession, setAdminSession] = useState<AdminSession | null>(null);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const isMobile = useIsMobile();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,93 +64,239 @@ export default function AdminLayout() {
     setShowLoginModal(false);
   };
 
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    if (isMobile) {
+      setMobileNavOpen(false);
+    }
+  };
+
   // Determine if the current user has permission to access certain tabs
   const canAccessAdminManagement = adminSession?.permissions.canManageAdmins;
 
   return (
-    <main className="min-h-screen flex flex-col md:px-5">
+    <main className="min-h-screen flex flex-col">
       <ScrollToTop />
       <Toaster position="top-center" richColors />
 
-      <div className="mt-5">
-        <img src="/logo-white.png" alt="Driplare Logo" width={120} />
-
-        {/* Tabs wrapper must wrap both list & content */}
-        <Tabs
-          value={activeTab}
-          onValueChange={setActiveTab}
-          className="flex flex-1 flex-col lg:flex-row md:mt-10"
-        >
-          {/* Sidebar with triggers */}
-          <aside className="md:w-[20%] w-full md:border-r rounded-sm border-gray-800 pt-40 md:bg-gray-950 p-4 h-screen">
-            <TabsList className="flex flex-row md:flex-col px-10 overflow-x-auto md:overflow-x-visible space-y-2">
-              <TabsTrigger value="dashboard">Submissions</TabsTrigger>
-              {adminSession?.permissions.canView && (
-                <TabsTrigger value="analytics">Analytics</TabsTrigger>
-              )}
-              {canAccessAdminManagement && (
-                <TabsTrigger value="admins">User Management</TabsTrigger>
-              )}
-              {adminSession?.permissions.canEdit && (
-                <TabsTrigger value="blogs">Blog Manager</TabsTrigger>
-              )}
-              {adminSession?.permissions.canView && (
-                <TabsTrigger value="notifications">Notifications</TabsTrigger>
-              )}
-              {adminSession?.permissions.canView && (
-                <TabsTrigger value="logs">Audit Logs</TabsTrigger>
-              )}
-              {adminSession?.permissions.canEdit && (
-                <TabsTrigger value="settings">Settings</TabsTrigger>
-              )}
-
-              <div className="flex flex-col space-y-4 mt-8">
-                <Link to="/">
-                  <button
-                    className="flex items-center gap-2 text-green-400 hover:text-green-500"
-                  >
-                    Client Area
-                    <ArrowRight className="hover:translate-x-1 transition-transform" size={16} />
-                  </button>
-                </Link>
-                
-                <Button
-                  onClick={handleLogout}
-                  variant="ghost"
-                  className="flex items-center gap-2 text-red-400 hover:text-red-500 justify-start px-0"
-                >
-                  <LogOut size={16} />
-                  <span>Logout</span>
+      <div className="flex flex-1 flex-col h-screen">
+        <header className="flex justify-between items-center p-4 md:px-6 border-b bg-background">
+          <div className="flex items-center gap-4">
+            <img src="/logo-white.png" alt="Driplare Logo" width={120} />
+          </div>
+          
+          {isMobile && (
+            <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
                 </Button>
-              </div>
-            </TabsList>
-          </aside>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[240px] sm:w-[300px] pt-10">
+                <nav className="flex flex-col space-y-2">
+                  <Button
+                    variant={activeTab === "dashboard" ? "default" : "ghost"}
+                    className="justify-start"
+                    onClick={() => handleTabChange("dashboard")}
+                  >
+                    Submissions
+                  </Button>
+                  
+                  {adminSession?.permissions.canView && (
+                    <Button
+                      variant={activeTab === "analytics" ? "default" : "ghost"}
+                      className="justify-start"
+                      onClick={() => handleTabChange("analytics")}
+                    >
+                      Analytics
+                    </Button>
+                  )}
+                  
+                  {canAccessAdminManagement && (
+                    <Button
+                      variant={activeTab === "admins" ? "default" : "ghost"}
+                      className="justify-start"
+                      onClick={() => handleTabChange("admins")}
+                    >
+                      User Management
+                    </Button>
+                  )}
+                  
+                  {adminSession?.permissions.canEdit && (
+                    <Button
+                      variant={activeTab === "blogs" ? "default" : "ghost"}
+                      className="justify-start"
+                      onClick={() => handleTabChange("blogs")}
+                    >
+                      Blog Manager
+                    </Button>
+                  )}
+                  
+                  {adminSession?.permissions.canView && (
+                    <Button
+                      variant={activeTab === "notifications" ? "default" : "ghost"}
+                      className="justify-start"
+                      onClick={() => handleTabChange("notifications")}
+                    >
+                      Notifications
+                    </Button>
+                  )}
+                  
+                  {adminSession?.permissions.canView && (
+                    <Button
+                      variant={activeTab === "logs" ? "default" : "ghost"}
+                      className="justify-start"
+                      onClick={() => handleTabChange("logs")}
+                    >
+                      Audit Logs
+                    </Button>
+                  )}
+                  
+                  {adminSession?.permissions.canEdit && (
+                    <Button
+                      variant={activeTab === "settings" ? "default" : "ghost"}
+                      className="justify-start"
+                      onClick={() => handleTabChange("settings")}
+                    >
+                      Settings
+                    </Button>
+                  )}
+                  
+                  <div className="pt-4 mt-4 border-t">
+                    <Link to="/">
+                      <Button
+                        variant="ghost"
+                        className="flex items-center gap-2 text-green-400 hover:text-green-500 w-full justify-start"
+                      >
+                        Client Area
+                        <ArrowRight className="hover:translate-x-1 transition-transform" size={16} />
+                      </Button>
+                    </Link>
+                    
+                    <Button
+                      onClick={handleLogout}
+                      variant="ghost"
+                      className="flex items-center gap-2 text-red-400 hover:text-red-500 w-full justify-start mt-2"
+                    >
+                      <LogOut size={16} />
+                      <span>Logout</span>
+                    </Button>
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          )}
+        </header>
 
-          {/* Tab content */}
-          <section className="md:w-[80%] w-full p-6 overflow-y-auto ">
-            <TabsContent value="dashboard">
-              <Dashboard />
-            </TabsContent>
-            <TabsContent value="analytics">
-              <Analytics />
-            </TabsContent>
-            <TabsContent value="admins">
-              <AdminManagement />
-            </TabsContent>
-            <TabsContent value="blogs">
-              <BlogManager />
-            </TabsContent>
-            <TabsContent value="notifications">
-              <Notifications />
-            </TabsContent>
-            <TabsContent value="logs">
-              <AuditLogs />
-            </TabsContent>
-            <TabsContent value="settings">
-              <Settings />
-            </TabsContent>
-          </section>
-        </Tabs>
+        {/* Desktop/Tablet Layout */}
+        <div className="flex flex-1 overflow-hidden">
+          {!isMobile && (
+            <aside className="w-[240px] border-r bg-gray-950 p-4 hidden md:block">
+              <nav className="flex flex-col space-y-2">
+                <Button
+                  variant={activeTab === "dashboard" ? "default" : "ghost"}
+                  className="justify-start"
+                  onClick={() => setActiveTab("dashboard")}
+                >
+                  Submissions
+                </Button>
+                
+                {adminSession?.permissions.canView && (
+                  <Button
+                    variant={activeTab === "analytics" ? "default" : "ghost"}
+                    className="justify-start"
+                    onClick={() => setActiveTab("analytics")}
+                  >
+                    Analytics
+                  </Button>
+                )}
+                
+                {canAccessAdminManagement && (
+                  <Button
+                    variant={activeTab === "admins" ? "default" : "ghost"}
+                    className="justify-start"
+                    onClick={() => setActiveTab("admins")}
+                  >
+                    User Management
+                  </Button>
+                )}
+                
+                {adminSession?.permissions.canEdit && (
+                  <Button
+                    variant={activeTab === "blogs" ? "default" : "ghost"}
+                    className="justify-start"
+                    onClick={() => setActiveTab("blogs")}
+                  >
+                    Blog Manager
+                  </Button>
+                )}
+                
+                {adminSession?.permissions.canView && (
+                  <Button
+                    variant={activeTab === "notifications" ? "default" : "ghost"}
+                    className="justify-start"
+                    onClick={() => setActiveTab("notifications")}
+                  >
+                    Notifications
+                  </Button>
+                )}
+                
+                {adminSession?.permissions.canView && (
+                  <Button
+                    variant={activeTab === "logs" ? "default" : "ghost"}
+                    className="justify-start"
+                    onClick={() => setActiveTab("logs")}
+                  >
+                    Audit Logs
+                  </Button>
+                )}
+                
+                {adminSession?.permissions.canEdit && (
+                  <Button
+                    variant={activeTab === "settings" ? "default" : "ghost"}
+                    className="justify-start"
+                    onClick={() => setActiveTab("settings")}
+                  >
+                    Settings
+                  </Button>
+                )}
+                
+                <div className="pt-4 mt-6 border-t">
+                  <Link to="/">
+                    <Button
+                      variant="ghost"
+                      className="flex items-center gap-2 text-green-400 hover:text-green-500 w-full justify-start"
+                    >
+                      Client Area
+                      <ArrowRight className="hover:translate-x-1 transition-transform" size={16} />
+                    </Button>
+                  </Link>
+                  
+                  <Button
+                    onClick={handleLogout}
+                    variant="ghost"
+                    className="flex items-center gap-2 text-red-400 hover:text-red-500 w-full justify-start mt-2"
+                  >
+                    <LogOut size={16} />
+                    <span>Logout</span>
+                  </Button>
+                </div>
+              </nav>
+            </aside>
+          )}
+          
+          <main className="flex-1 overflow-y-auto">
+            <div className="p-4 md:p-6">
+              {activeTab === "dashboard" && <Dashboard />}
+              {activeTab === "analytics" && <Analytics />}
+              {activeTab === "admins" && <AdminManagement />}
+              {activeTab === "blogs" && <BlogManager />}
+              {activeTab === "notifications" && <Notifications />}
+              {activeTab === "logs" && <AuditLogs />}
+              {activeTab === "settings" && <Settings />}
+            </div>
+          </main>
+        </div>
       </div>
 
       <AdminLoginModal
