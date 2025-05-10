@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { sendContactNotificationToAdmin } from "@/utils/email-service";
+import { submitForm } from "@/utils/form-utils";
 
 export function NewsletterSection() {
   const [formData, setFormData] = useState({
@@ -31,19 +31,26 @@ export function NewsletterSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.email) {
+      toast.error("Email is required");
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
-      await sendContactNotificationToAdmin(
-        formData.name || "Newsletter Subscriber",
-        formData.email,
-        "N/A",
-        formData.role || "Not specified",
-        "New newsletter subscription from Newsletter Section"
-      );
+      const success = await submitForm({
+        form_type: 'newsletter',
+        name: formData.name || "Newsletter Subscriber",
+        email: formData.email,
+        additional_info: formData.role || "Not specified"
+      });
       
-      toast.success("You've been subscribed to our newsletter!");
-      setFormData({ name: "", email: "", role: "" });
+      if (success) {
+        toast.success("You've been subscribed to our newsletter!");
+        setFormData({ name: "", email: "", role: "" });
+      }
     } catch (error) {
       console.error("Error submitting newsletter form:", error);
       toast.error("There was a problem with your subscription. Please try again.");

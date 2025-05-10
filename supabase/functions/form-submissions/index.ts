@@ -22,6 +22,9 @@ serve(async (req) => {
     // Parse the request body
     const { action, submissionIds, formData } = await req.json();
 
+    console.log('Form submission action:', action);
+    console.log('Form data:', formData);
+
     // Handle different actions
     switch (action) {
       case 'get': {

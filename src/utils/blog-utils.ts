@@ -31,8 +31,6 @@ export const uploadCoverImage = async (file: File): Promise<string | null> => {
     const fileName = `${crypto.randomUUID()}.${fileExt}`;
     const filePath = `blogs/${fileName}`;
 
-    const { data: adminSession } = await supabase.auth.getSession();
-    
     // Use unauthenticated upload for now (RLS policies will handle permissions)
     const { error } = await supabase.storage
       .from('blog_images')

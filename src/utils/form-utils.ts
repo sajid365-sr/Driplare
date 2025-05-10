@@ -19,7 +19,9 @@ export interface FormSubmission {
 // Submit a form and create a notification
 export const submitForm = async (formData: FormSubmission): Promise<boolean> => {
   try {
-    // First, insert the form submission into the database
+    console.log("Submitting form data:", formData);
+    
+    // Insert the form submission into the database
     const { error: submissionError } = await supabase
       .from('form_submissions')
       .insert(formData);
@@ -31,13 +33,18 @@ export const submitForm = async (formData: FormSubmission): Promise<boolean> => 
     }
     
     // Create a notification about the submission via the edge function
-    const response = await supabase.functions.invoke('form-submissions', {
-      body: { action: 'submit', formData }
-    });
-    
-    if (response.error) {
-      console.error('Error creating notification:', response.error);
-      // Don't return false here - the form submission was successful
+    try {
+      const response = await supabase.functions.invoke('form-submissions', {
+        body: { action: 'submit', formData }
+      });
+      
+      if (response.error) {
+        console.error('Error creating notification:', response.error);
+        // Don't return false here - the form submission was successful
+      }
+    } catch (notificationError) {
+      console.error('Failed to create notification:', notificationError);
+      // Form was still submitted successfully even if notification failed
     }
     
     toast.success('Form submitted successfully!');
@@ -59,12 +66,14 @@ export const getFormSubmissions = async (): Promise<any[]> => {
       
     if (error) {
       console.error('Error fetching form submissions:', error);
+      toast.error('Error fetching form submissions');
       return [];
     }
     
     return data || [];
   } catch (error) {
     console.error('Failed to fetch form submissions:', error);
+    toast.error('Failed to load submissions');
     return [];
   }
 };

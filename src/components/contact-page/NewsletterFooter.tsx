@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { sendContactNotificationToAdmin } from "@/utils/email-service";
+import { submitForm } from "@/utils/form-utils";
 
 export function NewsletterFooter() {
   const [email, setEmail] = useState("");
@@ -12,20 +12,26 @@ export function NewsletterFooter() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!email) {
+      toast.error("Email is required");
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
-      // Use the generic form submission since we don't have enough fields for newsletter
-      await sendContactNotificationToAdmin(
-        "Footer Newsletter Subscriber",
-        email,
-        "N/A",
-        "Newsletter",
-        "New footer newsletter subscription"
-      );
+      const success = await submitForm({
+        form_type: 'footer_newsletter',
+        name: "Footer Newsletter Subscriber",
+        email: email,
+        message: "Subscription from footer newsletter"
+      });
       
-      toast.success("You've been subscribed to our newsletter!");
-      setEmail("");
+      if (success) {
+        toast.success("You've been subscribed to our newsletter!");
+        setEmail("");
+      }
     } catch (error) {
       console.error("Error subscribing to newsletter:", error);
       toast.error("There was a problem with your subscription. Please try again.");

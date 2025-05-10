@@ -50,6 +50,8 @@ export default function FloatingFormCard() {
           desc: ""
         });
       }
+    } catch (error) {
+      console.error("Error submitting form:", error);
     } finally {
       setIsSubmitting(false);
     }

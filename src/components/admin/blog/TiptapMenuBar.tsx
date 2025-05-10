@@ -13,6 +13,8 @@ interface TiptapMenuBarProps {
 
 const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
   const addImage = async () => {
+    if (!editor) return;
+    
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -20,7 +22,9 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
       if (input.files?.length) {
         const file = input.files[0];
         try {
+          console.log("Uploading image file:", file.name);
           const imageUrl = await uploadEditorImage(file);
+          console.log("Received image URL:", imageUrl);
           if (imageUrl) {
             editor.chain().focus().setImage({ src: imageUrl }).run();
           }
@@ -33,6 +37,8 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
   };
 
   const setLink = () => {
+    if (!editor) return;
+    
     const url = window.prompt('URL');
     
     // Cancelled
