@@ -46,16 +46,27 @@ serve(async (req) => {
           );
         }
 
-        const { data, error } = await supabaseClient
-          .from('form_submissions')
-          .insert(formData)
-          .select()
-          .single();
+        // Create a notification for the form submission
+        const { data: notificationData, error: notificationError } = await supabaseClient
+          .from('notifications')
+          .insert({
+            title: 'New form submission',
+            message: `New ${formData.form_type} form submitted by ${formData.name}`,
+            type: 'submission',
+            recipient: 'admin'
+          })
+          .select();
         
-        if (error) throw error;
+        if (notificationError) {
+          console.error('Notification creation error:', notificationError);
+        }
         
         return new Response(
-          JSON.stringify({ success: true, submission: data }),
+          JSON.stringify({ 
+            success: true, 
+            message: 'Notification created',
+            notification: notificationData ? notificationData[0] : null 
+          }),
           { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }

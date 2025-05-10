@@ -6,7 +6,6 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { uploadEditorImage } from '@/utils/blog-utils';
-import { toast } from 'sonner';
 
 interface TiptapMenuBarProps {
   editor: Editor;
@@ -21,14 +20,12 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
       if (input.files?.length) {
         const file = input.files[0];
         try {
-          toast.loading('Uploading image...');
           const imageUrl = await uploadEditorImage(file);
           if (imageUrl) {
             editor.chain().focus().setImage({ src: imageUrl }).run();
-            toast.success('Image uploaded successfully');
           }
         } catch (error) {
-          toast.error('Failed to upload image');
+          console.error('Image upload error:', error);
         }
       }
     };
@@ -57,6 +54,10 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
     editor.chain().focus().extendMarkRange('link').setLink({ href: httpUrl }).run();
   };
 
+  if (!editor) {
+    return null;
+  }
+
   return (
     <div className="border-b p-2 flex flex-wrap gap-1">
       <Button
@@ -64,6 +65,7 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
         size="icon"
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={editor.isActive('bold') ? 'bg-muted' : ''}
+        type="button"
       >
         <Bold className="h-4 w-4" />
       </Button>
@@ -73,6 +75,7 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
         size="icon"
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={editor.isActive('italic') ? 'bg-muted' : ''}
+        type="button"
       >
         <Italic className="h-4 w-4" />
       </Button>
@@ -80,14 +83,9 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
       <Button
         variant="ghost"
         size="icon"
-        onClick={() => {
-          if (editor.isActive('underline')) {
-            editor.chain().focus().unsetMark('underline').run();
-          } else {
-            editor.chain().focus().setMark('underline').run();
-          }
-        }}
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
         className={editor.isActive('underline') ? 'bg-muted' : ''}
+        type="button"
       >
         <Underline className="h-4 w-4" />
       </Button>
@@ -99,6 +97,7 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
         size="icon"
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         className={editor.isActive('heading', { level: 2 }) ? 'bg-muted' : ''}
+        type="button"
       >
         <Heading className="h-4 w-4" />
       </Button>
@@ -108,6 +107,7 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
         size="icon"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={editor.isActive('bulletList') ? 'bg-muted' : ''}
+        type="button"
       >
         <List className="h-4 w-4" />
       </Button>
@@ -118,6 +118,7 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
         variant="ghost"
         size="icon"
         onClick={addImage}
+        type="button"
       >
         <Image className="h-4 w-4" />
       </Button>
@@ -127,6 +128,7 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
         size="icon"
         onClick={setLink}
         className={editor.isActive('link') ? 'bg-muted' : ''}
+        type="button"
       >
         <LinkIcon className="h-4 w-4" />
       </Button>
@@ -136,6 +138,7 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
         size="icon"
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         className={editor.isActive('codeBlock') ? 'bg-muted' : ''}
+        type="button"
       >
         <Code className="h-4 w-4" />
       </Button>

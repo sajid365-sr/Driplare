@@ -4,5 +4,7 @@
 project_id = "fizjizxvlekjbrsgdood"
 # Supabase Functions
 [functions]
+[functions.form-submissions]
+verify_jwt = false
 [functions.notifications]
 verify_jwt = false

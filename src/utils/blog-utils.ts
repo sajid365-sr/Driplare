@@ -1,4 +1,3 @@
-
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { slugify } from "@/lib/utils";
@@ -32,11 +31,18 @@ export const uploadCoverImage = async (file: File): Promise<string | null> => {
     const fileName = `${crypto.randomUUID()}.${fileExt}`;
     const filePath = `blogs/${fileName}`;
 
+    const { data: adminSession } = await supabase.auth.getSession();
+    
+    // Use unauthenticated upload for now (RLS policies will handle permissions)
     const { error } = await supabase.storage
       .from('blog_images')
-      .upload(filePath, file);
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: false
+      });
 
     if (error) {
+      console.error('Storage error:', error);
       toast.error('Error uploading image: ' + error.message);
       return null;
     }
@@ -62,9 +68,13 @@ export const uploadEditorImage = async (file: File): Promise<string | null> => {
 
     const { error } = await supabase.storage
       .from('blog_images')
-      .upload(filePath, file);
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: false
+      });
 
     if (error) {
+      console.error('Storage error:', error);
       toast.error('Error uploading image: ' + error.message);
       return null;
     }

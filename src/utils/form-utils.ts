@@ -19,19 +19,25 @@ export interface FormSubmission {
 // Submit a form and create a notification
 export const submitForm = async (formData: FormSubmission): Promise<boolean> => {
   try {
+    // First, insert the form submission into the database
+    const { error: submissionError } = await supabase
+      .from('form_submissions')
+      .insert(formData);
+      
+    if (submissionError) {
+      console.error('Error submitting form to database:', submissionError);
+      toast.error('Error submitting form: ' + submissionError.message);
+      return false;
+    }
+    
+    // Create a notification about the submission via the edge function
     const response = await supabase.functions.invoke('form-submissions', {
       body: { action: 'submit', formData }
     });
     
     if (response.error) {
-      console.error('Error submitting form:', response.error);
-      toast.error('Error submitting form: ' + response.error.message);
-      return false;
-    }
-    
-    if (!response.data.success) {
-      toast.error('Error submitting form: ' + (response.data.message || 'Unknown error'));
-      return false;
+      console.error('Error creating notification:', response.error);
+      // Don't return false here - the form submission was successful
     }
     
     toast.success('Form submitted successfully!');
@@ -46,16 +52,17 @@ export const submitForm = async (formData: FormSubmission): Promise<boolean> => 
 // Get all form submissions
 export const getFormSubmissions = async (): Promise<any[]> => {
   try {
-    const response = await supabase.functions.invoke('form-submissions', {
-      body: { action: 'get' }
-    });
-    
-    if (response.error || !response.data.success) {
-      console.error('Error fetching form submissions:', response.error || response.data.message);
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .select('*')
+      .order('created_at', { ascending: false });
+      
+    if (error) {
+      console.error('Error fetching form submissions:', error);
       return [];
     }
     
-    return response.data.submissions || [];
+    return data || [];
   } catch (error) {
     console.error('Failed to fetch form submissions:', error);
     return [];
@@ -65,12 +72,13 @@ export const getFormSubmissions = async (): Promise<any[]> => {
 // Update form submission status
 export const updateSubmissionStatus = async (id: string, status: string): Promise<boolean> => {
   try {
-    const response = await supabase.functions.invoke('form-submissions', {
-      body: { action: 'update_status', id, status }
-    });
+    const { error } = await supabase
+      .from('form_submissions')
+      .update({ status })
+      .eq('id', id);
     
-    if (response.error || !response.data.success) {
-      console.error('Error updating submission status:', response.error || response.data.message);
+    if (error) {
+      console.error('Error updating submission status:', error);
       return false;
     }
     
@@ -85,12 +93,13 @@ export const updateSubmissionStatus = async (id: string, status: string): Promis
 // Delete form submissions
 export const deleteSubmissions = async (submissionIds: string[]): Promise<boolean> => {
   try {
-    const response = await supabase.functions.invoke('form-submissions', {
-      body: { action: 'delete', submissionIds }
-    });
+    const { error } = await supabase
+      .from('form_submissions')
+      .delete()
+      .in('id', submissionIds);
     
-    if (response.error || !response.data.success) {
-      console.error('Error deleting submissions:', response.error || response.data.message);
+    if (error) {
+      console.error('Error deleting submissions:', error);
       return false;
     }
     

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ArrowRight, ChevronRight, LogOut } from "lucide-react";
+import { ArrowRight, LogOut } from "lucide-react";
 
 import AdminLoginModal from "../../admin/AdminLoginModal";
 import {
@@ -22,6 +22,8 @@ import Notifications from "@/pages/admin/Notifications";
 import AuditLogs from "@/pages/admin/AuditLogs";
 import Settings from "@/pages/admin/Settings";
 import BlogManager from "@/pages/admin/BlogManager";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export default function AdminLayout() {
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
@@ -48,7 +50,8 @@ export default function AdminLayout() {
   const handleLogout = () => {
     clearAdminSession();
     setAdminSession(null);
-    setShowLoginModal(true);
+    toast.success("Logged out successfully");
+    navigate("/");
   };
 
   const handleLoginSuccess = () => {
@@ -97,15 +100,25 @@ export default function AdminLayout() {
                 <TabsTrigger value="settings">Settings</TabsTrigger>
               )}
 
-              <Link to="/">
-                <button
+              <div className="flex flex-col space-y-4 mt-8">
+                <Link to="/">
+                  <button
+                    className="flex items-center gap-2 text-green-400 hover:text-green-500"
+                  >
+                    Client Area
+                    <ArrowRight className="hover:translate-x-1 transition-transform" size={16} />
+                  </button>
+                </Link>
+                
+                <Button
                   onClick={handleLogout}
-                  className="mt-6 flex items-center gap-5 text-green-400 hover:text-green-500"
+                  variant="ghost"
+                  className="flex items-center gap-2 text-red-400 hover:text-red-500 justify-start px-0"
                 >
-                  Client Area
-                  <ArrowRight className="mr-2 hover:scale-x-150 " size={16} />
-                </button>
-              </Link>
+                  <LogOut size={16} />
+                  <span>Logout</span>
+                </Button>
+              </div>
             </TabsList>
           </aside>
 
