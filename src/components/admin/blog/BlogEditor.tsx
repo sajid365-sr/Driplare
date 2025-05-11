@@ -1,24 +1,54 @@
-
 import React, { useState, useEffect, useRef } from "react";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getBlogPost, saveBlogPost, generateSlug, uploadCoverImage, getBlogCategories } from "@/utils/blog-utils";
+import {
+  getBlogPost,
+  saveBlogPost,
+  generateSlug,
+  uploadCoverImage,
+  getBlogCategories,
+} from "@/utils/blog-utils";
 import { Switch } from "@/components/ui/switch";
 import { Loader2, Image as ImageIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // Import Tiptap dependencies
-import { EditorContent, useEditor } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Placeholder from '@tiptap/extension-placeholder';
-import Underline from '@tiptap/extension-underline';
-import Link from '@tiptap/extension-link';
-import TextAlign from '@tiptap/extension-text-align';
-import Image from '@tiptap/extension-image';
+import {
+  EditorContent,
+  useEditor,
+  EditorProvider,
+  FloatingMenu,
+  BubbleMenu,
+} from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Placeholder from "@tiptap/extension-placeholder";
+import Underline from "@tiptap/extension-underline";
+import Link from "@tiptap/extension-link";
+import TextAlign from "@tiptap/extension-text-align";
+import Image from "@tiptap/extension-image";
 import TiptapMenuBar from "./TiptapMenuBar";
+import Highlight from "@tiptap/extension-highlight";
+import Heading from "@tiptap/extension-heading";
+import BulletList from "@tiptap/extension-bullet-list";
+import OrderedList from "@tiptap/extension-ordered-list";
+import Blockquote from "@tiptap/extension-blockquote";
+import { Color } from "@tiptap/extension-color";
+import TextStyle from "@tiptap/extension-text-style";
 
 interface BlogEditorProps {
   blogId?: string | null;
@@ -26,7 +56,11 @@ interface BlogEditorProps {
   onSaved: () => void;
 }
 
-export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProps) {
+export default function BlogEditor({
+  blogId,
+  onCancel,
+  onSaved,
+}: BlogEditorProps) {
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [coverImage, setCoverImage] = useState<string>("");
@@ -47,41 +81,56 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
   const editor = useEditor({
     extensions: [
       StarterKit,
-      Placeholder.configure({
-        placeholder: 'Start writing your blog content...',
-      }),
+      Placeholder.configure({ placeholder: "Start writing…" }),
       Underline,
-      Link.configure({
-        openOnClick: false,
-      }),
-      TextAlign.configure({
-        types: ['heading', 'paragraph'],
-      }),
-      Image.configure({
-        allowBase64: true,
-        inline: true,
-      }),
+      Link.configure({ openOnClick: false }),
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
+      Image.configure({ allowBase64: true, inline: true }),
+      Highlight,
+      Color,
+      TextStyle,
+
+      // ← Add these:
+      Heading.configure({ levels: [1, 2, 3] }),
+      BulletList.configure({}),
+      OrderedList,
+      Blockquote,
     ],
-    content: content,
-    onUpdate: ({ editor }) => {
-      setContent(editor.getHTML());
-    },
+    content: `
+      <p> Write your blog here.. </p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+     
+      `,
+    onUpdate: ({ editor }) => setContent(editor.getHTML()),
   });
 
   // Fetch blog data if editing existing blog
   useEffect(() => {
     const fetchCategories = async () => {
       const categoryList = await getBlogCategories();
-      setCategories(categoryList.length > 0 ? categoryList : [
-        'Technology', 'Design', 'Marketing', 'Business', 'Development'
+      setCategories([
+        "Technology",
+        "Design",
+        "Marketing",
+        "Business",
+        "Development",
       ]);
     };
 
     fetchCategories();
-    
+
     if (blogId) {
       setIsLoading(true);
-      getBlogPost(blogId).then(blog => {
+      getBlogPost(blogId).then((blog) => {
         if (blog) {
           setTitle(blog.title);
           setSlug(blog.slug);
@@ -92,8 +141,8 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
           if (editor) {
             editor.commands.setContent(blog.content);
           }
-          setStatus(blog.status === 'published' ? 'published' : 'draft');
-          setIsPublished(blog.status === 'published');
+          setStatus(blog.status === "published" ? "published" : "draft");
+          setIsPublished(blog.status === "published");
         }
         setIsLoading(false);
       });
@@ -115,7 +164,9 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
   };
 
   // Handle cover image upload
-  const handleCoverImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCoverImageChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -144,7 +195,7 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
 
   // Handle removing tags
   const handleRemoveTag = (tagToRemove: string) => {
-    setTags(tags.filter(tag => tag !== tagToRemove));
+    setTags(tags.filter((tag) => tag !== tagToRemove));
   };
 
   // Handle saving blog
@@ -169,14 +220,15 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
       tags,
       category: category || "Uncategorized",
       status: publishStatus,
-      published_at: publishStatus === 'published' ? new Date().toISOString() : undefined,
-      is_archived: false
+      published_at:
+        publishStatus === "published" ? new Date().toISOString() : undefined,
+      is_archived: false,
     };
 
     try {
       const savedId = await saveBlogPost(blogData, blogId || undefined);
       setIsSaving(false);
-      
+
       if (savedId) {
         onSaved();
       }
@@ -198,41 +250,44 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>{blogId ? "Edit Blog Post" : "Create New Blog Post"}</CardTitle>
+        <CardTitle>
+          {blogId ? "Edit Blog Post" : "Create New Blog Post"}
+        </CardTitle>
       </CardHeader>
-      
+
       <CardContent className="space-y-6">
         {/* Basic Info */}
         <div className="space-y-4">
+          {/* Title */}
           <div>
             <Label htmlFor="title">Title</Label>
-            <Input 
-              id="title" 
+            <Input
+              id="title"
               value={title}
               onChange={handleTitleChange}
               placeholder="Enter blog title"
             />
           </div>
-          
+          {/* Slug */}
           <div>
             <Label htmlFor="slug">Slug</Label>
-            <Input 
-              id="slug" 
+            <Input
+              id="slug"
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
               placeholder="blog-post-slug"
             />
           </div>
-          
+
           {/* Cover Image */}
           <div>
             <Label htmlFor="coverImage">Cover Image</Label>
             <div className="mt-2">
               {coverImage ? (
                 <div className="relative mb-4">
-                  <img 
-                    src={coverImage} 
-                    alt="Cover preview" 
+                  <img
+                    src={coverImage}
+                    alt="Cover preview"
                     className="max-h-60 rounded-md object-cover"
                   />
                   <Button
@@ -264,7 +319,7 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
                   )}
                 </Button>
               )}
-              <Input 
+              <Input
                 id="coverImage"
                 ref={coverImageRef}
                 type="file"
@@ -284,24 +339,20 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
                 value={tagInput}
                 onChange={(e) => setTagInput(e.target.value)}
                 placeholder="Add tags"
-                onKeyDown={(e) => e.key === 'Enter' && handleAddTag()}
+                onKeyDown={(e) => e.key === "Enter" && handleAddTag()}
               />
-              <Button 
-                type="button" 
-                variant="secondary"
-                onClick={handleAddTag}
-              >
+              <Button type="button" variant="secondary" onClick={handleAddTag}>
                 Add
               </Button>
             </div>
             <div className="flex flex-wrap gap-2 mt-2">
               {tags.map((tag) => (
-                <div 
-                  key={tag} 
+                <div
+                  key={tag}
                   className="bg-secondary text-secondary-foreground px-3 py-1 rounded-full flex items-center gap-1"
                 >
                   {tag}
-                  <button 
+                  <button
                     onClick={() => handleRemoveTag(tag)}
                     className="ml-1 text-muted-foreground hover:text-foreground"
                   >
@@ -321,27 +372,26 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
               </SelectTrigger>
               <SelectContent>
                 {categories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                  <SelectItem key={cat} value={cat}>
+                    {cat}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
 
           {/* Rich Text Editor */}
-          <div className="mt-6">
-            <Label>Content</Label>
-            <div className="mt-2 border rounded-md min-h-[300px]">
-              {editor && <TiptapMenuBar editor={editor} />}
-              <div className="p-4 min-h-[300px]">
-                <EditorContent editor={editor} className="min-h-[300px] prose max-w-none" />
-              </div>
+          <div className="border rounded-md flex flex-col h-[500px] overflow-hidden">
+            {editor && <TiptapMenuBar editor={editor} />}
+            <div className="flex-1 overflow-auto p-4 prose max-w-none">
+              <EditorContent editor={editor} />
             </div>
           </div>
         </div>
 
         {/* Publication Status */}
         <div className="flex items-center space-x-2">
-          <Switch 
+          <Switch
             id="published"
             checked={isPublished}
             onCheckedChange={(checked) => {
@@ -356,9 +406,11 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
       </CardContent>
 
       <CardFooter className="flex justify-between">
-        <Button variant="outline" onClick={onCancel}>Cancel</Button>
+        <Button variant="outline" onClick={onCancel}>
+          Cancel
+        </Button>
         <div className="space-x-2">
-          <Button 
+          <Button
             variant="outline"
             onClick={() => handleSave("draft")}
             disabled={isSaving}
@@ -368,10 +420,7 @@ export default function BlogEditor({ blogId, onCancel, onSaved }: BlogEditorProp
             ) : null}
             Save as Draft
           </Button>
-          <Button 
-            onClick={() => handleSave("published")}
-            disabled={isSaving}
-          >
+          <Button onClick={() => handleSave("published")} disabled={isSaving}>
             {isSaving && status === "published" ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             ) : null}

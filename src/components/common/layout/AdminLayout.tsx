@@ -1,21 +1,18 @@
-
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Toaster } from "sonner";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ArrowRight, LogOut, Menu, X } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
 
 import AdminLoginModal from "../../admin/AdminLoginModal";
 import {
   getAdminSession,
   clearAdminSession,
-  AdminSession
+  AdminSession,
 } from "@/utils/admin-auth";
 import ScrollToTop from "../ScrollToTop";
 import { ChatbotWidget } from "../chatbot/ChatbotWidget";
 import { initializeNotificationsFromSupabase } from "@/utils/notification-utils";
 import { useIsMobile } from "@/hooks/use-mobile";
-
 import Dashboard from "@/pages/admin/Dashboard";
 import Analytics from "@/pages/admin/Analytics";
 import AdminManagement from "@/pages/admin/AdminManagement";
@@ -26,6 +23,7 @@ import BlogManager from "@/pages/admin/BlogManager";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import ClientReview from "@/pages/admin/ClientReview";
 
 export default function AdminLayout() {
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
@@ -42,10 +40,10 @@ export default function AdminLayout() {
 
     // Show login modal if no valid session exists
     if (!session) setShowLoginModal(true);
-    
+
     // Initialize notifications from Supabase
     initializeNotificationsFromSupabase();
-    
+
     // Apply dark mode to the admin panel
     document.documentElement.classList.add("dark");
     return () => document.documentElement.classList.remove("dark");
@@ -84,7 +82,7 @@ export default function AdminLayout() {
           <div className="flex items-center gap-4">
             <img src="/logo-white.png" alt="Driplare Logo" width={120} />
           </div>
-          
+
           {isMobile && (
             <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
               <SheetTrigger asChild>
@@ -92,7 +90,10 @@ export default function AdminLayout() {
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[240px] sm:w-[300px] pt-10">
+              <SheetContent
+                side="left"
+                className="w-[240px] sm:w-[300px] pt-10"
+              >
                 <nav className="flex flex-col space-y-2">
                   <Button
                     variant={activeTab === "dashboard" ? "default" : "ghost"}
@@ -101,7 +102,7 @@ export default function AdminLayout() {
                   >
                     Submissions
                   </Button>
-                  
+
                   {adminSession?.permissions.canView && (
                     <Button
                       variant={activeTab === "analytics" ? "default" : "ghost"}
@@ -111,7 +112,7 @@ export default function AdminLayout() {
                       Analytics
                     </Button>
                   )}
-                  
+
                   {canAccessAdminManagement && (
                     <Button
                       variant={activeTab === "admins" ? "default" : "ghost"}
@@ -121,7 +122,7 @@ export default function AdminLayout() {
                       User Management
                     </Button>
                   )}
-                  
+
                   {adminSession?.permissions.canEdit && (
                     <Button
                       variant={activeTab === "blogs" ? "default" : "ghost"}
@@ -131,17 +132,19 @@ export default function AdminLayout() {
                       Blog Manager
                     </Button>
                   )}
-                  
+
                   {adminSession?.permissions.canView && (
                     <Button
-                      variant={activeTab === "notifications" ? "default" : "ghost"}
+                      variant={
+                        activeTab === "notifications" ? "default" : "ghost"
+                      }
                       className="justify-start"
                       onClick={() => handleTabChange("notifications")}
                     >
                       Notifications
                     </Button>
                   )}
-                  
+
                   {adminSession?.permissions.canView && (
                     <Button
                       variant={activeTab === "logs" ? "default" : "ghost"}
@@ -151,7 +154,18 @@ export default function AdminLayout() {
                       Audit Logs
                     </Button>
                   )}
-                  
+                  {adminSession?.permissions.canView && (
+                    <Button
+                      variant={
+                        activeTab === "clientReview" ? "default" : "ghost"
+                      }
+                      className="justify-start"
+                      onClick={() => handleTabChange("clientReview")}
+                    >
+                      Client Reviews
+                    </Button>
+                  )}
+
                   {adminSession?.permissions.canEdit && (
                     <Button
                       variant={activeTab === "settings" ? "default" : "ghost"}
@@ -161,18 +175,8 @@ export default function AdminLayout() {
                       Settings
                     </Button>
                   )}
-                  
+
                   <div className="pt-4 mt-4 border-t">
-                    <Link to="/">
-                      <Button
-                        variant="ghost"
-                        className="flex items-center gap-2 text-green-400 hover:text-green-500 w-full justify-start"
-                      >
-                        Client Area
-                        <ArrowRight className="hover:translate-x-1 transition-transform" size={16} />
-                      </Button>
-                    </Link>
-                    
                     <Button
                       onClick={handleLogout}
                       variant="ghost"
@@ -191,7 +195,7 @@ export default function AdminLayout() {
         {/* Desktop/Tablet Layout */}
         <div className="flex flex-1 overflow-hidden">
           {!isMobile && (
-            <aside className="w-[240px] border-r bg-gray-950 p-4 hidden md:block">
+            <aside className="w-[240px] border-r dark:bg-gray-900 bg-gray-100 p-4 hidden md:block">
               <nav className="flex flex-col space-y-2">
                 <Button
                   variant={activeTab === "dashboard" ? "default" : "ghost"}
@@ -200,7 +204,7 @@ export default function AdminLayout() {
                 >
                   Submissions
                 </Button>
-                
+
                 {adminSession?.permissions.canView && (
                   <Button
                     variant={activeTab === "analytics" ? "default" : "ghost"}
@@ -210,7 +214,7 @@ export default function AdminLayout() {
                     Analytics
                   </Button>
                 )}
-                
+
                 {canAccessAdminManagement && (
                   <Button
                     variant={activeTab === "admins" ? "default" : "ghost"}
@@ -220,7 +224,7 @@ export default function AdminLayout() {
                     User Management
                   </Button>
                 )}
-                
+
                 {adminSession?.permissions.canEdit && (
                   <Button
                     variant={activeTab === "blogs" ? "default" : "ghost"}
@@ -230,17 +234,19 @@ export default function AdminLayout() {
                     Blog Manager
                   </Button>
                 )}
-                
+
                 {adminSession?.permissions.canView && (
                   <Button
-                    variant={activeTab === "notifications" ? "default" : "ghost"}
+                    variant={
+                      activeTab === "notifications" ? "default" : "ghost"
+                    }
                     className="justify-start"
                     onClick={() => setActiveTab("notifications")}
                   >
                     Notifications
                   </Button>
                 )}
-                
+
                 {adminSession?.permissions.canView && (
                   <Button
                     variant={activeTab === "logs" ? "default" : "ghost"}
@@ -250,7 +256,16 @@ export default function AdminLayout() {
                     Audit Logs
                   </Button>
                 )}
-                
+                {adminSession?.permissions.canView && (
+                  <Button
+                    variant={activeTab === "clientReview" ? "default" : "ghost"}
+                    className="justify-start"
+                    onClick={() => setActiveTab("clientReview")}
+                  >
+                    Client Reviews
+                  </Button>
+                )}
+
                 {adminSession?.permissions.canEdit && (
                   <Button
                     variant={activeTab === "settings" ? "default" : "ghost"}
@@ -260,18 +275,8 @@ export default function AdminLayout() {
                     Settings
                   </Button>
                 )}
-                
+
                 <div className="pt-4 mt-6 border-t">
-                  <Link to="/">
-                    <Button
-                      variant="ghost"
-                      className="flex items-center gap-2 text-green-400 hover:text-green-500 w-full justify-start"
-                    >
-                      Client Area
-                      <ArrowRight className="hover:translate-x-1 transition-transform" size={16} />
-                    </Button>
-                  </Link>
-                  
                   <Button
                     onClick={handleLogout}
                     variant="ghost"
@@ -284,7 +289,7 @@ export default function AdminLayout() {
               </nav>
             </aside>
           )}
-          
+
           <main className="flex-1 overflow-y-auto">
             <div className="p-4 md:p-6">
               {activeTab === "dashboard" && <Dashboard />}
@@ -293,6 +298,7 @@ export default function AdminLayout() {
               {activeTab === "blogs" && <BlogManager />}
               {activeTab === "notifications" && <Notifications />}
               {activeTab === "logs" && <AuditLogs />}
+              {activeTab === "clientReview" && <ClientReview />}
               {activeTab === "settings" && <Settings />}
             </div>
           </main>

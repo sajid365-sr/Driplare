@@ -8,11 +8,12 @@ import WebDesign from "./pages/WebDesign";
 import DigitalMarketing from "./pages/DigitalMarketing";
 import AIServices from "./pages/AIServices";
 import Portfolio from "./pages/Portfolio";
-import Insights from "./pages/Insights";
+import Insights from "./pages/insights/Insights";
 import Contact from "./pages/Contact";
 import Layout from "./components/common/layout/Layout";
 import AdminLayout from "./components/common/layout/AdminLayout";
 import AdminPanel from "./pages/admin/AdminPanel";
+import InsightDetail from "./pages/insights/insightsDetails";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/ai-services" element={<AIServices />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/insights" element={<Insights />} />
+            <Route path="/insights/:id" element={<InsightDetail />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Route>

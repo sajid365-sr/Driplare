@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -8,15 +8,9 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import BlogTable from "@/components/admin/blog/BlogTable";
 import BlogEditor from "@/components/admin/blog/BlogEditor";
-import {
-  getBlogPosts,
-  BlogFilters,
-  PaginatedResponse,
-  BlogPost,
-} from "@/utils/blog-utils";
-import { Calendar, Search } from "lucide-react";
+import { PaginatedResponse } from "@/utils/blog-utils";
+import { Search } from "lucide-react";
 import {
   Pagination,
   PaginationContent,
@@ -26,20 +20,16 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { getReviews, Testimonial } from "@/utils/review.utils";
+import ReviewTable from "@/components/admin/review/ReviewTable";
+import CreateClientReview from "@/components/admin/review/CreateClientReview";
 
-export default function BlogManager() {
+export default function ClientReview() {
   const [isCreating, setIsCreating] = useState(false);
-  const [editingBlogId, setEditingBlogId] = useState<string | null>(null);
-  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [editingReviewId, setEditingReviewId] = useState<string | null>(null);
+  const [reviews, setReviews] = useState<Testimonial[]>([]);
   const [paginationData, setPaginationData] = useState<
-    Omit<PaginatedResponse<BlogPost>, "data">
+    Omit<PaginatedResponse<Testimonial>, "data">
   >({
     count: 0,
     page: 1,
@@ -47,23 +37,15 @@ export default function BlogManager() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filters, setFilters] = useState<BlogFilters>({
-    status: null,
-    category: null,
-  });
 
-  const fetchBlogs = async () => {
+  const fetchReviews = async () => {
     setIsLoading(true);
     try {
-      const { data, count, page, pageSize } = await getBlogPosts(
+      const { data, count, page, pageSize } = await getReviews(
         paginationData.page,
-        paginationData.pageSize,
-        {
-          ...filters,
-          searchQuery: searchQuery || null,
-        }
+        paginationData.pageSize
       );
-      setBlogs(data);
+      setReviews(data);
       setPaginationData({ count, page, pageSize });
     } catch (error) {
       console.error(error);
@@ -73,32 +55,24 @@ export default function BlogManager() {
   };
 
   useEffect(() => {
-    fetchBlogs();
-  }, [paginationData.page, filters]);
+    fetchReviews();
+  }, [paginationData.page]);
 
   const handlePageChange = (page: number) =>
     setPaginationData((p) => ({ ...p, page }));
 
   const handleSearch = () => {
     setPaginationData((p) => ({ ...p, page: 1 }));
-    fetchBlogs();
+    fetchReviews();
   };
 
-  const handleFilterChange = (key: keyof BlogFilters, value: string) => {
-    setFilters((f) => ({
-      ...f,
-      [key]: value === "all" ? null : value,
-    }));
-    setPaginationData((p) => ({ ...p, page: 1 }));
-  };
-
-  const handleBlogActionComplete = () => {
+  const handleReviewActionComplete = () => {
     setIsCreating(false);
-    setEditingBlogId(null);
-    fetchBlogs();
+    setEditingReviewId(null);
+    fetchReviews();
   };
-  const handleEditBlog = (id: string) => {
-    setEditingBlogId(id);
+  const handleEditReviews = (id: string) => {
+    setEditingReviewId(id);
     setIsCreating(true);
   };
 
@@ -159,24 +133,20 @@ export default function BlogManager() {
   return (
     <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Blog Management</h1>
+        <h1 className="text-3xl font-bold">Review Management</h1>
         {!isCreating && (
-          <Button onClick={() => setIsCreating(true)}>Create New Blog</Button>
+          <Button onClick={() => setIsCreating(true)}>Create New Review</Button>
         )}
       </div>
 
       {isCreating ? (
-        <BlogEditor
-          blogId={editingBlogId}
-          onCancel={() => setIsCreating(false)}
-          onSaved={handleBlogActionComplete}
-        />
+        <CreateClientReview reviewId={editingReviewId} />
       ) : (
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle>Blog Posts</CardTitle>
+            <CardTitle>Reviews</CardTitle>
             <CardDescription>
-              Manage blog posts with search, filters, and pagination
+              Manage reviews with search and pagination
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -195,49 +165,13 @@ export default function BlogManager() {
                 </div>
                 <Button onClick={handleSearch}>Search</Button>
               </div>
-
-              {/* Filters */}
-              <div className="flex gap-2 md:w-2/3">
-                <Select onValueChange={(v) => handleFilterChange("status", v)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Status</SelectItem>
-                    <SelectItem value="published">Published</SelectItem>
-                    <SelectItem value="draft">Draft</SelectItem>
-                    <SelectItem value="archived">Archived</SelectItem>
-                  </SelectContent>
-                </Select>
-
-                <Select
-                  onValueChange={(v) => handleFilterChange("category", v)}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Categories</SelectItem>
-                    <SelectItem value="technology">Technology</SelectItem>
-                    <SelectItem value="design">Design</SelectItem>
-                    <SelectItem value="marketing">Marketing</SelectItem>
-                    <SelectItem value="business">Business</SelectItem>
-                  </SelectContent>
-                </Select>
-
-                <Button variant="outline" className="flex gap-2">
-                  <Calendar className="h-4 w-4" />
-                  Date
-                </Button>
-              </div>
             </div>
 
-            <BlogTable
-              blogs={blogs}
+            <ReviewTable
+              reviews={reviews}
               isLoading={isLoading}
-              onEdit={handleEditBlog}
-              onDelete={handleBlogActionComplete}
-              onArchive={handleBlogActionComplete}
+              onEdit={handleEditReviews}
+              onDelete={handleReviewActionComplete}
             />
 
             {totalPages > 1 && (

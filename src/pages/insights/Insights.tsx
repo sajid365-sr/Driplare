@@ -1,14 +1,12 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Navbar } from "@/components/common/navigation/Navbar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Search, Loader2 } from "lucide-react";
-import AnimatedGridBg from "@/components/common/AnimatedGridBg";
 import { BlogPost, getBlogPosts } from "@/utils/blog-utils";
 import { formatDate } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const Insights = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,16 +21,16 @@ const Insights = () => {
       setIsLoading(true);
       try {
         const response = await getBlogPosts(1, 20, {
-          status: 'published'
+          status: "published",
         });
-        
+
         const blogs = response.data;
-        
+
         if (blogs.length > 0) {
           // Set the most recent post as featured
           const featured = blogs[0];
           setFeaturedPost(featured);
-          
+
           // Use the rest for the grid
           setDisplayedInsights(blogs.slice(1));
         }
@@ -42,17 +40,17 @@ const Insights = () => {
         setIsLoading(false);
       }
     };
-    
+
     fetchBlogs();
   }, []);
 
   // Handle search
   useEffect(() => {
     if (!featuredPost) return;
-    
+
     if (searchTerm === "") {
-      setDisplayedInsights(prev => 
-        prev.filter(post => post.id !== featuredPost.id)
+      setDisplayedInsights((prev) =>
+        prev.filter((post) => post.id !== featuredPost.id)
       );
     } else {
       const filtered = displayedInsights.filter(
@@ -68,7 +66,7 @@ const Insights = () => {
   // Typewriter effect for featured post
   useEffect(() => {
     if (!featuredPost) return;
-    
+
     const text = featuredPost.title;
 
     if (typingIndex < text.length) {
@@ -87,8 +85,6 @@ const Insights = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <AnimatedGridBg />
-      <Navbar />
       <main className="flex-1 pt-32 pb-16">
         <div className="container">
           <motion.div
@@ -133,25 +129,36 @@ const Insights = () => {
                   <div className="relative overflow-hidden rounded-xl">
                     <div className="absolute inset-0 bg-gradient-to-t from-black to-black/40">
                       <img
-                        src={featuredPost.cover_image || "https://images.unsplash.com/photo-1677442135136-760c813dfc5c?q=80&w=2232&auto=format&fit=crop"}
+                        src={
+                          featuredPost.cover_image ||
+                          "https://images.unsplash.com/photo-1677442135136-760c813dfc5c?q=80&w=2232&auto=format&fit=crop"
+                        }
                         alt={featuredPost.title}
-                        className="w-full h-full object-cover mix-blend-overlay opacity-80"
+                        className="w-full h-full object-cover mix-blend-screen opacity-30"
                       />
                     </div>
                     <div className="relative p-8 md:p-12 lg:p-16 flex flex-col h-full min-h-[400px] justify-end">
                       <span className="text-primary font-medium mb-3">
-                        {featuredPost.category} • {formatDate(featuredPost.published_at || featuredPost.created_at)}
+                        {featuredPost.category} •{" "}
+                        {formatDate(
+                          featuredPost.published_at || featuredPost.created_at
+                        )}
                       </span>
                       <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 h-[120px] md:h-[80px]">
                         {typingText}
                         <span className="animate-pulse">|</span>
                       </h2>
                       <p className="text-white/80 mb-6 max-w-2xl">
-                        {featuredPost.content.replace(/<[^>]+>/g, '').substring(0, 200)}...
+                        {featuredPost.content
+                          .replace(/<[^>]+>/g, "")
+                          .substring(0, 200)}
+                        ...
                       </p>
-                      <Button className="self-start bg-primary hover:bg-primary/90">
-                        Read Article <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                      <Link to={`/insights/${featuredPost.id}`}>
+                        <Button className="self-start bg-primary hover:bg-primary/90">
+                          Read Article <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </motion.div>
@@ -170,27 +177,37 @@ const Insights = () => {
                     <Card className="overflow-hidden h-full hover:shadow-lg transition-shadow cursor-pointer border-0 bg-card">
                       <div className="aspect-video overflow-hidden">
                         <img
-                          src={post.cover_image || "https://images.unsplash.com/photo-1677442135136-760c813dfc5c?q=80&w=2232&auto=format&fit=crop"}
+                          src={
+                            post.cover_image ||
+                            "https://images.unsplash.com/photo-1677442135136-760c813dfc5c?q=80&w=2232&auto=format&fit=crop"
+                          }
                           alt={post.title}
                           className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                         />
                       </div>
                       <CardContent className="p-6">
                         <span className="text-primary text-sm font-medium">
-                          {post.category} • {formatDate(post.published_at || post.created_at)}
+                          {post.category} •{" "}
+                          {formatDate(post.published_at || post.created_at)}
                         </span>
                         <h3 className="text-xl font-bold mt-2 mb-3">
                           {post.title}
                         </h3>
                         <p className="text-muted-foreground mb-4">
-                          {post.content.replace(/<[^>]+>/g, '').substring(0, 100)}...
+                          {post.content
+                            .replace(/<[^>]+>/g, "")
+                            .substring(0, 100)}
+                          ...
                         </p>
-                        <Button
-                          variant="ghost"
-                          className="p-0 hover:bg-transparent text-primary hover:text-primary/80"
-                        >
-                          Read More <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
+
+                        <Link to={`/insights/${post.id}`}>
+                          <Button
+                            variant="ghost"
+                            className="p-0 hover:bg-transparent text-primary hover:text-primary/80"
+                          >
+                            Read More <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        </Link>
                       </CardContent>
                     </Card>
                   </motion.div>

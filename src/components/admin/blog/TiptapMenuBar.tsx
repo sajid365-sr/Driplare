@@ -1,26 +1,46 @@
+import { Editor } from "@tiptap/react";
+import {
+  Bold,
+  Italic,
+  Underline,
+  List,
+  ListOrdered,
+  Heading1,
+  Heading2,
+  Image as ImageIcon,
+  Link as LinkIcon,
+  Code,
+  Quote,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  Undo,
+  Redo,
+  Heading3,
+  LetterText,
+  Highlighter,
+  RemoveFormatting,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { uploadEditorImage } from "@/utils/blog-utils";
+import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
 
-import React from 'react';
-import { Editor } from '@tiptap/react';
-import { 
-  Bold, Italic, Underline, List, ListOrdered, Heading1, Heading2, 
-  Image as ImageIcon, Link as LinkIcon, Code, Quote, AlignLeft, 
-  AlignCenter, AlignRight, Undo, Redo
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { uploadEditorImage } from '@/utils/blog-utils';
-import { Separator } from '@/components/ui/separator';
+// at top of BlogEditor.tsx
 
 interface TiptapMenuBarProps {
   editor: Editor;
 }
 
 const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
+  /* Add Image */
+
   const addImage = async () => {
     if (!editor) return;
-    
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
+
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
     input.onchange = async () => {
       if (input.files?.length) {
         const file = input.files[0];
@@ -32,35 +52,42 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
             editor.chain().focus().setImage({ src: imageUrl }).run();
           }
         } catch (error) {
-          console.error('Image upload error:', error);
+          console.error("Image upload error:", error);
         }
       }
     };
     input.click();
   };
 
+  /* Set Link */
   const setLink = () => {
     if (!editor) return;
-    
-    const url = window.prompt('URL');
-    
+
+    const url = window.prompt("URL");
+
     // Cancelled
     if (url === null) {
       return;
     }
-    
+
     // Empty
-    if (url === '') {
-      editor.chain().focus().extendMarkRange('link').unsetLink().run();
+    if (url === "") {
+      editor.chain().focus().extendMarkRange("link").unsetLink().run();
       return;
     }
-    
+
     // Add https:// if no protocol is specified
-    const httpUrl = url.startsWith('http://') || url.startsWith('https://') 
-      ? url 
-      : `https://${url}`;
-      
-    editor.chain().focus().extendMarkRange('link').setLink({ href: httpUrl }).run();
+    const httpUrl =
+      url.startsWith("http://") || url.startsWith("https://")
+        ? url
+        : `https://${url}`;
+
+    editor
+      .chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({ href: httpUrl })
+      .run();
   };
 
   if (!editor) {
@@ -73,126 +100,175 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
         <Button
           variant="ghost"
           size="icon"
+          onClick={() => editor.chain().focus().setParagraph().run()}
+          className={editor.isActive("paragraph") ? "bg-muted" : ""}
+          type="button"
+          title="Paragraph"
+        >
+          <LetterText className="h-4 w-4" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={editor.isActive('bold') ? 'bg-muted' : ''}
+          className={editor.isActive("bold") ? "bg-muted" : ""}
           type="button"
           title="Bold"
         >
           <Bold className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="icon"
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={editor.isActive('italic') ? 'bg-muted' : ''}
+          className={editor.isActive("italic") ? "bg-muted" : ""}
           type="button"
           title="Italic"
         >
           <Italic className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="icon"
           onClick={() => editor.chain().focus().toggleUnderline().run()}
-          className={editor.isActive('underline') ? 'bg-muted' : ''}
+          className={editor.isActive("underline") ? "bg-muted" : ""}
           type="button"
           title="Underline"
         >
           <Underline className="h-4 w-4" />
         </Button>
+
+        <Button variant="ghost" size="icon" type="button" title="color">
+          <Input
+            type="color"
+            value={editor.getAttributes("textStyle").color || "#000000"}
+            onInput={(e) => {
+              const color = (e.target as HTMLInputElement).value;
+              editor.chain().focus().setColor(color).run();
+            }}
+          />
+        </Button>
       </div>
 
       <Separator orientation="vertical" className="h-6 mx-1" />
-      
+
       <div className="flex items-center space-x-1">
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-          className={editor.isActive('heading', { level: 1 }) ? 'bg-muted' : ''}
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 1 }).run()
+          }
+          className={editor.isActive("heading", { level: 1 }) ? "bg-muted" : ""}
           type="button"
           title="Heading 1"
         >
           <Heading1 className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className={editor.isActive('heading', { level: 2 }) ? 'bg-muted' : ''}
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 2 }).run()
+          }
+          className={editor.isActive("heading", { level: 2 }) ? "bg-muted" : ""}
           type="button"
           title="Heading 2"
         >
           <Heading2 className="h-4 w-4" />
         </Button>
-        
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 3 }).run()
+          }
+          className={editor.isActive("heading", { level: 3 }) ? "bg-muted" : ""}
+          type="button"
+          title="Heading 3"
+        >
+          <Heading3 className="h-4 w-4" />
+        </Button>
+
         <Button
           variant="ghost"
           size="icon"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={editor.isActive('bulletList') ? 'bg-muted' : ''}
+          className={editor.isActive("bulletList") ? "bg-muted" : ""}
           type="button"
           title="Bullet List"
         >
           <List className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="icon"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={editor.isActive('orderedList') ? 'bg-muted' : ''}
+          className={editor.isActive("orderedList") ? "bg-muted" : ""}
           type="button"
           title="Numbered List"
         >
           <ListOrdered className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="icon"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={editor.isActive('blockquote') ? 'bg-muted' : ''}
+          className={editor.isActive("blockquote") ? "bg-muted" : ""}
           type="button"
           title="Quote"
         >
           <Quote className="h-4 w-4" />
         </Button>
       </div>
-      
+
       <Separator orientation="vertical" className="h-6 mx-1" />
-      
+
       <div className="flex items-center space-x-1">
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => editor.chain().focus().setTextAlign('left').run()}
-          className={editor.isActive({ textAlign: 'left' }) ? 'bg-muted' : ''}
+          onClick={() => editor.chain().focus().toggleHighlight().run()}
+          className={
+            editor.isActive({ textAlign: "highlight" }) ? "bg-muted" : ""
+          }
+          type="button"
+          title="Highlight"
+        >
+          <Highlighter className="h-4 w-4" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => editor.chain().focus().setTextAlign("left").run()}
+          className={editor.isActive({ textAlign: "left" }) ? "bg-muted" : ""}
           type="button"
           title="Align Left"
         >
           <AlignLeft className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => editor.chain().focus().setTextAlign('center').run()}
-          className={editor.isActive({ textAlign: 'center' }) ? 'bg-muted' : ''}
+          onClick={() => editor.chain().focus().setTextAlign("center").run()}
+          className={editor.isActive({ textAlign: "center" }) ? "bg-muted" : ""}
           type="button"
           title="Align Center"
         >
           <AlignCenter className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => editor.chain().focus().setTextAlign('right').run()}
-          className={editor.isActive({ textAlign: 'right' }) ? 'bg-muted' : ''}
+          onClick={() => editor.chain().focus().setTextAlign("right").run()}
+          className={editor.isActive({ textAlign: "right" }) ? "bg-muted" : ""}
           type="button"
           title="Align Right"
         >
@@ -201,7 +277,7 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
       </div>
 
       <Separator orientation="vertical" className="h-6 mx-1" />
-      
+
       <div className="flex items-center space-x-1">
         <Button
           variant="ghost"
@@ -212,32 +288,32 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
         >
           <ImageIcon className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="icon"
           onClick={setLink}
-          className={editor.isActive('link') ? 'bg-muted' : ''}
+          className={editor.isActive("link") ? "bg-muted" : ""}
           type="button"
           title="Insert Link"
         >
           <LinkIcon className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="icon"
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          className={editor.isActive('codeBlock') ? 'bg-muted' : ''}
+          className={editor.isActive("codeBlock") ? "bg-muted" : ""}
           type="button"
           title="Code Block"
         >
           <Code className="h-4 w-4" />
         </Button>
       </div>
-      
+
       <Separator orientation="vertical" className="h-6 mx-1" />
-      
+
       <div className="flex items-center space-x-1">
         <Button
           variant="ghost"
@@ -258,6 +334,16 @@ const TiptapMenuBar = ({ editor }: TiptapMenuBarProps) => {
           type="button"
         >
           <Redo className="h-4 w-4" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => editor.chain().focus().clearNodes().run()}
+          disabled={!editor.can().redo()}
+          title="Clear Formatting"
+          type="button"
+        >
+          <RemoveFormatting className="h-4 w-4" />
         </Button>
       </div>
     </div>

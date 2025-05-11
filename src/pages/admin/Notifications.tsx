@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   Table,
@@ -21,17 +20,26 @@ import {
 import { Bell, FileText, MessageSquare, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
-import { 
-  getNotifications, 
-  createNotification, 
-  markNotificationsAsRead, 
+import {
+  getNotifications,
+  createNotification,
+  markNotificationsAsRead,
   deleteNotifications,
-  Notification
+  Notification,
 } from "@/utils/notification-utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [selectedNotifications, setSelectedNotifications] = useState<string[]>([]);
+  const [selectedNotifications, setSelectedNotifications] = useState<string[]>(
+    []
+  );
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [newNotification, setNewNotification] = useState({
@@ -55,9 +63,12 @@ export default function Notifications() {
     try {
       const fetchedNotifications = await getNotifications();
       setNotifications(fetchedNotifications);
-      
+
       // Also update localStorage for compatibility with existing code
-      localStorage.setItem("driplare_notifications", JSON.stringify(fetchedNotifications));
+      localStorage.setItem(
+        "driplare_notifications",
+        JSON.stringify(fetchedNotifications)
+      );
     } catch (error) {
       console.error("Error fetching notifications:", error);
       toast.error("Failed to load notifications");
@@ -106,10 +117,10 @@ export default function Notifications() {
   // Mark notifications as read
   const handleMarkAsRead = async () => {
     if (!selectedNotifications.length) return;
-    
+
     try {
       const success = await markNotificationsAsRead(selectedNotifications);
-      
+
       if (success) {
         // Update local state
         const updatedNotifications = notifications.map((notification) =>
@@ -117,9 +128,12 @@ export default function Notifications() {
             ? { ...notification, read: true }
             : notification
         );
-        
+
         setNotifications(updatedNotifications);
-        localStorage.setItem("driplare_notifications", JSON.stringify(updatedNotifications));
+        localStorage.setItem(
+          "driplare_notifications",
+          JSON.stringify(updatedNotifications)
+        );
         setSelectedNotifications([]);
         toast.success("Notifications marked as read");
       }
@@ -132,18 +146,21 @@ export default function Notifications() {
   // Delete selected notifications
   const handleDeleteSelected = async () => {
     if (!selectedNotifications.length) return;
-    
+
     try {
       const success = await deleteNotifications(selectedNotifications);
-      
+
       if (success) {
         // Update local state
         const updatedNotifications = notifications.filter(
           (notification) => !selectedNotifications.includes(notification.id)
         );
-        
+
         setNotifications(updatedNotifications);
-        localStorage.setItem("driplare_notifications", JSON.stringify(updatedNotifications));
+        localStorage.setItem(
+          "driplare_notifications",
+          JSON.stringify(updatedNotifications)
+        );
         setSelectedNotifications([]);
       }
     } catch (error) {
@@ -161,7 +178,7 @@ export default function Notifications() {
     }
 
     setIsSubmitting(true);
-    
+
     try {
       const success = await createNotification(
         newNotification.title,
@@ -169,11 +186,11 @@ export default function Notifications() {
         newNotification.type,
         newNotification.recipient
       );
-      
+
       if (success) {
         // Refresh notifications list
         fetchNotifications();
-        
+
         // Reset form
         setNewNotification({
           title: "",
@@ -181,7 +198,7 @@ export default function Notifications() {
           type: "system",
           recipient: "all",
         });
-        
+
         toast.success("Notification created");
       }
     } catch (error) {
@@ -208,8 +225,8 @@ export default function Notifications() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={fetchNotifications}
             disabled={isLoading}
           >
@@ -229,19 +246,20 @@ export default function Notifications() {
                 ? "Deselect All"
                 : "Select All"}
             </Button>
-
-            <select
-              title="options"
-              className="px-2 py-1 rounded border border-border bg-background"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            >
-              <option value="all">All</option>
-              <option value="unread">Unread</option>
-              <option value="chat">Chat</option>
-              <option value="submission">Submission</option>
-              <option value="system">System</option>
-            </select>
+            <div className="flex-1">
+              <Select onValueChange={setFilter} value={filter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select your role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All</SelectItem>
+                  <SelectItem value="unread">Unread</SelectItem>
+                  <SelectItem value="chat">Chat</SelectItem>
+                  <SelectItem value="submission">Submission</SelectItem>
+                  <SelectItem value="system">System</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           <div className="flex space-x-2">
             <Button
@@ -368,13 +386,11 @@ export default function Notifications() {
             </div>
 
             <div className="flex justify-end">
-              <Button 
-                type="submit"
-                disabled={isSubmitting}
-              >
+              <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creating...
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
+                    Creating...
                   </>
                 ) : (
                   "Create Notification"
@@ -442,7 +458,7 @@ export default function Notifications() {
                   className={notification.read ? "" : "bg-secondary/20"}
                 >
                   <TableCell className="w-[50px]">
-                    <input
+                    <Input
                       type="checkbox"
                       checked={selectedNotifications.includes(notification.id)}
                       onChange={() => toggleSelect(notification.id)}
