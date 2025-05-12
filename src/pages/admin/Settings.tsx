@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -12,9 +14,11 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Eye, EyeOff, Key, Upload } from "lucide-react";
+import { Eye, EyeOff, Key, Upload, Trash2, RotateCcw } from "lucide-react";
 import { useGeminiAPI } from "@/hooks/use-gemini-api";
 import { Textarea } from "@/components/ui/textarea";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { format } from "date-fns";
 
 export default function Settings() {
   const [darkModeEnabled, setDarkModeEnabled] = useState(
@@ -30,6 +34,8 @@ export default function Settings() {
     isTestingConnection,
     syncContent,
     isSyncing,
+    syncLogs,
+    clearSyncLogs
   } = useGeminiAPI();
 
   // Content sync settings
@@ -74,10 +80,17 @@ export default function Settings() {
       };
 
       await syncContent(contentData);
-      toast.success("Content successfully synced with Gemini");
     } catch (error) {
-      toast.error("Failed to sync content");
+      console.error("Sync error caught:", error);
+      // Error is already handled in the hook
     }
+  };
+
+  // Format log status for display
+  const getStatusBadgeClass = (status: string) => {
+    return status === 'success' 
+      ? 'bg-green-500/20 text-green-500 px-2 py-0.5 rounded text-xs font-medium' 
+      : 'bg-red-500/20 text-red-500 px-2 py-0.5 rounded text-xs font-medium';
   };
 
   return (
@@ -141,6 +154,7 @@ export default function Settings() {
               <TabsList>
                 <TabsTrigger value="api-key">API Key</TabsTrigger>
                 <TabsTrigger value="content-sync">Content Sync</TabsTrigger>
+                <TabsTrigger value="logs">Activity Logs</TabsTrigger>
               </TabsList>
 
               {/* API Key Tab */}
@@ -179,6 +193,20 @@ export default function Settings() {
                     Your API key is stored securely and used to connect with
                     Google Gemini services.
                   </p>
+                </div>
+                <div className="bg-muted/40 p-4 rounded-md border border-border/50 mt-4">
+                  <h4 className="font-medium mb-2">About Gemini API</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Google Gemini is an advanced AI model that powers our chatbot features. 
+                    When connected, it provides more natural, accurate responses to customer 
+                    queries. To get an API key:
+                  </p>
+                  <ol className="list-decimal list-inside text-sm text-muted-foreground mt-2 space-y-1">
+                    <li>Go to the <a href="https://ai.google.dev/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Google AI Studio</a></li>
+                    <li>Sign in with your Google account</li>
+                    <li>Navigate to the API keys section</li>
+                    <li>Create a new API key and paste it above</li>
+                  </ol>
                 </div>
               </TabsContent>
 
@@ -237,6 +265,66 @@ export default function Settings() {
                   <Upload size={16} className="mr-1" />
                   {isSyncing ? "Syncing Content..." : "Update Gemini Knowledge"}
                 </Button>
+              </TabsContent>
+              
+              {/* Logs Tab */}
+              <TabsContent value="logs" className="space-y-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-medium">Gemini Activity Logs</h3>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={clearSyncLogs}
+                    className="flex items-center gap-1"
+                  >
+                    <Trash2 size={14} />
+                    <span>Clear Logs</span>
+                  </Button>
+                </div>
+                
+                <div className="border rounded-md">
+                  <ScrollArea className="h-[300px]">
+                    {syncLogs.length > 0 ? (
+                      <div className="p-2">
+                        {syncLogs.slice().reverse().map((log, index) => (
+                          <div key={index} className="border-b last:border-b-0 p-3">
+                            <div className="flex items-center justify-between mb-1">
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs text-muted-foreground">
+                                  {format(new Date(log.timestamp), 'MMM d, yyyy HH:mm:ss')}
+                                </span>
+                                <span className={getStatusBadgeClass(log.status)}>
+                                  {log.status.toUpperCase()}
+                                </span>
+                              </div>
+                              <span className="text-xs font-medium">
+                                {log.type === 'connection_test' ? 'API Test' : 
+                                 log.type === 'content_sync' ? 'Content Sync' : 'Chat'}
+                              </span>
+                            </div>
+                            
+                            {log.content && (
+                              <p className="text-sm truncate">{log.content}</p>
+                            )}
+                            
+                            {log.error && (
+                              <p className="text-sm text-red-500 truncate">{log.error}</p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center h-full p-4 text-center">
+                        <RotateCcw size={24} className="text-muted-foreground mb-2" />
+                        <p className="text-muted-foreground">No activity logs yet</p>
+                      </div>
+                    )}
+                  </ScrollArea>
+                </div>
+                
+                <p className="text-xs text-muted-foreground mt-2">
+                  Logs show recent Gemini API activity including connection tests, content syncs, and chat interactions.
+                </p>
               </TabsContent>
             </Tabs>
           </CardContent>

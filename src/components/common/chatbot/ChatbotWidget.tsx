@@ -1,8 +1,10 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { BotMessageSquare, MessageSquareText, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useGeminiAPI } from "@/hooks/use-gemini-api";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const ChatbotWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,10 +19,16 @@ export const ChatbotWidget = () => {
   ]);
   const [userMessage, setUserMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const messageEndRef = useRef<HTMLDivElement>(null);
 
   // Get Gemini API key
   const { apiKey } = useGeminiAPI();
   const useGemini = Boolean(apiKey);
+
+  // Auto-scroll to the latest message
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isTyping]);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -123,32 +131,19 @@ export const ChatbotWidget = () => {
     prevMessages: { text: string; isBot: boolean }[]
   ): Promise<string> => {
     try {
-      // In a real implementation, this would call the Gemini API
-      // For now, we'll simulate a response with a timeout
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Prepare conversation history
+      const conversationHistory = prevMessages.map(msg => ({
+        role: msg.isBot ? "model" : "user",
+        parts: [{ text: msg.text }]
+      })).slice(-5); // Only use the last 5 messages for context
 
-      // Context-aware response simulation based on the query
-      if (query.toLowerCase().includes("web design")) {
-        return "Our web design services include responsive design, UX/UI optimization, and custom development. Would you like to see some examples of our work?";
-      } else if (query.toLowerCase().includes("marketing")) {
-        return "Driplare offers comprehensive digital marketing services including SEO, SEM, social media management, and content marketing. What specific marketing challenge are you facing?";
-      } else if (
-        query.toLowerCase().includes("ai") ||
-        query.toLowerCase().includes("artificial intelligence")
-      ) {
-        return "Our AI services include chatbot development, natural language processing solutions, and AI integration with your existing systems. We specialize in making AI accessible and practical for businesses of all sizes.";
-      } else if (
-        query.toLowerCase().includes("price") ||
-        query.toLowerCase().includes("cost") ||
-        query.toLowerCase().includes("quote")
-      ) {
-        return "Our pricing varies based on project scope and requirements. I'd be happy to collect your information so our team can prepare a custom quote for your specific needs.";
-      } else {
-        return "Thanks for your message. I can help with information about our web design, digital marketing, and AI services. Could you tell me more about what you're looking for?";
-      }
+      // Add the current query
+      conversationHistory.push({
+        role: "user",
+        parts: [{ text: query }]
+      });
 
-      // In a real implementation:
-      /*
+      // Call Gemini API
       const response = await fetch('https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent', {
         method: 'POST',
         headers: {
@@ -158,24 +153,31 @@ export const ChatbotWidget = () => {
         body: JSON.stringify({
           contents: [
             {
-              role: 'user',
-              parts: [{ text: query }]
-            }
+              role: "system",
+              parts: [{ text: "You are a helpful assistant for Driplare, a company that offers web design, digital marketing, and AI solutions. Be concise, professional, and helpful." }]
+            },
+            ...conversationHistory
           ],
-          safetySettings: [
-            {
-              category: 'HARM_CATEGORY_HATE_SPEECH',
-              threshold: 'BLOCK_MEDIUM_AND_ABOVE'
-            }
-          ]
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 800
+          }
         })
       });
-      
-      if (!response.ok) throw new Error('Gemini API call failed');
+
+      if (!response.ok) {
+        console.error("Gemini API error status:", response.status);
+        throw new Error('Failed to get response from Gemini');
+      }
       
       const data = await response.json();
-      return data.candidates[0].content.parts[0].text;
-      */
+      console.log("Gemini response:", data);
+      
+      if (data.candidates && data.candidates[0]?.content?.parts && data.candidates[0].content.parts[0]?.text) {
+        return data.candidates[0].content.parts[0].text;
+      } else {
+        throw new Error('Invalid response format from Gemini');
+      }
     } catch (error) {
       console.error("Gemini API error:", error);
       // Fallback to default response
@@ -322,38 +324,41 @@ export const ChatbotWidget = () => {
                 </div>
               ) : (
                 <div className="flex-1 p-4 flex flex-col overflow-hidden">
-                  <div className="overflow-y-auto flex-grow mb-4 space-y-3">
-                    {messages.map((msg, index) => (
-                      <div
-                        key={index}
-                        className={`${
-                          msg.isBot
-                            ? "bg-muted/30 text-foreground rounded-lg p-3 inline-block max-w-[80%]"
-                            : "bg-[#F88220] text-white rounded-lg p-3 inline-block ml-auto max-w-[80%]"
-                        }`}
-                      >
-                        <p className="text-sm">{msg.text}</p>
-                      </div>
-                    ))}
-                    {isTyping && (
-                      <div className="bg-muted/30 text-foreground rounded-lg p-3 inline-block max-w-[80%]">
-                        <div className="flex space-x-1">
-                          <div
-                            className="w-2 h-2 bg-primary rounded-full animate-bounce"
-                            style={{ animationDelay: "0ms" }}
-                          ></div>
-                          <div
-                            className="w-2 h-2 bg-primary rounded-full animate-bounce"
-                            style={{ animationDelay: "150ms" }}
-                          ></div>
-                          <div
-                            className="w-2 h-2 bg-primary rounded-full animate-bounce"
-                            style={{ animationDelay: "300ms" }}
-                          ></div>
+                  <ScrollArea className="overflow-y-auto flex-grow mb-4 pr-2">
+                    <div className="space-y-3">
+                      {messages.map((msg, index) => (
+                        <div
+                          key={index}
+                          className={`${
+                            msg.isBot
+                              ? "bg-muted/30 text-foreground rounded-lg p-3 inline-block max-w-[80%]"
+                              : "bg-[#F88220] text-white rounded-lg p-3 inline-block ml-auto max-w-[80%]"
+                          }`}
+                        >
+                          <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
                         </div>
-                      </div>
-                    )}
-                  </div>
+                      ))}
+                      {isTyping && (
+                        <div className="bg-muted/30 text-foreground rounded-lg p-3 inline-block max-w-[80%]">
+                          <div className="flex space-x-1">
+                            <div
+                              className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                              style={{ animationDelay: "0ms" }}
+                            ></div>
+                            <div
+                              className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                              style={{ animationDelay: "150ms" }}
+                            ></div>
+                            <div
+                              className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                              style={{ animationDelay: "300ms" }}
+                            ></div>
+                          </div>
+                        </div>
+                      )}
+                      <div ref={messageEndRef} />
+                    </div>
+                  </ScrollArea>
 
                   {messages.length === 1 && (
                     <div className="space-y-2 mb-4">
