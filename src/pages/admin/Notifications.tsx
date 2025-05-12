@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import {
   Table,
@@ -13,16 +14,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Bell, FileText, MessageSquare, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import {
   getNotifications,
-  createNotification,
   markNotificationsAsRead,
   deleteNotifications,
   Notification,
@@ -34,6 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import CreateNotification from "@/components/admin/notifications/CreateNotification";
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -42,15 +40,9 @@ export default function Notifications() {
   );
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
-  const [newNotification, setNewNotification] = useState({
-    title: "",
-    message: "",
-    type: "system" as "chat" | "submission" | "system",
-    recipient: "all",
-  });
   const [activeTab, setActiveTab] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
 
   // Load notifications on component mount
   useEffect(() => {
@@ -168,45 +160,9 @@ export default function Notifications() {
     }
   };
 
-  // Create a new notification
-  const handleCreateNotification = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!newNotification.title || !newNotification.message) {
-      toast.error("Please fill out all required fields");
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const success = await createNotification(
-        newNotification.title,
-        newNotification.message,
-        newNotification.type,
-        newNotification.recipient
-      );
-
-      if (success) {
-        // Refresh notifications list
-        fetchNotifications();
-
-        // Reset form
-        setNewNotification({
-          title: "",
-          message: "",
-          type: "system",
-          recipient: "all",
-        });
-
-        toast.success("Notification created");
-      }
-    } catch (error) {
-      console.error("Error creating notification:", error);
-      toast.error("Failed to create notification");
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleNotificationCreated = () => {
+    fetchNotifications();
+    setIsCreating(false);
   };
 
   return (
@@ -238,168 +194,83 @@ export default function Notifications() {
         </div>
       </div>
 
-      <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center my-5 space-x-2">
-            <Button variant="outline" size="sm" onClick={selectAll}>
-              {selectedNotifications.length === filteredNotifications.length
-                ? "Deselect All"
-                : "Select All"}
-            </Button>
-            <div className="flex-1">
-              <Select onValueChange={setFilter} value={filter}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select your role" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All</SelectItem>
-                  <SelectItem value="unread">Unread</SelectItem>
-                  <SelectItem value="chat">Chat</SelectItem>
-                  <SelectItem value="submission">Submission</SelectItem>
-                  <SelectItem value="system">System</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <div className="flex space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleMarkAsRead}
-              disabled={selectedNotifications.length === 0}
-            >
-              Mark Read
-            </Button>
-            <Button
-              variant="destructive"
-              size="sm"
-              onClick={handleDeleteSelected}
-              disabled={selectedNotifications.length === 0}
-            >
-              Delete
-            </Button>
-          </div>
+      {!isCreating ? (
+        <div className="flex justify-end">
+          <Button onClick={() => setIsCreating(true)}>Create Notification</Button>
         </div>
+      ) : (
+        <div className="flex justify-end">
+          <Button variant="outline" onClick={() => setIsCreating(false)}>
+            Cancel
+          </Button>
+        </div>
+      )}
 
-        <TabsContent value="all" className="space-y-6">
-          <NotificationsTable />
-        </TabsContent>
-
-        <TabsContent value="leads" className="space-y-6">
-          <NotificationsTable />
-        </TabsContent>
-
-        <TabsContent value="submissions" className="space-y-6">
-          <NotificationsTable />
-        </TabsContent>
-
-        <TabsContent value="system" className="space-y-6">
-          <NotificationsTable />
-        </TabsContent>
-      </Tabs>
-
-      <Card className="mt-8">
-        <CardHeader>
-          <CardTitle>Create New Notification</CardTitle>
-          <CardDescription>
-            Create a notification to be sent to users
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleCreateNotification} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label htmlFor="title" className="text-sm font-medium">
-                  Title
-                </label>
-                <Input
-                  id="title"
-                  value={newNotification.title}
-                  onChange={(e) =>
-                    setNewNotification({
-                      ...newNotification,
-                      title: e.target.value,
-                    })
-                  }
-                  required
-                />
+      {isCreating ? (
+        <CreateNotification onSuccess={handleNotificationCreated} />
+      ) : (
+        <>
+          <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center my-5 space-x-2">
+                <Button variant="outline" size="sm" onClick={selectAll}>
+                  {selectedNotifications.length === filteredNotifications.length
+                    ? "Deselect All"
+                    : "Select All"}
+                </Button>
+                <div className="flex-1">
+                  <Select onValueChange={setFilter} value={filter}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All</SelectItem>
+                      <SelectItem value="unread">Unread</SelectItem>
+                      <SelectItem value="chat">Chat</SelectItem>
+                      <SelectItem value="submission">Submission</SelectItem>
+                      <SelectItem value="system">System</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-
-              <div className="space-y-2">
-                <label htmlFor="type" className="text-sm font-medium">
-                  Type
-                </label>
-                <select
-                  id="type"
-                  className="w-full p-2 rounded-md border border-border bg-background"
-                  value={newNotification.type}
-                  onChange={(e) =>
-                    setNewNotification({
-                      ...newNotification,
-                      type: e.target.value as "chat" | "submission" | "system",
-                    })
-                  }
+              <div className="flex space-x-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleMarkAsRead}
+                  disabled={selectedNotifications.length === 0}
                 >
-                  <option value="system">System</option>
-                  <option value="submission">Submission</option>
-                  <option value="chat">Chat</option>
-                </select>
-              </div>
-
-              <div className="space-y-2 md:col-span-2">
-                <label htmlFor="message" className="text-sm font-medium">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  className="w-full p-2 rounded-md border border-border bg-background min-h-[100px]"
-                  value={newNotification.message}
-                  onChange={(e) =>
-                    setNewNotification({
-                      ...newNotification,
-                      message: e.target.value,
-                    })
-                  }
-                  required
-                ></textarea>
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="recipient" className="text-sm font-medium">
-                  Recipient
-                </label>
-                <select
-                  id="recipient"
-                  className="w-full p-2 rounded-md border border-border bg-background"
-                  value={newNotification.recipient}
-                  onChange={(e) =>
-                    setNewNotification({
-                      ...newNotification,
-                      recipient: e.target.value,
-                    })
-                  }
+                  Mark Read
+                </Button>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onClick={handleDeleteSelected}
+                  disabled={selectedNotifications.length === 0}
                 >
-                  <option value="all">All Users</option>
-                  <option value="admin">Admins Only</option>
-                </select>
+                  Delete
+                </Button>
               </div>
             </div>
 
-            <div className="flex justify-end">
-              <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
-                    Creating...
-                  </>
-                ) : (
-                  "Create Notification"
-                )}
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+            <TabsContent value="all" className="space-y-6">
+              <NotificationsTable />
+            </TabsContent>
+
+            <TabsContent value="leads" className="space-y-6">
+              <NotificationsTable />
+            </TabsContent>
+
+            <TabsContent value="submissions" className="space-y-6">
+              <NotificationsTable />
+            </TabsContent>
+
+            <TabsContent value="system" className="space-y-6">
+              <NotificationsTable />
+            </TabsContent>
+          </Tabs>
+        </>
+      )}
     </div>
   );
 

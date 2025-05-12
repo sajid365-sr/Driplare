@@ -1,3 +1,4 @@
+
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -53,22 +54,28 @@ export const saveReview = async (
 ): Promise<string | null> => {
   try {
     if (reviewId) {
-      // Update existing post - use type assertion since we've verified the schema in SQL
+      // Update existing review - strip out any fields that might cause issues
+      const { id, created_at, ...updateData } = review; 
+      
+      // Update existing review with properly formatted data
       const { error } = await supabase
         .from("reviews")
-        .update(review)
+        .update({
+          ...updateData,
+          updated_at: new Date().toISOString()
+        })
         .eq("id", reviewId);
 
       if (error) {
-        console.error("Error updating reviews:", error);
-        toast.error("Error updating reviews: " + error.message);
+        console.error("Error updating review:", error);
+        toast.error("Error updating review: " + error.message);
         return null;
       }
 
-      toast.success("Reviews updated successfully");
+      toast.success("Review updated successfully");
       return reviewId;
     } else {
-      // Create new post
+      // Create new review
       const { data, error } = await supabase
         .from("reviews")
         .insert(review)
