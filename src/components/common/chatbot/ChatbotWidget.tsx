@@ -1,6 +1,5 @@
-
-import React, { useState, useEffect, useRef } from 'react';
-import { MessageSquareText, X } from 'lucide-react';
+import React, { useState, useEffect, useRef } from "react";
+import { BotMessageSquare, MessageSquareText, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useGeminiAPI } from "@/hooks/use-gemini-api";
@@ -218,12 +217,12 @@ export const ChatbotWidget = () => {
       {/* Chatbot Toggle Button */}
       <Button
         onClick={handleToggle}
-        className="fixed bottom-10 right-5 z-40 rounded-full w-14 h-14 flex items-center justify-center shadow-lg bg-[#F88220] hover:bg-[#F88220]/90 p-0"
+        className="fixed bottom-10 right-5 z-40 rounded-full w-14 h-14 flex items-center justify-center shadow-lg bg-[#F88220] hover:bg-[#F88220]/90"
       >
         {isOpen ? (
           <X size={24} className="text-white" />
         ) : (
-          <MessageSquareText size={24} className="text-white" />
+          <BotMessageSquare size={30} className="text-white w-12 h-12" />
         )}
       </Button>
 

@@ -28,6 +28,8 @@ export function Footer() {
     },
   ];
 
+  const subscribeToNewsLetter = (email: string) => {};
+
   return (
     <footer className="bg-gradient-to-b  from-primary/5 to-primary/30">
       {/* ================== Contact ===================== */}
@@ -168,13 +170,7 @@ export function Footer() {
           {/* ================== Newsletter ===================== */}
           <div className="col-span-2 md:col-span-1">
             <h3 className="font-bold mb-4">Newsletter</h3>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                // Add newsletter submission logic
-              }}
-              className="space-y-4"
-            >
+            <form onSubmit={() => subscribeToNewsLetter} className="space-y-4">
               <input
                 type="email"
                 placeholder="Your email"

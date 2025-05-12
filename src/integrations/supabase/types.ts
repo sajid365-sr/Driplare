@@ -147,6 +147,12 @@ export type Database = {
         };
         Relationships: [];
       };
+      news_letter: {
+        Row: {
+          id: string;
+          email: string;
+        };
+      };
       form_submissions: {
         Row: {
           additional_info: string | null;

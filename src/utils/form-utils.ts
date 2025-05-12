@@ -1,4 +1,3 @@
-
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -25,9 +24,9 @@ export interface FormSubmission {
 export async function submitForm(data: FormSubmission): Promise<boolean> {
   try {
     console.log("Submitting form:", data);
-    
+
     // Insert data into the form_submissions table
-    const { error } = await supabase.from('form_submissions').insert([data]);
+    const { error } = await supabase.from("form_submissions").insert([data]);
 
     if (error) {
       console.error("Form submission error:", error);
@@ -50,9 +49,9 @@ export async function submitForm(data: FormSubmission): Promise<boolean> {
 export async function getFormSubmissions(): Promise<any[]> {
   try {
     const { data, error } = await supabase
-      .from('form_submissions')
-      .select('*')
-      .order('created_at', { ascending: false });
+      .from("form_submissions")
+      .select("*")
+      .order("created_at", { ascending: false });
 
     if (error) {
       console.error("Error fetching form submissions:", error);
@@ -70,12 +69,15 @@ export async function getFormSubmissions(): Promise<any[]> {
 /**
  * Update submission status
  */
-export async function updateSubmissionStatus(id: string, status: string): Promise<boolean> {
+export async function updateSubmissionStatus(
+  id: string,
+  status: string
+): Promise<boolean> {
   try {
     const { error } = await supabase
-      .from('form_submissions')
+      .from("form_submissions")
       .update({ status })
-      .eq('id', id);
+      .eq("id", id);
 
     if (error) {
       console.error("Error updating submission status:", error);
@@ -97,9 +99,9 @@ export async function updateSubmissionStatus(id: string, status: string): Promis
 export async function deleteSubmissions(ids: string[]): Promise<boolean> {
   try {
     const { error } = await supabase
-      .from('form_submissions')
+      .from("form_submissions")
       .delete()
-      .in('id', ids);
+      .in("id", ids);
 
     if (error) {
       console.error("Error deleting submissions:", error);
@@ -111,6 +113,33 @@ export async function deleteSubmissions(ids: string[]): Promise<boolean> {
     return true;
   } catch (err) {
     console.error("Error deleting submissions:", err);
+    return false;
+  }
+}
+
+/* =========================== NEWSLETTER ================================== */
+
+export interface NewsLetterForm {
+  email: string;
+}
+export async function submitNewsletter(data: NewsLetterForm): Promise<boolean> {
+  try {
+    console.log("Submitting newsletter form:", data);
+
+    // Insert data into the form_submissions table
+    const { error } = await supabase.from("news_letter").insert(data);
+
+    if (error) {
+      console.error("Newsletter submission error:", error);
+      toast.error("Failed to submit form. Please try again.");
+      return false;
+    }
+
+    toast.success("Form submitted successfully!");
+    return true;
+  } catch (err) {
+    console.error("Form submission error:", err);
+    toast.error("An unexpected error occurred. Please try again.");
     return false;
   }
 }
