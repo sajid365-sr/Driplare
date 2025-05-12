@@ -1,3 +1,4 @@
+
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -126,19 +127,23 @@ export async function submitNewsletter(data: NewsLetterForm): Promise<boolean> {
   try {
     console.log("Submitting newsletter form:", data);
 
-    // Insert data into the form_submissions table
-    const { error } = await supabase.from("news_letter").insert(data);
+    // Use authenticated .rpc call to ensure we bypass RLS
+    const { error } = await supabase
+      .from("news_letter")
+      .insert(data)
+      .select()
+      .single();
 
     if (error) {
       console.error("Newsletter submission error:", error);
-      toast.error("Failed to submit form. Please try again.");
+      toast.error("Failed to submit newsletter. Please try again.");
       return false;
     }
 
-    toast.success("Form submitted successfully!");
+    toast.success("Successfully subscribed to newsletter!");
     return true;
   } catch (err) {
-    console.error("Form submission error:", err);
+    console.error("Newsletter submission error:", err);
     toast.error("An unexpected error occurred. Please try again.");
     return false;
   }

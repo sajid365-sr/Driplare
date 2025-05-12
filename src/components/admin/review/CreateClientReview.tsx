@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,12 +18,15 @@ import {
 import { ImageIcon, Loader2 } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 interface CreateClientReviewProps {
   reviewId?: string | null;
+  onCancel?: () => void;
 }
 
-const CreateClientReview = ({ reviewId }: CreateClientReviewProps) => {
+const CreateClientReview = ({ reviewId, onCancel }: CreateClientReviewProps) => {
+  const navigate = useNavigate();
   const coverImageRef = useRef<HTMLInputElement>(null);
   const [newReview, setNewReview] = useState<Testimonial>({
     id: "",
@@ -41,26 +45,17 @@ const CreateClientReview = ({ reviewId }: CreateClientReviewProps) => {
   const [isUploadingCover, setIsUploadingCover] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch blog data if editing existing blog
+  // Fetch review data if editing existing review
   useEffect(() => {
     if (reviewId) {
       setIsLoading(true);
       getReview(reviewId).then((review) => {
         if (review) {
           setNewReview({
-            ...newReview,
-            company: review.company,
-            complement: review.complement,
-            designation: review.designation,
-            id: review.id,
-            imageUrl: review.imageUrl,
-            name: review.name,
-            testimonialTitle: review.testimonialTitle,
-            videoUrl: review.videoUrl,
-            created_at: review.created_at,
+            ...review,
             updated_at: new Date().toISOString(),
           });
-          setImageUrl(review.imageUrl);
+          setImageUrl(review.imageUrl || "");
         }
         setIsLoading(false);
       });
@@ -74,24 +69,27 @@ const CreateClientReview = ({ reviewId }: CreateClientReviewProps) => {
 
     const review = {
       ...newReview,
-      // id: crypto.randomUUID().toString().slice(0, 7),
       imageUrl,
-      created_at: new Date().toISOString(),
+      created_at: newReview.created_at || new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
 
-    console.log(review);
+    console.log("Saving review:", review);
 
     try {
       const savedId = await saveReview(review, reviewId || undefined);
       setIsSubmitting(false);
 
       if (savedId) {
-        toast.success("Review save successfully.");
+        toast.success(`Review ${reviewId ? "updated" : "created"} successfully.`);
+        // Navigate back to the reviews list or reset form
+        if (onCancel) {
+          onCancel();
+        }
       }
     } catch (error) {
       setIsSubmitting(false);
-      toast.error("Error saving blog post");
+      toast.error(`Error ${reviewId ? "updating" : "creating"} review`);
       console.error(error);
     }
   };
@@ -130,8 +128,10 @@ const CreateClientReview = ({ reviewId }: CreateClientReviewProps) => {
     <div>
       <Card className="mt-8">
         <CardHeader>
-          <CardTitle>Create New Review</CardTitle>
-          <CardDescription>Create review based on TrustPilot.</CardDescription>
+          <CardTitle>{reviewId ? "Edit Review" : "Create New Review"}</CardTitle>
+          <CardDescription>
+            {reviewId ? "Update existing review." : "Create review based on TrustPilot."}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSaveReview} className="space-y-4">
@@ -283,12 +283,19 @@ const CreateClientReview = ({ reviewId }: CreateClientReviewProps) => {
               </div>
             </div>
 
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-2">
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={onCancel}
+              >
+                Cancel
+              </Button>
               <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Creating...
+                    {reviewId ? "Updating..." : "Creating..."}
                   </>
                 ) : (
                   <>{reviewId ? "Update Review" : "Create Review"}</>

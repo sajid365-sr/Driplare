@@ -71,9 +71,15 @@ export default function ClientReview() {
     setEditingReviewId(null);
     fetchReviews();
   };
-  const handleEditReviews = (id: string) => {
+  
+  const handleEditReview = (id: string) => {
     setEditingReviewId(id);
     setIsCreating(true);
+  };
+
+  const handleCancel = () => {
+    setIsCreating(false);
+    setEditingReviewId(null);
   };
 
   const totalPages = Math.ceil(paginationData.count / paginationData.pageSize);
@@ -140,7 +146,10 @@ export default function ClientReview() {
       </div>
 
       {isCreating ? (
-        <CreateClientReview reviewId={editingReviewId} />
+        <CreateClientReview 
+          reviewId={editingReviewId} 
+          onCancel={handleCancel}
+        />
       ) : (
         <Card>
           <CardHeader className="pb-3">
@@ -170,7 +179,7 @@ export default function ClientReview() {
             <ReviewTable
               reviews={reviews}
               isLoading={isLoading}
-              onEdit={handleEditReviews}
+              onEdit={handleEditReview}
               onDelete={handleReviewActionComplete}
             />
 

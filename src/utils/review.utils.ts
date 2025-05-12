@@ -52,19 +52,24 @@ export const saveReview = async (
   review: Testimonial,
   reviewId?: string
 ): Promise<string | null> => {
+  console.log("saveReview called with:", { review, reviewId });
+  
   try {
     if (reviewId) {
       // Update existing review - strip out any fields that might cause issues
       const { id, created_at, ...updateData } = review; 
       
+      console.log("Updating review with data:", updateData);
+      
       // Update existing review with properly formatted data
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from("reviews")
         .update({
           ...updateData,
           updated_at: new Date().toISOString()
         })
-        .eq("id", reviewId);
+        .eq("id", reviewId)
+        .select();
 
       if (error) {
         console.error("Error updating review:", error);
@@ -72,6 +77,7 @@ export const saveReview = async (
         return null;
       }
 
+      console.log("Review updated, response:", data);
       toast.success("Review updated successfully");
       return reviewId;
     } else {
