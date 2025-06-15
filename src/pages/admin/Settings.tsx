@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   Card,
@@ -19,6 +18,11 @@ import { useGeminiAPI } from "@/hooks/use-gemini-api";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { format } from "date-fns";
+import {
+  fetchContentSyncSettings,
+  saveContentSyncSettings,
+  uploadContentFile,
+} from "@/utils/content-sync";
 
 export default function Settings() {
   const [darkModeEnabled, setDarkModeEnabled] = useState(
@@ -43,6 +47,9 @@ export default function Settings() {
   const [contentSnippets, setContentSnippets] = useState("");
   const [activeTab, setActiveTab] = useState("api-key");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploadedFileUrl, setUploadedFileUrl] = useState<string | null>(null);
+  const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
+  const [isSavingContentSync, setIsSavingContentSync] = useState(false);
 
   // Handle dark mode toggle
   const handleThemeToggle = () => {
@@ -60,10 +67,44 @@ export default function Settings() {
 
   // Handle file selection
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
+    if (e.target.files?.[0]) {
       setSelectedFile(e.target.files[0]);
+      setUploadedFileName(e.target.files[0].name);
     }
   };
+
+  // Fetch saved settings each time content-sync tab is entered or Settings mounts
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const data = await fetchContentSyncSettings();
+        if (data) {
+          setWebsiteUrl(data.website_url || "");
+          setContentSnippets(data.content_snippets || "");
+          setUploadedFileUrl(data.content_file_url || null);
+          if (data.content_file_url) {
+            // Try to extract filename for display
+            const fname = data.content_file_url.split("/")?.pop() || null;
+            setUploadedFileName(fname);
+          } else {
+            setUploadedFileName(null);
+          }
+        } else {
+          setWebsiteUrl("");
+          setContentSnippets("");
+          setUploadedFileUrl(null);
+          setUploadedFileName(null);
+        }
+        setSelectedFile(null); // always clear file input when loading from db
+      } catch (err) {
+        toast.error("Failed to fetch content sync settings");
+      }
+    };
+
+    if (activeTab === "content-sync") {
+      fetchSettings();
+    }
+  }, [activeTab]);
 
   // Handle content sync
   const handleContentSync = async () => {
@@ -71,18 +112,39 @@ export default function Settings() {
       toast.error("Please enter a Gemini API key first");
       return;
     }
+    setIsSavingContentSync(true);
 
     try {
-      const contentData = {
+      let fileUrl = uploadedFileUrl ?? null;
+
+      // If a new file is selected, upload it
+      if (selectedFile) {
+        fileUrl = await uploadContentFile(selectedFile);
+        setUploadedFileUrl(fileUrl);
+      }
+      // Save the settings into Supabase
+      await saveContentSyncSettings({
         websiteUrl,
         contentSnippets,
-        file: selectedFile,
-      };
+        fileUrl,
+      });
 
-      await syncContent(contentData);
+      toast.success("Content sync settings saved successfully!");
+      setSelectedFile(null);
+      // Refetch settings after save to ensure state is correct
+      const updated = await fetchContentSyncSettings();
+      setWebsiteUrl(updated.website_url || "");
+      setContentSnippets(updated.content_snippets || "");
+      setUploadedFileUrl(updated.content_file_url || null);
+      setUploadedFileName(
+        updated.content_file_url
+          ? updated.content_file_url.split("/")?.pop() || null
+          : null
+      );
     } catch (error) {
-      console.error("Sync error caught:", error);
-      // Error is already handled in the hook
+      toast.error("Failed to save content sync settings");
+    } finally {
+      setIsSavingContentSync(false);
     }
   };
 
@@ -250,9 +312,23 @@ export default function Settings() {
                       onChange={handleFileChange}
                     />
                   </div>
-                  {selectedFile && (
+                  {(uploadedFileName || uploadedFileUrl) && (
                     <p className="text-sm text-muted-foreground">
-                      Selected file: {selectedFile.name}
+                      {uploadedFileUrl ? (
+                        <>
+                          Uploaded file:{" "}
+                          <a
+                            href={uploadedFileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary underline"
+                          >
+                            {uploadedFileName || "View file"}
+                          </a>
+                        </>
+                      ) : (
+                        <>Selected file: {uploadedFileName}</>
+                      )}
                     </p>
                   )}
                 </div>
@@ -260,10 +336,10 @@ export default function Settings() {
                 <Button
                   className="mt-4"
                   onClick={handleContentSync}
-                  disabled={isSyncing || !apiKey}
+                  disabled={isSavingContentSync || !apiKey}
                 >
                   <Upload size={16} className="mr-1" />
-                  {isSyncing ? "Syncing Content..." : "Update Gemini Knowledge"}
+                  {isSavingContentSync ? "Saving..." : "Save Content Settings"}
                 </Button>
               </TabsContent>
               

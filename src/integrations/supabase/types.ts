@@ -108,6 +108,30 @@ export type Database = {
         }
         Relationships: []
       }
+      content_sync_settings: {
+        Row: {
+          content_file_url: string | null
+          content_snippets: string | null
+          id: string
+          updated_at: string
+          website_url: string | null
+        }
+        Insert: {
+          content_file_url?: string | null
+          content_snippets?: string | null
+          id?: string
+          updated_at?: string
+          website_url?: string | null
+        }
+        Update: {
+          content_file_url?: string | null
+          content_snippets?: string | null
+          id?: string
+          updated_at?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       form_submissions: {
         Row: {
           additional_info: string | null
