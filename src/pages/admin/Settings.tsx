@@ -48,8 +48,10 @@ export default function Settings() {
   const GEMINI_MODEL_OPTIONS = [
     { value: "gemini-1.5-pro", label: "Gemini 1.5 Pro" },
     { value: "gemini-1.5-flash", label: "Gemini 1.5 Flash" },
-    { value: "gemini-2.0-flash", label: "Gemini 2.0 Flash" }
-    // You can add more as Google enables in the future
+    { value: "gemini-2.0-flash", label: "Gemini 2.0 Flash" },
+    { value: "gemini-2.0-flash-lite", label: "Gemini 2.0 Flash-Lite" },
+    { value: "gemini-2.5-flash-preview", label: "Gemini 2.5 Flash Preview" },
+    { value: "gemini-1.5-flash-8b", label: "Gemini 1.5 Flash-8B" }
   ];
 
   // Content sync settings
@@ -181,6 +183,15 @@ export default function Settings() {
     return status === 'success' 
       ? 'bg-green-500/20 text-green-500 px-2 py-0.5 rounded text-xs font-medium' 
       : 'bg-red-500/20 text-red-500 px-2 py-0.5 rounded text-xs font-medium';
+  };
+
+  // Remove handlers
+  const handleRemoveWebsiteUrl = () => setWebsiteUrl("");
+  const handleRemoveSnippets = () => setContentSnippets("");
+  const handleRemoveFile = () => {
+    setUploadedFileUrl(null);
+    setUploadedFileName(null);
+    setSelectedFile(null);
   };
 
   return (
@@ -320,34 +331,51 @@ export default function Settings() {
 
               {/* Content Sync Tab */}
               <TabsContent value="content-sync" className="space-y-4">
+                {/* Website URL */}
                 <div className="space-y-2">
                   <Label htmlFor="website-url">Website URL</Label>
-                  <Input
-                    id="website-url"
-                    type="url"
-                    placeholder="https://yourwebsite.com"
-                    value={websiteUrl}
-                    onChange={(e) => setWebsiteUrl(e.target.value)}
-                  />
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="website-url"
+                      type="url"
+                      placeholder="https://yourwebsite.com"
+                      value={websiteUrl}
+                      onChange={(e) => setWebsiteUrl(e.target.value)}
+                    />
+                    {websiteUrl && (
+                      <Button size="icon" variant="ghost" onClick={handleRemoveWebsiteUrl} title="Remove Website URL">
+                        <Trash2 size={16} />
+                      </Button>
+                    )}
+                  </div>
                   <p className="text-sm text-muted-foreground">
                     Enter your website URL to fetch and process content for the
                     chatbot.
                   </p>
                 </div>
 
+                {/* Content Snippets */}
                 <div className="space-y-2">
                   <Label htmlFor="content-snippets">
                     Custom Content Snippets
                   </Label>
-                  <Textarea
-                    id="content-snippets"
-                    placeholder="Paste key content, FAQs, or service descriptions here..."
-                    className="min-h-[120px]"
-                    value={contentSnippets}
-                    onChange={(e) => setContentSnippets(e.target.value)}
-                  />
+                  <div className="flex items-start gap-2">
+                    <Textarea
+                      id="content-snippets"
+                      placeholder="Paste key content, FAQs, or service descriptions here..."
+                      className="min-h-[120px]"
+                      value={contentSnippets}
+                      onChange={(e) => setContentSnippets(e.target.value)}
+                    />
+                    {contentSnippets && (
+                      <Button size="icon" variant="ghost" onClick={handleRemoveSnippets} title="Remove Snippets">
+                        <Trash2 size={16} />
+                      </Button>
+                    )}
+                  </div>
                 </div>
 
+                {/* Content File */}
                 <div className="space-y-2">
                   <Label htmlFor="content-file">Upload Content File</Label>
                   <div className="flex items-center gap-2">
@@ -357,6 +385,11 @@ export default function Settings() {
                       accept=".txt,.md,.json,.pdf,.docx"
                       onChange={handleFileChange}
                     />
+                    {(uploadedFileUrl || selectedFile) && (
+                      <Button size="icon" variant="ghost" onClick={handleRemoveFile} title="Remove File">
+                        <Trash2 size={16} />
+                      </Button>
+                    )}
                   </div>
                   {(uploadedFileName || uploadedFileUrl) && (
                     <p className="text-sm text-muted-foreground">
