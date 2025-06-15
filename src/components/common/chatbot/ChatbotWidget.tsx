@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useGeminiAPI } from "@/hooks/use-gemini-api";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Mic, Volume2 } from "lucide-react";
+import { Mic, Volume2, Pause, Play } from "lucide-react";
 import { useVoice } from "@/hooks/use-voice";
 
 export const ChatbotWidget = () => {
@@ -22,6 +22,11 @@ export const ChatbotWidget = () => {
   const [isTyping, setIsTyping] = useState(false);
   const messageEndRef = useRef<HTMLDivElement>(null);
 
+  // TTS playback state management
+  const [speakingMsgIdx, setSpeakingMsgIdx] = useState<number | null>(null);
+  const [isTTSPlaying, setIsTTSPlaying] = useState(false);
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+
   // Get Gemini API key
   const { apiKey, askGemini } = useGeminiAPI();
   const useGemini = Boolean(apiKey);
@@ -31,16 +36,57 @@ export const ChatbotWidget = () => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  // Automatically speak when a new bot message appears
+  // Clear speech state if chat closes or new messages added
   useEffect(() => {
-    // Only speak the *newest* bot message
-    if (messages.length === 0) return;
-    const lastMsg = messages[messages.length - 1];
-    if (lastMsg.isBot && lastMsg.text && !isTyping) {
-      speak(lastMsg.text);
+    if (!isOpen) {
+      // Stop speech synthesis if chat is closed
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      setSpeakingMsgIdx(null);
+      setIsTTSPlaying(false);
     }
-    // eslint-disable-next-line
-  }, [messages, isTyping]);
+  }, [isOpen]);
+
+  // Clean up speech synthesis if message is removed or changed
+  useEffect(() => {
+    return () => {
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+    };
+  }, []);
+
+  // Handle TTS play/pause for specific message
+  const handleTogglePlayBotMessage = (msg: string, msgIdx: number) => {
+    if (!window.speechSynthesis) {
+      alert("Speech Synthesis is not supported in your browser.");
+      return;
+    }
+    // If already playing this message, pause
+    if (isTTSPlaying && speakingMsgIdx === msgIdx) {
+      window.speechSynthesis.pause();
+      setIsTTSPlaying(false);
+      return;
+    }
+    // If paused on this message, resume
+    if (!isTTSPlaying && speakingMsgIdx === msgIdx && window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+      setIsTTSPlaying(true);
+      return;
+    }
+    // Otherwise, start speech on selected message
+    window.speechSynthesis.cancel(); // Stop any other speech
+    setSpeakingMsgIdx(msgIdx);
+    setIsTTSPlaying(true);
+    const utter = new window.SpeechSynthesisUtterance(msg);
+    utteranceRef.current = utter;
+    utter.onend = () => {
+      setIsTTSPlaying(false);
+      setSpeakingMsgIdx(null);
+    };
+    utter.onerror = () => {
+      setIsTTSPlaying(false);
+      setSpeakingMsgIdx(null);
+    };
+    window.speechSynthesis.speak(utter);
+  };
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -257,6 +303,21 @@ export const ChatbotWidget = () => {
                           style={{ position: "relative" }}
                         >
                           <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
+                          {/* Only for bot messages: Play/Pause button for TTS */}
+                          {msg.isBot && (
+                            <button
+                              aria-label={isTTSPlaying && speakingMsgIdx === index ? "Pause audio" : "Play audio"}
+                              onClick={() => handleTogglePlayBotMessage(msg.text, index)}
+                              className="ml-1 text-primary hover:text-primary/80"
+                              style={{ position: "absolute", bottom: 4, right: 8 }}
+                            >
+                              {isTTSPlaying && speakingMsgIdx === index ? (
+                                <Pause size={18} />
+                              ) : (
+                                <Play size={18} />
+                              )}
+                            </button>
+                          )}
                         </div>
                       ))}
                       {isTyping && (
