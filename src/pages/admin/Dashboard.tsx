@@ -56,26 +56,45 @@ export default function Dashboard() {
     setIsLoading(true);
     try {
       console.log("Dashboard: Starting to fetch submissions...");
+      console.log("Dashboard: Current time:", new Date().toISOString());
+      
       const data = await getFormSubmissions();
+      
       console.log("Dashboard: Received submissions data:", data);
       console.log("Dashboard: Number of submissions:", data.length);
+      console.log("Dashboard: Data types in array:", data.map(item => ({
+        id: item.id,
+        form_type: item.form_type,
+        email: item.email,
+        name: item.name
+      })));
       
       setSubmissions(data);
       
       if (data.length === 0) {
         console.log("Dashboard: No submissions found in database");
-        toast.info("No submissions found in the database");
+        console.log("Dashboard: This could indicate:");
+        console.log("- Empty tables in database");
+        console.log("- Database connection issues");
+        console.log("- RLS (Row Level Security) blocking access");
+        console.log("- Query permission issues");
+        toast.info("No submissions found. Check console for debugging details.");
       } else {
         console.log(`Dashboard: Successfully loaded ${data.length} submissions`);
         
         // Log breakdown by type
         const formSubmissions = data.filter(sub => sub.form_type !== 'newsletter');
         const newsletterSubmissions = data.filter(sub => sub.form_type === 'newsletter');
-        console.log(`Dashboard: Form submissions: ${formSubmissions.length}, Newsletter: ${newsletterSubmissions.length}`);
+        console.log(`Dashboard: Form submissions: ${formSubmissions.length}`);
+        console.log(`Dashboard: Newsletter submissions: ${newsletterSubmissions.length}`);
+        
+        // Log first few items for inspection
+        console.log("Dashboard: First few submissions:", data.slice(0, 3));
       }
     } catch (error) {
       console.error("Dashboard: Failed to fetch submissions:", error);
-      toast.error("Failed to load form submissions");
+      console.error("Dashboard: Error details:", JSON.stringify(error, null, 2));
+      toast.error("Failed to load form submissions. Check console for details.");
     } finally {
       setIsLoading(false);
     }
@@ -190,6 +209,11 @@ export default function Dashboard() {
             <CardTitle>Form Submissions</CardTitle>
             <CardDescription>
               Manage and respond to form submissions from all sources ({submissions.length} total)
+              {submissions.length === 0 && (
+                <span className="block text-orange-600 mt-1">
+                  ⚠️ No data found - Check browser console for debugging info
+                </span>
+              )}
             </CardDescription>
           </div>
           <div className="flex gap-2 mt-4 sm:mt-0">
@@ -362,12 +386,23 @@ export default function Dashboard() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground mb-4">
                 {submissions.length === 0 
-                  ? "No submissions found in database. Check console for debugging info." 
+                  ? "No submissions found in database." 
                   : "No submissions match your current filters"
                 }
               </p>
+              {submissions.length === 0 && (
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4 text-left max-w-md mx-auto">
+                  <h4 className="font-semibold text-orange-800 mb-2">Debugging Steps:</h4>
+                  <ul className="text-sm text-orange-700 space-y-1">
+                    <li>• Check browser console for detailed logs</li>
+                    <li>• Verify data exists in Supabase tables</li>
+                    <li>• Check database permissions</li>
+                    <li>• Ensure RLS policies allow access</li>
+                  </ul>
+                </div>
+              )}
               {searchTerm || filter !== "all" ? (
                 <Button
                   variant="link"

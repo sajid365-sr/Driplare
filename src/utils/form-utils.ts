@@ -69,39 +69,62 @@ export async function submitForm(data: FormSubmission): Promise<boolean> {
  */
 export async function getFormSubmissions(): Promise<CombinedSubmission[]> {
   try {
-    console.log("Fetching form submissions from both tables...");
+    console.log("Starting to fetch submissions from both tables...");
     
-    // Fetch regular form submissions
-    const { data: formData, error: formError } = await supabase
+    // First, let's check if we can connect to the database at all
+    const { data: testConnection, error: testError } = await supabase
       .from("form_submissions")
-      .select("*")
+      .select("count(*)")
+      .single();
+    
+    console.log("Database connection test:", { testConnection, testError });
+
+    // Fetch regular form submissions with detailed logging
+    console.log("Fetching form submissions...");
+    const { data: formData, error: formError, count: formCount } = await supabase
+      .from("form_submissions")
+      .select("*", { count: 'exact' })
       .order("created_at", { ascending: false });
+
+    console.log("Form submissions query result:");
+    console.log("- Data:", formData);
+    console.log("- Error:", formError);
+    console.log("- Count:", formCount);
+    console.log("- Data length:", formData?.length || 0);
 
     if (formError) {
       console.error("Error fetching form submissions:", formError);
-      toast.error("Failed to load form submissions");
+      console.error("Error details:", JSON.stringify(formError, null, 2));
+      toast.error("Failed to load form submissions: " + formError.message);
     }
 
-    // Fetch newsletter submissions
-    const { data: newsletterData, error: newsletterError } = await supabase
+    // Fetch newsletter submissions with detailed logging
+    console.log("Fetching newsletter submissions...");
+    const { data: newsletterData, error: newsletterError, count: newsletterCount } = await supabase
       .from("news_letter")
-      .select("*")
+      .select("*", { count: 'exact' })
       .order("created_at", { ascending: false });
+
+    console.log("Newsletter submissions query result:");
+    console.log("- Data:", newsletterData);
+    console.log("- Error:", newsletterError);
+    console.log("- Count:", newsletterCount);
+    console.log("- Data length:", newsletterData?.length || 0);
 
     if (newsletterError) {
       console.error("Error fetching newsletter submissions:", newsletterError);
-      toast.error("Failed to load newsletter submissions");
+      console.error("Error details:", JSON.stringify(newsletterError, null, 2));
+      toast.error("Failed to load newsletter submissions: " + newsletterError.message);
     }
-
-    console.log("Form submissions data:", formData);
-    console.log("Newsletter data:", newsletterData);
 
     // Combine and format the data
     const combinedData: CombinedSubmission[] = [];
 
     // Add form submissions
-    if (formData && formData.length > 0) {
-      formData.forEach(item => {
+    if (formData && Array.isArray(formData) && formData.length > 0) {
+      console.log("Processing form submissions data...");
+      formData.forEach((item, index) => {
+        console.log(`Form submission ${index}:`, item);
         combinedData.push({
           id: item.id,
           name: item.name,
@@ -119,11 +142,18 @@ export async function getFormSubmissions(): Promise<CombinedSubmission[]> {
           created_at: item.created_at
         });
       });
+      console.log(`Added ${formData.length} form submissions to combined data`);
+    } else {
+      console.warn("No form submissions found or data is not an array");
+      console.log("Form data type:", typeof formData);
+      console.log("Form data value:", formData);
     }
 
     // Add newsletter submissions
-    if (newsletterData && newsletterData.length > 0) {
-      newsletterData.forEach(item => {
+    if (newsletterData && Array.isArray(newsletterData) && newsletterData.length > 0) {
+      console.log("Processing newsletter submissions data...");
+      newsletterData.forEach((item, index) => {
+        console.log(`Newsletter submission ${index}:`, item);
         combinedData.push({
           id: item.id,
           name: 'Newsletter Subscriber',
@@ -133,18 +163,27 @@ export async function getFormSubmissions(): Promise<CombinedSubmission[]> {
           created_at: item.created_at
         });
       });
+      console.log(`Added ${newsletterData.length} newsletter submissions to combined data`);
+    } else {
+      console.warn("No newsletter submissions found or data is not an array");
+      console.log("Newsletter data type:", typeof newsletterData);
+      console.log("Newsletter data value:", newsletterData);
     }
 
     // Sort by created_at descending
     combinedData.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
-    console.log(`Total combined submissions: ${combinedData.length}`);
-    console.log("Combined data:", combinedData);
+    console.log(`Final combined data summary:`);
+    console.log(`- Total submissions: ${combinedData.length}`);
+    console.log(`- Form submissions: ${formData?.length || 0}`);
+    console.log(`- Newsletter submissions: ${newsletterData?.length || 0}`);
+    console.log("Combined data structure:", combinedData);
     
     return combinedData;
   } catch (err) {
-    console.error("Error fetching submissions:", err);
-    toast.error("Failed to load submissions");
+    console.error("Unexpected error fetching submissions:", err);
+    console.error("Error stack:", err instanceof Error ? err.stack : 'No stack trace');
+    toast.error("Failed to load submissions: " + (err instanceof Error ? err.message : 'Unknown error'));
     return [];
   }
 }
