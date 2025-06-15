@@ -4,6 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useGeminiAPI } from "@/hooks/use-gemini-api";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Mic, Volume2 } from "lucide-react";
+import { useVoice } from "@/hooks/use-voice";
 
 export const ChatbotWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -106,6 +108,24 @@ export const ChatbotWidget = () => {
   const handleQuickReply = (message: string) => {
     setUserMessage(message);
     handleSendMessage();
+  };
+
+  // Add voice input handler
+  const { isListening, startListening, stopListening, isSpeaking, speak } = useVoice();
+  const handleVoiceInput = () => {
+    if (isListening) {
+      stopListening();
+    } else {
+      startListening((transcript) => {
+        setUserMessage(transcript);
+        // Optional: auto-send after capture; if required, call handleSendMessage()
+      });
+    }
+  };
+
+  // Add voice output to bot messages:
+  const handlePlayBotMessage = (msg: string) => {
+    speak(msg);
   };
 
   return (
@@ -228,8 +248,20 @@ export const ChatbotWidget = () => {
                               ? "bg-muted/30 text-foreground rounded-lg p-3 inline-block max-w-[80%]"
                               : "bg-[#F88220] text-white rounded-lg p-3 inline-block ml-auto max-w-[80%]"
                           }`}
+                          style={{ position: "relative" }}
                         >
                           <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
+                          {/* Only for bot messages: Play button for TTS */}
+                          {msg.isBot && (
+                            <button
+                              aria-label="Play audio"
+                              onClick={() => handlePlayBotMessage(msg.text)}
+                              className="ml-1 text-primary hover:text-primary/80"
+                              style={{ position: "absolute", bottom: 4, right: 8 }}
+                            >
+                              <Volume2 size={18} />
+                            </button>
+                          )}
                         </div>
                       ))}
                       {isTyping && (
@@ -296,24 +328,34 @@ export const ChatbotWidget = () => {
                   )}
 
                   {/* Chat Input */}
-                  <form onSubmit={handleSendMessage} className="mt-auto">
-                    <div className="flex items-center">
-                      <input
-                        type="text"
-                        placeholder="Type a message..."
-                        value={userMessage}
-                        onChange={(e) => setUserMessage(e.target.value)}
-                        className="flex-1 bg-background border border-border rounded-l-md p-2 focus:outline-none"
-                      />
-                      <button
-                        type="submit"
-                        className="bg-[#F88220] text-white p-2 rounded-r-md"
-                        disabled={!userMessage.trim()}
-                      >
-                        <MessageSquareText size={20} />
-                      </button>
-                    </div>
-                  </form>
+                  <div className="flex items-center gap-2 mt-2">
+                    <button
+                      type="button"
+                      onClick={handleVoiceInput}
+                      className={`rounded-full p-2 ${isListening ? "bg-primary text-white" : "bg-secondary text-primary"}`}
+                      title={isListening ? "Stop Recording" : "Record Voice"}
+                    >
+                      <Mic size={20} />
+                    </button>
+                    <form onSubmit={handleSendMessage} className="flex-1">
+                      <div className="flex items-center">
+                        <input
+                          type="text"
+                          placeholder="Type a message..."
+                          value={userMessage}
+                          onChange={(e) => setUserMessage(e.target.value)}
+                          className="flex-1 bg-background border border-border rounded-l-md p-2 focus:outline-none"
+                        />
+                        <button
+                          type="submit"
+                          className="bg-[#F88220] text-white p-2 rounded-r-md"
+                          disabled={!userMessage.trim()}
+                        >
+                          <MessageSquareText size={20} />
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               )}
             </div>

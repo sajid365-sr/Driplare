@@ -23,6 +23,7 @@ import {
   saveContentSyncSettings,
   uploadContentFile,
 } from "@/utils/content-sync";
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 
 export default function Settings() {
   const [darkModeEnabled, setDarkModeEnabled] = useState(
@@ -271,11 +272,14 @@ export default function Settings() {
                         onChange={(e) => setApiKey(e.target.value)}
                         placeholder="Enter your Gemini API key"
                         className="pr-10"
+                        autoComplete="off"
                       />
                       <button
                         type="button"
                         onClick={() => setShowApiKey(!showApiKey)}
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        tabIndex={-1}
+                        aria-label={showApiKey ? "Hide" : "Show"}
                       >
                         {showApiKey ? <EyeOff size={16} /> : <Eye size={16} />}
                       </button>
@@ -283,11 +287,49 @@ export default function Settings() {
                     <Button
                       variant="outline"
                       className="ml-2 whitespace-nowrap"
-                      onClick={testConnection}
-                      disabled={!apiKey || isTestingConnection}
+                      onClick={() => {
+                        if (!apiKey.trim()) {
+                          toast.error("API key cannot be empty");
+                        } else {
+                          setApiKey(apiKey.trim());
+                          toast.success("API key updated.");
+                        }
+                      }}
+                      disabled={isTestingConnection}
                     >
-                      <Key size={16} className="mr-1" />
-                      {isTestingConnection ? "Testing..." : "Test Connection"}
+                      Save
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      className="ml-2"
+                      size="icon"
+                      asChild
+                    >
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <span title="Delete API Key"><Trash2 size={16} /></span>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Delete API Key?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Are you sure you want to delete your Gemini API key? This action cannot be undone and will disconnect Gemini features.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              className="bg-destructive"
+                              onClick={() => {
+                                setApiKey("");
+                                toast.info("API key deleted.");
+                              }}
+                            >
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </Button>
                   </div>
                   <p className="text-sm text-muted-foreground">
