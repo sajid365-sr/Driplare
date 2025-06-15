@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Navbar } from "@/components/common/navigation/Navbar";
 import AnimatedGridBg from "@/components/common/AnimatedGridBg";
@@ -42,7 +41,7 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#16192C] text-white relative overflow-x-hidden">
-      <AnimatedGridBg glow />
+      <AnimatedGridBg />
       <Navbar />
       <main className="flex-1 z-10">
         {/* Hero Section */}
