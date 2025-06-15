@@ -1,4 +1,3 @@
-
 import {
   Card,
   CardDescription,
@@ -142,45 +141,64 @@ export function CoreSolutionsSection() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {offerings.map((offering, i) => (
-            <Card
+            <div
               key={offering.title}
-              className="bg-card hover-scale overflow-hidden border-primary/10 transition-shadow shadow-xl relative"
+              className={`
+                relative group rounded-3xl transition-shadow overflow-hidden
+                shadow-xl border border-primary/10 bg-gradient-to-br from-secondary/60 via-white/60 to-primary/10
+                backdrop-blur-[3px] hover:scale-105
+                flex flex-col
+                min-h-[430px]
+              `}
+              style={{ boxShadow: "0 8px 64px 8px #8F5CFF12" }}
             >
-              <CardHeader>
-                <div className="flex items-center gap-3 mb-2">
-                  <offering.icon className="h-10 w-10 text-primary" />
+              {/* Number circle (like screenshot) */}
+              <div className="absolute right-5 top-5 z-10">
+                <div className="w-10 h-10 rounded-full bg-primary/80 flex items-center justify-center text-white font-bold text-lg shadow-lg ring-2 ring-primary/30">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+              </div>
+              <div className="p-7 pt-9 flex-1 flex flex-col">
+                {/* Icon and badge row */}
+                <div className="flex items-center gap-3 mb-5">
+                  <offering.icon className="h-11 w-11 text-primary drop-shadow-lg bg-white/70 rounded-full p-2" />
                   {offering.badge && (
-                    <span className="ml-2 inline-block bg-primary/10 text-primary text-xs font-bold rounded-full px-3 py-1">
+                    <span className="inline-block px-2 py-1 ml-1 rounded-lg bg-primary/10 text-primary text-xs font-semibold">
                       {offering.badge}
                     </span>
                   )}
                 </div>
-                <CardTitle>{offering.title}</CardTitle>
-                <CardDescription className="mb-2">{offering.valueProp}</CardDescription>
-                <ul className="list-disc list-inside space-y-1 text-sm text-foreground/80 mt-2">
+                <h3 className="text-2xl font-bold mb-2 text-foreground">{offering.title}</h3>
+                <p className="mb-3 text-base text-muted-foreground font-medium">{offering.valueProp}</p>
+                <ul className="mb-2 flex flex-col gap-2 text-foreground/90 text-sm pl-2">
                   {offering.bullets.map((b, bi) => (
-                    <li key={bi}>{b}</li>
+                    <li key={bi} className="flex items-start gap-2">
+                      <span className="inline-block w-1.5 h-1.5 mt-2 rounded-full bg-primary/60 shrink-0"></span>
+                      <span>{b}</span>
+                    </li>
                   ))}
                 </ul>
                 {offering.tech && (
-                  <div className="mt-3 text-xs font-medium text-muted-foreground">{offering.tech}</div>
+                  <div className="mt-2 text-xs font-medium text-primary">{offering.tech}</div>
                 )}
                 {offering.note && (
-                  <div className="mt-3 text-xs font-medium text-muted-foreground">{offering.note}</div>
+                  <div className="mt-2 text-xs font-medium text-accent-foreground">{offering.note}</div>
                 )}
-              </CardHeader>
-              <CardFooter>
-                <Link to={offering.link}>
-                  <Button
-                    variant="link"
-                    className="p-0 group flex items-center text-primary"
-                  >
-                    <span>Learn More</span>
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
-              </CardFooter>
-            </Card>
+                {/* "Learn More" button at the bottom */}
+                <div className="flex-grow" />
+                <div className="mt-6 flex">
+                  <Link to={offering.link} className="w-full">
+                    <Button
+                      variant="outline"
+                      className="w-full bg-primary/90 text-white rounded-full py-2 font-bold tracking-wide flex items-center justify-center group hover:bg-primary transition"
+                    >
+                      <span>Learn More</span>
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
