@@ -1,12 +1,14 @@
+
 import { Navbar } from "@/components/common/navigation/Navbar";
 import { Button } from "@/components/ui/button";
-import { Code, Pen, Users, Check, Star, Timer, FileText } from "lucide-react";
+import { Code, Pen, Users, Check, Star, Timer, FileText, LayoutGrid, LayoutDashboard, LayoutList } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedGridBg from "@/components/common/AnimatedGridBg";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import TestimonialSlider from "@/components/TestimonialSlider";
 import FloatingFormCard from "@/components/FloatingFormCard";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const caseStudies = [
   {
@@ -76,176 +78,178 @@ const services = [
   },
 ];
 
+const bestStack = [
+  { icon: <LayoutDashboard />, title: "Next.js / React 18" },
+  { icon: <Code />, title: "TypeScript" },
+  { icon: <LayoutGrid />, title: "Tailwind CSS" },
+  { icon: <LayoutList />, title: "Headless CMS & API" },
+];
+
+const futuristicGradient =
+  "bg-gradient-to-tr from-primary/90 via-background/90 to-accent/70";
+
+const projectHighlights = [
+  {
+    label: "320+",
+    text: "Web Projects Delivered",
+  },
+  {
+    label: "98%",
+    text: "Client Satisfaction Score",
+  },
+  {
+    label: "2x Faster",
+    text: "Average Project Launch",
+  },
+  {
+    label: "75%",
+    text: "Repeat Clients",
+  },
+];
+
 export default function WebDesign() {
+  const [showContact, setShowContact] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground relative overflow-x-hidden">
       <AnimatedGridBg />
       <Navbar />
       <main className="flex-1 flex flex-col z-10">
-        {/* Hero & Overview */}
-        <section className="relative flex flex-col md:flex-row min-h-[80vh] items-center justify-center py-20 md:py-0">
-          <div className="flex-1 flex justify-center items-center h-80 md:h-auto">
-            {/* Faux code-to-mockup animation: looped using Framer Motion on SVG */}
-            <motion.div
-              className="relative w-72 h-72 md:w-[400px] md:h-[400px] flex items-center justify-center bg-black rounded-xl border border-[#292929] overflow-hidden"
-              initial={{ boxShadow: "0 0 32px #F8822033" }}
-              animate={{
-                boxShadow: [
-                  "0 0 32px #F8822033",
-                  "0 0 76px #F8822066",
-                  "0 0 32px #F8822033",
-                ],
-              }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            >
-              {/* Code Side */}
-              <motion.div
-                className="absolute top-0 left-0 w-full h-full bg-[#18191c] z-10"
-                initial={{ opacity: 1 }}
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{
-                  times: [0, 0.5, 1],
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              >
-                {/* Simulated code SVG */}
-                <svg viewBox="0 0 180 180" className="w-full h-full">
-                  <rect
-                    x="18"
-                    y="28"
-                    width="144"
-                    height="12"
-                    rx="4"
-                    fill="#23242a"
-                  />
-                  <rect
-                    x="18"
-                    y="48"
-                    width="88"
-                    height="10"
-                    rx="3"
-                    fill="#F88220"
-                  />
-                  <rect
-                    x="18"
-                    y="64"
-                    width="120"
-                    height="10"
-                    rx="3"
-                    fill="#23242a"
-                  />
-                  <rect
-                    x="18"
-                    y="84"
-                    width="80"
-                    height="10"
-                    rx="3"
-                    fill="#23242a"
-                  />
-                  <rect
-                    x="18"
-                    y="104"
-                    width="105"
-                    height="10"
-                    rx="3"
-                    fill="#23242a"
-                  />
-                  <rect
-                    x="18"
-                    y="124"
-                    width="68"
-                    height="10"
-                    rx="3"
-                    fill="#F88220"
-                  />
-                </svg>
-              </motion.div>
-              {/* Mockup Side overlays in */}
-              <motion.div
-                className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#191c23] to-[#111114] z-20 flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{
-                  times: [0.5, 0.95, 1],
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              >
-                {/* Simulated web mockup SVG */}
-                <svg viewBox="0 0 180 180" className="w-full h-full">
-                  <rect
-                    x="12"
-                    y="32"
-                    width="156"
-                    height="112"
-                    rx="12"
-                    fill="#ffffff10"
-                  />
-                  <rect
-                    x="28"
-                    y="50"
-                    width="124"
-                    height="24"
-                    rx="7"
-                    fill="#fff3"
-                  />
-                  <rect
-                    x="28"
-                    y="86"
-                    width="90"
-                    height="14"
-                    rx="5"
-                    fill="#F88220"
-                  />
-                  <rect
-                    x="28"
-                    y="108"
-                    width="46"
-                    height="10"
-                    rx="5"
-                    fill="#fff5"
-                  />
-                  <rect
-                    x="80"
-                    y="108"
-                    width="46"
-                    height="10"
-                    rx="5"
-                    fill="#fff2"
-                  />
-                </svg>
-              </motion.div>
-            </motion.div>
-          </div>
-          {/* Text Block */}
-          <div className="flex-1 flex flex-col items-center md:items-start justify-center px-2 md:pl-12 mt-10 md:mt-0 text-center md:text-left relative z-10">
+        {/* Futuristic Hero */}
+        <section className="relative pt-32 pb-20 px-4 flex flex-col md:flex-row items-center md:items-end justify-between overflow-hidden">
+          {/* Left content */}
+          <div className="md:w-2/3 mb-16 md:mb-0">
             <motion.h1
-              className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight leading-tight"
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              className="text-[2.5rem] sm:text-[3.2rem] md:text-[4.2rem] font-extrabold max-w-3xl leading-tight mb-5"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              style={{
+                lineHeight: 1.08,
+                letterSpacing: "-0.01em"
+              }}
             >
-              Web Experiences That Captivate & Convert
+              Web Design & Development <span className="text-primary">for Visionary Teams</span>
             </motion.h1>
             <motion.p
-              className="text-lg md:text-xl text-muted-foreground mb-7 max-w-xl"
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.3 }}
+              className="text-lg md:text-xl text-muted-foreground max-w-xl mb-10"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.13 }}
             >
-              Responsive, pixel-perfect sites built for performance and growth.
+              We craft high-performing, pixel-perfect sites custom-built for your brand's needs. We blend <span className="font-semibold">compelling design</span> with <span className="font-semibold">cutting-edge technology</span> to captivate your audience and drive results.
             </motion.p>
-            <Button className="bg-primary hover:bg-primary/90 text-lg px-8 h-12 shadow-xl">
-              Get Your Free Audit
-            </Button>
+            <div className="flex gap-4">
+              <Button className="bg-primary hover:bg-primary/80 text-lg px-8 h-12 shadow-2xl" onClick={() => setShowContact(true)}>
+                Get Your Free Audit
+              </Button>
+              <Link to="/portfolio">
+                <Button variant="outline" className="text-lg px-8 h-12 border-primary/50 border-2">
+                  See Client Results
+                </Button>
+              </Link>
+            </div>
+          </div>
+          {/* Right "What's Best" sidebar */}
+          <motion.div
+            className={"hidden md:flex flex-col gap-5 items-start bg-background/80 shadow-xl rounded-3xl p-9 border border-primary/10"}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.17 }}
+            style={{
+              minWidth: 260,
+              maxWidth: 320
+            }}
+          >
+            <div className="text-xl font-bold mb-2 text-primary flex items-center gap-2">
+              <LayoutGrid className="w-6 h-6" />
+              What’s Best for Your Project?
+            </div>
+            <p className="text-muted-foreground mb-3 text-sm">
+              Our preferred stack for scale, performance & reliability.
+            </p>
+            <div className="flex flex-col gap-3 w-full">
+              {bestStack.map(b => (
+                <div key={b.title} className="flex gap-3 items-center text-base font-medium text-foreground/90">
+                  <span className="p-2 bg-primary/10 rounded-lg">{b.icon}</span>
+                  {b.title}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Futuristic divider */}
+        <div className="w-full h-4 bg-gradient-to-r from-primary/30 via-primary/0 to-background" />
+
+        {/* Project Highlights */}
+        <section className="container mx-auto py-10 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0">
+          <div className="flex flex-row flex-wrap gap-3 md:gap-7 items-center">
+            {projectHighlights.map((ph, idx) => (
+              <motion.div
+                key={ph.label}
+                className="rounded-2xl border bg-primary/5 shadow-xl text-center px-7 py-8 min-w-[130px]"
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.07 }}
+              >
+                <span className="text-3xl md:text-4xl font-extrabold text-primary block mb-1">{ph.label}</span>
+                <span className="text-base text-foreground/80">{ph.text}</span>
+              </motion.div>
+            ))}
+          </div>
+          <div className="text-lg mt-7 md:mt-0 text-primary/90 font-semibold max-w-sm text-center md:text-right">
+            Building next-gen sites & digital products for growth-focused brands.
+          </div>
+        </section>
+
+        {/* Web Design & Dev Explained */}
+        <section className={`relative py-16 px-2 ${futuristicGradient} rounded-b-3xl`}>
+          <div className="container mx-auto flex flex-col md:flex-row gap-14 items-center">
+            {/* Visual mockup */}
+            <motion.div
+              className="relative w-full max-w-[440px] h-[300px] md:h-[380px] bg-background rounded-3xl overflow-hidden shadow-xl border-2 border-primary/15"
+              initial={{ opacity: 0, scale: 0.97, x: -20 }}
+              whileInView={{ opacity: 1, scale: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.7 }}
+            >
+              <img
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+                alt="Futuristic web dashboard"
+                className="absolute inset-0 w-full h-full object-cover object-center"
+                style={{ filter: 'brightness(0.96) saturate(1.3)' }}
+              />
+              <div className="absolute bottom-5 right-5 bg-primary text-white py-1 px-4 rounded-full text-xs font-bold shadow-xl">Live Preview</div>
+            </motion.div>
+            {/* Explanatory Content */}
+            <div className="flex-1">
+              <h2 className="text-2xl md:text-3xl font-bold mb-3">What Sets Our Web Experiences Apart</h2>
+              <ul className="space-y-3">
+                <li>
+                  <span className="font-semibold text-primary">Human-centered Design: </span>
+                  Clean, emotionally engaging interfaces—no cookie-cutter templates.
+                </li>
+                <li>
+                  <span className="font-semibold text-primary">Modern Frontend & Backend: </span>
+                  We use React + TypeScript + Headless CMS for ultra-fast, scalable apps.
+                </li>
+                <li>
+                  <span className="font-semibold text-primary">SEO & Analytics Ready: </span>
+                  Sites launch with structured data, lightning load, and advanced tracking.
+                </li>
+                <li>
+                  <span className="font-semibold text-primary">Launch & Beyond: </span>
+                  Ongoing support, enhancements, and growth-powered experiments.
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
 
         {/* Why Choose Driplare */}
-        <section className="container py-16">
+        <section className="container py-20">
           <h2 className="text-xl md:text-2xl font-bold mb-8 text-center">
             Why Choose Driplare?
           </h2>
@@ -256,15 +260,12 @@ export default function WebDesign() {
                 className="flex flex-col items-center px-6 py-8 rounded-xl bg-muted shadow-md transition-transform"
                 initial={{ y: 35, opacity: 0, scale: 0.95 }}
                 whileHover={{
-                  y: -6,
-                  scale: 1.04,
-                  boxShadow: "0 2px 32px #F8822040",
+                  y: -6, scale: 1.04, boxShadow: "0 2px 32px #8F5CFF66"
                 }}
                 whileInView={{ y: 0, opacity: 1, scale: 1 }}
                 transition={{
                   delay: idx * 0.08 + 0.1,
-                  duration: 0.7,
-                  type: "spring",
+                  duration: 0.7, type: "spring",
                 }}
               >
                 <div className="mb-3">{h.icon}</div>
@@ -343,7 +344,7 @@ export default function WebDesign() {
                 </div>
                 {/* Hover Overlay */}
                 <motion.div
-                  className="absolute inset-0 bg-black/80 text-white flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
+                  className="absolute inset-0 bg-primary/90 text-white flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
                 >
@@ -351,7 +352,7 @@ export default function WebDesign() {
                     {c.metrics.map((m) => (
                       <li
                         key={m}
-                        className="text-primary font-semibold text-base"
+                        className="text-white font-semibold text-base"
                       >
                         {m}
                       </li>
@@ -359,7 +360,7 @@ export default function WebDesign() {
                   </ul>
                   <Link
                     to={c.link}
-                    className="bg-primary hover:bg-primary/90 px-5 py-2 rounded-lg font-bold shadow-lg inline-block"
+                    className="bg-white text-primary font-bold hover:bg-white/90 px-5 py-2 rounded-lg shadow-lg inline-block"
                   >
                     View Case Study
                   </Link>
@@ -392,6 +393,29 @@ export default function WebDesign() {
           </Button>
         </section>
       </main>
+      {/* Floating Get in Touch button */}
+      <Button
+        className="fixed z-[99] bottom-7 right-7 bg-primary text-white px-7 py-4 rounded-full shadow-2xl text-base font-bold hover:bg-primary/80 transition-all"
+        style={{ boxShadow: "0 1.5px 18px 0 #8F5CFF70" }}
+        onClick={() => setShowContact(true)}
+      >
+        Get in Touch
+      </Button>
+      {/* Floating form modal */}
+      {showContact && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-[1000]">
+          <div className="bg-background rounded-2xl shadow-2xl max-w-lg w-full p-7 relative animate-fade-in">
+            <button
+              className="absolute top-5 right-5 text-xl font-bold text-muted-foreground p-1 hover:text-primary"
+              onClick={() => setShowContact(false)}
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <FloatingFormCard />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
