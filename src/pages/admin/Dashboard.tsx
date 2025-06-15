@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import {
   Card,
@@ -39,6 +38,7 @@ import {
 } from "lucide-react";
 import { getFormSubmissions, updateSubmissionStatus, deleteSubmissions, CombinedSubmission } from "@/utils/form-utils";
 import { toast } from "sonner";
+import { exportToCSV } from "@/utils/csv-export";
 
 export default function Dashboard() {
   const [submissions, setSubmissions] = useState<CombinedSubmission[]>([]);
@@ -201,6 +201,16 @@ export default function Dashboard() {
     }
   };
 
+  const handleExport = () => {
+    if (filteredSubmissions.length === 0) {
+      toast.error("No data to export");
+      return;
+    }
+    
+    exportToCSV(filteredSubmissions, 'form_submissions');
+    toast.success(`Exported ${filteredSubmissions.length} submissions to CSV`);
+  };
+
   return (
     <div className="space-y-6">
       <Card>
@@ -225,9 +235,14 @@ export default function Dashboard() {
           </div>
           
           <div className="flex gap-2 mt-4 sm:mt-0">
-            <Button variant="outline" size="sm">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={handleExport}
+              disabled={filteredSubmissions.length === 0}
+            >
               <Download className="h-4 w-4 mr-2" />
-              Export
+              Export CSV
             </Button>
             {selectedSubmissions.length > 0 && (
               <Button 
