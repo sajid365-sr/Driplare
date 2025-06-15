@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import {
   Card,
@@ -7,38 +8,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Badge } from "@/components/ui/badge";
-import { formatDistance } from "date-fns";
-import {
-  Download,
-  Filter,
-  MoreHorizontal,
-  Search,
-  Loader2,
-  RefreshCw,
-  AlertCircle,
-} from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { getFormSubmissions, updateSubmissionStatus, deleteSubmissions, CombinedSubmission } from "@/utils/form-utils";
 import { toast } from "sonner";
 import { exportToCSV } from "@/utils/csv-export";
+import { DebugInfoPanel } from "@/components/admin/dashboard/DebugInfoPanel";
+import { SubmissionsFilters } from "@/components/admin/dashboard/SubmissionsFilters";
+import { SubmissionsActions } from "@/components/admin/dashboard/SubmissionsActions";
+import { SubmissionsTable } from "@/components/admin/dashboard/SubmissionsTable";
+import { EmptyState } from "@/components/admin/dashboard/EmptyState";
 
 export default function Dashboard() {
   const [submissions, setSubmissions] = useState<CombinedSubmission[]>([]);
@@ -172,34 +150,6 @@ export default function Dashboard() {
     
     return matchesFilter && matchesSearch;
   });
-  
-  const getBadgeVariant = (status: string) => {
-    switch (status) {
-      case "new": return "default";
-      case "in_progress": return "warning";
-      case "completed": return "success";
-      case "spam": return "destructive";
-      default: return "secondary";
-    }
-  };
-
-  const formatFormType = (formType: string) => {
-    if (!formType) return "Unknown";
-    
-    return formType
-      .split("_")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
-
-  const getFormTypeColor = (formType: string) => {
-    switch (formType) {
-      case "newsletter": return "bg-blue-100 text-blue-800";
-      case "contact": return "bg-green-100 text-green-800";
-      case "service_request": return "bg-purple-100 text-purple-800";
-      default: return "bg-gray-100 text-gray-800";
-    }
-  };
 
   const handleExport = () => {
     if (filteredSubmissions.length === 0) {
@@ -209,6 +159,11 @@ export default function Dashboard() {
     
     exportToCSV(filteredSubmissions, 'form_submissions');
     toast.success(`Exported ${filteredSubmissions.length} submissions to CSV`);
+  };
+
+  const handleClearFilters = () => {
+    setSearchTerm("");
+    setFilter("all");
   };
 
   return (
@@ -221,233 +176,48 @@ export default function Dashboard() {
               Manage and respond to form submissions from all sources ({submissions.length} total)
             </CardDescription>
             
-            {/* Debug Information Panel */}
-            {debugInfo && (
-              <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border text-sm">
-                <div className="flex items-start gap-2">
-                  <AlertCircle className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
-                  <div className="whitespace-pre-line text-gray-700 dark:text-gray-300">
-                    {debugInfo}
-                  </div>
-                </div>
-              </div>
-            )}
+            <DebugInfoPanel debugInfo={debugInfo} />
           </div>
           
-          <div className="flex gap-2 mt-4 sm:mt-0">
-            <Button 
-              variant="outline" 
-              size="sm" 
-              onClick={handleExport}
-              disabled={filteredSubmissions.length === 0}
-            >
-              <Download className="h-4 w-4 mr-2" />
-              Export CSV
-            </Button>
-            {selectedSubmissions.length > 0 && (
-              <Button 
-                variant="destructive" 
-                size="sm" 
-                onClick={handleDelete}
-                disabled={isDeleting}
-              >
-                {isDeleting ? (
-                  <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Deleting...
-                  </>
-                ) : (
-                  <>Delete Selected</>
-                )}
-              </Button>
-            )}
-          </div>
+          <SubmissionsActions
+            onExport={handleExport}
+            onDelete={handleDelete}
+            selectedCount={selectedSubmissions.length}
+            filteredCount={filteredSubmissions.length}
+            isDeleting={isDeleting}
+          />
         </CardHeader>
         
         <CardContent>
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <div className="relative flex-1">
-              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search submissions..."
-                className="pl-8"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-            <div className="flex gap-2">
-              <Select
-                defaultValue="all"
-                value={filter}
-                onValueChange={setFilter}
-              >
-                <SelectTrigger className="w-[180px]">
-                  <div className="flex items-center">
-                    <Filter className="h-4 w-4 mr-2" />
-                    <SelectValue placeholder="Filter" />
-                  </div>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Submissions</SelectItem>
-                  <SelectItem value="contact">Contact Forms</SelectItem>
-                  <SelectItem value="newsletter">Newsletter</SelectItem>
-                  <SelectItem value="service_request">Service Requests</SelectItem>
-                  <SelectItem value="new">New</SelectItem>
-                  <SelectItem value="in_progress">In Progress</SelectItem>
-                  <SelectItem value="completed">Completed</SelectItem>
-                  <SelectItem value="spam">Spam</SelectItem>
-                </SelectContent>
-              </Select>
-              <Button 
-                variant="outline" 
-                onClick={handleRefresh}
-                disabled={isRefreshing}
-              >
-                <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
-              </Button>
-            </div>
-          </div>
+          <SubmissionsFilters
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            filter={filter}
+            onFilterChange={setFilter}
+            onRefresh={handleRefresh}
+            isRefreshing={isRefreshing}
+          />
 
           {isLoading ? (
             <div className="flex justify-center items-center h-48">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
             </div>
           ) : filteredSubmissions.length > 0 ? (
-            <div className="rounded-md border overflow-hidden overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[50px]">
-                      <Checkbox
-                        checked={
-                          selectedSubmissions.length > 0 &&
-                          selectedSubmissions.length === filteredSubmissions.length
-                        }
-                        onCheckedChange={toggleSelectAll}
-                        aria-label="Select all"
-                      />
-                    </TableHead>
-                    <TableHead className="w-[120px]">Type</TableHead>
-                    <TableHead className="w-[180px]">Name</TableHead>
-                    <TableHead className="hidden md:table-cell">Email</TableHead>
-                    <TableHead className="hidden md:table-cell">Message/Subject</TableHead>
-                    <TableHead className="hidden lg:table-cell">Company</TableHead>
-                    <TableHead className="w-[100px]">Status</TableHead>
-                    <TableHead className="hidden lg:table-cell w-[120px]">Date</TableHead>
-                    <TableHead className="w-[50px]"></TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredSubmissions.map((submission) => (
-                    <TableRow key={submission.id}>
-                      <TableCell>
-                        <Checkbox
-                          checked={selectedSubmissions.includes(submission.id)}
-                          onCheckedChange={() => toggleSelectSubmission(submission.id)}
-                          aria-label="Select row"
-                        />
-                      </TableCell>
-                      <TableCell className="font-medium">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getFormTypeColor(submission.form_type || 'unknown')}`}>
-                          {formatFormType(submission.form_type || 'unknown')}
-                        </span>
-                      </TableCell>
-                      <TableCell>{submission.name || 'N/A'}</TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        <a
-                          href={`mailto:${submission.email}`}
-                          className="text-blue-500 hover:underline"
-                        >
-                          {submission.email}
-                        </a>
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell max-w-[300px] truncate">
-                        {submission.subject || submission.message || "No message"}
-                      </TableCell>
-                      <TableCell className="hidden lg:table-cell max-w-[200px] truncate">
-                        {submission.company || "N/A"}
-                      </TableCell>
-                      <TableCell>
-                        {submission.form_type === 'newsletter' ? (
-                          <Badge variant="secondary">Subscribed</Badge>
-                        ) : (
-                          <Select
-                            value={submission.status || "new"}
-                            onValueChange={(value) => handleStatusChange(submission.id, value)}
-                          >
-                            <SelectTrigger className="w-[110px] h-8">
-                              <SelectValue>
-                                <Badge variant={getBadgeVariant(submission.status || "new") as any}>
-                                  {submission.status ? submission.status.replace("_", " ") : "New"}
-                                </Badge>
-                              </SelectValue>
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="new">New</SelectItem>
-                              <SelectItem value="in_progress">In Progress</SelectItem>
-                              <SelectItem value="completed">Completed</SelectItem>
-                              <SelectItem value="spam">Spam</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        )}
-                      </TableCell>
-                      <TableCell className="hidden lg:table-cell text-muted-foreground">
-                        {submission.created_at
-                          ? formatDistance(new Date(submission.created_at), new Date(), {
-                              addSuffix: true,
-                            })
-                          : "Unknown"}
-                      </TableCell>
-                      <TableCell>
-                        <Button variant="ghost" size="icon">
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
+            <SubmissionsTable
+              submissions={filteredSubmissions}
+              selectedSubmissions={selectedSubmissions}
+              onToggleSelection={toggleSelectSubmission}
+              onToggleSelectAll={toggleSelectAll}
+              onStatusChange={handleStatusChange}
+            />
           ) : (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground mb-4">
-                {submissions.length === 0 
-                  ? "No submissions found in database." 
-                  : "No submissions match your current filters"
-                }
-              </p>
-              
-              {submissions.length === 0 && (
-                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4 text-left max-w-md mx-auto">
-                  <h4 className="font-semibold text-orange-800 mb-2">Debug Information:</h4>
-                  <div className="text-sm text-orange-700 space-y-1">
-                    <p>• Check browser console (F12) for detailed logs</p>
-                    <p>• Verify data exists in form_submissions table</p>
-                    <p>• Check RLS policies allow table access</p>
-                    <p>• Ensure proper authentication if required</p>
-                  </div>
-                </div>
-              )}
-              
-              {searchTerm || filter !== "all" ? (
-                <Button
-                  variant="link"
-                  onClick={() => {
-                    setSearchTerm("");
-                    setFilter("all");
-                  }}
-                >
-                  Clear filters
-                </Button>
-              ) : (
-                <Button
-                  variant="link"
-                  onClick={handleRefresh}
-                >
-                  Refresh data
-                </Button>
-              )}
-            </div>
+            <EmptyState
+              totalSubmissions={submissions.length}
+              searchTerm={searchTerm}
+              filter={filter}
+              onClearFilters={handleClearFilters}
+              onRefresh={handleRefresh}
+            />
           )}
         </CardContent>
         
