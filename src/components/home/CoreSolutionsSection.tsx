@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import AnimatedGridBg from "../common/AnimatedGridBg";
@@ -16,8 +10,9 @@ import {
   FileText,
   BrainCircuit,
   Wrench,
-  ArrowRight
+  ArrowRight,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const offerings = [
   {
@@ -123,11 +118,44 @@ const offerings = [
   }
 ];
 
+// Animation variants for the expandable cards
+const cardVariants = {
+  collapsed: {
+    width: 64,
+    minWidth: 64,
+    maxWidth: 70,
+    borderRadius: "2rem",
+    transition: { duration: 0.45, type: "spring", bounce: 0.2 },
+  },
+  expanded: {
+    width: 370,
+    minWidth: 300,
+    maxWidth: 420,
+    borderRadius: "2.2rem",
+    transition: { duration: 0.6, type: "spring", bounce: 0.24 },
+  },
+};
+
+const fadeInContent = {
+  initial: { opacity: 0, x: 36 },
+  animate: { opacity: 1, x: 0, transition: { delay: 0.08, duration: 0.36 } },
+  exit: { opacity: 0, x: 36, transition: { duration: 0.26 } }
+};
+
 export function CoreSolutionsSection() {
+  const [expanded, setExpanded] = useState<number | null>(0);
+
+  // On mobile, tap to expand, tap again to collapse
+  const handleCardClick = (idx: number) => {
+    if (window.innerWidth < 768) {
+      setExpanded(prev => (prev === idx ? null : idx));
+    }
+  };
+
   return (
     <section
       id="solutions"
-      className="py-20 bg-secondary/50 dark:bg-secondary/20"
+      className="py-20 bg-secondary/50 dark:bg-secondary/20 relative overflow-x-hidden"
     >
       <AnimatedGridBg />
       <div className="container">
@@ -139,69 +167,129 @@ export function CoreSolutionsSection() {
             From web and mobile to AI, creative design, marketing, and beyond—Driplare empowers your business to thrive in the digital age.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {offerings.map((offering, i) => (
-            <div
-              key={offering.title}
-              className={`
-                relative group rounded-3xl transition-shadow overflow-hidden
-                shadow-xl border border-primary/10 bg-gradient-to-br from-secondary/60 via-white/60 to-primary/10
-                backdrop-blur-[3px] hover:scale-105
-                flex flex-col
-                min-h-[430px]
-              `}
-              style={{ boxShadow: "0 8px 64px 8px #8F5CFF12" }}
-            >
-              {/* Number circle (like screenshot) */}
-              <div className="absolute right-5 top-5 z-10">
-                <div className="w-10 h-10 rounded-full bg-primary/80 flex items-center justify-center text-white font-bold text-lg shadow-lg ring-2 ring-primary/30">
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-              </div>
-              <div className="p-7 pt-9 flex-1 flex flex-col">
-                {/* Icon and badge row */}
-                <div className="flex items-center gap-3 mb-5">
-                  <offering.icon className="h-11 w-11 text-primary drop-shadow-lg bg-white/70 rounded-full p-2" />
-                  {offering.badge && (
-                    <span className="inline-block px-2 py-1 ml-1 rounded-lg bg-primary/10 text-primary text-xs font-semibold">
-                      {offering.badge}
-                    </span>
-                  )}
-                </div>
-                <h3 className="text-2xl font-bold mb-2 text-foreground">{offering.title}</h3>
-                <p className="mb-3 text-base text-muted-foreground font-medium">{offering.valueProp}</p>
-                <ul className="mb-2 flex flex-col gap-2 text-foreground/90 text-sm pl-2">
-                  {offering.bullets.map((b, bi) => (
-                    <li key={bi} className="flex items-start gap-2">
-                      <span className="inline-block w-1.5 h-1.5 mt-2 rounded-full bg-primary/60 shrink-0"></span>
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-                {offering.tech && (
-                  <div className="mt-2 text-xs font-medium text-primary">{offering.tech}</div>
-                )}
-                {offering.note && (
-                  <div className="mt-2 text-xs font-medium text-accent-foreground">{offering.note}</div>
-                )}
-                {/* "Learn More" button at the bottom */}
-                <div className="flex-grow" />
-                <div className="mt-6 flex">
-                  <Link to={offering.link} className="w-full">
-                    <Button
-                      variant="outline"
-                      className="w-full bg-primary/90 text-white rounded-full py-2 font-bold tracking-wide flex items-center justify-center group hover:bg-primary transition"
+        {/* Horizontally scrollable cards on mobile, flex centered on desktop */}
+        <div
+          className="
+            flex gap-5 md:gap-8 w-full
+            overflow-x-auto
+            md:overflow-visible
+            pb-4
+            mb-4
+            md:justify-center
+            scrollbar-hide
+          "
+        >
+          {offerings.map((offering, i) => {
+            const isExpanded = expanded === i;
+            return (
+              <motion.div
+                key={offering.title}
+                className={`
+                  group relative overflow-visible flex flex-col items-center
+                  shadow-2xl transition-[box-shadow] min-h-[66px]
+                  ${isExpanded ? "z-20" : "z-10"}
+                `}
+                initial="collapsed"
+                animate={isExpanded ? "expanded" : "collapsed"}
+                variants={cardVariants}
+                onMouseEnter={() => window.innerWidth >= 768 && setExpanded(i)}
+                onMouseLeave={() => window.innerWidth >= 768 && setExpanded(0)}
+                onClick={() => handleCardClick(i)}
+                style={{
+                  background: "linear-gradient(135deg, #8F5CFF 80%, #CBA8FF 100%)",
+                  color: "#fff",
+                  cursor: "pointer",
+                }}
+              >
+                {/* Vertical title and number when collapsed */}
+                <motion.div
+                  className="flex flex-col items-center justify-center h-full w-full"
+                  style={{
+                    minHeight: 64,
+                    minWidth: 64,
+                  }}
+                >
+                  {/* Number circle */}
+                  <div className="w-10 h-10 bg-white/80 text-primary font-bold flex items-center justify-center rounded-full mt-3 shadow-md mb-2 border-2 border-primary/40">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  {/* Vertical label */}
+                  <div className="flex flex-col items-center" style={{ height: 140, justifyContent: "center" }}>
+                    <span
+                      className="uppercase tracking-wider text-xs font-semibold text-white/90"
+                      style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
                     >
-                      <span>Learn More</span>
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
+                      {offering.title}
+                    </span>
+                  </div>
+                </motion.div>
+                {/* Revealed content on expand */}
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      className="
+                        absolute left-0 top-0 h-full w-full rounded-[2.2rem]
+                        shadow-2xl bg-white/95 text-foreground px-8 py-7 flex flex-col justify-start items-start
+                        z-30
+                        overflow-hidden
+                        "
+                      variants={fadeInContent}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      style={{
+                        boxShadow: "0 6px 56px 8px #8F5CFF11",
+                      }}
+                    >
+                      {/* Icon & badge row */}
+                      <div className="flex items-center gap-2 mb-4">
+                        <offering.icon className="h-10 w-10 text-primary bg-white rounded-full p-2 drop-shadow-lg" />
+                        {offering.badge && (
+                          <span className="inline-block px-2 py-1 ml-1 rounded-lg bg-primary/10 text-primary text-xs font-semibold">
+                            {offering.badge}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-lg md:text-xl font-extrabold mb-1 text-primary">{offering.title}</h3>
+                      <p className="mb-3 text-base text-muted-foreground font-medium">{offering.valueProp}</p>
+                      <ul className="mb-2 flex flex-col gap-2 text-foreground/90 text-xs pl-1">
+                        {offering.bullets.map((b, bi) => (
+                          <li key={bi} className="flex items-start gap-2">
+                            <span className="inline-block w-1.5 h-1.5 mt-2 rounded-full bg-primary/60 shrink-0"></span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      {offering.tech && (
+                        <div className="mt-2 mb-1 text-xs font-medium text-primary">{offering.tech}</div>
+                      )}
+                      {offering.note && (
+                        <div className="mt-2 mb-1 text-xs font-medium text-accent-foreground">{offering.note}</div>
+                      )}
+                      {/* "Learn More" button */}
+                      <div className="flex-grow" />
+                      <div className="mt-4 flex">
+                        <Link to={offering.link} className="w-full">
+                          <Button
+                            variant="outline"
+                            className="w-full bg-primary text-white rounded-full py-2 font-bold tracking-wide flex items-center justify-center group hover:bg-primary/90 transition"
+                          >
+                            <span>Learn More</span>
+                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </Button>
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
+
+// Hide scrollbars on mobile/modern browsers
+// Source: https://webtrickz.com/hide-scrollbar-with-tailwind-css/
