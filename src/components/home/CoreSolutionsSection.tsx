@@ -118,21 +118,25 @@ const offerings = [
   }
 ];
 
-// Animation variants for the expandable cards
+// Animation variants for the expandable cards with increased size and slower animation
 const cardVariants = {
   collapsed: {
-    width: 64,
-    minWidth: 64,
-    maxWidth: 70,
-    borderRadius: "2rem",
-    transition: { duration: 0.45, type: "spring", bounce: 0.2 },
+    width: 96,         // increased from 64
+    minWidth: 96,      // increased from 64
+    maxWidth: 120,     // increased from 70
+    height: 320,       // increased from previous vertical size (if present)
+    minHeight: 320,    // ensures vertical size of collapsed card is larger
+    borderRadius: "2.4rem",
+    transition: { duration: 0.9, type: "spring", bounce: 0.24 }, // slower
   },
   expanded: {
-    width: 370,
-    minWidth: 300,
-    maxWidth: 420,
-    borderRadius: "2.2rem",
-    transition: { duration: 0.6, type: "spring", bounce: 0.24 },
+    width: 480,       // increased from 370
+    minWidth: 420,    // increased from 300
+    maxWidth: 560,    // increased from 420
+    height: 540,      // increased from previous vertical size
+    minHeight: 520,   // ensures vertical size of expanded card is larger
+    borderRadius: "2.8rem",
+    transition: { duration: 0.9, type: "spring", bounce: 0.24 }, // slower
   },
 };
 
@@ -155,11 +159,11 @@ export function CoreSolutionsSection() {
   return (
     <section
       id="solutions"
-      className="py-20 bg-secondary/50 dark:bg-secondary/20 relative overflow-x-hidden"
+      className="py-24 bg-secondary/50 dark:bg-secondary/20 relative overflow-x-hidden"
     >
       <AnimatedGridBg />
       <div className="container">
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 fade-in slide-up">
             Our Offerings & Services
           </h2>
@@ -170,11 +174,11 @@ export function CoreSolutionsSection() {
         {/* Horizontally scrollable cards on mobile, flex centered on desktop */}
         <div
           className="
-            flex gap-5 md:gap-8 w-full
+            flex gap-8 md:gap-12 w-full
             overflow-x-auto
             md:overflow-visible
-            pb-4
-            mb-4
+            pb-8
+            mb-8
             md:justify-center
             scrollbar-hide
           "
@@ -186,7 +190,7 @@ export function CoreSolutionsSection() {
                 key={offering.title}
                 className={`
                   group relative overflow-visible flex flex-col items-center
-                  shadow-2xl transition-[box-shadow] min-h-[66px]
+                  shadow-2xl transition-[box-shadow] min-h-[96px]
                   ${isExpanded ? "z-20" : "z-10"}
                 `}
                 initial="collapsed"
@@ -205,18 +209,18 @@ export function CoreSolutionsSection() {
                 <motion.div
                   className="flex flex-col items-center justify-center h-full w-full"
                   style={{
-                    minHeight: 64,
-                    minWidth: 64,
+                    minHeight: 96,
+                    minWidth: 96,
                   }}
                 >
                   {/* Number circle */}
-                  <div className="w-10 h-10 bg-white/80 text-primary font-bold flex items-center justify-center rounded-full mt-3 shadow-md mb-2 border-2 border-primary/40">
+                  <div className="w-12 h-12 bg-white/80 text-primary font-bold flex items-center justify-center rounded-full mt-4 shadow-md mb-2 border-2 border-primary/40 text-lg">
                     {String(i + 1).padStart(2, "0")}
                   </div>
                   {/* Vertical label */}
-                  <div className="flex flex-col items-center" style={{ height: 140, justifyContent: "center" }}>
+                  <div className="flex flex-col items-center" style={{ height: 180, justifyContent: "center" }}>
                     <span
-                      className="uppercase tracking-wider text-xs font-semibold text-white/90"
+                      className="uppercase tracking-wider text-sm font-semibold text-white/90"
                       style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
                     >
                       {offering.title}
@@ -228,8 +232,8 @@ export function CoreSolutionsSection() {
                   {isExpanded && (
                     <motion.div
                       className="
-                        absolute left-0 top-0 h-full w-full rounded-[2.2rem]
-                        shadow-2xl bg-white/95 text-foreground px-8 py-7 flex flex-col justify-start items-start
+                        absolute left-0 top-0 h-full w-full rounded-[2.8rem]
+                        shadow-2xl bg-white/95 text-foreground px-12 py-10 flex flex-col justify-start items-start
                         z-30
                         overflow-hidden
                         "
@@ -242,40 +246,39 @@ export function CoreSolutionsSection() {
                       }}
                     >
                       {/* Icon & badge row */}
-                      <div className="flex items-center gap-2 mb-4">
-                        <offering.icon className="h-10 w-10 text-primary bg-white rounded-full p-2 drop-shadow-lg" />
+                      <div className="flex items-center gap-3 mb-6">
+                        <offering.icon className="h-12 w-12 text-primary bg-white rounded-full p-2 drop-shadow-lg" />
                         {offering.badge && (
-                          <span className="inline-block px-2 py-1 ml-1 rounded-lg bg-primary/10 text-primary text-xs font-semibold">
+                          <span className="inline-block px-3 py-1 ml-2 rounded-lg bg-primary/10 text-primary text-sm font-semibold">
                             {offering.badge}
                           </span>
                         )}
                       </div>
-                      <h3 className="text-lg md:text-xl font-extrabold mb-1 text-primary">{offering.title}</h3>
-                      <p className="mb-3 text-base text-muted-foreground font-medium">{offering.valueProp}</p>
-                      <ul className="mb-2 flex flex-col gap-2 text-foreground/90 text-xs pl-1">
+                      <h3 className="text-xl md:text-2xl font-extrabold mb-1 text-primary">{offering.title}</h3>
+                      <p className="mb-3 text-lg text-muted-foreground font-medium">{offering.valueProp}</p>
+                      <ul className="mb-2 flex flex-col gap-3 text-foreground/90 text-base pl-1">
                         {offering.bullets.map((b, bi) => (
                           <li key={bi} className="flex items-start gap-2">
-                            <span className="inline-block w-1.5 h-1.5 mt-2 rounded-full bg-primary/60 shrink-0"></span>
+                            <span className="inline-block w-2 h-2 mt-2 rounded-full bg-primary/60 shrink-0"></span>
                             <span>{b}</span>
                           </li>
                         ))}
                       </ul>
                       {offering.tech && (
-                        <div className="mt-2 mb-1 text-xs font-medium text-primary">{offering.tech}</div>
+                        <div className="mt-2 mb-1 text-base font-medium text-primary">{offering.tech}</div>
                       )}
                       {offering.note && (
-                        <div className="mt-2 mb-1 text-xs font-medium text-accent-foreground">{offering.note}</div>
+                        <div className="mt-2 mb-1 text-base font-medium text-accent-foreground">{offering.note}</div>
                       )}
-                      {/* "Learn More" button */}
                       <div className="flex-grow" />
-                      <div className="mt-4 flex">
+                      <div className="mt-6 flex">
                         <Link to={offering.link} className="w-full">
                           <Button
                             variant="outline"
-                            className="w-full bg-primary text-white rounded-full py-2 font-bold tracking-wide flex items-center justify-center group hover:bg-primary/90 transition"
+                            className="w-full bg-primary text-white rounded-full py-3 text-base font-bold tracking-wide flex items-center justify-center group hover:bg-primary/90 transition"
                           >
                             <span>Learn More</span>
-                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                           </Button>
                         </Link>
                       </div>
