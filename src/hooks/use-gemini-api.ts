@@ -14,6 +14,9 @@ export function useGeminiAPI() {
   const GEMINI_API_KEY = "gemini_api_key";
   const GEMINI_MODEL_KEY = "gemini_model";
 
+  // Valid Gemini models supported by the Gemini SDK
+  const SUPPORTED_MODELS = ["gemini-1.5-pro"];
+
   // State
   const [apiKey, setApiKeyState] = useState<string>("");
   const [geminiModel, setGeminiModelState] = useState<string>("gemini-1.5-pro");
@@ -26,7 +29,12 @@ export function useGeminiAPI() {
     const storedKey = localStorage.getItem(GEMINI_API_KEY);
     if (storedKey) setApiKeyState(storedKey);
 
-    const storedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
+    // If local storage has an unsupported model, force to default
+    let storedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
+    if (!SUPPORTED_MODELS.includes(storedModel)) {
+      storedModel = "gemini-1.5-pro";
+      localStorage.setItem(GEMINI_MODEL_KEY, storedModel);
+    }
     setGeminiModelState(storedModel);
 
     // Load sync logs from localStorage
@@ -34,11 +42,13 @@ export function useGeminiAPI() {
     setSyncLogs(logs);
   }, []);
 
-  // Set Gemini model and save to localStorage
+  // Set Gemini model and save to localStorage (with validation)
   const setGeminiModel = (model: string) => {
-    setGeminiModelState(model);
-    if (model) {
-      localStorage.setItem(GEMINI_MODEL_KEY, model);
+    // Only allow supported models
+    const validatedModel = SUPPORTED_MODELS.includes(model) ? model : "gemini-1.5-pro";
+    setGeminiModelState(validatedModel);
+    if (validatedModel) {
+      localStorage.setItem(GEMINI_MODEL_KEY, validatedModel);
       toast.success("Gemini model updated");
     }
   };
@@ -143,12 +153,17 @@ export function useGeminiAPI() {
     toast.success("Sync logs cleared");
   };
 
-  // --- Gemini SDK Setup with dynamic model ---
+  // --- Gemini SDK Setup with dynamic model (but safe) ---
   const getGeminiModelInstance = () => {
     const key = apiKey || import.meta.env.VITE_GEMINI_API_KEY;
     if (!key) throw new Error("Gemini API key is required");
-    // Model is always read from localStorage or fallback
-    const selectedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
+    // Get supported model only (falling back to default)
+    let selectedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
+    if (!SUPPORTED_MODELS.includes(selectedModel)) {
+      selectedModel = "gemini-1.5-pro";
+      localStorage.setItem(GEMINI_MODEL_KEY, selectedModel);
+      setGeminiModelState(selectedModel);
+    }
     const genAI = new GoogleGenerativeAI(key);
     return genAI.getGenerativeModel({
       model: selectedModel,

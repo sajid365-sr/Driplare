@@ -44,11 +44,10 @@ export default function Settings() {
     clearSyncLogs
   } = useGeminiAPI();
 
-  // Add Gemini model options (can expand as Google adds models)
+  // Add Gemini model options (Gemini 1.0 Pro is removed)
   const GEMINI_MODEL_OPTIONS = [
-    { value: "gemini-1.5-pro", label: "Gemini 1.5 Pro" },
-    { value: "gemini-1.0-pro", label: "Gemini 1.0 Pro" }
-    // Add more as needed
+    { value: "gemini-1.5-pro", label: "Gemini 1.5 Pro" }
+    // Add more as Google enables in the future
   ];
 
   // Content sync settings
