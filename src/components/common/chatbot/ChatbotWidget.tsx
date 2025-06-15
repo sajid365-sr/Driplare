@@ -31,6 +31,17 @@ export const ChatbotWidget = () => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
+  // Automatically speak when a new bot message appears
+  useEffect(() => {
+    // Only speak the *newest* bot message
+    if (messages.length === 0) return;
+    const lastMsg = messages[messages.length - 1];
+    if (lastMsg.isBot && lastMsg.text && !isTyping) {
+      speak(lastMsg.text);
+    }
+    // eslint-disable-next-line
+  }, [messages, isTyping]);
+
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -121,11 +132,6 @@ export const ChatbotWidget = () => {
         // Optional: auto-send after capture; if required, call handleSendMessage()
       });
     }
-  };
-
-  // Add voice output to bot messages:
-  const handlePlayBotMessage = (msg: string) => {
-    speak(msg);
   };
 
   return (
@@ -251,17 +257,6 @@ export const ChatbotWidget = () => {
                           style={{ position: "relative" }}
                         >
                           <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
-                          {/* Only for bot messages: Play button for TTS */}
-                          {msg.isBot && (
-                            <button
-                              aria-label="Play audio"
-                              onClick={() => handlePlayBotMessage(msg.text)}
-                              className="ml-1 text-primary hover:text-primary/80"
-                              style={{ position: "absolute", bottom: 4, right: 8 }}
-                            >
-                              <Volume2 size={18} />
-                            </button>
-                          )}
                         </div>
                       ))}
                       {isTyping && (
