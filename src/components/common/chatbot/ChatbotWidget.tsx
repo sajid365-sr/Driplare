@@ -33,12 +33,24 @@ function renderFormattedBotMessage(msg: string) {
   return <p className="text-sm whitespace-pre-wrap">{msg}</p>;
 }
 
-// Utility to strip asterisk bullets from text for TTS
+// Utility to strip asterisk bullets and other marks from text for TTS
 function textForSpeech(msg: string) {
-  // Replace * bullets with pause and plain line
+  // Remove *, -, •, and extra whitespace at the beginning of lines,
+  // as well as any " - " bullet-like prefix
   return msg
     .split("\n")
-    .map(line => line.startsWith("* ") ? line.replace(/^\*\s*/, "") : line)
+    .map(line =>
+      line
+        // Remove all asterisks
+        .replace(/\*/g, "")
+        // Remove leading dashes, bullets, or similar characters plus whitespace
+        .replace(/^[\s\-•·‣▪➤➔►‣–—]+/, "")
+        // Trim remaining whitespace
+        .trim()
+    )
+    // Filter out empty lines left behind
+    .filter(line => line.length > 0)
+    // Join with a pause for natural reading
     .join(". ");
 }
 
