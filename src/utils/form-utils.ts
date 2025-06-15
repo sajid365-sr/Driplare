@@ -69,7 +69,7 @@ export async function submitForm(data: FormSubmission): Promise<boolean> {
  */
 export async function getFormSubmissions(): Promise<CombinedSubmission[]> {
   try {
-    console.log("Fetching form submissions...");
+    console.log("Fetching form submissions from both tables...");
     
     // Fetch regular form submissions
     const { data: formData, error: formError } = await supabase
@@ -79,7 +79,7 @@ export async function getFormSubmissions(): Promise<CombinedSubmission[]> {
 
     if (formError) {
       console.error("Error fetching form submissions:", formError);
-      throw formError;
+      toast.error("Failed to load form submissions");
     }
 
     // Fetch newsletter submissions
@@ -90,29 +90,57 @@ export async function getFormSubmissions(): Promise<CombinedSubmission[]> {
 
     if (newsletterError) {
       console.error("Error fetching newsletter submissions:", newsletterError);
-      throw newsletterError;
+      toast.error("Failed to load newsletter submissions");
     }
 
+    console.log("Form submissions data:", formData);
+    console.log("Newsletter data:", newsletterData);
+
     // Combine and format the data
-    const combinedData: CombinedSubmission[] = [
-      ...(formData || []).map(item => ({
-        ...item,
-        form_type: item.form_type || 'contact'
-      })),
-      ...(newsletterData || []).map(item => ({
-        id: item.id,
-        name: 'Newsletter Subscriber',
-        email: item.email || '',
-        form_type: 'newsletter',
-        created_at: item.created_at,
-        status: 'new'
-      }))
-    ];
+    const combinedData: CombinedSubmission[] = [];
+
+    // Add form submissions
+    if (formData && formData.length > 0) {
+      formData.forEach(item => {
+        combinedData.push({
+          id: item.id,
+          name: item.name,
+          email: item.email,
+          form_type: item.form_type || 'contact',
+          phone: item.phone,
+          subject: item.subject,
+          message: item.message,
+          company: item.company,
+          service_type: item.service_type,
+          budget: item.budget,
+          timeline: item.timeline,
+          additional_info: item.additional_info,
+          status: item.status || 'new',
+          created_at: item.created_at
+        });
+      });
+    }
+
+    // Add newsletter submissions
+    if (newsletterData && newsletterData.length > 0) {
+      newsletterData.forEach(item => {
+        combinedData.push({
+          id: item.id,
+          name: 'Newsletter Subscriber',
+          email: item.email,
+          form_type: 'newsletter',
+          status: 'subscribed',
+          created_at: item.created_at
+        });
+      });
+    }
 
     // Sort by created_at descending
     combinedData.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
-    console.log(`Fetched ${combinedData.length} total submissions`);
+    console.log(`Total combined submissions: ${combinedData.length}`);
+    console.log("Combined data:", combinedData);
+    
     return combinedData;
   } catch (err) {
     console.error("Error fetching submissions:", err);

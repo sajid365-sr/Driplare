@@ -55,16 +55,26 @@ export default function Dashboard() {
   const fetchSubmissions = async () => {
     setIsLoading(true);
     try {
-      console.log("Starting to fetch submissions...");
+      console.log("Dashboard: Starting to fetch submissions...");
       const data = await getFormSubmissions();
-      console.log("Received submissions data:", data);
+      console.log("Dashboard: Received submissions data:", data);
+      console.log("Dashboard: Number of submissions:", data.length);
+      
       setSubmissions(data);
       
       if (data.length === 0) {
-        console.log("No submissions found in database");
+        console.log("Dashboard: No submissions found in database");
+        toast.info("No submissions found in the database");
+      } else {
+        console.log(`Dashboard: Successfully loaded ${data.length} submissions`);
+        
+        // Log breakdown by type
+        const formSubmissions = data.filter(sub => sub.form_type !== 'newsletter');
+        const newsletterSubmissions = data.filter(sub => sub.form_type === 'newsletter');
+        console.log(`Dashboard: Form submissions: ${formSubmissions.length}, Newsletter: ${newsletterSubmissions.length}`);
       }
     } catch (error) {
-      console.error("Failed to fetch submissions:", error);
+      console.error("Dashboard: Failed to fetch submissions:", error);
       toast.error("Failed to load form submissions");
     } finally {
       setIsLoading(false);
@@ -127,13 +137,19 @@ export default function Dashboard() {
   };
 
   const filteredSubmissions = submissions.filter(submission => {
-    const matchesFilter = filter === "all" || submission.status === filter || submission.form_type === filter;
+    const matchesFilter = filter === "all" || 
+      submission.status === filter || 
+      submission.form_type === filter ||
+      (filter === "contact" && submission.form_type !== 'newsletter') ||
+      (filter === "newsletter" && submission.form_type === 'newsletter');
     
     const matchesSearch = searchTerm === "" ||
       submission.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       submission.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       submission.message?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      submission.form_type?.toLowerCase().includes(searchTerm.toLowerCase());
+      submission.form_type?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      submission.company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      submission.subject?.toLowerCase().includes(searchTerm.toLowerCase());
     
     return matchesFilter && matchesSearch;
   });
@@ -173,7 +189,7 @@ export default function Dashboard() {
           <div>
             <CardTitle>Form Submissions</CardTitle>
             <CardDescription>
-              Manage and respond to form submissions from all sources
+              Manage and respond to form submissions from all sources ({submissions.length} total)
             </CardDescription>
           </div>
           <div className="flex gap-2 mt-4 sm:mt-0">
@@ -225,8 +241,9 @@ export default function Dashboard() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Submissions</SelectItem>
+                  <SelectItem value="contact">Contact Forms</SelectItem>
                   <SelectItem value="newsletter">Newsletter</SelectItem>
-                  <SelectItem value="contact">Contact</SelectItem>
+                  <SelectItem value="service_request">Service Requests</SelectItem>
                   <SelectItem value="new">New</SelectItem>
                   <SelectItem value="in_progress">In Progress</SelectItem>
                   <SelectItem value="completed">Completed</SelectItem>
@@ -265,7 +282,8 @@ export default function Dashboard() {
                     <TableHead className="w-[120px]">Type</TableHead>
                     <TableHead className="w-[180px]">Name</TableHead>
                     <TableHead className="hidden md:table-cell">Email</TableHead>
-                    <TableHead className="hidden md:table-cell">Message</TableHead>
+                    <TableHead className="hidden md:table-cell">Message/Subject</TableHead>
+                    <TableHead className="hidden lg:table-cell">Company</TableHead>
                     <TableHead className="w-[100px]">Status</TableHead>
                     <TableHead className="hidden lg:table-cell w-[120px]">Date</TableHead>
                     <TableHead className="w-[50px]"></TableHead>
@@ -296,7 +314,10 @@ export default function Dashboard() {
                         </a>
                       </TableCell>
                       <TableCell className="hidden md:table-cell max-w-[300px] truncate">
-                        {submission.message || "No message"}
+                        {submission.subject || submission.message || "No message"}
+                      </TableCell>
+                      <TableCell className="hidden lg:table-cell max-w-[200px] truncate">
+                        {submission.company || "N/A"}
                       </TableCell>
                       <TableCell>
                         {submission.form_type === 'newsletter' ? (
@@ -343,7 +364,7 @@ export default function Dashboard() {
             <div className="text-center py-12">
               <p className="text-muted-foreground">
                 {submissions.length === 0 
-                  ? "No submissions found in database" 
+                  ? "No submissions found in database. Check console for debugging info." 
                   : "No submissions match your current filters"
                 }
               </p>
