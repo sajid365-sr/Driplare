@@ -20,6 +20,26 @@ export interface FormSubmission {
 }
 
 /**
+ * Combined type for all submissions including newsletter
+ */
+export interface CombinedSubmission {
+  id: string;
+  name?: string;
+  email: string;
+  form_type: string;
+  phone?: string;
+  subject?: string;
+  message?: string;
+  company?: string;
+  service_type?: string;
+  budget?: string;
+  timeline?: string;
+  additional_info?: string;
+  status?: string;
+  created_at: string;
+}
+
+/**
  * Submit form data to Supabase
  */
 export async function submitForm(data: FormSubmission): Promise<boolean> {
@@ -47,22 +67,56 @@ export async function submitForm(data: FormSubmission): Promise<boolean> {
 /**
  * Get all form submissions with optional pagination
  */
-export async function getFormSubmissions(): Promise<any[]> {
+export async function getFormSubmissions(): Promise<CombinedSubmission[]> {
   try {
-    const { data, error } = await supabase
+    console.log("Fetching form submissions...");
+    
+    // Fetch regular form submissions
+    const { data: formData, error: formError } = await supabase
       .from("form_submissions")
       .select("*")
       .order("created_at", { ascending: false });
 
-    if (error) {
-      console.error("Error fetching form submissions:", error);
-      toast.error("Failed to load form submissions");
-      return [];
+    if (formError) {
+      console.error("Error fetching form submissions:", formError);
+      throw formError;
     }
 
-    return data || [];
+    // Fetch newsletter submissions
+    const { data: newsletterData, error: newsletterError } = await supabase
+      .from("news_letter")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (newsletterError) {
+      console.error("Error fetching newsletter submissions:", newsletterError);
+      throw newsletterError;
+    }
+
+    // Combine and format the data
+    const combinedData: CombinedSubmission[] = [
+      ...(formData || []).map(item => ({
+        ...item,
+        form_type: item.form_type || 'contact'
+      })),
+      ...(newsletterData || []).map(item => ({
+        id: item.id,
+        name: 'Newsletter Subscriber',
+        email: item.email || '',
+        form_type: 'newsletter',
+        created_at: item.created_at,
+        status: 'new'
+      }))
+    ];
+
+    // Sort by created_at descending
+    combinedData.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+    console.log(`Fetched ${combinedData.length} total submissions`);
+    return combinedData;
   } catch (err) {
-    console.error("Error fetching form submissions:", err);
+    console.error("Error fetching submissions:", err);
+    toast.error("Failed to load submissions");
     return [];
   }
 }
@@ -99,21 +153,57 @@ export async function updateSubmissionStatus(
  */
 export async function deleteSubmissions(ids: string[]): Promise<boolean> {
   try {
-    const { error } = await supabase
-      .from("form_submissions")
-      .delete()
-      .in("id", ids);
+    // Separate form submissions and newsletter submissions
+    const formIds: string[] = [];
+    const newsletterIds: string[] = [];
+    
+    // We need to check which table each ID belongs to
+    for (const id of ids) {
+      // Try to find in form_submissions first
+      const { data: formData } = await supabase
+        .from("form_submissions")
+        .select("id")
+        .eq("id", id)
+        .single();
+      
+      if (formData) {
+        formIds.push(id);
+      } else {
+        newsletterIds.push(id);
+      }
+    }
 
-    if (error) {
-      console.error("Error deleting submissions:", error);
-      toast.error("Failed to delete submissions");
-      return false;
+    // Delete from form_submissions
+    if (formIds.length > 0) {
+      const { error: formError } = await supabase
+        .from("form_submissions")
+        .delete()
+        .in("id", formIds);
+
+      if (formError) {
+        console.error("Error deleting form submissions:", formError);
+        throw formError;
+      }
+    }
+
+    // Delete from news_letter
+    if (newsletterIds.length > 0) {
+      const { error: newsletterError } = await supabase
+        .from("news_letter")
+        .delete()
+        .in("id", newsletterIds);
+
+      if (newsletterError) {
+        console.error("Error deleting newsletter submissions:", newsletterError);
+        throw newsletterError;
+      }
     }
 
     toast.success(`${ids.length} submission(s) deleted`);
     return true;
   } catch (err) {
     console.error("Error deleting submissions:", err);
+    toast.error("Failed to delete submissions");
     return false;
   }
 }
@@ -123,11 +213,11 @@ export async function deleteSubmissions(ids: string[]): Promise<boolean> {
 export interface NewsLetterForm {
   email: string;
 }
+
 export async function submitNewsletter(data: NewsLetterForm): Promise<boolean> {
   try {
     console.log("Submitting newsletter form:", data);
 
-    // Use authenticated .rpc call to ensure we bypass RLS
     const { error } = await supabase
       .from("news_letter")
       .insert(data)

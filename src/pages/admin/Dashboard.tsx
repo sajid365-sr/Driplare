@@ -34,17 +34,19 @@ import {
   MoreHorizontal,
   Search,
   Loader2,
+  RefreshCw,
 } from "lucide-react";
-import { getFormSubmissions, updateSubmissionStatus, deleteSubmissions } from "@/utils/form-utils";
+import { getFormSubmissions, updateSubmissionStatus, deleteSubmissions, CombinedSubmission } from "@/utils/form-utils";
 import { toast } from "sonner";
 
 export default function Dashboard() {
-  const [submissions, setSubmissions] = useState<any[]>([]);
+  const [submissions, setSubmissions] = useState<CombinedSubmission[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedSubmissions, setSelectedSubmissions] = useState<string[]>([]);
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
     fetchSubmissions();
@@ -53,14 +55,27 @@ export default function Dashboard() {
   const fetchSubmissions = async () => {
     setIsLoading(true);
     try {
+      console.log("Starting to fetch submissions...");
       const data = await getFormSubmissions();
+      console.log("Received submissions data:", data);
       setSubmissions(data);
+      
+      if (data.length === 0) {
+        console.log("No submissions found in database");
+      }
     } catch (error) {
       console.error("Failed to fetch submissions:", error);
       toast.error("Failed to load form submissions");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    await fetchSubmissions();
+    setIsRefreshing(false);
+    toast.success("Data refreshed successfully");
   };
 
   const handleStatusChange = async (id: string, status: string) => {
@@ -112,7 +127,7 @@ export default function Dashboard() {
   };
 
   const filteredSubmissions = submissions.filter(submission => {
-    const matchesFilter = filter === "all" || submission.status === filter;
+    const matchesFilter = filter === "all" || submission.status === filter || submission.form_type === filter;
     
     const matchesSearch = searchTerm === "" ||
       submission.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -142,6 +157,15 @@ export default function Dashboard() {
       .join(" ");
   };
 
+  const getFormTypeColor = (formType: string) => {
+    switch (formType) {
+      case "newsletter": return "bg-blue-100 text-blue-800";
+      case "contact": return "bg-green-100 text-green-800";
+      case "service_request": return "bg-purple-100 text-purple-800";
+      default: return "bg-gray-100 text-gray-800";
+    }
+  };
+
   return (
     <div className="space-y-6">
       <Card>
@@ -149,7 +173,7 @@ export default function Dashboard() {
           <div>
             <CardTitle>Form Submissions</CardTitle>
             <CardDescription>
-              Manage and respond to form submissions
+              Manage and respond to form submissions from all sources
             </CardDescription>
           </div>
           <div className="flex gap-2 mt-4 sm:mt-0">
@@ -201,14 +225,20 @@ export default function Dashboard() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Submissions</SelectItem>
+                  <SelectItem value="newsletter">Newsletter</SelectItem>
+                  <SelectItem value="contact">Contact</SelectItem>
                   <SelectItem value="new">New</SelectItem>
                   <SelectItem value="in_progress">In Progress</SelectItem>
                   <SelectItem value="completed">Completed</SelectItem>
                   <SelectItem value="spam">Spam</SelectItem>
                 </SelectContent>
               </Select>
-              <Button variant="outline" onClick={fetchSubmissions}>
-                Refresh
+              <Button 
+                variant="outline" 
+                onClick={handleRefresh}
+                disabled={isRefreshing}
+              >
+                <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
               </Button>
             </div>
           </div>
@@ -252,9 +282,11 @@ export default function Dashboard() {
                         />
                       </TableCell>
                       <TableCell className="font-medium">
-                        {formatFormType(submission.form_type)}
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getFormTypeColor(submission.form_type || 'unknown')}`}>
+                          {formatFormType(submission.form_type || 'unknown')}
+                        </span>
                       </TableCell>
-                      <TableCell>{submission.name}</TableCell>
+                      <TableCell>{submission.name || 'N/A'}</TableCell>
                       <TableCell className="hidden md:table-cell">
                         <a
                           href={`mailto:${submission.email}`}
@@ -267,24 +299,28 @@ export default function Dashboard() {
                         {submission.message || "No message"}
                       </TableCell>
                       <TableCell>
-                        <Select
-                          value={submission.status || "new"}
-                          onValueChange={(value) => handleStatusChange(submission.id, value)}
-                        >
-                          <SelectTrigger className="w-[110px] h-8">
-                            <SelectValue>
-                              <Badge variant={getBadgeVariant(submission.status || "new") as any}>
-                                {submission.status ? submission.status.replace("_", " ") : "New"}
-                              </Badge>
-                            </SelectValue>
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="new">New</SelectItem>
-                            <SelectItem value="in_progress">In Progress</SelectItem>
-                            <SelectItem value="completed">Completed</SelectItem>
-                            <SelectItem value="spam">Spam</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        {submission.form_type === 'newsletter' ? (
+                          <Badge variant="secondary">Subscribed</Badge>
+                        ) : (
+                          <Select
+                            value={submission.status || "new"}
+                            onValueChange={(value) => handleStatusChange(submission.id, value)}
+                          >
+                            <SelectTrigger className="w-[110px] h-8">
+                              <SelectValue>
+                                <Badge variant={getBadgeVariant(submission.status || "new") as any}>
+                                  {submission.status ? submission.status.replace("_", " ") : "New"}
+                                </Badge>
+                              </SelectValue>
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="new">New</SelectItem>
+                              <SelectItem value="in_progress">In Progress</SelectItem>
+                              <SelectItem value="completed">Completed</SelectItem>
+                              <SelectItem value="spam">Spam</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        )}
                       </TableCell>
                       <TableCell className="hidden lg:table-cell text-muted-foreground">
                         {submission.created_at
@@ -305,7 +341,12 @@ export default function Dashboard() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">No submissions found</p>
+              <p className="text-muted-foreground">
+                {submissions.length === 0 
+                  ? "No submissions found in database" 
+                  : "No submissions match your current filters"
+                }
+              </p>
               {searchTerm || filter !== "all" ? (
                 <Button
                   variant="link"
@@ -316,7 +357,14 @@ export default function Dashboard() {
                 >
                   Clear filters
                 </Button>
-              ) : null}
+              ) : (
+                <Button
+                  variant="link"
+                  onClick={handleRefresh}
+                >
+                  Refresh data
+                </Button>
+              )}
             </div>
           )}
         </CardContent>
