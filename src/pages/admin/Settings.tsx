@@ -68,8 +68,26 @@ export default function Settings() {
   // Handle file selection
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
-      setSelectedFile(e.target.files[0]);
-      setUploadedFileName(e.target.files[0].name);
+      const allowedTypes = [
+        "text/plain",
+        "application/json",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        // For Markdown
+        "text/markdown",
+        // Some browsers might set an empty type for .md/.txt files
+        ""
+      ];
+      const file = e.target.files[0];
+      // Check extension type fallback if type is empty
+      const ext = file.name.split('.').pop()?.toLowerCase();
+      const allowedExts = ["txt", "md", "json", "pdf", "docx"];
+      if (!allowedTypes.includes(file.type) && !allowedExts.includes(ext || "")) {
+        toast.error("Invalid file type. Please upload a txt, md, json, pdf, or docx file.");
+        return;
+      }
+      setSelectedFile(file);
+      setUploadedFileName(file.name);
     }
   };
 
@@ -308,7 +326,7 @@ export default function Settings() {
                     <Input
                       id="content-file"
                       type="file"
-                      accept=".txt,.md,.json"
+                      accept=".txt,.md,.json,.pdf,.docx"
                       onChange={handleFileChange}
                     />
                   </div>
