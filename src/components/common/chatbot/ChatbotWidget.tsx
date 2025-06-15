@@ -7,6 +7,41 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Mic, Volume2, Pause, Play } from "lucide-react";
 import { useVoice } from "@/hooks/use-voice";
 
+// Add this utility to extract and render bulleted lists
+function renderFormattedBotMessage(msg: string) {
+  // Split lines and detect bullet lines
+  const lines = msg.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+  const bulletLines = lines.filter(line => line.startsWith("* "));
+  // If at least 2 bullet lines exist, treat as list
+  if (bulletLines.length >= 2) {
+    // Find the intro (before the first bullet)
+    const firstBulletIdx = lines.findIndex(line => line.startsWith("* "));
+    const intro = lines.slice(0, firstBulletIdx).join(" ");
+    const items = lines.slice(firstBulletIdx).map(line => line.replace(/^\*\s*/, ""));
+    return (
+      <div>
+        {intro && <div className="mb-1 text-sm">{intro}</div>}
+        <ul className="list-disc pl-6 space-y-1 text-sm">
+          {items.map((item, i) => (
+            <li key={i}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+  // Otherwise, show as normal text
+  return <p className="text-sm whitespace-pre-wrap">{msg}</p>;
+}
+
+// Utility to strip asterisk bullets from text for TTS
+function textForSpeech(msg: string) {
+  // Replace * bullets with pause and plain line
+  return msg
+    .split("\n")
+    .map(line => line.startsWith("* ") ? line.replace(/^\*\s*/, "") : line)
+    .join(". ");
+}
+
 export const ChatbotWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [leadCapture, setLeadCapture] = useState(false);
@@ -71,11 +106,12 @@ export const ChatbotWidget = () => {
       setIsTTSPlaying(true);
       return;
     }
-    // Otherwise, start speech on selected message
+    // Otherwise, start speech on selected message (strip asterisks)
     window.speechSynthesis.cancel(); // Stop any other speech
     setSpeakingMsgIdx(msgIdx);
     setIsTTSPlaying(true);
-    const utter = new window.SpeechSynthesisUtterance(msg);
+    const usableText = textForSpeech(msg);
+    const utter = new window.SpeechSynthesisUtterance(usableText);
     utteranceRef.current = utter;
     utter.onend = () => {
       setIsTTSPlaying(false);
@@ -302,7 +338,8 @@ export const ChatbotWidget = () => {
                           }`}
                           style={{ position: "relative" }}
                         >
-                          <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
+                          {/* Use the new formatting for bot messages */}
+                          {msg.isBot ? renderFormattedBotMessage(msg.text) : <p className="text-sm whitespace-pre-wrap">{msg.text}</p>}
                           {/* Only for bot messages: Play/Pause button for TTS */}
                           {msg.isBot && (
                             <button
