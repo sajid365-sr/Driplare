@@ -35,6 +35,7 @@ import {
   Search,
   Loader2,
   RefreshCw,
+  AlertCircle,
 } from "lucide-react";
 import { getFormSubmissions, updateSubmissionStatus, deleteSubmissions, CombinedSubmission } from "@/utils/form-utils";
 import { toast } from "sonner";
@@ -47,6 +48,7 @@ export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [debugInfo, setDebugInfo] = useState<string>("");
 
   useEffect(() => {
     fetchSubmissions();
@@ -54,47 +56,45 @@ export default function Dashboard() {
 
   const fetchSubmissions = async () => {
     setIsLoading(true);
+    setDebugInfo("🔄 Starting to fetch submissions...");
+    
     try {
-      console.log("Dashboard: Starting to fetch submissions...");
-      console.log("Dashboard: Current time:", new Date().toISOString());
+      console.log("🚀 Dashboard: Starting submission fetch process");
       
       const data = await getFormSubmissions();
       
-      console.log("Dashboard: Received submissions data:", data);
-      console.log("Dashboard: Number of submissions:", data.length);
-      console.log("Dashboard: Data types in array:", data.map(item => ({
-        id: item.id,
-        form_type: item.form_type,
-        email: item.email,
-        name: item.name
-      })));
+      console.log("📥 Dashboard: Received data:", data);
       
       setSubmissions(data);
       
+      // Set debug info based on results
+      const formSubmissions = data.filter(sub => sub.form_type !== 'newsletter');
+      const newsletterSubmissions = data.filter(sub => sub.form_type === 'newsletter');
+      
+      const debugMessage = `
+✅ Fetch completed!
+📊 Total: ${data.length} submissions
+📝 Form submissions: ${formSubmissions.length}
+📧 Newsletter: ${newsletterSubmissions.length}
+      `.trim();
+      
+      setDebugInfo(debugMessage);
+      
       if (data.length === 0) {
-        console.log("Dashboard: No submissions found in database");
-        console.log("Dashboard: This could indicate:");
-        console.log("- Empty tables in database");
-        console.log("- Database connection issues");
-        console.log("- RLS (Row Level Security) blocking access");
-        console.log("- Query permission issues");
-        toast.info("No submissions found. Check console for debugging details.");
-      } else {
-        console.log(`Dashboard: Successfully loaded ${data.length} submissions`);
-        
-        // Log breakdown by type
-        const formSubmissions = data.filter(sub => sub.form_type !== 'newsletter');
-        const newsletterSubmissions = data.filter(sub => sub.form_type === 'newsletter');
-        console.log(`Dashboard: Form submissions: ${formSubmissions.length}`);
-        console.log(`Dashboard: Newsletter submissions: ${newsletterSubmissions.length}`);
-        
-        // Log first few items for inspection
-        console.log("Dashboard: First few submissions:", data.slice(0, 3));
+        console.warn("⚠️ Dashboard: No submissions found - this could indicate:");
+        console.warn("- Empty database tables");
+        console.warn("- RLS policies blocking access");
+        console.warn("- Database connection issues");
+        setDebugInfo("⚠️ No submissions found - check console for details");
+      } else if (formSubmissions.length === 0 && newsletterSubmissions.length > 0) {
+        console.warn("🔍 Dashboard: Only newsletter data found, no form submissions");
+        setDebugInfo(`⚠️ Only newsletter data (${newsletterSubmissions.length}) found. Form submissions table appears empty or inaccessible.`);
       }
+      
     } catch (error) {
-      console.error("Dashboard: Failed to fetch submissions:", error);
-      console.error("Dashboard: Error details:", JSON.stringify(error, null, 2));
-      toast.error("Failed to load form submissions. Check console for details.");
+      console.error("💥 Dashboard: Failed to fetch submissions:", error);
+      setDebugInfo(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      toast.error("Failed to load form submissions");
     } finally {
       setIsLoading(false);
     }
@@ -209,13 +209,21 @@ export default function Dashboard() {
             <CardTitle>Form Submissions</CardTitle>
             <CardDescription>
               Manage and respond to form submissions from all sources ({submissions.length} total)
-              {submissions.length === 0 && (
-                <span className="block text-orange-600 mt-1">
-                  ⚠️ No data found - Check browser console for debugging info
-                </span>
-              )}
             </CardDescription>
+            
+            {/* Debug Information Panel */}
+            {debugInfo && (
+              <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border text-sm">
+                <div className="flex items-start gap-2">
+                  <AlertCircle className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                  <div className="whitespace-pre-line text-gray-700 dark:text-gray-300">
+                    {debugInfo}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
+          
           <div className="flex gap-2 mt-4 sm:mt-0">
             <Button variant="outline" size="sm">
               <Download className="h-4 w-4 mr-2" />
@@ -240,6 +248,7 @@ export default function Dashboard() {
             )}
           </div>
         </CardHeader>
+        
         <CardContent>
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <div className="relative flex-1">
@@ -392,17 +401,19 @@ export default function Dashboard() {
                   : "No submissions match your current filters"
                 }
               </p>
+              
               {submissions.length === 0 && (
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4 text-left max-w-md mx-auto">
-                  <h4 className="font-semibold text-orange-800 mb-2">Debugging Steps:</h4>
-                  <ul className="text-sm text-orange-700 space-y-1">
-                    <li>• Check browser console for detailed logs</li>
-                    <li>• Verify data exists in Supabase tables</li>
-                    <li>• Check database permissions</li>
-                    <li>• Ensure RLS policies allow access</li>
-                  </ul>
+                  <h4 className="font-semibold text-orange-800 mb-2">Debug Information:</h4>
+                  <div className="text-sm text-orange-700 space-y-1">
+                    <p>• Check browser console (F12) for detailed logs</p>
+                    <p>• Verify data exists in form_submissions table</p>
+                    <p>• Check RLS policies allow table access</p>
+                    <p>• Ensure proper authentication if required</p>
+                  </div>
                 </div>
               )}
+              
               {searchTerm || filter !== "all" ? (
                 <Button
                   variant="link"
@@ -424,6 +435,7 @@ export default function Dashboard() {
             </div>
           )}
         </CardContent>
+        
         {filteredSubmissions.length > 0 && (
           <CardFooter className="flex justify-between">
             <p className="text-sm text-muted-foreground">
