@@ -7,17 +7,40 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Mic, Volume2, Pause, Play } from "lucide-react";
 import { useVoice } from "@/hooks/use-voice";
 
-// Add this utility to extract and render bulleted lists
+// Utility to clean up bullet marks and asterisks from text for display
+function cleanBotMessageText(msg: string) {
+  // Remove all starting *, -, •, and similar bullet marks and spaces from each line
+  // Also replaces multiple consecutive spaces with single space
+  return msg
+    .split("\n")
+    .map((line) =>
+      line
+        // Remove starting *, dashes, bullets, plus whitespace
+        .replace(/^[\s*\-•·‣▪➤➔►‣–—]+/, "")
+        // Remove lone asterisks inside line
+        .replace(/\*/g, "")
+        .replace(/\s{2,}/g, " ")
+        .trim()
+    )
+    .filter((line) => line.length > 0)
+    .join("\n");
+}
+
+// Enhanced utility to extract and render bulleted lists and decorate them without raw asterisks
 function renderFormattedBotMessage(msg: string) {
-  // Split lines and detect bullet lines
-  const lines = msg.split("\n").map(l => l.trim()).filter(l => l.length > 0);
-  const bulletLines = lines.filter(line => line.startsWith("* "));
-  // If at least 2 bullet lines exist, treat as list
+  // Clean lines for both display and bullet parsing
+  const lines = msg.split("\n").map((l) => l.trim()).filter((l) => l.length > 0);
+  // Detect bullet lines (hide asterisk/dash mark)
+  const bulletLines = lines.filter(line => /^\* |^\- |^• /.test(line));
+  // If at least 2 bullet lines exist, treat as a bullet list for display
   if (bulletLines.length >= 2) {
     // Find the intro (before the first bullet)
-    const firstBulletIdx = lines.findIndex(line => line.startsWith("* "));
-    const intro = lines.slice(0, firstBulletIdx).join(" ");
-    const items = lines.slice(firstBulletIdx).map(line => line.replace(/^\*\s*/, ""));
+    const firstBulletIdx = lines.findIndex(line => /^\* |^\- |^• /.test(line));
+    const intro = lines.slice(0, firstBulletIdx).map(cleanBotMessageText).join(" ");
+    const items = lines.slice(firstBulletIdx).map(line =>
+      // Remove the bullet, clean the text
+      cleanBotMessageText(line.replace(/^[\*\-•]+ /, ""))
+    );
     return (
       <div>
         {intro && <div className="mb-1 text-sm">{intro}</div>}
@@ -29,8 +52,8 @@ function renderFormattedBotMessage(msg: string) {
       </div>
     );
   }
-  // Otherwise, show as normal text
-  return <p className="text-sm whitespace-pre-wrap">{msg}</p>;
+  // Otherwise, just show the cleaned text
+  return <p className="text-sm whitespace-pre-wrap">{cleanBotMessageText(msg)}</p>;
 }
 
 // Utility to strip asterisk bullets and other marks from text for TTS
