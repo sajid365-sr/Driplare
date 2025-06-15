@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const mainCard = {
-  img: "/lovable-uploads/1f7d0f6d-ced2-4ed3-9d47-45224395b708.png", // Use the uploaded reference image
+  img: "/lovable-uploads/1f7d0f6d-ced2-4ed3-9d47-45224395b708.png",
   tags: ["Real-time Analytics", "Social", "Agile Advance", "Advance"],
   title: "Rising Stars Obscure",
   number: "01"
@@ -36,15 +36,51 @@ const verticalCards = [
   }
 ];
 
+// Animation variants for vertical cards
+const cardVariants = {
+  collapsed: {
+    width: 72,
+    boxShadow: "0 4px 14px 0 rgba(65,68,154,0.10)",
+    borderRadius: "2rem",
+    background: "linear-gradient(135deg,#816cff 60%,#4d39cf 100%)",
+    transition: {
+      type: "spring",
+      stiffness: 340,
+      damping: 30,
+      duration: 0.42
+    }
+  },
+  expanded: {
+    width: 220,
+    boxShadow: "0 12px 32px 0 rgba(77,57,207,.10),0 2px 8px 0 rgba(130,90,250,0.07)",
+    borderRadius: "2rem",
+    background: "linear-gradient(135deg,#816cff 60%,#4d39cf 100%)",
+    transition: {
+      type: "spring",
+      stiffness: 200,
+      damping: 23,
+      duration: 0.48
+    }
+  }
+};
+
 export function CoreSolutionsSection() {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
     <section className="relative py-20 bg-white dark:bg-secondary/20 overflow-x-hidden">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-8 md:gap-0">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-14 gap-8 md:gap-0">
           <div>
-            <h2 className="text-[2.4rem] md:text-[3.3rem] font-extrabold leading-tight text-neutral-900 dark:text-white mb-2" style={{fontFamily: 'Inter, sans-serif', letterSpacing: "-0.01em"}}>
+            <h2
+              className="text-[2.4rem] md:text-[3.3rem] font-extrabold leading-tight text-neutral-900 dark:text-white mb-2"
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                letterSpacing: "-0.01em",
+                lineHeight: 1.09,
+                textShadow: "0 2px 10px rgba(65,41,180,.06)"
+              }}
+            >
               We Are A Creative Digital<br className="hidden md:block" />
               Marketing Agency
             </h2>
@@ -58,23 +94,29 @@ export function CoreSolutionsSection() {
             </Link>
           </div>
         </div>
+
         {/* Main card + vertical cards */}
-        <div className="flex flex-col md:flex-row gap-6">
+        <div className="flex flex-col md:flex-row gap-7 items-stretch">
           {/* Main feature card */}
-          <motion.div 
-            className="relative flex flex-col justify-end bg-gradient-to-tr from-[#eee0ff] via-[#b2b5fd] to-[#dcebfa] rounded-3xl w-full max-w-[540px] min-h-[320px] shadow-lg overflow-hidden"
+          <motion.div
+            className="relative flex flex-col justify-end bg-gradient-to-tr from-[#eee0ff] via-[#b2b5fd] to-[#dcebfa] rounded-3xl w-full max-w-[540px] min-h-[340px] shadow-2xl overflow-hidden"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
+            style={{
+              borderRadius: '2.4rem',
+              boxShadow: "0 14px 54px 0 rgba(130,104,246,.13),0 1.5px 8px 0 rgba(65,68,154,0.07)"
+            }}
           >
-            <img 
-              src={mainCard.img} 
+            <img
+              src={mainCard.img}
               alt="Digital hero"
               className="absolute inset-0 w-full h-full object-cover object-center rounded-3xl z-0"
-              style={{filter: "brightness(0.95)"}}
+              style={{ filter: "brightness(0.95)" }}
             />
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#816cffcc] via-[#816cff30] to-transparent z-10 pointer-events-none rounded-3xl" />
+
             {/* Pills */}
             <div className="relative z-20 flex flex-wrap gap-3 p-7 pt-8">
               {mainCard.tags.map(tag => (
@@ -110,21 +152,20 @@ export function CoreSolutionsSection() {
                 tabIndex={0}
                 initial={false}
                 animate={expanded === i ? "expanded" : "collapsed"}
-                variants={{
-                  expanded: { width: 220 },
-                  collapsed: { width: 72 }
-                }}
-                style={{ minWidth: 72, maxWidth: 220, height: 320, borderRadius: "2rem", background: "linear-gradient(135deg, #816cff 60%, #4d39cf 100%)", transition: "box-shadow 0.2s" }}
-                transition={{ type: "spring", stiffness: 250, damping: 24, duration: 0.45 }}
+                variants={cardVariants}
+                style={{ minWidth: 72, maxWidth: 220, height: 340, borderRadius: "2rem", transition: "box-shadow 0.23s" }}
               >
                 {/* Card Number */}
                 <span className="absolute top-4 left-4 text-white font-bold opacity-70 text-[17px] select-none z-10">
                   {card.number}
                 </span>
                 {/* Rotated text (always visible) */}
-                <motion.div 
+                <motion.div
                   className="absolute left-2 bottom-4 origin-bottom-left"
-                  animate={expanded === i ? { rotate: 0, y: 0, x: 15, opacity: 0, transition: { duration: 0.25 } } : { rotate: -90, y: 0, x: 0, opacity: 1 }}
+                  animate={expanded === i
+                    ? { rotate: 0, y: 0, x: 15, opacity: 0, transition: { duration: 0.22 } }
+                    : { rotate: -90, y: 0, x: 0, opacity: 1 }
+                  }
                   style={{
                     writingMode: "vertical-rl",
                     textOrientation: "mixed"
@@ -136,14 +177,22 @@ export function CoreSolutionsSection() {
                 <AnimatePresence>
                   {expanded === i && (
                     <motion.div
-                      className="w-full h-full flex flex-col justify-center items-center px-8"
+                      className="w-full h-full flex flex-col justify-center items-center px-7"
                       initial={{ opacity: 0, x: 40 }}
-                      animate={{ opacity: 1, x: 0, transition: { duration: 0.4 } }}
-                      exit={{ opacity: 0, x: 60, transition: { duration: 0.2 } }}
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                        transition: { duration: 0.37, ease: "easeOut" }
+                      }}
+                      exit={{
+                        opacity: 0,
+                        x: 60,
+                        transition: { duration: 0.23, ease: "easeIn" }
+                      }}
                     >
-                      <div className="mt-4 mb-2 text-white text-xl font-bold">{card.label}</div>
+                      <div className="mt-4 mb-2 text-white text-xl font-bold text-center">{card.label}</div>
                       {card.desc && (
-                        <div className="text-white/80 text-sm mb-4 text-center">{card.desc}</div>
+                        <div className="text-white/90 text-sm mb-4 text-center">{card.desc}</div>
                       )}
                       <div>
                         <Link to={card.link}>
