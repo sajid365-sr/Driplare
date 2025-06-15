@@ -16,7 +16,7 @@ import {
   PaginatedResponse,
   BlogPost,
 } from "@/utils/blog-utils";
-import { Calendar, Search } from "lucide-react";
+import { Calendar, Search, RefreshCw } from "lucide-react";
 import {
   Pagination,
   PaginationContent,
@@ -33,6 +33,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "sonner";
 
 export default function BlogManager() {
   const [isCreating, setIsCreating] = useState(false);
@@ -46,6 +47,7 @@ export default function BlogManager() {
     pageSize: 10,
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState<BlogFilters>({
     status: null,
@@ -67,8 +69,21 @@ export default function BlogManager() {
       setPaginationData({ count, page, pageSize });
     } catch (error) {
       console.error(error);
+      toast.error("Failed to fetch blog posts");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    try {
+      await fetchBlogs();
+      toast.success("Blog posts refreshed successfully");
+    } catch (error) {
+      toast.error("Failed to refresh blog posts");
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -160,9 +175,20 @@ export default function BlogManager() {
     <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Blog Management</h1>
-        {!isCreating && (
-          <Button onClick={() => setIsCreating(true)}>Create New Blog</Button>
-        )}
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+            className="flex items-center gap-2"
+          >
+            <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+            Refresh
+          </Button>
+          {!isCreating && (
+            <Button onClick={() => setIsCreating(true)}>Create New Blog</Button>
+          )}
+        </div>
       </div>
 
       {isCreating ? (
