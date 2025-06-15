@@ -1,6 +1,6 @@
-
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Interface for content sync data
 interface ContentSyncData {
@@ -12,24 +12,36 @@ interface ContentSyncData {
 export function useGeminiAPI() {
   // Key to store Gemini API key in localStorage
   const GEMINI_API_KEY = "gemini_api_key";
+  const GEMINI_MODEL_KEY = "gemini_model";
 
   // State
   const [apiKey, setApiKeyState] = useState<string>("");
+  const [geminiModel, setGeminiModelState] = useState<string>("gemini-1.5-pro");
   const [isTestingConnection, setIsTestingConnection] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncLogs, setSyncLogs] = useState<any[]>([]);
 
-  // Load API key from localStorage on component mount
+  // Load API key and model from localStorage on component mount
   useEffect(() => {
     const storedKey = localStorage.getItem(GEMINI_API_KEY);
-    if (storedKey) {
-      setApiKeyState(storedKey);
-    }
-    
+    if (storedKey) setApiKeyState(storedKey);
+
+    const storedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
+    setGeminiModelState(storedModel);
+
     // Load sync logs
     const logs = JSON.parse(localStorage.getItem("gemini_sync_logs") || "[]");
     setSyncLogs(logs);
   }, []);
+
+  // Set Gemini model and save to localStorage
+  const setGeminiModel = (model: string) => {
+    setGeminiModelState(model);
+    if (model) {
+      localStorage.setItem(GEMINI_MODEL_KEY, model);
+      toast.success("Gemini model updated");
+    }
+  };
 
   // Set API key and save to localStorage
   const setApiKey = (key: string) => {
@@ -269,16 +281,93 @@ export function useGeminiAPI() {
     toast.success("Sync logs cleared");
   };
 
+  // --- Gemini SDK Setup ---
+  const getGeminiModelInstance = () => {
+    const key = apiKey || import.meta.env.VITE_GEMINI_API_KEY;
+    if (!key) throw new Error("Gemini API key is required");
+    const genAI = new GoogleGenerativeAI(key);
+    return genAI.getGenerativeModel({
+      model: geminiModel,
+      generationConfig: {
+        temperature: 0.7,
+        topK: 40,
+        topP: 0.9,
+        maxOutputTokens: 2000,
+      },
+    });
+  };
+
+  // --- Content ingestion for chat ---
+  const getKnowledgeContext = async () => {
+    // Fetch settings from Supabase
+    try {
+      const { fetchContentSyncSettings } = await import("@/utils/content-sync");
+      const data = await fetchContentSyncSettings();
+      let website = data.website_url || "";
+      let snippets = data.content_snippets || "";
+      let fileUrl: string | null = data.content_file_url || null;
+      let fileText = "";
+      if (fileUrl) {
+        // Fetch the file as text (basic handling for .txt/.md/.json)
+        try {
+          const ext = fileUrl.split('.').pop()?.toLowerCase();
+          const resp = await fetch(fileUrl);
+          if (ext === "pdf" || ext === "docx") {
+            // For binary files, fallback to 'file uploaded' note in prompt
+            fileText = `[File "${fileUrl}" uploaded. Please infer content from document.]`;
+          } else {
+            fileText = await resp.text();
+          }
+        } catch (e) {
+          fileText = "";
+        }
+      }
+      return {
+        website,
+        snippets,
+        fileText,
+      };
+    } catch (err) {
+      return { website: "", snippets: "", fileText: "" };
+    }
+  };
+
+  // Chat method to ask questions, using context
+  const askGemini = async (userMessage: string, previousMessages: { text: string; isBot: boolean }[]) => {
+    const model = getGeminiModelInstance();
+
+    // Get context from synced knowledge
+    const context = await getKnowledgeContext();
+    const contextPrompt = [
+      "You are Driplare's AI assistant. Use the following website details, content snippets, and file contents as your knowledge base.",
+      context.website && `Website URL: ${context.website}`,
+      context.snippets && `Custom Snippets:\n${context.snippets}`,
+      context.fileText && `File context:\n${context.fileText}`,
+      "",
+      "When answering, always prioritize using this provided knowledge."
+    ].filter(Boolean).join('\n\n');
+
+    // Compose the message history
+    const dynPrompt = contextPrompt + "\n\nConversation:\n" + previousMessages.map(m => (m.isBot ? `AI: ${m.text}` : `User: ${m.text}`)).join('\n') + `\nUser: ${userMessage}\nAI:`;
+
+    const result = await model.generateContent([dynPrompt], { timeout: 30000 });
+    // Extract result
+    const text = result && result.response && result.response.text ? result.response.text() : "Sorry, I couldn't generate a response.";
+    return typeof text === "string" ? text : "";
+  };
+
   return {
     apiKey,
     setApiKey,
+    geminiModel,
+    setGeminiModel,
     testConnection,
     isTestingConnection,
     syncContent,
     isSyncing,
     getSyncLogs,
     syncLogs,
-    clearSyncLogs
+    clearSyncLogs,
+    askGemini
   };
 }
-

@@ -34,6 +34,8 @@ export default function Settings() {
   const {
     apiKey,
     setApiKey,
+    geminiModel,
+    setGeminiModel,
     testConnection,
     isTestingConnection,
     syncContent,
@@ -41,6 +43,13 @@ export default function Settings() {
     syncLogs,
     clearSyncLogs
   } = useGeminiAPI();
+
+  // Add Gemini model options (can expand as Google adds models)
+  const GEMINI_MODEL_OPTIONS = [
+    { value: "gemini-1.5-pro", label: "Gemini 1.5 Pro" },
+    { value: "gemini-1.0-pro", label: "Gemini 1.0 Pro" }
+    // Add more as needed
+  ];
 
   // Content sync settings
   const [websiteUrl, setWebsiteUrl] = useState("");
@@ -287,6 +296,22 @@ export default function Settings() {
                     <li>Navigate to the API keys section</li>
                     <li>Create a new API key and paste it above</li>
                   </ol>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="gemini-model">Gemini Model</Label>
+                  <select
+                    id="gemini-model"
+                    className="block w-full border border-border rounded-md p-2 mt-1 bg-background"
+                    value={geminiModel}
+                    onChange={(e) => setGeminiModel(e.target.value)}
+                  >
+                    {GEMINI_MODEL_OPTIONS.map((m) => (
+                      <option value={m.value} key={m.value}>{m.label}</option>
+                    ))}
+                  </select>
+                  <p className="text-sm text-muted-foreground">
+                    Select the Gemini AI model to use for all chatbot and content syncing.
+                  </p>
                 </div>
               </TabsContent>
 

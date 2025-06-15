@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { BotMessageSquare, MessageSquareText, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -22,7 +21,7 @@ export const ChatbotWidget = () => {
   const messageEndRef = useRef<HTMLDivElement>(null);
 
   // Get Gemini API key
-  const { apiKey } = useGeminiAPI();
+  const { apiKey, askGemini } = useGeminiAPI();
   const useGemini = Boolean(apiKey);
 
   // Auto-scroll to the latest message
@@ -65,146 +64,41 @@ export const ChatbotWidget = () => {
 
     // Add user message to chat
     setMessages([...messages, { text: userMessage, isBot: false }]);
-
-    // Clear input field
     const userQuery = userMessage;
     setUserMessage("");
-
-    // Show typing indicator
     setIsTyping(true);
 
     try {
-      let response: string;
-
-      if (useGemini) {
-        // Use Gemini API for response
-        response = await getGeminiResponse(userQuery, messages);
-      } else {
-        // Use predefined responses as fallback
-        response = getBotpressResponse(userQuery);
-      }
-
-      // Log the chat message
+      // Always use Gemini API for response
+      const response = await askGemini(userQuery, [...messages, { text: userQuery, isBot: false }]);
+      // Log the chat message (unchanged storage logic)
       const chatLog = {
         type: "message",
         timestamp: new Date().toISOString(),
         query: userQuery,
         response: response,
-        useGemini,
+        useGemini: true,
       };
-
       const logs = JSON.parse(localStorage.getItem("chat_logs") || "[]");
       logs.push(chatLog);
       localStorage.setItem("chat_logs", JSON.stringify(logs));
 
-      // Add bot response with a slight delay to simulate typing
       setTimeout(() => {
         setMessages((prev) => [...prev, { text: response, isBot: true }]);
         setIsTyping(false);
-
-        // If this is a "default" response, trigger lead capture after 2 messages
-        if (!useGemini && messages.filter((m) => !m.isBot).length >= 1) {
-          setTimeout(() => handleStartLeadCapture(), 1500);
-        }
       }, 800);
     } catch (error) {
       console.error("Error getting bot response:", error);
-
-      // Fallback to default response on error
       setTimeout(() => {
         setMessages((prev) => [
           ...prev,
           {
-            text: "Sorry, I'm having trouble connecting. Let me take your contact info so someone can help you directly.",
+            text: "Sorry, I'm having trouble connecting. Please try again later.",
             isBot: true,
           },
         ]);
         setIsTyping(false);
-        setTimeout(() => handleStartLeadCapture(), 1500);
       }, 800);
-    }
-  };
-
-  // Get response from Gemini API
-  const getGeminiResponse = async (
-    query: string,
-    prevMessages: { text: string; isBot: boolean }[]
-  ): Promise<string> => {
-    try {
-      // Prepare conversation history
-      const conversationHistory = prevMessages.map(msg => ({
-        role: msg.isBot ? "model" : "user",
-        parts: [{ text: msg.text }]
-      })).slice(-5); // Only use the last 5 messages for context
-
-      // Add the current query
-      conversationHistory.push({
-        role: "user",
-        parts: [{ text: query }]
-      });
-
-      // Call Gemini API
-      const response = await fetch('https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-goog-api-key': apiKey
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              role: "system",
-              parts: [{ text: "You are a helpful assistant for Driplare, a company that offers web design, digital marketing, and AI solutions. Be concise, professional, and helpful." }]
-            },
-            ...conversationHistory
-          ],
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 800
-          }
-        })
-      });
-
-      if (!response.ok) {
-        console.error("Gemini API error status:", response.status);
-        throw new Error('Failed to get response from Gemini');
-      }
-      
-      const data = await response.json();
-      console.log("Gemini response:", data);
-      
-      if (data.candidates && data.candidates[0]?.content?.parts && data.candidates[0].content.parts[0]?.text) {
-        return data.candidates[0].content.parts[0].text;
-      } else {
-        throw new Error('Invalid response format from Gemini');
-      }
-    } catch (error) {
-      console.error("Gemini API error:", error);
-      // Fallback to default response
-      return getBotpressResponse(query);
-    }
-  };
-
-  // Get predefined response (simulating Botpress)
-  const getBotpressResponse = (query: string): string => {
-    // Simple pattern matching for demo purposes
-    const lowerQuery = query.toLowerCase();
-
-    if (lowerQuery.includes("hello") || lowerQuery.includes("hi")) {
-      return "Hello! How can I assist you with Driplare's services today?";
-    } else if (lowerQuery.includes("web") || lowerQuery.includes("design")) {
-      return "Our web design team creates beautiful, responsive websites tailored to your business needs. Would you like to know more?";
-    } else if (
-      lowerQuery.includes("marketing") ||
-      lowerQuery.includes("digital")
-    ) {
-      return "Driplare offers full-service digital marketing solutions to help your business grow online.";
-    } else if (lowerQuery.includes("ai") || lowerQuery.includes("artificial")) {
-      return "We provide cutting-edge AI solutions including chatbots, automation, and data analysis.";
-    } else if (lowerQuery.includes("pricing") || lowerQuery.includes("cost")) {
-      return "Our pricing depends on your specific requirements. Would you like to speak with a team member about a quote?";
-    } else {
-      return "Thanks for your message. To better assist you, could you provide more details about what you're looking for?";
     }
   };
 
