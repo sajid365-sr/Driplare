@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type UseVoiceReturn = {
   isListening: boolean;
@@ -12,7 +12,7 @@ type UseVoiceReturn = {
 export function useVoice(): UseVoiceReturn {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  let recognition: SpeechRecognition | null = null;
+  const recognitionRef = useRef<any>(null);
 
   // Voice-to-Text
   const startListening = (onResult: (transcript: string) => void) => {
@@ -22,15 +22,16 @@ export function useVoice(): UseVoiceReturn {
       alert("Speech Recognition is not supported in your browser.");
       return;
     }
-    recognition = new SpeechRecognition();
+    const recognition = new SpeechRecognition();
+    recognitionRef.current = recognition;
     recognition.continuous = false;
     recognition.interimResults = false;
     recognition.lang = "en-US";
     setIsListening(true);
 
-    recognition.onresult = (event: SpeechRecognitionEvent) => {
+    recognition.onresult = (event: any) => {
       const transcript = Array.from(event.results)
-        .map((result) => result[0].transcript)
+        .map((result: any) => result[0].transcript)
         .join("");
       onResult(transcript);
       setIsListening(false);
@@ -42,6 +43,7 @@ export function useVoice(): UseVoiceReturn {
   };
 
   const stopListening = () => {
+    const recognition = recognitionRef.current;
     if (recognition) {
       recognition.stop();
       setIsListening(false);
