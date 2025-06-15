@@ -118,25 +118,27 @@ const offerings = [
   }
 ];
 
-// Animation variants for the expandable cards with increased size and slower animation
+// Animation variants for the expandable cards: only width should change on expand, height remains the same
 const cardVariants = {
   collapsed: {
-    width: 96,         // increased from 64
-    minWidth: 96,      // increased from 64
-    maxWidth: 120,     // increased from 70
-    height: 320,       // increased from previous vertical size (if present)
-    minHeight: 320,    // ensures vertical size of collapsed card is larger
+    width: 96,         // collapsed width
+    minWidth: 96,
+    maxWidth: 120,
+    height: 320,       // fixed height
+    minHeight: 320,
+    maxHeight: 320,
     borderRadius: "2.4rem",
-    transition: { duration: 0.9, type: "spring", bounce: 0.24 }, // slower
+    transition: { duration: 0.9, type: "spring", bounce: 0.24 },
   },
   expanded: {
-    width: 480,       // increased from 370
-    minWidth: 420,    // increased from 300
-    maxWidth: 560,    // increased from 420
-    height: 540,      // increased from previous vertical size
-    minHeight: 520,   // ensures vertical size of expanded card is larger
+    width: 480,       // expanded width
+    minWidth: 420,
+    maxWidth: 560,
+    height: 320,      // height stays the same!
+    minHeight: 320,
+    maxHeight: 320,
     borderRadius: "2.8rem",
-    transition: { duration: 0.9, type: "spring", bounce: 0.24 }, // slower
+    transition: { duration: 0.9, type: "spring", bounce: 0.24 },
   },
 };
 
@@ -203,6 +205,7 @@ export function CoreSolutionsSection() {
                   background: "linear-gradient(135deg, #8F5CFF 80%, #CBA8FF 100%)",
                   color: "#fff",
                   cursor: "pointer",
+                  // Remove any previous height changes here if present!
                 }}
               >
                 {/* Vertical title and number when collapsed */}
@@ -243,6 +246,9 @@ export function CoreSolutionsSection() {
                       exit="exit"
                       style={{
                         boxShadow: "0 6px 56px 8px #8F5CFF11",
+                        height: "100%", // Ensures matching with parent
+                        minHeight: "320px",
+                        maxHeight: "320px",
                       }}
                     >
                       {/* Icon & badge row */}
