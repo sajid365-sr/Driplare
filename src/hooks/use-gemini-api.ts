@@ -10,7 +10,7 @@ interface ContentSyncData {
 }
 
 export function useGeminiAPI() {
-  // Key to store Gemini API key in localStorage
+  // Key to store Gemini API key and model in localStorage
   const GEMINI_API_KEY = "gemini_api_key";
   const GEMINI_MODEL_KEY = "gemini_model";
 
@@ -21,7 +21,7 @@ export function useGeminiAPI() {
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncLogs, setSyncLogs] = useState<any[]>([]);
 
-  // Load API key and model from localStorage on component mount
+  // Load API key and model from localStorage on mount
   useEffect(() => {
     const storedKey = localStorage.getItem(GEMINI_API_KEY);
     if (storedKey) setApiKeyState(storedKey);
@@ -29,7 +29,7 @@ export function useGeminiAPI() {
     const storedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
     setGeminiModelState(storedModel);
 
-    // Load sync logs
+    // Load sync logs from localStorage
     const logs = JSON.parse(localStorage.getItem("gemini_sync_logs") || "[]");
     setSyncLogs(logs);
   }, []);
@@ -55,69 +55,50 @@ export function useGeminiAPI() {
     }
   };
 
-  // Test connection with Gemini API
+  // Test connection to Gemini API using SDK
   const testConnection = async () => {
     if (!apiKey) {
       toast.error("Please enter an API key");
       return;
     }
-
     setIsTestingConnection(true);
 
     try {
-      // Make an actual API call to Gemini
-      const response = await fetch(
-        "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-goog-api-key": apiKey,
-          },
-          body: JSON.stringify({
-            contents: [
-              { 
-                role: "user",
-                parts: [{ text: "Hello, testing connection" }] 
-              }
-            ],
-            generationConfig: {
-              maxOutputTokens: 100,
-              temperature: 0.7
-            }
-          }),
+      // Use SDK (not REST API)
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const selectedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
+      const model = genAI.getGenerativeModel({
+        model: selectedModel,
+        generationConfig: {
+          temperature: 0.7,
+          topK: 40,
+          topP: 0.9,
+          maxOutputTokens: 2000
         }
-      );
+      });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        console.error("API error:", data);
-        throw new Error(data.error?.message || "API call failed");
+      // Simple test prompt
+      const result = await model.generateContent(["Test Gemini API connection."], {
+        timeout: 15000
+      });
+      const text = result?.response?.text ? await result.response.text() : "";
+      if (text.toLowerCase().includes("error")) {
+        throw new Error("Error from Gemini: " + text);
       }
-
       toast.success("Connection to Gemini API successful");
-      
       // Log test event
       const testEvent = {
         timestamp: new Date().toISOString(),
         type: "connection_test",
-        status: "success",
+        status: "success"
       };
-
-      const logs = JSON.parse(
-        localStorage.getItem("gemini_sync_logs") || "[]"
-      );
+      const logs = JSON.parse(localStorage.getItem("gemini_sync_logs") || "[]");
       logs.push(testEvent);
       localStorage.setItem("gemini_sync_logs", JSON.stringify(logs));
       setSyncLogs(logs);
-      
     } catch (error) {
-      toast.error(
-        "Failed to connect to Gemini API. Please check your API key."
-      );
+      toast.error("Failed to connect to Gemini API. Please check your API key.");
       console.error("Gemini API test failed:", error);
-      
       // Log failed test
       const testEvent = {
         timestamp: new Date().toISOString(),
@@ -125,16 +106,129 @@ export function useGeminiAPI() {
         status: "failed",
         error: String(error)
       };
-
-      const logs = JSON.parse(
-        localStorage.getItem("gemini_sync_logs") || "[]"
-      );
+      const logs = JSON.parse(localStorage.getItem("gemini_sync_logs") || "[]");
       logs.push(testEvent);
       localStorage.setItem("gemini_sync_logs", JSON.stringify(logs));
       setSyncLogs(logs);
     } finally {
       setIsTestingConnection(false);
     }
+  };
+
+  // Read file content
+  const readFileContent = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          resolve(event.target.result as string);
+        } else {
+          reject(new Error("Failed to read file"));
+        }
+      };
+      reader.onerror = () => reject(new Error("File read error"));
+      reader.readAsText(file);
+    });
+  };
+
+  // Get sync logs
+  const getSyncLogs = () => {
+    return syncLogs;
+  };
+
+  // Clear sync logs
+  const clearSyncLogs = () => {
+    localStorage.removeItem("gemini_sync_logs");
+    setSyncLogs([]);
+    toast.success("Sync logs cleared");
+  };
+
+  // --- Gemini SDK Setup with dynamic model ---
+  const getGeminiModelInstance = () => {
+    const key = apiKey || import.meta.env.VITE_GEMINI_API_KEY;
+    if (!key) throw new Error("Gemini API key is required");
+    // Model is always read from localStorage or fallback
+    const selectedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
+    const genAI = new GoogleGenerativeAI(key);
+    return genAI.getGenerativeModel({
+      model: selectedModel,
+      generationConfig: {
+        temperature: 0.7,
+        topK: 40,
+        topP: 0.9,
+        maxOutputTokens: 2000,
+      },
+    });
+  };
+
+  // --- Content ingestion for chat from website/snippets/files in context prompt ---
+  const getKnowledgeContext = async () => {
+    // Fetch settings from Supabase
+    try {
+      const { fetchContentSyncSettings } = await import("@/utils/content-sync");
+      const data = await fetchContentSyncSettings();
+      let website = data.website_url || "";
+      let snippets = data.content_snippets || "";
+      let fileUrl: string | null = data.content_file_url || null;
+      let fileText = "";
+      if (fileUrl) {
+        // Fetch the file as text (.txt/.md/.json) or provide a hint for binary
+        try {
+          const ext = fileUrl.split('.').pop()?.toLowerCase();
+          const resp = await fetch(fileUrl);
+          if (["pdf", "docx"].includes(ext || "")) {
+            fileText = `[File "${fileUrl}" uploaded. Please infer content from document if possible.]`;
+          } else {
+            fileText = await resp.text();
+          }
+        } catch (e) {
+          fileText = "";
+        }
+      }
+      return {
+        website,
+        snippets,
+        fileText,
+      };
+    } catch (err) {
+      return { website: "", snippets: "", fileText: "" };
+    }
+  };
+
+  // Chat method, with context from content sync sources (now uses SDK and dynamic model)
+  const askGemini = async (
+    userMessage: string,
+    previousMessages: { text: string; isBot: boolean }[]
+  ) => {
+    const model = getGeminiModelInstance();
+    const context = await getKnowledgeContext();
+    const contextPrompt = [
+      "You are Driplare's AI assistant. Use the following website details, content snippets, and file contents as your knowledge base.",
+      context.website && `Website URL: ${context.website}`,
+      context.snippets && `Custom Snippets:\n${context.snippets}`,
+      context.fileText && `File context:\n${context.fileText}`,
+      "",
+      "Always prioritize using this knowledge base and sound friendly yet expert.",
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+
+    // Compose dynamic prompt
+    const dynPrompt =
+      contextPrompt +
+      "\n\nConversation:\n" +
+      previousMessages
+        .map((m) => (m.isBot ? `AI: ${m.text}` : `User: ${m.text}`))
+        .join("\n") +
+      `\nUser: ${userMessage}\nAI:`;
+
+    // Use Gemini SDK, not REST
+    const result = await model.generateContent([dynPrompt], { timeout: 30000 });
+    const text =
+      result && result.response && result.response.text
+        ? await result.response.text()
+        : "Sorry, I couldn't generate a response.";
+    return typeof text === "string" ? text : "";
   };
 
   // Sync content with Gemini
@@ -251,109 +345,6 @@ export function useGeminiAPI() {
     } finally {
       setIsSyncing(false);
     }
-  };
-
-  // Read file content
-  const readFileContent = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          resolve(event.target.result as string);
-        } else {
-          reject(new Error("Failed to read file"));
-        }
-      };
-      reader.onerror = () => reject(new Error("File read error"));
-      reader.readAsText(file);
-    });
-  };
-
-  // Get sync logs
-  const getSyncLogs = () => {
-    return syncLogs;
-  };
-
-  // Clear sync logs
-  const clearSyncLogs = () => {
-    localStorage.removeItem("gemini_sync_logs");
-    setSyncLogs([]);
-    toast.success("Sync logs cleared");
-  };
-
-  // --- Gemini SDK Setup ---
-  const getGeminiModelInstance = () => {
-    const key = apiKey || import.meta.env.VITE_GEMINI_API_KEY;
-    if (!key) throw new Error("Gemini API key is required");
-    const genAI = new GoogleGenerativeAI(key);
-    return genAI.getGenerativeModel({
-      model: geminiModel,
-      generationConfig: {
-        temperature: 0.7,
-        topK: 40,
-        topP: 0.9,
-        maxOutputTokens: 2000,
-      },
-    });
-  };
-
-  // --- Content ingestion for chat ---
-  const getKnowledgeContext = async () => {
-    // Fetch settings from Supabase
-    try {
-      const { fetchContentSyncSettings } = await import("@/utils/content-sync");
-      const data = await fetchContentSyncSettings();
-      let website = data.website_url || "";
-      let snippets = data.content_snippets || "";
-      let fileUrl: string | null = data.content_file_url || null;
-      let fileText = "";
-      if (fileUrl) {
-        // Fetch the file as text (basic handling for .txt/.md/.json)
-        try {
-          const ext = fileUrl.split('.').pop()?.toLowerCase();
-          const resp = await fetch(fileUrl);
-          if (ext === "pdf" || ext === "docx") {
-            // For binary files, fallback to 'file uploaded' note in prompt
-            fileText = `[File "${fileUrl}" uploaded. Please infer content from document.]`;
-          } else {
-            fileText = await resp.text();
-          }
-        } catch (e) {
-          fileText = "";
-        }
-      }
-      return {
-        website,
-        snippets,
-        fileText,
-      };
-    } catch (err) {
-      return { website: "", snippets: "", fileText: "" };
-    }
-  };
-
-  // Chat method to ask questions, using context
-  const askGemini = async (userMessage: string, previousMessages: { text: string; isBot: boolean }[]) => {
-    const model = getGeminiModelInstance();
-
-    // Get context from synced knowledge
-    const context = await getKnowledgeContext();
-    const contextPrompt = [
-      "You are Driplare's AI assistant. Use the following website details, content snippets, and file contents as your knowledge base.",
-      context.website && `Website URL: ${context.website}`,
-      context.snippets && `Custom Snippets:\n${context.snippets}`,
-      context.fileText && `File context:\n${context.fileText}`,
-      "",
-      "When answering, always prioritize using this provided knowledge."
-    ].filter(Boolean).join('\n\n');
-
-    // Compose the message history
-    const dynPrompt = contextPrompt + "\n\nConversation:\n" + previousMessages.map(m => (m.isBot ? `AI: ${m.text}` : `User: ${m.text}`)).join('\n') + `\nUser: ${userMessage}\nAI:`;
-
-    const result = await model.generateContent([dynPrompt], { timeout: 30000 });
-    // Extract result
-    const text = result && result.response && result.response.text ? result.response.text() : "Sorry, I couldn't generate a response.";
-    return typeof text === "string" ? text : "";
   };
 
   return {

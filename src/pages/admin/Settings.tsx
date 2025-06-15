@@ -303,7 +303,9 @@ export default function Settings() {
                     id="gemini-model"
                     className="block w-full border border-border rounded-md p-2 mt-1 bg-background"
                     value={geminiModel}
-                    onChange={(e) => setGeminiModel(e.target.value)}
+                    onChange={(e) => {
+                      setGeminiModel(e.target.value); // Hook will sync this to localStorage
+                    }}
                   >
                     {GEMINI_MODEL_OPTIONS.map((m) => (
                       <option value={m.value} key={m.value}>{m.label}</option>
