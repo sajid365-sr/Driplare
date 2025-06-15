@@ -1,212 +1,187 @@
 
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Send } from "lucide-react";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import AnimatedGridBg from "../common/AnimatedGridBg";
+import {
+  Laptop,
+  Smartphone,
+  Rocket,
+  Paintbrush,
+  FileText,
+  BrainCircuit,
+  Wrench,
+  ArrowRight
+} from "lucide-react";
 
-const mainCard = {
-  img: "/lovable-uploads/1f7d0f6d-ced2-4ed3-9d47-45224395b708.png",
-  tags: ["Real-time Analytics", "Social", "Agile Advance", "Advance"],
-  title: "Rising Stars Obscure",
-  number: "01"
-};
-
-const verticalCards = [
+const offerings = [
   {
-    label: "Digital Marketing",
-    desc:
-      "Reprehendeuire irit in volut ate velit esse cillum dolDuis aute irure dolor in ore",
-    link: "#",
-    number: "02",
-    rotText: "Instantly Analyze"
+    icon: Laptop,
+    title: "Web Development",
+    valueProp: "We build beautiful, fast, and functional websites tailored to your business goals.",
+    bullets: [
+      "Custom Website Development (Landing pages, corporate sites, personal portfolios)",
+      "Full-Stack Web Applications (MERN, Next.js, React)",
+      "E-Commerce Development (Multivendor, payment gateway integration)",
+      "CMS & Dashboard Development (Admin panels, analytics dashboards)",
+      "Responsive Design & Cross-Browser Compatibility",
+      "SEO-Optimized & Performance-Tuned"
+    ],
+    tech: "Tech Stack: React, Next.js, Node.js, MongoDB/MySQL, Tailwind, Vite, Prisma",
+    link: "/web-design"
   },
   {
-    label: "Web & Mobile",
-    desc: "",
-    link: "#",
-    number: "03",
-    rotText: "Web & Mobile"
+    icon: Smartphone,
+    title: "Mobile App Development",
+    valueProp: "We develop cross-platform mobile applications that feel native.",
+    bullets: [
+      "React Native App Development",
+      "Expo & Expo Router Integration",
+      "Backend with Supabase or Firebase",
+      "AI-integrated features (if required)",
+      "App UI/UX Design",
+      "Testing and Deployment to App Store/Play Store"
+    ],
+    link: "/mobile-app-development"
   },
   {
-    label: "Email Marketing",
-    desc: "",
-    link: "#",
-    number: "04",
-    rotText: "Email Marketing"
+    icon: Rocket,
+    title: "Digital Marketing",
+    valueProp: "Driplare ensures your brand gets the visibility and engagement it deserves.",
+    bullets: [
+      "Search Engine Optimization (SEO)",
+      "Social Media Marketing (SMM)",
+      "Google & Meta Ads Management",
+      "Email Campaigns & Automation",
+      "Conversion Rate Optimization (CRO)",
+      "Analytics, Reporting & Strategy Building"
+    ],
+    note: "Campaigns are tailored to your niche, target audience, and business objectives.",
+    link: "/digital-marketing"
+  },
+  {
+    icon: Paintbrush,
+    title: "Graphic Design & Branding",
+    valueProp: "We help brands visually communicate with clarity and creativity.",
+    bullets: [
+      "Logo Design & Brand Identity",
+      "Business Cards, Brochures & Flyers",
+      "Social Media Creatives",
+      "UI/UX Design for Web & App",
+      "Motion Graphics & Illustrations",
+      "Packaging & Product Design"
+    ],
+    note: "We ensure brand consistency across all design elements.",
+    link: "/design-branding"
+  },
+  {
+    icon: FileText,
+    title: "Content Writing & Strategy",
+    valueProp: "Compelling content that ranks and converts.",
+    bullets: [
+      "Website Copywriting",
+      "SEO Blog Writing",
+      "Product Descriptions",
+      "Email Campaign Content",
+      "Ad Copy & Social Captions",
+      "Scriptwriting for Videos & Reels"
+    ],
+    note: "Content is always optimized for tone, brand voice, and user engagement.",
+    link: "/content-writing"
+  },
+  {
+    icon: BrainCircuit,
+    title: "AI-Powered Solutions",
+    valueProp: "For businesses that want to future-proof with automation and intelligence.",
+    bullets: [
+      "AI Chatbots for Support or Sales",
+      "Generative AI Integration (Text, Image, Outfit Styling, etc.)",
+      "Data-driven Recommendation Engines",
+      "Automation Workflows for Customer Engagement",
+      "AI-enhanced UI Interactions (voice, gesture, search)"
+    ],
+    badge: "Premium / On Demand",
+    link: "/ai-services"
+  },
+  {
+    icon: Wrench,
+    title: "Maintenance & Support",
+    valueProp: "We're here even after launch.",
+    bullets: [
+      "Website and App Monitoring",
+      "Bug Fixing and Performance Optimization",
+      "Feature Upgrades",
+      "Monthly Retainer Packages",
+      "Security Patches & Backups"
+    ],
+    link: "/maintenance"
   }
 ];
 
-// Animation variants for vertical cards
-const cardVariants = {
-  collapsed: {
-    width: 72,
-    boxShadow: "0 4px 14px 0 rgba(65,68,154,0.10)",
-    borderRadius: "2rem",
-    background: "linear-gradient(135deg,#816cff 60%,#4d39cf 100%)",
-    transition: {
-      type: "spring",
-      stiffness: 340,
-      damping: 30,
-      duration: 0.42
-    }
-  },
-  expanded: {
-    width: 220,
-    boxShadow: "0 12px 32px 0 rgba(77,57,207,.10),0 2px 8px 0 rgba(130,90,250,0.07)",
-    borderRadius: "2rem",
-    background: "linear-gradient(135deg,#816cff 60%,#4d39cf 100%)",
-    transition: {
-      type: "spring",
-      stiffness: 200,
-      damping: 23,
-      duration: 0.48
-    }
-  }
-};
-
 export function CoreSolutionsSection() {
-  const [expanded, setExpanded] = useState<number | null>(null);
-
   return (
-    <section className="relative py-20 bg-white dark:bg-secondary/20 overflow-x-hidden">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between mb-14 gap-8 md:gap-0">
-          <div>
-            <h2
-              className="text-[2.4rem] md:text-[3.3rem] font-extrabold leading-tight text-neutral-900 dark:text-white mb-2"
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                letterSpacing: "-0.01em",
-                lineHeight: 1.09,
-                textShadow: "0 2px 10px rgba(65,41,180,.06)"
-              }}
-            >
-              We Are A Creative Digital<br className="hidden md:block" />
-              Marketing Agency
-            </h2>
-          </div>
-          <div className="flex-shrink-0">
-            <Link to="/digital-marketing">
-              <button className="flex items-center bg-gradient-to-br from-[#816cff] to-[#4d39cf] text-white text-base font-semibold py-3 px-7 rounded-full shadow-xl gap-3 transition-all active:scale-95 hover:opacity-95">
-                EXPLORE MORE
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </Link>
-          </div>
+    <section
+      id="solutions"
+      className="py-20 bg-secondary/50 dark:bg-secondary/20"
+    >
+      <AnimatedGridBg />
+      <div className="container">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 fade-in slide-up">
+            Our Offerings & Services
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto fade-in slide-up">
+            From web and mobile to AI, creative design, marketing, and beyond—Driplare empowers your business to thrive in the digital age.
+          </p>
         </div>
-
-        {/* Main card + vertical cards */}
-        <div className="flex flex-col md:flex-row gap-7 items-stretch">
-          {/* Main feature card */}
-          <motion.div
-            className="relative flex flex-col justify-end bg-gradient-to-tr from-[#eee0ff] via-[#b2b5fd] to-[#dcebfa] rounded-3xl w-full max-w-[540px] min-h-[340px] shadow-2xl overflow-hidden"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-            style={{
-              borderRadius: '2.4rem',
-              boxShadow: "0 14px 54px 0 rgba(130,104,246,.13),0 1.5px 8px 0 rgba(65,68,154,0.07)"
-            }}
-          >
-            <img
-              src={mainCard.img}
-              alt="Digital hero"
-              className="absolute inset-0 w-full h-full object-cover object-center rounded-3xl z-0"
-              style={{ filter: "brightness(0.95)" }}
-            />
-            {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#816cffcc] via-[#816cff30] to-transparent z-10 pointer-events-none rounded-3xl" />
-
-            {/* Pills */}
-            <div className="relative z-20 flex flex-wrap gap-3 p-7 pt-8">
-              {mainCard.tags.map(tag => (
-                <span
-                  key={tag}
-                  className="flex items-center bg-gradient-to-br from-[#816cff] to-[#4d39cf] text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow hover:scale-105 transition-transform cursor-pointer"
-                >
-                  {tag}
-                  <Send className="ml-1 w-3.5 h-3.5" />
-                </span>
-              ))}
-            </div>
-            {/* Title and number */}
-            <div className="relative z-20 flex items-end justify-between px-7 pb-6 pt-4">
-              <div className="flex items-center gap-2">
-                <span className="inline-block bg-white/25 text-white px-2 py-1 rounded shadow">
-                  <svg className="inline w-4 h-4 -mt-1 mr-1" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><circle cx={12} cy={12} r={10} stroke="currentColor" strokeWidth={2.5} /><circle cx={12} cy={12} r={4} fill="currentColor" /></svg>
-                </span>
-                <span className="text-white font-bold text-lg drop-shadow">{mainCard.title}</span>
-              </div>
-              <span className="bg-white/25 text-white font-bold text-lg px-3 py-1 rounded-full drop-shadow">{mainCard.number}</span>
-            </div>
-          </motion.div>
-
-          {/* Vertical expand cards */}
-          <div className="flex flex-row gap-4">
-            {verticalCards.map((card, i) => (
-              <motion.div
-                key={card.label}
-                className="relative flex flex-col justify-between items-center cursor-pointer group"
-                onMouseEnter={() => setExpanded(i)}
-                onMouseLeave={() => setExpanded(null)}
-                tabIndex={0}
-                initial={false}
-                animate={expanded === i ? "expanded" : "collapsed"}
-                variants={cardVariants}
-                style={{ minWidth: 72, maxWidth: 220, height: 340, borderRadius: "2rem", transition: "box-shadow 0.23s" }}
-              >
-                {/* Card Number */}
-                <span className="absolute top-4 left-4 text-white font-bold opacity-70 text-[17px] select-none z-10">
-                  {card.number}
-                </span>
-                {/* Rotated text (always visible) */}
-                <motion.div
-                  className="absolute left-2 bottom-4 origin-bottom-left"
-                  animate={expanded === i
-                    ? { rotate: 0, y: 0, x: 15, opacity: 0, transition: { duration: 0.22 } }
-                    : { rotate: -90, y: 0, x: 0, opacity: 1 }
-                  }
-                  style={{
-                    writingMode: "vertical-rl",
-                    textOrientation: "mixed"
-                  }}
-                >
-                  <span className="text-white font-bold text-lg tracking-wide select-none">{card.rotText}</span>
-                </motion.div>
-                {/* Expanded content on hover */}
-                <AnimatePresence>
-                  {expanded === i && (
-                    <motion.div
-                      className="w-full h-full flex flex-col justify-center items-center px-7"
-                      initial={{ opacity: 0, x: 40 }}
-                      animate={{
-                        opacity: 1,
-                        x: 0,
-                        transition: { duration: 0.37, ease: "easeOut" }
-                      }}
-                      exit={{
-                        opacity: 0,
-                        x: 60,
-                        transition: { duration: 0.23, ease: "easeIn" }
-                      }}
-                    >
-                      <div className="mt-4 mb-2 text-white text-xl font-bold text-center">{card.label}</div>
-                      {card.desc && (
-                        <div className="text-white/90 text-sm mb-4 text-center">{card.desc}</div>
-                      )}
-                      <div>
-                        <Link to={card.link}>
-                          <span className="flex items-center gap-1 text-sm text-white underline-offset-4 underline hover:no-underline opacity-80 hover:opacity-100 transition">
-                            Read More <ArrowRight className="ml-0.5 w-4 h-4" />
-                          </span>
-                        </Link>
-                      </div>
-                    </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {offerings.map((offering, i) => (
+            <Card
+              key={offering.title}
+              className="bg-card hover-scale overflow-hidden border-primary/10 transition-shadow shadow-xl relative"
+            >
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <offering.icon className="h-10 w-10 text-primary" />
+                  {offering.badge && (
+                    <span className="ml-2 inline-block bg-primary/10 text-primary text-xs font-bold rounded-full px-3 py-1">
+                      {offering.badge}
+                    </span>
                   )}
-                </AnimatePresence>
-              </motion.div>
-            ))}
-          </div>
+                </div>
+                <CardTitle>{offering.title}</CardTitle>
+                <CardDescription className="mb-2">{offering.valueProp}</CardDescription>
+                <ul className="list-disc list-inside space-y-1 text-sm text-foreground/80 mt-2">
+                  {offering.bullets.map((b, bi) => (
+                    <li key={bi}>{b}</li>
+                  ))}
+                </ul>
+                {offering.tech && (
+                  <div className="mt-3 text-xs font-medium text-muted-foreground">{offering.tech}</div>
+                )}
+                {offering.note && (
+                  <div className="mt-3 text-xs font-medium text-muted-foreground">{offering.note}</div>
+                )}
+              </CardHeader>
+              <CardFooter>
+                <Link to={offering.link}>
+                  <Button
+                    variant="link"
+                    className="p-0 group flex items-center text-primary"
+                  >
+                    <span>Learn More</span>
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </CardFooter>
+            </Card>
+          ))}
         </div>
       </div>
     </section>
