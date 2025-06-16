@@ -1,7 +1,17 @@
-
 import { Navbar } from "@/components/common/navigation/Navbar";
 import { Button } from "@/components/ui/button";
-import { Code, Pen, Users, Check, Star, Timer, FileText, LayoutGrid, LayoutDashboard, LayoutList } from "lucide-react";
+import {
+  Code,
+  Pen,
+  Users,
+  Check,
+  Star,
+  Timer,
+  FileText,
+  LayoutGrid,
+  LayoutDashboard,
+  LayoutList,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedGridBg from "@/components/common/AnimatedGridBg";
 import ProcessTimeline from "@/components/ProcessTimeline";
@@ -112,7 +122,6 @@ export default function WebDesign() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground relative overflow-x-hidden">
-      <AnimatedGridBg />
       <Navbar />
       <main className="flex-1 flex flex-col z-10">
         {/* Futuristic Hero */}
@@ -126,10 +135,11 @@ export default function WebDesign() {
               transition={{ duration: 0.7 }}
               style={{
                 lineHeight: 1.08,
-                letterSpacing: "-0.01em"
+                letterSpacing: "-0.01em",
               }}
             >
-              Web Design & Development <span className="text-primary">for Visionary Teams</span>
+              Web Design & Development{" "}
+              <span className="text-primary">for Visionary Teams</span>
             </motion.h1>
             <motion.p
               className="text-lg md:text-xl text-muted-foreground max-w-xl mb-10"
@@ -137,14 +147,24 @@ export default function WebDesign() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.13 }}
             >
-              We craft high-performing, pixel-perfect sites custom-built for your brand's needs. We blend <span className="font-semibold">compelling design</span> with <span className="font-semibold">cutting-edge technology</span> to captivate your audience and drive results.
+              We craft high-performing, pixel-perfect sites custom-built for
+              your brand's needs. We blend{" "}
+              <span className="font-semibold">compelling design</span> with{" "}
+              <span className="font-semibold">cutting-edge technology</span> to
+              captivate your audience and drive results.
             </motion.p>
             <div className="flex gap-4">
-              <Button className="bg-primary hover:bg-primary/80 text-lg px-8 h-12 shadow-2xl" onClick={() => setShowContact(true)}>
+              <Button
+                className="bg-primary hover:bg-primary/80 text-lg px-8 h-12 shadow-2xl"
+                onClick={() => setShowContact(true)}
+              >
                 Get Your Free Audit
               </Button>
               <Link to="/portfolio">
-                <Button variant="outline" className="text-lg px-8 h-12 border-primary/50 border-2">
+                <Button
+                  variant="outline"
+                  className="text-lg px-8 h-12 border-primary/50 border-2"
+                >
                   See Client Results
                 </Button>
               </Link>
@@ -152,13 +172,15 @@ export default function WebDesign() {
           </div>
           {/* Right "What's Best" sidebar */}
           <motion.div
-            className={"hidden md:flex flex-col gap-5 items-start bg-background/80 shadow-xl rounded-3xl p-9 border border-primary/10"}
+            className={
+              "hidden md:flex flex-col gap-5 items-start bg-background/80 shadow-xl rounded-3xl p-9 border border-primary/10"
+            }
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.17 }}
             style={{
               minWidth: 260,
-              maxWidth: 320
+              maxWidth: 320,
             }}
           >
             <div className="text-xl font-bold mb-2 text-primary flex items-center gap-2">
@@ -169,8 +191,11 @@ export default function WebDesign() {
               Our preferred stack for scale, performance & reliability.
             </p>
             <div className="flex flex-col gap-3 w-full">
-              {bestStack.map(b => (
-                <div key={b.title} className="flex gap-3 items-center text-base font-medium text-foreground/90">
+              {bestStack.map((b) => (
+                <div
+                  key={b.title}
+                  className="flex gap-3 items-center text-base font-medium text-foreground/90"
+                >
                   <span className="p-2 bg-primary/10 rounded-lg">{b.icon}</span>
                   {b.title}
                 </div>
@@ -194,18 +219,23 @@ export default function WebDesign() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.07 }}
               >
-                <span className="text-3xl md:text-4xl font-extrabold text-primary block mb-1">{ph.label}</span>
+                <span className="text-3xl md:text-4xl font-extrabold text-primary block mb-1">
+                  {ph.label}
+                </span>
                 <span className="text-base text-foreground/80">{ph.text}</span>
               </motion.div>
             ))}
           </div>
           <div className="text-lg mt-7 md:mt-0 text-primary/90 font-semibold max-w-sm text-center md:text-right">
-            Building next-gen sites & digital products for growth-focused brands.
+            Building next-gen sites & digital products for growth-focused
+            brands.
           </div>
         </section>
 
         {/* Web Design & Dev Explained */}
-        <section className={`relative py-16 px-2 ${futuristicGradient} rounded-b-3xl`}>
+        <section
+          className={`relative py-16 px-2 ${futuristicGradient} rounded-b-3xl`}
+        >
           <div className="container mx-auto flex flex-col md:flex-row gap-14 items-center">
             {/* Visual mockup */}
             <motion.div
@@ -219,28 +249,43 @@ export default function WebDesign() {
                 src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
                 alt="Futuristic web dashboard"
                 className="absolute inset-0 w-full h-full object-cover object-center"
-                style={{ filter: 'brightness(0.96) saturate(1.3)' }}
+                style={{ filter: "brightness(0.96) saturate(1.3)" }}
               />
-              <div className="absolute bottom-5 right-5 bg-primary text-white py-1 px-4 rounded-full text-xs font-bold shadow-xl">Live Preview</div>
+              <div className="absolute bottom-5 right-5 bg-primary text-white py-1 px-4 rounded-full text-xs font-bold shadow-xl">
+                Live Preview
+              </div>
             </motion.div>
             {/* Explanatory Content */}
             <div className="flex-1">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3">What Sets Our Web Experiences Apart</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-3">
+                What Sets Our Web Experiences Apart
+              </h2>
               <ul className="space-y-3">
                 <li>
-                  <span className="font-semibold text-primary">Human-centered Design: </span>
-                  Clean, emotionally engaging interfaces—no cookie-cutter templates.
+                  <span className="font-semibold text-primary">
+                    Human-centered Design:{" "}
+                  </span>
+                  Clean, emotionally engaging interfaces—no cookie-cutter
+                  templates.
                 </li>
                 <li>
-                  <span className="font-semibold text-primary">Modern Frontend & Backend: </span>
-                  We use React + TypeScript + Headless CMS for ultra-fast, scalable apps.
+                  <span className="font-semibold text-primary">
+                    Modern Frontend & Backend:{" "}
+                  </span>
+                  We use React + TypeScript + Headless CMS for ultra-fast,
+                  scalable apps.
                 </li>
                 <li>
-                  <span className="font-semibold text-primary">SEO & Analytics Ready: </span>
-                  Sites launch with structured data, lightning load, and advanced tracking.
+                  <span className="font-semibold text-primary">
+                    SEO & Analytics Ready:{" "}
+                  </span>
+                  Sites launch with structured data, lightning load, and
+                  advanced tracking.
                 </li>
                 <li>
-                  <span className="font-semibold text-primary">Launch & Beyond: </span>
+                  <span className="font-semibold text-primary">
+                    Launch & Beyond:{" "}
+                  </span>
                   Ongoing support, enhancements, and growth-powered experiments.
                 </li>
               </ul>
@@ -260,12 +305,15 @@ export default function WebDesign() {
                 className="flex flex-col items-center px-6 py-8 rounded-xl bg-muted shadow-md transition-transform"
                 initial={{ y: 35, opacity: 0, scale: 0.95 }}
                 whileHover={{
-                  y: -6, scale: 1.04, boxShadow: "0 2px 32px #8F5CFF66"
+                  y: -6,
+                  scale: 1.04,
+                  boxShadow: "0 2px 32px #8F5CFF66",
                 }}
                 whileInView={{ y: 0, opacity: 1, scale: 1 }}
                 transition={{
                   delay: idx * 0.08 + 0.1,
-                  duration: 0.7, type: "spring",
+                  duration: 0.7,
+                  type: "spring",
                 }}
               >
                 <div className="mb-3">{h.icon}</div>

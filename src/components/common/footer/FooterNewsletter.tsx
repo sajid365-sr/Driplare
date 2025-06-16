@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { toast } from "sonner";
 import { submitNewsletter } from "@/utils/form-utils";
@@ -9,17 +8,17 @@ export function FooterNewsletter() {
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email) {
       toast.error("Please enter your email address");
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
       const success = await submitNewsletter({ email });
-      
+
       if (success) {
         toast.success("Thank you for subscribing to our newsletter!");
         setEmail("");
@@ -45,7 +44,7 @@ export function FooterNewsletter() {
         />
         <button
           type="submit"
-          className="w-full bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md transition-colors"
+          className="w-full bg-secondary-foreground hover:bg-accent  text-white px-4 py-2 rounded-md transition-colors"
           disabled={isSubmitting}
         >
           {isSubmitting ? "Subscribing..." : "Subscribe"}

@@ -15,7 +15,11 @@ export function useGeminiAPI() {
   const GEMINI_MODEL_KEY = "gemini_model";
 
   // Valid Gemini models supported by the Gemini SDK
-  const SUPPORTED_MODELS = ["gemini-1.5-pro", "gemini-1.5-flash", "gemini-2.0-flash"];
+  const SUPPORTED_MODELS = [
+    "gemini-1.5-pro",
+    "gemini-1.5-flash",
+    "gemini-2.0-flash",
+  ];
 
   // State
   const [apiKey, setApiKeyState] = useState<string>("");
@@ -30,7 +34,8 @@ export function useGeminiAPI() {
     if (storedKey) setApiKeyState(storedKey);
 
     // If localStorage has an unsupported model, force to default
-    let storedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
+    let storedModel =
+      localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
     if (!SUPPORTED_MODELS.includes(storedModel)) {
       storedModel = "gemini-1.5-pro";
       localStorage.setItem(GEMINI_MODEL_KEY, storedModel);
@@ -45,7 +50,9 @@ export function useGeminiAPI() {
   // Set Gemini model and save to localStorage (with validation)
   const setGeminiModel = (model: string) => {
     // Only allow supported models
-    const validatedModel = SUPPORTED_MODELS.includes(model) ? model : "gemini-1.5-pro";
+    const validatedModel = SUPPORTED_MODELS.includes(model)
+      ? model
+      : "gemini-1.5-pro";
     setGeminiModelState(validatedModel);
     if (validatedModel) {
       localStorage.setItem(GEMINI_MODEL_KEY, validatedModel);
@@ -76,21 +83,25 @@ export function useGeminiAPI() {
     try {
       // Use SDK (not REST API)
       const genAI = new GoogleGenerativeAI(apiKey);
-      const selectedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
+      const selectedModel =
+        localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
       const model = genAI.getGenerativeModel({
         model: selectedModel,
         generationConfig: {
           temperature: 0.7,
           topK: 40,
           topP: 0.9,
-          maxOutputTokens: 2000
-        }
+          maxOutputTokens: 2000,
+        },
       });
 
       // Simple test prompt
-      const result = await model.generateContent(["Test Gemini API connection."], {
-        timeout: 15000
-      });
+      const result = await model.generateContent(
+        ["Test Gemini API connection."],
+        {
+          timeout: 15000,
+        }
+      );
       const text = result?.response?.text ? await result.response.text() : "";
       if (text.toLowerCase().includes("error")) {
         throw new Error("Error from Gemini: " + text);
@@ -100,21 +111,23 @@ export function useGeminiAPI() {
       const testEvent = {
         timestamp: new Date().toISOString(),
         type: "connection_test",
-        status: "success"
+        status: "success",
       };
       const logs = JSON.parse(localStorage.getItem("gemini_sync_logs") || "[]");
       logs.push(testEvent);
       localStorage.setItem("gemini_sync_logs", JSON.stringify(logs));
       setSyncLogs(logs);
     } catch (error) {
-      toast.error("Failed to connect to Gemini API. Please check your API key.");
+      toast.error(
+        "Failed to connect to Gemini API. Please check your API key."
+      );
       console.error("Gemini API test failed:", error);
       // Log failed test
       const testEvent = {
         timestamp: new Date().toISOString(),
         type: "connection_test",
         status: "failed",
-        error: String(error)
+        error: String(error),
       };
       const logs = JSON.parse(localStorage.getItem("gemini_sync_logs") || "[]");
       logs.push(testEvent);
@@ -158,7 +171,8 @@ export function useGeminiAPI() {
     const key = apiKey || import.meta.env.VITE_GEMINI_API_KEY;
     if (!key) throw new Error("Gemini API key is required");
     // Get supported model only (falling back to default)
-    let selectedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
+    let selectedModel =
+      localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
     if (!SUPPORTED_MODELS.includes(selectedModel)) {
       selectedModel = "gemini-1.5-pro";
       localStorage.setItem(GEMINI_MODEL_KEY, selectedModel);
@@ -182,14 +196,14 @@ export function useGeminiAPI() {
     try {
       const { fetchContentSyncSettings } = await import("@/utils/content-sync");
       const data = await fetchContentSyncSettings();
-      let website = data.website_url || "";
-      let snippets = data.content_snippets || "";
-      let fileUrl: string | null = data.content_file_url || null;
+      const website = data.website_url || "";
+      const snippets = data.content_snippets || "";
+      const fileUrl: string | null = data.content_file_url || null;
       let fileText = "";
       if (fileUrl) {
         // Fetch the file as text (.txt/.md/.json) or provide a hint for binary
         try {
-          const ext = fileUrl.split('.').pop()?.toLowerCase();
+          const ext = fileUrl.split(".").pop()?.toLowerCase();
           const resp = await fetch(fileUrl);
           if (["pdf", "docx"].includes(ext || "")) {
             fileText = `[File "${fileUrl}" uploaded. Please infer content from document if possible.]`;
@@ -257,7 +271,7 @@ export function useGeminiAPI() {
 
     try {
       // Process website URL if provided
-      let contentToSync = [];
+      const contentToSync = [];
 
       if (contentData.websiteUrl) {
         contentToSync.push({
@@ -300,17 +314,18 @@ export function useGeminiAPI() {
               {
                 role: "user",
                 parts: [
-                  { 
-                    text: "Process this content for my chatbot knowledge base: " + 
-                    JSON.stringify(contentToSync)
-                  }
-                ]
-              }
+                  {
+                    text:
+                      "Process this content for my chatbot knowledge base: " +
+                      JSON.stringify(contentToSync),
+                  },
+                ],
+              },
             ],
             generationConfig: {
               maxOutputTokens: 800,
-              temperature: 0.2
-            }
+              temperature: 0.2,
+            },
           }),
         }
       );
@@ -325,16 +340,14 @@ export function useGeminiAPI() {
         timestamp: new Date().toISOString(),
         content: contentToSync.map((c) => c.source).join(", "),
         status: "success",
-        type: "content_sync"
+        type: "content_sync",
       };
 
-      const logs = JSON.parse(
-        localStorage.getItem("gemini_sync_logs") || "[]"
-      );
+      const logs = JSON.parse(localStorage.getItem("gemini_sync_logs") || "[]");
       logs.push(syncEvent);
       localStorage.setItem("gemini_sync_logs", JSON.stringify(logs));
       setSyncLogs(logs);
-      
+
       toast.success("Content successfully synced with Gemini AI");
       return true;
     } catch (error) {
@@ -345,17 +358,17 @@ export function useGeminiAPI() {
         timestamp: new Date().toISOString(),
         error: String(error),
         status: "failed",
-        type: "content_sync"
+        type: "content_sync",
       };
 
-      const logs = JSON.parse(
-        localStorage.getItem("gemini_sync_logs") || "[]"
-      );
+      const logs = JSON.parse(localStorage.getItem("gemini_sync_logs") || "[]");
       logs.push(syncEvent);
       localStorage.setItem("gemini_sync_logs", JSON.stringify(logs));
       setSyncLogs(logs);
 
-      toast.error(`Content sync failed: ${error instanceof Error ? error.message : "Unknown error"}`);
+      toast.error(
+        `Content sync failed: ${error instanceof Error ? error.message : "Unknown error"}`
+      );
       throw error;
     } finally {
       setIsSyncing(false);
@@ -374,6 +387,6 @@ export function useGeminiAPI() {
     getSyncLogs,
     syncLogs,
     clearSyncLogs,
-    askGemini
+    askGemini,
   };
 }

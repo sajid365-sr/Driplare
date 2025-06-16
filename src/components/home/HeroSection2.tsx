@@ -79,7 +79,7 @@ export default function Hero() {
           {/* Right Side */}
           <div className="relative flex justify-center lg:justify-end">
             {/* Background circle */}
-            <div className="absolute w-80 h-80 bg-purple-100 dark:bg-purple-800 rounded-full -top-20 -right-10" />
+            <div className="absolute w-80 h-80 bg-primary dark:bg-orange-400 rounded-full -top-20 -right-10" />
 
             {/* Statue + Doc */}
             <div className="relative z-10">

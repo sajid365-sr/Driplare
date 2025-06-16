@@ -19,7 +19,10 @@ const fadeIn = (delay = 0) => ({
 
 const containerFade = {
   initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { staggerChildren: 0.13, delayChildren: 0.15 } },
+  animate: {
+    opacity: 1,
+    transition: { staggerChildren: 0.13, delayChildren: 0.15 },
+  },
 };
 
 const sectionCard =
@@ -29,7 +32,8 @@ const description = `Step into tomorrow's web and brand experience. At Driplare,
 
 const description2 = `Explore our selected projects and discover how we transform ideas into beautiful, impactful products that don't just meet the moment, but shape what's next.`;
 
-const highlightGradient = "bg-gradient-to-r from-primary/30 via-background/80 to-primary/50";
+const highlightGradient =
+  "bg-gradient-to-r from-primary/30 via-background/80 to-primary/50";
 
 const trustedDesc =
   "Trusted by industry leaders and innovators who demand performance, design excellence, and future-ready technology.";
@@ -41,7 +45,6 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#16192C] text-white relative overflow-x-hidden">
-      <AnimatedGridBg />
       <Navbar />
       <main className="flex-1 z-10">
         {/* Hero Section */}
@@ -62,7 +65,10 @@ export default function Portfolio() {
             >
               {description}
             </motion.p>
-            <motion.p className="max-w-xl text-lg text-foreground/80 mb-2" {...fadeIn(0.23)}>
+            <motion.p
+              className="max-w-xl text-lg text-foreground/80 mb-2"
+              {...fadeIn(0.23)}
+            >
               {description2}
             </motion.p>
           </div>
@@ -83,7 +89,9 @@ export default function Portfolio() {
           <h3 className="text-2xl md:text-3xl font-semibold mb-1 text-center tracking-tight">
             Trusted by Global Brands
           </h3>
-          <p className="text-muted-foreground text-lg mb-6 text-center">{trustedDesc}</p>
+          <p className="text-muted-foreground text-lg mb-6 text-center">
+            {trustedDesc}
+          </p>
           <div className="max-w-6xl mx-auto">
             <InfiniteBrandsSlider />
           </div>
@@ -103,7 +111,10 @@ export default function Portfolio() {
         </motion.section>
 
         {/* Featured Case Study */}
-        <motion.section {...fadeIn(0.06)} className={`w-full ${sectionCard} ${highlightGradient}`}>
+        <motion.section
+          {...fadeIn(0.06)}
+          className={`w-full ${sectionCard} ${highlightGradient}`}
+        >
           <FeaturedCaseStudy />
         </motion.section>
 
@@ -113,10 +124,7 @@ export default function Portfolio() {
         </motion.section>
 
         {/* Collaborate CTA */}
-        <motion.div
-          {...fadeIn(0.15)}
-          className="z-30"
-        >
+        <motion.div {...fadeIn(0.15)} className="z-30">
           <CollaborateBanner />
         </motion.div>
       </main>

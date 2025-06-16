@@ -44,9 +44,7 @@ export default function AdminLayout() {
     // Initialize notifications from Supabase
     initializeNotificationsFromSupabase();
 
-    // Apply dark mode to the admin panel
-    document.documentElement.classList.add("dark");
-    return () => document.documentElement.classList.remove("dark");
+    return () => {};
   }, []);
 
   const handleLogout = () => {
@@ -100,7 +98,7 @@ export default function AdminLayout() {
                     className="justify-start"
                     onClick={() => handleTabChange("dashboard")}
                   >
-                    Submissions
+                    Form Submissions
                   </Button>
 
                   {adminSession?.permissions.canView && (
@@ -145,7 +143,7 @@ export default function AdminLayout() {
                     </Button>
                   )}
 
-                  {adminSession?.permissions.canView && (
+                  {/* {adminSession?.permissions.canView && (
                     <Button
                       variant={activeTab === "logs" ? "default" : "ghost"}
                       className="justify-start"
@@ -153,7 +151,7 @@ export default function AdminLayout() {
                     >
                       Audit Logs
                     </Button>
-                  )}
+                  )} */}
                   {adminSession?.permissions.canView && (
                     <Button
                       variant={
@@ -202,7 +200,7 @@ export default function AdminLayout() {
                   className="justify-start"
                   onClick={() => setActiveTab("dashboard")}
                 >
-                  Submissions
+                  Form Submissions
                 </Button>
 
                 {adminSession?.permissions.canView && (
@@ -247,7 +245,7 @@ export default function AdminLayout() {
                   </Button>
                 )}
 
-                {adminSession?.permissions.canView && (
+                {/* {adminSession?.permissions.canView && (
                   <Button
                     variant={activeTab === "logs" ? "default" : "ghost"}
                     className="justify-start"
@@ -255,7 +253,7 @@ export default function AdminLayout() {
                   >
                     Audit Logs
                   </Button>
-                )}
+                )} */}
                 {adminSession?.permissions.canView && (
                   <Button
                     variant={activeTab === "clientReview" ? "default" : "ghost"}
@@ -297,7 +295,7 @@ export default function AdminLayout() {
               {activeTab === "admins" && <AdminManagement />}
               {activeTab === "blogs" && <BlogManager />}
               {activeTab === "notifications" && <Notifications />}
-              {activeTab === "logs" && <AuditLogs />}
+              {/* {activeTab === "logs" && <AuditLogs />} */}
               {activeTab === "clientReview" && <ClientReview />}
               {activeTab === "settings" && <Settings />}
             </div>

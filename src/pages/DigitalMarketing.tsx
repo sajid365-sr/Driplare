@@ -124,7 +124,6 @@ export default function DigitalMarketing() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground relative overflow-x-hidden">
-      <AnimatedGridBg />
       <Navbar />
       <main className="flex-1 flex flex-col z-10">
         {/* Hero & Value Proposition */}

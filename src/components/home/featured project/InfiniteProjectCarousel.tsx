@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
@@ -13,7 +12,9 @@ interface InfiniteProjectCarouselProps {
   projects: Project[];
 }
 
-export function InfiniteProjectCarousel({ projects }: InfiniteProjectCarouselProps) {
+export function InfiniteProjectCarousel({
+  projects,
+}: InfiniteProjectCarouselProps) {
   // Double the items to create the infinite effect
   const doubledProjects = [...projects, ...projects];
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -42,8 +43,8 @@ export function InfiniteProjectCarousel({ projects }: InfiniteProjectCarouselPro
       className="overflow-x-hidden whitespace-nowrap cursor-grab active:cursor-grabbing"
       style={{ WebkitOverflowScrolling: "touch" }}
     >
-      <motion.div 
-        className="inline-flex gap-6 py-8"
+      <motion.div
+        className="inline-flex gap-6 py-8 select-none"
         whileTap={{ cursor: "grabbing" }}
       >
         {doubledProjects.map((project, idx) => (
@@ -59,7 +60,9 @@ export function InfiniteProjectCarousel({ projects }: InfiniteProjectCarouselPro
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex flex-col justify-end">
-              <span className="text-primary text-sm font-medium mb-2">{project.category}</span>
+              <span className="text-primary text-sm font-medium mb-2">
+                {project.category}
+              </span>
               <h3 className="text-white text-xl font-bold">{project.title}</h3>
             </div>
           </motion.div>

@@ -11,8 +11,6 @@ import { DemoFormSection } from "@/components/ai-services-page/DemoFormSection";
 const AIServices = () => {
   return (
     <div className="relative min-h-screen bg-[#1A1F2C] flex flex-col text-white overflow-x-hidden">
-      <AnimatedGridBg />
-      <Navbar />
       <main className="flex-1 pt-0">
         <HeroSection />
         <WhyAISection />

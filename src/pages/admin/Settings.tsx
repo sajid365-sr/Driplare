@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  CardFooter
+  CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -23,7 +23,17 @@ import {
   saveContentSyncSettings,
   uploadContentFile,
 } from "@/utils/content-sync";
-import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 
 export default function Settings() {
   const [darkModeEnabled, setDarkModeEnabled] = useState(
@@ -42,7 +52,7 @@ export default function Settings() {
     syncContent,
     isSyncing,
     syncLogs,
-    clearSyncLogs
+    clearSyncLogs,
   } = useGeminiAPI();
 
   // Add Gemini model options (now includes Flash models and 2.0)
@@ -52,7 +62,7 @@ export default function Settings() {
     { value: "gemini-2.0-flash", label: "Gemini 2.0 Flash" },
     { value: "gemini-2.0-flash-lite", label: "Gemini 2.0 Flash-Lite" },
     { value: "gemini-2.5-flash-preview", label: "Gemini 2.5 Flash Preview" },
-    { value: "gemini-1.5-flash-8b", label: "Gemini 1.5 Flash-8B" }
+    { value: "gemini-1.5-flash-8b", label: "Gemini 1.5 Flash-8B" },
   ];
 
   // Content sync settings
@@ -89,14 +99,19 @@ export default function Settings() {
         // For Markdown
         "text/markdown",
         // Some browsers might set an empty type for .md/.txt files
-        ""
+        "",
       ];
       const file = e.target.files[0];
       // Check extension type fallback if type is empty
-      const ext = file.name.split('.').pop()?.toLowerCase();
+      const ext = file.name.split(".").pop()?.toLowerCase();
       const allowedExts = ["txt", "md", "json", "pdf", "docx"];
-      if (!allowedTypes.includes(file.type) && !allowedExts.includes(ext || "")) {
-        toast.error("Invalid file type. Please upload a txt, md, json, pdf, or docx file.");
+      if (
+        !allowedTypes.includes(file.type) &&
+        !allowedExts.includes(ext || "")
+      ) {
+        toast.error(
+          "Invalid file type. Please upload a txt, md, json, pdf, or docx file."
+        );
         return;
       }
       setSelectedFile(file);
@@ -181,9 +196,9 @@ export default function Settings() {
 
   // Format log status for display
   const getStatusBadgeClass = (status: string) => {
-    return status === 'success' 
-      ? 'bg-green-500/20 text-green-500 px-2 py-0.5 rounded text-xs font-medium' 
-      : 'bg-red-500/20 text-red-500 px-2 py-0.5 rounded text-xs font-medium';
+    return status === "success"
+      ? "bg-green-500/20 text-green-500 px-2 py-0.5 rounded text-xs font-medium"
+      : "bg-red-500/20 text-red-500 px-2 py-0.5 rounded text-xs font-medium";
   };
 
   // Remove handlers
@@ -199,9 +214,9 @@ export default function Settings() {
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">Settings & Integrations</h1>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-1">
         {/* Theme Settings */}
-        <Card>
+        {/* <Card>
           <CardHeader>
             <CardTitle>Appearance</CardTitle>
             <CardDescription>
@@ -236,7 +251,7 @@ export default function Settings() {
               <Switch id="animations" defaultChecked />
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
 
         {/* Gemini AI Integration */}
         <Card>
@@ -255,7 +270,7 @@ export default function Settings() {
             >
               <TabsList>
                 <TabsTrigger value="api-key">API Key</TabsTrigger>
-                <TabsTrigger value="content-sync">Content Sync</TabsTrigger>
+                <TabsTrigger value="content-sync">Knowledge Base</TabsTrigger>
                 <TabsTrigger value="logs">Activity Logs</TabsTrigger>
               </TabsList>
 
@@ -307,13 +322,17 @@ export default function Settings() {
                     >
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
-                          <span title="Delete API Key"><Trash2 size={16} /></span>
+                          <span title="Delete API Key">
+                            <Trash2 size={16} />
+                          </span>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader>
                             <AlertDialogTitle>Delete API Key?</AlertDialogTitle>
                             <AlertDialogDescription>
-                              Are you sure you want to delete your Gemini API key? This action cannot be undone and will disconnect Gemini features.
+                              Are you sure you want to delete your Gemini API
+                              key? This action cannot be undone and will
+                              disconnect Gemini features.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
@@ -340,12 +359,22 @@ export default function Settings() {
                 <div className="bg-muted/40 p-4 rounded-md border border-border/50 mt-4">
                   <h4 className="font-medium mb-2">About Gemini API</h4>
                   <p className="text-sm text-muted-foreground">
-                    Google Gemini is an advanced AI model that powers our chatbot features. 
-                    When connected, it provides more natural, accurate responses to customer 
-                    queries. To get an API key:
+                    Google Gemini is an advanced AI model that powers our
+                    chatbot features. When connected, it provides more natural,
+                    accurate responses to customer queries. To get an API key:
                   </p>
                   <ol className="list-decimal list-inside text-sm text-muted-foreground mt-2 space-y-1">
-                    <li>Go to the <a href="https://ai.google.dev/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Google AI Studio</a></li>
+                    <li>
+                      Go to the{" "}
+                      <a
+                        href="https://ai.google.dev/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:underline"
+                      >
+                        Google AI Studio
+                      </a>
+                    </li>
                     <li>Sign in with your Google account</li>
                     <li>Navigate to the API keys section</li>
                     <li>Create a new API key and paste it above</li>
@@ -354,6 +383,7 @@ export default function Settings() {
                 <div className="space-y-2">
                   <Label htmlFor="gemini-model">Gemini Model</Label>
                   <select
+                    title="select"
                     id="gemini-model"
                     className="block w-full border border-border rounded-md p-2 mt-1 bg-background"
                     value={geminiModel}
@@ -362,11 +392,14 @@ export default function Settings() {
                     }}
                   >
                     {GEMINI_MODEL_OPTIONS.map((m) => (
-                      <option value={m.value} key={m.value}>{m.label}</option>
+                      <option value={m.value} key={m.value}>
+                        {m.label}
+                      </option>
                     ))}
                   </select>
                   <p className="text-sm text-muted-foreground">
-                    Select the Gemini AI model to use for all chatbot and content syncing.
+                    Select the Gemini AI model to use for all chatbot and
+                    content syncing.
                   </p>
                 </div>
               </TabsContent>
@@ -385,7 +418,12 @@ export default function Settings() {
                       onChange={(e) => setWebsiteUrl(e.target.value)}
                     />
                     {websiteUrl && (
-                      <Button size="icon" variant="ghost" onClick={handleRemoveWebsiteUrl} title="Remove Website URL">
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={handleRemoveWebsiteUrl}
+                        title="Remove Website URL"
+                      >
                         <Trash2 size={16} />
                       </Button>
                     )}
@@ -410,7 +448,12 @@ export default function Settings() {
                       onChange={(e) => setContentSnippets(e.target.value)}
                     />
                     {contentSnippets && (
-                      <Button size="icon" variant="ghost" onClick={handleRemoveSnippets} title="Remove Snippets">
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={handleRemoveSnippets}
+                        title="Remove Snippets"
+                      >
                         <Trash2 size={16} />
                       </Button>
                     )}
@@ -428,7 +471,12 @@ export default function Settings() {
                       onChange={handleFileChange}
                     />
                     {(uploadedFileUrl || selectedFile) && (
-                      <Button size="icon" variant="ghost" onClick={handleRemoveFile} title="Remove File">
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={handleRemoveFile}
+                        title="Remove File"
+                      >
                         <Trash2 size={16} />
                       </Button>
                     )}
@@ -463,13 +511,13 @@ export default function Settings() {
                   {isSavingContentSync ? "Saving..." : "Save Content Settings"}
                 </Button>
               </TabsContent>
-              
+
               {/* Logs Tab */}
               <TabsContent value="logs" className="space-y-4">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-medium">Gemini Activity Logs</h3>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="sm"
                     onClick={clearSyncLogs}
                     className="flex items-center gap-1"
@@ -478,49 +526,73 @@ export default function Settings() {
                     <span>Clear Logs</span>
                   </Button>
                 </div>
-                
+
                 <div className="border rounded-md">
                   <ScrollArea className="h-[300px]">
                     {syncLogs.length > 0 ? (
                       <div className="p-2">
-                        {syncLogs.slice().reverse().map((log, index) => (
-                          <div key={index} className="border-b last:border-b-0 p-3">
-                            <div className="flex items-center justify-between mb-1">
-                              <div className="flex items-center gap-2">
-                                <span className="text-xs text-muted-foreground">
-                                  {format(new Date(log.timestamp), 'MMM d, yyyy HH:mm:ss')}
-                                </span>
-                                <span className={getStatusBadgeClass(log.status)}>
-                                  {log.status.toUpperCase()}
+                        {syncLogs
+                          .slice()
+                          .reverse()
+                          .map((log, index) => (
+                            <div
+                              key={index}
+                              className="border-b last:border-b-0 p-3"
+                            >
+                              <div className="flex items-center justify-between mb-1">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs text-muted-foreground">
+                                    {format(
+                                      new Date(log.timestamp),
+                                      "MMM d, yyyy HH:mm:ss"
+                                    )}
+                                  </span>
+                                  <span
+                                    className={getStatusBadgeClass(log.status)}
+                                  >
+                                    {log.status.toUpperCase()}
+                                  </span>
+                                </div>
+                                <span className="text-xs font-medium">
+                                  {log.type === "connection_test"
+                                    ? "API Test"
+                                    : log.type === "content_sync"
+                                      ? "Content Sync"
+                                      : "Chat"}
                                 </span>
                               </div>
-                              <span className="text-xs font-medium">
-                                {log.type === 'connection_test' ? 'API Test' : 
-                                 log.type === 'content_sync' ? 'Content Sync' : 'Chat'}
-                              </span>
+
+                              {log.content && (
+                                <p className="text-sm truncate">
+                                  {log.content}
+                                </p>
+                              )}
+
+                              {log.error && (
+                                <p className="text-sm text-red-500 truncate">
+                                  {log.error}
+                                </p>
+                              )}
                             </div>
-                            
-                            {log.content && (
-                              <p className="text-sm truncate">{log.content}</p>
-                            )}
-                            
-                            {log.error && (
-                              <p className="text-sm text-red-500 truncate">{log.error}</p>
-                            )}
-                          </div>
-                        ))}
+                          ))}
                       </div>
                     ) : (
                       <div className="flex flex-col items-center justify-center h-full p-4 text-center">
-                        <RotateCcw size={24} className="text-muted-foreground mb-2" />
-                        <p className="text-muted-foreground">No activity logs yet</p>
+                        <RotateCcw
+                          size={24}
+                          className="text-muted-foreground mb-2"
+                        />
+                        <p className="text-muted-foreground">
+                          No activity logs yet
+                        </p>
                       </div>
                     )}
                   </ScrollArea>
                 </div>
-                
+
                 <p className="text-xs text-muted-foreground mt-2">
-                  Logs show recent Gemini API activity including connection tests, content syncs, and chat interactions.
+                  Logs show recent Gemini API activity including connection
+                  tests, content syncs, and chat interactions.
                 </p>
               </TabsContent>
             </Tabs>

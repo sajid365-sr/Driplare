@@ -23,7 +23,6 @@ const Contact = () => {
         </div>
       </main>
       <NewsletterFooter />
-      <Toaster position="top-center" />
     </div>
   );
 };

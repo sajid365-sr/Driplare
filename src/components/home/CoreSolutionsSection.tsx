@@ -168,7 +168,6 @@ export function CoreSolutionsSection() {
       id="solutions"
       className="py-24 bg-secondary/50 dark:bg-secondary/20 relative overflow-x-hidden"
     >
-      <AnimatedGridBg />
       <div className="container">
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 fade-in slide-up">
@@ -209,7 +208,7 @@ export function CoreSolutionsSection() {
                 onClick={() => handleCardClick(i)}
                 style={{
                   background:
-                    "linear-gradient(135deg, #8F5CFF 80%, #CBA8FF 100%)",
+                    "linear-gradient(135deg, #ff9d00 20%, #ff9500 100%)",
                   color: "#fff",
                   cursor: "pointer",
                   // Remove any previous height changes here if present!
