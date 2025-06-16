@@ -23,6 +23,7 @@ import {
   saveContentSyncSettings,
   uploadContentFile,
 } from "@/utils/content-sync";
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 
 export default function Settings() {
   const [darkModeEnabled, setDarkModeEnabled] = useState(
@@ -44,10 +45,14 @@ export default function Settings() {
     clearSyncLogs
   } = useGeminiAPI();
 
-  // Add Gemini model options (Gemini 1.0 Pro is removed)
+  // Add Gemini model options (now includes Flash models and 2.0)
   const GEMINI_MODEL_OPTIONS = [
-    { value: "gemini-1.5-pro", label: "Gemini 1.5 Pro" }
-    // Add more as Google enables in the future
+    { value: "gemini-1.5-pro", label: "Gemini 1.5 Pro" },
+    { value: "gemini-1.5-flash", label: "Gemini 1.5 Flash" },
+    { value: "gemini-2.0-flash", label: "Gemini 2.0 Flash" },
+    { value: "gemini-2.0-flash-lite", label: "Gemini 2.0 Flash-Lite" },
+    { value: "gemini-2.5-flash-preview", label: "Gemini 2.5 Flash Preview" },
+    { value: "gemini-1.5-flash-8b", label: "Gemini 1.5 Flash-8B" }
   ];
 
   // Content sync settings
@@ -181,6 +186,15 @@ export default function Settings() {
       : 'bg-red-500/20 text-red-500 px-2 py-0.5 rounded text-xs font-medium';
   };
 
+  // Remove handlers
+  const handleRemoveWebsiteUrl = () => setWebsiteUrl("");
+  const handleRemoveSnippets = () => setContentSnippets("");
+  const handleRemoveFile = () => {
+    setUploadedFileUrl(null);
+    setUploadedFileName(null);
+    setSelectedFile(null);
+  };
+
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">Settings & Integrations</h1>
@@ -258,11 +272,14 @@ export default function Settings() {
                         onChange={(e) => setApiKey(e.target.value)}
                         placeholder="Enter your Gemini API key"
                         className="pr-10"
+                        autoComplete="off"
                       />
                       <button
                         type="button"
                         onClick={() => setShowApiKey(!showApiKey)}
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        tabIndex={-1}
+                        aria-label={showApiKey ? "Hide" : "Show"}
                       >
                         {showApiKey ? <EyeOff size={16} /> : <Eye size={16} />}
                       </button>
@@ -270,11 +287,49 @@ export default function Settings() {
                     <Button
                       variant="outline"
                       className="ml-2 whitespace-nowrap"
-                      onClick={testConnection}
-                      disabled={!apiKey || isTestingConnection}
+                      onClick={() => {
+                        if (!apiKey.trim()) {
+                          toast.error("API key cannot be empty");
+                        } else {
+                          setApiKey(apiKey.trim());
+                          toast.success("API key updated.");
+                        }
+                      }}
+                      disabled={isTestingConnection}
                     >
-                      <Key size={16} className="mr-1" />
-                      {isTestingConnection ? "Testing..." : "Test Connection"}
+                      Save
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      className="ml-2"
+                      size="icon"
+                      asChild
+                    >
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <span title="Delete API Key"><Trash2 size={16} /></span>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Delete API Key?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Are you sure you want to delete your Gemini API key? This action cannot be undone and will disconnect Gemini features.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              className="bg-destructive"
+                              onClick={() => {
+                                setApiKey("");
+                                toast.info("API key deleted.");
+                              }}
+                            >
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </Button>
                   </div>
                   <p className="text-sm text-muted-foreground">
@@ -318,34 +373,51 @@ export default function Settings() {
 
               {/* Content Sync Tab */}
               <TabsContent value="content-sync" className="space-y-4">
+                {/* Website URL */}
                 <div className="space-y-2">
                   <Label htmlFor="website-url">Website URL</Label>
-                  <Input
-                    id="website-url"
-                    type="url"
-                    placeholder="https://yourwebsite.com"
-                    value={websiteUrl}
-                    onChange={(e) => setWebsiteUrl(e.target.value)}
-                  />
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="website-url"
+                      type="url"
+                      placeholder="https://yourwebsite.com"
+                      value={websiteUrl}
+                      onChange={(e) => setWebsiteUrl(e.target.value)}
+                    />
+                    {websiteUrl && (
+                      <Button size="icon" variant="ghost" onClick={handleRemoveWebsiteUrl} title="Remove Website URL">
+                        <Trash2 size={16} />
+                      </Button>
+                    )}
+                  </div>
                   <p className="text-sm text-muted-foreground">
                     Enter your website URL to fetch and process content for the
                     chatbot.
                   </p>
                 </div>
 
+                {/* Content Snippets */}
                 <div className="space-y-2">
                   <Label htmlFor="content-snippets">
                     Custom Content Snippets
                   </Label>
-                  <Textarea
-                    id="content-snippets"
-                    placeholder="Paste key content, FAQs, or service descriptions here..."
-                    className="min-h-[120px]"
-                    value={contentSnippets}
-                    onChange={(e) => setContentSnippets(e.target.value)}
-                  />
+                  <div className="flex items-start gap-2">
+                    <Textarea
+                      id="content-snippets"
+                      placeholder="Paste key content, FAQs, or service descriptions here..."
+                      className="min-h-[120px]"
+                      value={contentSnippets}
+                      onChange={(e) => setContentSnippets(e.target.value)}
+                    />
+                    {contentSnippets && (
+                      <Button size="icon" variant="ghost" onClick={handleRemoveSnippets} title="Remove Snippets">
+                        <Trash2 size={16} />
+                      </Button>
+                    )}
+                  </div>
                 </div>
 
+                {/* Content File */}
                 <div className="space-y-2">
                   <Label htmlFor="content-file">Upload Content File</Label>
                   <div className="flex items-center gap-2">
@@ -355,6 +427,11 @@ export default function Settings() {
                       accept=".txt,.md,.json,.pdf,.docx"
                       onChange={handleFileChange}
                     />
+                    {(uploadedFileUrl || selectedFile) && (
+                      <Button size="icon" variant="ghost" onClick={handleRemoveFile} title="Remove File">
+                        <Trash2 size={16} />
+                      </Button>
+                    )}
                   </div>
                   {(uploadedFileName || uploadedFileUrl) && (
                     <p className="text-sm text-muted-foreground">

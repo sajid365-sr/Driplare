@@ -4,6 +4,78 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useGeminiAPI } from "@/hooks/use-gemini-api";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Mic, Volume2, Pause, Play } from "lucide-react";
+import { useVoice } from "@/hooks/use-voice";
+
+// Utility to clean up bullet marks and asterisks from text for display
+function cleanBotMessageText(msg: string) {
+  // Remove all starting *, -, •, and similar bullet marks and spaces from each line
+  // Also replaces multiple consecutive spaces with single space
+  return msg
+    .split("\n")
+    .map((line) =>
+      line
+        // Remove starting *, dashes, bullets, plus whitespace
+        .replace(/^[\s*\-•·‣▪➤➔►‣–—]+/, "")
+        // Remove lone asterisks inside line
+        .replace(/\*/g, "")
+        .replace(/\s{2,}/g, " ")
+        .trim()
+    )
+    .filter((line) => line.length > 0)
+    .join("\n");
+}
+
+// Enhanced utility to extract and render bulleted lists and decorate them without raw asterisks
+function renderFormattedBotMessage(msg: string) {
+  // Clean lines for both display and bullet parsing
+  const lines = msg.split("\n").map((l) => l.trim()).filter((l) => l.length > 0);
+  // Detect bullet lines (hide asterisk/dash mark)
+  const bulletLines = lines.filter(line => /^\* |^\- |^• /.test(line));
+  // If at least 2 bullet lines exist, treat as a bullet list for display
+  if (bulletLines.length >= 2) {
+    // Find the intro (before the first bullet)
+    const firstBulletIdx = lines.findIndex(line => /^\* |^\- |^• /.test(line));
+    const intro = lines.slice(0, firstBulletIdx).map(cleanBotMessageText).join(" ");
+    const items = lines.slice(firstBulletIdx).map(line =>
+      // Remove the bullet, clean the text
+      cleanBotMessageText(line.replace(/^[\*\-•]+ /, ""))
+    );
+    return (
+      <div>
+        {intro && <div className="mb-1 text-sm">{intro}</div>}
+        <ul className="list-disc pl-6 space-y-1 text-sm">
+          {items.map((item, i) => (
+            <li key={i}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+  // Otherwise, just show the cleaned text
+  return <p className="text-sm whitespace-pre-wrap">{cleanBotMessageText(msg)}</p>;
+}
+
+// Utility to strip asterisk bullets and other marks from text for TTS
+function textForSpeech(msg: string) {
+  // Remove *, -, •, and extra whitespace at the beginning of lines,
+  // as well as any " - " bullet-like prefix
+  return msg
+    .split("\n")
+    .map(line =>
+      line
+        // Remove all asterisks
+        .replace(/\*/g, "")
+        // Remove leading dashes, bullets, or similar characters plus whitespace
+        .replace(/^[\s\-•·‣▪➤➔►‣–—]+/, "")
+        // Trim remaining whitespace
+        .trim()
+    )
+    // Filter out empty lines left behind
+    .filter(line => line.length > 0)
+    // Join with a pause for natural reading
+    .join(". ");
+}
 
 export const ChatbotWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +92,11 @@ export const ChatbotWidget = () => {
   const [isTyping, setIsTyping] = useState(false);
   const messageEndRef = useRef<HTMLDivElement>(null);
 
+  // TTS playback state management
+  const [speakingMsgIdx, setSpeakingMsgIdx] = useState<number | null>(null);
+  const [isTTSPlaying, setIsTTSPlaying] = useState(false);
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+
   // Get Gemini API key
   const { apiKey, askGemini } = useGeminiAPI();
   const useGemini = Boolean(apiKey);
@@ -28,6 +105,59 @@ export const ChatbotWidget = () => {
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
+
+  // Clear speech state if chat closes or new messages added
+  useEffect(() => {
+    if (!isOpen) {
+      // Stop speech synthesis if chat is closed
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      setSpeakingMsgIdx(null);
+      setIsTTSPlaying(false);
+    }
+  }, [isOpen]);
+
+  // Clean up speech synthesis if message is removed or changed
+  useEffect(() => {
+    return () => {
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+    };
+  }, []);
+
+  // Handle TTS play/pause for specific message
+  const handleTogglePlayBotMessage = (msg: string, msgIdx: number) => {
+    if (!window.speechSynthesis) {
+      alert("Speech Synthesis is not supported in your browser.");
+      return;
+    }
+    // If already playing this message, pause
+    if (isTTSPlaying && speakingMsgIdx === msgIdx) {
+      window.speechSynthesis.pause();
+      setIsTTSPlaying(false);
+      return;
+    }
+    // If paused on this message, resume
+    if (!isTTSPlaying && speakingMsgIdx === msgIdx && window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+      setIsTTSPlaying(true);
+      return;
+    }
+    // Otherwise, start speech on selected message (strip asterisks)
+    window.speechSynthesis.cancel(); // Stop any other speech
+    setSpeakingMsgIdx(msgIdx);
+    setIsTTSPlaying(true);
+    const usableText = textForSpeech(msg);
+    const utter = new window.SpeechSynthesisUtterance(usableText);
+    utteranceRef.current = utter;
+    utter.onend = () => {
+      setIsTTSPlaying(false);
+      setSpeakingMsgIdx(null);
+    };
+    utter.onerror = () => {
+      setIsTTSPlaying(false);
+      setSpeakingMsgIdx(null);
+    };
+    window.speechSynthesis.speak(utter);
+  };
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -106,6 +236,19 @@ export const ChatbotWidget = () => {
   const handleQuickReply = (message: string) => {
     setUserMessage(message);
     handleSendMessage();
+  };
+
+  // Add voice input handler
+  const { isListening, startListening, stopListening, isSpeaking, speak } = useVoice();
+  const handleVoiceInput = () => {
+    if (isListening) {
+      stopListening();
+    } else {
+      startListening((transcript) => {
+        setUserMessage(transcript);
+        // Optional: auto-send after capture; if required, call handleSendMessage()
+      });
+    }
   };
 
   return (
@@ -228,8 +371,25 @@ export const ChatbotWidget = () => {
                               ? "bg-muted/30 text-foreground rounded-lg p-3 inline-block max-w-[80%]"
                               : "bg-[#F88220] text-white rounded-lg p-3 inline-block ml-auto max-w-[80%]"
                           }`}
+                          style={{ position: "relative" }}
                         >
-                          <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
+                          {/* Use the new formatting for bot messages */}
+                          {msg.isBot ? renderFormattedBotMessage(msg.text) : <p className="text-sm whitespace-pre-wrap">{msg.text}</p>}
+                          {/* Only for bot messages: Play/Pause button for TTS */}
+                          {msg.isBot && (
+                            <button
+                              aria-label={isTTSPlaying && speakingMsgIdx === index ? "Pause audio" : "Play audio"}
+                              onClick={() => handleTogglePlayBotMessage(msg.text, index)}
+                              className="ml-1 text-primary hover:text-primary/80"
+                              style={{ position: "absolute", bottom: 4, right: 8 }}
+                            >
+                              {isTTSPlaying && speakingMsgIdx === index ? (
+                                <Pause size={18} />
+                              ) : (
+                                <Play size={18} />
+                              )}
+                            </button>
+                          )}
                         </div>
                       ))}
                       {isTyping && (
@@ -296,24 +456,34 @@ export const ChatbotWidget = () => {
                   )}
 
                   {/* Chat Input */}
-                  <form onSubmit={handleSendMessage} className="mt-auto">
-                    <div className="flex items-center">
-                      <input
-                        type="text"
-                        placeholder="Type a message..."
-                        value={userMessage}
-                        onChange={(e) => setUserMessage(e.target.value)}
-                        className="flex-1 bg-background border border-border rounded-l-md p-2 focus:outline-none"
-                      />
-                      <button
-                        type="submit"
-                        className="bg-[#F88220] text-white p-2 rounded-r-md"
-                        disabled={!userMessage.trim()}
-                      >
-                        <MessageSquareText size={20} />
-                      </button>
-                    </div>
-                  </form>
+                  <div className="flex items-center gap-2 mt-2">
+                    <button
+                      type="button"
+                      onClick={handleVoiceInput}
+                      className={`rounded-full p-2 ${isListening ? "bg-primary text-white" : "bg-secondary text-primary"}`}
+                      title={isListening ? "Stop Recording" : "Record Voice"}
+                    >
+                      <Mic size={20} />
+                    </button>
+                    <form onSubmit={handleSendMessage} className="flex-1">
+                      <div className="flex items-center">
+                        <input
+                          type="text"
+                          placeholder="Type a message..."
+                          value={userMessage}
+                          onChange={(e) => setUserMessage(e.target.value)}
+                          className="flex-1 bg-background border border-border rounded-l-md p-2 focus:outline-none"
+                        />
+                        <button
+                          type="submit"
+                          className="bg-[#F88220] text-white p-2 rounded-r-md"
+                          disabled={!userMessage.trim()}
+                        >
+                          <MessageSquareText size={20} />
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               )}
             </div>

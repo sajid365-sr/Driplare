@@ -15,7 +15,7 @@ export function useGeminiAPI() {
   const GEMINI_MODEL_KEY = "gemini_model";
 
   // Valid Gemini models supported by the Gemini SDK
-  const SUPPORTED_MODELS = ["gemini-1.5-pro"];
+  const SUPPORTED_MODELS = ["gemini-1.5-pro", "gemini-1.5-flash", "gemini-2.0-flash"];
 
   // State
   const [apiKey, setApiKeyState] = useState<string>("");
@@ -29,7 +29,7 @@ export function useGeminiAPI() {
     const storedKey = localStorage.getItem(GEMINI_API_KEY);
     if (storedKey) setApiKeyState(storedKey);
 
-    // If local storage has an unsupported model, force to default
+    // If localStorage has an unsupported model, force to default
     let storedModel = localStorage.getItem(GEMINI_MODEL_KEY) || "gemini-1.5-pro";
     if (!SUPPORTED_MODELS.includes(storedModel)) {
       storedModel = "gemini-1.5-pro";
