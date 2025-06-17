@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import ClientReview from "@/pages/admin/ClientReview";
+import { ThemeToggle } from "../ThemeToggle";
 
 export default function AdminLayout() {
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
@@ -73,14 +74,16 @@ export default function AdminLayout() {
   return (
     <main className="min-h-screen flex flex-col">
       <ScrollToTop />
-      <Toaster position="top-center" richColors />
+      {/* <Toaster position="top-center" richColors /> */}
 
       <div className="flex flex-1 flex-col h-screen">
         <header className="flex justify-between items-center p-4 md:px-6 border-b bg-background">
           <div className="flex items-center gap-4">
             <img src="/logo-white.png" alt="Driplare Logo" width={120} />
           </div>
-
+          <ThemeToggle />
+        </header>
+        <div>
           {isMobile && (
             <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
               <SheetTrigger asChild>
@@ -100,7 +103,6 @@ export default function AdminLayout() {
                   >
                     Form Submissions
                   </Button>
-
                   {adminSession?.permissions.canView && (
                     <Button
                       variant={activeTab === "analytics" ? "default" : "ghost"}
@@ -110,7 +112,6 @@ export default function AdminLayout() {
                       Analytics
                     </Button>
                   )}
-
                   {canAccessAdminManagement && (
                     <Button
                       variant={activeTab === "admins" ? "default" : "ghost"}
@@ -120,7 +121,6 @@ export default function AdminLayout() {
                       User Management
                     </Button>
                   )}
-
                   {adminSession?.permissions.canEdit && (
                     <Button
                       variant={activeTab === "blogs" ? "default" : "ghost"}
@@ -130,7 +130,6 @@ export default function AdminLayout() {
                       Blog Manager
                     </Button>
                   )}
-
                   {adminSession?.permissions.canView && (
                     <Button
                       variant={
@@ -142,16 +141,15 @@ export default function AdminLayout() {
                       Notifications
                     </Button>
                   )}
-
                   {/* {adminSession?.permissions.canView && (
-                    <Button
-                      variant={activeTab === "logs" ? "default" : "ghost"}
-                      className="justify-start"
-                      onClick={() => handleTabChange("logs")}
-                    >
-                      Audit Logs
-                    </Button>
-                  )} */}
+                      <Button
+                        variant={activeTab === "logs" ? "default" : "ghost"}
+                        className="justify-start"
+                        onClick={() => handleTabChange("logs")}
+                      >
+                        Audit Logs
+                      </Button>
+                    )} */}
                   {adminSession?.permissions.canView && (
                     <Button
                       variant={
@@ -163,7 +161,6 @@ export default function AdminLayout() {
                       Client Reviews
                     </Button>
                   )}
-
                   {adminSession?.permissions.canEdit && (
                     <Button
                       variant={activeTab === "settings" ? "default" : "ghost"}
@@ -173,7 +170,6 @@ export default function AdminLayout() {
                       Settings
                     </Button>
                   )}
-
                   <div className="pt-4 mt-4 border-t">
                     <Button
                       onClick={handleLogout}
@@ -188,7 +184,7 @@ export default function AdminLayout() {
               </SheetContent>
             </Sheet>
           )}
-        </header>
+        </div>
 
         {/* Desktop/Tablet Layout */}
         <div className="flex flex-1 overflow-hidden">

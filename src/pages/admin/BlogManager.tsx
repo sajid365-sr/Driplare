@@ -182,8 +182,9 @@ export default function BlogManager() {
             disabled={isRefreshing}
             className="flex items-center gap-2"
           >
-            <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
-            Refresh
+            <RefreshCw
+              className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}
+            />
           </Button>
           {!isCreating && (
             <Button onClick={() => setIsCreating(true)}>Create New Blog</Button>

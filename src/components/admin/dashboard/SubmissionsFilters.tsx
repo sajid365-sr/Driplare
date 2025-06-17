@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, Filter, RefreshCw } from 'lucide-react';
+import { Search, Filter, RefreshCw, Download } from "lucide-react";
 
 interface SubmissionsFiltersProps {
   searchTerm: string;
@@ -18,6 +17,8 @@ interface SubmissionsFiltersProps {
   onFilterChange: (value: string) => void;
   onRefresh: () => void;
   isRefreshing: boolean;
+  filteredCount: number;
+  onExport: () => void;
 }
 
 export function SubmissionsFilters({
@@ -26,7 +27,9 @@ export function SubmissionsFilters({
   filter,
   onFilterChange,
   onRefresh,
-  isRefreshing
+  isRefreshing,
+  onExport,
+  filteredCount,
 }: SubmissionsFiltersProps) {
   return (
     <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -56,18 +59,22 @@ export function SubmissionsFilters({
             <SelectItem value="contact">Contact Forms</SelectItem>
             <SelectItem value="newsletter">Newsletter</SelectItem>
             <SelectItem value="service_request">Service Requests</SelectItem>
-            <SelectItem value="new">New</SelectItem>
-            <SelectItem value="in_progress">In Progress</SelectItem>
-            <SelectItem value="completed">Completed</SelectItem>
-            <SelectItem value="spam">Spam</SelectItem>
           </SelectContent>
         </Select>
-        <Button 
-          variant="outline" 
-          onClick={onRefresh}
-          disabled={isRefreshing}
+
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={onExport}
+          disabled={filteredCount === 0}
         >
-          <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+          <Download className="h-4 w-4 mr-2" />
+          Export CSV
+        </Button>
+        <Button variant="outline" onClick={onRefresh} disabled={isRefreshing}>
+          <RefreshCw
+            className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}
+          />
         </Button>
       </div>
     </div>

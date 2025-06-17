@@ -5,12 +5,10 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Eye, EyeOff, Key, Upload, Trash2, RotateCcw } from "lucide-react";
@@ -47,10 +45,7 @@ export default function Settings() {
     setApiKey,
     geminiModel,
     setGeminiModel,
-    testConnection,
     isTestingConnection,
-    syncContent,
-    isSyncing,
     syncLogs,
     clearSyncLogs,
   } = useGeminiAPI();
@@ -73,20 +68,6 @@ export default function Settings() {
   const [uploadedFileUrl, setUploadedFileUrl] = useState<string | null>(null);
   const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
   const [isSavingContentSync, setIsSavingContentSync] = useState(false);
-
-  // Handle dark mode toggle
-  const handleThemeToggle = () => {
-    const newMode = !darkModeEnabled;
-    setDarkModeEnabled(newMode);
-
-    if (newMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-
-    toast.success(`Theme changed to ${newMode ? "dark" : "light"} mode`);
-  };
 
   // Handle file selection
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -214,45 +195,7 @@ export default function Settings() {
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">Settings & Integrations</h1>
 
-      <div className="grid gap-6 md:grid-cols-1">
-        {/* Theme Settings */}
-        {/* <Card>
-          <CardHeader>
-            <CardTitle>Appearance</CardTitle>
-            <CardDescription>
-              Customize the appearance of your admin dashboard
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <Label htmlFor="dark-mode" className="text-base">
-                  Dark Mode
-                </Label>
-                <p className="text-sm text-muted-foreground">
-                  Switch between light and dark themes
-                </p>
-              </div>
-              <Switch
-                id="dark-mode"
-                checked={darkModeEnabled}
-                onCheckedChange={handleThemeToggle}
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <Label htmlFor="animations" className="text-base">
-                  Animations
-                </Label>
-                <p className="text-sm text-muted-foreground">
-                  Enable smooth transitions and animations
-                </p>
-              </div>
-              <Switch id="animations" defaultChecked />
-            </div>
-          </CardContent>
-        </Card> */}
-
+      <div>
         {/* Gemini AI Integration */}
         <Card>
           <CardHeader>
@@ -278,7 +221,7 @@ export default function Settings() {
               <TabsContent value="api-key" className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="gemini-api-key">Gemini API Key</Label>
-                  <div className="flex">
+                  <div className="flex items-center gap-3">
                     <div className="relative flex-1">
                       <Input
                         id="gemini-api-key"
@@ -301,7 +244,7 @@ export default function Settings() {
                     </div>
                     <Button
                       variant="outline"
-                      className="ml-2 whitespace-nowrap"
+                      className=" whitespace-nowrap"
                       onClick={() => {
                         if (!apiKey.trim()) {
                           toast.error("API key cannot be empty");
@@ -314,12 +257,7 @@ export default function Settings() {
                     >
                       Save
                     </Button>
-                    <Button
-                      variant="destructive"
-                      className="ml-2"
-                      size="icon"
-                      asChild
-                    >
+                    <Button variant="destructive" size="icon" asChild>
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
                           <span title="Delete API Key">
@@ -443,7 +381,7 @@ export default function Settings() {
                     <Textarea
                       id="content-snippets"
                       placeholder="Paste key content, FAQs, or service descriptions here..."
-                      className="min-h-[120px]"
+                      className="min-h-[250px]"
                       value={contentSnippets}
                       onChange={(e) => setContentSnippets(e.target.value)}
                     />

@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import BlogEditor from "@/components/admin/blog/BlogEditor";
 import { PaginatedResponse } from "@/utils/blog-utils";
-import { Search } from "lucide-react";
+import { RefreshCw, Search } from "lucide-react";
 import {
   Pagination,
   PaginationContent,
@@ -20,9 +20,10 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { getReviews, Testimonial } from "@/utils/review.utils";
+import { getReview, getReviews, Testimonial } from "@/utils/review.utils";
 import ReviewTable from "@/components/admin/review/ReviewTable";
 import CreateClientReview from "@/components/admin/review/CreateClientReview";
+import { toast } from "sonner";
 
 export default function ClientReview() {
   const [isCreating, setIsCreating] = useState(false);
@@ -37,6 +38,7 @@ export default function ClientReview() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const fetchReviews = async () => {
     setIsLoading(true);
@@ -71,7 +73,7 @@ export default function ClientReview() {
     setEditingReviewId(null);
     fetchReviews();
   };
-  
+
   const handleEditReview = (id: string) => {
     setEditingReviewId(id);
     setIsCreating(true);
@@ -136,19 +138,46 @@ export default function ClientReview() {
     return items;
   };
 
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    try {
+      await fetchReviews();
+      toast.success("Reviews refreshed successfully");
+    } catch (error) {
+      toast.error("Failed to refresh reviews");
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
   return (
     <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Review Management</h1>
-        {!isCreating && (
-          <Button onClick={() => setIsCreating(true)}>Create New Review</Button>
-        )}
+        <div className="flex gap-5 items-center">
+          <Button
+            variant="outline"
+            onClick={handleRefresh}
+            disabled={isRefreshing || isLoading}
+            className="flex items-center gap-2"
+          >
+            <RefreshCw
+              className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}
+            />
+          </Button>
+          {!isCreating && (
+            <Button onClick={() => setIsCreating(true)}>
+              Create New Review
+            </Button>
+          )}
+        </div>
       </div>
 
       {isCreating ? (
-        <CreateClientReview 
-          reviewId={editingReviewId} 
+        <CreateClientReview
+          reviewId={editingReviewId}
           onCancel={handleCancel}
+          handleRefresh={handleRefresh}
         />
       ) : (
         <Card>

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -55,15 +54,16 @@ export function NotificationHeader({
             className="pl-8"
           />
         </div>
-        
+
         <Button
           variant="outline"
           onClick={handleRefresh}
           disabled={isRefreshing || isLoading}
           className="flex items-center gap-2"
         >
-          <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
-          Refresh
+          <RefreshCw
+            className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}
+          />
         </Button>
 
         <Button

@@ -1,4 +1,3 @@
-
 import { LoadingScreen } from "@/components/common/LoadingScreen";
 import { Navbar } from "../navigation/Navbar";
 import { Outlet } from "react-router-dom";
@@ -14,7 +13,7 @@ const Layout = () => {
       <LoadingScreen />
       <ScrollToTop />
       <ScrollToTopButton />
-      <Toaster position="top-center" richColors />
+      {/* <Toaster position="top-center" richColors /> */}
       <Navbar />
       <main>
         <Outlet />

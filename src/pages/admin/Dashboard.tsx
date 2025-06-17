@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import {
   Card,
@@ -9,7 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
-import { getFormSubmissions, updateSubmissionStatus, deleteSubmissions, CombinedSubmission } from "@/utils/form-utils";
+import {
+  getFormSubmissions,
+  updateSubmissionStatus,
+  deleteSubmissions,
+  CombinedSubmission,
+} from "@/utils/form-utils";
 import { toast } from "sonner";
 import { exportToCSV } from "@/utils/csv-export";
 import { DebugInfoPanel } from "@/components/admin/dashboard/DebugInfoPanel";
@@ -26,6 +30,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Button } from "@/components/ui/button";
 
 export default function Dashboard() {
   const [submissions, setSubmissions] = useState<CombinedSubmission[]>([]);
@@ -46,46 +51,60 @@ export default function Dashboard() {
   const fetchSubmissions = async () => {
     setIsLoading(true);
     setDebugInfo("🔄 Starting to fetch submissions...");
-    
+
     try {
       console.log("🚀 Dashboard: Starting submission fetch process");
-      
+
       const data = await getFormSubmissions();
-      
+
       console.log("📥 Dashboard: Received data:", data);
-      
+
       setSubmissions(data);
-      
+
       // Reset to first page when data changes
       setCurrentPage(1);
-      
+
       // Set debug info based on results
-      const formSubmissions = data.filter(sub => sub.form_type !== 'newsletter');
-      const newsletterSubmissions = data.filter(sub => sub.form_type === 'newsletter');
-      
+      const formSubmissions = data.filter(
+        (sub) => sub.form_type !== "newsletter"
+      );
+      const newsletterSubmissions = data.filter(
+        (sub) => sub.form_type === "newsletter"
+      );
+
       const debugMessage = `
 ✅ Fetch completed!
 📊 Total: ${data.length} submissions
 📝 Form submissions: ${formSubmissions.length}
 📧 Newsletter: ${newsletterSubmissions.length}
       `.trim();
-      
+
       setDebugInfo(debugMessage);
-      
+
       if (data.length === 0) {
-        console.warn("⚠️ Dashboard: No submissions found - this could indicate:");
+        console.warn(
+          "⚠️ Dashboard: No submissions found - this could indicate:"
+        );
         console.warn("- Empty database tables");
         console.warn("- RLS policies blocking access");
         console.warn("- Database connection issues");
         setDebugInfo("⚠️ No submissions found - check console for details");
-      } else if (formSubmissions.length === 0 && newsletterSubmissions.length > 0) {
-        console.warn("🔍 Dashboard: Only newsletter data found, no form submissions");
-        setDebugInfo(`⚠️ Only newsletter data (${newsletterSubmissions.length}) found. Form submissions table appears empty or inaccessible.`);
+      } else if (
+        formSubmissions.length === 0 &&
+        newsletterSubmissions.length > 0
+      ) {
+        console.warn(
+          "🔍 Dashboard: Only newsletter data found, no form submissions"
+        );
+        setDebugInfo(
+          `⚠️ Only newsletter data (${newsletterSubmissions.length}) found. Form submissions table appears empty or inaccessible.`
+        );
       }
-      
     } catch (error) {
       console.error("💥 Dashboard: Failed to fetch submissions:", error);
-      setDebugInfo(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      setDebugInfo(
+        `❌ Error: ${error instanceof Error ? error.message : "Unknown error"}`
+      );
       toast.error("Failed to load form submissions");
     } finally {
       setIsLoading(false);
@@ -103,9 +122,9 @@ export default function Dashboard() {
     try {
       const success = await updateSubmissionStatus(id, status);
       if (success) {
-        setSubmissions(submissions.map(sub => 
-          sub.id === id ? { ...sub, status } : sub
-        ));
+        setSubmissions(
+          submissions.map((sub) => (sub.id === id ? { ...sub, status } : sub))
+        );
       }
     } catch (error) {
       console.error("Failed to update status:", error);
@@ -115,12 +134,14 @@ export default function Dashboard() {
 
   const handleDelete = async () => {
     if (selectedSubmissions.length === 0) return;
-    
+
     setIsDeleting(true);
     try {
       const success = await deleteSubmissions(selectedSubmissions);
       if (success) {
-        setSubmissions(submissions.filter(sub => !selectedSubmissions.includes(sub.id)));
+        setSubmissions(
+          submissions.filter((sub) => !selectedSubmissions.includes(sub.id))
+        );
         setSelectedSubmissions([]);
       }
     } catch (error) {
@@ -132,10 +153,8 @@ export default function Dashboard() {
   };
 
   const toggleSelectSubmission = (id: string) => {
-    setSelectedSubmissions(prev =>
-      prev.includes(id)
-        ? prev.filter(subId => subId !== id)
-        : [...prev, id]
+    setSelectedSubmissions((prev) =>
+      prev.includes(id) ? prev.filter((subId) => subId !== id) : [...prev, id]
     );
   };
 
@@ -143,25 +162,27 @@ export default function Dashboard() {
     if (selectedSubmissions.length === paginatedSubmissions.length) {
       setSelectedSubmissions([]);
     } else {
-      setSelectedSubmissions(paginatedSubmissions.map(sub => sub.id));
+      setSelectedSubmissions(paginatedSubmissions.map((sub) => sub.id));
     }
   };
 
-  const filteredSubmissions = submissions.filter(submission => {
-    const matchesFilter = filter === "all" || 
-      submission.status === filter || 
+  const filteredSubmissions = submissions.filter((submission) => {
+    const matchesFilter =
+      filter === "all" ||
+      submission.status === filter ||
       submission.form_type === filter ||
-      (filter === "contact" && submission.form_type !== 'newsletter') ||
-      (filter === "newsletter" && submission.form_type === 'newsletter');
-    
-    const matchesSearch = searchTerm === "" ||
+      (filter === "contact" && submission.form_type !== "newsletter") ||
+      (filter === "newsletter" && submission.form_type === "newsletter");
+
+    const matchesSearch =
+      searchTerm === "" ||
       submission.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       submission.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       submission.message?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       submission.form_type?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       submission.company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       submission.subject?.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     return matchesFilter && matchesSearch;
   });
 
@@ -182,11 +203,11 @@ export default function Dashboard() {
     const current = currentPage;
     let start = Math.max(1, current - Math.floor(maxVisible / 2));
     const end = Math.min(totalPages, start + maxVisible - 1);
-    
+
     if (end - start + 1 < maxVisible) {
       start = Math.max(1, end - maxVisible + 1);
     }
-    
+
     if (start > 1) {
       items.push(
         <PaginationItem key="first">
@@ -201,7 +222,7 @@ export default function Dashboard() {
         );
       }
     }
-    
+
     for (let i = start; i <= end; i++) {
       items.push(
         <PaginationItem key={i}>
@@ -214,7 +235,7 @@ export default function Dashboard() {
         </PaginationItem>
       );
     }
-    
+
     if (end < totalPages) {
       if (end < totalPages - 1) {
         items.push(
@@ -231,7 +252,7 @@ export default function Dashboard() {
         </PaginationItem>
       );
     }
-    
+
     return items;
   };
 
@@ -240,8 +261,8 @@ export default function Dashboard() {
       toast.error("No data to export");
       return;
     }
-    
-    exportToCSV(filteredSubmissions, 'form_submissions');
+
+    exportToCSV(filteredSubmissions, "form_submissions");
     toast.success(`Exported ${filteredSubmissions.length} submissions to CSV`);
   };
 
@@ -258,21 +279,31 @@ export default function Dashboard() {
           <div>
             <CardTitle>Form Submissions</CardTitle>
             <CardDescription>
-              Manage and respond to form submissions from all sources ({submissions.length} total)
+              Manage and respond to form submissions from all sources (
+              {submissions.length} total)
             </CardDescription>
-            
+
             <DebugInfoPanel debugInfo={debugInfo} />
           </div>
-          
-          <SubmissionsActions
-            onExport={handleExport}
-            onDelete={handleDelete}
-            selectedCount={selectedSubmissions.length}
-            filteredCount={filteredSubmissions.length}
-            isDeleting={isDeleting}
-          />
+          {selectedSubmissions.length > 0 && (
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={handleDelete}
+              disabled={isDeleting}
+            >
+              {isDeleting ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Deleting...
+                </>
+              ) : (
+                <>Delete Selected</>
+              )}
+            </Button>
+          )}
         </CardHeader>
-        
+
         <CardContent>
           <SubmissionsFilters
             searchTerm={searchTerm}
@@ -281,6 +312,8 @@ export default function Dashboard() {
             onFilterChange={setFilter}
             onRefresh={handleRefresh}
             isRefreshing={isRefreshing}
+            onExport={handleExport}
+            filteredCount={filteredSubmissions.length}
           />
 
           {isLoading ? (
@@ -296,24 +329,38 @@ export default function Dashboard() {
                 onToggleSelectAll={toggleSelectAll}
                 onStatusChange={handleStatusChange}
               />
-              
+
               {totalPages > 1 && (
                 <div className="mt-6">
                   <Pagination>
                     <PaginationContent>
                       <PaginationItem>
                         <PaginationPrevious
-                          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-                          className={currentPage <= 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                          onClick={() =>
+                            handlePageChange(Math.max(1, currentPage - 1))
+                          }
+                          className={
+                            currentPage <= 1
+                              ? "pointer-events-none opacity-50"
+                              : "cursor-pointer"
+                          }
                         />
                       </PaginationItem>
-                      
+
                       {generatePaginationItems()}
-                      
+
                       <PaginationItem>
                         <PaginationNext
-                          onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
-                          className={currentPage >= totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                          onClick={() =>
+                            handlePageChange(
+                              Math.min(totalPages, currentPage + 1)
+                            )
+                          }
+                          className={
+                            currentPage >= totalPages
+                              ? "pointer-events-none opacity-50"
+                              : "cursor-pointer"
+                          }
                         />
                       </PaginationItem>
                     </PaginationContent>
@@ -331,12 +378,15 @@ export default function Dashboard() {
             />
           )}
         </CardContent>
-        
+
         {paginatedSubmissions.length > 0 && (
           <CardFooter className="flex justify-between">
             <p className="text-sm text-muted-foreground">
-              Showing {startIndex + 1}-{Math.min(endIndex, filteredSubmissions.length)} of {filteredSubmissions.length} submissions
-              {filteredSubmissions.length !== submissions.length && ` (filtered from ${submissions.length} total)`}
+              Showing {startIndex + 1}-
+              {Math.min(endIndex, filteredSubmissions.length)} of{" "}
+              {filteredSubmissions.length} submissions
+              {filteredSubmissions.length !== submissions.length &&
+                ` (filtered from ${submissions.length} total)`}
             </p>
             <p className="text-sm text-muted-foreground">
               Page {currentPage} of {totalPages}
