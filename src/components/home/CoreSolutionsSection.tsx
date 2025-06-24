@@ -126,22 +126,22 @@ const offerings = [
 // Animation variants for the expandable cards: only width should change on expand, height remains the same
 const cardVariants = {
   collapsed: {
-    width: 96, // collapsed width
-    minWidth: 96,
-    maxWidth: 120,
-    height: 320, // fixed height
-    minHeight: 320,
-    maxHeight: 320,
+    width: 120, // collapsed width
+    minWidth: 120,
+    maxWidth: 140,
+    height: 400, // fixed height
+    minHeight: 400,
+    maxHeight: 400,
     borderRadius: "2.4rem",
     transition: { duration: 0.9, type: "spring", bounce: 0.24 },
   },
   expanded: {
-    width: 480, // expanded width
-    minWidth: 420,
-    maxWidth: 560,
-    height: 320, // height stays the same!
-    minHeight: 320,
-    maxHeight: 320,
+    width: 560, // expanded width
+    minWidth: 480,
+    maxWidth: 640,
+    height: 400, // height stays the same!
+    minHeight: 400,
+    maxHeight: 400,
     borderRadius: "2.8rem",
     transition: { duration: 0.9, type: "spring", bounce: 0.24 },
   },
@@ -156,8 +156,9 @@ const fadeInContent = {
 export function CoreSolutionsSection() {
   const [expanded, setExpanded] = useState<number | null>(0);
 
-  // On mobile, tap to expand, tap again to collapse
+  // On mobile, tap to expand, tap again to collapse (except first card)
   const handleCardClick = (idx: number) => {
+    if (idx === 0) return; // First card doesn't respond to clicks
     if (window.innerWidth < 768) {
       setExpanded((prev) => (prev === idx ? null : idx));
     }
@@ -166,7 +167,7 @@ export function CoreSolutionsSection() {
   return (
     <section
       id="solutions"
-      className="py-24 bg-secondary/50 dark:bg-secondary/20 relative overflow-x-hidden"
+      className="py-32 bg-secondary/50 dark:bg-secondary/20 relative overflow-x-hidden"
     >
       <div className="container">
         <div className="text-center mb-20">
@@ -191,35 +192,37 @@ export function CoreSolutionsSection() {
           "
         >
           {offerings.map((offering, i) => {
-            const isExpanded = expanded === i;
+            const isExpanded = i === 0 || expanded === i; // First card is always expanded
+            const isFirstCard = i === 0;
+            
             return (
               <motion.div
                 key={offering.title}
                 className={`
                   group relative overflow-visible flex flex-col items-center
-                  shadow-2xl transition-[box-shadow] min-h-[96px]
+                  shadow-2xl transition-[box-shadow] min-h-[120px]
                   ${isExpanded ? "z-20" : "z-10"}
+                  ${isFirstCard ? "" : "cursor-pointer"}
                 `}
                 initial="collapsed"
                 animate={isExpanded ? "expanded" : "collapsed"}
                 variants={cardVariants}
-                onMouseEnter={() => window.innerWidth >= 768 && setExpanded(i)}
-                onMouseLeave={() => window.innerWidth >= 768 && setExpanded(0)}
+                onMouseEnter={() => !isFirstCard && window.innerWidth >= 768 && setExpanded(i)}
+                onMouseLeave={() => !isFirstCard && window.innerWidth >= 768 && setExpanded(0)}
                 onClick={() => handleCardClick(i)}
                 style={{
                   background:
                     "linear-gradient(135deg, #ff9d00 20%, #ff9500 100%)",
                   color: "#fff",
-                  cursor: "pointer",
-                  // Remove any previous height changes here if present!
+                  cursor: isFirstCard ? "default" : "pointer",
                 }}
               >
                 {/* Vertical title and number when collapsed */}
                 <motion.div
                   className="flex flex-col items-center justify-center h-full w-full"
                   style={{
-                    minHeight: 96,
-                    minWidth: 96,
+                    minHeight: 120,
+                    minWidth: 120,
                   }}
                 >
                   {/* Number circle */}
@@ -229,7 +232,7 @@ export function CoreSolutionsSection() {
                   {/* Vertical label */}
                   <div
                     className="flex flex-col items-center"
-                    style={{ height: 180, justifyContent: "center" }}
+                    style={{ height: 220, justifyContent: "center" }}
                   >
                     <span
                       className="uppercase tracking-wider text-sm font-semibold text-white/90"
@@ -259,8 +262,8 @@ export function CoreSolutionsSection() {
                       style={{
                         boxShadow: "0 6px 56px 8px #8F5CFF11",
                         height: "100%", // Ensures matching with parent
-                        minHeight: "320px",
-                        maxHeight: "320px",
+                        minHeight: "400px",
+                        maxHeight: "400px",
                       }}
                     >
                       {/* Icon & badge row */}
