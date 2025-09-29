@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MobileMenu } from "./MobileMenu";
 import {
@@ -42,10 +42,10 @@ export function Navbar() {
 
   useEffect(() => {
     fetchNotifications();
-    
+
     // Set up polling to check for new notifications periodically
     const interval = setInterval(fetchNotifications, 30000); // every 30 seconds
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -124,15 +124,15 @@ export function Navbar() {
                     <li>
                       <Link
                         to="/web-design"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/25 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/25  focus:bg-accent focus:text-accent-foreground"
                       >
                         <div className="flex items-center space-x-2">
                           <Code className="h-5 w-5 text-primary" />
-                          <div className="text-sm font-medium leading-none">
+                          <div className="text-sm font-medium hover:text-orange-600 leading-none">
                             Web Design & Development
                           </div>
                         </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground hover:text-gray-50">
+                        <p className="text-sm hover:text-orange-600 leading-tight dark:text-accent text-black/90">
                           Beautiful, responsive websites that convert visitors
                           to customers.
                         </p>
@@ -141,15 +141,15 @@ export function Navbar() {
                     <li>
                       <Link
                         to="/digital-marketing"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/25 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/25  focus:bg-accent focus:text-accent-foreground"
                       >
                         <div className="flex items-center space-x-2">
                           <BarChart2 className="h-5 w-5 text-primary" />
-                          <div className="text-sm font-medium leading-none">
+                          <div className="text-sm font-medium hover:text-orange-600 leading-none">
                             Digital Marketing
                           </div>
                         </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground hover:text-gray-50">
+                        <p className="text-sm hover:text-orange-600 leading-tight dark:text-accent text-black/90">
                           Strategic campaigns that drive growth and increase
                           visibility.
                         </p>
