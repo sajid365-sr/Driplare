@@ -8,11 +8,10 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent z-0"></div>
       <div className="container relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight leading-tight fade-in slide-up">
-            Empower Your Brand with
-            <br className="hidden md:block" />
-            <span className="text-primary">AI-Driven Digital Excellence</span>
-          </h1>
+          <h1 className="text-orange-600"> Empower Your Brand with</h1>
+
+          <h1 className="text-yellow-600">AI-Driven Digital Excellence</h1>
+
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto fade-in slide-up">
             Cutting-edge solutions that transform how businesses connect with
             their audience.

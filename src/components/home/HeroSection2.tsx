@@ -18,17 +18,16 @@ export default function Hero() {
         <div className=" p-10 mx-auto  grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Side */}
           <div className="space-y-6">
-            <h1 className="text-4xl sm:text-5xl font-bold leading-tight">
+            <h1 className="text-4xl sm:text-5xl text-neutral-700 dark:text-neutral-300 font-bold leading-tight">
               Empower Your Brand with{" "}
-              <span className="text-green-500 dark:text-green-400">
-                AI-Driven Digital Excellence
-              </span>{" "}
             </h1>
+            <h1 className="text-green-500 dark:text-green-400 text-4xl sm:text-5xl font-bold leading-tight">
+              AI-Driven Digital Excellence
+            </h1>{" "}
             <p className="text-gray-600 dark:text-gray-300 max-w-lg">
               Cutting-edge solutions that transform how businesses connect with
               their audience.
             </p>
-
             {/* Form */}
             {/* <div className="flex flex-col sm:flex-row gap-3">
               <select
@@ -63,7 +62,6 @@ export default function Hero() {
                 </Button>
               </Link>
             </div>
-
             {/* Notes */}
             <div className="flex flex-col sm:flex-row sm:space-x-6 text-sm text-gray-500 dark:text-gray-400 mt-2">
               <div className="flex items-center space-x-1">
