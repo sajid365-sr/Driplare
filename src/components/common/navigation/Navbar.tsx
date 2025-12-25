@@ -11,28 +11,19 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import {
-  Code,
-  BarChart2,
-  Brain,
-  MessageSquareCode,
-  UserRound,
-  SlidersHorizontal,
+  Bot,
+  Workflow,
+  Code2,
+  Database,
+  Briefcase,
   Bell,
+  Brain,
 } from "lucide-react";
 import { ThemeToggle } from "../ThemeToggle";
 import { NotificationsDropdown } from "../notifications/NotificationsDropdown";
 import AdminLoginModal from "@/components/admin/AdminLoginModal";
 import { getNotifications } from "@/utils/notification-utils";
 import { Notification as NotificationType } from "@/utils/notification-utils";
-
-interface Notification {
-  id: string;
-  title: string;
-  message: string;
-  timestamp: Date;
-  read: boolean;
-  type: "chat_lead" | "form_submission" | "system";
-}
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -42,10 +33,7 @@ export function Navbar() {
 
   useEffect(() => {
     fetchNotifications();
-
-    // Set up polling to check for new notifications periodically
-    const interval = setInterval(fetchNotifications, 30000); // every 30 seconds
-
+    const interval = setInterval(fetchNotifications, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -78,18 +66,18 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300  ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-background/50 backdrop-blur-sm shadow-sm pt-3"
           : "bg-transparent pt-5"
       }`}
     >
-      <div className="container flex items-center justify-between ">
+      <div className="container flex items-center justify-between">
         <Link to="/" className="text-2xl font-bold">
           <img src="/logo-white.png" alt="Driplare Logo" width={120} />
         </Link>
 
-        <div className="flex relative items-center space-x-1 ">
+        <div className="flex relative items-center space-x-1">
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -103,90 +91,88 @@ export function Navbar() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className=" grid w-[400px]  gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                    {/* Featured Service */}
                     <li className="row-span-3 bg-[url(/ai-solution.png)] bg-cover">
                       <NavigationMenuLink asChild>
                         <Link
-                          to="/ai-services"
-                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-black/40 to-black/60 p-6 no-underline hover:bg-primary/25 hover:bg-to-primary/50 outline-none focus:shadow-md"
+                          to="/ai-agents"
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-black/40 to-black/60 p-6 no-underline hover:bg-primary/25 outline-none focus:shadow-md"
                         >
-                          <Brain className="h-6 w-6 text-white" />
-                          <div className="mb-2 mt-4 text-lg font-medium hover:text-primary text-white">
-                            AI Solutions
+                          <Bot className="h-6 w-6 text-white" />
+                          <div className="mb-2 mt-4 text-lg font-medium text-white hover:text-primary">
+                            Custom AI Agents
                           </div>
-                          <p className="text-sm hover:text-accent leading-tight text-white/90">
-                            Leverage cutting-edge AI technology to transform
-                            your business capabilities.
+                          <p className="text-sm leading-tight text-white/90">
+                            Autonomous digital workers that handle complex tasks
+                            24/7 with human-like intelligence.
                           </p>
                         </Link>
                       </NavigationMenuLink>
                     </li>
+
+                    {/* Workflow Automation */}
                     <li>
                       <Link
-                        to="/web-design"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/25  focus:bg-accent focus:text-accent-foreground"
+                        to="/workflow-automation"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/25 focus:bg-accent focus:text-accent-foreground"
                       >
                         <div className="flex items-center space-x-2">
-                          <Code className="h-5 w-5 text-primary" />
-                          <div className="text-sm font-medium hover:text-orange-600 leading-none">
-                            Web Design & Development
+                          <Workflow className="h-5 w-5 text-primary" />
+                          <div className="text-sm font-medium leading-none hover:text-primary">
+                            Workflow Automation
                           </div>
                         </div>
-                        <p className="text-sm hover:text-orange-600 leading-tight dark:text-accent text-black/90">
-                          Beautiful, responsive websites that convert visitors
-                          to customers.
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          End-to-end process streamlining to eliminate manual
+                          tasks and boost efficiency.
                         </p>
                       </Link>
                     </li>
+
+                    {/* Web Development */}
                     <li>
                       <Link
-                        to="/digital-marketing"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/25  focus:bg-accent focus:text-accent-foreground"
+                        to="/web-development"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/25 focus:bg-accent focus:text-accent-foreground"
                       >
                         <div className="flex items-center space-x-2">
-                          <BarChart2 className="h-5 w-5 text-primary" />
-                          <div className="text-sm font-medium hover:text-orange-600 leading-none">
-                            Digital Marketing
+                          <Code2 className="h-5 w-5 text-primary" />
+                          <div className="text-sm font-medium leading-none hover:text-primary">
+                            Full-Stack Web Development
                           </div>
                         </div>
-                        <p className="text-sm hover:text-orange-600 leading-tight dark:text-accent text-black/90">
-                          Strategic campaigns that drive growth and increase
-                          visibility.
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          MERN stack specialization for scalable, modern web
+                          applications.
                         </p>
                       </Link>
                     </li>
+
+                    {/* More Services */}
                     <li>
                       <NavigationMenuLink asChild>
                         <div className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none">
                           <div className="text-sm font-medium mb-2 text-muted-foreground">
-                            AI Services
+                            More Services
                           </div>
                           <ul className="space-y-2">
                             <li>
                               <Link
-                                to="/ai-services#chatbot"
+                                to="/data-scraping"
                                 className="flex items-center space-x-2 text-sm hover:text-primary transition-colors"
                               >
-                                <MessageSquareCode className="h-4 w-4" />
-                                <span>Chatbot Integration</span>
+                                <Database className="h-4 w-4" />
+                                <span>Data Scraping & Monitoring</span>
                               </Link>
                             </li>
                             <li>
                               <Link
-                                to="/ai-services#agents"
+                                to="/b2b-consulting"
                                 className="flex items-center space-x-2 text-sm hover:text-primary transition-colors"
                               >
-                                <UserRound className="h-4 w-4" />
-                                <span>Custom AI Agents</span>
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                to="/ai-services#automation"
-                                className="flex items-center space-x-2 text-sm hover:text-primary transition-colors"
-                              >
-                                <SlidersHorizontal className="h-4 w-4" />
-                                <span>AI Automation</span>
+                                <Briefcase className="h-4 w-4" />
+                                <span>B2B Technical Consulting</span>
                               </Link>
                             </li>
                           </ul>
@@ -212,6 +198,7 @@ export function Navbar() {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
+
               <NavigationMenuItem>
                 <Link onClick={() => setShowLoginModal(true)} to="#">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -231,10 +218,8 @@ export function Navbar() {
             >
               <Bell size={20} />
               {unreadCount ? (
-                <span className="absolute top-0 right-0 w-2 h-2 bg-[#F88220] rounded-full"></span>
-              ) : (
-                <></>
-              )}
+                <span className="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"></span>
+              ) : null}
             </button>
             {showNotifications && (
               <NotificationsDropdown
@@ -242,6 +227,7 @@ export function Navbar() {
               />
             )}
           </div>
+
           <AdminLoginModal
             open={showLoginModal}
             setClose={setShowLoginModal}
