@@ -4,14 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Menu,
-  ChevronDown,
-  ChevronRight,
-  Code,
-  BarChart2,
-  Brain,
-  MessageSquareCode,
-  UserRound,
-  SlidersHorizontal,
+  Bot,
+  Workflow,
+  Code2,
+  Database,
+  Briefcase,
 } from "lucide-react";
 import {
   Accordion,
@@ -54,65 +51,51 @@ export function MobileMenu() {
                 Solutions
               </AccordionTrigger>
               <AccordionContent>
-                <div className="flex flex-col space-y-5 mt-2 ml-4">
+                <div className="flex flex-col space-y-4 mt-3 ml-4">
                   <Link
-                    to="/web-design"
+                    to="/ai-agents"
                     className="flex items-center space-x-2 hover:text-primary transition-colors"
                     onClick={handleLinkClick}
                   >
-                    <Code className="h-5 w-5" />
-                    <span>Web Design & Development</span>
+                    <Bot className="h-5 w-5" />
+                    <span>Custom AI Agents</span>
                   </Link>
 
                   <Link
-                    to="/digital-marketing"
+                    to="/workflow-automation"
                     className="flex items-center space-x-2 hover:text-primary transition-colors"
                     onClick={handleLinkClick}
                   >
-                    <BarChart2 className="h-5 w-5" />
-                    <span>Digital Marketing</span>
+                    <Workflow className="h-5 w-5" />
+                    <span>Workflow Automation</span>
                   </Link>
 
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="ai-solutions" className="border-0">
-                      <AccordionTrigger className="py-0">
-                        <div className="flex items-center space-x-2">
-                          <Brain className="h-5 w-5" />
-                          <span>AI Solutions</span>
-                        </div>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <div className="flex flex-col space-y-4 mt-2 ml-4">
-                          <Link
-                            to="/ai-services#chatbot"
-                            className="flex items-center space-x-2 hover:text-primary transition-colors"
-                            onClick={handleLinkClick}
-                          >
-                            <MessageSquareCode className="h-4 w-4" />
-                            <span>Chatbot Integration</span>
-                          </Link>
+                  <Link
+                    to="/web-development"
+                    className="flex items-center space-x-2 hover:text-primary transition-colors"
+                    onClick={handleLinkClick}
+                  >
+                    <Code2 className="h-5 w-5" />
+                    <span>Full-Stack Web Development</span>
+                  </Link>
 
-                          <Link
-                            to="/ai-services#agents"
-                            className="flex items-center space-x-2 hover:text-primary transition-colors"
-                            onClick={handleLinkClick}
-                          >
-                            <UserRound className="h-4 w-4" />
-                            <span>Custom AI Agents</span>
-                          </Link>
+                  <Link
+                    to="/data-scraping"
+                    className="flex items-center space-x-2 hover:text-primary transition-colors"
+                    onClick={handleLinkClick}
+                  >
+                    <Database className="h-5 w-5" />
+                    <span>Data Scraping & Monitoring</span>
+                  </Link>
 
-                          <Link
-                            to="/ai-services#automation"
-                            className="flex items-center space-x-2 hover:text-primary transition-colors"
-                            onClick={handleLinkClick}
-                          >
-                            <SlidersHorizontal className="h-4 w-4" />
-                            <span>AI Automation</span>
-                          </Link>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
+                  <Link
+                    to="/b2b-consulting"
+                    className="flex items-center space-x-2 hover:text-primary transition-colors"
+                    onClick={handleLinkClick}
+                  >
+                    <Briefcase className="h-5 w-5" />
+                    <span>B2B Technical Consulting</span>
+                  </Link>
                 </div>
               </AccordionContent>
             </AccordionItem>
@@ -135,15 +118,17 @@ export function MobileMenu() {
           </Link>
 
           <Link
-            to="/admin"
+            to="/contact"
             className="text-lg font-medium hover:text-primary transition-colors"
             onClick={handleLinkClick}
           >
-            Admin Area
+            Contact
           </Link>
 
-          <Button className="mt-4 bg-primary hover:bg-primary/90 w-full">
-            Get Started
+          <Button className="mt-4 bg-primary hover:bg-primary/90 w-full" asChild>
+            <Link to="/contact" onClick={handleLinkClick}>
+              Get Started
+            </Link>
           </Button>
         </nav>
       </SheetContent>
