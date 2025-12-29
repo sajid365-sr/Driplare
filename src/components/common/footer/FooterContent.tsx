@@ -4,19 +4,17 @@ import { FooterNewsletter } from "./FooterNewsletter";
 
 export function FooterContent() {
   const solutionLinks = [
-    { text: "Web Design & Development", url: "/web-design" },
-    { text: "Digital Marketing", url: "/digital-marketing" },
-    { text: "AI Solutions", url: "/ai-services" },
-    { text: "Chatbot Integration", url: "/ai-services#chatbot" },
-    { text: "Custom AI Agents", url: "/ai-services#agents" },
-    { text: "AI Automation", url: "/ai-services#automation" },
+    { text: "Custom AI Agent", url: "/ai-agents" },
+    { text: "Workflow Automation", url: "/workflow-automation" },
+    { text: "Web Development", url: "/web-development" },
+    { text: "Data Scraping", url: "/data-scraping" },
+    { text: "B2B Consulting", url: "/b2b-consulting" },
   ];
 
   const companyLinks = [
-    { text: "About", url: "/about" },
-    { text: "Team", url: "/team" },
-    { text: "Careers", url: "/careers" },
-    { text: "Portfolio", url: "/portfolio" },
+    { text: "About", url: "/about-us" },
+    { text: "Pricing", url: "/pricing" },
+    { text: "Security", url: "/security" },
     { text: "Insights", url: "/insights" },
     { text: "Contact", url: "/contact" },
   ];

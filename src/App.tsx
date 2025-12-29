@@ -9,12 +9,20 @@ import WorkflowAutomation from "./pages/services/WorkflowAutomation";
 import WebDevelopment from "./pages/services/WebDevelopment";
 import DataScraping from "./pages/services/DataScraping";
 import B2BConsulting from "./pages/services/B2BConsulting";
-import Portfolio from "./pages/Portfolio";
 import Insights from "./pages/insights/Insights";
 import Contact from "./pages/Contact";
 import Layout from "./components/common/layout/Layout";
 import AdminLayout from "./components/common/layout/AdminLayout";
 import InsightDetail from "./pages/insights/insightsDetails";
+import CaseStudies from "./pages/services/CaseStudies";
+import AboutUs from "./pages/AboutUs";
+import Pricing from "./pages/Pricing";
+import Security from "./pages/Security";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import OurMethodology from "./pages/OurMethodology";
+import AgentMarketplace from "./pages/agent-marketplace/AgentMarketplace";
+import ProductDetails from "./pages/agent-marketplace/ProductDetails";
 
 const queryClient = new QueryClient();
 
@@ -31,10 +39,18 @@ const App = () => (
             <Route path="/web-development" element={<WebDevelopment />} />
             <Route path="/data-scraping" element={<DataScraping />} />
             <Route path="/b2b-consulting" element={<B2BConsulting />} />
-            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/insights" element={<Insights />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/agent-marketplace" element={<AgentMarketplace />} />
+            <Route path="/agent-marketplace/:id" element={<ProductDetails />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/security" element={<Security />} />
             <Route path="/insights/:id" element={<InsightDetail />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/methodology" element={<OurMethodology />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="/admin" element={<AdminLayout />} />

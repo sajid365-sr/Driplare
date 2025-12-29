@@ -12,7 +12,7 @@ export function FooterBottom() {
       <ul className="flex gap-5 justify-center items-center">
         <li>
           <Link
-            to="/privacy"
+            to="/privacy-policy"
             className="text-gray-50 hover:text-primary transition-colors"
           >
             Privacy Policy
@@ -20,18 +20,10 @@ export function FooterBottom() {
         </li>
         <li>
           <Link
-            to="/terms"
+            to="/terms-of-service"
             className="text-gray-50 hover:text-primary transition-colors"
           >
             Terms of Service
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/cookies"
-            className="text-gray-50 hover:text-primary transition-colors"
-          >
-            Cookie Policy
           </Link>
         </li>
       </ul>

@@ -184,9 +184,9 @@ export function Navbar() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link to="/portfolio">
+                <Link to="/case-studies">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Portfolio
+                    Case Studies
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
@@ -195,6 +195,20 @@ export function Navbar() {
                 <Link to="/insights">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Insights
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/agent-marketplace">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Agent Marketplace
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/pricing">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Pricing
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
