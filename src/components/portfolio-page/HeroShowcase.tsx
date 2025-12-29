@@ -23,9 +23,7 @@ export function HeroShowcase() {
   return (
     <section className="relative w-full h-[58vh] min-h-[360px] flex items-center justify-center overflow-hidden bg-[#1A1F2C]">
       {/* Animated square grid, behind - re-use grid SVG */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <AnimatedGridBg />
-      </div>
+      <div className="absolute inset-0 z-0 pointer-events-none"></div>
       {/* Split: left image, right text */}
       <div className="relative z-10 container flex flex-col md:flex-row items-center justify-center gap-10 h-full">
         {/* Left: cycling images */}

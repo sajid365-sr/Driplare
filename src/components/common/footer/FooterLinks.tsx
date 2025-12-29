@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 interface FooterLinksProps {
@@ -18,7 +17,7 @@ export function FooterLinks({ title, links }: FooterLinksProps) {
           <li key={link.url}>
             <Link
               to={link.url}
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-muted-foreground hover:text-secondary-foreground transition-colors"
             >
               {link.text}
             </Link>

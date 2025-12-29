@@ -102,20 +102,20 @@ export const saveBlogPost = async (
   try {
     const now = new Date().toISOString();
 
+    console.log(existingId);
+
     // Prepare post data
     const postData = {
       ...post,
       updated_at: now,
     };
 
-    console.log(postData);
-
     if (existingId) {
-      // Update existing post - use type assertion since we've verified the schema in SQL
-      const { error } = await supabase
+      const { error, data } = await supabase
         .from("blogs")
-        .update(postData as BlogPostFormData)
-        .eq("id", existingId);
+        .update({ ...postData })
+        .eq("id", existingId)
+        .select();
 
       if (error) {
         console.error("Error updating blog post:", error);
@@ -123,8 +123,14 @@ export const saveBlogPost = async (
         return null;
       }
 
+      if (!data || data.length === 0) {
+        console.warn("No blog post found to update.");
+        toast.error("No blog post found with that ID.");
+        return null;
+      }
+
       toast.success("Blog post updated successfully");
-      return existingId;
+      return data[0].id;
     } else {
       // Create new post
       const { data, error } = await supabase

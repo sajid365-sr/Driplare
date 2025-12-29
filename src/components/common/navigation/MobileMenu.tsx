@@ -1,17 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import {
   Menu,
-  ChevronDown,
-  ChevronRight,
-  Code,
-  BarChart2,
-  Brain,
-  MessageSquareCode,
-  UserRound,
-  SlidersHorizontal,
+  Bot,
+  Workflow,
+  Code2,
+  Database,
+  Briefcase,
+  LayoutGrid,
+  TrendingUp,
+  ShoppingBag,
+  Mail,
+  ArrowRight,
 } from "lucide-react";
 import {
   Accordion,
@@ -22,131 +30,143 @@ import {
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
-
-  const handleLinkClick = () => {
-    setOpen(false);
-  };
+  const closeMenu = () => setOpen(false);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden rounded-full hover:bg-primary/10"
+        >
           <Menu className="h-6 w-6" />
-          <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="w-[85vw] sm:w-[350px] overflow-y-auto"
+        className="w-[85vw] sm:w-[400px] p-0 border-l border-border/40"
       >
-        <nav className="flex flex-col space-y-5 mt-12">
-          <Link
-            to="/"
-            className="text-lg font-medium hover:text-primary transition-colors"
-            onClick={handleLinkClick}
-          >
-            Home
-          </Link>
+        <div className="flex flex-col h-full bg-background">
+          <SheetHeader className="p-6 text-left border-b border-border/40">
+            <SheetTitle>
+              <img src="/logo.png" alt="Driplare" width={110} className="" />
+            </SheetTitle>
+          </SheetHeader>
 
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="solutions" className="border-b-0">
-              <AccordionTrigger className="text-lg font-medium py-0">
-                Solutions
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="flex flex-col space-y-5 mt-2 ml-4">
-                  <Link
-                    to="/web-design"
-                    className="flex items-center space-x-2 hover:text-primary transition-colors"
-                    onClick={handleLinkClick}
-                  >
-                    <Code className="h-5 w-5" />
-                    <span>Web Design & Development</span>
-                  </Link>
+          <nav className="flex-1 overflow-y-auto p-6 space-y-2">
+            <Link
+              to="/"
+              onClick={closeMenu}
+              className="flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all font-medium text-lg"
+            >
+              <TrendingUp className="h-5 w-5 text-primary" /> Home
+            </Link>
 
-                  <Link
-                    to="/digital-marketing"
-                    className="flex items-center space-x-2 hover:text-primary transition-colors"
-                    onClick={handleLinkClick}
-                  >
-                    <BarChart2 className="h-5 w-5" />
-                    <span>Digital Marketing</span>
-                  </Link>
+            <Accordion type="single" collapsible>
+              <AccordionItem value="solutions" className="border-none">
+                <AccordionTrigger className="hover:no-underline p-3 rounded-xl hover:bg-primary/5 transition-all">
+                  <div className="flex items-center gap-4 font-medium text-lg">
+                    <LayoutGrid className="h-5 w-5 text-primary" /> Solutions
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pb-0 pt-2 ml-4 border-l-2 border-primary/10">
+                  <div className="flex flex-col space-y-1 pl-4">
+                    <MobileNavLink
+                      to="/ai-agents"
+                      icon={Bot}
+                      label="Custom AI Agents"
+                      onClick={closeMenu}
+                    />
+                    <MobileNavLink
+                      to="/workflow-automation"
+                      icon={Workflow}
+                      label="Workflow Automation"
+                      onClick={closeMenu}
+                    />
+                    <MobileNavLink
+                      to="/web-development"
+                      icon={Code2}
+                      label="Web Development"
+                      onClick={closeMenu}
+                    />
+                    <MobileNavLink
+                      to="/data-scraping"
+                      icon={Database}
+                      label="Data Scraping"
+                      onClick={closeMenu}
+                    />
+                    <MobileNavLink
+                      to="/b2b-consulting"
+                      icon={Briefcase}
+                      label="B2B Consulting"
+                      onClick={closeMenu}
+                    />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="ai-solutions" className="border-0">
-                      <AccordionTrigger className="py-0">
-                        <div className="flex items-center space-x-2">
-                          <Brain className="h-5 w-5" />
-                          <span>AI Solutions</span>
-                        </div>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <div className="flex flex-col space-y-4 mt-2 ml-4">
-                          <Link
-                            to="/ai-services#chatbot"
-                            className="flex items-center space-x-2 hover:text-primary transition-colors"
-                            onClick={handleLinkClick}
-                          >
-                            <MessageSquareCode className="h-4 w-4" />
-                            <span>Chatbot Integration</span>
-                          </Link>
+            <Link
+              to="/case-studies"
+              onClick={closeMenu}
+              className="flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all font-medium text-lg"
+            >
+              <ArrowRight className="h-5 w-5 text-primary" /> Case Studies
+            </Link>
 
-                          <Link
-                            to="/ai-services#agents"
-                            className="flex items-center space-x-2 hover:text-primary transition-colors"
-                            onClick={handleLinkClick}
-                          >
-                            <UserRound className="h-4 w-4" />
-                            <span>Custom AI Agents</span>
-                          </Link>
+            <Link
+              to="/agent-marketplace"
+              onClick={closeMenu}
+              className="flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all font-medium text-lg"
+            >
+              <ShoppingBag className="h-5 w-5 text-primary" /> Agent Marketplace
+            </Link>
 
-                          <Link
-                            to="/ai-services#automation"
-                            className="flex items-center space-x-2 hover:text-primary transition-colors"
-                            onClick={handleLinkClick}
-                          >
-                            <SlidersHorizontal className="h-4 w-4" />
-                            <span>AI Automation</span>
-                          </Link>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+            <Link
+              to="/contact"
+              onClick={closeMenu}
+              className="flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all font-medium text-lg"
+            >
+              <Mail className="h-5 w-5 text-primary" /> Contact
+            </Link>
+          </nav>
 
-          <Link
-            to="/portfolio"
-            className="text-lg font-medium hover:text-primary transition-colors"
-            onClick={handleLinkClick}
-          >
-            Portfolio
-          </Link>
-
-          <Link
-            to="/insights"
-            className="text-lg font-medium hover:text-primary transition-colors"
-            onClick={handleLinkClick}
-          >
-            Insights
-          </Link>
-
-          <Link
-            to="/admin"
-            className="text-lg font-medium hover:text-primary transition-colors"
-            onClick={handleLinkClick}
-          >
-            Admin Area
-          </Link>
-
-          <Button className="mt-4 bg-primary hover:bg-primary/90 w-full">
-            Get Started
-          </Button>
-        </nav>
+          <div className="p-6 border-t border-border/40">
+            <Button
+              asChild
+              className="w-full h-14 rounded-2xl text-lg font-bold shadow-lg shadow-primary/20"
+            >
+              <Link to="/contact" onClick={closeMenu}>
+                Get Started
+              </Link>
+            </Button>
+          </div>
+        </div>
       </SheetContent>
     </Sheet>
+  );
+}
+
+// Small helper component for mobile nav links
+function MobileNavLink({
+  to,
+  icon: Icon,
+  label,
+  onClick,
+}: {
+  to: string;
+  icon: React.ElementType;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <Link
+      to={to}
+      onClick={onClick}
+      className="flex items-center gap-3 p-3 text-muted-foreground hover:text-primary transition-colors"
+    >
+      <Icon className="h-5 w-5" /> {label}
+    </Link>
   );
 }

@@ -1,4 +1,3 @@
-
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -53,20 +52,20 @@ export const saveReview = async (
   reviewId?: string
 ): Promise<string | null> => {
   console.log("saveReview called with:", { review, reviewId });
-  
+
   try {
     if (reviewId) {
       // Update existing review - strip out any fields that might cause issues
-      const { id, created_at, ...updateData } = review; 
-      
-      console.log("Updating review with data:", updateData);
-      
+      const { id, created_at, ...updateData } = review;
+
+      console.log("Updating review with data:", updateData, reviewId);
+
       // Update existing review with properly formatted data
       const { data, error } = await supabase
         .from("reviews")
         .update({
           ...updateData,
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         })
         .eq("id", reviewId)
         .select();

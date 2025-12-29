@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Table,
@@ -45,9 +44,7 @@ export function NotificationsTable({
         <CardContent className="py-10">
           <div className="text-center">
             <Bell className="mx-auto h-12 w-12 text-muted-foreground/60" />
-            <h3 className="mt-4 text-lg font-medium">
-              No notifications found
-            </h3>
+            <h3 className="mt-4 text-lg font-medium">No notifications found</h3>
             <p className="text-muted-foreground mt-2">
               Notifications will appear here
             </p>
@@ -107,22 +104,19 @@ export function NotificationsTable({
                       notification.type === "chat"
                         ? "bg-blue-500/20 text-blue-700 dark:text-blue-300"
                         : notification.type === "submission"
-                        ? "bg-green-500/20 text-green-700 dark:text-green-300"
-                        : "bg-orange-500/20 text-orange-700 dark:text-orange-300"
+                          ? "bg-green-500/20 text-green-700 dark:text-green-300"
+                          : "bg-orange-500/20 text-orange-700 dark:text-orange-300"
                     }`}
                   >
                     {notification.type === "chat"
                       ? "Chat Lead"
                       : notification.type === "submission"
-                      ? "Form Submission"
-                      : "System"}
+                        ? "Form Submission"
+                        : "System"}
                   </span>
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
-                  {format(
-                    new Date(notification.timestamp),
-                    "MMM d, yyyy h:mm a"
-                  )}
+                  {format(new Date(notification.timestamp), "d/MM/yy h:mm a")}
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   <span

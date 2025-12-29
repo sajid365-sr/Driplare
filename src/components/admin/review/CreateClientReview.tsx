@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -23,9 +22,14 @@ import { useNavigate } from "react-router-dom";
 interface CreateClientReviewProps {
   reviewId?: string | null;
   onCancel?: () => void;
+  handleRefresh?: () => void;
 }
 
-const CreateClientReview = ({ reviewId, onCancel }: CreateClientReviewProps) => {
+const CreateClientReview = ({
+  reviewId,
+  onCancel,
+  handleRefresh,
+}: CreateClientReviewProps) => {
   const navigate = useNavigate();
   const coverImageRef = useRef<HTMLInputElement>(null);
   const [newReview, setNewReview] = useState<Testimonial>({
@@ -81,7 +85,11 @@ const CreateClientReview = ({ reviewId, onCancel }: CreateClientReviewProps) => 
       setIsSubmitting(false);
 
       if (savedId) {
-        toast.success(`Review ${reviewId ? "updated" : "created"} successfully.`);
+        toast.success(
+          `Review ${reviewId ? "updated" : "created"} successfully.`
+        );
+        handleRefresh();
+
         // Navigate back to the reviews list or reset form
         if (onCancel) {
           onCancel();
@@ -128,9 +136,13 @@ const CreateClientReview = ({ reviewId, onCancel }: CreateClientReviewProps) => 
     <div>
       <Card className="mt-8">
         <CardHeader>
-          <CardTitle>{reviewId ? "Edit Review" : "Create New Review"}</CardTitle>
+          <CardTitle>
+            {reviewId ? "Edit Review" : "Create New Review"}
+          </CardTitle>
           <CardDescription>
-            {reviewId ? "Update existing review." : "Create review based on TrustPilot."}
+            {reviewId
+              ? "Update existing review."
+              : "Create review based on TrustPilot."}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -284,11 +296,7 @@ const CreateClientReview = ({ reviewId, onCancel }: CreateClientReviewProps) => 
             </div>
 
             <div className="flex justify-end gap-2">
-              <Button 
-                type="button" 
-                variant="outline" 
-                onClick={onCancel}
-              >
+              <Button type="button" variant="outline" onClick={onCancel}>
                 Cancel
               </Button>
               <Button type="submit" disabled={isSubmitting}>
