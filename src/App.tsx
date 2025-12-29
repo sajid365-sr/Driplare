@@ -29,6 +29,7 @@ import Product from "./pages/marketplace/Products";
 import ProductDetailsPage from "./pages/marketplace/ProductDetails";
 import CaseStudies2 from "./pages/services/CaseStudies-2";
 import CaseStudyDetailPage from "./pages/CaseStudyDetailPage";
+import PricingPage from "./pages/PricingPage";
 
 const queryClient = new QueryClient();
 

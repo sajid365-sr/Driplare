@@ -56,141 +56,122 @@ const tiers = [
 
 export function PricingTable() {
   return (
-    <section className="py-20 bg-[#F9F9F9]">
-      <div className="container">
+    <section className="py-24 bg-background">
+      <div className="container mx-auto px-4">
+        {/* Header Section */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center max-w-3xl mx-auto mb-20"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0A0A0A] mb-4">
-            The Core AI Agent Tiers
+          <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-6">
+            The Core <span className="text-primary">AI Agent Tiers.</span>
           </h2>
-          <p className="text-lg text-[#0A0A0A]/70 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground leading-relaxed">
             Productized solutions for predictable value generation. Each tier is designed for specific business scales.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {/* Pricing Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
           {tiers.map((tier, index) => (
             <motion.div
               key={tier.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className={`relative bg-white rounded-2xl p-8 border-2 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF6B00]/20 hover:-translate-y-2 ${
-                tier.tier === 1
-                  ? 'border-[#E5E5E5] hover:border-[#FF6B00]'
-                  : tier.tier === 2
-                  ? 'border-[#FF6B00] shadow-lg shadow-[#FF6B00]/20'
-                  : 'border-[#0A0A0A] bg-[#0A0A0A] text-white'
+              transition={{ delay: index * 0.1 }}
+              className={`relative flex flex-col p-8 md:p-10 rounded-[2.5rem] border transition-all duration-500 ${
+                tier.popular 
+                ? "bg-card border-primary shadow-[0_0_50px_-12px_rgba(var(--primary),0.3)] scale-105 z-10" 
+                : tier.tier === 3
+                ? "bg-[#0A0A0A] border-white/10 text-white"
+                : "bg-card/50 border-border hover:border-primary/50 shadow-sm"
               }`}
             >
-              {/* Popular Badge */}
+              {/* Specialized Badges */}
               {tier.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <div className="bg-[#FF6B00] text-white px-4 py-2 rounded-full text-sm font-mono font-bold flex items-center gap-2">
-                    <Zap className="w-4 h-4" />
-                    Most Efficient
-                  </div>
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-6 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
+                  <span className="flex items-center gap-2 text-white">
+                    <Zap className="w-3 h-3 fill-current" /> Most Efficient
+                  </span>
                 </div>
               )}
-
-              {/* Enterprise Badge */}
               {tier.tier === 3 && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <div className="bg-white text-[#0A0A0A] px-4 py-2 rounded-full text-sm font-mono font-bold flex items-center gap-2 border-2 border-[#0A0A0A]">
-                    <Crown className="w-4 h-4" />
-                    Enterprise Elite
-                  </div>
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-white text-black px-6 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg border border-black/10">
+                  <span className="flex items-center gap-2">
+                    <Crown className="w-3 h-3 fill-current" /> Enterprise Elite
+                  </span>
                 </div>
               )}
 
-              {/* Header */}
-              <div className="text-center mb-8">
-                <h3 className={`text-2xl font-bold mb-2 ${
-                  tier.tier === 3 ? 'text-white' : 'text-[#0A0A0A]'
-                }`}>
+              {/* Title & Description */}
+              <div className="mb-8">
+                <h3 className={`text-2xl font-black mb-3 ${tier.tier === 3 ? 'text-white' : 'text-foreground'}`}>
                   {tier.name}
                 </h3>
-                <p className={`text-sm mb-4 ${
-                  tier.tier === 3 ? 'text-white/70' : 'text-[#0A0A0A]/70'
-                }`}>
+                <p className={`text-sm leading-relaxed ${tier.tier === 3 ? 'text-white/60' : 'text-muted-foreground'}`}>
                   {tier.description}
                 </p>
+              </div>
 
-                <div className="flex items-baseline justify-center gap-1 mb-2">
-                  <span className={`text-4xl font-mono font-bold ${
-                    tier.tier === 3 ? 'text-[#FF6B00]' : 'text-[#FF6B00]'
-                  }`}>
+              {/* Pricing Section */}
+              <div className="mb-8">
+                <div className="flex items-baseline gap-1">
+                  <span className={`text-5xl font-black tracking-tighter ${tier.tier === 3 ? 'text-primary' : 'text-foreground'}`}>
                     {tier.price}
                   </span>
-                  <span className={`text-sm font-mono ${
-                    tier.tier === 3 ? 'text-white/60' : 'text-[#0A0A0A]/60'
-                  }`}>
+                  <span className={`text-sm font-medium uppercase tracking-widest ${tier.tier === 3 ? 'text-white/40' : 'text-muted-foreground'}`}>
                     / {tier.period}
                   </span>
                 </div>
               </div>
 
-              {/* Features */}
-              <div className="space-y-4 mb-8">
-                {tier.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-start gap-3">
-                    <Check className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
-                      tier.tier === 1
-                        ? 'text-[#0A0A0A]'
-                        : tier.tier === 2
-                        ? 'text-[#FF6B00]'
-                        : 'text-[#FF6B00]'
-                    }`} />
-                    <span className={`text-sm leading-relaxed ${
-                      tier.tier === 3 ? 'text-white/90' : 'text-[#0A0A0A]/80'
-                    }`}>
+              {/* Features List */}
+              <ul className="space-y-4 mb-10 flex-grow">
+                {tier.features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <Check className={`w-5 h-5 shrink-0 ${tier.tier === 3 ? 'text-primary' : 'text-primary'}`} />
+                    <span className={`text-sm font-medium ${tier.tier === 3 ? 'text-white/80' : 'text-muted-foreground'}`}>
                       {feature}
                     </span>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
 
-              {/* CTA Button */}
+              {/* Button */}
               <Button
-                className={`w-full font-mono font-bold ${
-                  tier.tier === 1
-                    ? 'bg-[#0A0A0A] hover:bg-[#0A0A0A]/90 text-white'
-                    : tier.tier === 2
-                    ? 'bg-[#FF6B00] hover:bg-[#FF6B00]/90 text-white'
-                    : 'bg-white hover:bg-white/90 text-[#0A0A0A] border-2 border-white'
+                className={`w-full py-7 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all duration-300 ${
+                  tier.popular 
+                  ? "bg-primary text-white hover:opacity-90 shadow-[0_10px_20px_-10px_rgba(var(--primary),0.5)]" 
+                  : tier.tier === 3
+                  ? "bg-white text-black hover:bg-white/90"
+                  : "bg-accent hover:bg-accent/80 text-foreground"
                 }`}
               >
-                {tier.cta}
-                <ArrowRight className="w-4 h-4 ml-2" />
+                {tier.cta} <ArrowRight className="w-5 h-5" />
               </Button>
 
-              {/* Value Indicator */}
-              <div className={`mt-6 text-center ${
-                tier.tier === 3 ? 'text-white/60' : 'text-[#0A0A0A]/60'
-              }`}>
-                <div className="text-xs font-mono">
-                  VALUE_GENERATION: {tier.tier === 1 ? 'HIGH' : tier.tier === 2 ? 'MAXIMUM' : 'ENTERPRISE'}
+              {/* System Metadata Footer */}
+              <div className={`mt-8 pt-6 border-t ${tier.tier === 3 ? 'border-white/5' : 'border-border/50'}`}>
+                <div className={`text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-center ${tier.tier === 3 ? 'text-white/30' : 'text-muted-foreground/50'}`}>
+                  VALUE_GENERATION: {tier.tier === 1 ? 'HIGH' : tier.tier === 2 ? 'MAXIMUM' : 'ENTERPRISE_INFRA'}
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom Note */}
+        {/* Closing Infrastructure Note */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.8 }}
-          className="text-center mt-12"
+          className="text-center mt-16"
         >
-          <p className="text-[#0A0A0A]/60 font-mono text-sm">
-            All investments include system architecture, deployment, and initial training.
+          <p className="text-muted-foreground/60 font-mono text-xs uppercase tracking-widest">
+            All deployments include core architecture, security protocols, and 0-latency optimization.
           </p>
         </motion.div>
       </div>

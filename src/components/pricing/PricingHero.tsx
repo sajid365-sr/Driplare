@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Sparkles } from "lucide-react";
 
 export function PricingHero() {
   const [billingType, setBillingType] = useState("setup");
 
   return (
-    <section className="relative min-h-screen bg-white flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen bg-white flex items-center justify-center overflow-hidden mt-10">
       {/* Blueprint Grid Background */}
       <div
         className="absolute inset-0 opacity-5"
@@ -42,9 +43,10 @@ export function PricingHero() {
             transition={{ duration: 0.8 }}
             className="mb-8"
           >
-            <div className="inline-flex items-center gap-3 bg-[#0A0A0A] text-white px-6 py-3 rounded-full font-mono text-sm">
-              <span>SYSTEM_INVESTMENT</span>
-            </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-4">
+        <Sparkles size={14} /> SYSTEM_INVESTMENT
+      </div>
+           
           </motion.div>
 
           <motion.h1

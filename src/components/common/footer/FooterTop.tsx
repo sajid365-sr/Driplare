@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -11,37 +11,40 @@ export function FooterTop() {
   }).replace(/\s/g, '_').toUpperCase();
 
   return (
-    <div className="border-t border-b border-[#0A0A0A] py-8">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-          {/* Left - Logo */}
-          <div className="text-left">
-            <Link to="/" className="font-montserrat font-bold text-2xl text-[#0A0A0A] tracking-wider">
-              DRIPLARE
+    <div className="border-b border-[#0A0A0A]/5 py-12">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+          {/* Logo Section */}
+          <div className="flex flex-col items-center md:items-start">
+            <Link to="/" className="text-3xl font-black tracking-tighter text-[#0A0A0A]">
+              DRIPLARE<span className="text-primary">.</span>
             </Link>
+            <p className="text-[10px] font-mono font-bold text-[#0A0A0A]/40 mt-1 uppercase tracking-widest">
+              Architecting Autonomy
+            </p>
           </div>
 
-          {/* Middle - Status */}
-          <div className="text-center">
-            <div className="inline-flex items-center gap-3 bg-white px-4 py-2 border border-[#0A0A0A] rounded-none">
-              <div className="w-2 h-2 bg-[#22C55E] rounded-full animate-pulse"></div>
-              <span className="font-mono text-sm text-[#0A0A0A] font-bold">
-                [ SYSTEM_STATUS: OPERATIONAL_24/7 ]
+          {/* Status Monitoring */}
+          <div className="flex flex-col items-center group">
+            <div className="inline-flex items-center gap-3 bg-[#0A0A0A]/5 border border-transparent group-hover:border-primary/20 px-6 py-2.5 rounded-2xl transition-all">
+              <Activity className="w-4 h-4 text-primary animate-pulse" />
+              <span className="font-mono text-xs text-[#0A0A0A] font-black tracking-wider uppercase">
+                SYSTEM_STATUS: OPERATIONAL
               </span>
             </div>
-            <div className="mt-2 font-mono text-xs text-[#0A0A0A]/60">
-              [ LAST_SCAN: {currentDate} ]
+            <div className="mt-2 font-mono text-[9px] text-[#0A0A0A]/40 font-bold uppercase tracking-widest">
+              LST_SYNC: {currentDate} // 0-LATENCY
             </div>
           </div>
 
-          {/* Right - CTA */}
-          <div className="text-right">
-            <Link to="/contact">
-              <Button className="bg-[#FF6B00] hover:bg-[#FF6B00]/90 text-white px-6 py-3 rounded-none font-mono text-sm font-bold border border-[#0A0A0A]">
-                [ INITIATE_PROJECT ]
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+          {/* CTA Section */}
+          <div>
+            <Button asChild className="bg-[#0A0A0A] hover:bg-primary text-white px-8 py-7 rounded-2xl font-bold text-lg shadow-xl shadow-[#0A0A0A]/10 transition-all active:scale-95 group">
+              <Link to="/contact">
+                Initiate Project
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

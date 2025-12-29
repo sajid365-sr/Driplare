@@ -20,6 +20,8 @@ import {
   ShoppingBag,
   Mail,
   ArrowRight,
+  DollarSign,
+  Brain,
 } from "lucide-react";
 import {
   Accordion,
@@ -45,7 +47,7 @@ export function MobileMenu() {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="w-[85vw] sm:w-[400px] p-0 border-l border-border/40"
+        className="w-[85vw] md:hidden sm:w-[400px] p-0 border-l border-border/40"
       >
         <div className="flex flex-col h-full bg-background">
           <SheetHeader className="p-6 text-left border-b border-border/40">
@@ -124,11 +126,18 @@ export function MobileMenu() {
             </Link>
 
             <Link
-              to="/contact"
+              to="/pricing"
               onClick={closeMenu}
               className="flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all font-medium text-lg"
             >
-              <Mail className="h-5 w-5 text-primary" /> Contact
+              <DollarSign className="h-5 w-5 text-primary" /> Pricing
+            </Link>
+            <Link
+              to="/insights"
+              onClick={closeMenu}
+              className="flex items-center gap-4 p-3 rounded-xl hover:bg-primary/5 transition-all font-medium text-lg"
+            >
+              <Brain className="h-5 w-5 text-primary" /> Insights
             </Link>
           </nav>
 

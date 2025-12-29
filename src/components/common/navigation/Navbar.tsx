@@ -195,6 +195,7 @@ export function Navbar() {
                 </Link>
               </NavigationMenuItem>
 
+           
               <NavigationMenuItem>
                 <Link
                   to="/pricing"
@@ -205,6 +206,18 @@ export function Navbar() {
                   )}
                 >
                   Pricing
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link
+                  to="/insights"
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "bg-transparent hover:bg-primary/10",
+                    isActive("/insights") && "text-primary"
+                  )}
+                >
+                  Insights
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>

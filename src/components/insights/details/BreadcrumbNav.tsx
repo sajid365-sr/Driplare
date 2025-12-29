@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ChevronRight, Home } from "lucide-react";
 
 interface BreadcrumbNavProps {
   postTitle: string;
@@ -6,19 +7,22 @@ interface BreadcrumbNavProps {
 
 export function BreadcrumbNav({ postTitle }: BreadcrumbNavProps) {
   return (
-    <nav className="py-6 border-b border-[#E5E5E5]">
+    <nav className="py-5">
       <div className="container mx-auto px-4">
-        <div className="font-mono text-sm text-[#0A0A0A]/60">
-          <Link to="/" className="hover:text-[#FF6B00] transition-colors">
-            HOME
+        <div className="flex items-center gap-3 font-mono text-[12px] font-bold tracking-[0.2em] text-[#0A0A0A]/40 uppercase">
+          <Link
+            to="/"
+            className="hover:text-primary flex items-center gap-1.5 transition-colors"
+          >
+            <Home size={12} /> HOME
           </Link>
-          <span className="mx-2">/</span>
-          <Link to="/insights" className="hover:text-[#FF6B00] transition-colors">
+          <ChevronRight size={12} className="opacity-30" />
+          <Link to="/insights" className="hover:text-primary transition-colors">
             INTELLIGENCE_HUB
           </Link>
-          <span className="mx-2">/</span>
-          <span className="text-[#FF6B00] font-bold">
-            [{postTitle.length > 30 ? postTitle.substring(0, 30) + "..." : postTitle}]
+          <ChevronRight size={12} className="opacity-30" />
+          <span className="text-primary truncate max-w-[200px] md:max-w-none">
+            {postTitle}
           </span>
         </div>
       </div>

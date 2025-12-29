@@ -9,6 +9,7 @@ import { SocialProofSection } from "@/components/home/SocialProofSection";
 import { TechStackSection } from "@/components/home/TechStackSection";
 import { FinalCTASection } from "@/components/home/FinalCTASection";
 import { initializeNotificationsFromSupabase } from "@/utils/notification-utils";
+import { Hero } from "@/components/home/HeroSection2";
 
 const Index = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -87,17 +88,18 @@ const Index = () => {
         <div className="relative">
           <div className="w-4 h-4 bg-[#FF6B00] rounded-full opacity-80"></div>
           <div className="absolute inset-0 w-4 h-4 bg-[#FF6B00] rounded-full animate-ping opacity-30"></div>
-          {isHovering && (
+          {/* {isHovering && (
             <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#0A0A0A] text-white px-2 py-1 rounded text-xs font-mono whitespace-nowrap">
               Status: Ready
             </div>
-          )}
+          )} */}
         </div>
       </div>
 
       <main>
         {/* 1. Hero Section: The Executive Hook */}
-        <HeroSection />
+        {/* <HeroSection /> */}
+        <Hero/>
 
         {/* 2. The Infrastructure Gap */}
         <InfrastructureGapSection />

@@ -39,7 +39,7 @@ export function ScrollToTopButton() {
   return (
     <div className="fixed bottom-5 right-1/2 z-50">
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <Button
             onClick={scrollToTop}
             className="rounded-full  animate-pulse h-10 w-10 bg-primary/30 hover:bg-primary/90 shadow-lg"

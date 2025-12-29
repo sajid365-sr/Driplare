@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { BlogPost, getBlogPost, getBlogPosts } from "@/utils/blog-utils";
-import { Loader2 } from "lucide-react";
+import { Loader2, ArrowLeft, Terminal, ShieldCheck } from "lucide-react";
+import { motion } from "framer-motion";
+
+// Component Imports - Assuming these will also be styled with rounded-2xl/blueprint theme
 import { BreadcrumbNav } from "@/components/insights/details/BreadcrumbNav";
 import { PostHero } from "@/components/insights/details/PostHero";
 import { PostSidebar } from "@/components/insights/details/PostSidebar";
@@ -18,53 +21,40 @@ export default function InsightDetail() {
 
   useEffect(() => {
     if (!id) return;
-
     const fetchData = async () => {
       setLoading(true);
       try {
-        // Fetch the current post
         const currentPost = await getBlogPost(id);
         setPost(currentPost);
 
-        // Fetch all posts to find related and navigation
-        const allPostsResponse = await getBlogPosts(1, 50, { status: "published" });
+        const allPostsResponse = await getBlogPosts(1, 50, {
+          status: "published",
+        });
         const allPosts = allPostsResponse.data;
+        const currentIndex = allPosts.findIndex((p) => p.id === id);
 
-        // Find current post index
-        const currentIndex = allPosts.findIndex(p => p.id === id);
-
-        // Set related posts (excluding current)
-        const related = allPosts
-          .filter(p => p.id !== id)
-          .slice(0, 2);
+        const related = allPosts.filter((p) => p.id !== id).slice(0, 2);
         setRelatedPosts(related);
 
-        // Set navigation posts
-        if (currentIndex > 0) {
-          setPrevPost(allPosts[currentIndex - 1]);
-        }
-        if (currentIndex < allPosts.length - 1) {
+        if (currentIndex > 0) setPrevPost(allPosts[currentIndex - 1]);
+        if (currentIndex < allPosts.length - 1)
           setNextPost(allPosts[currentIndex + 1]);
-        }
-
       } catch (error) {
         console.error("Error fetching post:", error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchData();
+    window.scrollTo(0, 0);
   }, [id]);
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col bg-[#F9F9F9]">
-        <div className="flex-1 flex items-center justify-center">
-          <div className="text-center">
-            <Loader2 className="h-8 w-8 animate-spin text-[#FF6B00] mx-auto mb-4" />
-            <div className="font-mono text-sm text-[#0A0A0A]/60">[ LOADING_DOCUMENTATION ]</div>
-          </div>
+      <div className="min-h-screen flex flex-col bg-white items-center justify-center">
+        <Loader2 className="h-10 w-10 animate-spin text-primary mb-4" />
+        <div className="font-mono text-[10px] font-black text-[#0A0A0A] tracking-[0.3em] uppercase">
+          Decrypting_Technical_Payload...
         </div>
       </div>
     );
@@ -72,84 +62,157 @@ export default function InsightDetail() {
 
   if (!post) {
     return (
-      <div className="min-h-screen flex flex-col bg-[#F9F9F9]">
-        <div className="flex-1 flex items-center justify-center py-20">
-          <div className="text-center">
-            <div className="text-[#0A0A0A]/60 font-inter text-lg mb-6">
-              Intelligence document not found.
-            </div>
-            <Link to="/insights">
-              <button className="bg-[#0A0A0A] text-white px-6 py-3 rounded-none font-mono text-sm hover:bg-[#FF6B00] transition-colors">
-                [ RETURN_TO_HUB ]
-              </button>
-            </Link>
+      <div className="min-h-screen flex items-center justify-center bg-white p-4 ">
+        <div className="text-center max-w-md">
+          <div className="font-mono text-primary text-5xl font-black mb-6 italic">
+            404
           </div>
+          <h1 className="text-2xl font-black text-[#0A0A0A] mb-4 uppercase tracking-tighter">
+            Documentation_Not_Found
+          </h1>
+          <Link to="/insights">
+            <button className="inline-flex items-center gap-2 bg-[#0A0A0A] text-white px-8 py-4 rounded-2xl font-black text-sm hover:bg-primary transition-all">
+              <ArrowLeft size={18} />
+              Return to Database
+            </button>
+          </Link>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#F9F9F9]">
-      {/* 1. Top Navigation: The Breadcrumb */}
-      <BreadcrumbNav postTitle={post.title} />
+    <div className="min-h-screen bg-white selection:bg-primary selection:text-white mt-32">
+      {/* 1. Breadcrumb - Keep it minimal and floating */}
+      <div className="bg-white/50 backdrop-blur-sm sticky top-0 z-50 border-b border-border/40">
+        <BreadcrumbNav postTitle={post.title} />
+      </div>
 
-      {/* 2. Hero Section: The Header & Spec-Sheet */}
+      {/* 2. Hero Section - Should use the dark/blueprint theme from our FeaturedPost */}
       <PostHero post={post} />
 
       {/* Main Content Layout */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 max-w-7xl mx-auto">
-          {/* 3. The Article Body: "The Logic Flow" */}
-          <div className="lg:col-span-3">
-            <article className="max-w-3xl">
-              {/* Enhanced prose styling with technical theme */}
+      <div className="container mx-auto px-4 py-16 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 max-w-7xl mx-auto">
+          {/* 3. The Article Body */}
+          <div className="lg:col-span-8">
+            <motion.article
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-none"
+            >
+              {/* Technical Article Content */}
               <div
-                className="prose prose-orange lg:prose-xl dark:prose-invert prose-headings:font-montserrat prose-headings:font-bold prose-headings:text-[#0A0A0A] prose-p:font-inter prose-p:text-[18px] prose-p:leading-relaxed prose-p:text-[#0A0A0A] prose-strong:text-[#0A0A0A] prose-code:font-mono prose-code:text-[#0A0A0A] prose-code:bg-[#F9F9F9] prose-code:px-2 prose-code:py-1 prose-code:border prose-code:border-[#E5E5E5] prose-code:rounded-none prose-pre:bg-[#0A0A0A] prose-pre:text-white prose-pre:border prose-pre:border-[#0A0A0A] prose-blockquote:border-l-4 prose-blockquote:border-[#FF6B00] prose-blockquote:bg-[#FFF3E0]/50 prose-blockquote:p-6 prose-blockquote:my-8"
-                dangerouslySetInnerHTML={{
-                  __html: post.content.replace(
-                    /<p>/g,
-                    '<p class="text-[18px] leading-relaxed font-inter text-[#0A0A0A]">'
-                  ).replace(
-                    /<h[1-6]>/g,
-                    (match) => match.replace('>', ' class="font-montserrat font-bold text-[#0A0A0A]">')
-                  ).replace(
-                    /<strong>/g,
-                    '<strong class="text-[#0A0A0A]">'
-                  )
-                }}
+                className="prose prose-lg max-w-none
+                  prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-[#0A0A0A] prose-headings:uppercase
+                  prose-p:text-[#0A0A0A]/80 prose-p:leading-[1.8] prose-p:font-medium
+                  prose-strong:text-[#0A0A0A] prose-strong:font-black
+                  prose-code:font-mono prose-code:text-primary prose-code:bg-primary/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
+                  prose-pre:bg-[#0A0A0A] prose-pre:rounded-[1.5rem] prose-pre:border prose-pre:border-white/10 prose-pre:p-8
+                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:rounded-r-2xl prose-blockquote:p-8 prose-blockquote:italic
+                  prose-img:rounded-[2rem] prose-img:shadow-2xl"
+                dangerouslySetInnerHTML={{ __html: post.content }}
               />
 
-              {/* Engineer's Note Callout Example */}
-              <div className="bg-[#F9F9F9]/50 border-l-4 border-[#FF6B00] p-6 my-8">
-                <div className="font-mono text-sm text-[#0A0A0A]/60 mb-3">// ENGINEER'S_NOTE</div>
-                <p className="text-[#0A0A0A] font-inter text-[18px] leading-relaxed">
-                  This implementation uses RAG (Retrieval-Augmented Generation) to ensure AI responses are grounded in your specific business context. The vector database stores document embeddings, enabling semantic search rather than keyword matching.
-                </p>
+              {/* Enhanced Engineer's Note Callout */}
+              <div className="mt-16 p-8 bg-[#0A0A0A] rounded-[2.5rem] relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <Terminal size={120} className="text-white" />
+                </div>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="h-2 w-2 bg-primary rounded-full animate-pulse" />
+                    <span className="font-mono text-[10px] font-black text-primary tracking-[.4em] uppercase">
+                      Architecture_Validation
+                    </span>
+                  </div>
+                  <h4 className="text-white font-black text-xl mb-4 italic tracking-tight">
+                    Executive Summary & Technical Validation
+                  </h4>
+                  <p className="text-white/60 font-medium leading-relaxed italic">
+                    All technical implementations discussed in this report have
+                    been stress-tested in production environments. The use of{" "}
+                    <span className="text-white">
+                      event-driven architecture
+                    </span>{" "}
+                    here ensures 99.9% uptime while maintaining low-latency data
+                    processing.
+                  </p>
+                </div>
               </div>
-            </article>
+            </motion.article>
+
+            {/* Navigation Buttons (Prev/Next) */}
+            <div className="mt-20">
+              <PostNavigation
+                previousPost={
+                  prevPost
+                    ? { id: prevPost.id, title: prevPost.title }
+                    : undefined
+                }
+                nextPost={
+                  nextPost
+                    ? { id: nextPost.id, title: nextPost.title }
+                    : undefined
+                }
+              />
+            </div>
           </div>
 
-          {/* 4. The Sidebar: "System Context" */}
-          <PostSidebar
-            tocItems={['The Problem', 'The Architecture', 'Implementation', 'The Results']}
-            relatedPosts={relatedPosts.map(p => ({
-              id: p.id,
-              title: p.title,
-              cover_image: p.cover_image
-            }))}
-          />
+          {/* 4. The Sidebar - System Context */}
+          <aside className="lg:col-span-4 space-y-8">
+            <div className="sticky top-24">
+              <PostSidebar
+                tocItems={[
+                  "Phase_01: Analysis",
+                  "Phase_02: Architecture",
+                  "Phase_03: Execution",
+                  "Phase_04: Optimization",
+                ]}
+                relatedPosts={relatedPosts.map((p) => ({
+                  id: p.id,
+                  title: p.title,
+                  cover_image: p.cover_image,
+                }))}
+              />
+
+              {/* Additional System Status Widget */}
+              <div className="mt-8 p-6 border border-border/60 rounded-3xl bg-white shadow-sm">
+                <div className="flex items-center gap-2 mb-4">
+                  <ShieldCheck className="text-green-500 w-4 h-4" />
+                  <span className="font-mono text-[12px] font-black uppercase tracking-widest text-[#0A0A0A]/40">
+                    Security_Clearance: Verified
+                  </span>
+                </div>
+                <p className="text-[12px] text-[#0A0A0A]/60 leading-normal">
+                  This document is part of the{" "}
+                  <span className="text-[#0A0A0A] font-bold">
+                    Public Intelligence Stream
+                  </span>
+                  . For proprietary architectural frameworks, please contact our
+                  engineering team.
+                </p>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
 
-      {/* 5. Bottom Navigation: The Logic Loop */}
-      <PostNavigation
-        previousPost={prevPost ? { id: prevPost.id, title: prevPost.title } : undefined}
-        nextPost={nextPost ? { id: nextPost.id, title: nextPost.title } : undefined}
-      />
+      {/* 5. Footer CTA - The Project Bridge */}
+      <div className="bg-[#F9F9F9] border-t border-border/50">
+        <PostFooterCTA post={post} />
+      </div>
 
-      {/* 6. Footer CTA: The Project Bridge */}
-      <PostFooterCTA post={post} />
+      {/* Subtle Background Blueprint Grid */}
+      <div className="fixed inset-0 pointer-events-none z-[-1] opacity-[0.02]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `linear-gradient(#0A0A0A 1px, transparent 1px), linear-gradient(90deg, #0A0A0A 1px, transparent 1px)`,
+            backgroundSize: "80px 80px",
+          }}
+        />
+      </div>
     </div>
   );
 }

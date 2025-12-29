@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, FileText } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, FileText, Clock, Tag } from "lucide-react";
 import { Link } from "react-router-dom";
 import { BlogPost } from "@/utils/blog-utils";
 import { formatDate } from "@/lib/utils";
@@ -12,24 +10,10 @@ interface PostGridProps {
 
 export function PostGrid({ posts }: PostGridProps) {
   return (
-    <section className="py-16 bg-white">
-      <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0A0A0A] mb-4 font-montserrat">
-            The Intelligence Grid (The "Logs")
-          </h2>
-          <p className="text-[#0A0A0A]/70 font-inter leading-relaxed max-w-2xl mx-auto">
-            Cards look like folders or technical documents. No rounded corners (square edges for an industrial look). 1px border.
-          </p>
-        </motion.div>
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        {/* Grid Container */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {posts.map((post, index) => (
             <motion.div
               key={post.id}
@@ -37,99 +21,93 @@ export function PostGrid({ posts }: PostGridProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 * index }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              whileHover={{ y: -10 }}
+              className="group flex flex-col h-full bg-white border border-border/50 rounded-[2rem] overflow-hidden hover:border-primary transition-all duration-500 hover:shadow-[0_20px_50px_-12px_rgba(var(--primary),0.15)]"
             >
-              <Card className="overflow-hidden h-full border border-[#0A0A0A] rounded-none bg-white hover:border-[#FF6B00] transition-all duration-300 cursor-pointer group">
-                <div className="aspect-video overflow-hidden relative">
-                  <img
-                    src={post.cover_image || "https://images.unsplash.com/photo-1677442135136-760c813dfc5c?q=80&w=2232&auto=format&fit=crop"}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {/* Hover border effect */}
-                  <div className="absolute inset-0 border border-[#FF6B00] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              {/* Image Header */}
+              <div className="aspect-[16/10] overflow-hidden relative bg-[#F9F9F9]">
+                <img
+                  src={post.cover_image || "https://images.unsplash.com/photo-1677442135136-760c813dfc5c?q=80&w=2232&auto=format&fit=crop"}
+                  alt={post.title}
+                  className="w-full h-full object-cover grayscale-[50%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="bg-white/90 backdrop-blur-md text-[#0A0A0A] px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border border-border/50">
+                    {post.category}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content Body */}
+              <div className="p-8 flex flex-col flex-grow">
+                {/* Meta Bar */}
+                <div className="flex items-center gap-4 mb-4 text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-widest">
+                  <span className="flex items-center gap-1.5">
+                    <Clock size={12} className="text-primary" />
+                    {formatDate(post.published_at || post.created_at)}
+                  </span>
+                  <span className="opacity-30">|</span>
+                  <span className="flex items-center gap-1.5">
+                    Intel_Report
+                  </span>
                 </div>
 
-                <CardContent className="p-6">
-                  {/* Meta Information */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="font-mono text-xs text-[#0A0A0A]/60">
-                      {post.category}
-                    </span>
-                    <span className="font-mono text-xs text-[#0A0A0A]/60">
-                      {formatDate(post.published_at || post.created_at)}
-                    </span>
-                  </div>
+                {/* Title */}
+                <h3 className="text-2xl font-black text-[#0A0A0A] mb-4 tracking-tight leading-tight group-hover:text-primary transition-colors line-clamp-2">
+                  {post.title}
+                </h3>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-[#0A0A0A] mb-3 font-montserrat leading-tight">
-                    {post.title}
-                  </h3>
+                {/* Content Preview */}
+                <p className="text-[#0A0A0A]/60 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
+                  {post.content.replace(/<[^>]+>/g, "").substring(0, 150)}...
+                </p>
 
-                  {/* Content Preview */}
-                  <p className="text-[#0A0A0A]/70 font-inter leading-relaxed mb-4 text-sm">
-                    {post.content.replace(/<[^>]+>/g, "").substring(0, 120)}...
-                  </p>
-
-                  {/* Tech Stack */}
-                  <div className="mb-4">
-                    <div className="font-mono text-xs text-[#0A0A0A]/60 mb-2">STACK:</div>
-                    <div className="flex flex-wrap gap-1">
-                      {["n8n", "OpenAI", "MongoDB"].map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-1 bg-[#F9F9F9] border border-[#0A0A0A]/20 font-mono text-xs text-[#0A0A0A] rounded-none"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Read More */}
-                  <Link to={`/insights/${post.id}`}>
-                    <Button
-                      variant="ghost"
-                      className="p-0 hover:bg-transparent text-[#FF6B00] hover:text-[#FF6B00]/80 group/btn"
-                    >
-                      Read More
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                    </Button>
+                {/* Footer Action */}
+                <div className="mt-auto pt-6 border-t border-border/50 flex items-center justify-between">
+                  <Link 
+                    to={`/insights/${post.id}`}
+                    className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#0A0A0A] group/link"
+                  >
+                    Read Intelligence 
+                    <ArrowRight size={16} className="text-primary transition-transform group-hover/link:translate-x-1" />
                   </Link>
-                </CardContent>
-
-                {/* Document-style bottom border */}
-                <div className="h-1 bg-[#0A0A0A] group-hover:bg-[#FF6B00] transition-colors duration-300"></div>
-              </Card>
+                  
+                  <div className="text-[9px] font-mono font-bold text-muted-foreground/40 uppercase tracking-[0.2em]">
+                    Log_{post.id.toString().substring(0, 4)}
+                  </div>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
 
-        {/* No Results */}
+        {/* Empty State */}
         {posts.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-20"
+            className="text-center py-32 bg-[#F9F9F9] rounded-[3rem] border-2 border-dashed border-border/50"
           >
-            <FileText className="w-16 h-16 text-[#0A0A0A]/30 mx-auto mb-4" />
-            <p className="text-[#0A0A0A]/60 font-inter">No intelligence logs found matching your criteria.</p>
-            <div className="font-mono text-xs text-[#0A0A0A]/40 mt-2">[ DATABASE_EMPTY ]</div>
+            <FileText className="w-16 h-16 text-muted-foreground/20 mx-auto mb-6" />
+            <h3 className="text-2xl font-black text-[#0A0A0A] tracking-tighter mb-2">Database Empty.</h3>
+            <p className="text-muted-foreground font-medium">No intelligence logs match your current query.</p>
+            <div className="font-mono text-[10px] text-primary font-bold mt-6 tracking-[0.3em] uppercase">
+              [ STATUS: WAITING_FOR_INPUT ]
+            </div>
           </motion.div>
         )}
 
-        {/* Status Footer */}
+        {/* System Metadata Footer */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.8 }}
-          className="text-center mt-12"
+          className="text-center mt-20"
         >
-          <div className="inline-flex items-center gap-4 bg-[#F9F9F9] px-6 py-3 border border-[#0A0A0A] rounded-none">
-            <div className="w-2 h-2 bg-[#22C55E] rounded-full animate-pulse"></div>
-            <span className="font-mono text-sm text-[#0A0A0A]">
-              GRID_ACTIVE | CARDS_LOADED: {posts.length} | DISPLAY_MODE: TECHNICAL
+          <div className="inline-flex items-center gap-4 bg-[#0A0A0A]/5 px-8 py-3 rounded-2xl border border-border/50">
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+            <span className="font-mono text-[10px] font-black text-[#0A0A0A]/60 uppercase tracking-[0.2em]">
+              GRID_STATUS: ACTIVE | CACHE_REPORTS: {posts.length} | UI_MODE: ENGINEERED
             </span>
           </div>
         </motion.div>

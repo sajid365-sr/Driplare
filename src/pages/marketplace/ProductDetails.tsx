@@ -34,7 +34,7 @@ const AGENTS = [
       "Calendly Booking",
     ],
     techStack: ["OpenAI GPT-4o", "n8n", "Meta API"],
-    image: "/agents/social-ai.png",
+    image: "https://www.lyzr.ai/wp-content/uploads/2025/02/blog_ai_agents_for_social_media-1024x576.webp",
     rating: 4.9,
   },
   {
@@ -45,7 +45,7 @@ const AGENTS = [
     description:
       "Automated outbound agent that finds prospects and crafts personalized intros.",
     tools: ["PhantomBuster", "Claude 3.5", "Make"],
-    image: "/agents/linkedin-ai.png",
+    image: "https://media.licdn.com/dms/image/v2/D5612AQF_DGHYCGzi_A/article-cover_image-shrink_720_1280/B56ZczLdrwG0AQ-/0/1748910342152?e=2147483647&v=beta&t=Fk-l760iroGLxUBTuvT_Dwrj1V0thVl6rfVBSzARhog",
     rating: 5.0,
   },
   {
@@ -56,7 +56,7 @@ const AGENTS = [
     description:
       "Monitors competitor prices hourly and updates your Shopify store.",
     tools: ["BrightData", "Node.js", "Shopify"],
-    image: "/agents/scraping-ai.png",
+    image: "https://www.akira.ai/hubfs/Appstore%20Review%20Analysis%20Agent%20(67)-1.png",
     rating: 4.8,
   },
   {
@@ -67,7 +67,7 @@ const AGENTS = [
     description:
       "Cold email automation with AI-powered icebreakers and deliverability checks.",
     tools: ["Instantly", "GPT-4", "n8n"],
-    image: "/agents/email-bot.png",
+    image: "https://www.ameyo.com/wp-content/uploads/2022/05/8-1024x631.png",
     rating: 4.7,
   },
 ];
