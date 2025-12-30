@@ -1,37 +1,51 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-white">
+    <section className="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-white">
       <div className="container relative z-10">
         <motion.div
-          className="max-w-4xl mx-auto text-center"
+          className="max-w-5xl mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 bg-orange-100/20 px-4 py-2 rounded-full text-orange-500 mb-6">
-            <span className="text-sm font-medium">DISCOVER ENGINEERED EFFICIENCY</span>
+          <div className="inline-flex items-center gap-3 bg-[#F9F9F9] border border-border/60 px-4 py-2 rounded-full mb-8">
+            <Terminal size={14} className="text-primary" />
+            <span className="font-mono text-[10px] font-bold tracking-[0.2em] text-[#0A0A0A]/60 uppercase">
+              PROTOCOL // AGENTIC_WORKFORCE_V1
+            </span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-black">
-            Hire Digital Workers <span className="block text-orange-500">That Never Sleep.</span>
+
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-[0.9] tracking-tighter text-[#0A0A0A] uppercase">
+            Hire Digital Workers <br />
+            <span className="text-primary italic">That Never Sleep.</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-            We architect autonomous AI Agents tailored to your unique business logic. Eliminate manual bottlenecks and drive 24/7 productivity without increasing your headcount.
+
+          <p className="text-lg md:text-xl text-[#0A0A0A]/60 mb-10 max-w-2xl mx-auto font-medium leading-relaxed">
+            We architect autonomous AI Agents tailored to your unique business
+            logic. Eliminate manual bottlenecks and drive 24/7 productivity.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="gap-2 bg-orange-500 hover:bg-orange-600 text-white" asChild>
-              <Link to="/contact">
-                Book an Automation Audit
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="border-gray-300 text-gray-800 hover:bg-gray-100" asChild>
-              <Link to="/portfolio">See Use Cases</Link>
-            </Button>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link to="/contact">
+              <Button
+                size="lg"
+                className="h-16 px-10 bg-[#0A0A0A] hover:bg-primary text-white rounded-2xl font-black uppercase tracking-widest transition-all hover:-translate-y-1 shadow-xl shadow-black/10"
+              >
+                Book Automation Audit
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link
+              to="/case-studies"
+              className="font-mono text-xs font-bold uppercase tracking-widest text-[#0A0A0A]/40 hover:text-primary transition-colors"
+            >
+              [ VIEW_USE_CASES ]
+            </Link>
           </div>
         </motion.div>
       </div>

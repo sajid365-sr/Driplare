@@ -1,40 +1,45 @@
 import { motion } from "framer-motion";
 
-export const SynergyGraphic = () => {
-  return (
-    <section className="py-20 bg-gray-900 text-white">
-      <div className="container">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-orange-500">
-            More Than Just Code.
+export const SynergyGraphic = () => (
+  <section className="py-24 bg-[#0A0A0A] text-white">
+    <div className="container">
+      <div className="flex flex-col lg:flex-row gap-16 items-center">
+        <div className="lg:w-1/2">
+          <span className="font-mono text-xs font-bold text-primary tracking-[0.3em] uppercase">
+            The_Driplare_Edge
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase mt-4 mb-8 leading-none">
+            Built for <br />
+            <span className="text-primary italic">Intelligence.</span>
           </h2>
-          <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
-            Most developers just build the app. We build the app to be <strong>Automation-Ready.</strong> Every MERN system we engineer is designed to integrate seamlessly with our <strong>Custom AI Agents</strong> and <strong>n8n Workflows</strong>. It's not just a tool; it's an intelligent asset.
+          <p className="text-white/40 text-lg leading-relaxed mb-10">
+            Most developers just build the app. We build the app to be{" "}
+            <strong>Automation-Ready</strong>. Every system we engineer includes
+            native API hooks for our AI Agents and n8n Workflows.
           </p>
-        </motion.div>
 
-        {/* Venn Diagram Placeholder */}
-        <motion.div
-          className="max-w-2xl mx-auto"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="relative aspect-square bg-gray-800 rounded-full p-8 flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-4xl text-orange-500 mb-4">🎯</div>
-              <h3 className="text-2xl font-bold text-orange-400 mb-2">Driplare</h3>
-              <p className="text-sm text-gray-400">Where Code, AI & Automation Unite</p>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center text-primary font-black">
+              !
             </div>
+            <p className="font-mono text-[10px] text-white/60 tracking-widest uppercase">
+              Integration: Native // Logic: Unified
+            </p>
           </div>
-        </motion.div>
+        </div>
+
+        <div className="lg:w-1/2 w-full aspect-square relative flex items-center justify-center">
+          {/* Venn Diagram Visual */}
+          <div className="absolute w-64 h-64 border border-primary/30 rounded-full -translate-x-12 animate-pulse" />
+          <div className="absolute w-64 h-64 border border-white/10 rounded-full translate-x-12" />
+          <div className="absolute w-64 h-64 border border-white/10 rounded-full -translate-y-12" />
+          <div className="z-10 bg-[#0A0A0A] p-8 rounded-full border-2 border-primary shadow-[0_0_50px_rgba(255,107,0,0.2)] text-center">
+            <span className="font-black text-primary text-xl uppercase tracking-tighter">
+              SYNERGY
+            </span>
+          </div>
+        </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);

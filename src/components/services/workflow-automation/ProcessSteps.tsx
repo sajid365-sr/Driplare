@@ -1,67 +1,54 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
-const processSteps = [
+const steps = [
   {
-    step: "01",
-    title: "Process Mapping",
-    description: "We interview your team to find the \"hidden\" manual tasks that slow you down."
+    id: "01",
+    title: "MAPPING",
+    desc: "We interview your team to find hidden manual tasks.",
   },
   {
-    step: "02",
-    title: "Workflow Architecting",
-    description: "We build a digital blueprint of your new, automated pipeline."
+    id: "02",
+    title: "ARCHITECTING",
+    desc: "We build a digital blueprint of your new pipeline.",
   },
   {
-    step: "03",
-    title: "Stress Testing",
-    description: "We push the workflow to the limit to ensure it handles every edge case."
+    id: "03",
+    title: "STRESS TESTING",
+    desc: "Ensuring the workflow handles every edge case.",
   },
   {
-    step: "04",
-    title: "Handover & Support",
-    description: "We deploy the system and provide documentation so you stay in control."
-  }
+    id: "04",
+    title: "HANDOVER",
+    desc: "Deployment and documentation for your team.",
+  },
 ];
 
-export const ProcessSteps = () => {
-  return (
-    <section className="py-20 bg-muted/30 text-black">
-      <div className="container">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            The "Engineered Efficiency" Process
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            A proven methodology to transform your operations.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-4 gap-8">
-          {processSteps.map((step, idx) => (
-            <motion.div
-              key={step.step}
-              className="relative text-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.15 }}
-            >
-              <div className="text-6xl font-bold text-primary/20 mb-4">{step.step}</div>
-              <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-              <p className="text-muted-foreground text-sm">{step.description}</p>
-              {idx < processSteps.length - 1 && (
-                <ArrowRight className="hidden md:block absolute top-8 -right-4 h-6 w-6 text-primary/30" />
-              )}
-            </motion.div>
-          ))}
-        </div>
+export const ProcessSteps = () => (
+  <section className="py-24 bg-[#F9F9F9]">
+    <div className="container">
+      <div className="text-center mb-16">
+        <h2 className="text-4xl font-black uppercase tracking-tighter">
+          The_Methodology
+        </h2>
       </div>
-    </section>
-  );
-};
+      <div className="grid md:grid-cols-4 gap-4">
+        {steps.map((step, idx) => (
+          <div
+            key={idx}
+            className="relative p-8 bg-white border border-border/40 rounded-[2rem] text-center"
+          >
+            <span className="font-mono text-xs font-bold text-primary tracking-widest uppercase bg-primary/5 px-3 py-1 rounded-full mb-6 inline-block">
+              Step_{step.id}
+            </span>
+            <h3 className="text-xl font-black uppercase tracking-tight mb-4">
+              {step.title}
+            </h3>
+            <p className="text-sm text-[#0A0A0A]/60 font-medium leading-relaxed">
+              {step.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);

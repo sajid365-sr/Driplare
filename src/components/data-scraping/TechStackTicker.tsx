@@ -10,7 +10,7 @@ const techStack = [
   "HEADLESS_BROWSERS",
   "RATE_LIMITING",
   "ANTI_DETECTION",
-  "DATA_VALIDATION"
+  "DATA_VALIDATION",
 ];
 
 export function TechStackTicker() {
@@ -27,7 +27,9 @@ export function TechStackTicker() {
             Technical Resilience
           </h2>
           <p className="text-[#0A0A0A]/70 max-w-2xl mx-auto font-inter">
-            Anti-Bot & Scaling — We handle the complexity. Our scrapers are designed to bypass the most advanced anti-bot measures while maintaining 99% uptime.
+            Anti-Bot & Scaling — We handle the complexity. Our scrapers are
+            designed to bypass the most advanced anti-bot measures while
+            maintaining 99% uptime.
           </p>
         </motion.div>
 
@@ -43,7 +45,7 @@ export function TechStackTicker() {
           <motion.div
             className="flex gap-8 whitespace-nowrap"
             animate={{
-              x: [0, -100 * techStack.length]
+              x: [0, -100 * techStack.length],
             }}
             transition={{
               x: {
@@ -80,21 +82,33 @@ export function TechStackTicker() {
           className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
         >
           <div className="bg-white p-6 rounded-xl border border-[#E5E5E5] text-center">
-            <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-2">99%</div>
+            <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-2">
+              99%
+            </div>
             <div className="text-sm text-[#0A0A0A]/60">Success Rate</div>
-            <div className="text-xs font-mono text-[#0A0A0A]/50 mt-2">ANTI_BOT_BYPASS</div>
+            <div className="text-xs font-mono text-[#0A0A0A]/50 mt-2">
+              ANTI_BOT_BYPASS
+            </div>
           </div>
 
           <div className="bg-white p-6 rounded-xl border border-[#E5E5E5] text-center">
-            <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-2">24/7</div>
+            <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-2">
+              24/7
+            </div>
             <div className="text-sm text-[#0A0A0A]/60">Uptime</div>
-            <div className="text-xs font-mono text-[#0A0A0A]/50 mt-2">SYSTEM_MONITORING</div>
+            <div className="text-xs font-mono text-[#0A0A0A]/50 mt-2">
+              SYSTEM_MONITORING
+            </div>
           </div>
 
           <div className="bg-white p-6 rounded-xl border border-[#E5E5E5] text-center">
-            <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-2">50+</div>
+            <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-2">
+              50+
+            </div>
             <div className="text-sm text-[#0A0A0A]/60">Sources</div>
-            <div className="text-xs font-mono text-[#0A0A0A]/50 mt-2">DATA_INTEGRATION</div>
+            <div className="text-xs font-mono text-[#0A0A0A]/50 mt-2">
+              DATA_INTEGRATION
+            </div>
           </div>
         </motion.div>
 
@@ -109,7 +123,10 @@ export function TechStackTicker() {
           <div className="inline-block bg-[#0A0A0A] text-white px-8 py-4 rounded-xl">
             <div className="flex items-center gap-3 font-mono text-sm">
               <div className="w-3 h-3 bg-[#FF6B00] rounded-full animate-pulse"></div>
-              <span>ARCHITECTURE_STATUS: ENTERPRISE_GRADE | SCALING: AUTO | RELIABILITY: MAXIMUM</span>
+              <span>
+                ARCHITECTURE_STATUS: ENTERPRISE_GRADE | SCALING: AUTO |
+                RELIABILITY: MAXIMUM
+              </span>
             </div>
           </div>
         </motion.div>

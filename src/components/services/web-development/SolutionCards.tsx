@@ -1,63 +1,65 @@
 import { motion } from "framer-motion";
+import { LayoutDashboard, Database, Link2, History } from "lucide-react";
 
 const solutions = [
   {
-    icon: "📊",
-    title: "Custom Business Dashboards",
-    description: "Stop logging into ten different tools. We build centralized MERN dashboards that pull data from your AI agents and automation workflows into one beautiful, real-time control center."
+    icon: <LayoutDashboard />,
+    tag: "ANALYTICS",
+    title: "Business Dashboards",
+    desc: "Centralized MERN control centers that pull live data from your AI agents and automation.",
   },
   {
-    icon: "🛠️",
-    title: "Internal Operations Tools",
-    description: "Standard SaaS doesn't always fit. We build bespoke internal tools—inventory systems, project trackers, or client portals—designed specifically for your team's unique workflow."
+    icon: <Database />,
+    tag: "OPERATIONS",
+    title: "Internal Tooling",
+    desc: "Bespoke inventory systems and client portals designed for your unique team logic.",
   },
   {
-    icon: "🔌",
-    title: "API Development & Integration",
-    description: "We build the \"bridges\" that allow your systems to talk to each other. Robust, secure, and lightning-fast APIs that serve as the nervous system of your business."
+    icon: <Link2 />,
+    tag: "CONNECTIVITY",
+    title: "API Ecosystems",
+    desc: "The nervous system of your business. Secure, lightning-fast bridges between your stack.",
   },
   {
-    icon: "🚀",
-    title: "Legacy Modernization",
-    description: "Is your old software holding you back? We migrate slow, outdated systems into modern MERN environments, increasing speed, security, and mobile responsiveness."
-  }
+    icon: <History />,
+    tag: "LEGACY",
+    title: "System Modernization",
+    desc: "Migrating slow, outdated software into high-speed, mobile-responsive MERN environments.",
+  },
 ];
 
-export const SolutionCards = () => {
-  return (
-    <section className="py-20 bg-white">
-      <div className="container">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">
-            Custom Solutions We Build
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            The "What"
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {solutions.map((solution, idx) => (
-            <motion.div
-              key={solution.title}
-              className="bg-card rounded-xl p-6 border border-border hover:border-orange-500 transition-all hover:shadow-lg text-black"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-            >
-              <div className="text-4xl text-orange-500 mb-4">{solution.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{solution.title}</h3>
-              <p className="text-muted-foreground">{solution.description}</p>
-            </motion.div>
-          ))}
-        </div>
+export const SolutionCards = () => (
+  <section className="py-24 bg-white">
+    <div className="container">
+      <div className="max-w-3xl mb-16">
+        <span className="font-mono text-xs font-bold text-primary tracking-[0.3em] uppercase">
+          Development_Scope
+        </span>
+        <h2 className="text-4xl font-black text-[#0A0A0A] tracking-tighter uppercase mt-4">
+          Solutions we engineer
+        </h2>
       </div>
-    </section>
-  );
-};
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {solutions.map((sol, idx) => (
+          <motion.div
+            key={idx}
+            className="p-8 bg-[#F9F9F9] border border-border/40 rounded-[2rem] hover:border-primary transition-colors group"
+          >
+            <div className="text-primary mb-6 group-hover:scale-110 transition-transform">
+              {sol.icon}
+            </div>
+            <span className="font-mono text-[9px] font-black text-primary/50 tracking-widest uppercase">
+              {sol.tag}
+            </span>
+            <h3 className="font-black text-lg uppercase tracking-tight mt-2 mb-3">
+              {sol.title}
+            </h3>
+            <p className="text-sm text-[#0A0A0A]/50 font-medium leading-relaxed">
+              {sol.desc}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);

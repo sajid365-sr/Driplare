@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 export function DashboardPreview() {
   // Mock data for charts
   const priceData = [45, 52, 48, 61, 55, 67, 63, 58, 72, 68, 75, 71];
-  const volumeData = [120, 135, 142, 158, 145, 162, 175, 168, 185, 178, 192, 188];
+  const volumeData = [
+    120, 135, 142, 158, 145, 162, 175, 168, 185, 178, 192, 188,
+  ];
 
   return (
     <section className="py-20 bg-[#1A1F2C] text-white relative overflow-hidden">
@@ -14,8 +16,21 @@ export function DashboardPreview() {
       <div className="absolute inset-0 opacity-20">
         <svg className="w-full h-full" viewBox="0 0 100 100">
           <defs>
-            <pattern id="dashboard-grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#FF6B00" strokeWidth="0.2" opacity="0.3"/>
+            <pattern
+              id="dashboard-grid"
+              x="0"
+              y="0"
+              width="10"
+              height="10"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 10 0 L 0 0 0 10"
+                fill="none"
+                stroke="#FF6B00"
+                strokeWidth="0.2"
+                opacity="0.3"
+              />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#dashboard-grid)" />
@@ -33,7 +48,8 @@ export function DashboardPreview() {
             Your Command Center
           </h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto font-inter">
-            We don't just give you a CSV file. We build custom MERN-stack dashboards where you can visualize market shifts as they happen.
+            We don't just give you a CSV file. We build custom MERN-stack
+            dashboards where you can visualize market shifts as they happen.
           </p>
         </motion.div>
 
@@ -53,8 +69,12 @@ export function DashboardPreview() {
                     <BarChart className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white font-montserrat">Data Intelligence Dashboard</h3>
-                    <p className="text-white/60 font-mono text-sm">LIVE_DATA • AUTO_REFRESH</p>
+                    <h3 className="text-xl font-bold text-white font-montserrat">
+                      Data Intelligence Dashboard
+                    </h3>
+                    <p className="text-white/60 font-mono text-sm">
+                      LIVE_DATA • AUTO_REFRESH
+                    </p>
                   </div>
                 </div>
 
@@ -64,7 +84,10 @@ export function DashboardPreview() {
                     <span className="font-mono text-xs">SYSTEM_ACTIVE</span>
                   </div>
                   <div className="text-white/60 font-mono text-sm">
-                    LAST_UPDATE: <span className="text-[#FF6B00]">{new Date().toLocaleTimeString()}</span>
+                    LAST_UPDATE:{" "}
+                    <span className="text-[#FF6B00]">
+                      {new Date().toLocaleTimeString()}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -78,10 +101,14 @@ export function DashboardPreview() {
                   {/* Price Tracking Chart */}
                   <div className="bg-[#1F242F] rounded-xl p-6 border border-white/10">
                     <div className="flex items-center justify-between mb-6">
-                      <h4 className="text-lg font-bold text-white font-montserrat">Competitor Price Tracking</h4>
+                      <h4 className="text-lg font-bold text-white font-montserrat">
+                        Competitor Price Tracking
+                      </h4>
                       <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-[#FF6B00] rounded-full animate-pulse"></div>
-                        <span className="text-[#FF6B00] font-mono text-sm">LIVE</span>
+                        <span className="text-[#FF6B00] font-mono text-sm">
+                          LIVE
+                        </span>
                       </div>
                     </div>
 
@@ -113,9 +140,12 @@ export function DashboardPreview() {
                   {/* Volume Chart */}
                   <div className="bg-[#1F242F] rounded-xl p-6 border border-white/10">
                     <div className="flex items-center justify-between mb-6">
-                      <h4 className="text-lg font-bold text-white font-montserrat">Data Volume Trends</h4>
+                      <h4 className="text-lg font-bold text-white font-montserrat">
+                        Data Volume Trends
+                      </h4>
                       <div className="text-white/60 font-mono text-sm">
-                        <span className="text-[#FF6B00] font-mono">100K+</span> records/day
+                        <span className="text-[#FF6B00] font-mono">100K+</span>{" "}
+                        records/day
                       </div>
                     </div>
 
@@ -129,7 +159,10 @@ export function DashboardPreview() {
                           initial={{ height: 0 }}
                           whileInView={{ height: `${(volume / 200) * 100}%` }}
                           viewport={{ once: true }}
-                          transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
+                          transition={{
+                            delay: index * 0.1 + 0.5,
+                            duration: 0.5,
+                          }}
                         >
                           {/* Optionally add a tooltip or value */}
                         </motion.div>
@@ -147,34 +180,46 @@ export function DashboardPreview() {
                 <div className="space-y-6">
                   {/* Key Metrics */}
                   <div className="bg-[#1F242F] rounded-xl p-6 border border-white/10">
-                    <h4 className="text-lg font-bold text-white mb-6 font-montserrat">Key Metrics</h4>
+                    <h4 className="text-lg font-bold text-white mb-6 font-montserrat">
+                      Key Metrics
+                    </h4>
 
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
                         <span className="text-white/70">Active Sources</span>
-                        <span className="text-[#FF6B00] font-mono font-bold">47</span>
+                        <span className="text-[#FF6B00] font-mono font-bold">
+                          47
+                        </span>
                       </div>
 
                       <div className="flex justify-between items-center">
                         <span className="text-white/70">Success Rate</span>
-                        <span className="text-[#FF6B00] font-mono font-bold">99.7%</span>
+                        <span className="text-[#FF6B00] font-mono font-bold">
+                          99.7%
+                        </span>
                       </div>
 
                       <div className="flex justify-between items-center">
                         <span className="text-white/70">Avg Response</span>
-                        <span className="text-[#FF6B00] font-mono font-bold">&lt;2s</span>
+                        <span className="text-[#FF6B00] font-mono font-bold">
+                          &lt;2s
+                        </span>
                       </div>
 
                       <div className="flex justify-between items-center">
                         <span className="text-white/70">Data Freshness</span>
-                        <span className="text-[#FF6B00] font-mono font-bold">REAL_TIME</span>
+                        <span className="text-[#FF6B00] font-mono font-bold">
+                          REAL_TIME
+                        </span>
                       </div>
                     </div>
                   </div>
 
                   {/* Quick Actions */}
                   <div className="bg-[#1F242F] rounded-xl p-6 border border-white/10">
-                    <h4 className="text-lg font-bold text-white mb-6 font-montserrat">Quick Actions</h4>
+                    <h4 className="text-lg font-bold text-white mb-6 font-montserrat">
+                      Quick Actions
+                    </h4>
 
                     <div className="space-y-3">
                       <button className="w-full bg-[#FF6B00] hover:bg-[#FF6B00]/90 text-white px-4 py-3 rounded-lg text-sm font-bold transition-colors">
@@ -193,14 +238,18 @@ export function DashboardPreview() {
 
                   {/* System Status */}
                   <div className="bg-[#1F242F] rounded-xl p-6 border border-white/10">
-                    <h4 className="text-lg font-bold text-white mb-4 font-montserrat">System Status</h4>
+                    <h4 className="text-lg font-bold text-white mb-4 font-montserrat">
+                      System Status
+                    </h4>
 
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <span className="text-white/70 text-sm">Scrapers</span>
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                          <span className="text-green-400 font-mono text-xs">ACTIVE</span>
+                          <span className="text-green-400 font-mono text-xs">
+                            ACTIVE
+                          </span>
                         </div>
                       </div>
 
@@ -208,7 +257,9 @@ export function DashboardPreview() {
                         <span className="text-white/70 text-sm">API</span>
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                          <span className="text-green-400 font-mono text-xs">ONLINE</span>
+                          <span className="text-green-400 font-mono text-xs">
+                            ONLINE
+                          </span>
                         </div>
                       </div>
 
@@ -216,7 +267,9 @@ export function DashboardPreview() {
                         <span className="text-white/70 text-sm">Database</span>
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                          <span className="text-green-400 font-mono text-xs">SYNCED</span>
+                          <span className="text-green-400 font-mono text-xs">
+                            SYNCED
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -235,11 +288,17 @@ export function DashboardPreview() {
             className="text-center mt-12"
           >
             <div className="bg-white text-[#0A0A0A] p-8 rounded-2xl max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4 font-montserrat">Build Your Dashboard</h3>
+              <h3 className="text-2xl font-bold mb-4 font-montserrat">
+                Build Your Dashboard
+              </h3>
               <p className="text-[#0A0A0A]/70 mb-6 font-inter">
-                Custom data visualization and real-time monitoring tailored to your business needs.
+                Custom data visualization and real-time monitoring tailored to
+                your business needs.
               </p>
-              <Button asChild className="bg-[#FF6B00] hover:bg-[#FF6B00]/90 text-white">
+              <Button
+                asChild
+                className="bg-[#FF6B00] hover:bg-[#FF6B00]/90 text-white"
+              >
                 <Link to="/contact">
                   Request Dashboard Demo
                   <ArrowRight className="w-4 h-4 ml-2" />

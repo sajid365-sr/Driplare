@@ -31,7 +31,7 @@ export function HeroSection() {
             linear-gradient(#E5E5E5 1px, transparent 1px),
             linear-gradient(90deg, #E5E5E5 1px, transparent 1px)
           `,
-          backgroundSize: '50px 50px'
+          backgroundSize: "50px 50px",
         }}
       />
 
@@ -46,7 +46,9 @@ export function HeroSection() {
             >
               <h1 className="text-5xl lg:text-6xl font-bold text-[#0A0A0A] leading-tight">
                 Stop Trading Hours for Tasks.{" "}
-                <span className="block text-[#FF6B00]">Engineer Your Efficiency.</span>
+                <span className="block text-[#FF6B00]">
+                  Engineer Your Efficiency.
+                </span>
               </h1>
             </motion.div>
 
@@ -56,7 +58,9 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <p className="text-xl text-[#0A0A0A]/80 max-w-lg">
-                We architect custom AI Agents and autonomous workflows that work 24/7, so your team can focus on growth. No manual grind. No human error. Just systems that scale.
+                We architect custom AI Agents and autonomous workflows that work
+                24/7, so your team can focus on growth. No manual grind. No
+                human error. Just systems that scale.
               </p>
             </motion.div>
 
@@ -116,10 +120,10 @@ export function HeroSection() {
                   animate={{
                     scale: [1, 1.1, 1],
                     boxShadow: [
-                      '0 0 0 0 rgba(255, 107, 0, 0.4)',
-                      '0 0 0 20px rgba(255, 107, 0, 0)',
-                      '0 0 0 0 rgba(255, 107, 0, 0)'
-                    ]
+                      "0 0 0 0 rgba(255, 107, 0, 0.4)",
+                      "0 0 0 20px rgba(255, 107, 0, 0)",
+                      "0 0 0 0 rgba(255, 107, 0, 0)",
+                    ],
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
@@ -142,7 +146,7 @@ export function HeroSection() {
                       duration: 1.5,
                       delay: i * 0.2,
                       repeat: Infinity,
-                      repeatDelay: 1
+                      repeatDelay: 1,
                     }}
                   >
                     {i + 1}
@@ -152,9 +156,19 @@ export function HeroSection() {
                 {/* Connection lines */}
                 <svg className="absolute inset-0 w-full h-full">
                   <defs>
-                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient
+                      id="gradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
                       <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="#FF6B00" stopOpacity="0.1" />
+                      <stop
+                        offset="100%"
+                        stopColor="#FF6B00"
+                        stopOpacity="0.1"
+                      />
                     </linearGradient>
                   </defs>
                   {[...Array(6)].map((_, i) => (
@@ -175,7 +189,9 @@ export function HeroSection() {
               </div>
 
               <div className="text-center mt-6">
-                <p className="text-[#0A0A0A] font-mono text-sm">System Status: <span className="text-[#FF6B00]">ACTIVE</span></p>
+                <p className="text-[#0A0A0A] font-mono text-sm">
+                  System Status: <span className="text-[#FF6B00]">ACTIVE</span>
+                </p>
               </div>
             </motion.div>
           </div>

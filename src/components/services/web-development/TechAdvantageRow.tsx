@@ -1,87 +1,60 @@
 import { motion } from "framer-motion";
+import { Zap, ShieldCheck, Cpu } from "lucide-react";
 
 const advantages = [
   {
-    title: "Speed of Innovation",
-    description: "JavaScript from top to bottom means faster development cycles and lower costs for you.",
-    icon: "⚡"
+    icon: <Zap />,
+    title: "Rapid Innovation",
+    desc: "JavaScript end-to-end means unified logic and 40% faster deployment cycles.",
   },
   {
-    title: "Infinite Scalability",
-    description: "Built to handle thousands of concurrent users and massive datasets without breaking a sweat.",
-    icon: "📈"
+    icon: <Cpu />,
+    title: "Infinite Scale",
+    desc: "Native support for concurrent users and massive horizontal scaling.",
   },
   {
-    title: "Future-Proof",
-    description: "Powered by the technologies that run the world's largest platforms (Meta, Netflix, Airbnb).",
-    icon: "🔮"
-  }
+    icon: <ShieldCheck />,
+    title: "Security Native",
+    desc: "Encrypted data layers and enterprise-grade JWT authentication.",
+  },
 ];
 
-export const TechAdvantageRow = () => {
-  return (
-    <section className="py-20 bg-gray-50">
-      <div className="container">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">
-            Why the MERN Stack?
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            The Efficiency Argument
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-8 text-center">
-          {advantages.map((advantage, idx) => (
-            <motion.div
-              key={advantage.title}
-              className="bg-white p-8 rounded-xl shadow-lg border border-gray-200"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-            >
-              <div className="text-4xl text-orange-500 mb-4">{advantage.icon}</div>
-              <h3 className="text-xl font-bold mb-3 text-black">{advantage.title}</h3>
-              <p className="text-gray-600">{advantage.description}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* MERN Stack Icons */}
-        <motion.div
-          className="flex justify-center items-center gap-8 mt-16"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-        >
-          <div className="text-center">
-            <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl mb-2">M</div>
-            <span className="text-sm font-medium">MongoDB</span>
-          </div>
-          <div className="w-1 h-1 bg-orange-500 rounded-full"></div>
-          <div className="text-center">
-            <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center text-white font-bold text-xl mb-2">E</div>
-            <span className="text-sm font-medium">Express</span>
-          </div>
-          <div className="w-1 h-1 bg-orange-500 rounded-full"></div>
-          <div className="text-center">
-            <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-2">R</div>
-            <span className="text-sm font-medium">React</span>
-          </div>
-          <div className="w-1 h-1 bg-orange-500 rounded-full"></div>
-          <div className="text-center">
-            <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl mb-2">N</div>
-            <span className="text-sm font-medium">Node.js</span>
-          </div>
-        </motion.div>
+export const TechAdvantageRow = () => (
+  <section className="py-24 bg-[#F9F9F9]">
+    <div className="container">
+      <div className="grid md:grid-cols-3 gap-8 mb-20">
+        {advantages.map((adv, idx) => (
+          <motion.div
+            key={idx}
+            className="p-10 bg-white border border-border/40 rounded-[2.5rem] group hover:border-primary/40 transition-all shadow-sm"
+          >
+            <div className="w-12 h-12 bg-[#0A0A0A] rounded-xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+              {adv.icon}
+            </div>
+            <h3 className="font-black text-xl uppercase tracking-tighter mb-4">
+              {adv.title}
+            </h3>
+            <p className="text-[#0A0A0A]/50 text-sm font-medium leading-relaxed">
+              {adv.desc}
+            </p>
+          </motion.div>
+        ))}
       </div>
-    </section>
-  );
-};
+
+      <div className="flex flex-wrap justify-center items-center gap-12">
+        {["MongoDB", "Express", "React", "Node.js"].map((tech) => (
+          <div key={tech} className="flex flex-col items-center">
+            <div className="w-20 h-20 rounded-full border border-border/60 flex items-center justify-center bg-white shadow-inner mb-3">
+              <span className="font-black text-2xl text-[#0A0A0A]">
+                {tech[0]}
+              </span>
+            </div>
+            <span className="font-mono text-[10px] font-black uppercase tracking-widest opacity-40">
+              {tech}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);

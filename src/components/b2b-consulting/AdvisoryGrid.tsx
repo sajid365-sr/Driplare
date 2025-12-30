@@ -1,141 +1,168 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { Target, Settings, Workflow } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  Target,
+  Settings,
+  Workflow,
+  Plus,
+  ShieldCheck,
+  Database,
+  Zap,
+} from "lucide-react";
 
 const pillars = [
   {
     icon: Target,
     title: "AI Feasibility & Roadmap",
-    focus: "Strategy",
-    description: "Not every problem needs an AI agent. We audit your workflows to identify where AI will provide the highest ROI and design a 12-month implementation roadmap.",
-    color: "#FF6B00"
+    focus: "Investment Strategy",
+    description:
+      "Not every problem needs an AI agent. We audit your workflows to identify where AI will provide the highest ROI and design a 12-month implementation roadmap.",
+    protocol: "PROTO_AI_09",
+    stats: ["ROI Forecast", "Feasibility Score", "12mo Roadmap"],
   },
   {
     icon: Settings,
     title: "Tech Stack Optimization",
-    focus: "Efficiency",
-    description: "Is your current stack holding you back? We analyze your MERN, legacy, or No-Code infrastructure to eliminate redundancies and optimize performance.",
-    color: "#0A0A0A"
+    focus: "Technical Efficiency",
+    description:
+      "Is your current stack holding you back? We analyze your MERN, legacy, or No-Code infrastructure to eliminate redundancies and optimize performance.",
+    protocol: "PROTO_STACK_12",
+    stats: ["Debt Analysis", "Speed Optimization", "Redundancy Kill"],
   },
   {
     icon: Workflow,
     title: "Automation Architecture",
-    focus: "Scalability",
-    description: "We design the 'plumbing' of your business. We architect how your CRM, ERP, and AI systems communicate to ensure 100% data integrity as you grow.",
-    color: "#FF6B00"
-  }
+    focus: "System Scalability",
+    description:
+      "We architect how your CRM, ERP, and AI systems communicate. We build the 'plumbing' that ensures 100% data integrity as you scale.",
+    protocol: "PROTO_AUTO_04",
+    stats: ["Integrity Sync", "API Mapping", "Scale Validation"],
+  },
 ];
 
 export function AdvisoryGrid() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const lineY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
   return (
-    <section ref={containerRef} className="py-20 bg-[#F9F9F9] relative">
-      {/* Blueprint Background */}
-      <div
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: `
-            linear-gradient(#E5E5E5 1px, transparent 1px),
-            linear-gradient(90deg, #E5E5E5 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px'
-        }}
-      />
-
-      {/* Guided Scroll Line */}
-      <motion.div
-        className="fixed left-8 top-0 w-0.5 bg-[#FF6B00] z-40"
-        style={{ y: lineY }}
-        transition={{ type: "spring", stiffness: 100 }}
-      />
-
-      <div className="container relative z-10">
+    <section className="py-24 bg-white border-t border-black/5 relative">
+      <div className="container relative z-10 px-4">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-semibold text-[#0A0A0A] mb-4 font-montserrat">
-            The Consulting Pillars
+          <div className="inline-block px-4 py-1 bg-black text-white text-[10px] font-mono font-bold mb-4 rounded-full">
+            THE_CONSULTING_FRAMEWORK
+          </div>
+          <h2 className="text-4xl md:text-5xl font-black text-[#0A0A0B] mb-6 font-montserrat tracking-tighter uppercase">
+            Strategic Advisory Pillars
           </h2>
-          <p className="text-lg text-[#0A0A0A]/70 max-w-2xl mx-auto font-inter font-light">
-            The "How We Help" — 3-column monochromatic cards.
+          <p className="text-lg text-black/50 max-w-2xl mx-auto font-inter">
+            Bridging the gap between engineering complexity and business
+            objectives.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {pillars.map((pillar, index) => (
             <motion.div
               key={pillar.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="group relative bg-white border-2 border-[#E5E5E5] rounded-xl p-8 hover:border-[#FF6B00] transition-all duration-300 hover:shadow-lg"
+              transition={{ delay: index * 0.1 }}
+              className="group relative bg-white border border-black/10 rounded-2xl p-8 hover:border-[#FF6B00] transition-all duration-500 flex flex-col h-full hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)]"
             >
-              {/* Icon */}
-              <div className="mb-6">
-                <div
-                  className="w-16 h-16 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: `${pillar.color}15` }}
-                >
-                  <pillar.icon
-                    className="w-8 h-8"
-                    style={{ color: pillar.color }}
-                  />
+              {/* Card Header */}
+              <div className="flex justify-between items-start mb-10">
+                <div className="p-3 bg-[#F5F5F7] rounded-xl text-black group-hover:bg-[#FF6B00] group-hover:text-white transition-colors duration-500">
+                  <pillar.icon className="w-6 h-6" />
+                </div>
+                <div className="text-right font-mono text-[9px] font-bold text-black/30">
+                  REF: {pillar.protocol}
                 </div>
               </div>
 
-              {/* Title & Focus */}
-              <div className="mb-4">
-                <h3 className="text-xl font-semibold text-[#0A0A0A] mb-2 font-montserrat">{pillar.title}</h3>
-                <span className="inline-block bg-[#F5F5F5] text-[#0A0A0A] px-3 py-1 rounded-full text-sm font-mono font-bold">
+              <div className="mb-6">
+                <span className="text-[#FF6B00] font-mono text-[10px] font-bold uppercase tracking-widest">
                   {pillar.focus}
                 </span>
+                <h3 className="text-2xl font-bold text-black mt-1 font-montserrat tracking-tight">
+                  {pillar.title}
+                </h3>
               </div>
 
-              {/* Description */}
-              <p className="text-[#0A0A0A]/70 leading-relaxed font-inter font-light">{pillar.description}</p>
+              <p className="text-black/60 text-sm leading-relaxed font-inter mb-8 flex-grow">
+                {pillar.description}
+              </p>
 
-              {/* Technical Specs */}
-              <div className="mt-6 pt-4 border-t border-[#E5E5E5]/50">
-                <div className="text-xs font-mono text-[#0A0A0A]/50">
-                  {pillar.title.includes("AI Feasibility") && "DELIVERABLE: 12_MONTH_ROADMAP | METHOD: WORKFLOW_AUDIT | SUCCESS_METRIC: ROI_IDENTIFICATION"}
-                  {pillar.title.includes("Tech Stack") && "DELIVERABLE: OPTIMIZATION_REPORT | METHOD: INFRASTRUCTURE_ANALYSIS | SUCCESS_METRIC: PERFORMANCE_INCREASE"}
-                  {pillar.title.includes("Automation") && "DELIVERABLE: ARCHITECTURE_BLUEPRINT | METHOD: SYSTEM_INTEGRATION | SUCCESS_METRIC: DATA_INTEGRITY"}
+              {/* Stat Pills */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {pillar.stats.map((stat, i) => (
+                  <div
+                    key={i}
+                    className="px-2 py-1 bg-black/[0.03] rounded border border-black/5 text-[9px] font-mono font-bold"
+                  >
+                    + {stat}
+                  </div>
+                ))}
+              </div>
+
+              {/* Metadata Footer */}
+              <div className="pt-6 border-t border-black/5 flex items-center justify-between">
+                <div className="text-[10px] font-mono text-black/40">
+                  AUDIT_READY: 100%
+                </div>
+                <div className="flex items-center gap-1 text-[10px] font-mono font-bold text-[#FF6B00]">
+                  INITIATE <Plus className="w-3 h-3" />
                 </div>
               </div>
-
-              {/* Hover Effect */}
-              <motion.div
-                className="absolute bottom-0 left-0 right-0 h-1 bg-[#FF6B00] rounded-b-xl origin-left"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
             </motion.div>
           ))}
         </div>
 
-        {/* System Status */}
+        {/* Global Success Indicator */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.8 }}
-          className="text-center mt-16"
+          transition={{ delay: 0.5 }}
+          className="mt-20 flex justify-center"
         >
-          <div className="inline-flex items-center gap-4 bg-[#0A0A0A] text-white px-8 py-4 rounded-xl">
-            <div className="w-3 h-3 bg-[#FF6B00] rounded-full animate-pulse"></div>
-            <span className="font-mono text-sm">CONSULTING_FRAMEWORK: ACTIVE | METHODOLOGY: PROVEN | SUCCESS_RATE: 95%</span>
+          <div className="bg-[#0A0A0B] text-white px-8 py-5 rounded-2xl flex flex-col md:flex-row items-center gap-8 shadow-2xl">
+            <div className="flex items-center gap-3">
+              <ShieldCheck className="w-5 h-5 text-green-500" />
+              <div className="text-left">
+                <div className="text-[10px] font-mono text-white/50">
+                  DATA_GOVERNANCE
+                </div>
+                <div className="text-xs font-bold font-mono">
+                  ENCRYPTED_ADVISORY
+                </div>
+              </div>
+            </div>
+            <div className="w-px h-8 bg-white/10 hidden md:block" />
+            <div className="flex items-center gap-3">
+              <Zap className="w-5 h-5 text-[#FF6B00]" />
+              <div className="text-left">
+                <div className="text-[10px] font-mono text-white/50">
+                  SYSTEM_SUCCESS
+                </div>
+                <div className="text-xs font-bold font-mono">
+                  95%_ADOPTION_RATE
+                </div>
+              </div>
+            </div>
+            <div className="w-px h-8 bg-white/10 hidden md:block" />
+            <div className="flex items-center gap-3">
+              <Database className="w-5 h-5 text-blue-400" />
+              <div className="text-left">
+                <div className="text-[10px] font-mono text-white/50">
+                  NETWORK_SCALE
+                </div>
+                <div className="text-xs font-bold font-mono">
+                  MULTI_CLOUD_READY
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

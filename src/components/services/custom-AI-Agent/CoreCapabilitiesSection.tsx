@@ -1,63 +1,62 @@
 import { motion } from "framer-motion";
+import { Target, Bot, BarChart3, Settings2 } from "lucide-react";
 
-const features = [
+const capabilities = [
   {
-    icon: "🎯",
-    title: "Lead Qualification Agents",
-    description: "Instantly vet and score leads from WhatsApp, Email, or Web Forms. Our agents ensure only high-value prospects reach your CRM, saving your sales team hours of filtering."
+    icon: <Target />,
+    title: "Lead Qualification",
+    desc: "Vet and score leads from WhatsApp or Email. Only high-value prospects reach your CRM.",
   },
   {
-    icon: "🤖",
-    title: "Customer Support Agents",
-    description: "Move beyond basic chatbots. We build agents that access your internal knowledge base (RAG) to solve complex queries and only escalate to humans when absolutely necessary."
+    icon: <Bot />,
+    title: "Support Agents",
+    desc: "Agents that access your internal RAG knowledge base to solve complex user queries.",
   },
   {
-    icon: "📈",
-    title: "Research & Data Agents",
-    description: "Autonomous agents that scrape, summarize, and deliver market insights or competitor pricing directly to your dashboard. Stay ahead of the market on autopilot."
+    icon: <BarChart3 />,
+    title: "Research & Data",
+    desc: "Autonomous agents that scrape and summarize market insights directly to your dashboard.",
   },
   {
-    icon: "⚙️",
-    title: "Operations Agents",
-    description: "Connect your entire stack. These agents trigger n8n workflows, update MongoDB databases, and send Slack notifications the moment a specific business event occurs."
-  }
+    icon: <Settings2 />,
+    title: "Operations Logic",
+    desc: "Connect your stack via n8n to trigger database updates and Slack alerts instantly.",
+  },
 ];
 
-export const CoreCapabilitiesSection = () => {
-  return (
-    <section className="py-20 bg-muted/30">
-      <div className="container">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Core Capabilities: The "What"
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            We don't just build chatbots; we engineer intelligent agents for specific business functions.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, idx) => (
-            <motion.div
-              key={feature.title}
-              className="bg-card rounded-xl p-6 border border-border hover:border-orange-500 transition-all hover:shadow-lg text-black"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-            >
-              <div className="text-4xl text-orange-500 mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-muted-foreground">{feature.description}</p>
-            </motion.div>
-          ))}
-        </div>
+export const CoreCapabilitiesSection = () => (
+  <section className="py-24 bg-white">
+    <div className="container">
+      <div className="max-w-3xl mb-16">
+        <span className="font-mono text-xs font-bold text-primary tracking-[0.3em] uppercase">
+          Modules
+        </span>
+        <h2 className="text-4xl font-black text-[#0A0A0A] tracking-tighter uppercase mt-4">
+          Core_Capabilities
+        </h2>
       </div>
-    </section>
-  );
-};
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {capabilities.map((cap, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: idx * 0.1 }}
+            className="p-8 bg-[#F9F9F9] border border-border/40 rounded-[2rem] hover:border-primary/40 transition-all group"
+          >
+            <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary mb-6 shadow-sm group-hover:scale-110 transition-transform">
+              {cap.icon}
+            </div>
+            <h3 className="font-black text-lg uppercase tracking-tight mb-3">
+              {cap.title}
+            </h3>
+            <p className="text-sm text-[#0A0A0A]/50 font-medium leading-relaxed">
+              {cap.desc}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);

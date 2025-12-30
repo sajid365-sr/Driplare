@@ -1,197 +1,67 @@
 import { motion } from "framer-motion";
-import { Search, Download, Filter, Monitor, ArrowRight, Globe, Database, Zap } from "lucide-react";
+import {
+  Search,
+  Download,
+  Filter,
+  Monitor,
+  Globe,
+  Database,
+} from "lucide-react";
 
 const steps = [
-  {
-    icon: Search,
-    title: "Targeting",
-    description: "Identifying high-value data sources and anti-bot obstacles.",
-    detail: "URL discovery, rate limit analysis, bot detection mapping"
-  },
-  {
-    icon: Download,
-    title: "Extraction",
-    description: "High-speed scraping using residential proxies and headless browsers.",
-    detail: "Puppeteer, Playwright, residential IP rotation"
-  },
-  {
-    icon: Filter,
-    title: "Refining",
-    description: "Cleaning and structuring raw data into JSON/SQL formats.",
-    detail: "Data validation, deduplication, format conversion"
-  },
-  {
-    icon: Monitor,
-    title: "Monitoring",
-    description: "Feeding the data into custom MERN dashboards or AI analysis agents.",
-    detail: "Real-time alerts, automated reporting, API integration"
-  }
+  { icon: Search, title: "Targeting", detail: "Anti-bot analysis" },
+  { icon: Download, title: "Extraction", detail: "Residential IP rotation" },
+  { icon: Filter, title: "Refining", detail: "Data normalization" },
+  { icon: Monitor, title: "Monitoring", detail: "Real-time API push" },
 ];
 
 export function ExtractionFlow() {
   return (
-    <section className="py-20 bg-[#F9F9F9] relative overflow-hidden">
-      {/* Flow Background */}
-      <div className="absolute inset-0 opacity-10">
-        <svg className="w-full h-full" viewBox="0 0 100 100">
-          <defs>
-            <linearGradient id="flow-bg" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.1" />
-              <stop offset="50%" stopColor="#FF6B00" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#FF6B00" stopOpacity="0.1" />
-            </linearGradient>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#flow-bg)" />
-        </svg>
-      </div>
-
-      <div className="container relative z-10">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0A0A0A] mb-4 font-montserrat">
-            The Extraction Lifecycle
+    <section className="py-24 bg-[#F9F9F9]">
+      <div className="container">
+        <div className="max-w-3xl mb-16">
+          <span className="font-mono text-xs font-bold text-primary tracking-[0.3em] uppercase">
+            Architecture_Lifecycle
+          </span>
+          <h2 className="text-4xl font-black text-[#0A0A0A] tracking-tighter uppercase mt-4">
+            The Data Pipeline
           </h2>
-          <p className="text-lg text-[#0A0A0A]/70 max-w-2xl mx-auto font-inter">
-            A horizontal step-by-step diagram showing data moving from "The Web" to "Your Dashboard."
-          </p>
-        </motion.div>
+        </div>
 
-        {/* Flow Diagram */}
-        <div className="max-w-6xl mx-auto">
-          <div className="relative">
-            {/* Start Point */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-8"
-            >
-              <div className="flex flex-col items-center gap-3">
-                <div className="w-16 h-16 bg-[#0A0A0A] rounded-full flex items-center justify-center">
-                  <Globe className="w-8 h-8 text-white" />
-                </div>
-                <span className="text-sm font-bold text-[#0A0A0A] font-montserrat">The Web</span>
-              </div>
-            </motion.div>
+        <div className="relative pt-12">
+          {/* Connecting Line */}
+          <div className="absolute top-24 left-10 right-10 h-[1px] bg-border hidden lg:block" />
 
-            {/* End Point */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-8"
-            >
-              <div className="flex flex-col items-center gap-3">
-                <div className="w-16 h-16 bg-[#FF6B00] rounded-full flex items-center justify-center">
-                  <Database className="w-8 h-8 text-white" />
-                </div>
-                <span className="text-sm font-bold text-[#0A0A0A] font-montserrat">Your Dashboard</span>
-              </div>
-            </motion.div>
-
-            {/* Main Flow Line */}
-            <svg className="absolute top-1/2 left-16 right-16 w-[calc(100%-8rem)] h-0.5 -translate-y-1/2">
-              <defs>
-                <linearGradient id="main-flow" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#0A0A0A" />
-                  <stop offset="25%" stopColor="#FF6B00" />
-                  <stop offset="75%" stopColor="#FF6B00" />
-                  <stop offset="100%" stopColor="#0A0A0A" />
-                </linearGradient>
-              </defs>
-              <line x1="0%" y1="50%" x2="100%" y2="50%" stroke="url(#main-flow)" strokeWidth="3" />
-            </svg>
-
-            {/* Animated Data Flow */}
-            <motion.div
-              className="absolute top-1/2 left-16 w-4 h-4 bg-[#FF6B00] rounded-full shadow-lg -translate-y-1/2"
-              animate={{ x: ["0%", "calc(100% - 2rem)"] }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
+          <div className="grid lg:grid-cols-4 gap-8">
+            {steps.map((step, idx) => (
               <motion.div
-                className="absolute inset-0 w-4 h-4 bg-[#FF6B00] rounded-full"
-                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              />
-            </motion.div>
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="relative bg-white p-8 rounded-[2rem] border border-border/40 shadow-sm group hover:border-primary/40 transition-colors"
+              >
+                <div className="w-12 h-12 bg-[#0A0A0A] rounded-xl flex items-center justify-center text-primary mb-6 relative z-10 group-hover:scale-110 transition-transform">
+                  <step.icon size={20} />
+                </div>
+                <div className="font-mono text-[10px] text-primary font-bold mb-2">
+                  PHASE_0{idx + 1}
+                </div>
+                <h3 className="font-black text-xl uppercase tracking-tighter mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-[#0A0A0A]/50 font-medium">
+                  {step.detail}
+                </p>
 
-            {/* Steps */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 relative z-10 pt-32">
-              {steps.map((step, index) => (
-                <motion.div
-                  key={step.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 }}
-                  className="text-center"
-                >
-                  <div className="relative mb-6">
-                    <div className="w-20 h-20 bg-white border-2 border-[#E5E5E5] rounded-xl flex items-center justify-center mx-auto shadow-lg">
-                      <step.icon className="w-10 h-10 text-[#0A0A0A]" />
-                    </div>
-
-                    {/* Step Number */}
-                    <div className="absolute -top-3 -right-3 w-8 h-8 bg-[#FF6B00] rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold font-mono text-sm">{index + 1}</span>
-                    </div>
-                  </div>
-
-                  <h3 className="text-xl font-bold text-[#0A0A0A] mb-3 font-montserrat">{step.title}</h3>
-                  <p className="text-[#0A0A0A]/70 mb-3 font-inter leading-relaxed">{step.description}</p>
-                  <div className="text-xs font-mono text-[#0A0A0A]/50 bg-[#E5E5E5] px-3 py-2 rounded">
-                    {step.detail}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                {/* Visual Connector for Mobile */}
+                <div className="mt-6 font-mono text-[9px] text-[#0A0A0A]/20 tracking-widest uppercase">
+                  READY_FOR_HANDOVER // {idx === 3 ? "FINAL" : "NEXT"}
+                </div>
+              </motion.div>
+            ))}
           </div>
-
-          {/* Technical Specs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.8 }}
-            className="mt-16 bg-white p-8 rounded-xl border border-[#E5E5E5] shadow-sm"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <h4 className="font-bold text-[#0A0A0A] mb-3 font-montserrat">Infrastructure</h4>
-                <div className="space-y-2 text-sm font-mono text-[#0A0A0A]/70">
-                  <div>• Residential Proxies</div>
-                  <div>• Headless Browsers</div>
-                  <div>• Rate Limit Management</div>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-bold text-[#0A0A0A] mb-3 font-montserrat">Processing</h4>
-                <div className="space-y-2 text-sm font-mono text-[#0A0A0A]/70">
-                  <div>• Real-time Validation</div>
-                  <div>• Data Normalization</div>
-                  <div>• Error Recovery</div>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-bold text-[#0A0A0A] mb-3 font-montserrat">Delivery</h4>
-                <div className="space-y-2 text-sm font-mono text-[#0A0A0A]/70">
-                  <div>• RESTful APIs</div>
-                  <div>• Webhook Integration</div>
-                  <div>• Scheduled Reports</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>

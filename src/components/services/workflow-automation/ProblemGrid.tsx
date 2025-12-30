@@ -1,54 +1,60 @@
 import { motion } from "framer-motion";
+import { AlertTriangle } from "lucide-react";
 
 const painPoints = [
   {
-    title: "The Fragmented Stack",
-    description: "Your CRM doesn't talk to your Billing, and your Billing doesn't talk to your Support. We fix the silence."
+    title: "FRAGMENTED STACK",
+    desc: "Your CRM, Billing, and Support don't speak. We fix the silence.",
+    code: "ERR_SILOED_DATA",
   },
   {
-    title: "The Manual Tax",
-    description: "Every hour spent on manual data entry is an hour stolen from growth. We buy your time back."
+    title: "THE MANUAL TAX",
+    desc: "Every hour of data entry is an hour stolen from growth.",
+    code: "ERR_LOW_ROI",
   },
   {
-    title: "The Human Error",
-    description: "Manual processes eventually fail. Automated workflows are 100% consistent, 100% of the time."
-  }
+    title: "HUMAN DRIFT",
+    desc: "Manual processes eventually fail. Automation is 100% consistent.",
+    code: "ERR_LOGIC_FAIL",
+  },
 ];
 
-export const ProblemGrid = () => {
-  return (
-    <section className="py-20 bg-black text-white">
-      <div className="container">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            The Cost of Doing Nothing
-          </h2>
-          <p className="text-lg mb-8 opacity-90">
-            Understanding the pain points of un-automated workflows.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {painPoints.map((point, idx) => (
-            <motion.div
-              key={point.title}
-              className="bg-gray-900 p-8 rounded-xl shadow-xl border border-gray-700 text-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.15 }}
-            >
-              <h3 className="text-xl font-bold mb-3">{point.title}</h3>
-              <p className="text-gray-400">{point.description}</p>
-            </motion.div>
-          ))}
-        </div>
+export const ProblemGrid = () => (
+  <section className="py-24 bg-[#0A0A0A] text-white overflow-hidden">
+    <div className="container">
+      <div className="max-w-3xl mb-16">
+        <span className="font-mono text-xs font-bold text-primary tracking-[0.3em] uppercase">
+          Audit_Report
+        </span>
+        <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase mt-4 mb-6">
+          The Cost of{" "}
+          <span className="text-primary italic">Doing Nothing.</span>
+        </h2>
       </div>
-    </section>
-  );
-};
+
+      <div className="grid md:grid-cols-3 gap-6">
+        {painPoints.map((point, idx) => (
+          <motion.div
+            key={idx}
+            className="p-10 rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent relative group"
+            whileHover={{ borderColor: "rgba(255, 107, 0, 0.3)" }}
+          >
+            <AlertTriangle
+              className="text-primary/40 group-hover:text-primary transition-colors mb-6"
+              size={24}
+            />
+            <span className="font-mono text-[10px] text-primary font-black tracking-widest uppercase">
+              {point.code}
+            </span>
+            <h3 className="text-xl font-black uppercase mt-2 mb-4 tracking-tight">
+              {point.title}
+            </h3>
+            <p className="text-white/40 text-sm leading-relaxed font-medium">
+              {point.desc}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);

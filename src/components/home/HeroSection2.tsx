@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen bg-white overflow-hidden flex items-center">
+    <section className="relative min-h-screen bg-white overflow-hidden flex items-center mt-20">
       {/* Background Graphic: The Neural Line */}
       <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none">
         <motion.path
@@ -28,7 +28,6 @@ export function Hero() {
       </svg>
 
       <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
-        
         {/* Left: The Vision */}
         <div className="space-y-8">
           <motion.div
@@ -48,8 +47,9 @@ export function Hero() {
           >
             BUILDING <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400  ">
-              INVISIBLE 
-            </span> <br />
+              INVISIBLE
+            </span>{" "}
+            <br />
             WORKFORCES.
           </motion.h1>
 
@@ -59,7 +59,9 @@ export function Hero() {
             transition={{ delay: 0.4 }}
             className="text-gray-400 text-lg md:text-xl max-w-lg leading-relaxed"
           >
-            We don't just build tools. We architect autonomous systems that handle your operations, sales, and data while you focus on the next big move.
+            We don't just build tools. We architect autonomous systems that
+            handle your operations, sales, and data while you focus on the next
+            big move.
           </motion.p>
 
           <motion.div
@@ -68,12 +70,20 @@ export function Hero() {
             transition={{ delay: 0.6 }}
             className="flex flex-wrap gap-4"
           >
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 py-7 text-lg font-bold group">
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 py-7 text-lg font-bold group"
+            >
               <Link to="/case-studies" className="flex items-center gap-2">
-                View Systems <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                View Systems{" "}
+                <ArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
-            <Button variant="outline" size="lg" className="border-black/10 bg-black text-white hover:bg-orange/5 rounded-full px-8 py-7 text-lg font-bold">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-black/10 bg-black text-white hover:bg-orange/5 rounded-full px-8 py-7 text-lg font-bold"
+            >
               <Link to="/contact">Book a Consult</Link>
             </Button>
           </motion.div>
@@ -117,7 +127,9 @@ export function Hero() {
               </div>
               <div className="flex gap-3 text-primary font-bold">
                 <span className="text-gray-600">04</span>
-                <span className="animate-pulse">SYSTEM_LIVE: 24/7 AUTONOMOUS_MODE</span>
+                <span className="animate-pulse">
+                  SYSTEM_LIVE: 24/7 AUTONOMOUS_MODE
+                </span>
               </div>
             </div>
 
@@ -131,8 +143,12 @@ export function Hero() {
               <Box size={20} />
             </div>
             <div>
-              <div className="text-[10px] uppercase font-bold text-gray-400 leading-none">Efficiency</div>
-              <div className="text-lg font-black text-black leading-none">+300%</div>
+              <div className="text-[10px] uppercase font-bold text-gray-400 leading-none">
+                Efficiency
+              </div>
+              <div className="text-lg font-black text-black leading-none">
+                +300%
+              </div>
             </div>
           </div>
         </motion.div>

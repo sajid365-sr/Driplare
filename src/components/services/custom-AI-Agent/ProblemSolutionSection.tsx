@@ -1,58 +1,83 @@
 import { motion } from "framer-motion";
+import { XCircle, CheckCircle2 } from "lucide-react";
 
 export const ProblemSolutionSection = () => {
-  return (
-    <section className="py-20 bg-gray-50">
-      <div className="container">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">
-            The Empathy Gap: Manual Burden vs. AI Advantage
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Understand the shift from tedious manual processes to intelligent automation.
-          </p>
-        </motion.div>
+  const points = [
+    {
+      old: "Leads wait hours for responses",
+      new: "Instant qualification & booking",
+      label: "LATENCY",
+    },
+    {
+      old: "40% of time on data entry",
+      new: "Agents handle the busy work",
+      label: "CAPACITY",
+    },
+    {
+      old: "Inconsistent human follow-up",
+      new: "100% precision logic execution",
+      label: "PRECISION",
+    },
+  ];
 
-        <div className="grid md:grid-cols-2 gap-8 text-black">
-          <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-            <h3 className="text-2xl font-bold mb-4 text-red-600">The Manual Burden (Old Way)</h3>
-            <ul className="space-y-6">
-              <li>
-                <h4 className="font-semibold text-lg mb-1">Leads Lost:</h4>
-                <p className="text-gray-700">Potential clients wait hours for a response after 5 PM.</p>
-              </li>
-              <li>
-                <h4 className="font-semibold text-lg mb-1">Team Burnout:</h4>
-                <p className="text-gray-700">Staff spent 40% of their day on repetitive data entry.</p>
-              </li>
-              <li>
-                <h4 className="font-semibold text-lg mb-1">Human Error:</h4>
-                <p className="text-gray-700">Manual tasks lead to inconsistent data and missed follow-ups.</p>
-              </li>
-            </ul>
-          </div>
-          <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-            <h3 className="text-2xl font-bold mb-4 text-green-600">The AI Advantage (Driplare Way)</h3>
-            <ul className="space-y-6">
-              <li>
-                <h4 className="font-semibold text-lg mb-1">Instant Engagement:</h4>
-                <p className="text-gray-700">AI qualifies and books leads the second they arrive.</p>
-              </li>
-              <li>
-                <h4 className="font-semibold text-lg mb-1">Creative Freedom:</h4>
-                <p className="text-gray-700">Agents handle the "busy work" while your team scales.</p>
-              </li>
-              <li>
-                <h4 className="font-semibold text-lg mb-1">100% Precision:</h4>
-                <p className="text-gray-700">Logic-driven agents execute tasks perfectly, every single time.</p>
-              </li>
-            </ul>
-          </div>
+  return (
+    <section className="py-24 bg-[#F9F9F9]">
+      <div className="container">
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+          {/* Manual Burden */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-white border border-border/60 p-10 rounded-[2.5rem]"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <XCircle className="text-red-500" size={24} />
+              <h3 className="font-black text-xl uppercase tracking-tighter">
+                Manual_Burden
+              </h3>
+            </div>
+            <div className="space-y-8">
+              {points.map((p) => (
+                <div key={p.label} className="group">
+                  <span className="font-mono text-[9px] text-[#0A0A0A]/30 font-bold uppercase tracking-[0.2em]">
+                    {p.label}
+                  </span>
+                  <p className="text-[#0A0A0A]/60 font-medium mt-1">{p.old}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* AI Advantage */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-[#0A0A0A] text-white p-10 rounded-[2.5rem] shadow-2xl relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 p-8 opacity-10">
+              <CheckCircle2 size={120} className="text-primary" />
+            </div>
+            <div className="flex items-center gap-3 mb-8 relative z-10">
+              <CheckCircle2 size={24} className="text-primary" />
+              <h3 className="font-black text-xl uppercase tracking-tighter">
+                Driplare_Advantage
+              </h3>
+            </div>
+            <div className="space-y-8 relative z-10">
+              {points.map((p) => (
+                <div key={p.label}>
+                  <span className="font-mono text-[9px] text-primary font-bold uppercase tracking-[0.2em]">
+                    {p.label}_SOLVED
+                  </span>
+                  <p className="text-white font-black text-lg mt-1 tracking-tight">
+                    {p.new}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

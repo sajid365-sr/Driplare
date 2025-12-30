@@ -1,33 +1,23 @@
 import { motion } from "framer-motion";
 
-export const TechLogosSection = () => {
-  return (
-    <section className="py-20 bg-gray-900 text-white">
-      <div className="container">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            We Speak the Language of Every App.
-          </h2>
-          <p className="text-lg mb-8 opacity-90">
-            We specialize in <span className="font-bold text-orange-500">n8n</span> and <span className="font-bold text-orange-500">Zapier</span> to build highly flexible, enterprise-grade automations. Whether you use legacy software or modern SaaS tools, if it has an API, we can automate it.
-          </p>
-        </motion.div>
-
-        {/* Placeholder for grayscale slider of logos */}
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-70">
-          <div className="h-16 w-32 bg-gray-700 rounded-md flex items-center justify-center text-gray-400">Zapier</div>
-          <div className="h-16 w-32 bg-gray-700 rounded-md flex items-center justify-center text-gray-400">n8n</div>
-          <div className="h-16 w-32 bg-gray-700 rounded-md flex items-center justify-center text-gray-400">Make</div>
-          <div className="h-16 w-32 bg-gray-700 rounded-md flex items-center justify-center text-gray-400">Slack</div>
-          <div className="h-16 w-32 bg-gray-700 rounded-md flex items-center justify-center text-gray-400">Shopify</div>
-          <div className="h-16 w-32 bg-gray-700 rounded-md flex items-center justify-center text-gray-400">HubSpot</div>
-        </div>
+export const TechLogosSection = () => (
+  <section className="py-20 bg-white border-y border-border/40">
+    <div className="container text-center">
+      <p className="font-mono text-[10px] font-black text-[#0A0A0A]/30 tracking-[0.4em] uppercase mb-12">
+        Supported_Integrations
+      </p>
+      <div className="flex flex-wrap justify-center items-center gap-12 opacity-30 grayscale hover:grayscale-0 transition-all">
+        {["n8n", "Zapier", "Slack", "Stripe", "HubSpot", "Shopify"].map(
+          (logo) => (
+            <span
+              key={logo}
+              className="text-2xl font-black uppercase tracking-tighter text-[#0A0A0A]"
+            >
+              {logo}
+            </span>
+          )
+        )}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);

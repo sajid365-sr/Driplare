@@ -1,64 +1,58 @@
 import { motion } from "framer-motion";
-import { CheckCircle } from "lucide-react";
+import { Users, CreditCard, RefreshCw, BarChart } from "lucide-react";
 
-const automationServices = [
+const services = [
   {
-    icon: "📇",
-    title: "CRM & Lead Management",
-    copy: "Automatically route leads from any source into your CRM, assign them to the right team member, and trigger instant \"thank you\" sequences without lifting a finger."
+    icon: <Users />,
+    title: "CRM Pipelines",
+    copy: "Automatically route leads and trigger 'thank you' sequences instantly.",
   },
   {
-    icon: "💳",
-    title: "Financial & Invoicing Pipelines",
-    copy: "Bridge the gap between your payment gateways (Stripe/PayPal) and your accounting software. Automate invoice generation, payment tracking, and late-fee reminders."
+    icon: <CreditCard />,
+    title: "Finance Sync",
+    copy: "Bridge Stripe and PayPal to your accounting software automatically.",
   },
   {
-    icon: "🔄",
-    title: "Data Synchronization",
-    copy: "Ensure your Google Sheets, MongoDB databases, and Project Management tools (Asana/Trello) are always in perfect sync. No more outdated information."
+    icon: <RefreshCw />,
+    title: "Data Sync",
+    copy: "Keep Google Sheets and Project tools in perfect, real-time sync.",
   },
   {
-    icon: "📊",
-    title: "Automated Reporting & Alerts",
-    copy: "Get daily summaries of your key business metrics delivered to Slack or Email. Stay informed without having to log into five different dashboards."
-  }
+    icon: <BarChart />,
+    title: "Auto-Reporting",
+    copy: "Daily metrics delivered to Slack or Email without logging into dashboards.",
+  },
 ];
 
-export const ServiceIconGrid = () => {
-  return (
-    <section className="py-20 bg-white text-black">
-      <div className="container">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Core Automation Services: The "What"
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            We don't just build chatbots; we engineer intelligent agents for specific business functions.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {automationServices.map((service, idx) => (
-            <motion.div
-              key={service.title}
-              className="bg-card rounded-xl p-6 border border-border hover:border-orange-500 transition-all hover:shadow-lg text-black"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-            >
-              <div className="text-4xl text-orange-500 mb-4">{service.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-              <p className="text-muted-foreground">{service.copy}</p>
-            </motion.div>
-          ))}
-        </div>
+export const ServiceIconGrid = () => (
+  <section className="py-24 bg-white">
+    <div className="container">
+      <div className="max-w-3xl mb-16">
+        <span className="font-mono text-xs font-bold text-primary tracking-[0.3em] uppercase">
+          Core_Modules
+        </span>
+        <h2 className="text-4xl font-black text-[#0A0A0A] tracking-tighter uppercase mt-4">
+          Automation_Services
+        </h2>
       </div>
-    </section>
-  );
-};
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {services.map((service, idx) => (
+          <motion.div
+            key={idx}
+            className="p-8 bg-[#F9F9F9] border border-border/40 rounded-[2rem] group hover:border-primary/40 transition-all"
+          >
+            <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary mb-6 shadow-sm group-hover:scale-110 transition-transform">
+              {service.icon}
+            </div>
+            <h3 className="font-black text-lg uppercase tracking-tight mb-3">
+              {service.title}
+            </h3>
+            <p className="text-sm text-[#0A0A0A]/50 font-medium leading-relaxed">
+              {service.copy}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
