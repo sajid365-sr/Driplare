@@ -17,10 +17,9 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
-import { CombinedSubmission } from "@/utils/form-utils";
 
 interface SubmissionsTableProps {
-  submissions: CombinedSubmission[];
+  submissions: [];
   selectedSubmissions: string[];
   onToggleSelection: (id: string) => void;
   onToggleSelectAll: () => void;
@@ -71,7 +70,7 @@ export function SubmissionsTable({
 
   return (
     <div className="rounded-md border overflow-hidden overflow-x-auto">
-      <Table>
+      {/* <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[50px]">
@@ -148,7 +147,7 @@ export function SubmissionsTable({
             </TableRow>
           ))}
         </TableBody>
-      </Table>
+      </Table> */}
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { ChevronRight, Check, Send, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { saveContactSubmission } from "@/lib/form-action";
 import {
   Select,
   SelectContent,
@@ -13,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "sonner";
 
 const steps = [
   {
@@ -105,20 +107,29 @@ export function StepByStepForm() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    // Simulate form submission
-    setTimeout(() => {
+
+    try {
+      const result = await saveContactSubmission(formData);
+
+      if (result.success) {
+        toast.success("Transmission Complete! We have received your brief.");
+        // ফর্ম রিসেট
+        setFormData({
+          name: "",
+          company: "",
+          email: "",
+          service: "",
+          details: "",
+        });
+        setCurrentStep(1);
+      } else {
+        toast.error(result.error || "Transmission failed.");
+      }
+    } catch (error) {
+      toast.error("An unexpected error occurred.");
+    } finally {
       setIsSubmitting(false);
-      alert("Form submitted successfully! We'll be in touch soon.");
-      // Reset form
-      setCurrentStep(1);
-      setFormData({
-        name: "",
-        company: "",
-        email: "",
-        service: "",
-        details: "",
-      });
-    }, 2000);
+    }
   };
 
   const progressWidth = ((currentStep - 1) / (steps.length - 1)) * 100;

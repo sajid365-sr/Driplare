@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { verifyAdminCredentials } from "@/utils/admin-auth";
+// import { verifyAdminCredentials } from "@/utils/admin-auth";
 
 interface AdminLoginModalProps {
   onSuccess: () => void;
@@ -32,37 +32,33 @@ export default function AdminLoginModal({
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      // Validate non-empty credentials
-      if (!userId.trim() || !apiKey.trim()) {
-        toast.error("Please enter valid credentials");
-        setIsSubmitting(false);
-        return;
-      }
-
-      // Verify admin credentials against Supabase
-      const session = await verifyAdminCredentials(userId, apiKey);
-
-      if (session) {
-        toast.success("Login successful");
-        onSuccess();
-
-        // Add navigation to admin page after successful login
-        setTimeout(() => {
-          router.push('/admin');
-          setClose(false);
-        }, 500);
-      } else {
-        setIsSubmitting(false);
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      toast.error("Login failed. Please try again.");
-      setIsSubmitting(false);
-    }
+    // e.preventDefault();
+    // setIsSubmitting(true);
+    // try {
+    //   // Validate non-empty credentials
+    //   if (!userId.trim() || !apiKey.trim()) {
+    //     toast.error("Please enter valid credentials");
+    //     setIsSubmitting(false);
+    //     return;
+    //   }
+    //   // Verify admin credentials against Supabase
+    //   const session = await verifyAdminCredentials(userId, apiKey);
+    //   if (session) {
+    //     toast.success("Login successful");
+    //     onSuccess();
+    //     // Add navigation to admin page after successful login
+    //     setTimeout(() => {
+    //       router.push('/admin');
+    //       setClose(false);
+    //     }, 500);
+    //   } else {
+    //     setIsSubmitting(false);
+    //   }
+    // } catch (error) {
+    //   console.error("Login error:", error);
+    //   toast.error("Login failed. Please try again.");
+    //   setIsSubmitting(false);
+    // }
   };
 
   return (
@@ -72,7 +68,8 @@ export default function AdminLoginModal({
           <DialogTitle>Admin Login</DialogTitle>
           <DialogDescription>
             Please enter your Admin User ID and API Key to access the admin
-            panel. Default login is user ID: "owner" and API Key: "encrypted-secret-key-1"
+            panel. Default login is user ID: "owner" and API Key:
+            "encrypted-secret-key-1"
           </DialogDescription>
         </DialogHeader>
 

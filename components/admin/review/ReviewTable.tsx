@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import {
@@ -16,13 +16,23 @@ import { format } from "date-fns";
 
 interface ClientReview {
   id: string;
-  clientName: string;
+  name: string;
+  title: string;
+  designation: string;
   company: string;
+  testimonial: string;
+  testimonialTitle: string;
+  imageUrl: string;
+  complement: string;
+  videoUrl?: string; // ইতিমধ্যেই অপশনাল
+  timeSaved?: string; // ইতিমধ্যেই অপশনাল
+  efficiencyGain?: string; // ইতিমধ্যেই অপশনাল
+  createdAt: Date; // ইতিমধ্যেই অপশনাল
+  clientName: string;
   rating: number;
   review: string;
   project: string;
   status: "pending" | "approved" | "rejected";
-  createdAt: Date;
 }
 
 interface ReviewTableProps {
@@ -55,7 +65,10 @@ export function ReviewTable({ reviews, onRefresh }: ReviewTableProps) {
     }
   };
 
-  const handleStatusUpdate = async (reviewId: string, status: "approved" | "rejected") => {
+  const handleStatusUpdate = async (
+    reviewId: string,
+    status: "approved" | "rejected"
+  ) => {
     // Mock status update - replace with real API call
     console.log(`Updating review ${reviewId} to ${status}`);
     onRefresh();
@@ -117,7 +130,9 @@ export function ReviewTable({ reviews, onRefresh }: ReviewTableProps) {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => handleStatusUpdate(review.id, "approved")}
+                        onClick={() =>
+                          handleStatusUpdate(review.id, "approved")
+                        }
                         className="text-green-600 hover:text-green-700"
                       >
                         <CheckCircle className="h-4 w-4" />
@@ -125,7 +140,9 @@ export function ReviewTable({ reviews, onRefresh }: ReviewTableProps) {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => handleStatusUpdate(review.id, "rejected")}
+                        onClick={() =>
+                          handleStatusUpdate(review.id, "rejected")
+                        }
                         className="text-orange-600 hover:text-orange-700"
                       >
                         <XCircle className="h-4 w-4" />

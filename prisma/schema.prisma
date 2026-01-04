@@ -1,16 +1,11 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "./generated/prisma"
 }
 
 datasource db {
   provider = "mongodb"
+  // url এখানে থাকবে না, কারণ আমরা prisma.config.ts ব্যবহার করছি
 }
 
 model User {
@@ -56,4 +51,40 @@ model Lead {
   updatedAt DateTime @updatedAt
 
   @@map("leads")
+}
+
+// Contact Form Submission Model
+model ContactSubmission {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  company   String
+  email     String
+  service   String
+  details   String
+  status    String   @default("pending") // pending, reviewed, contacted
+  createdAt DateTime @default(now())
+}
+
+// Newsletter Subscription Model
+model Newsletter {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  designation      String
+  company          String
+  testimonialTitle String
+  imageUrl         String
+  videoUrl         String?
+  complement       String // বড় টেক্সটের জন্য @db.Text ব্যবহার করা ভালো
+  timeSaved        String?
+  efficiencyGain   String?
+  rating           Int      @default(5)
+  status           String   @default("approved") // pending, approved, rejected
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }

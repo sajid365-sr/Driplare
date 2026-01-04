@@ -11,20 +11,22 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function uploadImageToCloudinary(formData: FormData) {
+// lib/blog-action.ts বা যেখানে ফাংশনটি আছে
+export async function uploadImageToCloudinary(
+  formData: FormData,
+  folder: string
+) {
   try {
-    const file = formData.get("file") as File;
+    const file = formData.get("file") as File; // FormData থেকে ফাইলটি বের করা
     if (!file) throw new Error("No file provided");
 
-    // ফাইলটিকে buffer-এ রূপান্তর
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    // Cloudinary-তে আপলোড করার প্রমিজ
     const result = (await new Promise((resolve, reject) => {
       cloudinary.uploader
         .upload_stream(
-          { folder: "blog_covers" }, // ফোল্ডারের নাম
+          { folder: folder }, // এখানে 'folder' প্যারামিটার ব্যবহার করুন
           (error, result) => {
             if (error) reject(error);
             else resolve(result);
@@ -33,9 +35,9 @@ export async function uploadImageToCloudinary(formData: FormData) {
         .end(buffer);
     })) as any;
 
-    return result.secure_url; // আপলোড হওয়া ইমেজের URL রিটার্ন করবে
+    return result.secure_url;
   } catch (error) {
-    console.error("Cloudinary Upload Error:", error);
+    console.error("Cloudinary Error:", error);
     return null;
   }
 }

@@ -11,13 +11,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-// import {
-//   getBlogPost,
-//   saveBlogPost,
-//   generateSlug,
-//   uploadCoverImage,
-//   getBlogCategories,
-// } from "@/utils/blog-utils";
 import { uploadImageToCloudinary } from "@/lib/blog-actions";
 import { Switch } from "@/components/ui/switch";
 import { Loader2, Image as ImageIcon, X } from "lucide-react";
@@ -188,7 +181,7 @@ export default function BlogEditor({
       const formData = new FormData();
       formData.append("file", file);
 
-      const imageUrl = await uploadImageToCloudinary(formData);
+      const imageUrl = await uploadImageToCloudinary(formData, "testimonials");
       return imageUrl;
     } catch (error) {
       console.error("Client upload error:", error);

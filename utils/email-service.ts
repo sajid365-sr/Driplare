@@ -1,11 +1,10 @@
-
 import { Resend } from "resend";
 import { ReactElement } from "react";
 import { renderToString } from "react-dom/server";
-import { NewsletterConfirmationEmail } from "@/components/emails/NewsletterConfirmationEmail";
-import { ContactConfirmationEmail } from "@/components/emails/ContactConfirmationEmail";
 import { toast } from "sonner";
 import { getResendApiKey, setResendApiKey } from "./api-key-manager";
+import { NewsletterConfirmationEmail } from "@/components/email/NewsletterConfirmationEmail";
+import { ContactConfirmationEmail } from "@/components/email/ContactConfirmationEmail";
 
 // Create a resend instance based on available API key
 const createResendInstance = () => {
@@ -161,7 +160,9 @@ export const sendGenericFormSubmissionToAdmin = async (
 export const checkApiKeyStatus = () => {
   const apiKey = getResendApiKey();
   if (!apiKey || apiKey === "Test Key") {
-    toast.warning("Email functionality is limited. Please set a valid Resend API key.");
+    toast.warning(
+      "Email functionality is limited. Please set a valid Resend API key."
+    );
     return false;
   }
   return true;
