@@ -1,0 +1,79 @@
+{
+  "navigation": {
+    "home": "Home",
+    "solutions": "Solutions",
+    "caseStudies": "Case Studies",
+    "marketplace": "Marketplace",
+    "pricing": "Pricing",
+    "insights": "Insights",
+    "login": "Login",
+    "getStarted": "Get Started",
+    "customAIAgents": "Custom AI Agents",
+    "customAIAgentsDesc": "Autonomous digital workers that handle complex tasks 24/7 with human-like logic.",
+    "workflowAutomation": "Workflow Automation",
+    "workflowAutomationDesc": "End-to-end process streamlining to boost efficiency.",
+    "fullStackDevelopment": "Full-Stack Development",
+    "fullStackDevelopmentDesc": "Scalable MERN stack applications for modern business.",
+    "enterpriseCapabilities": "Enterprise Capabilities",
+    "dataScraping": "Data Scraping & Monitoring",
+    "technicalConsulting": "Technical Consulting"
+  },
+  "footer": {
+    "brand": "DRIPLARE",
+    "tagline": "Architecting Autonomy",
+    "systemStatus": "SYSTEM_STATUS: OPERATIONAL",
+    "lastSync": "LST_SYNC",
+    "latency": "0-LATENCY",
+    "initiateProject": "Initiate Project"
+  },
+  "hero": {
+    "title": "Stop Trading Hours for Tasks.",
+    "subtitle": "Engineer Your Efficiency.",
+    "description": "Transform your business operations with intelligent automation and AI-powered solutions that work tirelessly to maximize your productivity.",
+    "primaryCTA": "Explore Solutions",
+    "secondaryCTA": "View Case Studies"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "open": "Open",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Let's discuss your project",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again."
+  },
+  "language": {
+    "english": "English",
+    "bangla": "বাংলা",
+    "switchLanguage": "Switch Language"
+  },
+  "about": {
+    "title": "About Driplare",
+    "description1": "Driplare is a leading AI solutions and software development company specializing in intelligent automation and custom MERN stack applications.",
+    "description2": "We architect autonomy through cutting-edge technology, helping businesses transform their operations with AI-powered solutions that work tirelessly to maximize productivity.",
+    "missionTitle": "Our Mission",
+    "missionDesc": "To democratize access to enterprise-grade AI solutions and automation tools for businesses of all sizes.",
+    "visionTitle": "Our Vision",
+    "visionDesc": "A world where every business can leverage AI to focus on what matters most - innovation and growth."
+  }
+}
