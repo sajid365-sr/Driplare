@@ -88,3 +88,21 @@ model Review {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
+
+model Agent {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  category        String
+  price           Float
+  description     String?
+  fullDescription String?
+  features        String[] // Array of features
+  techStack       String[] // Array of tools/tech
+  image           String
+  rating          Float    @default(0.0)
+  users           String   @default("0")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("agents")
+}
