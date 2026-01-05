@@ -1,4 +1,5 @@
 
+
 # Logs
 logs
 *.log
@@ -27,3 +28,7 @@ dist-ssr
 *.sw?
 
 /generated/prisma
+
+
+# clerk configuration (can include secrets)
+/.clerk/

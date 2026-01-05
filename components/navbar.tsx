@@ -96,7 +96,7 @@ export function Navbar() {
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
                         <Link
-                          href="/ai-agents"
+                          href="/solutions/ai-agents"
                           className="flex h-full w-full select-none flex-col justify-end rounded-xl bg-[url(/ai-solution.png)] bg-cover bg-center p-6 no-underline outline-none relative overflow-hidden group border border-border/50"
                         >
                           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent group-hover:from-primary/80 transition-all duration-500" />
@@ -116,7 +116,7 @@ export function Navbar() {
                     {/* Standard Links */}
                     <li>
                       <Link
-                        href="/workflow-automation"
+                        href="/solutions/workflow-automation"
                         className="block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-all hover:bg-primary/10 hover:translate-x-1 group"
                       >
                         <div className="flex items-center gap-2">
@@ -133,7 +133,7 @@ export function Navbar() {
 
                     <li>
                       <Link
-                        href="/web-development"
+                        href="/solutions/web-development"
                         className="block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-all hover:bg-primary/10 hover:translate-x-1 group"
                       >
                         <div className="flex items-center gap-2">
@@ -155,14 +155,14 @@ export function Navbar() {
                       </span>
                       <div className="flex flex-col gap-3">
                         <Link
-                          href="/data-scraping"
+                          href="/solutions/data-scraping"
                           className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                         >
                           <Database className="h-4 w-4" />{" "}
                           {t("navigation.dataScraping")}
                         </Link>
                         <Link
-                          href="/b2b-consulting"
+                          href="/solutions/b2b-consulting"
                           className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                         >
                           <Briefcase className="h-4 w-4" />{" "}

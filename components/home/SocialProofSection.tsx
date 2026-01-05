@@ -111,7 +111,7 @@ export function SocialProofSection() {
   }
 
   // যদি কোন রিভিউ না থাকে
-  if (testimonials.length === 0) return null;
+  // if (testimonials.length === 0) return null;
 
   return (
     <section

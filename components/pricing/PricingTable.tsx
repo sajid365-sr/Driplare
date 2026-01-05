@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Zap, Crown } from "lucide-react";
@@ -13,10 +15,10 @@ const tiers = [
       "1 Custom AI Agent",
       "Basic Knowledge Base (RAG)",
       "7-Day Deployment",
-      "Email Support"
+      "Email Support",
     ],
     cta: "Get Started",
-    popular: false
+    popular: false,
   },
   {
     name: "Efficiency Pro",
@@ -30,10 +32,10 @@ const tiers = [
       "14-Day Deployment",
       "Priority Slack Support",
       "Performance Analytics",
-      "Monthly Optimization Calls"
+      "Monthly Optimization Calls",
     ],
     cta: "Engineer My Business",
-    popular: true
+    popular: true,
   },
   {
     name: "Enterprise Architect",
@@ -47,11 +49,11 @@ const tiers = [
       "Priority Architecture",
       "24/7 System Monitoring",
       "Dedicated Success Manager",
-      "Unlimited Optimization"
+      "Unlimited Optimization",
     ],
     cta: "Book Consultation",
-    popular: false
-  }
+    popular: false,
+  },
 ];
 
 export function PricingTable() {
@@ -69,7 +71,8 @@ export function PricingTable() {
             The Core <span className="text-primary">AI Agent Tiers.</span>
           </h2>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Productized solutions for predictable value generation. Each tier is designed for specific business scales.
+            Productized solutions for predictable value generation. Each tier is
+            designed for specific business scales.
           </p>
         </motion.div>
 
@@ -84,10 +87,10 @@ export function PricingTable() {
               transition={{ delay: index * 0.1 }}
               className={`relative flex flex-col p-8 md:p-10 rounded-[2.5rem] border transition-all duration-500 ${
                 tier.popular
-                ? "bg-card border-primary shadow-[0_0_50px_-12px_rgba(var(--primary),0.3)] scale-105 z-10"
-                : tier.tier === 3
-                ? "bg-[#0A0A0A] border-white/10 text-white"
-                : "bg-card/50 border-border hover:border-primary/50 shadow-sm"
+                  ? "bg-card border-primary shadow-[0_0_50px_-12px_rgba(var(--primary),0.3)] scale-105 z-10"
+                  : tier.tier === 3
+                    ? "bg-[#0A0A0A] border-white/10 text-white"
+                    : "bg-card/50 border-border hover:border-primary/50 shadow-sm"
               }`}
             >
               {/* Specialized Badges */}
@@ -108,10 +111,14 @@ export function PricingTable() {
 
               {/* Title & Description */}
               <div className="mb-8">
-                <h3 className={`text-2xl font-black mb-3 ${tier.tier === 3 ? 'text-white' : 'text-foreground'}`}>
+                <h3
+                  className={`text-2xl font-black mb-3 ${tier.tier === 3 ? "text-white" : "text-foreground"}`}
+                >
                   {tier.name}
                 </h3>
-                <p className={`text-sm leading-relaxed ${tier.tier === 3 ? 'text-white/60' : 'text-muted-foreground'}`}>
+                <p
+                  className={`text-sm leading-relaxed ${tier.tier === 3 ? "text-white/60" : "text-muted-foreground"}`}
+                >
                   {tier.description}
                 </p>
               </div>
@@ -119,10 +126,14 @@ export function PricingTable() {
               {/* Pricing Section */}
               <div className="mb-8">
                 <div className="flex items-baseline gap-1">
-                  <span className={`text-5xl font-black tracking-tighter ${tier.tier === 3 ? 'text-primary' : 'text-foreground'}`}>
+                  <span
+                    className={`text-5xl font-black tracking-tighter ${tier.tier === 3 ? "text-primary" : "text-foreground"}`}
+                  >
                     {tier.price}
                   </span>
-                  <span className={`text-sm font-medium uppercase tracking-widest ${tier.tier === 3 ? 'text-white/40' : 'text-muted-foreground'}`}>
+                  <span
+                    className={`text-sm font-medium uppercase tracking-widest ${tier.tier === 3 ? "text-white/40" : "text-muted-foreground"}`}
+                  >
                     / {tier.period}
                   </span>
                 </div>
@@ -132,8 +143,12 @@ export function PricingTable() {
               <ul className="space-y-4 mb-10 flex-grow">
                 {tier.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <Check className={`w-5 h-5 shrink-0 ${tier.tier === 3 ? 'text-primary' : 'text-primary'}`} />
-                    <span className={`text-sm font-medium ${tier.tier === 3 ? 'text-white/80' : 'text-muted-foreground'}`}>
+                    <Check
+                      className={`w-5 h-5 shrink-0 ${tier.tier === 3 ? "text-primary" : "text-primary"}`}
+                    />
+                    <span
+                      className={`text-sm font-medium ${tier.tier === 3 ? "text-white/80" : "text-muted-foreground"}`}
+                    >
                       {feature}
                     </span>
                   </li>
@@ -144,19 +159,28 @@ export function PricingTable() {
               <Button
                 className={`w-full py-7 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all duration-300 ${
                   tier.popular
-                  ? "bg-primary text-white hover:opacity-90 shadow-[0_10px_20px_-10px_rgba(var(--primary),0.5)]"
-                  : tier.tier === 3
-                  ? "bg-white text-black hover:bg-white/90"
-                  : "bg-accent hover:bg-accent/80 text-foreground"
+                    ? "bg-primary text-white hover:opacity-90 shadow-[0_10px_20px_-10px_rgba(var(--primary),0.5)]"
+                    : tier.tier === 3
+                      ? "bg-white text-black hover:bg-white/90"
+                      : "bg-accent hover:bg-accent/80 text-foreground"
                 }`}
               >
                 {tier.cta} <ArrowRight className="w-5 h-5" />
               </Button>
 
               {/* System Metadata Footer */}
-              <div className={`mt-8 pt-6 border-t ${tier.tier === 3 ? 'border-white/5' : 'border-border/50'}`}>
-                <div className={`text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-center ${tier.tier === 3 ? 'text-white/30' : 'text-muted-foreground/50'}`}>
-                  VALUE_GENERATION: {tier.tier === 1 ? 'HIGH' : tier.tier === 2 ? 'MAXIMUM' : 'ENTERPRISE_INFRA'}
+              <div
+                className={`mt-8 pt-6 border-t ${tier.tier === 3 ? "border-white/5" : "border-border/50"}`}
+              >
+                <div
+                  className={`text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-center ${tier.tier === 3 ? "text-white/30" : "text-muted-foreground/50"}`}
+                >
+                  VALUE_GENERATION:{" "}
+                  {tier.tier === 1
+                    ? "HIGH"
+                    : tier.tier === 2
+                      ? "MAXIMUM"
+                      : "ENTERPRISE_INFRA"}
                 </div>
               </div>
             </motion.div>
@@ -171,7 +195,8 @@ export function PricingTable() {
           className="text-center mt-16"
         >
           <p className="text-muted-foreground/60 font-mono text-xs uppercase tracking-widest">
-            All deployments include core architecture, security protocols, and 0-latency optimization.
+            All deployments include core architecture, security protocols, and
+            0-latency optimization.
           </p>
         </motion.div>
       </div>

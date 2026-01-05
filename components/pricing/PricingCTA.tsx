@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, TrendingUp } from "lucide-react";
@@ -14,7 +16,7 @@ export function PricingCTA() {
             radial-gradient(circle at 25% 25%, #FF6B00 2px, transparent 2px),
             radial-gradient(circle at 75% 75%, #FF6B00 1px, transparent 1px)
           `,
-          backgroundSize: '150px 150px'
+          backgroundSize: "150px 150px",
         }}
       />
 
@@ -22,7 +24,13 @@ export function PricingCTA() {
       <div className="absolute inset-0">
         <svg className="w-full h-full opacity-10">
           <defs>
-            <linearGradient id="ctaCircuitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient
+              id="ctaCircuitGradient"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
               <stop offset="0%" stopColor="transparent" />
               <stop offset="50%" stopColor="#FF6B00" />
               <stop offset="100%" stopColor="transparent" />
@@ -99,7 +107,8 @@ export function PricingCTA() {
             </h2>
 
             <p className="text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-              Let's discuss how we can engineer efficiency into your specific business model.
+              Let's discuss how we can engineer efficiency into your specific
+              business model.
             </p>
 
             <motion.div
@@ -129,17 +138,23 @@ export function PricingCTA() {
             transition={{ delay: 0.5 }}
           >
             <div className="flex flex-col items-center gap-2">
-              <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-1">30-Day</div>
+              <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-1">
+                30-Day
+              </div>
               <div className="text-white/60 text-sm">Money-Back Guarantee</div>
             </div>
 
             <div className="flex flex-col items-center gap-2">
-              <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-1">24/7</div>
+              <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-1">
+                24/7
+              </div>
               <div className="text-white/60 text-sm">Technical Support</div>
             </div>
 
             <div className="flex flex-col items-center gap-2">
-              <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-1">∞</div>
+              <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-1">
+                ∞
+              </div>
               <div className="text-white/60 text-sm">Scalability Promise</div>
             </div>
           </motion.div>
@@ -155,7 +170,8 @@ export function PricingCTA() {
             <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-lg px-6 py-3 rounded-full border border-white/20">
               <div className="w-3 h-3 bg-[#FF6B00] rounded-full animate-pulse"></div>
               <span className="font-mono text-sm text-white/70">
-                INVESTMENT_READINESS: ACTIVE | ROI_CALCULATOR: AVAILABLE | NEXT_STEP: CONTACT
+                INVESTMENT_READINESS: ACTIVE | ROI_CALCULATOR: AVAILABLE |
+                NEXT_STEP: CONTACT
               </span>
             </div>
           </motion.div>

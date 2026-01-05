@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 import { PricingHero } from "@/components/pricing/PricingHero";
 import { PricingTable } from "@/components/pricing/PricingTable";
 import { ServicePriceGrid } from "@/components/pricing/ServicePriceGrid";
@@ -7,10 +7,10 @@ import { TransparencyNote } from "@/components/pricing/TransparencyNote";
 import { AccordionFAQ } from "@/components/pricing/AccordionFAQ";
 import { PricingCTA } from "@/components/pricing/PricingCTA";
 
-export const metadata: Metadata = {
-  title: 'Pricing - AI Solutions & Development Services',
-  description: 'Transparent pricing for AI agents, workflow automation, and MERN stack development. No hidden fees, clear ROI calculations.',
-}
+// export const metadata: Metadata = {
+//   title: 'Pricing - AI Solutions & Development Services',
+//   description: 'Transparent pricing for AI agents, workflow automation, and MERN stack development. No hidden fees, clear ROI calculations.',
+// }
 
 export default function PricingPage() {
   return (

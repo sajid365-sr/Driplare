@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,9 @@ const MarketplaceHero = () => {
           [ ARCHIVE: AI_SOLUTIONS ]
         </h1>
         <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto font-['Montserrat']">
-          Battle-tested automation systems designed to be integrated by our engineers into your existing infrastructure. No technical configuration required from your side.
+          Battle-tested automation systems designed to be integrated by our
+          engineers into your existing infrastructure. No technical
+          configuration required from your side.
         </p>
 
         <div className="max-w-md mx-auto">

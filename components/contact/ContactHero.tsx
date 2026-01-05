@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 import { Bot, ArrowRight } from "lucide-react";
 
@@ -12,7 +13,7 @@ export function ContactHero() {
             linear-gradient(#E5E5E5 1px, transparent 1px),
             linear-gradient(90deg, #E5E5E5 1px, transparent 1px)
           `,
-          backgroundSize: '40px 40px'
+          backgroundSize: "40px 40px",
         }}
       />
 
@@ -20,11 +21,32 @@ export function ContactHero() {
       <div className="absolute inset-0 opacity-5">
         <svg className="w-full h-full" viewBox="0 0 100 100">
           <defs>
-            <pattern id="hero-circuit" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="2" cy="2" r="1" fill="#FF6B00" opacity="0.3"/>
-              <circle cx="18" cy="18" r="1" fill="#FF6B00" opacity="0.3"/>
-              <line x1="2" y1="2" x2="18" y2="18" stroke="#E5E5E5" strokeWidth="0.5"/>
-              <line x1="18" y1="2" x2="2" y2="18" stroke="#E5E5E5" strokeWidth="0.5"/>
+            <pattern
+              id="hero-circuit"
+              x="0"
+              y="0"
+              width="20"
+              height="20"
+              patternUnits="userSpaceOnUse"
+            >
+              <circle cx="2" cy="2" r="1" fill="#FF6B00" opacity="0.3" />
+              <circle cx="18" cy="18" r="1" fill="#FF6B00" opacity="0.3" />
+              <line
+                x1="2"
+                y1="2"
+                x2="18"
+                y2="18"
+                stroke="#E5E5E5"
+                strokeWidth="0.5"
+              />
+              <line
+                x1="18"
+                y1="2"
+                x2="2"
+                y2="18"
+                stroke="#E5E5E5"
+                strokeWidth="0.5"
+              />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#hero-circuit)" />
@@ -61,7 +83,8 @@ export function ContactHero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-[#0A0A0A]/70 max-w-3xl mx-auto leading-relaxed mb-12 font-montserrat"
           >
-            Choose your preferred path: Talk to our AI Architect Assistant for instant scheduling, or send a manual brief.
+            Choose your preferred path: Talk to our AI Architect Assistant for
+            instant scheduling, or send a manual brief.
           </motion.p>
 
           {/* Path Options */}
@@ -94,7 +117,9 @@ export function ContactHero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-[#0A0A0A]/60 text-sm font-mono">SELECT_YOUR_PATH</span>
+          <span className="text-[#0A0A0A]/60 text-sm font-mono">
+            SELECT_YOUR_PATH
+          </span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
@@ -111,11 +136,11 @@ export function ContactHero() {
         className="absolute top-20 right-20 hidden md:block"
         animate={{
           rotate: 360,
-          scale: [1, 1.1, 1]
+          scale: [1, 1.1, 1],
         }}
         transition={{
           rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-          scale: { duration: 3, repeat: Infinity }
+          scale: { duration: 3, repeat: Infinity },
         }}
       >
         <div className="w-12 h-12 bg-[#FF6B00]/10 rounded-full flex items-center justify-center">
@@ -127,7 +152,7 @@ export function ContactHero() {
         className="absolute bottom-32 left-16 hidden md:block"
         animate={{
           x: [0, 10, 0],
-          y: [0, -10, 0]
+          y: [0, -10, 0],
         }}
         transition={{ duration: 4, repeat: Infinity }}
       >

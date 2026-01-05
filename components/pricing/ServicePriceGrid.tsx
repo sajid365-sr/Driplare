@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Workflow, Database, Code, ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,14 +9,15 @@ const services = [
     icon: Workflow,
     title: "Workflow Automation (n8n)",
     startingPrice: "$3,500",
-    description: "Best for connecting fragmented apps and eliminating manual data transfers.",
+    description:
+      "Best for connecting fragmented apps and eliminating manual data transfers.",
     features: [
       "Multi-platform integration",
       "Conditional logic workflows",
       "Error handling & recovery",
-      "Performance monitoring"
+      "Performance monitoring",
     ],
-    color: "#FF6B00"
+    color: "#FF6B00",
   },
   {
     icon: Database,
@@ -25,9 +28,9 @@ const services = [
       "Real-time data collection",
       "Competitor price tracking",
       "Automated alerts",
-      "Historical data storage"
+      "Historical data storage",
     ],
-    color: "#0A0A0A"
+    color: "#0A0A0A",
   },
   {
     icon: Code,
@@ -38,10 +41,10 @@ const services = [
       "MongoDB database design",
       "Express API development",
       "React frontend components",
-      "Node.js backend logic"
+      "Node.js backend logic",
     ],
-    color: "#FF6B00"
-  }
+    color: "#FF6B00",
+  },
 ];
 
 export function ServicePriceGrid() {
@@ -59,7 +62,8 @@ export function ServicePriceGrid() {
             Specialist <span className="text-primary">Services.</span>
           </h2>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            The "Starting From" Grid. Services that require custom architectural approaches.
+            The "Starting From" Grid. Services that require custom architectural
+            approaches.
           </p>
         </motion.div>
 
@@ -82,29 +86,38 @@ export function ServicePriceGrid() {
                     linear-gradient(var(--border) 1px, transparent 1px),
                     linear-gradient(90deg, var(--border) 1px, transparent 1px)
                   `,
-                  backgroundSize: '24px 24px'
+                  backgroundSize: "24px 24px",
                 }}
               />
 
               <div className="relative z-10 flex flex-col h-full">
                 {/* Icon Container */}
                 <div className="mb-8">
-                  <div 
+                  <div
                     className="w-16 h-16 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110 duration-500"
                     style={{ backgroundColor: `${service.color}15` }}
                   >
-                    <service.icon 
-                      className="w-8 h-8" 
-                      style={{ color: service.color === "#0A0A0A" ? "var(--foreground)" : service.color }} 
+                    <service.icon
+                      className="w-8 h-8"
+                      style={{
+                        color:
+                          service.color === "#0A0A0A"
+                            ? "var(--foreground)"
+                            : service.color,
+                      }}
                     />
                   </div>
                 </div>
 
                 {/* Title & Price */}
                 <div className="mb-6">
-                  <h3 className="text-2xl font-black tracking-tight mb-2">{service.title}</h3>
+                  <h3 className="text-2xl font-black tracking-tight mb-2">
+                    {service.title}
+                  </h3>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Starting at</span>
+                    <span className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
+                      Starting at
+                    </span>
                     <span className="text-2xl font-black text-primary">
                       {service.startingPrice}
                     </span>
@@ -121,7 +134,9 @@ export function ServicePriceGrid() {
                   {service.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center gap-3">
                       <Check className="w-4 h-4 text-primary shrink-0" />
-                      <span className="text-sm font-medium text-muted-foreground">{feature}</span>
+                      <span className="text-sm font-medium text-muted-foreground">
+                        {feature}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -155,12 +170,14 @@ export function ServicePriceGrid() {
             <div className="absolute top-0 right-0 text-[8rem] font-black opacity-5 pointer-events-none translate-x-1/4 -translate-y-1/4">
               CUSTOM
             </div>
-            
+
             <h3 className="text-3xl md:text-5xl font-black tracking-tighter mb-6 relative z-10">
-              Need a Custom <br className="hidden md:block" /> Architectural Solution?
+              Need a Custom <br className="hidden md:block" /> Architectural
+              Solution?
             </h3>
             <p className="text-white/80 text-lg max-w-2xl mx-auto mb-10 relative z-10">
-              Every business is unique. Let's design a system investment plan that perfectly matches your specific requirements.
+              Every business is unique. Let's design a system investment plan
+              that perfectly matches your specific requirements.
             </p>
             <Button className="bg-white text-primary hover:bg-white/90 font-black py-8 px-10 rounded-2xl text-xl shadow-xl transition-transform hover:scale-105 relative z-10">
               Request Custom Quote

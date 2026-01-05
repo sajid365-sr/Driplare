@@ -1,13 +1,3 @@
-generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
-}
-
-datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
-}
-
 model User {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   clerkId   String   @unique

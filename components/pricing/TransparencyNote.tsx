@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 import { Shield, Eye, AlertTriangle } from "lucide-react";
 
@@ -15,7 +16,9 @@ export function TransparencyNote() {
             {/* Header */}
             <div className="flex items-center gap-3 mb-6">
               <Shield className="w-6 h-6 text-[#FF6B00]" />
-              <h2 className="text-2xl font-bold text-[#0A0A0A]">Transparency & Running Costs</h2>
+              <h2 className="text-2xl font-bold text-[#0A0A0A]">
+                Transparency & Running Costs
+              </h2>
             </div>
 
             {/* Main Note */}
@@ -23,9 +26,13 @@ export function TransparencyNote() {
               <div className="flex items-start gap-3">
                 <Eye className="w-5 h-5 text-[#0A0A0A] mt-0.5 flex-shrink-0" />
                 <div>
-                  <h3 className="font-bold text-[#0A0A0A] mb-2 font-mono">API_COST_TRANSPARENCY</h3>
+                  <h3 className="font-bold text-[#0A0A0A] mb-2 font-mono">
+                    API_COST_TRANSPARENCY
+                  </h3>
                   <p className="text-[#0A0A0A]/80 leading-relaxed">
-                    Our setup fees cover the architecture. Third-party API costs (OpenAI, Anthropic) and hosting are billed directly based on your usage to ensure no hidden markups.
+                    Our setup fees cover the architecture. Third-party API costs
+                    (OpenAI, Anthropic) and hosting are billed directly based on
+                    your usage to ensure no hidden markups.
                   </p>
                 </div>
               </div>
@@ -66,9 +73,13 @@ export function TransparencyNote() {
               <div className="flex items-start gap-3">
                 <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-bold text-yellow-800 mb-1">Cost Estimation Notice</h4>
+                  <h4 className="font-bold text-yellow-800 mb-1">
+                    Cost Estimation Notice
+                  </h4>
                   <p className="text-yellow-700 text-sm">
-                    API costs vary based on usage volume and complexity. We provide detailed cost projections during your technical discovery call.
+                    API costs vary based on usage volume and complexity. We
+                    provide detailed cost projections during your technical
+                    discovery call.
                   </p>
                 </div>
               </div>
@@ -79,7 +90,8 @@ export function TransparencyNote() {
               <div className="inline-flex items-center gap-3 bg-[#F5F5F5] px-4 py-2 rounded-full">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span className="font-mono text-sm text-[#0A0A0A]/70">
-                  TRANSPARENCY_LEVEL: MAXIMUM | LAST_AUDIT: {new Date().toLocaleDateString()}
+                  TRANSPARENCY_LEVEL: MAXIMUM | LAST_AUDIT:{" "}
+                  {new Date().toLocaleDateString()}
                 </span>
               </div>
             </div>
