@@ -13,6 +13,7 @@ model User {
   clerkId   String   @unique
   email     String   @unique
   name      String?
+  imageUrl  String? // নতুন যোগ করা হয়েছে
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -4,6 +4,7 @@ import "./globals.css";
 import I18nProvider from "@/components/i18n-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/Footer";
+import SyncUser from "@/components/auth/SyncUser";
 
 // Montserrat configuration
 const montserrat = Montserrat({
@@ -34,7 +35,10 @@ export default function RootLayout({
         >
           <I18nProvider>
             <Navbar />
-            <main>{children}</main>
+            <main>
+              <SyncUser />
+              {children}
+            </main>
             <Footer />
           </I18nProvider>
         </body>

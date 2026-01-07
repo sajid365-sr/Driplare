@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useLanguage } from "./i18n-provider";
+import Image from "next/image";
 
 const languages = [
   { code: "en", name: "English", flag: "🇺🇸" },
@@ -22,7 +23,8 @@ export function LanguageSwitcher() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="h-9 w-9 p-0">
-          <Languages className="h-4 w-4" />
+          {/* <Languages className="h-4 w-4" /> */}
+          <span>En</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

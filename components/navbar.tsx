@@ -20,12 +20,7 @@ import { LanguageSwitcher } from "./language-switcher";
 import { cn } from "@/lib/utils";
 
 // Clerk Imports
-import {
-  SignedIn,
-  SignedOut,
-  UserButton,
-  SignInButton,
-} from "@clerk/clerk-react";
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 
 export function Navbar() {
@@ -246,7 +241,7 @@ export function Navbar() {
             </SignedOut>
 
             <SignedIn>
-              <UserButton afterSignOutUrl="/" />
+              <UserButton />
             </SignedIn>
 
             {/* <div className="relative">
