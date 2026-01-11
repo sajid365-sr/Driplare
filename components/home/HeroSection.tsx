@@ -1,12 +1,15 @@
-'use client'
+"use client";
 
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Terminal, Box, Activity } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next"; // হুক ইমপোর্ট করা হলো
 
 export function Hero() {
+  const { t } = useTranslation(); // t ফাংশনটি ইনিশিয়ালাইজ করা হলো
+
   return (
     <section className="relative min-h-screen bg-white overflow-hidden flex items-center mt-20">
       {/* Background Graphic: The Neural Line */}
@@ -38,21 +41,21 @@ export function Hero() {
             className="flex items-center gap-3 text-primary font-mono text-sm tracking-widest"
           >
             <span className="h-px w-8 bg-primary"></span>
-            ENGINEERING AUTONOMY
+            {t("hero.badge")}
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-6xl md:text-8xl font-black text-black leading-none tracking-tighter"
+            className="text-6xl md:text-8xl font-black text-black leading-none tracking-tighter uppercase"
           >
-            BUILDING <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400  ">
-              INVISIBLE
+            {t("hero.titlePart1")} <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">
+              {t("hero.titlePart2")}
             </span>{" "}
             <br />
-            WORKFORCES.
+            {t("hero.titlePart3")}
           </motion.h1>
 
           <motion.p
@@ -61,9 +64,7 @@ export function Hero() {
             transition={{ delay: 0.4 }}
             className="text-gray-400 text-lg md:text-xl max-w-lg leading-relaxed"
           >
-            We don't just build tools. We architect autonomous systems that
-            handle your operations, sales, and data while you focus on the next
-            big move.
+            {t("hero.description")}
           </motion.p>
 
           <motion.div
@@ -75,9 +76,10 @@ export function Hero() {
             <Button
               size="lg"
               className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 py-7 text-lg font-bold group"
+              asChild
             >
               <Link href="/case-studies" className="flex items-center gap-2">
-                View Systems{" "}
+                {t("hero.btnViewSystems")}{" "}
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
@@ -85,13 +87,14 @@ export function Hero() {
               variant="outline"
               size="lg"
               className="border-black/10 bg-black text-white hover:bg-orange/5 rounded-full px-8 py-7 text-lg font-bold"
+              asChild
             >
-              <Link href="/contact">Book a Consult</Link>
+              <Link href="/contact">{t("hero.btnBookConsult")}</Link>
             </Button>
           </motion.div>
         </div>
 
-        {/* Right: The Engine (Interactive Terminal Card) */}
+        {/* Right: The Engine (Terminal Card) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -99,7 +102,6 @@ export function Hero() {
           className="relative hidden lg:block"
         >
           <div className="bg-[#151515] border border-white/10 rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden group">
-            {/* Terminal Header */}
             <div className="flex items-center gap-2 mb-6 border-b border-white/5 pb-4">
               <div className="flex gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-red-500/20" />
@@ -111,7 +113,6 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Simulated Logic Flow */}
             <div className="space-y-4 font-mono text-xs">
               <div className="flex gap-3 text-green-400">
                 <span className="text-gray-600">01</span>
@@ -135,18 +136,17 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Floating Visual Elements */}
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/40 transition-all" />
           </div>
 
-          {/* Abstract Floating Stats */}
+          {/* Floating Stats */}
           <div className="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-3">
             <div className="bg-primary/10 p-2 rounded-lg text-primary">
               <Box size={20} />
             </div>
             <div>
               <div className="text-[10px] uppercase font-bold text-gray-400 leading-none">
-                Efficiency
+                {t("hero.efficiency")}
               </div>
               <div className="text-lg font-black text-black leading-none">
                 +300%
@@ -159,7 +159,7 @@ export function Hero() {
       {/* Decorative Branding */}
       <div className="absolute bottom-10 left-10 hidden md:block">
         <p className="text-[10rem] font-black text-white/[0.02] pointer-events-none select-none tracking-tighter uppercase leading-none">
-          SYSTEMS
+          {t("hero.brandingBg")}
         </p>
       </div>
     </section>

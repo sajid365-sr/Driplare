@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 import { HeroSection } from "@/components/services/custom-AI-Agent/HeroSection";
 import { ProblemSolutionSection } from "@/components/services/custom-AI-Agent/ProblemSolutionSection";
 import { CoreCapabilitiesSection } from "@/components/services/custom-AI-Agent/CoreCapabilitiesSection";
@@ -8,13 +8,15 @@ import { FAQSection } from "@/components/services/custom-AI-Agent/FAQSection";
 import { FinalCTASection } from "@/components/services/custom-AI-Agent/FinalCTASection";
 
 export const metadata: Metadata = {
-  title: 'Custom AI Agents Development - Intelligent Automation Solutions',
-  description: 'Build autonomous AI agents that handle complex tasks 24/7. Custom AI agent development with advanced machine learning and natural language processing capabilities.',
-}
+  title: "Custom AI Agents Development - Intelligent Automation Solutions",
+  description:
+    "Build autonomous AI agents that handle complex tasks 24/7. Custom AI agent development with advanced machine learning and natural language processing capabilities.",
+};
 
 export default function AIAgents() {
   return (
-    <div className="min-h-screen bg-white">
+    // Updated: Added dark:bg-[#0A0A0A] for main background
+    <div className="min-h-screen bg-white dark:bg-[#0A0A0A] transition-colors duration-300">
       <HeroSection />
       <ProblemSolutionSection />
       <CoreCapabilitiesSection />

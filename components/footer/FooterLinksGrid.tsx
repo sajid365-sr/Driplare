@@ -1,71 +1,55 @@
-import { motion } from "framer-motion";
+"use client";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 import { NewsletterForm } from "./NewsletterForm";
 
 export function FooterLinksGrid() {
+  const { t } = useTranslation();
+
   const linkSections = [
     {
-      title: "ECOSYSTEM",
-
-      subtitle: "(SERVICES)",
-
+      title: t("footer.sections.ecosystem"),
+      subtitle: t("footer.subtitles.services"),
       links: [
-        { text: "Custom AI Agents", url: "/services/ai-agents" },
-
-        { text: "Workflow Automation", url: "/services/workflow-automation" },
-
-        { text: "MERN Infrastructure", url: "/services/web-development" },
-
-        { text: "Data Monitoring", url: "/services/data-scraping" },
-
-        { text: "Technical Consulting", url: "/services/b2b-consulting" },
+        { text: t("footer.links.aiAgents"), url: "/services/ai-agents" },
+        {
+          text: t("footer.links.workflow"),
+          url: "/services/workflow-automation",
+        },
+        { text: t("footer.links.mern"), url: "/services/web-development" },
+        { text: t("footer.links.data"), url: "/services/data-scraping" },
+        { text: t("footer.links.consulting"), url: "/services/b2b-consulting" },
       ],
     },
-
     {
-      title: "INTELLIGENCE",
-
-      subtitle: "(RESOURCES)",
-
+      title: t("footer.sections.intelligence"),
+      subtitle: t("footer.subtitles.resources"),
       links: [
-        { text: "Engineered Results", url: "/case-studies" },
-
-        { text: "Intelligence Hub", url: "/insights" },
-
-        { text: "System Documentation", url: "/docs" },
-
-        { text: "FAQ & Security", url: "/security" },
+        { text: t("footer.links.results"), url: "/case-studies" },
+        { text: t("footer.links.insights"), url: "/insights" },
+        { text: t("footer.links.docs"), url: "/docs" },
+        { text: t("footer.links.security"), url: "/security" },
       ],
     },
-
     {
-      title: "IDENTITY",
-
-      subtitle: "(DRIPLARE)",
-
+      title: t("footer.sections.identity"),
+      subtitle: t("footer.subtitles.driplare"),
       links: [
-        { text: "About the Architecture", url: "/about-us" },
-
-        { text: "Our Methodology", url: "/methodology" },
-
-        { text: "Contact the Architect", url: "/contact" },
-
-        { text: "Book a Strategy Call", url: "/contact" },
+        { text: t("footer.links.about"), url: "/about-us" },
+        { text: t("footer.links.methodology"), url: "/methodology" },
+        { text: t("footer.links.contact"), url: "/contact" },
+        { text: t("footer.links.strategy"), url: "/contact" },
       ],
     },
-
     {
-      title: "CONNECT",
-
-      subtitle: "(SOCIALS)",
-
+      title: t("footer.sections.connect"),
+      subtitle: t("footer.subtitles.socials"),
       links: [
         {
           text: "LinkedIn",
           url: "https://linkedin.com/company/driplare",
           external: true,
         },
-
         {
           text: "Facebook",
           url: "https://facebook.com/driplare",
@@ -76,18 +60,17 @@ export function FooterLinksGrid() {
   ];
 
   return (
-    <div className="py-20">
+    <div className="py-20 transition-colors">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
-          {/* প্রথম ৩টি কলাম: ECOSYSTEM, INTELLIGENCE, IDENTITY */}
           {linkSections.slice(0, 3).map((section) => (
             <div key={section.title} className="space-y-8">
               <div>
-                <h3 className="text-sm font-black text-[#0A0A0A] tracking-tighter mb-1 uppercase">
+                <h3 className="text-sm font-black text-[#0A0A0A] dark:text-white tracking-tighter mb-1 uppercase">
                   {section.title}
                 </h3>
                 <div className="h-0.5 w-6 bg-primary/30 rounded-full" />
-                <p className="font-mono text-[12px] font-bold text-[#0A0A0A]/30 mt-2 tracking-widest uppercase">
+                <p className="font-mono text-[12px] font-bold text-[#0A0A0A]/30 dark:text-white/30 mt-2 tracking-widest uppercase">
                   {section.subtitle}
                 </p>
               </div>
@@ -97,7 +80,7 @@ export function FooterLinksGrid() {
                   <Link
                     key={link.text}
                     href={link.url}
-                    className="text-sm font-medium text-[#0A0A0A]/60 hover:text-primary transition-all duration-300 flex items-center group"
+                    className="text-sm font-medium text-[#0A0A0A]/60 dark:text-white/60 hover:text-primary dark:hover:text-primary transition-all duration-300 flex items-center group"
                   >
                     <span className="w-0 overflow-hidden group-hover:w-4 transition-all text-primary font-bold opacity-0 group-hover:opacity-100 italic">
                       /
@@ -109,19 +92,15 @@ export function FooterLinksGrid() {
             </div>
           ))}
 
-          {/* চতুর্থ কলাম: মার্ক করা জায়গায় Newsletter + CONNECT সোশ্যাল লিংকস */}
           <div className="space-y-12">
-            {/* ১. মার্ক করা উপরের অংশে Newsletter Form */}
             <NewsletterForm />
-
-            {/* ২. মার্ক করা নিচের অংশে CONNECT সোশ্যাল লিংকস */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-sm font-black text-[#0A0A0A] tracking-tighter mb-1 uppercase">
+                <h3 className="text-sm font-black text-[#0A0A0A] dark:text-white tracking-tighter mb-1 uppercase">
                   {linkSections[3].title}
                 </h3>
                 <div className="h-0.5 w-6 bg-primary/30 rounded-full" />
-                <p className="font-mono text-[12px] font-bold text-[#0A0A0A]/30 mt-2 tracking-widest uppercase">
+                <p className="font-mono text-[12px] font-bold text-[#0A0A0A]/30 dark:text-white/30 mt-2 tracking-widest uppercase">
                   {linkSections[3].subtitle}
                 </p>
               </div>
@@ -131,9 +110,9 @@ export function FooterLinksGrid() {
                   <Link
                     key={link.text}
                     href={link.url}
-                    target={"_blank"}
-                    rel={"noopener noreferrer"}
-                    className="text-sm font-medium text-[#0A0A0A]/60 hover:text-primary transition-all duration-300 flex items-center group"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-[#0A0A0A]/60 dark:text-white/60 hover:text-primary dark:hover:text-primary transition-all duration-300 flex items-center group"
                   >
                     <span className="w-0 overflow-hidden group-hover:w-4 transition-all text-primary font-bold opacity-0 group-hover:opacity-100 italic">
                       /

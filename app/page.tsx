@@ -8,7 +8,7 @@ import { HowWeEngineerSection } from "@/components/home/HowWeEngineerSection";
 import { SocialProofSection } from "@/components/home/SocialProofSection";
 import { TechStackSection } from "@/components/home/TechStackSection";
 import { FinalCTASection } from "@/components/home/FinalCTASection";
-import { Hero } from "@/components/home/HeroSection2";
+import { Hero } from "@/components/home/HeroSection";
 
 export default function HomePage() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });

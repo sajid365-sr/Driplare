@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { motion } from "framer-motion";
 import {
@@ -10,40 +10,46 @@ import {
   Database,
   Zap,
 } from "lucide-react";
-
-const pillars = [
-  {
-    icon: Target,
-    title: "AI Feasibility & Roadmap",
-    focus: "Investment Strategy",
-    description:
-      "Not every problem needs an AI agent. We audit your workflows to identify where AI will provide the highest ROI and design a 12-month implementation roadmap.",
-    protocol: "PROTO_AI_09",
-    stats: ["ROI Forecast", "Feasibility Score", "12mo Roadmap"],
-  },
-  {
-    icon: Settings,
-    title: "Tech Stack Optimization",
-    focus: "Technical Efficiency",
-    description:
-      "Is your current stack holding you back? We analyze your MERN, legacy, or No-Code infrastructure to eliminate redundancies and optimize performance.",
-    protocol: "PROTO_STACK_12",
-    stats: ["Debt Analysis", "Speed Optimization", "Redundancy Kill"],
-  },
-  {
-    icon: Workflow,
-    title: "Automation Architecture",
-    focus: "System Scalability",
-    description:
-      "We architect how your CRM, ERP, and AI systems communicate. We build the 'plumbing' that ensures 100% data integrity as you scale.",
-    protocol: "PROTO_AUTO_04",
-    stats: ["Integrity Sync", "API Mapping", "Scale Validation"],
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export function AdvisoryGrid() {
+  const { t } = useTranslation();
+
+  const pillars = [
+    {
+      icon: Target,
+      title: t("services.consulting.advisory.pillars.ai.title"),
+      focus: t("services.consulting.advisory.pillars.ai.focus"),
+      description: t("services.consulting.advisory.pillars.ai.desc"),
+      protocol: "PROTO_AI_09",
+      stats: t("services.consulting.advisory.pillars.ai.stats", {
+        returnObjects: true,
+      }) as string[],
+    },
+    {
+      icon: Settings,
+      title: t("services.consulting.advisory.pillars.stack.title"),
+      focus: t("services.consulting.advisory.pillars.stack.focus"),
+      description: t("services.consulting.advisory.pillars.stack.desc"),
+      protocol: "PROTO_STACK_12",
+      stats: t("services.consulting.advisory.pillars.stack.stats", {
+        returnObjects: true,
+      }) as string[],
+    },
+    {
+      icon: Workflow,
+      title: t("services.consulting.advisory.pillars.automation.title"),
+      focus: t("services.consulting.advisory.pillars.automation.focus"),
+      description: t("services.consulting.advisory.pillars.automation.desc"),
+      protocol: "PROTO_AUTO_04",
+      stats: t("services.consulting.advisory.pillars.automation.stats", {
+        returnObjects: true,
+      }) as string[],
+    },
+  ];
+
   return (
-    <section className="py-24 bg-white border-t border-black/5 relative">
+    <section className="py-24 bg-white border-t border-black/5 relative overflow-hidden">
       <div className="container relative z-10 px-4">
         <motion.div
           className="text-center mb-20"
@@ -51,69 +57,65 @@ export function AdvisoryGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="inline-block px-4 py-1 bg-black text-white text-[10px] font-mono font-bold mb-4 rounded-full">
-            THE_CONSULTING_FRAMEWORK
+          <div className="inline-block px-4 py-1 bg-[#0A0A0B] text-white text-[10px] font-mono font-bold mb-4 rounded-full uppercase tracking-widest">
+            {t("services.consulting.advisory.badge")}
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-[#0A0A0B] mb-6 font-montserrat tracking-tighter uppercase">
-            Strategic Advisory Pillars
+          <h2 className="text-4xl md:text-5xl font-black text-[#0A0A0B] mb-6 font-montserrat tracking-tighter uppercase italic">
+            {t("services.consulting.advisory.title")}
           </h2>
-          <p className="text-lg text-black/50 max-w-2xl mx-auto font-inter">
-            Bridging the gap between engineering complexity and business
-            objectives.
+          <p className="text-lg text-black/50 max-w-2xl mx-auto font-medium">
+            {t("services.consulting.advisory.description")}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {pillars.map((pillar, index) => (
             <motion.div
-              key={pillar.title}
+              key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group relative bg-white border border-black/10 rounded-2xl p-8 hover:border-[#FF6B00] transition-all duration-500 flex flex-col h-full hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)]"
+              className="group relative bg-white border border-black/10 rounded-3xl p-8 hover:border-primary transition-all duration-500 flex flex-col h-full hover:shadow-[0_30px_60px_-15px_rgba(255,107,0,0.1)]"
             >
-              {/* Card Header */}
               <div className="flex justify-between items-start mb-10">
-                <div className="p-3 bg-[#F5F5F7] rounded-xl text-black group-hover:bg-[#FF6B00] group-hover:text-white transition-colors duration-500">
+                <div className="p-4 bg-[#F5F5F7] rounded-2xl text-black group-hover:bg-primary group-hover:text-white transition-all duration-500 group-hover:rotate-6">
                   <pillar.icon className="w-6 h-6" />
                 </div>
-                <div className="text-right font-mono text-[9px] font-bold text-black/30">
+                <div className="text-right font-mono text-[9px] font-black text-black/20 group-hover:text-primary/40">
                   REF: {pillar.protocol}
                 </div>
               </div>
 
               <div className="mb-6">
-                <span className="text-[#FF6B00] font-mono text-[10px] font-bold uppercase tracking-widest">
+                <span className="text-primary font-mono text-[10px] font-black uppercase tracking-widest">
                   {pillar.focus}
                 </span>
-                <h3 className="text-2xl font-bold text-black mt-1 font-montserrat tracking-tight">
+                <h3 className="text-2xl font-black text-[#0A0A0B] mt-2 font-montserrat tracking-tight">
                   {pillar.title}
                 </h3>
               </div>
 
-              <p className="text-black/60 text-sm leading-relaxed font-inter mb-8 flex-grow">
+              <p className="text-black/60 text-sm leading-relaxed mb-8 flex-grow font-medium">
                 {pillar.description}
               </p>
 
-              {/* Stat Pills */}
-              <div className="flex flex-wrap gap-2 mb-8">
+              <div className="flex flex-wrap gap-2 mb-10">
                 {pillar.stats.map((stat, i) => (
                   <div
                     key={i}
-                    className="px-2 py-1 bg-black/[0.03] rounded border border-black/5 text-[9px] font-mono font-bold"
+                    className="px-3 py-1 bg-black/[0.03] rounded-full border border-black/5 text-[9px] font-mono font-bold uppercase"
                   >
                     + {stat}
                   </div>
                 ))}
               </div>
 
-              {/* Metadata Footer */}
               <div className="pt-6 border-t border-black/5 flex items-center justify-between">
-                <div className="text-[10px] font-mono text-black/40">
-                  AUDIT_READY: 100%
+                <div className="text-[10px] font-mono font-bold text-black/30">
+                  AUDIT_STATUS: READY
                 </div>
-                <div className="flex items-center gap-1 text-[10px] font-mono font-bold text-[#FF6B00]">
+                <div className="flex items-center gap-1 text-[10px] font-mono font-black text-primary group-hover:gap-2 transition-all cursor-pointer">
                   INITIATE <Plus className="w-3 h-3" />
                 </div>
               </div>
@@ -121,50 +123,51 @@ export function AdvisoryGrid() {
           ))}
         </div>
 
-        {/* Global Success Indicator */}
+        {/* Success Metrics Bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="mt-20 flex justify-center"
+          className="mt-24 flex justify-center px-4"
         >
-          <div className="bg-[#0A0A0B] text-white px-8 py-5 rounded-2xl flex flex-col md:flex-row items-center gap-8 shadow-2xl">
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="w-5 h-5 text-green-500" />
-              <div className="text-left">
-                <div className="text-[10px] font-mono text-white/50">
-                  DATA_GOVERNANCE
+          <div className="bg-[#0A0A0B] text-white p-2 rounded-[2rem] flex flex-col md:flex-row items-center gap-1 shadow-2xl border border-white/5">
+            {[
+              {
+                icon: ShieldCheck,
+                label: "DATA_GOVERNANCE",
+                val: "ENCRYPTED_ADVISORY",
+                color: "text-green-500",
+              },
+              {
+                icon: Zap,
+                label: "SYSTEM_SUCCESS",
+                val: "95%_ADOPTION_RATE",
+                color: "text-primary",
+              },
+              {
+                icon: Database,
+                label: "NETWORK_SCALE",
+                val: "MULTI_CLOUD_READY",
+                color: "text-blue-400",
+              },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center">
+                <div className="flex items-center gap-4 px-8 py-4">
+                  <item.icon className={`w-5 h-5 ${item.color}`} />
+                  <div className="text-left">
+                    <div className="text-[9px] font-mono text-white/40 tracking-tighter">
+                      {item.label}
+                    </div>
+                    <div className="text-xs font-bold font-mono tracking-tight">
+                      {item.val}
+                    </div>
+                  </div>
                 </div>
-                <div className="text-xs font-bold font-mono">
-                  ENCRYPTED_ADVISORY
-                </div>
+                {i < 2 && (
+                  <div className="hidden md:block w-px h-8 bg-white/10" />
+                )}
               </div>
-            </div>
-            <div className="w-px h-8 bg-white/10 hidden md:block" />
-            <div className="flex items-center gap-3">
-              <Zap className="w-5 h-5 text-[#FF6B00]" />
-              <div className="text-left">
-                <div className="text-[10px] font-mono text-white/50">
-                  SYSTEM_SUCCESS
-                </div>
-                <div className="text-xs font-bold font-mono">
-                  95%_ADOPTION_RATE
-                </div>
-              </div>
-            </div>
-            <div className="w-px h-8 bg-white/10 hidden md:block" />
-            <div className="flex items-center gap-3">
-              <Database className="w-5 h-5 text-blue-400" />
-              <div className="text-left">
-                <div className="text-[10px] font-mono text-white/50">
-                  NETWORK_SCALE
-                </div>
-                <div className="text-xs font-bold font-mono">
-                  MULTI_CLOUD_READY
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </motion.div>
       </div>

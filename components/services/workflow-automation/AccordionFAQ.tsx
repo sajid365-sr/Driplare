@@ -1,6 +1,7 @@
-'use client'
+"use client";
 
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   Accordion,
   AccordionContent,
@@ -8,24 +9,26 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const faqs = [
-  {
-    question: "Is my data secure during automation?",
-    answer: "Absolutely. We prioritize end-to-end encryption and often use self-hosted tools like n8n for clients who require maximum data privacy."
-  },
-  {
-    question: "What if an automation breaks?",
-    answer: "We build \"Error Handling\" into every workflow. If a connection fails, you (and we) get an instant alert, and the system attempts a graceful recovery."
-  },
-  {
-    question: "Can you automate legacy software with no API?",
-    answer: "Often, yes. We use various \"hooks\" and custom scripts to bridge even the most stubborn software into a modern workflow."
-  }
-];
-
 export const AccordionFAQ = () => {
+  const { t } = useTranslation();
+
+  const faqs = [
+    {
+      question: t("services.workflow.faq.questions.security.q"),
+      answer: t("services.workflow.faq.questions.security.a"),
+    },
+    {
+      question: t("services.workflow.faq.questions.failure.q"),
+      answer: t("services.workflow.faq.questions.failure.a"),
+    },
+    {
+      question: t("services.workflow.faq.questions.legacy.q"),
+      answer: t("services.workflow.faq.questions.legacy.a"),
+    },
+  ];
+
   return (
-    <section className="py-20 bg-white text-black">
+    <section className="py-20 bg-white dark:bg-[#0A0A0A] text-black dark:text-white transition-colors duration-300">
       <div className="container">
         <motion.div
           className="text-center mb-16"
@@ -33,11 +36,11 @@ export const AccordionFAQ = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Frequently Asked Questions
+          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-4">
+            {t("services.workflow.faq.title")}
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Clear answers to your most pressing questions about workflow automation.
+          <p className="text-muted-foreground dark:text-white/40 max-w-2xl mx-auto font-medium">
+            {t("services.workflow.faq.subtitle")}
           </p>
         </motion.div>
 
@@ -51,11 +54,14 @@ export const AccordionFAQ = () => {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <AccordionItem value={`item-${idx}`}>
-                  <AccordionTrigger className="text-lg font-semibold text-left">
+                <AccordionItem
+                  value={`item-${idx}`}
+                  className="border-border/60 dark:border-white/10"
+                >
+                  <AccordionTrigger className="text-lg font-black uppercase tracking-tight text-left hover:text-primary transition-colors">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground text-base">
+                  <AccordionContent className="text-muted-foreground dark:text-white/60 text-base leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

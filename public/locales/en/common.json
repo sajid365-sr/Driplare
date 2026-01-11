@@ -18,20 +18,782 @@
     "dataScraping": "Data Scraping & Monitoring",
     "technicalConsulting": "Technical Consulting"
   },
-  "footer": {
-    "brand": "DRIPLARE",
-    "tagline": "Architecting Autonomy",
-    "systemStatus": "SYSTEM_STATUS: OPERATIONAL",
-    "lastSync": "LST_SYNC",
-    "latency": "0-LATENCY",
-    "initiateProject": "Initiate Project"
-  },
   "hero": {
-    "title": "Stop Trading Hours for Tasks.",
-    "subtitle": "Engineer Your Efficiency.",
-    "description": "Transform your business operations with intelligent automation and AI-powered solutions that work tirelessly to maximize your productivity.",
-    "primaryCTA": "Explore Solutions",
-    "secondaryCTA": "View Case Studies"
+    "badge": "ENGINEERING AUTONOMY",
+    "titlePart1": "BUILDING",
+    "titlePart2": "INVISIBLE",
+    "titlePart3": "WORKFORCES.",
+    "description": "We don't just build tools. We architect autonomous systems that handle your operations, sales, and data while you focus on the next big move.",
+    "btnViewSystems": "View Systems",
+    "btnBookConsult": "Book a Consult",
+    "efficiency": "Efficiency",
+    "brandingBg": "SYSTEMS"
+  },
+
+  "infrastructure": {
+    "title": "The Infrastructure Gap",
+    "description": "The hidden tax on your business isn't your software—it's the manual effort required to run it. We bridge the gap between fragmented apps and a unified, intelligent ecosystem.",
+    "manualLabel": "Manual Labor Cost",
+    "aiLabel": "AI Automation Cost",
+    "monthlyCost": "Monthly Cost",
+    "manualStatus": "Inefficient, unpredictable, costly",
+    "aiStatus": "Efficient, predictable, scalable",
+    "potentialSavings": "Potential Monthly Savings"
+  },
+  "pillars": {
+    "title": "The Core",
+    "titleAccent": "Pillars.",
+    "subtitle": "From fragmented tasks to high-value architectural systems that transform how your business operates.",
+    "items": {
+      "agents": {
+        "title": "Autonomous AI Agents",
+        "description": "Digital workers trained on your business data to handle support, lead gen, and research. They learn your processes and execute them flawlessly.",
+        "features": [
+          "Natural language processing for customer queries",
+          "Automated data entry and validation",
+          "Intelligent routing and prioritization",
+          "24/7 availability without fatigue"
+        ]
+      },
+      "workflow": {
+        "title": "Workflow Architecture",
+        "description": "End-to-end automation using n8n to connect your entire stack (CRM, Finance, Operations). We build the nervous system of your business.",
+        "features": [
+          "Seamless API integrations",
+          "Conditional logic and triggers",
+          "Error handling and recovery",
+          "Real-time data synchronization"
+        ]
+      },
+      "mern": {
+        "title": "MERN System Engineering",
+        "description": "Custom-built dashboards and secure backends to house your intelligent data. Built with MongoDB, Express, React, and Node.js for maximum performance.",
+        "features": [
+          "Scalable database architecture",
+          "Real-time data visualization",
+          "Secure authentication systems",
+          "Performance-optimized APIs"
+        ]
+      }
+    }
+  },
+  "featured": {
+    "title": "Intelligence in Action",
+    "subtitle": "A teaser of our Competitor Pricing Monitor.",
+    "terminal": {
+      "status": "Status",
+      "active": "ACTIVE",
+      "monitored": "Monitored SKUs",
+      "frequency": "Update Frequency",
+      "freqValue": "60 seconds",
+      "alertsTitle": "Price Change Alerts",
+      "live": "Live",
+      "summary": "2,000+ Competitor SKU's monitored every 60 seconds. 100% Automated.",
+      "preview": "Dashboard Preview",
+      "contact": "Contact for full access"
+    },
+    "logs": [
+      "[SYSTEM]: SKU-502 Updated. Price Change: -5%",
+      "[SYSTEM]: Competitor analysis complete. 1,247 products scanned.",
+      "[SYSTEM]: Alert triggered: Price drop detected on Product-X",
+      "[SYSTEM]: Daily report generated. 23 price changes logged.",
+      "[SYSTEM]: SKU-789 Updated. Price Change: +2%",
+      "[SYSTEM]: Real-time monitoring active. 2,000+ SKUs tracked.",
+      "[SYSTEM]: Notification sent to sales team.",
+      "[SYSTEM]: Data synchronization complete."
+    ]
+  },
+  "engineer": {
+    "title": "How We Engineer",
+    "subtitle": "A technical, disciplined approach to building systems that scale.",
+    "steps": {
+      "audit": {
+        "title": "Audit",
+        "desc": "We map your manual bottlenecks and identify high-impact automation opportunities.",
+        "tags": ["Process Mapping", "Pain Point Analysis"]
+      },
+      "architect": {
+        "title": "Architect",
+        "desc": "We design the logic flow and agent personality that matches your business needs.",
+        "tags": ["System Design", "Architecture Planning"]
+      },
+      "integrate": {
+        "title": "Integrate",
+        "desc": "We build the MERN foundation and connect all your systems through secure APIs.",
+        "tags": ["API Development", "Integration Testing"]
+      },
+      "scale": {
+        "title": "Scale",
+        "desc": "Continuous monitoring and optimization ensures 24/7 performance and growth.",
+        "tags": ["Performance Monitoring", "Continuous Optimization"]
+      }
+    }
+  },
+  "social": {
+    "label": "VERIFIED_ROI_DOCUMENTATION",
+    "title": "Verified ROI from Global Business Leaders",
+    "na": "N/A",
+    "playVideo": "Play Video",
+    "videoTitle": "Video Testimonial",
+    "goToSlide": "Go to slide"
+  },
+  "stack": {
+    "title": "The Machine Room",
+    "subtitle": "Built on enterprise-grade infrastructure. No wrappers. Just raw power.",
+    "architectureTitle": "Enterprise-Grade Architecture",
+    "descriptions": {
+      "mongodb": "NoSQL Document Database",
+      "nodejs": "JavaScript Runtime",
+      "react": "Frontend Framework",
+      "n8n": "Workflow Automation",
+      "openai": "AI & Machine Learning",
+      "stripe": "Payment Processing",
+      "aws": "Cloud Infrastructure"
+    }
+  },
+  "cta": {
+    "title": "Ready to build a business that runs itself?",
+    "subtitle": "Join the elite group of businesses that have automated their operations and reclaimed their time.",
+    "button": "Book Your Technical Discovery Call",
+    "scarcity": "Limited to 2 new client integrations per month to ensure architectural precision.",
+    "stats": {
+      "uptime": "Uptime Guarantee",
+      "monitoring": "System Monitoring",
+      "scalability": "Scalability Potential"
+    }
+  },
+  "footer": {
+    "tagline": "Architecting Autonomy",
+    "status": "SYSTEM_STATUS: OPERATIONAL",
+    "lastSync": "LST_SYNC",
+    "initiate": "Initiate Project",
+    "rights": "DRIPLARE_LABS // INFRA_VERIFIED",
+    "architectedBy": "Architected_By",
+    "sections": {
+      "ecosystem": "ECOSYSTEM",
+      "intelligence": "INTELLIGENCE",
+      "identity": "IDENTITY",
+      "connect": "CONNECT"
+    },
+    "subtitles": {
+      "services": "(SERVICES)",
+      "resources": "(RESOURCES)",
+      "driplare": "(DRIPLARE)",
+      "socials": "(SOCIALS)"
+    },
+    "links": {
+      "aiAgents": "Custom AI Agents",
+      "workflow": "Workflow Automation",
+      "mern": "MERN Infrastructure",
+      "data": "Data Monitoring",
+      "consulting": "Technical Consulting",
+      "results": "Engineered Results",
+      "insights": "Intelligence Hub",
+      "docs": "System Documentation",
+      "security": "FAQ & Security",
+      "about": "About the Architecture",
+      "methodology": "Our Methodology",
+      "contact": "Contact the Architect",
+      "strategy": "Book a Strategy Call"
+    }
+  },
+  "services": {
+    "aiAgents": {
+      "hero": {
+        "protocol": "PROTOCOL // AGENTIC_WORKFORCE_V1",
+        "title": "Hire Digital Workers",
+        "titleHighlight": "That Never Sleep.",
+        "description": "We architect autonomous AI Agents tailored to your unique business logic. Eliminate manual bottlenecks and drive 24/7 productivity.",
+        "cta": "Book Automation Audit",
+        "viewCases": "[ VIEW_USE_CASES ]"
+      },
+      "problemSolution": {
+        "manualTitle": "Manual_Burden",
+        "advantageTitle": "Driplare_Advantage",
+        "points": {
+          "latency": {
+            "label": "LATENCY",
+            "old": "Leads wait hours for responses",
+            "new": "Instant qualification & booking"
+          },
+          "capacity": {
+            "label": "CAPACITY",
+            "old": "40% of time on data entry",
+            "new": "Agents handle the busy work"
+          },
+          "precision": {
+            "label": "PRECISION",
+            "old": "Inconsistent human follow-up",
+            "new": "100% precision logic execution"
+          }
+        }
+      },
+      "capabilities": {
+        "tagline": "Modules",
+        "title": "Core_Capabilities",
+        "items": {
+          "leadQual": {
+            "title": "Lead Qualification",
+            "desc": "Vet and score leads from WhatsApp or Email. Only high-value prospects reach your CRM."
+          },
+          "support": {
+            "title": "Support Agents",
+            "desc": "Agents that access your internal RAG knowledge base to solve complex user queries."
+          },
+          "research": {
+            "title": "Research & Data",
+            "desc": "Autonomous agents that scrape and summarize market insights directly to your dashboard."
+          },
+          "ops": {
+            "title": "Operations Logic",
+            "desc": "Connect your stack via n8n to trigger database updates and Slack alerts instantly."
+          }
+        }
+      },
+      "technical": {
+        "tagline": "The_Stack",
+        "title": "Native Integration,",
+        "titleHighlight": "Not Just a Wrapper.",
+        "description": "We don't build \"GPT-wrappers.\" Driplare agents are architected into your MERN stack and n8n workflows for deep-level autonomy.",
+        "stack": {
+          "rag": {
+            "title": "RAG Architecture",
+            "desc": "Mathematically grounded in your specific data."
+          },
+          "mern": {
+            "title": "MERN Native",
+            "desc": "Seamless Node.js and MongoDB integration."
+          },
+          "workflow": {
+            "title": "Workflow Logic",
+            "desc": "Powered by n8n for 400+ third-party connections."
+          }
+        }
+      },
+      "roadmap": {
+        "tagline": "Protocol",
+        "title": "The Driplare Roadmap",
+        "steps": {
+          "step1": {
+            "title": "DISCOVERY",
+            "desc": "Audit manual friction points and identify high-ROI automation nodes.",
+            "tag": "AUDIT"
+          },
+          "step2": {
+            "title": "ARCHITECTURE",
+            "desc": "Design of RAG pipelines, agent personality, and tool-integration logic.",
+            "tag": "DESIGN"
+          },
+          "step3": {
+            "title": "DEPLOYMENT",
+            "desc": "Model training on proprietary data and secure environment staging.",
+            "tag": "LAUNCH"
+          },
+          "step4": {
+            "title": "OPTIMIZATION",
+            "desc": "Continuous logic refinement and performance scaling based on live data.",
+            "tag": "EVOLVE"
+          }
+        }
+      },
+      "faq": {
+        "title": "System_Clarifications",
+        "questions": {
+          "accuracy": {
+            "q": "Accuracy & Hallucinations?",
+            "a": "We utilize RAG (Retrieval-Augmented Generation). Your agent is mathematically grounded in your approved documentation, not general internet knowledge."
+          },
+          "legacy": {
+            "q": "Legacy Integration?",
+            "a": "Our agents connect via n8n or custom APIs to your existing CRM, ERP, and internal databases without replacing them."
+          },
+          "timeline": {
+            "q": "Deployment Timeline?",
+            "a": "An enterprise-grade agent typically moves from architecture to production in 14 to 28 days."
+          }
+        }
+      },
+      "cta": {
+        "title": "Stop Trading Hours",
+        "for": "for",
+        "tasks": "Tasks.",
+        "status": "[ STATUS: READY_FOR_ORCHESTRATION ]",
+        "button": "Engineer Your Efficiency"
+      }
+    },
+    "workflow": {
+      "hero": {
+        "status": "STATUS // SYSTEMS_OPTIMIZATION_ACTIVE",
+        "title": "Your Business,",
+        "titleHighlight": "On Autopilot.",
+        "description": "Stop losing hours to \"copy-paste\" tasks. We architect seamless automated pipelines that connect your stack and execute workflows while you sleep.",
+        "cta": "Start Automating Today",
+        "browse": "[ BROWSE_FLOW_EXAMPLES ]"
+      },
+      "visualization": {
+        "trigger": "Trigger",
+        "triggerText": "Manual Data Entry",
+        "engine": "Driplare_Engine",
+        "status": "Status: Processing_Logic",
+        "action": "Action",
+        "actionText": "Auto-Synced Success",
+        "caption": "System_Architecture_Visualization_V2"
+      },
+      "problems": {
+        "tagline": "Audit_Report",
+        "title": "The Cost of",
+        "titleHighlight": "Doing Nothing.",
+        "points": {
+          "stack": {
+            "title": "FRAGMENTED STACK",
+            "desc": "Your CRM, Billing, and Support don't speak. We fix the silence."
+          },
+          "manual": {
+            "title": "THE MANUAL TAX",
+            "desc": "Every hour of data entry is an hour stolen from growth."
+          },
+          "drift": {
+            "title": "HUMAN DRIFT",
+            "desc": "Manual processes eventually fail. Automation is 100% consistent."
+          }
+        }
+      },
+      "modules": {
+        "tagline": "Core_Modules",
+        "title": "Automation_Services",
+        "items": {
+          "crm": {
+            "title": "CRM Pipelines",
+            "copy": "Automatically route leads and trigger 'thank you' sequences instantly."
+          },
+          "finance": {
+            "title": "Finance Sync",
+            "copy": "Bridge Stripe and PayPal to your accounting software automatically."
+          },
+          "data": {
+            "title": "Data Sync",
+            "copy": "Keep Google Sheets and Project tools in perfect, real-time sync."
+          },
+          "reporting": {
+            "title": "Auto-Reporting",
+            "copy": "Daily metrics delivered to Slack or Email without logging into dashboards."
+          }
+        }
+      },
+      "integrations": {
+        "tagline": "Supported_Integrations"
+      },
+      "process": {
+        "title": "The_Methodology",
+        "stepLabel": "Step",
+        "steps": {
+          "mapping": {
+            "title": "MAPPING",
+            "desc": "We interview your team to find hidden manual tasks."
+          },
+          "architecting": {
+            "title": "ARCHITECTING",
+            "desc": "We build a digital blueprint of your new pipeline."
+          },
+          "testing": {
+            "title": "STRESS TESTING",
+            "desc": "Ensuring the workflow handles every edge case."
+          },
+          "handover": {
+            "title": "HANDOVER",
+            "desc": "Deployment and documentation for your team."
+          }
+        }
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "subtitle": "Clear answers to your most pressing questions about workflow automation.",
+        "questions": {
+          "security": {
+            "q": "Is my data secure during automation?",
+            "a": "Absolutely. We prioritize end-to-end encryption and often use self-hosted tools like n8n for clients who require maximum data privacy."
+          },
+          "failure": {
+            "q": "What if an automation breaks?",
+            "a": "We build \"Error Handling\" into every workflow. If a connection fails, you (and we) get an instant alert, and the system attempts a graceful recovery."
+          },
+          "legacy": {
+            "q": "Can you automate legacy software with no API?",
+            "a": "Often, yes. We use various \"hooks\" and custom scripts to bridge even the most stubborn software into a modern workflow."
+          }
+        }
+      },
+      "finalCta": {
+        "title": "Ready to stop the",
+        "titleHighlight": "Manual Grind?",
+        "button": "Request Workflow Audit"
+      }
+    },
+    "webDev": {
+      "hero": {
+        "infra": "INFRASTRUCTURE // MERN_CORE_V1",
+        "title": "Scalable Systems",
+        "titleHighlight": "Built to Endure.",
+        "description": "We don't just build websites; we engineer high-performance web ecosystems. Robust, secure, and ready to handle your next 10x growth phase.",
+        "cta": "Consult an Architect",
+        "viewStack": "[ VIEW_STACK_CAPABILITIES ]"
+      },
+      "advantages": {
+        "rapid": {
+          "title": "Rapid Innovation",
+          "desc": "JavaScript end-to-end means unified logic and 40% faster deployment cycles."
+        },
+        "scale": {
+          "title": "Infinite Scale",
+          "desc": "Native support for concurrent users and massive horizontal scaling."
+        },
+        "security": {
+          "title": "Security Native",
+          "desc": "Encrypted data layers and enterprise-grade JWT authentication."
+        }
+      },
+      "solutions": {
+        "tagline": "Development_Scope",
+        "header": "Solutions we engineer",
+        "items": {
+          "dashboards": {
+            "tag": "ANALYTICS",
+            "title": "Business Dashboards",
+            "desc": "Centralized MERN control centers that pull live data from your AI agents and automation."
+          },
+          "internal": {
+            "tag": "OPERATIONS",
+            "title": "Internal Tooling",
+            "desc": "Bespoke inventory systems and client portals designed for your unique team logic."
+          },
+          "api": {
+            "tag": "CONNECTIVITY",
+            "title": "API Ecosystems",
+            "desc": "The nervous system of your business. Secure, lightning-fast bridges between your stack."
+          },
+          "legacy": {
+            "tag": "LEGACY",
+            "title": "System Modernization",
+            "desc": "Migrating slow, outdated software into high-speed, mobile-responsive MERN environments."
+          }
+        }
+      },
+      "synergy": {
+        "tagline": "The_Driplare_Edge",
+        "title": "Built for",
+        "titleHighlight": "Intelligence.",
+        "description": "Most developers just build the app. We build the app to be Automation-Ready. Every system we engineer includes native API hooks for our AI Agents and n8n Workflows.",
+        "status": "Integration: Native // Logic: Unified",
+        "centerText": "SYNERGY"
+      },
+      "lifecycle": {
+        "header": "Project_Lifecycle",
+        "steps": {
+          "arch": {
+            "title": "REQUIREMENT_ARCH",
+            "desc": "Ensuring every line of code serves a specific business purpose."
+          },
+          "agile": {
+            "title": "AGILE_DEVELOPMENT",
+            "desc": "Sprint-based builds with real-time progress tracking."
+          },
+          "stress": {
+            "title": "STRESS_TESTING",
+            "desc": "Rigorous performance and load testing before deployment."
+          },
+          "cloud": {
+            "title": "CLOUD_ORCHESTRATION",
+            "desc": "High-performance hosting on AWS or Google Cloud."
+          }
+        }
+      },
+      "faq": {
+        "tagline": "Knowledge_Base",
+        "title": "Critical Questions.",
+        "titleHighlight": "Expert Answers.",
+        "description": "Transparent insights into our engineering philosophy and the technical foundations of your future digital ecosystem.",
+        "questions": {
+          "stack": {
+            "tag": "TECH_STACK",
+            "q": "Why choose MERN over No-Code or WordPress?",
+            "a": "No-code and WordPress are for templates; MERN is for products. If your business requires complex logic, custom AI integrations, or high-concurrency data processing, off-the-shelf solutions will eventually become a bottleneck. MERN offers total intellectual property ownership and infinite scalability."
+          },
+          "security": {
+            "tag": "SECURITY",
+            "q": "How do you ensure enterprise-grade data security?",
+            "a": "We implement a multi-layer security protocol: industry-standard JWT (JSON Web Tokens) for authentication, Bcrypt for password hashing, and CORS/Helmet for server-side protection. Furthermore, we architect our databases with Row-Level Security (RLS) and conduct rigorous penetration testing."
+          },
+          "integration": {
+            "tag": "INTEGRATION",
+            "q": "Can these systems communicate with my existing legacy software?",
+            "a": "Yes. Our specialty is building 'Headless' backends. We develop custom API wrappers and middleware that allow your modern MERN system to pull data from—and push data to—legacy databases, ERPs, or CRMs, effectively modernizing your stack."
+          },
+          "ownership": {
+            "tag": "OWNERSHIP",
+            "q": "Who owns the code once the project is complete?",
+            "a": "You do. Unlike SaaS platforms that charge you per user forever, we provide a full handover of the source code and documentation. You own the intellectual property (IP), giving you the freedom to maintain it internally."
+          }
+        }
+      },
+      "cta": {
+        "title": "Build Your Empire on",
+        "titleHighlight": "Solid Ground.",
+        "status": "[ STATUS: READY_FOR_CONSULTATION ]",
+        "button": "Start Technical Consultation"
+      }
+    },
+    "scraping": {
+      "hero": {
+        "badge": "ESTABLISHING_DATA_LINK_V4.0",
+        "title": "Your Private",
+        "titleHighlight": "Web Database.",
+        "description": "We engineer high-performance scrapers that bypass anti-bot shields to deliver structured, real-time intelligence directly to your dashboard.",
+        "cta": "Request Data Audit",
+        "status": "24/7_Market_Scanner_Active",
+        "metrics": {
+          "daily": "REQUESTS_DAILY",
+          "uptime": "UPTIME_REL",
+          "sources": "SOURCES",
+          "latency": "LATENCY"
+        }
+      },
+      "flow": {
+        "tagline": "Architecture_Lifecycle",
+        "header": "The Data Pipeline",
+        "steps": {
+          "targeting": { "title": "Targeting", "detail": "Anti-bot analysis" },
+          "extraction": {
+            "title": "Extraction",
+            "detail": "Residential IP rotation"
+          },
+          "refining": { "title": "Refining", "detail": "Data normalization" },
+          "monitoring": {
+            "title": "Monitoring",
+            "detail": "Real-time API push"
+          }
+        },
+        "footer": "READY_FOR_HANDOVER",
+        "final": "FINAL",
+        "next": "NEXT"
+      },
+      "capabilities": {
+        "tagline": "Specialized Nodes",
+        "description": "Architecting the bridge between raw web data and executive decision-making.",
+        "nodes": {
+          "market": {
+            "title": "Market Arbiter",
+            "focus": "E-Commerce Intelligence",
+            "desc": "Real-time monitoring of competitor price-drops and SKU movements. We convert market volatility into your competitive edge.",
+            "features": [
+              "Dynamic Pricing Flow",
+              "Inventory Leak Detection",
+              "Competitor Heatmaps",
+              "Stock-Out Alerts"
+            ]
+          },
+          "leads": {
+            "title": "Lead Catalyst",
+            "focus": "B2B Neural Growth",
+            "desc": "Automated extraction from LinkedIn, Google Maps, and niche directories. High-velocity pipeline feeding for modern sales teams.",
+            "features": [
+              "Identity Verification",
+              "Company Data Cleansing",
+              "Lead Scoring Logic",
+              "Verified Contact Matrix"
+            ]
+          },
+          "sentiment": {
+            "title": "Sentiment Pulse",
+            "focus": "Fin-Tech & Analytics",
+            "desc": "Deep-scraping news and social signals. We quantify the 'mood' of the market before the charts reflect the movement.",
+            "features": [
+              "Trend Velocity Tracking",
+              "News Aggregation Nodes",
+              "Crypto Social Scans",
+              "Volatility Forecasting"
+            ]
+          },
+          "insight": {
+            "title": "Core Insight Engine",
+            "focus": "Research & Media",
+            "desc": "Mass aggregation of articles and reviews processed through AI summarizing agents to extract raw, actionable intelligence.",
+            "features": [
+              "Academic Scraper Nodes",
+              "Review Sentiment Sync",
+              "Insight Distillation",
+              "Media Trend Synthesis"
+            ]
+          }
+        },
+        "footer": {
+          "title": "Custom Neural Architectures",
+          "desc": "Need a specific extraction engine? We build bespoke MERN interfaces to handle any data complexity or volume.",
+          "button": "Discuss Custom Project"
+        }
+      },
+      "dashboard": {
+        "title": "Your Command Center",
+        "description": "We don't just give you a CSV file. We build custom MERN-stack dashboards where you can visualize market shifts as they happen.",
+        "ui": {
+          "header": "Data Intelligence Dashboard",
+          "status": "SYSTEM_ACTIVE",
+          "lastUpdate": "LAST_UPDATE",
+          "charts": {
+            "price": "Competitor Price Tracking",
+            "volume": "Data Volume Trends"
+          },
+          "metrics": {
+            "title": "Key Metrics",
+            "sources": "Active Sources",
+            "success": "Success Rate",
+            "response": "Avg Response",
+            "freshness": "Data Freshness"
+          },
+          "actions": {
+            "title": "Quick Actions",
+            "report": "Generate Report",
+            "alert": "Set Alert",
+            "export": "Export Data"
+          }
+        },
+        "footer": {
+          "title": "Build Your Dashboard",
+          "desc": "Custom data visualization and real-time monitoring tailored to your business needs.",
+          "button": "Request Dashboard Demo"
+        }
+      },
+      "tech": {
+        "title": "Technical Resilience",
+        "description": "Anti-Bot & Scaling — We handle the complexity. Our scrapers are designed to bypass the most advanced anti-bot measures while maintaining 99% uptime.",
+        "metrics": {
+          "success": { "label": "Success Rate", "sub": "ANTI_BOT_BYPASS" },
+          "uptime": { "label": "Uptime", "sub": "SYSTEM_MONITORING" },
+          "sources": { "label": "Sources", "sub": "DATA_INTEGRATION" }
+        },
+        "status": "ARCHITECTURE_STATUS: ENTERPRISE_GRADE | SCALING: AUTO | RELIABILITY: MAXIMUM"
+      },
+      "cta": {
+        "badge": "SYSTEMS_READY: READY_FOR_DEPLOYMENT",
+        "titleStart": "Ready",
+        "titleHighlight": "to Decode",
+        "titleEnd": " Your Market?",
+        "description": "Stop guessing. Start extracting. We build the neural pathways between raw web data and your business strategy.",
+        "buttonPrimary": "Initialize Extraction",
+        "buttonSecondary": "View Technical Specs",
+        "trustGrid": {
+          "data": "Data Scanned",
+          "latency": "Avg. Latency",
+          "security": "Security",
+          "sources": "Scalable Sources"
+        }
+      }
+    },
+    "consulting": {
+      "hero": {
+        "badge": "ADVISORY_STATUS: ELITE_STRATEGY",
+        "titlePart1": "Technology is a Tool.",
+        "titlePart2": "Architecture is Strategy.",
+        "description": "Driplare provides the technical clarity needed to scale. We audit your infrastructure, identify AI feasibility, and build the full-stack system roadmaps that eliminate technical debt.",
+        "btnPrimary": "Book Strategic Audit",
+        "btnSecondary": "View Framework",
+        "schematic": {
+          "title": "DRIPLARE_SCHEMATIC_v4",
+          "node1": "Data_Extraction_Nodes",
+          "node2": "AI_Processing_Layer",
+          "node3": "Neural_Pathway_Sync"
+        }
+      },
+      "advisory": {
+        "badge": "THE_CONSULTING_FRAMEWORK",
+        "title": "Strategic Advisory Pillars",
+        "description": "Bridging the gap between engineering complexity and business objectives.",
+        "pillars": {
+          "ai": {
+            "title": "AI Feasibility & Roadmap",
+            "focus": "Investment Strategy",
+            "desc": "Not every problem needs an AI agent. We audit your workflows to identify where AI will provide the highest ROI.",
+            "stats": ["ROI Forecast", "Feasibility Score", "12mo Roadmap"]
+          },
+          "stack": {
+            "title": "Tech Stack Optimization",
+            "focus": "Technical Efficiency",
+            "desc": "Is your current stack holding you back? We analyze your infrastructure to eliminate redundancies and optimize performance.",
+            "stats": ["Debt Analysis", "Speed Optimization", "Redundancy Kill"]
+          },
+          "automation": {
+            "title": "Automation Architecture",
+            "focus": "System Scalability",
+            "desc": "We architect how your CRM, ERP, and AI systems communicate, ensuring 100% data integrity as you scale.",
+            "stats": ["Integrity Sync", "API Mapping", "Scale Validation"]
+          }
+        }
+      },
+      "roadmap": {
+        "title": "The Execution Pathway",
+        "subtitle": "From raw complexity to a streamlined technical asset. Our 3-phase methodology.",
+        "phases": {
+          "p1": {
+            "title": "Technical Audit",
+            "desc": "A deep-layer analysis of your current manual bottlenecks and legacy codebases. We find the leaks.",
+            "items": [
+              "Process Mapping",
+              "Architecture Review",
+              "Debt Identification"
+            ]
+          },
+          "p2": {
+            "title": "Strategic Blueprint",
+            "desc": "We deliver a comprehensive system schematic. A complete technical specification for your future scale.",
+            "items": [
+              "Tech Spec PDF",
+              "Cost-Benefit Logic",
+              "Implementation Path"
+            ]
+          },
+          "p3": {
+            "title": "Implementation Oversight",
+            "desc": "We lead the execution team to ensure the blueprint is built to spec. Quality assurance at every node.",
+            "items": [
+              "Code Integrity Review",
+              "QA Validation",
+              "Perf Optimization"
+            ]
+          }
+        }
+      },
+      "valueSplit": {
+        "visualText": "Strategic architecture visualizing data flow and security nodes.",
+        "title": "Avoid the",
+        "titleSpan": "\"Feature Trap\"",
+        "description": "Most agencies build features. We build **Systems**. We ensure the tools you build today don't become the technical debt of tomorrow.",
+        "cta": "Request Strategy Audit",
+        "benefits": {
+          "dev": "Reduced Dev Waste",
+          "hosting": "Hosting Optimization",
+          "security": "Security Compliance"
+        }
+      },
+      "marquee": {
+        "title": "Technical",
+        "titleSpan": "Stacks",
+        "titleEnd": "We Optimize",
+        "stats": {
+          "systems": "Systems Built",
+          "audits": "Debt Audits",
+          "success": "Success Rate",
+          "protocol": "Protocol Level"
+        }
+      },
+      "consulting_cta": {
+        "badge": "READY_FOR_SPEC_REVIEW?",
+        "title_main": "Let’s Engineer Your",
+        "title_span": "Next Decade",
+        "title_end": "of Growth.",
+        "desc": "Stop guessing your technical roadmap. Get a second opinion from architects who build for scale.",
+        "btn": "Schedule Architecture Call",
+        "tags": ["SYSTEMS_MAPPING", "DEBT_ELIMINATION", "AI_FEASIBILITY"]
+      }
+    }
   },
   "common": {
     "loading": "Loading...",

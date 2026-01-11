@@ -6,9 +6,10 @@ import { Play, CheckCircle, Clock, TrendingUp, Loader2 } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useMediaQuery } from "../../hooks/use-media-query";
 import { getReviews, type Testimonial } from "@/lib/review-action";
+import { useTranslation } from "react-i18next";
 
 export function SocialProofSection() {
-  // Initial value [] দেয়ায় 'possibly undefined' এরর সমাধান হবে
+  const { t } = useTranslation();
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -19,7 +20,6 @@ export function SocialProofSection() {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
 
-  // ডাটা ফেচিং সিস্টেম
   useEffect(() => {
     async function loadReviews() {
       try {
@@ -36,7 +36,6 @@ export function SocialProofSection() {
     loadReviews();
   }, []);
 
-  // Auto-rotate slides
   useEffect(() => {
     if (!isPaused && testimonials.length > 0) {
       intervalRef.current = setInterval(() => {
@@ -110,9 +109,6 @@ export function SocialProofSection() {
     );
   }
 
-  // যদি কোন রিভিউ না থাকে
-  // if (testimonials.length === 0) return null;
-
   return (
     <section
       className="py-20 overflow-hidden bg-[#121212] text-white relative"
@@ -130,11 +126,11 @@ export function SocialProofSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
         >
-          <div className="inline-block border border-[#E5E5E5]/30 rounded-lg px-6 py-2 mb-6 font-mono text-sm">
-            VERIFIED_ROI_DOCUMENTATION
+          <div className="inline-block border border-[#E5E5E5]/30 rounded-lg px-6 py-2 mb-6 font-mono text-sm uppercase tracking-widest">
+            {t("social.label")}
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-[#FF6B00] mb-4">
-            Verified ROI from Global Business Leaders
+            {t("social.title")}
           </h2>
         </motion.div>
 
@@ -177,13 +173,13 @@ export function SocialProofSection() {
                       <div className="flex items-center gap-2 text-[#FF6B00]">
                         <Clock className="w-4 h-4" />
                         <span className="font-mono text-xs">
-                          {testimonial.timeSaved || "N/A"}
+                          {testimonial.timeSaved || t("social.na")}
                         </span>
                       </div>
                       <div className="flex items-center gap-2 text-[#FF6B00]">
                         <TrendingUp className="w-4 h-4" />
                         <span className="font-mono text-xs">
-                          {testimonial.efficiencyGain || "N/A"}
+                          {testimonial.efficiencyGain || t("social.na")}
                         </span>
                       </div>
                     </div>
@@ -199,7 +195,7 @@ export function SocialProofSection() {
                       <Dialog>
                         <DialogTrigger asChild>
                           <button
-                            title="Play Video"
+                            title={t("social.playVideo")}
                             className="absolute inset-0 flex items-center justify-center group"
                           >
                             <div className="bg-[#FF6B00] rounded-full p-4 group-hover:scale-110 transition-transform shadow-xl">
@@ -219,7 +215,7 @@ export function SocialProofSection() {
                                   )
                                 : testimonial.videoUrl
                             }
-                            title="Video Testimonial"
+                            title={t("social.videoTitle")}
                             allowFullScreen
                             className="w-full h-full"
                           />
@@ -260,7 +256,7 @@ export function SocialProofSection() {
             {testimonials.map((_, i) => (
               <button
                 key={`dot-${i}`}
-                title={`Go to slide ${i + 1}`}
+                title={`${t("social.goToSlide")} ${i + 1}`}
                 onClick={() => goToSlide(i)}
                 className={`w-2 h-2 rounded-full transition-all ${i === activeIndex ? "bg-[#FF6B00] w-6" : "bg-white/20"}`}
               />

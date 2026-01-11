@@ -1,6 +1,7 @@
-'use client'
+"use client";
 
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const techStack = [
   "PUPPETEER",
@@ -16,120 +17,108 @@ const techStack = [
 ];
 
 export function TechStackTicker() {
+  const { t } = useTranslation();
+
   return (
-    <section className="py-16 bg-[#F9F9F9] border-t border-[#E5E5E5]">
+    <section className="py-20 bg-[#F9F9F9] dark:bg-black/20 border-y border-border dark:border-white/5 transition-colors">
       <div className="container">
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-[#0A0A0A] mb-4 font-montserrat">
-            Technical Resilience
+          <h2 className="text-3xl md:text-4xl font-black text-[#0A0A0A] dark:text-white mb-4 uppercase tracking-tighter">
+            {t("services.scraping.tech.title")}
           </h2>
-          <p className="text-[#0A0A0A]/70 max-w-2xl mx-auto font-inter">
-            Anti-Bot & Scaling — We handle the complexity. Our scrapers are
-            designed to bypass the most advanced anti-bot measures while
-            maintaining 99% uptime.
+          <p className="text-[#0A0A0A]/60 dark:text-white/50 max-w-2xl mx-auto font-medium">
+            {t("services.scraping.tech.description")}
           </p>
         </motion.div>
 
-        {/* Scrolling Ticker */}
-        <div className="relative overflow-hidden bg-white border border-[#E5E5E5] rounded-xl p-6">
-          {/* Left fade */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10"></div>
+        {/* Scrolling Ticker Container */}
+        <div className="relative overflow-hidden bg-white dark:bg-white/5 border border-border dark:border-white/10 rounded-2xl p-8 shadow-sm">
+          {/* Gradient Overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-[#111] to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-[#111] to-transparent z-10"></div>
 
-          {/* Right fade */}
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10"></div>
-
-          {/* Scrolling content */}
           <motion.div
-            className="flex gap-8 whitespace-nowrap"
-            animate={{
-              x: [0, -100 * techStack.length],
-            }}
+            className="flex gap-6 whitespace-nowrap"
+            animate={{ x: [0, -120 * techStack.length] }}
             transition={{
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 20,
+                duration: 25,
                 ease: "linear",
               },
             }}
           >
-            {/* Duplicate for seamless loop */}
             {[...techStack, ...techStack, ...techStack].map((tech, index) => (
-              <motion.div
+              <div
                 key={`${tech}-${index}`}
-                className="flex items-center gap-3 bg-[#F5F5F5] px-4 py-2 rounded-full border border-[#E5E5E5]"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="flex items-center gap-3 bg-[#F5F5F5] dark:bg-white/5 px-6 py-3 rounded-xl border border-border dark:border-white/10 hover:border-primary/50 transition-colors group cursor-default"
               >
-                <div className="w-2 h-2 bg-[#FF6B00] rounded-full animate-pulse"></div>
-                <span className="font-mono text-sm font-bold text-[#0A0A0A] tracking-wider">
+                <div className="w-2 h-2 bg-primary rounded-full shadow-[0_0_8px_rgba(255,107,0,0.5)] group-hover:scale-150 transition-transform"></div>
+                <span className="font-mono text-sm font-black text-[#0A0A0A] dark:text-white tracking-widest">
                   [{tech}]
                 </span>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
         </div>
 
-        {/* Technical Specs */}
+        {/* Stats Grid */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {[
+            {
+              v: "99%",
+              l: t("services.scraping.tech.metrics.success.label"),
+              s: t("services.scraping.tech.metrics.success.sub"),
+            },
+            {
+              v: "24/7",
+              l: t("services.scraping.tech.metrics.uptime.label"),
+              s: t("services.scraping.tech.metrics.uptime.sub"),
+            },
+            {
+              v: "50+",
+              l: t("services.scraping.tech.metrics.sources.label"),
+              s: t("services.scraping.tech.metrics.sources.sub"),
+            },
+          ].map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-white dark:bg-white/5 p-8 rounded-[2rem] border border-border dark:border-white/10 text-center hover:border-primary/30 transition-all"
+            >
+              <div className="text-4xl font-black text-primary mb-2 tracking-tighter italic">
+                {stat.v}
+              </div>
+              <div className="text-sm font-bold text-[#0A0A0A] dark:text-white uppercase tracking-tight">
+                {stat.l}
+              </div>
+              <div className="text-[10px] font-mono text-[#0A0A0A]/40 dark:text-white/30 mt-3 font-bold">
+                {stat.s}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Console-Style Status Note */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
-        >
-          <div className="bg-white p-6 rounded-xl border border-[#E5E5E5] text-center">
-            <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-2">
-              99%
-            </div>
-            <div className="text-sm text-[#0A0A0A]/60">Success Rate</div>
-            <div className="text-xs font-mono text-[#0A0A0A]/50 mt-2">
-              ANTI_BOT_BYPASS
-            </div>
-          </div>
-
-          <div className="bg-white p-6 rounded-xl border border-[#E5E5E5] text-center">
-            <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-2">
-              24/7
-            </div>
-            <div className="text-sm text-[#0A0A0A]/60">Uptime</div>
-            <div className="text-xs font-mono text-[#0A0A0A]/50 mt-2">
-              SYSTEM_MONITORING
-            </div>
-          </div>
-
-          <div className="bg-white p-6 rounded-xl border border-[#E5E5E5] text-center">
-            <div className="text-2xl font-mono font-bold text-[#FF6B00] mb-2">
-              50+
-            </div>
-            <div className="text-sm text-[#0A0A0A]/60">Sources</div>
-            <div className="text-xs font-mono text-[#0A0A0A]/50 mt-2">
-              DATA_INTEGRATION
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Architecture Note */}
-        <motion.div
+          className="text-center mt-16"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.8 }}
-          className="text-center mt-12"
         >
-          <div className="inline-block bg-[#0A0A0A] text-white px-8 py-4 rounded-xl">
-            <div className="flex items-center gap-3 font-mono text-sm">
-              <div className="w-3 h-3 bg-[#FF6B00] rounded-full animate-pulse"></div>
-              <span>
-                ARCHITECTURE_STATUS: ENTERPRISE_GRADE | SCALING: AUTO |
-                RELIABILITY: MAXIMUM
-              </span>
-            </div>
+          <div className="inline-flex items-center gap-4 bg-[#0A0A0A] dark:bg-primary/10 text-white dark:text-primary px-8 py-4 rounded-full border border-white/10 dark:border-primary/20 shadow-2xl shadow-primary/5">
+            <div className="w-2 h-2 bg-primary dark:bg-primary rounded-full animate-ping"></div>
+            <span className="font-mono text-[10px] md:text-xs font-bold tracking-[0.1em]">
+              {t("services.scraping.tech.status")}
+            </span>
           </div>
         </motion.div>
       </div>

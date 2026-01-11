@@ -1,29 +1,32 @@
-'use client'
+"use client";
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function FeaturedProjectSection() {
+  const { t } = useTranslation();
   const [logs, setLogs] = useState<string[]>([]);
-  const [currentLogIndex, setCurrentLogIndex] = useState(0);
 
+  // লগের টেক্সটগুলো সবসময় ইংরেজি ভার্সন থেকে নেওয়ার জন্য
   const sampleLogs = [
-    "[SYSTEM]: SKU-502 Updated. Price Change: -5%",
     "[SYSTEM]: Competitor analysis complete. 1,247 products scanned.",
-    "[SYSTEM]: Alert triggered: Price drop detected on Product-X",
-    "[SYSTEM]: Daily report generated. 23 price changes logged.",
-    "[SYSTEM]: SKU-789 Updated. Price Change: +2%",
-    "[SYSTEM]: Real-time monitoring active. 2,000+ SKUs tracked.",
-    "[SYSTEM]: Notification sent to sales team.",
     "[SYSTEM]: Data synchronization complete.",
+    "[SYSTEM]: Real-time monitoring active. 2,000+ SKUs tracked.",
+    "[SYSTEM]: Daily report generated. 23 price changes logged.",
+    "[SYSTEM]: Alert triggered: Price drop detected on Product-X",
+    "[SYSTEM]: Notification sent to sales team.",
+    "[SYSTEM]: SKU-789 Updated. Price Change: +2%",
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setLogs(prev => {
+      setLogs((prev) => {
         const newLogs = [...prev];
-        newLogs.push(sampleLogs[Math.floor(Math.random() * sampleLogs.length)]);
-        return newLogs.slice(-8); // Keep last 8 logs
+        const randomLog =
+          sampleLogs[Math.floor(Math.random() * sampleLogs.length)];
+        newLogs.push(randomLog);
+        return newLogs.slice(-8); // আগের ডিজাইন অনুযায়ী ৮টি লগ রাখা
       });
     }, 2000);
 
@@ -32,95 +35,108 @@ export function FeaturedProjectSection() {
 
   return (
     <section className="py-20 bg-[#0A0A0A] text-white">
-      <div className="container">
+      <div className="container mx-auto px-4">
+        {/* Header */}
         <motion.div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#FF6B00] mb-4">
-            Intelligence in Action
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            {t("featured.title")}
           </h2>
-          <p className="text-lg text-white/80 max-w-2xl mx-auto">
-            A teaser of your Competitor Pricing Monitor.
+          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+            {t("featured.subtitle")}
           </p>
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
-          {/* Terminal-like interface */}
-          <div className="bg-black/50 border border-[#E5E5E5]/20 rounded-xl overflow-hidden">
-            {/* Terminal header */}
-            <div className="bg-[#1F1F1F] px-4 py-2 border-b border-[#E5E5E5]/20">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="text-white/60 text-sm font-mono ml-4">
-                  pricing-monitor:~$
-                </span>
+          {/* Terminal Box (ডিজাইন হুবহু image_08bc50.png এর মতো) */}
+          <div className="bg-[#0A0A0A] border border-[#1F1F1F] rounded-lg overflow-hidden shadow-2xl">
+            {/* Terminal Header Bar */}
+            <div className="bg-[#1F1F1F] px-4 py-2 flex items-center gap-2">
+              <div className="flex gap-1.5">
+                <div className="w-3 h-3 bg-[#FF5F56] rounded-full"></div>
+                <div className="w-3 h-3 bg-[#FFBD2E] rounded-full"></div>
+                <div className="w-3 h-3 bg-[#27C93F] rounded-full"></div>
               </div>
+              <span className="text-white/40 text-xs font-mono ml-4">
+                pricing-monitor:~$
+              </span>
             </div>
 
-            {/* Terminal content */}
-            <div className="p-6 font-mono text-sm">
-              {/* Static header */}
-              <div className="mb-6">
-                <div className="text-green-400 mb-2">Competitor Pricing Monitor v2.1</div>
-                <div className="text-blue-400">Status: <span className="text-green-400">ACTIVE</span></div>
-                <div className="text-yellow-400">Monitored SKUs: <span className="text-white">2,000+</span></div>
-                <div className="text-purple-400">Update Frequency: <span className="text-white">60 seconds</span></div>
+            {/* Terminal Content Area */}
+            <div className="p-8 font-mono text-sm min-h-[400px]">
+              {/* Status Info Section */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-2 mb-10">
+                <div className="flex gap-2">
+                  <span className="text-[#27C93F]">
+                    Competitor Pricing Monitor v2.1
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-[#4DA6FF]">
+                    {t("featured.terminal.statusLabel")}
+                  </span>
+                  <span className="text-[#27C93F]">
+                    {t("featured.terminal.statusValue")}
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-[#FFBD2E]">
+                    {t("featured.terminal.skusLabel")}
+                  </span>
+                  <span className="text-white">
+                    {t("featured.terminal.skusValue")}
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-[#A370FF]">
+                    {t("featured.terminal.freqLabel")}
+                  </span>
+                  <span className="text-white">
+                    {t("featured.terminal.freqValue")}
+                  </span>
+                </div>
               </div>
 
-              {/* Live logs */}
-              <div className="space-y-1 mb-4">
+              {/* Real-time Logs (সর্বদা ইংরেজিতে) */}
+              <div className="space-y-1 mb-8">
                 {logs.map((log, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="text-green-400"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-[#27C93F]"
                   >
                     {log}
                   </motion.div>
                 ))}
               </div>
 
-              {/* Blurred dashboard preview */}
-              <div className="relative bg-[#1F1F1F] rounded-lg p-4 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FF6B00]/20 to-transparent animate-pulse"></div>
-                <div className="relative">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-white font-semibold">Price Change Alerts</h3>
-                    <span className="text-[#FF6B00] font-mono text-sm">Live</span>
-                  </div>
-
-                  {/* Mock chart */}
-                  <div className="h-32 flex items-end justify-between gap-1 mb-4">
-                    {[...Array(12)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="bg-[#FF6B00] flex-1 rounded-t"
-                        style={{ height: `${20 + Math.random() * 60}%` }}
-                        animate={{ height: `${20 + Math.random() * 60}%` }}
-                        transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="text-center text-white/60 text-sm">
-                    2,000+ Competitor SKU's monitored every 60 seconds. 100% Automated.
-                  </div>
+              {/* Locked Preview Area */}
+              <div className="relative mt-12 rounded-md overflow-hidden border border-white/5 bg-[#141414] p-8">
+                {/* Mock Chart behind blur */}
+                <div className="h-20 flex items-end gap-1 opacity-20 blur-sm">
+                  {[...Array(15)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="bg-[#FF6B00] flex-1"
+                      style={{ height: `${20 + Math.random() * 80}%` }}
+                    ></div>
+                  ))}
                 </div>
 
-                {/* Blur overlay */}
-                <div className="absolute inset-0 bg-[#0A0A0A]/80 backdrop-blur-sm flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-[#FF6B00] text-2xl mb-2">🔒</div>
-                    <p className="text-white/60 font-mono text-sm">Dashboard Preview</p>
-                    <p className="text-white/40 text-xs">Contact for full access</p>
-                  </div>
+                {/* Lock Overlay */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-[2px]">
+                  <div className="text-[#FFBD2E] text-2xl mb-2">🔒</div>
+                  <h4 className="text-white font-bold tracking-widest text-xs uppercase">
+                    {t("featured.terminal.preview")}
+                  </h4>
+                  <p className="text-white/40 text-[10px] mt-1">
+                    {t("featured.terminal.contact")}
+                  </p>
                 </div>
               </div>
             </div>

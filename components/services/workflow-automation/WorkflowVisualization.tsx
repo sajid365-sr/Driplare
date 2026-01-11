@@ -1,43 +1,47 @@
-'use client'
+"use client";
 
 import { motion } from "framer-motion";
 import { Zap, ArrowRight, Settings } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const WorkflowVisualization = () => {
+  const { t } = useTranslation();
+
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="py-24 bg-white dark:bg-[#0A0A0A] overflow-hidden transition-colors duration-300">
       <div className="container">
-        <div className="relative group p-1 bg-border/40 rounded-[3rem] overflow-hidden shadow-2xl">
+        <div className="relative group p-1 bg-border/40 dark:bg-white/5 rounded-[3rem] overflow-hidden shadow-2xl">
           {/* Main Visual Container */}
           <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-[2.8rem] overflow-hidden flex items-center justify-center">
             {/* Background Image with Overlay */}
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-105"
               style={{
-                backgroundImage: `url('https://thumbs.dreamstime.com/b/futuristic-neon-digital-circuit-board-background-glowing-abstract-lines-circular-nodes-high-tech-connectivity-design-402151126.jpg')`, // Technical circuit/node background
+                backgroundImage: `url('https://thumbs.dreamstime.com/b/futuristic-neon-digital-circuit-board-background-glowing-abstract-lines-circular-nodes-high-tech-connectivity-design-402151126.jpg')`,
               }}
             />
 
-            {/* Dark/Gradient Overlay to make elements pop */}
+            {/* Dark/Gradient Overlay */}
             <div className="absolute inset-0 bg-[#0A0A0A]/80 backdrop-blur-[2px]" />
 
-            {/* The Orchestration Layer (The UI Elements) */}
+            {/* The Orchestration Layer */}
             <div className="relative z-10 w-full max-w-5xl px-6">
               <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4">
-                {/* Step 1: Input */}
+                {/* Step 1: Input/Trigger */}
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
                   className="w-full md:w-64 p-6 bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl text-center"
                 >
                   <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <Settings className="text-white/40" size={20} />
                   </div>
                   <span className="font-mono text-[10px] text-primary font-bold tracking-widest uppercase mb-2 block">
-                    Trigger
+                    {t("services.workflow.visualization.trigger")}
                   </span>
                   <p className="text-white font-bold text-sm uppercase">
-                    Manual Data Entry
+                    {t("services.workflow.visualization.triggerText")}
                   </p>
                 </motion.div>
 
@@ -54,10 +58,11 @@ export const WorkflowVisualization = () => {
                   />
                 </div>
 
-                {/* Step 2: Central Hub */}
+                {/* Step 2: Central Hub (Engine) */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
                   className="w-full md:w-80 p-10 bg-[#0A0A0A] border-2 border-primary rounded-[2.5rem] text-center shadow-[0_0_50px_rgba(255,107,0,0.2)] relative overflow-hidden"
                 >
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
@@ -67,10 +72,10 @@ export const WorkflowVisualization = () => {
                     fill="currentColor"
                   />
                   <h3 className="text-white font-black text-xl tracking-tighter uppercase mb-2">
-                    Driplare_Engine
+                    {t("services.workflow.visualization.engine")}
                   </h3>
                   <span className="font-mono text-[9px] text-white/40 tracking-[0.3em] uppercase">
-                    Status: Processing_Logic
+                    {t("services.workflow.visualization.status")}
                   </span>
                 </motion.div>
 
@@ -87,20 +92,21 @@ export const WorkflowVisualization = () => {
                   />
                 </div>
 
-                {/* Step 3: Output */}
+                {/* Step 3: Output/Action */}
                 <motion.div
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
                   className="w-full md:w-64 p-6 bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl text-center"
                 >
                   <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <ArrowRight className="text-white/40" size={20} />
                   </div>
                   <span className="font-mono text-[10px] text-primary font-bold tracking-widest uppercase mb-2 block">
-                    Action
+                    {t("services.workflow.visualization.action")}
                   </span>
                   <p className="text-white font-bold text-sm uppercase">
-                    Auto-Synced Success
+                    {t("services.workflow.visualization.actionText")}
                   </p>
                 </motion.div>
               </div>
@@ -108,10 +114,10 @@ export const WorkflowVisualization = () => {
           </div>
 
           {/* Bottom Caption Overlay */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-max">
             <div className="px-6 py-2 bg-primary/10 backdrop-blur-xl border border-primary/20 rounded-full">
               <p className="font-mono text-[10px] font-black text-primary tracking-[0.4em] uppercase">
-                System_Architecture_Visualization_V2
+                {t("services.workflow.visualization.caption")}
               </p>
             </div>
           </div>

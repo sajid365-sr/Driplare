@@ -1,46 +1,49 @@
-import { motion } from "framer-motion";
-import { BrainCircuit, Workflow, Database, Check, ArrowRight } from "lucide-react";
+"use client";
 
-const pillars = [
-  {
-    icon: BrainCircuit,
-    title: "Autonomous AI Agents",
-    description: "Digital workers trained on your business data to handle support, lead gen, and research. They learn your processes and execute them flawlessly.",
-    features: [
-      "Natural language processing for customer queries",
-      "Automated data entry and validation",
-      "Intelligent routing and prioritization",
-      "24/7 availability without fatigue"
-    ],
-    status: "READY_FOR_DEPLOY"
-  },
-  {
-    icon: Workflow,
-    title: "Workflow Architecture",
-    description: "End-to-end automation using n8n to connect your entire stack (CRM, Finance, Operations). We build the nervous system of your business.",
-    features: [
-      "Seamless API integrations",
-      "Conditional logic and triggers",
-      "Error handling and recovery",
-      "Real-time data synchronization"
-    ],
-    status: "ACTIVE_NEXUS"
-  },
-  {
-    icon: Database,
-    title: "MERN System Engineering",
-    description: "Custom-built dashboards and secure backends to house your intelligent data. Built with MongoDB, Express, React, and Node.js for maximum performance.",
-    features: [
-      "Scalable database architecture",
-      "Real-time data visualization",
-      "Secure authentication systems",
-      "Performance-optimized APIs"
-    ],
-    status: "INFRA_STABLE"
-  }
-];
+import { motion } from "framer-motion";
+import {
+  BrainCircuit,
+  Workflow,
+  Database,
+  Check,
+  ArrowRight,
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function CorePillarsSection() {
+  const { t } = useTranslation();
+
+  // Pillars array moved inside component to access translations
+  const pillars = [
+    {
+      icon: BrainCircuit,
+      title: t("pillars.items.agents.title"),
+      description: t("pillars.items.agents.description"),
+      features: t("pillars.items.agents.features", {
+        returnObjects: true,
+      }) as string[],
+      status: "READY_FOR_DEPLOY",
+    },
+    {
+      icon: Workflow,
+      title: t("pillars.items.workflow.title"),
+      description: t("pillars.items.workflow.description"),
+      features: t("pillars.items.workflow.features", {
+        returnObjects: true,
+      }) as string[],
+      status: "ACTIVE_NEXUS",
+    },
+    {
+      icon: Database,
+      title: t("pillars.items.mern.title"),
+      description: t("pillars.items.mern.description"),
+      features: t("pillars.items.mern.features", {
+        returnObjects: true,
+      }) as string[],
+      status: "INFRA_STABLE",
+    },
+  ];
+
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       {/* Background Grid Pattern */}
@@ -48,7 +51,7 @@ export function CorePillarsSection() {
         className="absolute inset-0 z-0 opacity-[0.02]"
         style={{
           backgroundImage: `linear-gradient(#0A0A0A 1px, transparent 1px), linear-gradient(90deg, #0A0A0A 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
+          backgroundSize: "40px 40px",
         }}
       />
 
@@ -61,10 +64,11 @@ export function CorePillarsSection() {
           viewport={{ once: true }}
         >
           <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-[#0A0A0A] mb-8">
-            The Core <span className="text-primary">Pillars.</span>
+            {t("pillars.title")}{" "}
+            <span className="text-primary">{t("pillars.titleAccent")}</span>
           </h2>
           <p className="text-xl text-[#0A0A0A]/60 leading-relaxed font-medium">
-            From fragmented tasks to high-value architectural systems that transform how your business operates.
+            {t("pillars.subtitle")}
           </p>
         </motion.div>
 
@@ -91,7 +95,10 @@ export function CorePillarsSection() {
               {/* Icon */}
               <div className="mb-10">
                 <div className="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
-                  <pillar.icon className="h-10 w-10 text-primary" strokeWidth={1.5} />
+                  <pillar.icon
+                    className="h-10 w-10 text-primary"
+                    strokeWidth={1.5}
+                  />
                 </div>
               </div>
 
@@ -100,7 +107,7 @@ export function CorePillarsSection() {
                 <h3 className="text-3xl font-black text-[#0A0A0A] mb-4 tracking-tight">
                   {pillar.title}
                 </h3>
-                <p className="text-[#0A0A0A]/60  leading-relaxed font-medium">
+                <p className="text-[#0A0A0A]/60 leading-relaxed font-medium">
                   {pillar.description}
                 </p>
 
