@@ -5,6 +5,7 @@ import I18nProvider from "@/components/i18n-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/Footer";
 import SyncUser from "@/components/auth/SyncUser";
+import ChatWidget from "@/components/chatbot/ChatWidget";
 
 // Montserrat configuration
 const montserrat = Montserrat({
@@ -37,6 +38,7 @@ export default function RootLayout({
             <Navbar />
             <main>
               <SyncUser />
+              <ChatWidget />
               {children}
             </main>
             <Footer />
