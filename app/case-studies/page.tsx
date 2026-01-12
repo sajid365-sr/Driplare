@@ -1,7 +1,8 @@
 "use client";
 
-import type { Metadata } from "next";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { motion, AnimatePresence } from "framer-motion";
 import { ResultsHero } from "@/components/CaseStudies/ResultsHero";
 import { FilterBar } from "@/components/CaseStudies/FilterBar";
 import { CaseStudyCard } from "@/components/CaseStudies/CaseStudyCard";
@@ -9,114 +10,76 @@ import { VideoTestimonialCarousel } from "@/components/CaseStudies/VideoTestimon
 import { LogicAccordion } from "@/components/CaseStudies/LogicAccordion";
 import { FinalCTA } from "@/components/CaseStudies/FinalCTA";
 
-const caseStudies = [
-  {
-    id: "pricing-monitor",
-    title: "Competitor Pricing & Market Intelligence System",
-    context: "E-commerce Enterprise (5,000+ SKUs)",
-    problem:
-      "40+ manual hours per week spent tracking competitor shifts across 15 websites.",
-    solution:
-      "An autonomous Node.js scraper integrated with an AI Analysis Agent and a React Dashboard.",
-    result: "98% Reduction in Manual Labor | Instant Price-Adjustment Alerts",
-    techTags: ["Node.js", "n8n", "Puppeteer", "OpenAI", "MongoDB", "React"],
-    imageUrl: "",
-    category: "AI_AGENTS",
+// টেকনিক্যাল স্ট্যাটিক ডাটা (যা ল্যাঙ্গুয়েজ ভেদে বদলাবে না)
+const techMapping = {
+  "ecommerce-ai-agent": {
+    tags: ["OpenAI", "Vector Database", "n8n", "Meta API"],
+    cat: "AI_AGENTS",
   },
-  {
-    id: "workflow-automation",
-    title: "Multi-Platform Workflow Automation Suite",
-    context: "SaaS Company (500+ Daily Transactions)",
-    problem:
-      "Manual data synchronization between CRM, accounting software, and project management tools causing delays and errors.",
-    solution:
-      "Custom n8n workflows connecting all business systems with intelligent routing and error handling.",
-    result: "85% Faster Processing | Zero Manual Data Entry Errors",
-    techTags: ["n8n", "Node.js", "REST APIs", "Webhook Integration", "MongoDB"],
-    imageUrl: "",
-    category: "WORKFLOW_AUTOMATION",
+  "pricing-monitor": {
+    tags: ["Node.js", "n8n", "Puppeteer", "OpenAI"],
+    cat: "AI_AGENTS",
   },
-  {
-    id: "mern-dashboard",
-    title: "Real-Time Business Intelligence Dashboard",
-    context: "Manufacturing Company (Global Operations)",
-    problem:
-      "Scattered data across multiple systems with no unified view of business performance.",
-    solution:
-      "Full-stack MERN application with real-time data visualization and automated reporting.",
-    result: "300% Improvement in Decision Speed | 24/7 System Monitoring",
-    techTags: [
-      "MongoDB",
-      "Express.js",
-      "React",
-      "Node.js",
-      "Socket.io",
-      "Chart.js",
-    ],
-    imageUrl: "",
-    category: "MERN_INFRASTRUCTURE",
+  "workflow-automation": {
+    tags: ["n8n", "REST APIs", "Webhooks"],
+    cat: "WORKFLOW_AUTOMATION",
   },
-];
+  "mern-dashboard": {
+    tags: ["MongoDB", "React", "Socket.io"],
+    cat: "MERN_INFRASTRUCTURE",
+  },
+};
 
-// export const metadata: Metadata = {
-//   title: "Case Studies - Real Results from AI & Automation Projects",
-//   description:
-//     "Explore real-world case studies showcasing the impact of our AI agents, workflow automation, and MERN stack development solutions.",
-// };
-
-export default function CaseStudies() {
+export default function CaseStudies2() {
+  const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState("all");
+
+  // JSON থেকে ডাটা আনা
+  const studiesData = t("case_studies.items", { returnObjects: true }) as any[];
+
+  // স্ট্যাটিক টেকনিক্যাল ডাটার সাথে মার্জ করা
+  const caseStudies = Array.isArray(studiesData)
+    ? studiesData.map((study) => ({
+        ...study,
+        techTags: techMapping[study.id as keyof typeof techMapping]?.tags || [],
+        category: techMapping[study.id as keyof typeof techMapping]?.cat || "",
+      }))
+    : [];
 
   const filteredCaseStudies = caseStudies.filter((study) => {
     if (activeFilter === "all") return true;
-    return study.category.toLowerCase().includes(activeFilter);
+    return study.category.toLowerCase().includes(activeFilter.toLowerCase());
   });
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-background text-foreground pt-20">
       <ResultsHero />
 
-      {/* Filter Bar */}
-      <FilterBar activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+      <div className="container mx-auto px-4">
+        <FilterBar
+          activeFilter={activeFilter}
+          onFilterChange={setActiveFilter}
+        />
 
-      {/* Case Study Grid */}
-      <section className="py-20 bg-[#F9F9F9]">
-        <div className="container">
-          <div className="space-y-12">
-            {filteredCaseStudies.map((study, index) => (
-              <CaseStudyCard
-                key={study.id}
-                title={study.title}
-                context={study.context}
-                problem={study.problem}
-                solution={study.solution}
-                result={study.result}
-                techTags={study.techTags}
-                imageUrl={study.imageUrl}
-                category={study.category}
-                delay={index * 0.2}
-              />
-            ))}
+        <section className="py-20">
+          <div className="grid grid-cols-1 gap-8">
+            <AnimatePresence mode="popLayout">
+              {filteredCaseStudies.map((study, index) => (
+                <CaseStudyCard key={study.id} study={study} index={index} />
+              ))}
+            </AnimatePresence>
           </div>
+        </section>
+      </div>
 
-          {filteredCaseStudies.length === 0 && (
-            <div className="text-center py-20">
-              <p className="text-[#0A0A0A]/60 font-mono text-lg">
-                NO_PROJECTS_FOUND: No case studies match the selected filter.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Video Testimonials */}
       <VideoTestimonialCarousel />
 
-      {/* Logic Accordion */}
-      <LogicAccordion />
+      <div className="bg-accent/5 py-24">
+        <div className="container mx-auto px-4">
+          <LogicAccordion />
+        </div>
+      </div>
 
-      {/* Final CTA */}
       <FinalCTA />
     </div>
   );

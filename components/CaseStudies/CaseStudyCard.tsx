@@ -1,125 +1,118 @@
-'use client'
+"use client";
 
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight, Cpu, Target, Zap, Download } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
-interface CaseStudyCardProps {
-  title: string;
-  context: string;
-  problem: string;
-  solution: string;
-  result: string;
-  techTags: string[];
-  imageUrl: string;
-  category: string;
-  delay?: number;
-}
+export function CaseStudyCard({ study, index }: any) {
+  const { t } = useTranslation();
 
-export function CaseStudyCard({
-  title,
-  context,
-  problem,
-  solution,
-  result,
-  techTags,
-  imageUrl,
-  category,
-  delay = 0
-}: CaseStudyCardProps) {
+  const handleDownloadPDF = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(`/pdfs/driplare-${study.id}-report.pdf`, "_blank");
+  };
+
   return (
     <motion.div
-      className="group bg-white/80 backdrop-blur-lg border border-[#E5E5E5] rounded-xl overflow-hidden hover:border-[#FF6B00] transition-all duration-300 hover:shadow-2xl"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay }}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 20 }}
+      transition={{ delay: index * 0.1 }}
+      className="group relative bg-card dark:bg-[#0D0D0E] border border-border/50 dark:border-white/10 rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-primary/5"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        {/* Left Side - Visual */}
-        <div className="relative bg-[#F5F5F5] p-8 flex items-center justify-center min-h-[300px]">
-          {/* Technical Schematic Background */}
-          <div className="absolute inset-0 opacity-20">
-            <svg className="w-full h-full" viewBox="0 0 400 300">
-              <defs>
-                <pattern id={`grid-${title.replace(/\s+/g, '-').toLowerCase()}`} width="20" height="20" patternUnits="userSpaceOnUse">
-                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#E5E5E5" strokeWidth="1"/>
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill={`url(#grid-${title.replace(/\s+/g, '-').toLowerCase()})`} />
-
-              {/* Circuit paths */}
-              <path
-                d="M50,50 L150,50 L150,100 L250,100 L250,150 L350,150"
-                fill="none"
-                stroke="#FF6B00"
-                strokeWidth="2"
-                opacity="0.6"
-              />
-              <circle cx="50" cy="50" r="4" fill="#FF6B00" opacity="0.8"/>
-              <circle cx="150" cy="50" r="4" fill="#FF6B00" opacity="0.8"/>
-              <circle cx="250" cy="100" r="4" fill="#FF6B00" opacity="0.8"/>
-              <circle cx="350" cy="150" r="4" fill="#FF6B00" opacity="0.8"/>
-            </svg>
+      <div className="flex flex-col lg:flex-row">
+        {/* Metric Sidebar - Visual Anchor */}
+        <div className="lg:w-1/4 bg-primary p-8 flex flex-col justify-center items-center text-white text-center relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10 bg-[url('/grid-white.svg')] bg-center"></div>
+          <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.2em] opacity-80 mb-2">
+            {t("case_studies.case_study_card.roi_label")}
+          </span>
+          <div className="relative z-10 text-5xl font-black tracking-tighter">
+            {study.metric}
           </div>
-
-          {/* Project Image/Icon */}
-          <div className="relative z-10">
-            {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt={title}
-                className="w-48 h-32 object-contain filter grayscale-[80%] contrast-125"
-              />
-            ) : (
-              <div className="w-48 h-32 bg-[#FF6B00]/10 rounded-lg flex items-center justify-center">
-                <div className="text-6xl text-[#FF6B00] opacity-50">⚡</div>
-              </div>
-            )}
-          </div>
-
-          {/* Category Badge */}
-          <div className="absolute top-4 left-4">
-            <Badge variant="outline" className="bg-[#0A0A0A] text-white border-[#FF6B00] font-mono text-xs">
-              {category}
-            </Badge>
-          </div>
+          <Zap className="relative z-10 mt-4 opacity-50" size={32} />
         </div>
 
-        {/* Right Side - Data */}
-        <div className="p-8">
-          <h3 className="text-2xl font-bold text-[#0A0A0A] mb-2">{title}</h3>
-          <p className="text-[#0A0A0A]/60 font-mono text-sm mb-6">{context}</p>
-
-          <div className="space-y-4 mb-6">
-            <div>
-              <h4 className="font-bold text-[#0A0A0A] mb-2">THE PROBLEM</h4>
-              <p className="text-[#0A0A0A]/70 text-sm leading-relaxed">{problem}</p>
+        {/* Content Body */}
+        <div className="flex-1 p-8 lg:p-12 space-y-8 bg-gradient-to-br from-card to-background dark:from-[#0D0D0E] dark:to-[#050505]">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono text-primary font-bold uppercase tracking-widest px-2 py-0.5 bg-primary/10 dark:bg-primary/20 rounded-md">
+                {t("case_studies.case_study_card.sector_label")}:{" "}
+                {study.context}
+              </span>
+              <h3 className="text-2xl md:text-4xl font-black mt-2 tracking-tight dark:text-white">
+                {study.title}
+              </h3>
             </div>
 
-            <div>
-              <h4 className="font-bold text-[#0A0A0A] mb-2">THE SOLUTION</h4>
-              <p className="text-[#0A0A0A]/70 text-sm leading-relaxed">{solution}</p>
-            </div>
-
-            <div className="bg-[#FF6B00]/5 border border-[#FF6B00]/20 rounded-lg p-4">
-              <h4 className="font-bold text-[#FF6B00] mb-2">THE RESULT</h4>
-              <p className="text-[#FF6B00] font-mono text-lg font-bold">{result}</p>
+            {/* Tech Stack - Badge Style */}
+            <div className="flex flex-wrap gap-2 justify-start md:justify-end max-w-xs">
+              {study.techTags.map((tag: string) => (
+                <span
+                  key={tag}
+                  className="px-2 py-1 bg-accent/50 dark:bg-white/5 rounded border border-border/50 dark:border-white/10 text-[9px] font-mono font-bold uppercase tracking-tighter dark:text-white/70"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
 
-          {/* Tech Stack */}
-          <div>
-            <h4 className="font-bold text-[#0A0A0A] mb-3">TECH_STACK</h4>
-            <div className="flex flex-wrap gap-2">
-              {techTags.map((tag, index) => (
-                <Badge
-                  key={index}
-                  variant="secondary"
-                  className="bg-[#E5E5E5] text-[#0A0A0A] font-mono text-xs hover:bg-[#FF6B00] hover:text-white transition-colors"
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-6 border-y border-border/50 dark:border-white/5">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground dark:text-white/40 uppercase tracking-widest">
+                <Target size={14} className="text-red-500" />{" "}
+                {t("case_studies.case_study_card.bottleneck_label")}
+              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground dark:text-white/60 font-medium italic">
+                "{study.problem}"
+              </p>
+            </div>
+            <div className="space-y-3 border-l border-border/30 dark:border-white/10 pl-8 hidden md:block">
+              <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground dark:text-white/40 uppercase tracking-widest">
+                <Cpu size={14} className="text-primary" />{" "}
+                {t("case_studies.case_study_card.architecture_label")}
+              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground dark:text-white/70">
+                {study.solution}
+              </p>
+            </div>
+          </div>
+
+          <div className="pt-2 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-1">
+              <p className="text-[10px] font-bold text-muted-foreground dark:text-white/40 uppercase tracking-widest">
+                {t("case_studies.case_study_card.output_label")}
+              </p>
+              <div className="text-primary font-black text-2xl tracking-tighter uppercase italic">
+                {study.result}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleDownloadPDF}
+                className="rounded-xl border-border/50 dark:border-white/10 gap-2 hover:bg-primary/5 dark:hover:bg-white/5 transition-all hidden sm:flex dark:text-white"
+              >
+                <Download size={14} />{" "}
+                {t("case_studies.case_study_card.pdf_btn")}
+              </Button>
+
+              <Link href={`/case-studies/${study.id}`}>
+                <Button
+                  size="sm"
+                  className="rounded-xl gap-2 font-bold px-6 shadow-lg shadow-primary/10"
                 >
-                  {tag}
-                </Badge>
-              ))}
+                  {t("case_studies.case_study_card.read_btn")}{" "}
+                  <ArrowUpRight size={16} />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,14 +1,7 @@
-'use client'
+"use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
-
-const filters = [
-  { id: "all", label: "ALL_SYSTEMS" },
-  { id: "ai", label: "AI_AGENTS" },
-  { id: "workflow", label: "WORKFLOW_AUTOMATION" },
-  { id: "mern", label: "MERN_INFRASTRUCTURE" }
-];
+import { useTranslation } from "react-i18next";
 
 interface FilterBarProps {
   activeFilter: string;
@@ -16,9 +9,34 @@ interface FilterBarProps {
 }
 
 export function FilterBar({ activeFilter, onFilterChange }: FilterBarProps) {
+  const { t } = useTranslation();
+
+  const filters = [
+    { id: "all", label: t("case_studies.filter.all") },
+    { id: "ai", label: t("case_studies.filter.ai") },
+    { id: "workflow", label: t("case_studies.filter.workflow") },
+    { id: "mern", label: t("case_studies.filter.mern") },
+  ];
+
+  // প্রজেক্ট কাউন্ট লজিক (অরিজিনাল অনুযায়ী রাখা হয়েছে)
+  const getProjectCount = (filterId: string) => {
+    switch (filterId) {
+      case "all":
+        return "4"; // আপনার অরিজিনাল ডাটাতে ৪টি কেস স্টাডি ছিল
+      case "ai":
+        return "2";
+      case "workflow":
+        return "1";
+      case "mern":
+        return "1";
+      default:
+        return "0";
+    }
+  };
+
   return (
-    <section className="py-12 bg-[#F9F9F9] border-y border-[#E5E5E5]">
-      <div className="container">
+    <section className="py-12 bg-[#F9F9F9] dark:bg-[#0A0A0B] border-y border-[#E5E5E5] dark:border-white/5 transition-colors">
+      <div className="container px-4">
         <div className="flex flex-wrap justify-center gap-4">
           {filters.map((filter, index) => (
             <motion.button
@@ -26,8 +44,8 @@ export function FilterBar({ activeFilter, onFilterChange }: FilterBarProps) {
               onClick={() => onFilterChange(filter.id)}
               className={`px-6 py-3 rounded-full font-mono text-sm transition-all duration-300 border-2 ${
                 activeFilter === filter.id
-                  ? "bg-[#FF6B00] text-white border-[#FF6B00] shadow-lg"
-                  : "bg-white text-[#0A0A0A] border-[#E5E5E5] hover:border-[#FF6B00] hover:text-[#FF6B00]"
+                  ? "bg-[#FF6B00] text-white border-[#FF6B00] shadow-lg shadow-[#FF6B00]/20"
+                  : "bg-white dark:bg-white/5 text-[#0A0A0A] dark:text-white/70 border-[#E5E5E5] dark:border-white/10 hover:border-[#FF6B00] hover:text-[#FF6B00]"
               }`}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -41,18 +59,21 @@ export function FilterBar({ activeFilter, onFilterChange }: FilterBarProps) {
         </div>
 
         <motion.div
-          className="text-center mt-6"
+          className="text-center mt-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
-          <p className="text-[#0A0A0A]/60 text-sm font-mono">
-            FILTER_STATUS: {filters.find(f => f.id === activeFilter)?.label || 'ALL_SYSTEMS'} | PROJECTS_FOUND: {
-              activeFilter === 'all' ? '3' :
-              activeFilter === 'ai' ? '2' :
-              activeFilter === 'workflow' ? '1' :
-              activeFilter === 'mern' ? '1' : '3'
-            }
+          <p className="text-[#0A0A0A]/60 dark:text-white/30 text-[10px] md:text-xs font-mono uppercase tracking-widest">
+            {t("case_studies.filter.status_label")}:{" "}
+            <span className="text-[#FF6B00]">
+              {filters.find((f) => f.id === activeFilter)?.label}
+            </span>
+            <span className="mx-4 text-black/10 dark:text-white/10">|</span>
+            {t("case_studies.filter.found_label")}:{" "}
+            <span className="text-[#FF6B00]">
+              {getProjectCount(activeFilter)}
+            </span>
           </p>
         </motion.div>
       </div>
