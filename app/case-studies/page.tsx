@@ -1,55 +1,76 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { ResultsHero } from "@/components/CaseStudies/ResultsHero";
 import { FilterBar } from "@/components/CaseStudies/FilterBar";
 import { CaseStudyCard } from "@/components/CaseStudies/CaseStudyCard";
+import { getAllCaseStudies } from "@/lib/case-study-action";
 import { VideoTestimonialCarousel } from "@/components/CaseStudies/VideoTestimonialCarousel";
 import { LogicAccordion } from "@/components/CaseStudies/LogicAccordion";
 import { FinalCTA } from "@/components/CaseStudies/FinalCTA";
 
-// টেকনিক্যাল স্ট্যাটিক ডাটা (যা ল্যাঙ্গুয়েজ ভেদে বদলাবে না)
-const techMapping = {
-  "ecommerce-ai-agent": {
-    tags: ["OpenAI", "Vector Database", "n8n", "Meta API"],
-    cat: "AI_AGENTS",
-  },
-  "pricing-monitor": {
-    tags: ["Node.js", "n8n", "Puppeteer", "OpenAI"],
-    cat: "AI_AGENTS",
-  },
-  "workflow-automation": {
-    tags: ["n8n", "REST APIs", "Webhooks"],
-    cat: "WORKFLOW_AUTOMATION",
-  },
-  "mern-dashboard": {
-    tags: ["MongoDB", "React", "Socket.io"],
-    cat: "MERN_INFRASTRUCTURE",
-  },
-};
-
-export default function CaseStudies2() {
-  const { t } = useTranslation();
+export default function CaseStudiesPage() {
+  const { i18n } = useTranslation();
   const [activeFilter, setActiveFilter] = useState("all");
+  const [rawDbData, setRawDbData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // JSON থেকে ডাটা আনা
-  const studiesData = t("case_studies.items", { returnObjects: true }) as any[];
+  // ডাটাবেজ থেকে ডাটা ফেচ করা
+  useEffect(() => {
+    async function fetchData() {
+      const result = await getAllCaseStudies();
+      if (result.success) {
+        setRawDbData(result.data || []);
+      }
+      setLoading(false);
+    }
+    fetchData();
+  }, []);
 
-  // স্ট্যাটিক টেকনিক্যাল ডাটার সাথে মার্জ করা
-  const caseStudies = Array.isArray(studiesData)
-    ? studiesData.map((study) => ({
-        ...study,
-        techTags: techMapping[study.id as keyof typeof techMapping]?.tags || [],
-        category: techMapping[study.id as keyof typeof techMapping]?.cat || "",
-      }))
-    : [];
+  // ল্যাঙ্গুয়েজ এবং ফিল্টার অনুযায়ী ডাটা প্রসেস করা
+  const processedStudies = useMemo(() => {
+    const currentLang = i18n.language.split("-")[0] as "en" | "bn";
 
-  const filteredCaseStudies = caseStudies.filter((study) => {
-    if (activeFilter === "all") return true;
-    return study.category.toLowerCase().includes(activeFilter.toLowerCase());
-  });
+    return rawDbData
+      .map((item) => {
+        const langContent = item[currentLang] || item.en;
+
+        return {
+          id: item.id,
+          slug: item.slug,
+          category: item.category,
+          techTags: item.techTags,
+          // Metadata fields
+          clientName: item.clientName,
+          industry: item.industry,
+          clientLocation: item.clientLocation,
+          videoReviewUrl: item.videoReviewUrl,
+          // Language specific fields
+          title: langContent?.title || "",
+          context: langContent?.context || "",
+          problem: langContent?.problem || "",
+          solution: langContent?.solution || "",
+          result: langContent?.result || "",
+          metric: langContent?.metric || "",
+          testimonial: langContent?.testimonial || "",
+        };
+      })
+      .filter((study) => {
+        if (activeFilter === "all") return true;
+        return study.category
+          ?.toLowerCase()
+          .includes(activeFilter.toLowerCase());
+      });
+  }, [rawDbData, i18n.language, activeFilter]);
+
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-primary" />
+      </div>
+    );
 
   return (
     <div className="min-h-screen bg-background text-foreground pt-20">
@@ -62,16 +83,25 @@ export default function CaseStudies2() {
         />
 
         <section className="py-20">
-          <div className="grid grid-cols-1 gap-8">
+          <div className="grid grid-cols-1 gap-12">
+            {" "}
+            {/* Gap বাড়িয়েছি কার্ডগুলোর মাঝে */}
             <AnimatePresence mode="popLayout">
-              {filteredCaseStudies.map((study, index) => (
+              {processedStudies.map((study, index) => (
                 <CaseStudyCard key={study.id} study={study} index={index} />
               ))}
             </AnimatePresence>
           </div>
+
+          {processedStudies.length === 0 && (
+            <div className="text-center py-20 text-muted-foreground">
+              No case studies found for this category.
+            </div>
+          )}
         </section>
       </div>
 
+      {/* ভিডিও ক্যারোজেল (এটিতে আপনার ৪টি ভিডিওর লিংক ডাটাবেজ থেকে সরাসরি ম্যাপ করতে পারবেন) */}
       <VideoTestimonialCarousel />
 
       <div className="bg-accent/5 py-24">

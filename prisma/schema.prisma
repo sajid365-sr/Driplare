@@ -107,3 +107,49 @@ model Agent {
 
   @@map("agents")
 }
+
+// এটি একটি এমবেডেড অবজেক্ট টাইপ
+type CaseContent {
+  title           String
+  context         String
+  problem         String
+  solution        String
+  myApproach      String? // The Strategy / Story
+  failedAttempts  String? // Challenges & what didn't work initially
+  result          String
+  metric          String // e.g., "70% Cost Reduction"
+  testimonial     String?
+  testimonialRole String? // e.g., "CEO", "Operations Manager"
+}
+
+model CaseStudy {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug     String   @unique
+  category String
+  techTags String[]
+
+  // Client & Project Metadata
+  clientName      String?
+  clientLocation  String? // e.g., "USA", "UK", "Bangladesh"
+  industry        String? // e.g., "E-commerce", "Healthcare"
+  projectDuration String? // e.g., "3 Weeks", "2 Months"
+
+  // Visuals & Media
+  heroImage         String?
+  videoReviewUrl    String? // Client Testimonial Video (YouTube/Loom)
+  dashboardVideoUrl String? // Solution Demo Video
+  n8nDiagramUrl     String? // Workflow Diagram Image
+  gallery           String[] // [image1_url, image2_url, ...]
+
+  // Comparative Stats (ROI Calculator support)
+  beforeMetricValue Int? // e.g., 40 (hours)
+  afterMetricValue  Int? // e.g., 2 (hours)
+  metricUnit        String? // e.g., "hrs/week", "USD", "%"
+
+  // Multi-language Content (The Story)
+  en CaseContent
+  bn CaseContent
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
