@@ -1,21 +1,20 @@
 "use client";
 
 import React, { useEffect, useState, useMemo } from "react";
-import { motion } from "framer-motion";
 import {
   ArrowLeft,
   XCircle,
-  Lightbulb,
   Code,
   BarChart,
   CheckCircle2,
   ArrowRight,
   Play,
-  ExternalLink,
   Clock,
   MapPin,
   Building2,
   Workflow,
+  LayoutDashboard,
+  Image as ImageIcon,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -64,6 +63,13 @@ export default function CaseStudyDetailPage() {
 
   const isBn = i18n.language.startsWith("bn");
 
+  // Helper function to format YouTube URLs
+  const formatYoutubeUrl = (url: string) => {
+    return url
+      ?.replace("youtu.be/", "www.youtube.com/embed/")
+      .replace("watch?v=", "embed/");
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground pt-28 pb-20">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -98,7 +104,6 @@ export default function CaseStudyDetailPage() {
             </p>
           </div>
 
-          {/* Quick Result Card */}
           <div className="bg-primary/10 border border-primary/20 rounded-3xl p-8 flex flex-col justify-center items-center text-center">
             <BarChart size={48} className="text-primary mb-4" />
             <span className="text-5xl font-black text-primary">
@@ -110,19 +115,17 @@ export default function CaseStudyDetailPage() {
           </div>
         </div>
 
-        {/* Video Review Section (If available) */}
+        {/* --- Video Review Section (Client Testimonial) --- */}
         {caseStudy.videoReviewUrl && (
           <section className="mb-20">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               <Play className="text-primary" fill="currentColor" />{" "}
               {isBn ? "ক্লায়েন্ট রিভিউ" : "Client Video Review"}
             </h2>
-            <div className="aspect-video w-full rounded-3xl overflow-hidden border border-border shadow-2xl">
+            <div className="aspect-video w-full rounded-3xl overflow-hidden border border-border shadow-2xl bg-muted">
               <iframe
                 className="w-full h-full"
-                src={caseStudy.videoReviewUrl
-                  .replace("youtu.be/", "www.youtube.com/embed/")
-                  .replace("watch?v=", "embed/")}
+                src={formatYoutubeUrl(caseStudy.videoReviewUrl)}
                 title="Client Review"
                 allowFullScreen
               ></iframe>
@@ -162,6 +165,24 @@ export default function CaseStudyDetailPage() {
           </div>
         </section>
 
+        {/* --- Solution Demo / Dashboard Video (NEW) --- */}
+        {caseStudy.dashboardVideoUrl && (
+          <section className="mb-20">
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+              <LayoutDashboard className="text-primary" />{" "}
+              {isBn ? "সলিউশন ডেমো ভিডিও" : "Solution & Dashboard Demo"}
+            </h2>
+            <div className="aspect-video w-full rounded-3xl overflow-hidden border border-border shadow-xl bg-muted">
+              <iframe
+                className="w-full h-full"
+                src={formatYoutubeUrl(caseStudy.dashboardVideoUrl)}
+                title="Dashboard Demo"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </section>
+        )}
+
         {/* The Story / Approach */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-20">
           <div className="lg:col-span-2 space-y-12">
@@ -174,7 +195,6 @@ export default function CaseStudyDetailPage() {
                 {caseStudy.myApproach}
               </p>
             </section>
-
             {caseStudy.failedAttempts && (
               <section className="bg-muted/30 p-8 rounded-2xl border-l-4 border-orange-400">
                 <h3 className="text-xl font-bold mb-3">
@@ -187,9 +207,28 @@ export default function CaseStudyDetailPage() {
                 </p>
               </section>
             )}
+
+            {/* --- Project Gallery (NEW) --- */}
+            {caseStudy.gallery && caseStudy.gallery.length > 0 && (
+              <section className="pt-10">
+                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                  <ImageIcon className="text-primary" />{" "}
+                  {isBn ? "প্রজেক্ট গ্যালারি" : "Project Gallery"}
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {caseStudy.gallery.map((img: string, idx: number) => (
+                    <img
+                      key={idx}
+                      src={img}
+                      alt={`Project screenshot ${idx}`}
+                      className="rounded-2xl border w-full h-64 object-cover hover:scale-[1.02] transition-transform duration-300"
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
 
-          {/* Sidebar Tech Info */}
           <div className="space-y-8">
             <div className="bg-card border p-8 rounded-3xl shadow-sm">
               <h3 className="font-bold mb-4 flex items-center gap-2">
@@ -224,8 +263,9 @@ export default function CaseStudyDetailPage() {
           </div>
         </div>
 
-        {/* Results & Testimonial */}
+        {/* Results & Testimonial Section (Keep it as it is) */}
         <section className="bg-neutral-900 text-white rounded-[3rem] p-12 md:p-16 mb-20 relative overflow-hidden">
+          {/* ... existing Testimonial UI ... */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-5xl font-black mb-6">
@@ -247,9 +287,8 @@ export default function CaseStudyDetailPage() {
               </div>
             </div>
             <div className="hidden md:block">
-              {/* ROI Visualization Placeholder */}
-              <div className="relative h-64 w-full bg-gradient-to-br from-primary/20 to-transparent rounded-full flex items-center justify-center border border-white/10">
-                <div className="text-center">
+              <div className="relative h-64 w-full bg-gradient-to-br from-primary/20 to-transparent rounded-full flex items-center justify-center border border-white/10 text-center">
+                <div>
                   <p className="text-6xl font-black text-primary">
                     {caseStudy.metric}
                   </p>
@@ -262,7 +301,7 @@ export default function CaseStudyDetailPage() {
           </div>
         </section>
 
-        {/* Final Call to Action */}
+        {/* Final CTA */}
         <div className="text-center space-y-8 py-10">
           <h2 className="text-4xl md:text-6xl font-black tracking-tight">
             {isBn

@@ -11,6 +11,7 @@ export async function getAllCaseStudies() {
         createdAt: "desc", // নতুন প্রজেক্ট আগে দেখাবে
       },
     });
+    if (!studies) return { success: true, data: [] };
     return { success: true, data: JSON.parse(JSON.stringify(studies)) };
   } catch (error) {
     console.error("Fetch Error:", error);
