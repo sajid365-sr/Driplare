@@ -9,6 +9,7 @@ import Notifications from "./Notifications";
 import AuditLogs from "./AuditLogs";
 import Settings from "./Settings";
 import { useState } from "react";
+import CaseStudy from "./CaseStudy";
 
 // export const metadata: Metadata = {
 //   title: 'Admin Panel - Driplare Management',
@@ -31,6 +32,7 @@ export default function AdminPanel() {
           <TabsList className="flex flex-col px-5  ">
             <TabsTrigger value="dashboard">Submissions</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="caseStudy">Case Study</TabsTrigger>
             <TabsTrigger value="admins">User Management</TabsTrigger>
             <TabsTrigger value="notifications">Notifications</TabsTrigger>
             <TabsTrigger value="logs">Audit Logs</TabsTrigger>
@@ -43,6 +45,9 @@ export default function AdminPanel() {
           <TabsContent value="dashboard">{/* <Dashboard /> */}</TabsContent>
           <TabsContent value="analytics">
             <Analytics />
+          </TabsContent>
+          <TabsContent value="caseStudy">
+            <CaseStudy />
           </TabsContent>
           <TabsContent value="admins">
             <AdminManagement />
