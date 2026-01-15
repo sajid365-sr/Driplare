@@ -1,4 +1,4 @@
-import { BlogPost } from "@/app/admin/BlogManager";
+import { BlogPost } from "@/app/(admin)/admin/BlogManager";
 import { Clock, Cpu, Calendar, ShieldCheck } from "lucide-react";
 
 interface PostHeroProps {

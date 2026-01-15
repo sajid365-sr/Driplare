@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from "react";
 import {
@@ -23,7 +23,13 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import { Loader2, TrendingUp, Users, MessageSquare, Calendar } from "lucide-react";
+import {
+  Loader2,
+  TrendingUp,
+  Users,
+  MessageSquare,
+  Calendar,
+} from "lucide-react";
 
 interface AnalyticsData {
   totalSubmissions: number;
@@ -33,7 +39,9 @@ interface AnalyticsData {
 }
 
 export default function Analytics() {
-  const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(null);
+  const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -88,7 +96,9 @@ export default function Analytics() {
       {/* Header */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">Analytics Dashboard</CardTitle>
+          <CardTitle className="text-2xl font-bold">
+            Analytics Dashboard
+          </CardTitle>
           <CardDescription>
             Insights into form submissions and user engagement
           </CardDescription>
@@ -99,11 +109,15 @@ export default function Analytics() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Submissions</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Total Submissions
+            </CardTitle>
             <MessageSquare className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{analyticsData.totalSubmissions}</div>
+            <div className="text-2xl font-bold">
+              {analyticsData.totalSubmissions}
+            </div>
             <p className="text-xs text-muted-foreground">
               <span className="text-green-600">+12%</span> from last month
             </p>
@@ -117,7 +131,9 @@ export default function Analytics() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {analyticsData.submissionsByType.find(t => t.name === "Contact Forms")?.value || 0}
+              {analyticsData.submissionsByType.find(
+                (t) => t.name === "Contact Forms"
+              )?.value || 0}
             </div>
             <p className="text-xs text-muted-foreground">
               57% of total submissions
@@ -140,7 +156,9 @@ export default function Analytics() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Avg. Response Time</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Avg. Response Time
+            </CardTitle>
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -176,7 +194,9 @@ export default function Analytics() {
                       outerRadius={100}
                       fill="#8884d8"
                       dataKey="value"
-                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                      label={({ name, percent }) =>
+                        `${name} ${(percent * 100).toFixed(0)}%`
+                      }
                     >
                       {analyticsData.submissionsByType.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
@@ -253,7 +273,9 @@ export default function Analytics() {
                     outerRadius={100}
                     fill="#8884d8"
                     dataKey="value"
-                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                    label={({ name, percent }) =>
+                      `${name} ${(percent * 100).toFixed(0)}%`
+                    }
                   >
                     {analyticsData.submissionsByStatus.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />

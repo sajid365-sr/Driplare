@@ -14,13 +14,21 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Bot, Workflow, Code2, Database, Briefcase, Bell } from "lucide-react";
+import {
+  Bot,
+  Workflow,
+  Code2,
+  Database,
+  Briefcase,
+  Bell,
+  ShieldCheck,
+} from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./language-switcher";
 import { cn } from "@/lib/utils";
 
 // Clerk Imports
-import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 
 export function Navbar() {
@@ -28,6 +36,9 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const pathname = usePathname();
+  const { user } = useUser();
+
+  const isAdmin = user?.publicMetadata?.role === "admin";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -218,6 +229,17 @@ export function Navbar() {
                 >
                   {t("navigation.insights")}
                 </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                {isAdmin && (
+                  <Link
+                    href="/admin"
+                    className="flex items-center gap-1 text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-full font-medium hover:bg-primary/20 transition-all"
+                  >
+                    <ShieldCheck size={14} />
+                    Admin Panel
+                  </Link>
+                )}
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>

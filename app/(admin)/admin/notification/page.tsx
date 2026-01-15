@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState, useEffect } from "react";
 import {
@@ -25,7 +25,9 @@ export default function Notifications() {
       {/* Header */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">Notifications Management</CardTitle>
+          <CardTitle className="text-2xl font-bold">
+            Notifications Management
+          </CardTitle>
           <CardDescription>
             Send notifications to users and manage notification templates
           </CardDescription>
@@ -58,7 +60,9 @@ export default function Notifications() {
             <CardContent>
               <div className="text-center py-12">
                 <Bell className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-lg font-medium mb-2">Templates Coming Soon</h3>
+                <h3 className="text-lg font-medium mb-2">
+                  Templates Coming Soon
+                </h3>
                 <p className="text-muted-foreground">
                   Notification templates will be available in the next update.
                 </p>

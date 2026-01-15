@@ -1,14 +1,15 @@
-import type { Metadata } from 'next'
+// import type { Metadata } from "next";
 import { MethodologyHero } from "@/components/our-methodology/MethodologyHero";
 import { LifecycleSteps } from "@/components/our-methodology/LifecycleSteps";
 import { PhilosophySection } from "@/components/our-methodology/PhilosophySection";
 import { StandardsGrid } from "@/components/our-methodology/StandardsGrid";
 import { MethodologyCTA } from "@/components/our-methodology/MethodologyCTA";
 
-export const metadata: Metadata = {
-  title: 'Our Methodology - Technical Framework & Development Process',
-  description: 'Learn about our systematic approach to AI agent development, MERN stack engineering, and autonomous system architecture.',
-}
+// export const metadata: Metadata = {
+//   title: "Our Methodology - Technical Framework & Development Process",
+//   description:
+//     "Learn about our systematic approach to AI agent development, MERN stack engineering, and autonomous system architecture.",
+// };
 
 export default function OurMethodologyPage() {
   return (

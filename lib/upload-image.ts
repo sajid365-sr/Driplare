@@ -1,3 +1,5 @@
+"use server";
+
 // lib/upload-image.ts
 import { v2 as cloudinary } from "cloudinary";
 
@@ -12,17 +14,19 @@ export async function uploadImageToCloudinary(
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    const result = (await new Promise((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          { folder: folder }, // এখানে 'folder' প্যারামিটার ব্যবহার করুন
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        )
-        .end(buffer);
-    })) as any;
+    const result = await new Promise<{ secure_url: string }>(
+      (resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream(
+            { folder: folder }, // এখানে 'folder' প্যারামিটার ব্যবহার করুন
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result as { secure_url: string });
+            }
+          )
+          .end(buffer);
+      }
+    );
 
     return result.secure_url;
   } catch (error) {

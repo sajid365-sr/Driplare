@@ -25,7 +25,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { toast } from "sonner";
-import { BlogPost } from "@/app/admin/BlogManager";
+import { BlogPost } from "@/app/(admin)/admin/BlogManager";
 // import { BlogPost } from "./BlogEditor";
 
 interface BlogTableProps {

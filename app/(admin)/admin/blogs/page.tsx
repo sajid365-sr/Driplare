@@ -74,26 +74,30 @@ export default function BlogManager() {
   return (
     <div className="space-y-6">
       {/* Header and Tabs components remain the same */}
-      <TabsContent value="list" className="space-y-6">
-        <BlogTable
-          blogs={posts}
-          isLoading={isLoading}
-          onEdit={(id) => handleEditPost(posts.find((p) => p.id === id)!)}
-          onDelete={fetchPosts} // ডিলিট হলে রিফ্রেশ হবে
-          onArchive={fetchPosts}
-        />
-      </TabsContent>
+      <Tabs>
+        <TabsContent value="list" className="space-y-6">
+          <BlogTable
+            blogs={posts}
+            isLoading={isLoading}
+            onEdit={(id) => handleEditPost(posts.find((p) => p.id === id)!)}
+            onDelete={fetchPosts} // ডিলিট হলে রিফ্রেশ হবে
+            onArchive={fetchPosts}
+          />
+        </TabsContent>
+      </Tabs>
 
-      <TabsContent value="editor" className="space-y-6">
-        <BlogEditor
-          post={editingPost}
-          onSave={() => {
-            fetchPosts();
-            setActiveTab("list");
-          }}
-          onCancel={() => setActiveTab("list")}
-        />
-      </TabsContent>
+      <Tabs>
+        <TabsContent value="editor" className="space-y-6">
+          <BlogEditor
+            post={editingPost}
+            onSave={() => {
+              fetchPosts();
+              setActiveTab("list");
+            }}
+            onCancel={() => setActiveTab("list")}
+          />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

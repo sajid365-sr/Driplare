@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { v2 as cloudinary } from "cloudinary";
-import { BlogPost } from "@/app/admin/BlogManager";
+import { BlogPost } from "@/app/(admin)/admin/BlogManager";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

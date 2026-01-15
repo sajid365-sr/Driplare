@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, FileText, Clock, Tag } from "lucide-react";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
-import { BlogPost } from "@/app/admin/BlogManager";
+import { BlogPost } from "@/app/(admin)/admin/BlogManager";
 
 interface PostGridProps {
   posts: BlogPost[];

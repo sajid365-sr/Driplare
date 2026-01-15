@@ -38,7 +38,7 @@ import {
   getBlogPost,
   saveBlogPost,
 } from "@/lib/blog-actions";
-import { BlogPost } from "@/app/admin/BlogManager";
+import { BlogPost } from "@/app/(admin)/admin/BlogManager";
 
 interface BlogEditorProps {
   blogId?: string | null;

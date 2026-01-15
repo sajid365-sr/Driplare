@@ -3,7 +3,7 @@ import { ArrowRight, Clock, ShieldCheck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
-import { BlogPost } from "@/app/admin/BlogManager";
+import { BlogPost } from "@/app/(admin)/admin/BlogManager";
 
 interface FeaturedPostProps {
   post: BlogPost;

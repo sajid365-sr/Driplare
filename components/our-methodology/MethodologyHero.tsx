@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 
 export function MethodologyHero() {
@@ -22,8 +24,7 @@ export function MethodologyHero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl md:text-6xl font-bold text-[#0A0A0A] mb-8 leading-tight font-montserrat"
           >
-            We Don't Guess.{" "}
-            <span className="text-[#FF6B00]">We Engineer.</span>
+            We Don't Guess. <span className="text-[#FF6B00]">We Engineer.</span>
           </motion.h1>
 
           <motion.p
@@ -32,7 +33,9 @@ export function MethodologyHero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-[#0A0A0A]/70 max-w-3xl mx-auto leading-relaxed mb-12 font-inter font-light"
           >
-            Every Driplare project follows a strict 4-phase architectural lifecycle. We combine software engineering rigors with AI innovation to ensure your systems are stable, scalable, and secure.
+            Every Driplare project follows a strict 4-phase architectural
+            lifecycle. We combine software engineering rigors with AI innovation
+            to ensure your systems are stable, scalable, and secure.
           </motion.p>
 
           {/* Technical Specs Preview */}
@@ -43,20 +46,36 @@ export function MethodologyHero() {
             className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-2xl mx-auto"
           >
             <div className="bg-[#F9F9F9] p-4 border border-[#E5E5E5] rounded-none">
-              <div className="font-mono text-xs text-[#0A0A0A]/60 mb-1">[ PHASE_01 ]</div>
-              <div className="font-montserrat font-bold text-[#0A0A0A]">Systems Audit</div>
+              <div className="font-mono text-xs text-[#0A0A0A]/60 mb-1">
+                [ PHASE_01 ]
+              </div>
+              <div className="font-montserrat font-bold text-[#0A0A0A]">
+                Systems Audit
+              </div>
             </div>
             <div className="bg-[#F9F9F9] p-4 border border-[#E5E5E5] rounded-none">
-              <div className="font-mono text-xs text-[#0A0A0A]/60 mb-1">[ PHASE_02 ]</div>
-              <div className="font-montserrat font-bold text-[#0A0A0A]">Logic Architecture</div>
+              <div className="font-mono text-xs text-[#0A0A0A]/60 mb-1">
+                [ PHASE_02 ]
+              </div>
+              <div className="font-montserrat font-bold text-[#0A0A0A]">
+                Logic Architecture
+              </div>
             </div>
             <div className="bg-[#F9F9F9] p-4 border border-[#E5E5E5] rounded-none">
-              <div className="font-mono text-xs text-[#0A0A0A]/60 mb-1">[ PHASE_03 ]</div>
-              <div className="font-montserrat font-bold text-[#0A0A0A]">Deployment</div>
+              <div className="font-mono text-xs text-[#0A0A0A]/60 mb-1">
+                [ PHASE_03 ]
+              </div>
+              <div className="font-montserrat font-bold text-[#0A0A0A]">
+                Deployment
+              </div>
             </div>
             <div className="bg-[#F9F9F9] p-4 border border-[#E5E5E5] rounded-none">
-              <div className="font-mono text-xs text-[#0A0A0A]/60 mb-1">[ PHASE_04 ]</div>
-              <div className="font-montserrat font-bold text-[#0A0A0A]">Optimization</div>
+              <div className="font-mono text-xs text-[#0A0A0A]/60 mb-1">
+                [ PHASE_04 ]
+              </div>
+              <div className="font-montserrat font-bold text-[#0A0A0A]">
+                Optimization
+              </div>
             </div>
           </motion.div>
         </div>

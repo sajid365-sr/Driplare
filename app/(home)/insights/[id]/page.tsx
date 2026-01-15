@@ -11,7 +11,7 @@ import { PostHero } from "@/components/insights/details/PostHero";
 import { PostSidebar } from "@/components/insights/details/PostSidebar";
 import { PostNavigation } from "@/components/insights/details/PostNavigation";
 import { PostFooterCTA } from "@/components/insights/details/PostFooterCTA";
-import { BlogPost } from "@/app/admin/BlogManager";
+import { BlogPost } from "@/app/(admin)/admin/BlogManager";
 import { getAllBlogsForAdmin, getBlogPost } from "@/lib/blog-actions";
 
 export default function InsightDetail({ params }: { params: { id: string } }) {

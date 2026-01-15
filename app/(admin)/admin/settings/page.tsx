@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState } from "react";
 import {
@@ -58,7 +58,7 @@ export default function Settings() {
     setIsLoading(true);
     try {
       // Mock save - replace with real API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       toast.success("Settings saved successfully");
     } catch (error) {
       toast.error("Failed to save settings");
@@ -68,7 +68,7 @@ export default function Settings() {
   };
 
   const updateSetting = (key: string, value: any) => {
-    setSettings(prev => ({ ...prev, [key]: value }));
+    setSettings((prev) => ({ ...prev, [key]: value }));
   };
 
   return (
@@ -119,7 +119,9 @@ export default function Settings() {
                     id="contactEmail"
                     type="email"
                     value={settings.contactEmail}
-                    onChange={(e) => updateSetting("contactEmail", e.target.value)}
+                    onChange={(e) =>
+                      updateSetting("contactEmail", e.target.value)
+                    }
                   />
                 </div>
               </div>
@@ -128,7 +130,9 @@ export default function Settings() {
                 <Textarea
                   id="siteDescription"
                   value={settings.siteDescription}
-                  onChange={(e) => updateSetting("siteDescription", e.target.value)}
+                  onChange={(e) =>
+                    updateSetting("siteDescription", e.target.value)
+                  }
                 />
               </div>
             </CardContent>
@@ -179,7 +183,9 @@ export default function Settings() {
                     id="smtpPassword"
                     type="password"
                     value={settings.smtpPassword}
-                    onChange={(e) => updateSetting("smtpPassword", e.target.value)}
+                    onChange={(e) =>
+                      updateSetting("smtpPassword", e.target.value)
+                    }
                   />
                 </div>
               </div>
@@ -205,7 +211,9 @@ export default function Settings() {
                 </div>
                 <Switch
                   checked={settings.emailNotifications}
-                  onCheckedChange={(checked) => updateSetting("emailNotifications", checked)}
+                  onCheckedChange={(checked) =>
+                    updateSetting("emailNotifications", checked)
+                  }
                 />
               </div>
               <div className="flex items-center justify-between">
@@ -217,7 +225,9 @@ export default function Settings() {
                 </div>
                 <Switch
                   checked={settings.pushNotifications}
-                  onCheckedChange={(checked) => updateSetting("pushNotifications", checked)}
+                  onCheckedChange={(checked) =>
+                    updateSetting("pushNotifications", checked)
+                  }
                 />
               </div>
               <div className="flex items-center justify-between">
@@ -229,7 +239,9 @@ export default function Settings() {
                 </div>
                 <Switch
                   checked={settings.weeklyReports}
-                  onCheckedChange={(checked) => updateSetting("weeklyReports", checked)}
+                  onCheckedChange={(checked) =>
+                    updateSetting("weeklyReports", checked)
+                  }
                 />
               </div>
             </CardContent>
@@ -257,15 +269,21 @@ export default function Settings() {
                 </div>
                 <Switch
                   checked={settings.twoFactorAuth}
-                  onCheckedChange={(checked) => updateSetting("twoFactorAuth", checked)}
+                  onCheckedChange={(checked) =>
+                    updateSetting("twoFactorAuth", checked)
+                  }
                 />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="sessionTimeout">Session Timeout (minutes)</Label>
+                  <Label htmlFor="sessionTimeout">
+                    Session Timeout (minutes)
+                  </Label>
                   <Select
                     value={settings.sessionTimeout}
-                    onValueChange={(value) => updateSetting("sessionTimeout", value)}
+                    onValueChange={(value) =>
+                      updateSetting("sessionTimeout", value)
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -282,7 +300,9 @@ export default function Settings() {
                   <Label htmlFor="passwordPolicy">Password Policy</Label>
                   <Select
                     value={settings.passwordPolicy}
-                    onValueChange={(value) => updateSetting("passwordPolicy", value)}
+                    onValueChange={(value) =>
+                      updateSetting("passwordPolicy", value)
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -334,7 +354,9 @@ export default function Settings() {
                     id="primaryColor"
                     type="color"
                     value={settings.primaryColor}
-                    onChange={(e) => updateSetting("primaryColor", e.target.value)}
+                    onChange={(e) =>
+                      updateSetting("primaryColor", e.target.value)
+                    }
                   />
                 </div>
                 <div className="space-y-2">

@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Code, Shield, TrendingUp } from "lucide-react";
 
@@ -5,24 +7,42 @@ const standards = [
   {
     code: "CODE_QUALITY",
     title: "Clean Code Standards",
-    description: "We follow clean-code principles in TypeScript/Node.js to ensure easy maintenance.",
+    description:
+      "We follow clean-code principles in TypeScript/Node.js to ensure easy maintenance.",
     icon: Code,
-    details: ["TypeScript strict mode", "SOLID principles", "DRY methodology", "Comprehensive testing"]
+    details: [
+      "TypeScript strict mode",
+      "SOLID principles",
+      "DRY methodology",
+      "Comprehensive testing",
+    ],
   },
   {
     code: "SECURITY_BY_DESIGN",
     title: "Security First Architecture",
-    description: "Encryption at rest and in transit is a non-negotiable standard for every API bridge.",
+    description:
+      "Encryption at rest and in transit is a non-negotiable standard for every API bridge.",
     icon: Shield,
-    details: ["AES-256 encryption", "JWT authentication", "Rate limiting", "Input validation"]
+    details: [
+      "AES-256 encryption",
+      "JWT authentication",
+      "Rate limiting",
+      "Input validation",
+    ],
   },
   {
     code: "SCALABILITY_PROOFS",
     title: "Horizontal Scaling Ready",
-    description: "We build with horizontal scaling in mind, ensuring your MERN backend handles 10x traffic without a rewrite.",
+    description:
+      "We build with horizontal scaling in mind, ensuring your MERN backend handles 10x traffic without a rewrite.",
     icon: TrendingUp,
-    details: ["Load balancing", "Database sharding", "CDN integration", "Auto-scaling"]
-  }
+    details: [
+      "Load balancing",
+      "Database sharding",
+      "CDN integration",
+      "Auto-scaling",
+    ],
+  },
 ];
 
 export function StandardsGrid() {
@@ -76,12 +96,19 @@ export function StandardsGrid() {
 
                 {/* Technical Details */}
                 <div className="border-t border-[#E5E5E5] pt-4">
-                  <div className="font-mono text-xs text-[#0A0A0A]/60 mb-3">IMPLEMENTATION_DETAILS:</div>
+                  <div className="font-mono text-xs text-[#0A0A0A]/60 mb-3">
+                    IMPLEMENTATION_DETAILS:
+                  </div>
                   <div className="space-y-1">
                     {standard.details.map((detail, detailIndex) => (
-                      <div key={detailIndex} className="flex items-center gap-2">
+                      <div
+                        key={detailIndex}
+                        className="flex items-center gap-2"
+                      >
                         <div className="w-1 h-1 bg-[#FF6B00] rounded-full"></div>
-                        <span className="text-xs text-[#0A0A0A]/70 font-inter font-light">{detail}</span>
+                        <span className="text-xs text-[#0A0A0A]/70 font-inter font-light">
+                          {detail}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -91,7 +118,9 @@ export function StandardsGrid() {
                 <div className="mt-4 pt-4 border-t border-[#E5E5E5]">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-[#22C55E] rounded-full animate-pulse"></div>
-                    <span className="font-mono text-xs text-[#0A0A0A]/60">STANDARD_ACTIVE | COMPLIANCE_VERIFIED</span>
+                    <span className="font-mono text-xs text-[#0A0A0A]/60">
+                      STANDARD_ACTIVE | COMPLIANCE_VERIFIED
+                    </span>
                   </div>
                 </div>
               </div>
@@ -110,11 +139,14 @@ export function StandardsGrid() {
           <div className="bg-white border border-[#0A0A0A] p-6 rounded-none max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-3 mb-3">
               <Shield className="w-5 h-5 text-[#22C55E]" />
-              <span className="font-mono text-sm font-bold text-[#0A0A0A]">QUALITY_ASSURANCE</span>
+              <span className="font-mono text-sm font-bold text-[#0A0A0A]">
+                QUALITY_ASSURANCE
+              </span>
             </div>
             <p className="text-[#0A0A0A]/80 font-inter font-light leading-relaxed">
-              Every project undergoes rigorous quality checks against these standards before delivery.
-              We don't just build systems—we build systems that last.
+              Every project undergoes rigorous quality checks against these
+              standards before delivery. We don't just build systems—we build
+              systems that last.
             </p>
           </div>
         </motion.div>
