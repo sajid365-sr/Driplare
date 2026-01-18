@@ -4,83 +4,63 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+
+// Shadcn UI Components
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Save,
-  Image as ImageIcon,
-  Video,
-  Calculator,
-  Globe,
-} from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+import { Form } from "@/components/ui/form";
+import { toast } from "sonner";
 
-// --- 1. Zod Schema (Prisma Model এর সাথে মিল রেখে) ---
+// Icons
+import { Loader2, Save, FileText, ImageIcon, Info } from "lucide-react";
+
+// Action File
+import { createCaseStudy } from "@/lib/case-study-action";
+
+import MetadataStep from "./MetadataStep";
+import ContentStep from "./ContentStep";
+import VisualsStep from "./VisualsStep";
+
+// --- Schema Definition ---
 const caseContentSchema = z.object({
   title: z.string().min(1, "Title is required"),
   context: z.string().min(10, "Context is required"),
   problem: z.string().min(10, "Problem statement is required"),
-  solution: z.string().min(10, "Solution details are required"),
-  myApproach: z.string().optional(), // Strategy
-  failedAttempts: z.string().optional(),
+  solution: z.string().min(10, "Solution details is required"),
+  myApproach: z.string().optional(),
   result: z.string().min(1, "Result summary is required"),
-  metric: z.string().min(1, "Key metric is required"), // "70% Cost Reduction"
+  metric: z.string().min(1, "Key metric is required"),
   testimonial: z.string().optional(),
-  testimonialRole: z.string().optional(),
 });
 
 const formSchema = z.object({
-  slug: z.string().min(1, "Slug is required"),
   category: z.string().min(1, "Category is required"),
-  techTags: z.string(), // We will convert comma separated string to array later
-
-  // Metadata
+  techTags: z.string().min(1, "Tech stack is required"),
   clientName: z.string().optional(),
-  clientLocation: z.string().optional(),
   industry: z.string().optional(),
-  projectDuration: z.string().optional(),
-
-  // Visuals (URLs for now, assuming upload logic handles getting the URL)
-  heroImage: z.string().optional(),
-  videoReviewUrl: z.string().optional(),
-  dashboardVideoUrl: z.string().optional(),
-  n8nDiagramUrl: z.string().optional(),
-
-  // ROI Stats (Coerce to number because inputs return strings)
+  clientLocation: z.string().optional(),
   beforeMetricValue: z.coerce.number().optional(),
   afterMetricValue: z.coerce.number().optional(),
   metricUnit: z.string().optional(),
-
-  // Nested Language Content
   en: caseContentSchema,
   bn: caseContentSchema,
+  videoReviewUrl: z.string().optional(),
+  dashboardVideoUrl: z.string().optional(),
+  n8nDiagramUrl: z.string().optional(),
+  gallery: z.array(z.string()).default([]),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
-export default function CaseStudyForm() {
-  const [activeLang, setActiveLang] = useState("en");
+export default function CaseStudyTabsForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // --- 2. Initialize Form ---
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      slug: "",
       category: "",
       techTags: "",
+      gallery: [],
       en: {
         title: "",
         context: "",
@@ -100,427 +80,103 @@ export default function CaseStudyForm() {
     },
   });
 
-  // --- 3. Handle Submit ---
   async function onSubmit(data: FormValues) {
     setIsSubmitting(true);
-    try {
-      // Tags string কে Array তে কনভার্ট করা
-      const formattedData = {
-        ...data,
-        techTags: data.techTags.split(",").map((tag) => tag.trim()),
-      };
 
-      console.log("Submitting Data:", formattedData);
-      // TODO: Call your Server Action or API here
-      // await createCaseStudy(formattedData);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    console.log("Form submitted with data:", data);
+    // try {
+    //   const formattedData = {
+    //     ...data,
+    //     techTags: data.techTags.split(",").map((tag) => tag.trim()),
+    //   };
+
+    //   const result = await createCaseStudy(formattedData);
+    //   if (result.success) {
+    //     toast.success("Case study published successfully!");
+    //     form.reset();
+    //   } else {
+    //     toast.error(result.error || "Failed to save");
+    //   }
+    // } catch (error) {
+    //   toast.error("Something went wrong");
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
+    setIsSubmitting(false);
   }
 
-  // --- Helper to render Language Fields ---
-  const renderContentFields = (lang: "en" | "bn") => (
-    <div className="space-y-4 animate-in fade-in-50">
-      <FormField
-        control={form.control}
-        name={`${lang}.title`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Case Title ({lang.toUpperCase()})</FormLabel>
-            <FormControl>
-              <Input placeholder="Enter catchy title..." {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <FormField
-          control={form.control}
-          name={`${lang}.context`}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Context / Backstory</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="What was the situation?"
-                  className="h-32"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name={`${lang}.problem`}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>The Problem</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="What pain points did they have?"
-                  className="h-32"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <FormField
-          control={form.control}
-          name={`${lang}.solution`}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>The Solution</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="How did you solve it?"
-                  className="h-32"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name={`${lang}.result`}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>The Result</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="What was the outcome?"
-                  className="h-32"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-
-      <FormField
-        control={form.control}
-        name={`${lang}.myApproach`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>My Approach / Strategy (Optional)</FormLabel>
-            <FormControl>
-              <Textarea
-                placeholder="Unique strategy used..."
-                className="h-20"
-                {...field}
-              />
-            </FormControl>
-          </FormItem>
-        )}
-      />
-
-      <div className="grid grid-cols-2 gap-4">
-        <FormField
-          control={form.control}
-          name={`${lang}.metric`}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Highlight Metric</FormLabel>
-              <FormControl>
-                <Input placeholder="e.g. 70% Cost Reduction" {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name={`${lang}.testimonial`}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Client Quote</FormLabel>
-              <FormControl>
-                <Input placeholder="Client feedback..." {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-      </div>
-    </div>
-  );
+  const handleFormError = (errors: any) => {
+    console.log("Form validation errors:", errors);
+  };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 pb-10">
-        {/* --- Header Actions --- */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-foreground">
-              Add New Case Study
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Create a comprehensive case study record.
-            </p>
-          </div>
-          <div className="flex gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => form.reset()}
-            >
-              Discard
-            </Button>
-            <Button type="submit" disabled={isSubmitting}>
-              <Save className="mr-2 h-4 w-4" />
-              {isSubmitting ? "Saving..." : "Save Case Study"}
-            </Button>
-          </div>
+    <div className="max-w-6xl mx-auto py-10 px-4">
+      <div className="flex justify-between items-center mb-8">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">
+            Create Case Study
+          </h1>
+          <p className="text-muted-foreground">
+            Fill in the details to showcase your success story.
+          </p>
         </div>
+        <Button
+          onClick={form.handleSubmit(onSubmit, handleFormError)}
+          disabled={isSubmitting}
+          className="bg-orange-600 hover:bg-orange-700 text-white px-8"
+        >
+          {isSubmitting ? (
+            <Loader2 className="animate-spin mr-2 h-4 w-4" />
+          ) : (
+            <Save className="mr-2 h-4 w-4" />
+          )}
+          Save Case Study
+        </Button>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* --- Left Column: Main Content (Tabs) --- */}
-          <div className="lg:col-span-2 space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Case Study Details</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Tabs
-                  value={activeLang}
-                  onValueChange={setActiveLang}
-                  className="w-full"
-                >
-                  <TabsList className="grid w-full grid-cols-2 mb-6">
-                    <TabsTrigger value="en">English Version</TabsTrigger>
-                    <TabsTrigger value="bn">Bengali Version</TabsTrigger>
-                  </TabsList>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit, handleFormError)}
+          className="space-y-8"
+        >
+          <Tabs defaultValue="metadata" className="w-full">
+            <TabsList className="grid w-full grid-cols-4 mb-8 h-12">
+              <TabsTrigger value="metadata" className="text-base">
+                <Info className="w-4 h-4 mr-2" /> Metadata
+              </TabsTrigger>
+              <TabsTrigger value="english" className="text-base">
+                <FileText className="w-4 h-4 mr-2" /> English Content
+              </TabsTrigger>
+              <TabsTrigger value="bengali" className="text-base">
+                <FileText className="w-4 h-4 mr-2" /> Bengali Content
+              </TabsTrigger>
+              <TabsTrigger value="visuals" className="text-base">
+                <ImageIcon className="w-4 h-4 mr-2" /> Visuals & Media
+              </TabsTrigger>
+            </TabsList>
 
-                  <TabsContent value="en">
-                    {renderContentFields("en")}
-                  </TabsContent>
+            {/* --- TAB 1: METADATA --- */}
+            <TabsContent value="metadata">
+              <MetadataStep form={form} />
+            </TabsContent>
 
-                  <TabsContent value="bn">
-                    {renderContentFields("bn")}
-                  </TabsContent>
-                </Tabs>
-              </CardContent>
-            </Card>
+            {/* --- TAB 2: ENGLISH --- */}
+            <TabsContent value="english">
+              <ContentStep form={form} lang="en" title="English Presentation" />
+            </TabsContent>
 
-            {/* Visuals Section */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <ImageIcon size={18} /> Visuals & Media
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="heroImage"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Hero Image URL</FormLabel>
-                      <FormControl>
-                        <Input placeholder="https://..." {...field} />
-                      </FormControl>
-                      <FormDescription>
-                        Link to the main cover image.
-                      </FormDescription>
-                    </FormItem>
-                  )}
-                />
-                <div className="grid grid-cols-2 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="dashboardVideoUrl"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Demo Video URL</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Loom/YouTube Link" {...field} />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="n8nDiagramUrl"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Workflow Diagram URL</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Image URL" {...field} />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+            {/* --- TAB 3: BENGALI --- */}
+            <TabsContent value="bengali">
+              <ContentStep form={form} lang="bn" title="Bengali Presentation" />
+            </TabsContent>
 
-          {/* --- Right Column: Metadata & Settings --- */}
-          <div className="space-y-6">
-            {/* Core Info */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Globe size={18} /> Project Metadata
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="slug"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Slug (URL)</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="e.g. email-automation-saas"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription className="text-xs">
-                        Unique ID for the URL.
-                      </FormDescription>
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="clientName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Client Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Client Company" {...field} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-
-                <div className="grid grid-cols-2 gap-2">
-                  <FormField
-                    control={form.control}
-                    name="industry"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Industry</FormLabel>
-                        <FormControl>
-                          <Input placeholder="SaaS, Health..." {...field} />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="clientLocation"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Location</FormLabel>
-                        <FormControl>
-                          <Input placeholder="USA, UK..." {...field} />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="category"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Category</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Automation, Web Dev..."
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="techTags"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Tech Stack</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Next.js, n8n, Prisma (comma separated)"
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </CardContent>
-            </Card>
-
-            {/* ROI Calculator Data */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Calculator size={18} /> ROI / Stats
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-2">
-                  <FormField
-                    control={form.control}
-                    name="beforeMetricValue"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Before</FormLabel>
-                        <FormControl>
-                          <Input type="number" placeholder="40" {...field} />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="afterMetricValue"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>After</FormLabel>
-                        <FormControl>
-                          <Input type="number" placeholder="2" {...field} />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <FormField
-                  control={form.control}
-                  name="metricUnit"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Unit</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Hours/Week, USD..." {...field} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </form>
-    </Form>
+            {/* --- TAB 4: VISUALS --- */}
+            <TabsContent value="visuals">
+              <VisualsStep form={form} />
+            </TabsContent>
+          </Tabs>
+        </form>
+      </Form>
+    </div>
   );
 }

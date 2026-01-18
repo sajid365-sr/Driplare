@@ -38,7 +38,6 @@ export async function createCaseStudy(data: any) {
   try {
     const study = await prisma.caseStudy.create({
       data: {
-        slug: data.slug,
         category: data.category,
         techTags: data.techTags,
         en: data.en, // সরাসরি অবজেক্ট পাঠিয়ে দিন

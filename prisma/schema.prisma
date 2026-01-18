@@ -123,8 +123,8 @@ type CaseContent {
 }
 
 model CaseStudy {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  slug     String   @unique
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
   category String
   techTags String[]
 
