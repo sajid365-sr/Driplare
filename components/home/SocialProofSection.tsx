@@ -210,9 +210,9 @@ export function SocialProofSection() {
                             src={
                               testimonial.videoUrl.includes("watch?v=")
                                 ? testimonial.videoUrl.replace(
-                                    "watch?v=",
-                                    "embed/"
-                                  )
+                                  "watch?v=",
+                                  "embed/"
+                                )
                                 : testimonial.videoUrl
                             }
                             title={t("social.videoTitle")}

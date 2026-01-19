@@ -11,11 +11,13 @@ import { UseFormReturn } from "react-hook-form";
 import { uploadImageToCloudinary } from "@/lib/upload-image";
 import { toast } from "sonner";
 
-interface VisualsStepProps {
-  form: UseFormReturn<Record<string, unknown>>;
+interface VisualsStepProps<TFormValues> {
+  form: UseFormReturn<TFormValues>;
 }
 
-export default function VisualsStep({ form }: VisualsStepProps) {
+export default function VisualsStep<TFormValues extends Record<string, unknown>>({
+  form,
+}: VisualsStepProps<TFormValues>) {
   const [upLoading, setUpLoading] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [galleryPreviews, setGalleryPreviews] = useState<string[]>([]);
@@ -50,7 +52,7 @@ export default function VisualsStep({ form }: VisualsStepProps) {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const url = await uploadImageToCloudinary(formData, "case-studies");
+      const url = await uploadImageToCloudinary(formData, "Driplare/Website Asset/Case Studies");
 
       if (url) {
         form.setValue(fieldName, url);
@@ -103,7 +105,7 @@ export default function VisualsStep({ form }: VisualsStepProps) {
         files.map(async (file) => {
           const formData = new FormData();
           formData.append("file", file);
-          return uploadImageToCloudinary(formData, "case-studies/gallery");
+          return uploadImageToCloudinary(formData, "Driplare/Website Asset/Case Studies/Gallery");
         })
       );
 

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
-  Badge,
   Briefcase,
   ChevronLeft,
   ChevronRight,
@@ -13,6 +12,7 @@ import {
   Plus,
   Trash2,
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -31,10 +31,13 @@ import {
 import { toast } from "sonner";
 import { deleteCaseStudy, getAllCaseStudies } from "@/lib/case-study-action";
 import { useEffect, useState } from "react";
+import { useAlertDialog } from "@/hooks/use-alert-dialog";
+import { CaseStudy } from "@/types/case-study-types";
 
 export default function CaseStudiesPage() {
-  const [caseStudies, setCaseStudies] = useState<any[]>([]);
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { showAlert } = useAlertDialog();
 
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
@@ -62,7 +65,16 @@ export default function CaseStudiesPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm("Are you sure you want to delete this case study?")) {
+    const confirmed = await showAlert({
+      title: "Are you absolutely sure?",
+      description:
+        "This action cannot be undone. This will permanently delete this case study and remove all associated data from our servers.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+      variant: "destructive",
+    });
+
+    if (confirmed) {
       try {
         const res = await deleteCaseStudy(id);
         if (res.success) {
@@ -159,7 +171,7 @@ export default function CaseStudiesPage() {
                             title="View Live"
                           >
                             <Link
-                              href={`/case-studies/${study.slug}`}
+                              href={`/case-studies/${study.id}`}
                               target="_blank"
                             >
                               <ExternalLink className="h-4 w-4" />
@@ -175,10 +187,12 @@ export default function CaseStudiesPage() {
                               <Edit className="h-4 w-4 text-blue-600" />
                             </Link>
                           </Button>
+
+
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => handleDelete(study.id)}
+                            onClick={() => study.id && handleDelete(study.id)}
                             className="text-red-600 hover:text-red-700"
                             title="Delete"
                           >

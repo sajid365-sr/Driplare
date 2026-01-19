@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { ContactFormData } from "@/types/form-types";
 
 const steps = [
   {
@@ -37,17 +38,9 @@ const steps = [
   },
 ];
 
-interface FormData {
-  name: string;
-  company: string;
-  email: string;
-  service: string;
-  details: string;
-}
-
 export function StepByStepForm() {
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     company: "",
     email: "",
@@ -81,7 +74,7 @@ export function StepByStepForm() {
     }
   }, [formData.email]);
 
-  const updateFormData = (field: keyof FormData, value: string) => {
+  const updateFormData = (field: keyof ContactFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -101,7 +94,7 @@ export function StepByStepForm() {
     const currentStepData = steps[currentStep - 1];
     return currentStepData.fields.every((field) => {
       if (field === "details") return formData.details.length > 10;
-      return formData[field as keyof FormData].trim() !== "";
+      return formData[field as keyof ContactFormData].trim() !== "";
     });
   };
 
@@ -162,11 +155,10 @@ export function StepByStepForm() {
               {steps.map((step, index) => (
                 <div key={step.id} className="flex items-center">
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 ${
-                      step.id <= currentStep
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 ${step.id <= currentStep
                         ? "bg-[#FF6B00] text-white border-[#FF6B00]"
                         : "bg-white text-[#0A0A0A] border-[#E5E5E5]"
-                    }`}
+                      }`}
                   >
                     {step.id < currentStep ? (
                       <Check className="w-4 h-4" />
@@ -254,11 +246,10 @@ export function StepByStepForm() {
                             updateFormData("email", e.target.value)
                           }
                           placeholder="your.email@company.com"
-                          className={`text-[#0A0A0A] ${
-                            emailError
+                          className={`text-[#0A0A0A] ${emailError
                               ? "border-[#FF6B00] focus:border-[#FF6B00]"
                               : "border-[#E5E5E5] focus:border-[#FF6B00]"
-                          }`}
+                            }`}
                         />
                         {emailError && (
                           <div className="flex items-center gap-2 mt-2 text-[#FF6B00]">
@@ -349,12 +340,12 @@ export function StepByStepForm() {
                   animate={
                     isTyping
                       ? {
-                          boxShadow: [
-                            "0 0 0 0 rgba(255, 107, 0, 0.4)",
-                            "0 0 0 10px rgba(255, 107, 0, 0)",
-                            "0 0 0 0 rgba(255, 107, 0, 0)",
-                          ],
-                        }
+                        boxShadow: [
+                          "0 0 0 0 rgba(255, 107, 0, 0.4)",
+                          "0 0 0 10px rgba(255, 107, 0, 0)",
+                          "0 0 0 0 rgba(255, 107, 0, 0)",
+                        ],
+                      }
                       : {}
                   }
                   transition={{ duration: 2, repeat: isTyping ? Infinity : 0 }}
@@ -362,11 +353,10 @@ export function StepByStepForm() {
                   <Button
                     onClick={handleSubmit}
                     disabled={!isStepValid() || isSubmitting}
-                    className={`flex items-center gap-2 ${
-                      isTyping
+                    className={`flex items-center gap-2 ${isTyping
                         ? "bg-[#FF6B00] shadow-lg shadow-[#FF6B00]/50"
                         : "bg-[#FF6B00] hover:bg-[#FF6B00]/90"
-                    }`}
+                      }`}
                   >
                     {isSubmitting ? (
                       <>

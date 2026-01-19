@@ -121,6 +121,16 @@ export default function MetadataStep({ form }: MetadataStepProps) {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="projectDuration"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Project Duration (e.g. day/week/month)</FormLabel>
+                <Input {...field} />
+              </FormItem>
+            )}
+          />
         </CardContent>
       </Card>
     </div>

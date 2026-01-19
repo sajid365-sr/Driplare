@@ -2,152 +2,219 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Loader2, ArrowLeft, Terminal, ShieldCheck } from "lucide-react";
+import { Loader2, Calendar, ArrowRight, Tag } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
-// Server Action
-import { getBlogPostDetails } from "@/lib/blog-actions";
+// Server Actions
+import { getAllPublishedBlogs, getBlogCategories } from "@/lib/blog-actions";
+import { BlogPost } from "@/types/blog-types";
+import { Badge } from "@/components/ui/badge";
 
-// Component Imports
-import { BreadcrumbNav } from "@/components/insights/details/BreadcrumbNav";
-import { PostHero } from "@/components/insights/details/PostHero";
-import { PostSidebar } from "@/components/insights/details/PostSidebar";
-import { PostNavigation } from "@/components/insights/details/PostNavigation";
-import { PostFooterCTA } from "@/components/insights/details/PostFooterCTA";
-
-export default function InsightDetail({ params }: { params: { id: string } }) {
-  const id = params.id;
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+/**
+ * Insights Main Page
+ * Displays all published blog posts in a grid layout
+ */
+export default function InsightsPage() {
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [filteredBlogs, setFilteredBlogs] = useState<BlogPost[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      const result = await getBlogPostDetails(id);
-      setData(result);
-      setLoading(false);
-    }
-    fetchData();
-    window.scrollTo(0, 0);
-  }, [id]);
+    fetchBlogs();
+    fetchCategories();
+  }, []);
 
-  if (loading) {
+  /**
+   * Fetch all published blogs
+   */
+  const fetchBlogs = async () => {
+    setIsLoading(true);
+    try {
+      const response = await getAllPublishedBlogs();
+      if (response.success) {
+        setBlogs(response.data);
+        setFilteredBlogs(response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  /**
+   * Fetch blog categories
+   */
+  const fetchCategories = async () => {
+    try {
+      const cats = await getBlogCategories();
+      setCategories(["All", ...cats]);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
+  /**
+   * Filter blogs by category
+   */
+  const handleCategoryFilter = (category: string) => {
+    setSelectedCategory(category);
+    if (category === "All") {
+      setFilteredBlogs(blogs);
+    } else {
+      setFilteredBlogs(blogs.filter((blog) => blog.category === category));
+    }
+  };
+
+  if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col bg-white items-center justify-center">
         <Loader2 className="h-10 w-10 animate-spin text-primary mb-4" />
         <div className="font-mono text-[10px] font-black text-[#0A0A0A] tracking-[0.3em] uppercase">
-          Decrypting_Technical_Payload...
+          Loading_Insights...
         </div>
       </div>
     );
   }
-
-  if (!data || !data.post) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white p-4 ">
-        <div className="text-center max-w-md">
-          <div className="font-mono text-primary text-5xl font-black mb-6 italic">
-            404
-          </div>
-          <h1 className="text-2xl font-black text-[#0A0A0A] mb-4 uppercase tracking-tighter">
-            Documentation_Not_Found
-          </h1>
-          <Link href="/insights">
-            <button className="inline-flex items-center gap-2 bg-[#0A0A0A] text-white px-8 py-4 rounded-2xl font-black text-sm hover:bg-primary transition-all">
-              <ArrowLeft size={18} />
-              Return to Database
-            </button>
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  const { post, relatedPosts, prevPost, nextPost } = data;
 
   return (
-    <div className="min-h-screen bg-white selection:bg-primary selection:text-white mt-32">
-      <div className="bg-white/50 backdrop-blur-sm sticky top-0 z-50 border-b border-border/40">
-        <BreadcrumbNav postTitle={post.title} />
-      </div>
-
-      <PostHero post={post} />
-
-      <div className="container mx-auto px-4 py-16 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 max-w-7xl mx-auto">
-          <div className="lg:col-span-8">
-            <motion.article
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="max-w-none"
-            >
-              <div
-                className="prose prose-lg max-w-none 
-                  prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-[#0A0A0A] prose-headings:uppercase
-                  prose-p:text-[#0A0A0A]/80 prose-p:leading-[1.8] prose-p:font-medium
-                  prose-strong:text-[#0A0A0A] prose-strong:font-black
-                  prose-code:font-mono prose-code:text-primary prose-code:bg-primary/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md
-                  prose-pre:bg-[#0A0A0A] prose-pre:rounded-[1.5rem] prose-pre:border prose-pre:border-white/10 prose-pre:p-8
-                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:rounded-r-2xl prose-blockquote:p-8
-                  prose-img:rounded-[2rem] prose-img:shadow-2xl"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
-
-              <div className="mt-16 p-8 bg-[#0A0A0A] rounded-[2.5rem] relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <Terminal size={120} className="text-white" />
-                </div>
-                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="h-2 w-2 bg-primary rounded-full animate-pulse" />
-                    <span className="font-mono text-[10px] font-black text-primary tracking-[.4em] uppercase">
-                      Architecture_Validation
-                    </span>
-                  </div>
-                  <h4 className="text-white font-black text-xl mb-4 italic tracking-tight">
-                    Executive Summary & Technical Validation
-                  </h4>
-                  <p className="text-white/60 font-medium leading-relaxed italic">
-                    All technical implementations discussed in this report have
-                    been stress-tested. The transition to MongoDB with Prisma
-                    ensures high scalability.
-                  </p>
-                </div>
-              </div>
-            </motion.article>
-
-            <div className="mt-20">
-              <PostNavigation previousPost={prevPost} nextPost={nextPost} />
+    <div className="min-h-screen bg-white pt-32 pb-20">
+      {/* Hero Section */}
+      <div className="container mx-auto px-4 mb-16">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="inline-flex items-center gap-2 mb-6">
+              <div className="h-2 w-2 bg-primary rounded-full animate-pulse" />
+              <span className="font-mono text-[10px] font-black text-primary tracking-[.4em] uppercase">
+                Intelligence_Stream
+              </span>
             </div>
-          </div>
-
-          <aside className="lg:col-span-4 space-y-8">
-            <div className="sticky top-24">
-              <PostSidebar
-                tocItems={["Phase_01", "Phase_02", "Phase_03"]} // আপনি চাইলে এটি কন্টেন্ট থেকে ডায়নামিক করতে পারেন
-                relatedPosts={relatedPosts}
-              />
-
-              <div className="mt-8 p-6 border border-border/60 rounded-3xl bg-white shadow-sm">
-                <div className="flex items-center gap-2 mb-4">
-                  <ShieldCheck className="text-green-500 w-4 h-4" />
-                  <span className="font-mono text-[12px] font-black uppercase tracking-widest text-[#0A0A0A]/40">
-                    Security_Clearance: Verified
-                  </span>
-                </div>
-                <p className="text-[12px] text-[#0A0A0A]/60 leading-normal">
-                  Verified by Driplare Engine v2.0
-                </p>
-              </div>
-            </div>
-          </aside>
+            <h1 className="text-5xl md:text-6xl font-black text-[#0A0A0A] mb-6 uppercase tracking-tighter">
+              Technical Insights
+            </h1>
+            <p className="text-xl text-[#0A0A0A]/60 font-medium max-w-2xl mx-auto">
+              Deep dives into automation, AI architecture, and scalable system
+              design.
+            </p>
+          </motion.div>
         </div>
       </div>
 
-      <div className="bg-[#F9F9F9] border-t border-border/50">
-        <PostFooterCTA post={post} />
+      {/* Category Filter */}
+      <div className="container mx-auto px-4 mb-12">
+        <div className="flex flex-wrap gap-3 justify-center">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => handleCategoryFilter(category)}
+              className={`px-6 py-2 rounded-full font-bold text-sm transition-all ${selectedCategory === category
+                  ? "bg-primary text-white"
+                  : "bg-gray-100 text-[#0A0A0A] hover:bg-gray-200"
+                }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
       </div>
 
+      {/* Blog Posts Grid */}
+      <div className="container mx-auto px-4">
+        {filteredBlogs.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-[#0A0A0A]/40 font-mono text-sm">
+              No posts found in this category.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {filteredBlogs.map((blog, index) => (
+              <motion.div
+                key={blog.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Link href={`/insights/${blog.id}`}>
+                  <div className="group h-full bg-white border border-border/60 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                    {/* Cover Image */}
+                    <div className="relative w-full h-56 bg-gray-100 overflow-hidden">
+                      <Image
+                        src={blog.cover_image || "/placeholder.svg"}
+                        alt={blog.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 right-4">
+                        <Badge className="bg-primary/90 text-white backdrop-blur-sm">
+                          {blog.category}
+                        </Badge>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6">
+                      {/* Date */}
+                      <div className="flex items-center gap-2 mb-3">
+                        <Calendar className="w-3 h-3 text-[#0A0A0A]/40" />
+                        <span className="text-xs font-mono text-[#0A0A0A]/40 uppercase">
+                          {new Date(blog.createdAt).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-xl font-black text-[#0A0A0A] mb-3 line-clamp-2 group-hover:text-primary transition-colors uppercase tracking-tight">
+                        {blog.title}
+                      </h3>
+
+                      {/* Excerpt */}
+                      {blog.excerpt && (
+                        <p className="text-sm text-[#0A0A0A]/60 mb-4 line-clamp-3 leading-relaxed">
+                          {blog.excerpt}
+                        </p>
+                      )}
+
+                      {/* Tags */}
+                      {blog.tags && blog.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {blog.tags.slice(0, 3).map((tag, idx) => (
+                            <span
+                              key={idx}
+                              className="inline-flex items-center gap-1 text-xs font-mono text-[#0A0A0A]/40 bg-gray-100 px-2 py-1 rounded-md"
+                            >
+                              <Tag className="w-2 h-2" />
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Read More */}
+                      <div className="flex items-center gap-2 text-primary font-bold text-sm group-hover:gap-4 transition-all">
+                        Read Article
+                        <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Background Grid */}
       <div className="fixed inset-0 pointer-events-none z-[-1] opacity-[0.02]">
         <div
           className="absolute inset-0"

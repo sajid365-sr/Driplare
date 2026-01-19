@@ -72,8 +72,23 @@ export const getReviews = async (page: number = 1, pageSize: number = 10) => {
   }
 };
 
+// Interface for saving reviews
+export interface SaveReviewData {
+  name: string;
+  designation: string;
+  company: string;
+  testimonialTitle: string;
+  complement: string;
+  imageUrl?: string;
+  videoUrl?: string;
+  timeSaved?: string;
+  efficiencyGain?: string;
+  rating?: number;
+  status?: string;
+}
+
 // ৩. Create or Update review
-export const saveReview = async (review: Testimonial, reviewId?: string) => {
+export const saveReview = async (review: SaveReviewData, reviewId?: string) => {
   try {
     if (reviewId) {
       const updated = await prisma.review.update({
@@ -83,11 +98,13 @@ export const saveReview = async (review: Testimonial, reviewId?: string) => {
           designation: review.designation,
           company: review.company,
           testimonialTitle: review.testimonialTitle,
-          videoUrl: review.videoUrl,
-          imageUrl: review.imageUrl,
+          videoUrl: review.videoUrl || null,
+          imageUrl: review.imageUrl || "",
           complement: review.complement,
-          timeSaved: review.timeSaved,
-          efficiencyGain: review.efficiencyGain,
+          timeSaved: review.timeSaved || null,
+          efficiencyGain: review.efficiencyGain || null,
+          rating: review.rating || 5,
+          status: review.status || "approved",
         },
       });
       revalidatePath("/");
@@ -103,11 +120,13 @@ export const saveReview = async (review: Testimonial, reviewId?: string) => {
           designation: review.designation,
           company: review.company,
           testimonialTitle: review.testimonialTitle,
-          videoUrl: review.videoUrl,
-          imageUrl: review.imageUrl,
+          videoUrl: review.videoUrl || null,
+          imageUrl: review.imageUrl || "",
           complement: review.complement,
-          timeSaved: review.timeSaved,
-          efficiencyGain: review.efficiencyGain,
+          timeSaved: review.timeSaved || null,
+          efficiencyGain: review.efficiencyGain || null,
+          rating: review.rating || 5,
+          status: review.status || "approved",
         },
       });
       revalidatePath("/");

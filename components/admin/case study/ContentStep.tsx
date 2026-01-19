@@ -76,6 +76,17 @@ export default function ContentStep({ form, lang, title }: ContentStepProps) {
           />
           <FormField
             control={form.control}
+            name={`${lang}.myApproach`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>My Approach</FormLabel>
+                <Textarea className="h-24" {...field} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name={`${lang}.result`}
             render={({ field }) => (
               <FormItem>

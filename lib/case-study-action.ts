@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma"; // আপনার প্রিজমা ক্লায়েন্ট পাথ
 import { revalidatePath } from "next/cache";
+import { CaseStudy } from "@/types/case-study-types"
 
 // সব কেস স্টাডি ফেচ করা (নতুনগুলো আগে আসবে)
 export async function getAllCaseStudies() {
@@ -34,20 +35,34 @@ export async function getCaseStudyById(id: string) {
 }
 
 // ২. ডাটা সেভ করা (Initial Seed এর জন্য ব্যবহার করতে পারেন)
-export async function createCaseStudy(data: any) {
+export async function createCaseStudy(data: CaseStudy) {
   try {
     const study = await prisma.caseStudy.create({
       data: {
-        category: data.category,
-        techTags: data.techTags,
-        en: data.en, // সরাসরি অবজেক্ট পাঠিয়ে দিন
-        bn: data.bn, // সরাসরি অবজেক্ট পাঠিয়ে দিন
+        ...data
       },
     });
     return { success: true, data: study };
   } catch (error) {
     console.error("Creation failed:", error);
     return { success: false, error: "Creation failed" };
+  }
+}
+
+// কেস স্টাডি আপডেট করা
+export async function updateCaseStudy(id: string, data: CaseStudy) {
+
+  try {
+    const study = await prisma.caseStudy.update({
+      where: { id },
+      data: {
+        ...data,
+      },
+    });
+    return { success: true, data: study };
+  } catch (error) {
+    console.error("Update failed:", error);
+    return { success: false, error: "Update failed" };
   }
 }
 
