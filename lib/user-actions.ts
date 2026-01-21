@@ -45,7 +45,7 @@ export async function createAdminUser(data: { email: string; firstName: string; 
       emailAddress: [data.email],
       firstName: data.firstName,
       lastName: data.lastName,
-      password: "Test@123",
+      password: "TempPass123!",
       publicMetadata: { role: "admin" }
     });
 
@@ -131,7 +131,7 @@ export async function createUser(data: { email: string; firstName: string; lastN
       emailAddress: [data.email],
       firstName: data.firstName,
       lastName: data.lastName,
-      password: "Test@123",
+      password: "TempPass123!",
       publicMetadata: { role: data.role || "user" }
     });
 

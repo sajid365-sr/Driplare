@@ -13,13 +13,13 @@ export default clerkMiddleware(async (auth, req) => {
     return redirectToSignIn();
   }
 
-  // ২. যদি অ্যাডমিন রাউটে যাওয়ার চেষ্টা করে কিন্তু রোল 'admin' না হয়
+  // ২. যদি অ্যাডমিন রাউটে যাওয়ার চেষ্টা করে কিন্তু রোল 'admin' বা 'system_admin' না হয়
   if (userId && isAdminRoute(req)) {
     // Clerk-এর sessionClaims থেকে রোল চেক করা হচ্ছে
-    const role = sessionClaims?.metadata?.role;
+    const role = sessionClaims?.metadata?.role as string | undefined;
 
-    if (role !== "admin") {
-      // রোল অ্যাডমিন না হলে তাকে হোমপেজে পাঠিয়ে দেওয়া হবে
+    if (role !== "admin" && role !== "system_admin") {
+      // রোল অ্যাডমিন বা সিস্টেম অ্যাডমিন না হলে তাকে হোমপেজে পাঠিয়ে দেওয়া হবে
       const url = new URL("/", req.url);
       return NextResponse.redirect(url);
     }

@@ -39,7 +39,8 @@ import {
 } from "@/components/ui/select";
 import { Loader2, Plus, Edit, Trash2, User, Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
-import { getUsers, deleteUser, createUser, updateUserRole } from "@/lib/user-actions";
+import { useUser } from "@clerk/nextjs";
+import { getUsers, deleteUser, createUser, updateUserRole, getUserById } from "@/lib/user-actions";
 
 interface User {
   id: string;
@@ -53,10 +54,12 @@ interface User {
 }
 
 export default function UserManagement() {
+  const { user: clerkUser } = useUser();
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [currentAdminUser, setCurrentAdminUser] = useState<User | null>(null);
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
@@ -69,8 +72,29 @@ export default function UserManagement() {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    if (clerkUser?.id) {
+      fetchCurrentAdminUser();
+      fetchUsers();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clerkUser?.id]);
+
+  const fetchCurrentAdminUser = async () => {
+    if (!clerkUser?.id) return;
+
+    try {
+      // Find the user in our database by clerkId
+      const allUsers = await getUsers();
+      if (allUsers.success && allUsers.data) {
+        const currentUser = allUsers.data.find(u => u.clerkId === clerkUser.id);
+        if (currentUser) {
+          setCurrentAdminUser(currentUser);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching current admin user:", error);
+    }
+  };
 
   const fetchUsers = async () => {
     setIsLoading(true);
@@ -156,27 +180,45 @@ export default function UserManagement() {
   };
 
   const resetForm = () => {
+    const defaultRole = currentAdminUser?.role === "system_admin" ? "admin" :
+                       currentAdminUser?.role === "admin" ? "user" : "user";
+
     setFormData({
       email: "",
       firstName: "",
       lastName: "",
-      role: "user",
+      role: defaultRole as typeof formData.role,
     });
   };
 
   const getRoleBadgeVariant = (role: string) => {
     switch (role) {
-      case "super_admin":
+      case "system_admin":
         return "destructive";
       case "admin":
         return "default";
-      case "moderator":
-        return "secondary";
       case "user":
         return "outline";
       default:
         return "outline";
     }
+  };
+
+  // Permission Logic
+  const canDeleteUser = (targetUser: User) => {
+    if (!currentAdminUser) return false;
+
+    // System admin can delete all users
+    if (currentAdminUser.role === "system_admin") {
+      return true;
+    }
+
+    // Admin can only delete users (not admins or system_admins)
+    if (currentAdminUser.role === "admin") {
+      return targetUser.role === "user";
+    }
+
+    return false;
   };
 
   // Pagination Logic
@@ -293,10 +335,19 @@ export default function UserManagement() {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="user">User</SelectItem>
-                          <SelectItem value="moderator">Moderator</SelectItem>
-                          <SelectItem value="admin">Admin</SelectItem>
-                          <SelectItem value="super_admin">Super Admin</SelectItem>
+                          {currentAdminUser?.role === "system_admin" && (
+                            <SelectItem value="admin">Admin</SelectItem>
+                          )}
+                          {currentAdminUser?.role === "admin" && (
+                            <SelectItem value="user">User</SelectItem>
+                          )}
+                          {!currentAdminUser?.role && (
+                            <>
+                              <SelectItem value="user">User</SelectItem>
+                              <SelectItem value="admin">Admin</SelectItem>
+                              <SelectItem value="system_admin">System Admin</SelectItem>
+                            </>
+                          )}
                         </SelectContent>
                       </Select>
                     </div>
@@ -368,7 +419,7 @@ export default function UserManagement() {
                         >
                           <Edit className="h-4 w-4 text-blue-600" />
                         </Button>
-                        {user.role !== "super_admin" && (
+                        {canDeleteUser(user) && (
                           <Button
                             variant="ghost"
                             size="sm"

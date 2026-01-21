@@ -38,7 +38,7 @@ export function Navbar() {
   const pathname = usePathname();
   const { user } = useUser();
 
-  const isAdmin = user?.publicMetadata?.role === "admin";
+  const isAdmin = user?.publicMetadata?.role === "admin" || user?.publicMetadata?.role === "system_admin";
 
   useEffect(() => {
     const handleScroll = () => {
