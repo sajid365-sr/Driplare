@@ -16,6 +16,7 @@ model User {
   imageUrl  String? // নতুন যোগ করা হয়েছে
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  role      String?  @default("user")
 
   // Relations
   chatMessages ChatMessage[]

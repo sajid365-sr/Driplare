@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -36,63 +37,53 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Loader2, Plus, Edit, Trash2, User, Shield } from "lucide-react";
+import { Loader2, Plus, Edit, Trash2, User, Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
+import { getUsers, deleteUser, createUser, updateUserRole } from "@/lib/user-actions";
 
-interface AdminUser {
+interface User {
   id: string;
+  clerkId: string;
   email: string;
-  name: string;
-  role: string;
-  status: string;
-  lastLogin?: Date;
+  name: string | null;
+  imageUrl: string | null;
   createdAt: Date;
+  updatedAt: Date;
+  role: string | null;
 }
 
-export default function AdminManagement() {
-  const [admins, setAdmins] = useState<AdminUser[]>([]);
+export default function UserManagement() {
+  const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [editingAdmin, setEditingAdmin] = useState<AdminUser | null>(null);
+  const [editingUser, setEditingUser] = useState<User | null>(null);
   const [formData, setFormData] = useState({
     email: "",
-    name: "",
-    role: "admin",
-    status: "active" as const,
+    firstName: "",
+    lastName: "",
+    role: "user" as const,
   });
 
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   useEffect(() => {
-    fetchAdmins();
+    fetchUsers();
   }, []);
 
-  const fetchAdmins = async () => {
+  const fetchUsers = async () => {
     setIsLoading(true);
     try {
-      // Mock data - replace with real API call
-      const mockAdmins: AdminUser[] = [
-        {
-          id: "1",
-          email: "admin@driplare.com",
-          name: "System Administrator",
-          role: "super_admin",
-          status: "active",
-          lastLogin: new Date(),
-          createdAt: new Date("2024-01-01"),
-        },
-        {
-          id: "2",
-          email: "manager@driplare.com",
-          name: "Content Manager",
-          role: "admin",
-          status: "active",
-          lastLogin: new Date(Date.now() - 86400000), // 1 day ago
-          createdAt: new Date("2024-02-15"),
-        },
-      ];
-      setAdmins(mockAdmins);
+      const res = await getUsers();
+      if (res.success && res.data) {
+        setUsers(res.data);
+      } else {
+        toast.error("Failed to load users");
+      }
     } catch (error) {
-      console.error("Error fetching admins:", error);
-      toast.error("Failed to load admin users");
+      console.error("Error fetching users:", error);
+      toast.error("Failed to load users");
     } finally {
       setIsLoading(false);
     }
@@ -101,53 +92,65 @@ export default function AdminManagement() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      if (editingAdmin) {
-        // Update existing admin
-        setAdmins((prev) =>
-          prev.map((admin) =>
-            admin.id === editingAdmin.id ? { ...admin, ...formData } : admin
-          )
-        );
-        toast.success("Admin updated successfully");
+      if (editingUser) {
+        // Update existing user role
+        const res = await updateUserRole(editingUser.id, formData.role);
+        if (res.success) {
+          toast.success("User updated successfully");
+          fetchUsers(); // Refresh data
+        } else {
+          toast.error(res.error || "Failed to update user");
+        }
       } else {
-        // Create new admin
-        const newAdmin: AdminUser = {
-          id: Date.now().toString(),
-          ...formData,
-          createdAt: new Date(),
-        };
-        setAdmins((prev) => [...prev, newAdmin]);
-        toast.success("Admin created successfully");
+        // Create new user
+        const res = await createUser({
+          email: formData.email,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          role: formData.role,
+        });
+        if (res.success) {
+          toast.success("User created successfully");
+          fetchUsers(); // Refresh data
+        } else {
+          toast.error(res.error || "Failed to create user");
+        }
       }
 
       setIsDialogOpen(false);
-      setEditingAdmin(null);
+      setEditingUser(null);
       resetForm();
     } catch (error) {
-      console.error("Error saving admin:", error);
-      toast.error("Failed to save admin");
+      console.error("Error saving user:", error);
+      toast.error("Failed to save user");
     }
   };
 
-  const handleEdit = (admin: AdminUser) => {
-    setEditingAdmin(admin);
+  const handleEdit = (user: User) => {
+    setEditingUser(user);
+    const nameParts = user.name?.split(" ") || ["", ""];
     setFormData({
-      email: admin.email,
-      name: admin.name,
-      role: admin.role,
-      status: admin.status === "active" ? "active" : "active",
+      email: user.email,
+      firstName: nameParts[0] || "",
+      lastName: nameParts.slice(1).join(" ") || "",
+      role: (user.role || "user") as typeof formData.role,
     });
     setIsDialogOpen(true);
   };
 
-  const handleDelete = async (adminId: string) => {
-    if (confirm("Are you sure you want to delete this admin user?")) {
+  const handleDelete = async (userId: string, clerkId: string) => {
+    if (confirm("Are you sure you want to delete this user? This action cannot be undone.")) {
       try {
-        setAdmins((prev) => prev.filter((admin) => admin.id !== adminId));
-        toast.success("Admin deleted successfully");
+        const res = await deleteUser(userId, clerkId);
+        if (res.success) {
+          toast.success("User deleted successfully");
+          fetchUsers(); // Refresh data
+        } else {
+          toast.error(res.error || "Failed to delete user");
+        }
       } catch (error) {
-        console.error("Error deleting admin:", error);
-        toast.error("Failed to delete admin");
+        console.error("Error deleting user:", error);
+        toast.error("Failed to delete user");
       }
     }
   };
@@ -155,9 +158,9 @@ export default function AdminManagement() {
   const resetForm = () => {
     setFormData({
       email: "",
-      name: "",
-      role: "admin",
-      status: "active",
+      firstName: "",
+      lastName: "",
+      role: "user",
     });
   };
 
@@ -169,14 +172,18 @@ export default function AdminManagement() {
         return "default";
       case "moderator":
         return "secondary";
+      case "user":
+        return "outline";
       default:
         return "outline";
     }
   };
 
-  const getStatusBadgeVariant = (status: string) => {
-    return status === "active" ? "default" : "secondary";
-  };
+  // Pagination Logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(users.length / itemsPerPage);
 
   if (isLoading) {
     return (
@@ -193,40 +200,29 @@ export default function AdminManagement() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="text-2xl font-bold">
-                User Management
-              </CardTitle>
-              <CardDescription>
-                Manage admin users and their permissions
-              </CardDescription>
-            </div>
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-              <DialogTrigger asChild>
-                <Button
-                  onClick={() => {
-                    setEditingAdmin(null);
-                    resetForm();
-                  }}
-                >
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add Admin
-                </Button>
-              </DialogTrigger>
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold tracking-tight">User Management</h2>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogTrigger asChild>
+            <Button
+              onClick={() => {
+                setEditingUser(null);
+                resetForm();
+              }}
+            >
+              <Plus className="mr-2 h-4 w-4" /> Add User
+            </Button>
+          </DialogTrigger>
               <DialogContent className="sm:max-w-[425px]">
                 <form onSubmit={handleSubmit}>
                   <DialogHeader>
                     <DialogTitle>
-                      {editingAdmin ? "Edit Admin User" : "Add New Admin User"}
+                      {editingUser ? "Edit User" : "Add New User"}
                     </DialogTitle>
                     <DialogDescription>
-                      {editingAdmin
-                        ? "Update the admin user's information and permissions."
-                        : "Create a new admin user account with specified permissions."}
+                      {editingUser
+                        ? "Update the user's information and permissions."
+                        : "Create a new user account with specified permissions."}
                     </DialogDescription>
                   </DialogHeader>
                   <div className="grid gap-4 py-4">
@@ -246,19 +242,37 @@ export default function AdminManagement() {
                         }
                         className="col-span-3"
                         required
+                        disabled={editingUser ? true : false}
                       />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="name" className="text-right">
-                        Name
+                      <Label htmlFor="firstName" className="text-right">
+                        First Name
                       </Label>
                       <Input
-                        id="name"
-                        value={formData.name}
+                        id="firstName"
+                        value={formData.firstName}
                         onChange={(e) =>
                           setFormData((prev) => ({
                             ...prev,
-                            name: e.target.value,
+                            firstName: e.target.value,
+                          }))
+                        }
+                        className="col-span-3"
+                        required
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="lastName" className="text-right">
+                        Last Name
+                      </Label>
+                      <Input
+                        id="lastName"
+                        value={formData.lastName}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            lastName: e.target.value,
                           }))
                         }
                         className="col-span-3"
@@ -272,62 +286,37 @@ export default function AdminManagement() {
                       <Select
                         value={formData.role}
                         onValueChange={(value) =>
-                          setFormData((prev) => ({ ...prev, role: value }))
+                          setFormData((prev) => ({ ...prev, role: value as typeof prev.role }))
                         }
                       >
                         <SelectTrigger className="col-span-3">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
+                          <SelectItem value="user">User</SelectItem>
                           <SelectItem value="moderator">Moderator</SelectItem>
                           <SelectItem value="admin">Admin</SelectItem>
-                          <SelectItem value="super_admin">
-                            Super Admin
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="status" className="text-right">
-                        Status
-                      </Label>
-                      <Select
-                        value={formData.status}
-                        onValueChange={(value) =>
-                          setFormData((prev) => ({
-                            ...prev,
-                            status: value as typeof prev.status,
-                          }))
-                        }
-                      >
-                        <SelectTrigger className="col-span-3">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="active">Active</SelectItem>
-                          <SelectItem value="inactive">Inactive</SelectItem>
+                          <SelectItem value="super_admin">Super Admin</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
                   <DialogFooter>
                     <Button type="submit">
-                      {editingAdmin ? "Update Admin" : "Create Admin"}
+                      {editingUser ? "Update User" : "Create User"}
                     </Button>
                   </DialogFooter>
                 </form>
               </DialogContent>
             </Dialog>
           </div>
-        </CardHeader>
-      </Card>
 
-      {/* Admin Users Table */}
+      {/* Users Table */}
       <Card>
         <CardHeader>
-          <CardTitle>Admin Users</CardTitle>
+          <CardTitle>All Users ({users.length})</CardTitle>
           <CardDescription>
-            A list of all admin users and their permissions
+            A list of all users and their permissions
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -336,69 +325,120 @@ export default function AdminManagement() {
               <TableRow>
                 <TableHead>User</TableHead>
                 <TableHead>Role</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Last Login</TableHead>
                 <TableHead>Created</TableHead>
+                <TableHead>Last Updated</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {admins.map((admin) => (
-                <TableRow key={admin.id}>
-                  <TableCell>
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                        <User className="w-4 h-4 text-primary" />
-                      </div>
-                      <div>
-                        <div className="font-medium">{admin.name}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {admin.email}
+              {currentItems.length > 0 ? (
+                currentItems.map((user) => (
+                  <TableRow key={user.id}>
+                    <TableCell>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                          <User className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <div className="font-medium">{user.name || "Unnamed User"}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {user.email}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={getRoleBadgeVariant(admin.role)}>
-                      {admin.role.replace("_", " ")}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={getStatusBadgeVariant(admin.status)}>
-                      {admin.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    {admin.lastLogin
-                      ? admin.lastLogin.toLocaleDateString()
-                      : "Never"}
-                  </TableCell>
-                  <TableCell>{admin.createdAt.toLocaleDateString()}</TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex items-center gap-2 justify-end">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleEdit(admin)}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      {admin.role !== "super_admin" && (
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={getRoleBadgeVariant(user.role || "user")}>
+                        {(user.role || "user").replace("_", " ")}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      {new Date(user.createdAt).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      {new Date(user.updatedAt).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex items-center gap-2 justify-end">
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => handleDelete(admin.id)}
-                          className="text-red-600 hover:text-red-700"
+                          onClick={() => handleEdit(user)}
+                          title="Edit"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Edit className="h-4 w-4 text-blue-600" />
                         </Button>
-                      )}
-                    </div>
+                        {user.role !== "super_admin" && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleDelete(user.id, user.clerkId)}
+                            className="text-red-600 hover:text-red-700"
+                            title="Delete"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        )}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={5}
+                    className="text-center h-24 text-muted-foreground"
+                  >
+                    No users found. Start by adding one!
                   </TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between mt-6">
+              <p className="text-sm text-muted-foreground">
+                Showing {indexOfFirstItem + 1} to{" "}
+                {Math.min(indexOfLastItem, users.length)} of{" "}
+                {users.length}
+              </p>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                >
+                  <ChevronLeft className="h-4 w-4 mr-1" /> Previous
+                </Button>
+                <div className="flex items-center gap-1 mx-2">
+                  {Array.from({ length: totalPages }, (_, i) => (
+                    <Button
+                      key={i + 1}
+                      variant={currentPage === i + 1 ? "default" : "outline"}
+                      size="sm"
+                      className="w-8 h-8 p-0"
+                      onClick={() => setCurrentPage(i + 1)}
+                    >
+                      {i + 1}
+                    </Button>
+                  ))}
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() =>
+                    setCurrentPage((p) => Math.min(totalPages, p + 1))
+                  }
+                  disabled={currentPage === totalPages}
+                >
+                  Next <ChevronRight className="h-4 w-4 ml-1" />
+                </Button>
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
