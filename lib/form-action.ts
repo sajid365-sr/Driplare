@@ -2,17 +2,16 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import {
+  ContactFormData,
+  ContactFormSubmission,
+  UpdateSubmissionStatusData,
+} from "@/types/form-types";
 
-// ১. কন্টাক্ট ফর্মের জন্য ইন্টারফেস
-export interface ContactFormData {
-  name: string;
-  company: string;
-  email: string;
-  service: string;
-  details: string;
-}
-
-// ২. কন্টাক্ট ফর্ম সাবমিশন সেভ করা
+/**
+ * Save Contact Form Submission
+ * Creates a new contact form submission from the frontend
+ */
 export async function saveContactSubmission(formData: ContactFormData) {
   try {
     const submission = await prisma.contactSubmission.create({
@@ -25,8 +24,8 @@ export async function saveContactSubmission(formData: ContactFormData) {
       },
     });
 
-    // এডমিন পেজের ডাটা রিফ্রেশ করার জন্য (ঐচ্ছিক)
-    revalidatePath("/admin/submissions");
+    // Revalidate admin page
+    revalidatePath("/admin/form-submissions");
 
     return { success: true, id: submission.id };
   } catch (error: unknown) {
@@ -35,24 +34,31 @@ export async function saveContactSubmission(formData: ContactFormData) {
   }
 }
 
-// ৩. নিউজলেটার সাবস্ক্রিপশন (Error টাইপ হ্যান্ডলিং সহ)
+/**
+ * Newsletter Subscription
+ * Subscribes email to newsletter with duplicate handling
+ */
 export async function subscribeNewsletter(email: string) {
   try {
     await prisma.newsletter.create({
       data: { email },
     });
     return { success: true };
-  } catch (error: any) {
-    // এখানে সরাসরি টাইপ চেক না করে এরর অবজেক্টের 'code' প্রপার্টি চেক করা হচ্ছে
-    // Prisma-তে ডুপ্লিকেট ডাটার এরর কোড সবসময় "P2002" হয়
-    if (error && typeof error === "object" && error.code === "P2002") {
+  } catch (error: unknown) {
+    // Check for duplicate email error (Prisma error code P2002)
+    if (
+      error &&
+      typeof error === "object" &&
+      "code" in error &&
+      error.code === "P2002"
+    ) {
       return {
         success: false,
         error: "This email is already synced!",
       };
     }
 
-    // অন্য যেকোনো সাধারণ এররের জন্য
+    // Handle other errors
     console.error("Newsletter Error:", error);
     return {
       success: false,
@@ -61,15 +67,94 @@ export async function subscribeNewsletter(email: string) {
   }
 }
 
-// ৪. এডমিন প্যানেলের জন্য ডাটা ফেচ করা
-export async function getContactSubmissions() {
+/**
+ * Get All Contact Submissions
+ * Fetches all contact form submissions for admin panel
+ */
+export async function getContactSubmissions(): Promise<
+  ContactFormSubmission[]
+> {
   try {
     const data = await prisma.contactSubmission.findMany({
       orderBy: { createdAt: "desc" },
     });
-    return data; // এটি স্বয়ংক্রিয়ভাবে Prisma-র জেনারেটেড টাইপ রিটার্ন করবে
+    return data as ContactFormSubmission[];
   } catch (error: unknown) {
     console.error("Fetch Error:", error);
     return [];
+  }
+}
+
+/**
+ * Get Single Contact Submission
+ * Fetches a single submission by ID
+ */
+export async function getContactSubmission(
+  id: string
+): Promise<ContactFormSubmission | null> {
+  try {
+    const submission = await prisma.contactSubmission.findUnique({
+      where: { id },
+    });
+    return submission as ContactFormSubmission | null;
+  } catch (error: unknown) {
+    console.error("Fetch Error:", error);
+    return null;
+  }
+}
+
+/**
+ * Update Submission Status
+ * Updates the status and response of a contact submission
+ * 
+ * Note: Type assertion is used because the Prisma client needs to be regenerated
+ * after schema changes. Run `npx prisma generate` to update types.
+ */
+export async function updateSubmissionStatus(
+  id: string,
+  data: UpdateSubmissionStatusData
+) {
+  try {
+    // Type assertion needed until Prisma client is regenerated after schema update
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const updateData: any = {
+      status: data.status,
+      response: data.response || null,
+    };
+
+    const updated = await prisma.contactSubmission.update({
+      where: { id },
+      data: updateData,
+    });
+
+    revalidatePath("/admin/form-submissions");
+
+    return {
+      success: true,
+      message: "Submission status updated successfully",
+      data: updated,
+    };
+  } catch (error: unknown) {
+    console.error("Update Error:", error);
+    return { success: false, message: "Failed to update submission status" };
+  }
+}
+
+/**
+ * Delete Contact Submission
+ * Deletes a contact form submission
+ */
+export async function deleteContactSubmission(id: string) {
+  try {
+    await prisma.contactSubmission.delete({
+      where: { id },
+    });
+
+    revalidatePath("/admin/form-submissions");
+
+    return { success: true, message: "Submission deleted successfully" };
+  } catch (error: unknown) {
+    console.error("Delete Error:", error);
+    return { success: false, message: "Failed to delete submission" };
   }
 }

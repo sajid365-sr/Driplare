@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -9,22 +9,13 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { uploadImageToCloudinary } from "@/lib/blog-actions";
 import { Switch } from "@/components/ui/switch";
-import { Loader2, Image as ImageIcon, X } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 // Tiptap Imports
-import { EditorContent, useEditor } from "@tiptap/react";
+import { EditorContent, useEditor, ReactNodeViewRenderer } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import Underline from "@tiptap/extension-underline";
@@ -32,40 +23,54 @@ import Link from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
 import Image from "@tiptap/extension-image";
 import Highlight from "@tiptap/extension-highlight";
-import { TiptapMenuBar } from "./TiptapMenuBar"; // Ensure correct import path
+import { ResizableImageView } from "./ResizableImage";
+
+// Components
+import { TiptapMenuBar } from "./TiptapMenuBar";
+import { CoverImageUpload } from "./CoverImageUpload";
+import { BlogMetadata } from "./BlogMetadata";
+import { BlogCategoryTags } from "./BlogCategoryTags";
+
+// Actions & Types
 import {
   getBlogCategories,
-  getBlogPost,
   saveBlogPost,
 } from "@/lib/blog-actions";
-import { BlogPost } from "@/app/(admin)/admin/BlogManager";
+import { uploadImageToCloudinary } from "@/lib/upload-image";
+import { BlogPost } from "@/types/blog-types";
 
 interface BlogEditorProps {
-  blogId?: string | null;
+  blogId?: string;
+  initialData?: BlogPost | null;
   onCancel: () => void;
   onSave: () => void;
-  post?: BlogPost | null;
 }
 
+/**
+ * Blog Editor Component
+ * Refactored rich text editor for creating and editing blog posts
+ */
 export default function BlogEditor({
   blogId,
+  initialData,
   onCancel,
   onSave,
 }: BlogEditorProps) {
+  // Form State
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [coverImage, setCoverImage] = useState<string>("");
-  const [isUploadingCover, setIsUploadingCover] = useState(false);
+  const [excerpt, setExcerpt] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
   const [isPublished, setIsPublished] = useState(false);
+
+  // UI State
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploadingCover, setIsUploadingCover] = useState(false);
   const [categories, setCategories] = useState<string[]>([]);
-  const [tagInput, setTagInput] = useState("");
-
-  const coverImageRef = useRef<HTMLInputElement>(null);
 
   // Initialize Tiptap Editor
   const editor = useEditor({
@@ -82,7 +87,28 @@ export default function BlogEditor({
         HTMLAttributes: { class: "text-primary underline" },
       }),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
-      Image.configure({ allowBase64: true }),
+      Image.extend({
+        addAttributes() {
+          return {
+            ...this.parent?.(),
+            width: {
+              default: "auto",
+              renderHTML: (attributes) => {
+                return { width: attributes.width };
+              },
+            },
+            height: {
+              default: "auto",
+              renderHTML: (attributes) => {
+                return { height: attributes.height };
+              },
+            },
+          };
+        },
+        addNodeView() {
+          return ReactNodeViewRenderer(ResizableImageView);
+        },
+      }).configure({ allowBase64: true }),
       Highlight.configure({ multicolor: true }),
     ],
     content: content || "<p></p>",
@@ -96,32 +122,27 @@ export default function BlogEditor({
     },
   });
 
-  // Fetch Categories and Blog Data
+  /**
+   * Load categories and initial data
+   */
   useEffect(() => {
     const initData = async () => {
       setIsLoading(true);
       try {
-        const categoryList = await getBlogCategories();
-        setCategories(
-          categoryList.length > 0
-            ? categoryList
-            : ["Technology", "Design", "Marketing", "Business", "Development"]
-        );
+        await loadCategories();
 
-        if (blogId) {
-          const blog = await getBlogPost(blogId);
-          if (blog) {
-            setTitle(blog.title);
-            setSlug(blog.slug);
-            setCoverImage(blog.cover_image || "");
-            setTags(blog.tags || []);
-            setCategory(blog.category);
-            setContent(blog.content);
-            setIsPublished(blog.status === "published");
+        if (initialData) {
+          setTitle(initialData.title);
+          setSlug(initialData.slug);
+          setCoverImage(initialData.cover_image || "");
+          setExcerpt(initialData.excerpt || "");
+          setTags(initialData.tags || []);
+          setCategory(initialData.category);
+          setContent(initialData.content);
+          setIsPublished(initialData.published);
 
-            if (editor && blog.content) {
-              editor.commands.setContent(blog.content);
-            }
+          if (editor && initialData.content) {
+            editor.commands.setContent(initialData.content);
           }
         }
       } catch (err) {
@@ -132,60 +153,97 @@ export default function BlogEditor({
     };
 
     initData();
-  }, [blogId, editor]);
+  }, [initialData, editor]);
 
-  // Sync slug with title
-  // useEffect(() => {
-  //   if (title && !blogId) {
-  //     setSlug(generateSlug(title));
-  //   }
-  // }, [title, blogId]);
+  /**
+   * Load categories from database
+   */
+  const loadCategories = async () => {
+    const categoryList = await getBlogCategories();
+    setCategories(categoryList);
+  };
 
-  const handleSave = async (publishStatus: "published" | "draft") => {
+  /**
+   * Auto-generate slug from title
+   */
+  useEffect(() => {
+    if (title && !blogId) {
+      const generatedSlug = title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+      setSlug(generatedSlug);
+    }
+  }, [title, blogId]);
+
+  /**
+   * Handle save/publish
+   */
+  const handleSave = async () => {
     if (!title || !content) {
       toast.error("Title and Content are required");
       return;
     }
 
+    if (!slug) {
+      toast.error("URL Slug is required");
+      return;
+    }
+
+    if (!category) {
+      toast.error("Category is required");
+      return;
+    }
+
     setIsSaving(true);
-    const blogData = {
+    const blogData: Partial<BlogPost> = {
       title,
       slug,
       content,
       cover_image: coverImage,
+      excerpt: excerpt || undefined,
       tags,
-      category: category || "Uncategorized",
-      status: publishStatus,
-      updated_at: new Date().toISOString(),
-      created_at: new Date().toISOString(),
-      is_archived: false,
+      category,
+      published: isPublished,
     };
 
     try {
-      const result = await saveBlogPost(blogData, blogId || undefined);
-      if (result) {
+      const result = await saveBlogPost(blogData as BlogPost, blogId);
+      if (result.success) {
         toast.success(
-          `Post ${publishStatus === "published" ? "published" : "saved as draft"}`
+          blogId ? "Blog updated successfully" : "Blog created successfully"
         );
         onSave();
+      } else {
+        toast.error("Failed to save blog post");
       }
     } catch (error) {
-      toast.error("Failed to save post");
+      toast.error("Error saving blog post");
     } finally {
       setIsSaving(false);
     }
   };
 
-  const uploadCoverImage = async (file: File): Promise<string | null> => {
+  /**
+   * Upload cover image to Cloudinary
+   */
+  const handleCoverImageUpload = async (file: File) => {
+    setIsUploadingCover(true);
     try {
       const formData = new FormData();
       formData.append("file", file);
-
-      const imageUrl = await uploadImageToCloudinary(formData, "testimonials");
-      return imageUrl;
+      const imageUrl = await uploadImageToCloudinary(formData, "blog-covers");
+      if (imageUrl) {
+        setCoverImage(imageUrl);
+        toast.success("Cover image uploaded");
+      } else {
+        toast.error("Failed to upload image");
+      }
     } catch (error) {
-      console.error("Client upload error:", error);
-      return null;
+      console.error("Upload error:", error);
+      toast.error("Failed to upload image");
+    } finally {
+      setIsUploadingCover(false);
     }
   };
 
@@ -202,7 +260,7 @@ export default function BlogEditor({
     <Card className="w-full shadow-lg border-t-4 border-t-primary">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-2xl font-bold">
-          {blogId ? "Edit Post" : "Create Post"}
+          {blogId ? "Edit Blog Post" : "Create New Blog Post"}
         </CardTitle>
         <div className="flex items-center gap-4">
           <div className="flex items-center space-x-2 bg-muted p-2 rounded-lg">
@@ -212,146 +270,45 @@ export default function BlogEditor({
               onCheckedChange={setIsPublished}
             />
             <Label htmlFor="published" className="text-sm font-medium">
-              {isPublished ? "Public" : "Private"}
+              {isPublished ? "Published" : "Draft"}
             </Label>
           </div>
         </div>
       </CardHeader>
 
       <CardContent className="space-y-8">
-        {/* Cover Image Section */}
-        <div className="group relative w-full h-64 bg-muted rounded-xl overflow-hidden border-2 border-dashed border-muted-foreground/20 hover:border-primary/50 transition-all">
-          {coverImage ? (
-            <>
-              <img
-                src={coverImage}
-                alt="Cover"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                <Button
-                  variant="secondary"
-                  onClick={() => coverImageRef.current?.click()}
-                >
-                  Change Image
-                </Button>
-                <Button
-                  variant="destructive"
-                  onClick={() => setCoverImage("")}
-                  size="icon"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
-            </>
-          ) : (
-            <button
-              className="w-full h-full flex flex-col items-center justify-center gap-2"
-              onClick={() => coverImageRef.current?.click()}
-              disabled={isUploadingCover}
-            >
-              {isUploadingCover ? (
-                <Loader2 className="h-8 w-8 animate-spin" />
-              ) : (
-                <ImageIcon className="h-10 w-10 text-muted-foreground" />
-              )}
-              <span className="font-medium text-muted-foreground">
-                Add Cover Image
-              </span>
-            </button>
-          )}
-          <input
-            title="input"
-            ref={coverImageRef}
-            type="file"
-            className="hidden"
-            accept="image/*"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) {
-                setIsUploadingCover(true);
-                uploadCoverImage(file).then((url) => {
-                  if (url) setCoverImage(url);
-                  setIsUploadingCover(false);
-                });
-              }
-            }}
-          />
-        </div>
+        {/* Cover Image */}
+        <CoverImageUpload
+          coverImage={coverImage}
+          isUploading={isUploadingCover}
+          onUpload={handleCoverImageUpload}
+          onRemove={() => setCoverImage("")}
+        />
 
-        {/* Inputs Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <Label className="text-base">Post Title</Label>
-            <Input
-              className="text-lg font-semibold py-6"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g. How AI is changing the world"
-            />
-          </div>
-          <div className="space-y-2">
-            <Label className="text-base">URL Slug</Label>
-            <Input
-              className="font-mono text-sm bg-muted/50"
-              value={slug}
-              onChange={(e) => setSlug(e.target.value)}
-            />
-          </div>
-        </div>
+        {/* Title, Slug, Excerpt */}
+        <BlogMetadata
+          title={title}
+          slug={slug}
+          excerpt={excerpt}
+          onTitleChange={setTitle}
+          onSlugChange={setSlug}
+          onExcerptChange={setExcerpt}
+        />
 
-        {/* Categories & Tags */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <Label>Category</Label>
-            <Select value={category} onValueChange={setCategory}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select Category" />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>
-                    {cat}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="space-y-2">
-            <Label>Tags</Label>
-            <div className="flex gap-2">
-              <Input
-                value={tagInput}
-                onChange={(e) => setTagInput(e.target.value)}
-                onKeyDown={(e) =>
-                  e.key === "Enter" &&
-                  (e.preventDefault(),
-                  setTags([...tags, tagInput]),
-                  setTagInput(""))
-                }
-                placeholder="Press Enter to add"
-              />
-            </div>
-            <div className="flex flex-wrap gap-2 pt-2">
-              {tags.map((t) => (
-                <span
-                  key={t}
-                  className="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1"
-                >
-                  {t}{" "}
-                  <X
-                    className="h-3 w-3 cursor-pointer"
-                    onClick={() => setTags(tags.filter((i) => i !== t))}
-                  />
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* Category & Tags */}
+        <BlogCategoryTags
+          category={category}
+          categories={categories}
+          tags={tags}
+          onCategoryChange={setCategory}
+          onCategoriesRefresh={loadCategories}
+          onTagAdd={(tag) => setTags([...tags, tag])}
+          onTagRemove={(tag) => setTags(tags.filter((t) => t !== tag))}
+        />
 
-        {/* Editor Area */}
+        {/* Rich Text Editor */}
         <div className="space-y-2">
-          <Label className="text-base">Content</Label>
+          <Label className="text-base">Content *</Label>
           <div className="border-2 rounded-xl overflow-hidden focus-within:border-primary transition-colors">
             {editor && <TiptapMenuBar editor={editor} />}
             <div className="p-6 prose prose-slate dark:prose-invert max-w-none min-h-[400px]">
@@ -363,34 +320,20 @@ export default function BlogEditor({
 
       <CardFooter className="flex justify-between border-t p-6 bg-muted/20">
         <Button variant="ghost" onClick={onCancel} className="font-medium">
-          Discard
+          Cancel
         </Button>
-        <div className="flex gap-3">
-          <Button
-            variant="outline"
-            onClick={() => handleSave("draft")}
-            disabled={isSaving}
-          >
-            {isSaving && !isPublished ? (
+        <Button onClick={handleSave} disabled={isSaving} className="px-8">
+          {isSaving ? (
+            <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-              "Save Draft"
-            )}
-          </Button>
-          <Button
-            onClick={() => handleSave("published")}
-            disabled={isSaving}
-            className="px-8"
-          >
-            {isSaving && isPublished ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            ) : blogId ? (
-              "Update Post"
-            ) : (
-              "Publish Now"
-            )}
-          </Button>
-        </div>
+              Saving...
+            </>
+          ) : blogId ? (
+            "Update Post"
+          ) : (
+            `${isPublished ? "Publish" : "Save Draft"}`
+          )}
+        </Button>
       </CardFooter>
     </Card>
   );

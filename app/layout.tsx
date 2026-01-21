@@ -4,6 +4,7 @@ import "./globals.css";
 import I18nProvider from "@/components/i18n-provider";
 import SyncUser from "@/components/auth/SyncUser";
 import { Toaster } from "sonner";
+import { AlertDialogProvider } from "@/components/providers/AlertDialogProvider";
 
 // Montserrat configuration
 const montserrat = Montserrat({
@@ -38,12 +39,14 @@ export default function RootLayout({
           className={`${montserrat.variable} ${hindSiliguri.variable} antialiased font-sans`}
         >
           <I18nProvider>
-            <SyncUser />
+            <AlertDialogProvider>
+              <SyncUser />
 
-            {children}
+              {children}
 
-            {/* গ্লোবাল নোটিফিকেশন সিস্টেম */}
-            <Toaster position="top-center" richColors />
+              {/* গ্লোবাল নোটিফিকেশন সিস্টেম */}
+              <Toaster position="top-center" richColors />
+            </AlertDialogProvider>
           </I18nProvider>
         </body>
       </html>

@@ -5,47 +5,52 @@ import Link from "next/link";
 import { Loader2, ArrowLeft, Terminal, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
-// Component Imports - Assuming these will also be styled with rounded-2xl/blueprint theme
+// Component Imports
 import { BreadcrumbNav } from "@/components/insights/details/BreadcrumbNav";
 import { PostHero } from "@/components/insights/details/PostHero";
 import { PostSidebar } from "@/components/insights/details/PostSidebar";
 import { PostNavigation } from "@/components/insights/details/PostNavigation";
 import { PostFooterCTA } from "@/components/insights/details/PostFooterCTA";
-import { BlogPost } from "@/app/(admin)/admin/BlogManager";
-import { getAllBlogsForAdmin, getBlogPost } from "@/lib/blog-actions";
+import { getBlogPostDetails } from "@/lib/blog-actions";
+import {
+  BlogPost,
+  RelatedPost,
+  PostNavigationInfo,
+} from "@/types/blog-types";
 
+/**
+ * Insight Detail Page
+ * Displays a single blog post with navigation and related posts
+ */
 export default function InsightDetail({ params }: { params: { id: string } }) {
   const id = params.id;
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
-  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
-  const [prevPost, setPrevPost] = useState<BlogPost | null>(null);
-  const [nextPost, setNextPost] = useState<BlogPost | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<RelatedPost[]>([]);
+  const [prevPost, setPrevPost] = useState<PostNavigationInfo | null>(null);
+  const [nextPost, setNextPost] = useState<PostNavigationInfo | null>(null);
 
   useEffect(() => {
     if (!id) return;
+
     const fetchData = async () => {
       setLoading(true);
       try {
-        const currentPost = await getBlogPost(id);
-        setPost(currentPost);
+        const result = await getBlogPostDetails(id);
 
-        const allPostsResponse = await getAllBlogsForAdmin();
-        const allPosts: BlogPost[] = allPostsResponse.data;
-        const currentIndex = allPosts.findIndex((p) => p?.id === id);
-
-        const related = allPosts.filter((p) => p.id !== id).slice(0, 2);
-        setRelatedPosts(related);
-
-        if (currentIndex > 0) setPrevPost(allPosts[currentIndex - 1]);
-        if (currentIndex < allPosts.length - 1)
-          setNextPost(allPosts[currentIndex + 1]);
+        if (result) {
+          setPost(result.post);
+          setRelatedPosts(result.relatedPosts || []);
+          setPrevPost(result.prevPost || null);
+          setNextPost(result.nextPost || null);
+        }
       } catch (error) {
         console.error("Error fetching post:", error);
       } finally {
         setLoading(false);
       }
     };
+
     fetchData();
     window.scrollTo(0, 0);
   }, [id]);
@@ -63,7 +68,7 @@ export default function InsightDetail({ params }: { params: { id: string } }) {
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white p-4 ">
+      <div className="min-h-screen flex items-center justify-center bg-white p-4">
         <div className="text-center max-w-md">
           <div className="font-mono text-primary text-5xl font-black mb-6 italic">
             404
@@ -74,7 +79,7 @@ export default function InsightDetail({ params }: { params: { id: string } }) {
           <Link href="/insights">
             <button className="inline-flex items-center gap-2 bg-[#0A0A0A] text-white px-8 py-4 rounded-2xl font-black text-sm hover:bg-primary transition-all">
               <ArrowLeft size={18} />
-              Return to Database
+              Return to Intelligence Stream
             </button>
           </Link>
         </div>
@@ -84,25 +89,25 @@ export default function InsightDetail({ params }: { params: { id: string } }) {
 
   return (
     <div className="min-h-screen bg-white selection:bg-primary selection:text-white mt-32">
-      {/* 1. Breadcrumb - Keep it minimal and floating */}
+      {/* Breadcrumb Navigation */}
       <div className="bg-white/50 backdrop-blur-sm sticky top-0 z-50 border-b border-border/40">
         <BreadcrumbNav postTitle={post.title} />
       </div>
 
-      {/* 2. Hero Section - Should use the dark/blueprint theme from our FeaturedPost */}
+      {/* Hero Section */}
       <PostHero post={post} />
 
       {/* Main Content Layout */}
       <div className="container mx-auto px-4 py-16 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 max-w-7xl mx-auto">
-          {/* 3. The Article Body */}
+          {/* Article Body */}
           <div className="lg:col-span-8">
             <motion.article
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="max-w-none"
             >
-              {/* Technical Article Content */}
+              {/* Blog Content */}
               <div
                 className="prose prose-lg max-w-none
                   prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-[#0A0A0A] prose-headings:uppercase
@@ -115,7 +120,7 @@ export default function InsightDetail({ params }: { params: { id: string } }) {
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
 
-              {/* Enhanced Engineer's Note Callout */}
+              {/* Technical Validation Callout */}
               <div className="mt-16 p-8 bg-[#0A0A0A] rounded-[2.5rem] relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
                   <Terminal size={120} className="text-white" />
@@ -143,7 +148,7 @@ export default function InsightDetail({ params }: { params: { id: string } }) {
               </div>
             </motion.article>
 
-            {/* Navigation Buttons (Prev/Next) */}
+            {/* Navigation (Prev/Next) */}
             <div className="mt-20">
               <PostNavigation
                 previousPost={
@@ -152,15 +157,13 @@ export default function InsightDetail({ params }: { params: { id: string } }) {
                     : undefined
                 }
                 nextPost={
-                  nextPost
-                    ? { id: nextPost.id, title: nextPost.title }
-                    : undefined
+                  nextPost ? { id: nextPost.id, title: nextPost.title } : undefined
                 }
               />
             </div>
           </div>
 
-          {/* 4. The Sidebar - System Context */}
+          {/* Sidebar */}
           <aside className="lg:col-span-4 space-y-8">
             <div className="sticky top-24">
               <PostSidebar
@@ -170,14 +173,10 @@ export default function InsightDetail({ params }: { params: { id: string } }) {
                   "Phase_03: Execution",
                   "Phase_04: Optimization",
                 ]}
-                relatedPosts={relatedPosts.map((p) => ({
-                  id: p.id,
-                  title: p.title,
-                  cover_image: p.cover_image,
-                }))}
+                relatedPosts={relatedPosts}
               />
 
-              {/* Additional System Status Widget */}
+              {/* System Status Widget */}
               <div className="mt-8 p-6 border border-border/60 rounded-3xl bg-white shadow-sm">
                 <div className="flex items-center gap-2 mb-4">
                   <ShieldCheck className="text-green-500 w-4 h-4" />
@@ -199,12 +198,12 @@ export default function InsightDetail({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      {/* 5. Footer CTA - The Project Bridge */}
+      {/* Footer CTA */}
       <div className="bg-[#F9F9F9] border-t border-border/50">
         <PostFooterCTA post={post} />
       </div>
 
-      {/* Subtle Background Blueprint Grid */}
+      {/* Background Blueprint Grid */}
       <div className="fixed inset-0 pointer-events-none z-[-1] opacity-[0.02]">
         <div
           className="absolute inset-0"

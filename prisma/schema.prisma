@@ -55,6 +55,30 @@ model Lead {
   @@map("leads")
 }
 
+model BlogPost {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  slug        String   @unique
+  content     String // এটি HTML কন্টেন্ট স্টোর করবে
+  cover_image String
+  category    String   @default("Technical")
+  excerpt     String? // ছোট সামারি (কার্ডে দেখানোর জন্য)
+  tags        String[] @default([])
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Blog Category Model for proper category management
+model BlogCategory {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 // Contact Form Submission Model
 model ContactSubmission {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -63,8 +87,10 @@ model ContactSubmission {
   email     String
   service   String
   details   String
-  status    String   @default("pending") // pending, reviewed, contacted
+  status    String   @default("pending") // pending, replied, resolved, archived
+  response  String? // Admin's response/notes about this submission
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // Newsletter Subscription Model

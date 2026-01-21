@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 
 // Shadcn UI Components
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -20,43 +19,19 @@ import { createCaseStudy } from "@/lib/case-study-action";
 import MetadataStep from "./MetadataStep";
 import ContentStep from "./ContentStep";
 import VisualsStep from "./VisualsStep";
-
-// --- Schema Definition ---
-const caseContentSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  context: z.string().min(10, "Context is required"),
-  problem: z.string().min(10, "Problem statement is required"),
-  solution: z.string().min(10, "Solution details is required"),
-  myApproach: z.string().optional(),
-  result: z.string().min(1, "Result summary is required"),
-  metric: z.string().min(1, "Key metric is required"),
-  testimonial: z.string().optional(),
-});
-
-const formSchema = z.object({
-  category: z.string().min(1, "Category is required"),
-  techTags: z.string().min(1, "Tech stack is required"),
-  clientName: z.string().optional(),
-  industry: z.string().optional(),
-  clientLocation: z.string().optional(),
-  beforeMetricValue: z.coerce.number().optional(),
-  afterMetricValue: z.coerce.number().optional(),
-  metricUnit: z.string().optional(),
-  en: caseContentSchema,
-  bn: caseContentSchema,
-  videoReviewUrl: z.string().optional(),
-  dashboardVideoUrl: z.string().optional(),
-  n8nDiagramUrl: z.string().optional(),
-  gallery: z.array(z.string()).default([]),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+import { useRouter } from "next/navigation";
+import { formatDate } from "@/lib/utils";
+import {
+  CaseStudyFormValues,
+  caseStudyFormSchema,
+} from "./caseStudyFormSchema";
 
 export default function CaseStudyTabsForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<CaseStudyFormValues>({
+    resolver: zodResolver(caseStudyFormSchema),
     defaultValues: {
       category: "",
       techTags: "",
@@ -80,32 +55,35 @@ export default function CaseStudyTabsForm() {
     },
   });
 
-  async function onSubmit(data: FormValues) {
+  async function onSubmit(data: CaseStudyFormValues) {
     setIsSubmitting(true);
 
     console.log("Form submitted with data:", data);
-    // try {
-    //   const formattedData = {
-    //     ...data,
-    //     techTags: data.techTags.split(",").map((tag) => tag.trim()),
-    //   };
+    try {
+      const formattedData = {
+        ...data,
+        techTags: data.techTags.split(",").map((tag) => tag.trim()),
+        createdAt: formatDate(new Date()),
+        updatedAt: formatDate(new Date()),
+      };
 
-    //   const result = await createCaseStudy(formattedData);
-    //   if (result.success) {
-    //     toast.success("Case study published successfully!");
-    //     form.reset();
-    //   } else {
-    //     toast.error(result.error || "Failed to save");
-    //   }
-    // } catch (error) {
-    //   toast.error("Something went wrong");
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+      const result = await createCaseStudy(formattedData);
+      if (result.success) {
+        toast.success("Case study published successfully!");
+        form.reset();
+        router.push('/admin/case-studies')
+      } else {
+        toast.error(result.error || "Failed to save");
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsSubmitting(false);
+    }
     setIsSubmitting(false);
   }
 
-  const handleFormError = (errors: any) => {
+  const handleFormError = (errors: unknown) => {
     console.log("Form validation errors:", errors);
   };
 

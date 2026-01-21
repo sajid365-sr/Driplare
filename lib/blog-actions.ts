@@ -1,49 +1,21 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import {
+  BlogPost,
+  BlogPostDetails,
+  RelatedPost,
+  PostNavigationInfo,
+} from "@/types/blog-types";
 import { revalidatePath } from "next/cache";
-import { v2 as cloudinary } from "cloudinary";
-import { BlogPost } from "@/app/(admin)/admin/BlogManager";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
-// lib/blog-action.ts বা যেখানে ফাংশনটি আছে
-export async function uploadImageToCloudinary(
-  formData: FormData,
-  folder: string
-) {
-  try {
-    const file = formData.get("file") as File; // FormData থেকে ফাইলটি বের করা
-    if (!file) throw new Error("No file provided");
-
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
-    const result = (await new Promise((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          { folder: folder }, // এখানে 'folder' প্যারামিটার ব্যবহার করুন
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        )
-        .end(buffer);
-    })) as any;
-
-    return result.secure_url;
-  } catch (error) {
-    console.error("Cloudinary Error:", error);
-    return null;
-  }
-}
-
-// একটি ব্লগের বিস্তারিত এবং নেভিগেশন (Prev/Next) আনা
-export async function getBlogPostDetails(id: string) {
+/**
+ * Get Blog Post Details
+ * Fetches a single blog post with related posts and navigation
+ */
+export async function getBlogPostDetails(
+  id: string
+): Promise<BlogPostDetails | null> {
   try {
     const post = await prisma.blogPost.findUnique({
       where: { id },
@@ -51,35 +23,51 @@ export async function getBlogPostDetails(id: string) {
 
     if (!post) return null;
 
-    // রিলেটেড পোস্ট (একই ক্যাটাগরির অন্য ২ টি পোস্ট)
+    // Related posts (same category)
     const relatedPosts = await prisma.blogPost.findMany({
       where: {
         category: post.category,
         id: { not: id },
-        status: "published",
+        published: true,
       },
       take: 2,
-      select: { id: true, title: true, coverImage: true },
+      select: {
+        id: true,
+        title: true,
+        cover_image: true,
+        slug: true,
+      },
     });
 
-    // আগের এবং পরের পোস্টের ID ও টাইটেল আনা (নেভিগেশনের জন্য)
+    // Previous post
     const prevPost = await prisma.blogPost.findFirst({
-      where: { createdAt: { lt: post.createdAt }, status: "published" },
+      where: {
+        createdAt: { lt: post.createdAt },
+        published: true,
+      },
       orderBy: { createdAt: "desc" },
-      select: { id: true, title: true },
+      select: { id: true, title: true, slug: true },
     });
 
+    // Next post
     const nextPost = await prisma.blogPost.findFirst({
-      where: { createdAt: { gt: post.createdAt }, status: "published" },
+      where: {
+        createdAt: { gt: post.createdAt },
+        published: true,
+      },
       orderBy: { createdAt: "asc" },
-      select: { id: true, title: true },
+      select: { id: true, title: true, slug: true },
     });
 
     return {
-      post: JSON.parse(JSON.stringify(post)), // Serializing for Client Component
-      relatedPosts,
-      prevPost,
-      nextPost,
+      post: JSON.parse(JSON.stringify(post)) as BlogPost,
+      relatedPosts: JSON.parse(JSON.stringify(relatedPosts)) as RelatedPost[],
+      prevPost: prevPost
+        ? (JSON.parse(JSON.stringify(prevPost)) as PostNavigationInfo)
+        : null,
+      nextPost: nextPost
+        ? (JSON.parse(JSON.stringify(nextPost)) as PostNavigationInfo)
+        : null,
     };
   } catch (error) {
     console.error("Details Fetch Error:", error);
@@ -87,94 +75,151 @@ export async function getBlogPostDetails(id: string) {
   }
 }
 
-// ব্লগ ডিলিট
-export async function deleteBlogPost(id: string) {
+/**
+ * Save Blog Post
+ * Creates or updates a blog post
+ */
+export async function saveBlogPost(data: BlogPost, id?: string) {
   try {
-    await prisma.blogPost.delete({ where: { id } });
-    revalidatePath("/admin/blog");
-    return { success: true };
-  } catch (error) {
-    return { success: false };
-  }
-}
+    // Generate slug from title if not provided
+    const postData = {
+      ...data,
+      slug:
+        data.slug ||
+        data.title
+          .toLowerCase()
+          .replace(/ /g, "-")
+          .replace(/[^\w-]+/g, ""),
+      updatedAt: new Date(),
+    };
 
-// ব্লগ সেভ বা আপডেট
-export async function saveBlogPost(data: any, id?: string) {
-  try {
     if (id) {
-      await prisma.blogPost.update({ where: { id }, data });
+      await prisma.blogPost.update({
+        where: { id },
+        data: postData,
+      });
     } else {
-      await prisma.blogPost.create({ data });
+      await prisma.blogPost.create({
+        data: postData,
+      });
     }
+
     revalidatePath("/admin/blog");
     revalidatePath("/insights");
+    revalidatePath(`/insights/${id}`);
+
     return { success: true };
   } catch (error) {
-    return { success: false, error: "Failed to save" };
+    console.error("Save Error:", error);
+    return { success: false, error: "Failed to save blog post" };
   }
 }
 
-// সব ব্লগ লিস্ট আনা (অ্যাডমিন প্যানেলের জন্য)
+/**
+ * Get All Blogs For Admin
+ * Fetches all blog posts (including unpublished) for admin panel
+ */
 export async function getAllBlogsForAdmin() {
   try {
     const blogs = await prisma.blogPost.findMany({
       orderBy: { createdAt: "desc" },
     });
-    return JSON.parse(JSON.stringify(blogs));
+    return {
+      success: true,
+      data: JSON.parse(JSON.stringify(blogs)) as BlogPost[],
+    };
   } catch (error) {
     console.error("Fetch Error:", error);
-    return [];
+    return { success: false, data: [] };
   }
 }
-// একটি ব্লগ আনা (For insights details page)
-export async function getBlogPost(id: string) {
+
+/**
+ * Get All Published Blog Posts
+ * Fetches all published blog posts for public display
+ */
+export async function getAllPublishedBlogs() {
+  try {
+    const blogs = await prisma.blogPost.findMany({
+      where: { published: true },
+      orderBy: { createdAt: "desc" },
+    });
+    return {
+      success: true,
+      data: JSON.parse(JSON.stringify(blogs)) as BlogPost[],
+    };
+  } catch (error) {
+    console.error("Fetch Error:", error);
+    return { success: false, data: [] };
+  }
+}
+
+/**
+ * Get Single Blog Post
+ * Fetches a single blog post by ID
+ */
+export async function getBlogPost(id: string): Promise<BlogPost | null> {
   try {
     const blog = await prisma.blogPost.findUnique({
       where: { id },
     });
-    return JSON.parse(JSON.stringify(blog));
+    return blog ? (JSON.parse(JSON.stringify(blog)) as BlogPost) : null;
   } catch (error) {
     console.error("Fetch Error:", error);
-    return [];
+    return null;
   }
 }
 
-// আর্কাইভ করা (Status পরিবর্তন)
-export async function archiveBlogPost(id: string) {
+/**
+ * Delete Blog Post
+ * Permanently deletes a blog post
+ */
+export async function deleteBlogPost(id: string) {
   try {
-    await prisma.blogPost.update({
-      where: { id },
-      data: { status: "archived" },
-    });
+    await prisma.blogPost.delete({ where: { id } });
     revalidatePath("/admin/blog");
+    revalidatePath("/insights");
     return { success: true };
   } catch (error) {
     return { success: false };
   }
 }
 
-export async function getBlogCategories() {
+/**
+ * Archive Blog Post
+ * Sets a blog post as unpublished
+ */
+export async function archiveBlogPost(id: string) {
   try {
-    // ডাটাবেজের সব ব্লগ থেকে ইউনিক ক্যাটাগরিগুলো নিয়ে আসবে
-    const categories = await prisma.blogPost.findMany({
-      where: {
-        is_archived: false, // আর্কাইভ করা ব্লগ বাদ দিতে চাইলে
-      },
-      select: {
-        category: true,
-      },
-      distinct: ["category"], // শুধুমাত্র আলাদা আলাদা ক্যাটাগরি ফিল্টার করবে
+    await prisma.blogPost.update({
+      where: { id },
+      data: { published: false },
+    });
+    revalidatePath("/admin/blog");
+    revalidatePath("/insights");
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+}
+
+/**
+ * Get Blog Categories
+ * Returns categories from BlogCategory collection
+ */
+export async function getBlogCategories(): Promise<string[]> {
+  try {
+    const categories = await prisma.blogCategory.findMany({
+      orderBy: { name: "asc" },
+      select: { name: true },
     });
 
-    // আমরা চাই শুধু স্ট্রিং এর একটি অ্যারে (যেমন: ["Tech", "Design"])
-    const categoryList = categories
-      .map((item: any) => item.category)
-      .filter((cat: any) => cat !== null && cat !== ""); // খালি ক্যাটাগরি বাদ দিবে
+    const categoryList = categories.map((item) => item.name);
 
+    // If no categories exist, return empty array (user should use Category Manager)
     return categoryList;
   } catch (error) {
     console.error("Error fetching categories:", error);
-    // যদি ডাটাবেজে কোনো ক্যাটাগরি না থাকে বা এরর হয়, তবে ডিফল্ট কিছু ক্যাটাগরি রিটার্ন করবে
-    return ["Technology", "Design", "Marketing", "Business", "Development"];
+    return [];
   }
 }
