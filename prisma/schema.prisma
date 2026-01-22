@@ -117,23 +117,23 @@ model Review {
   updatedAt        DateTime @updatedAt
 }
 
-model Agent {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  name            String
-  category        String
-  price           Float
-  description     String?
-  fullDescription String?
-  features        String[] // Array of features
-  techStack       String[] // Array of tools/tech
-  image           String
-  rating          Float    @default(0.0)
-  users           String   @default("0")
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+// model Agent {
+//   id              String   @id @default(auto()) @map("_id") @db.ObjectId
+//   name            String
+//   category        String
+//   price           Float
+//   description     String?
+//   fullDescription String?
+//   features        String[] // Array of features
+//   techStack       String[] // Array of tools/tech
+//   image           String
+//   rating          Float    @default(0.0)
+//   users           String   @default("0")
+//   createdAt       DateTime @default(now())
+//   updatedAt       DateTime @updatedAt
 
-  @@map("agents")
-}
+//   @@map("agents")
+// }
 
 // এটি একটি এমবেডেড অবজেক্ট টাইপ
 type CaseContent {
@@ -179,4 +179,75 @@ model CaseStudy {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model SiteSettings {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  // General Site Settings
+  siteName        String  @default("Driplare")
+  siteTitle       String  @default("AI Agent and Automation")
+  footerCopyright String  @default("© 2026 All Rights Reserved")
+  logoUrl         String?
+  faviconUrl      String?
+
+  // Social Media Links & Permissions
+  youtubeUrl    String?
+  linkedinUrl   String?
+  facebookUrl   String?
+  twitterUrl    String?
+  instagramUrl  String?
+  showYouTube   Boolean @default(false)
+  showTwitter   Boolean @default(false)
+  showInstagram Boolean @default(false)
+  showFacebook  Boolean @default(true)
+  showLinkedin  Boolean @default(true)
+
+  // SEO & Tracking
+  googleAnalyticsId String?
+  metaDescription   String?
+
+  // System Control
+  maintenanceMode Boolean @default(false)
+
+  // API Config (Non-sensitive only)
+  cloudinaryFolder String @default("portfolio")
+  resendFromEmail  String @default("onboarding@resend.dev")
+
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+// Agent Content Type for Multi-language Support
+type AgentContent {
+  name            String
+  description     String
+  fullDescription String
+  features        String[]
+}
+
+model Agent {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug       String   @unique
+  price      Float
+  rating     Float    @default(5.0)
+  totalSales Int      @default(0)
+  category   String
+  mainImage  String
+  gallery    String[]
+  videoUrl   String?
+  techStack  String[]
+  difficulty String   @default("Easy")
+  setupTime  String?
+  status     String   @default("active")
+
+  // Multi-language Content (like CaseStudy)
+  en AgentContent
+  bn AgentContent
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("agents")
 }

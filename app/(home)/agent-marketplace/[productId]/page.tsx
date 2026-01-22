@@ -2,333 +2,432 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import {
-  ArrowLeft,
-  CheckCircle2,
-  Cpu,
-  ShieldCheck,
-  Globe,
-  Zap,
-  Code2,
-  PlayCircle,
-  Layers,
-  Sparkles,
+  ArrowLeft, CheckCircle2, Cpu, Globe, Zap,
+  PlayCircle, Sparkles, BarChart3, Rocket,
+  Star, Users, Clock, ExternalLink, Heart,
+  Share2, Bookmark, ChevronRight, Layers
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AgentCard } from "@/components/marketplace/AgentCard";
-import { getAgentById, getAllAgents } from "@/lib/agent-marketplace-action";
-import { useTranslation } from "react-i18next";
-
-interface Agent {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  description?: string;
-  fullDescription?: string;
-  features: string[];
-  techStack?: string[];
-  tools?: string[];
-  image: string;
-  rating: number;
-}
+import { Progress } from "@/components/ui/progress";
+import { getAgentBySlug } from "@/lib/agent-marketplace-action";
+import { Agent } from "@/types/agent-marketplace";
 
 export default function AgentDetailsPage() {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
   const params = useParams();
-  const productId = params?.productId as string;
-
-  const [currentAgent, setCurrentAgent] = useState<Agent | null>(null);
-  const [relatedAgents, setRelatedAgents] = useState<Agent[]>([]);
+  const slug = params?.productId as string;
+  const [agent, setAgent] = useState<Agent | null>(null);
   const [loading, setLoading] = useState(true);
-
-  // ক্যাটাগরি লেবেলের জন্য হেল্পার (আগের মতো)
-  const getCategoryLabel = (cat: string) => {
-    const key = cat?.toLowerCase().replace(/ & /g, "_").replace(/ /g, "_");
-    const translated = t(`marketplace.filters.categories.${key}`);
-    return translated.includes("marketplace.") ? cat : translated;
-  };
+  const [activeImage, setActiveImage] = useState(0);
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
-    if (!productId) return;
-    async function loadData() {
-      try {
-        setLoading(true);
-        const agentRes = await getAgentById(productId);
-        if (agentRes?.success && agentRes.data) {
-          setCurrentAgent(agentRes.data as Agent);
-        }
-        const allRes = await getAllAgents();
-        if (allRes?.success && allRes.data) {
-          const filtered = (allRes.data as Agent[])
-            .filter((a) => a.id !== productId)
-            .slice(0, 3);
-          setRelatedAgents(filtered);
-        }
-      } catch (error) {
-        console.error("Failed to load agent:", error);
-      } finally {
-        setLoading(false);
+    async function loadAgent() {
+      const res = await getAgentBySlug(slug);
+      if (res.success && res.data) {
+        setAgent(res.data as unknown as Agent);
       }
+      setLoading(false);
     }
-    loadData();
-  }, [productId]);
+    loadAgent();
+  }, [slug]);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
+  if (loading) return <LoadingSkeleton />;
+  if (!agent) return <NotFound />;
 
-  if (!currentAgent) {
-    return (
-      <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center gap-4">
-        <p className="text-xl font-bold">
-          {t("marketplace.agent_details.not_found")}
-        </p>
-        <Link href="/agent-marketplace" className="text-primary underline">
-          {t("marketplace.agent_details.back_to_market")}
-        </Link>
-      </div>
-    );
-  }
+  // Get language-specific content (like CaseStudy page)
+  const currentLang = i18n.language.split("-")[0] as "en" | "bn";
+  const langContent = agent[currentLang] || agent.en;
+
+  const allImages = [agent.mainImage, ...agent.gallery];
 
   return (
-    <div className="min-h-screen bg-background pb-20 pt-28 transition-colors duration-300">
-      <div className="container mx-auto px-4">
-        {/* Header Navigation */}
-        <Link
-          href="/agent-marketplace"
-          className="inline-flex items-center cursor-pointer gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 group"
-        >
-          <ArrowLeft
-            size={16}
-            className="group-hover:-translate-x-1 transition-transform"
-          />
-          {t("marketplace.agent_details.back_to_market")}
-        </Link>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      {/* Header */}
+      <header className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative z-10 container mx-auto px-4 py-6">
+          <Link
+            href="/agent-marketplace"
+            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors mb-4"
+          >
+            <ArrowLeft size={20} />
+            Back to Marketplace
+          </Link>
+        </div>
+      </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* LEFT: Content */}
-          <div className="lg:col-span-2 space-y-12">
-            <header className="space-y-4">
-              <Badge
-                variant="outline"
-                className="text-primary border-primary/30 uppercase tracking-widest px-3 py-1"
-              >
-                {getCategoryLabel(currentAgent.category)}
-              </Badge>
-              <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight dark:text-white">
-                {currentAgent.name}
-              </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl italic">
-                {currentAgent.fullDescription || currentAgent.description}
-              </p>
-            </header>
-
-            {/* Visual Demo Area */}
-            <div className="group relative aspect-video bg-black rounded-3xl border border-border/50 overflow-hidden shadow-2xl shadow-primary/5">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-50" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-                <div className="p-5 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 group-hover:scale-110 transition-transform duration-500 cursor-pointer">
-                  <PlayCircle size={48} className="text-primary" />
-                </div>
-                <span className="mt-4 font-mono text-[10px] uppercase tracking-[0.3em] text-white/60">
-                  {t("marketplace.agent_details.demo_label")}
-                </span>
+      <div className="container mx-auto px-4 py-12 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* LEFT: Main Content */}
+          <div className="lg:col-span-8 space-y-8">
+            {/* Hero Section */}
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center gap-3">
+                <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 shadow-lg">
+                  {agent.category}
+                </Badge>
+                <Badge variant="outline" className="bg-white/50 backdrop-blur-sm">
+                  <BarChart3 size={12} className="mr-1" />
+                  {agent.totalSales}+ Deployed
+                </Badge>
+                <Badge variant="outline" className="bg-white/50 backdrop-blur-sm">
+                  <Star size={12} className="mr-1 text-yellow-500 fill-yellow-500" />
+                  {agent.rating.toFixed(1)}
+                </Badge>
               </div>
-              <div className="absolute bottom-4 left-6 font-mono text-[10px] text-primary/30 pointer-events-none hidden md:block select-none">
-                {`> exec_agent_flow --id=${currentAgent.id}`} <br />
-                {`> status: ready_for_deployment`} <br />
-                {`> encryption: AES-256`}
+
+              <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-white uppercase italic leading-tight">
+                {langContent?.name || "Unnamed Agent"}
+              </h1>
+
+              <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-medium max-w-3xl">
+                {langContent?.fullDescription || "No description available"}
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-4 pt-4">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl px-8 py-4 text-lg font-bold"
+                >
+                  <Rocket className="mr-2 h-5 w-5" />
+                  Get Started
+                </Button>
+                <Button variant="outline" size="lg" className="px-6 py-4">
+                  <PlayCircle className="mr-2 h-5 w-5" />
+                  Watch Demo
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  onClick={() => setIsBookmarked(!isBookmarked)}
+                  className={`px-6 py-4 ${isBookmarked ? 'text-red-500' : ''}`}
+                >
+                  <Heart className={`h-5 w-5 ${isBookmarked ? 'fill-current' : ''}`} />
+                </Button>
+                <Button variant="ghost" size="lg" className="px-6 py-4">
+                  <Share2 className="h-5 w-5" />
+                </Button>
               </div>
             </div>
 
-            {/* Information Tabs */}
-            <Tabs defaultValue="capabilities" className="w-full">
-              <TabsList className="bg-accent/30 p-1 border border-border/50 w-full justify-start rounded-xl mb-6">
-                <TabsTrigger value="capabilities" className="rounded-lg px-6">
-                  {t("marketplace..tabs.capabilities")}
-                </TabsTrigger>
-                <TabsTrigger value="technical" className="rounded-lg px-6">
-                  {t("marketplace.agent_details.tabs.architecture")}
-                </TabsTrigger>
+            {/* Media Gallery */}
+            <Card className="overflow-hidden shadow-2xl border-0">
+              <div className="relative">
+                {agent.videoUrl ? (
+                  <div className="aspect-video bg-black relative">
+                    <iframe
+                      className="w-full h-full"
+                      src={agent.videoUrl}
+                      title="Demo Video"
+                      allowFullScreen
+                    />
+                    <div className="absolute top-4 right-4">
+                      <Badge className="bg-red-500 text-white border-0">
+                        <PlayCircle className="h-3 w-3 mr-1" />
+                        Demo Video
+                      </Badge>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="aspect-video relative overflow-hidden">
+                    <img
+                      src={allImages[activeImage]}
+                      alt={langContent?.name || "Agent preview"}
+                      className="w-full h-full object-cover"
+                    />
+                    {allImages.length > 1 && (
+                      <>
+                        {/* Navigation arrows */}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white hover:bg-black/70"
+                          onClick={() => setActiveImage((prev) => (prev > 0 ? prev - 1 : allImages.length - 1))}
+                          aria-label="Previous image"
+                        >
+                          <ChevronRight className="h-4 w-4 rotate-180" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white hover:bg-black/70"
+                          onClick={() => setActiveImage((prev) => (prev < allImages.length - 1 ? prev + 1 : 0))}
+                          aria-label="Next image"
+                        >
+                          <ChevronRight className="h-4 w-4" />
+                        </Button>
+
+                        {/* Thumbnail indicators */}
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                          {allImages.map((_, index) => (
+                            <button
+                              key={index}
+                              className={`w-2 h-2 rounded-full transition-all ${index === activeImage ? 'bg-white' : 'bg-white/50'
+                                }`}
+                              onClick={() => setActiveImage(index)}
+                              aria-label={`View image ${index + 1} of ${allImages.length}`}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
+
+                {/* Thumbnail strip for multiple images */}
+                {allImages.length > 1 && !agent.videoUrl && (
+                  <div className="flex gap-2 p-4 bg-slate-50 dark:bg-slate-800">
+                    {allImages.map((image, index) => (
+                      <button
+                        key={index}
+                        className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${index === activeImage ? 'border-blue-500 scale-105' : 'border-slate-200'
+                          }`}
+                        onClick={() => setActiveImage(index)}
+                      >
+                        <img src={image} alt={`Preview ${index + 1}`} className="w-full h-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </Card>
+
+            {/* Detailed Information Tabs */}
+            <Tabs defaultValue="features" className="space-y-6">
+              <TabsList className="grid w-full grid-cols-4 bg-slate-100 dark:bg-slate-800">
+                <TabsTrigger value="features">Features</TabsTrigger>
+                <TabsTrigger value="tech">Tech Stack</TabsTrigger>
+                <TabsTrigger value="reviews">Reviews</TabsTrigger>
+                <TabsTrigger value="docs">Documentation</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="capabilities" className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {(currentAgent.features || []).map(
-                    (feature: string, idx: number) => (
-                      <div
-                        key={idx}
-                        className="flex items-center gap-4 p-5 bg-card border border-border/40 rounded-2xl hover:border-primary/30 transition-colors"
-                      >
-                        <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                          <CheckCircle2 className="text-primary" size={20} />
+              <TabsContent value="features" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-2xl">
+                      <Sparkles className="h-6 w-6 text-blue-500" />
+                      Key Features & Capabilities
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {langContent?.features?.map((feature: string, i: number) => (
+                        <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-white dark:from-slate-800 dark:to-slate-700">
+                          <CheckCircle2 className="text-green-500 shrink-0 mt-1 h-5 w-5" />
+                          <span className="font-medium text-slate-800 dark:text-slate-200">{feature}</span>
                         </div>
-                        <span className="font-semibold dark:text-gray-200">
-                          {feature}
-                        </span>
-                      </div>
-                    )
-                  )}
-                </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
               </TabsContent>
 
-              <TabsContent
-                value="technical"
-                className="bg-accent/20 p-8 rounded-3xl border border-border/50"
-              >
-                <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
-                  <div className="space-y-6 flex-1">
-                    <div className="space-y-2">
-                      <h4 className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest">
-                        <Layers size={14} />{" "}
-                        {t("marketplace.agent_details.technical.core_stack")}
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {(
-                          currentAgent.techStack ||
-                          currentAgent.tools ||
-                          []
-                        ).map((t: string) => (
-                          <span
-                            key={t}
-                            className="px-3 py-1 bg-background border border-border/50 rounded-md text-xs font-mono dark:text-gray-300"
-                          >
-                            {t}
-                          </span>
+              <TabsContent value="tech" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-2xl">
+                      <Layers className="h-6 w-6 text-purple-500" />
+                      Technology Stack
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-3">
+                      {agent.techStack.map((tech: string) => (
+                        <Badge key={tech} variant="secondary" className="px-4 py-2 text-sm font-medium">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="reviews" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-2xl">
+                      <Star className="h-6 w-6 text-yellow-500" />
+                      User Reviews & Ratings
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    {/* Rating Overview */}
+                    <div className="flex items-center gap-6 p-6 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl">
+                      <div className="text-center">
+                        <div className="text-4xl font-bold text-slate-900 dark:text-white">{agent.rating.toFixed(1)}</div>
+                        <div className="flex items-center justify-center gap-1 mt-1">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`h-4 w-4 ${i < Math.floor(agent.rating) ? 'text-yellow-500 fill-yellow-500' : 'text-slate-300'}`}
+                            />
+                          ))}
+                        </div>
+                        <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                          Based on {agent.totalSales} deployments
+                        </div>
+                      </div>
+
+                      <div className="flex-1 space-y-2">
+                        {[5, 4, 3, 2, 1].map((rating) => (
+                          <div key={rating} className="flex items-center gap-2">
+                            <span className="text-sm w-3">{rating}</span>
+                            <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
+                            <Progress value={rating === 5 ? 80 : rating === 4 ? 15 : 3} className="flex-1 h-2" />
+                            <span className="text-sm text-slate-600 w-8">{rating === 5 ? '80%' : rating === 4 ? '15%' : '3%'}</span>
+                          </div>
                         ))}
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <h4 className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest">
-                        <ShieldCheck size={14} />{" "}
-                        {t(
-                          "marketplace.agent_details.technical.security_title"
-                        )}
-                      </h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed italic">
-                        {t("marketplace.agent_details.technical.security_desc")}
-                      </p>
+
+                    {/* Sample Reviews */}
+                    <div className="space-y-4">
+                      {[
+                        { name: "Sarah Johnson", rating: 5, comment: "This agent transformed our workflow completely!", time: "2 weeks ago" },
+                        { name: "Mike Chen", rating: 5, comment: "Easy to set up and incredibly powerful.", time: "1 month ago" },
+                        { name: "Emma Davis", rating: 4, comment: "Great performance, minor learning curve but worth it.", time: "3 weeks ago" }
+                      ].map((review, index) => (
+                        <div key={index} className="p-4 border border-slate-200 dark:border-slate-700 rounded-lg">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                                {review.name.charAt(0)}
+                              </div>
+                              <span className="font-medium">{review.name}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              {[...Array(review.rating)].map((_, i) => (
+                                <Star key={i} className="h-4 w-4 text-yellow-500 fill-yellow-500" />
+                              ))}
+                            </div>
+                          </div>
+                          <p className="text-slate-600 dark:text-slate-400 mb-2">{review.comment}</p>
+                          <span className="text-sm text-slate-500">{review.time}</span>
+                        </div>
+                      ))}
                     </div>
-                  </div>
-                  <div className="w-full md:w-64 h-48 bg-background/50 rounded-2xl border border-dashed border-border/50 flex flex-col items-center justify-center p-4 text-center">
-                    <Cpu size={32} className="text-primary/40 mb-3" />
-                    <span className="text-[10px] font-mono text-muted-foreground uppercase leading-tight">
-                      {t("marketplace.agent_details.technical.viz_label")}
-                    </span>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="docs" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-2xl">
+                      <Globe className="h-6 w-6 text-green-500" />
+                      Documentation & Resources
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <Button variant="outline" className="h-20 flex-col gap-2">
+                        <ExternalLink className="h-6 w-6" />
+                        Setup Guide
+                      </Button>
+                      <Button variant="outline" className="h-20 flex-col gap-2">
+                        <PlayCircle className="h-6 w-6" />
+                        Video Tutorials
+                      </Button>
+                      <Button variant="outline" className="h-20 flex-col gap-2">
+                        <BarChart3 className="h-6 w-6" />
+                        API Documentation
+                      </Button>
+                      <Button variant="outline" className="h-20 flex-col gap-2">
+                        <Users className="h-6 w-6" />
+                        Community Support
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               </TabsContent>
             </Tabs>
           </div>
 
-          {/* RIGHT: Action Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-32 space-y-6">
-              <div className="p-8 rounded-3xl border border-border/50 bg-card shadow-2xl relative overflow-hidden dark:bg-card/40 dark:backdrop-blur-md">
-                <div className="absolute top-0 right-0 p-3">
-                  <div className="h-2 w-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]" />
-                </div>
+          {/* RIGHT: Sidebar */}
+          <div className="lg:col-span-4">
+            <div className="sticky top-8 space-y-6">
+              {/* Pricing Card */}
+              <Card className="bg-gradient-to-br from-blue-600 to-purple-600 text-white border-0 shadow-2xl">
+                <CardContent className="p-8">
+                  <div className="text-center space-y-6">
+                    <div>
+                      <div className="text-sm font-medium text-blue-100 uppercase tracking-wider mb-2">
+                        Starting Price
+                      </div>
+                      <div className="text-5xl font-black flex items-baseline justify-center">
+                        <span className="text-2xl mr-1">$</span>
+                        {agent.price}
+                        <span className="text-lg font-normal text-blue-200 ml-1">/month</span>
+                      </div>
+                    </div>
 
-                <div className="space-y-2 mb-8">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                    {t("marketplace.agent_details.sidebar.investment")}
-                  </p>
-                  <div className="text-6xl font-black text-primary flex items-baseline gap-1">
-                    <span className="text-2xl">$</span>
-                    {currentAgent.price}
+                    <div className="space-y-3 text-sm">
+                      <div className="flex justify-between items-center py-2 border-t border-white/20">
+                        <span className="flex items-center gap-2">
+                          <Zap className="h-4 w-4" />
+                          Setup Time
+                        </span>
+                        <span className="font-bold">{agent.setupTime || "Quick"}</span>
+                      </div>
+                      <div className="flex justify-between items-center py-2 border-t border-white/20">
+                        <span className="flex items-center gap-2">
+                          <Cpu className="h-4 w-4" />
+                          Difficulty
+                        </span>
+                        <span className="font-bold">{agent.difficulty}</span>
+                      </div>
+                      <div className="flex justify-between items-center py-2 border-t border-white/20">
+                        <span className="flex items-center gap-2">
+                          <Users className="h-4 w-4" />
+                          Deployments
+                        </span>
+                        <span className="font-bold">{agent.totalSales}+</span>
+                      </div>
+                    </div>
+
+                    <Button
+                      size="lg"
+                      className="w-full bg-white text-blue-600 hover:bg-blue-50 font-bold py-4 text-lg shadow-xl"
+                    >
+                      <Rocket className="mr-2 h-5 w-5" />
+                      Get Started Now
+                    </Button>
                   </div>
-                </div>
+                </CardContent>
+              </Card>
 
-                <div className="space-y-4 mb-8">
-                  <SidebarItem
-                    icon={Zap}
-                    label={t("marketplace.agent_details.sidebar.setup_time")}
-                    value={t("marketplace.agent_details.sidebar.setup_value")}
-                  />
-                  <SidebarItem
-                    icon={Code2}
-                    label={t("marketplace.agent_details.sidebar.maintenance")}
-                    value={t(
-                      "marketplace.agent_details.sidebar.maintenance_value"
-                    )}
-                  />
-                  <SidebarItem
-                    icon={Globe}
-                    label={t("marketplace.agent_details.sidebar.access")}
-                    value={t("marketplace.agent_details.sidebar.access_value")}
-                  />
-                </div>
-
-                <div className="space-y-3">
-                  <Button className="w-full py-7 text-lg font-bold rounded-2xl bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20">
-                    {t("marketplace.agent_details.sidebar.btn_deploy")}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full py-7 rounded-2xl border-border/50 hover:bg-primary/5 dark:text-white"
-                  >
-                    {t("marketplace.agent_details.sidebar.btn_brief")}
-                  </Button>
-                </div>
-              </div>
-
-              {/* Support Card */}
-              <div className="p-6 bg-primary/5 rounded-2xl border border-primary/10 flex items-center gap-4 transition-colors hover:bg-primary/10">
-                <div className="p-3 bg-primary/10 rounded-xl">
-                  <Sparkles className="text-primary" size={20} />
-                </div>
-                <div className="text-sm">
-                  <p className="font-bold dark:text-white">
-                    {t("marketplace.agent_details.custom_card.title")}
-                  </p>
-                  <p className="text-muted-foreground text-xs leading-relaxed">
-                    {t("marketplace.agent_details.custom_card.desc")}
-                  </p>
-                </div>
-              </div>
+              {/* Quick Stats */}
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="font-bold text-lg mb-4">Quick Stats</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-600 dark:text-slate-400">Rating</span>
+                      <div className="flex items-center gap-1">
+                        <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
+                        <span className="font-bold">{agent.rating.toFixed(1)}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-600 dark:text-slate-400">Deployments</span>
+                      <span className="font-bold">{agent.totalSales}+</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-600 dark:text-slate-400">Last Updated</span>
+                      <span className="text-sm">{new Date(agent.updatedAt).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-          </div>
-        </div>
-
-        {/* RELATED AGENTS SECTION */}
-        <div className="mt-32 pt-20 border-t border-border/50">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-            <div className="space-y-2">
-              <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase italic dark:text-white">
-                {t("marketplace.agent_details.synergy.title")}{" "}
-                <span className="text-primary underline decoration-primary/20">
-                  {t("marketplace.agent_details.synergy.accent")}
-                </span>
-              </h2>
-              <p className="text-muted-foreground">
-                {t("marketplace.agent_details.synergy.desc", {
-                  name: currentAgent.name,
-                })}
-              </p>
-            </div>
-            <Link href="/agent-marketplace">
-              <Button
-                variant="link"
-                className="text-primary p-0 h-auto font-bold uppercase tracking-widest text-xs"
-              >
-                {t("marketplace.agent_details.synergy.view_all")}{" "}
-                <ArrowLeft size={14} className="rotate-180 ml-1" />
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {relatedAgents.map((agent) => (
-              <AgentCard key={agent.id} agent={agent} />
-            ))}
           </div>
         </div>
       </div>
@@ -336,21 +435,43 @@ export default function AgentDetailsPage() {
   );
 }
 
-function SidebarItem({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: any;
-  label: string;
-  value: string;
-}) {
+function LoadingSkeleton() {
   return (
-    <div className="flex items-center justify-between py-2 border-b border-border/30 last:border-0">
-      <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium">
-        <Icon size={16} className="text-primary/70" /> {label}
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+      <div className="space-y-8 w-full max-w-4xl mx-auto px-4">
+        <div className="animate-pulse space-y-4">
+          <div className="h-8 bg-slate-200 dark:bg-slate-700 rounded w-1/3 mx-auto"></div>
+          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/2 mx-auto"></div>
+          <div className="h-64 bg-slate-200 dark:bg-slate-700 rounded-xl"></div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="h-32 bg-slate-200 dark:bg-slate-700 rounded-lg"></div>
+            <div className="h-32 bg-slate-200 dark:bg-slate-700 rounded-lg"></div>
+            <div className="h-32 bg-slate-200 dark:bg-slate-700 rounded-lg"></div>
+          </div>
+        </div>
       </div>
-      <span className="text-sm font-bold dark:text-gray-200">{value}</span>
+    </div>
+  );
+}
+
+function NotFound() {
+  return (
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+      <div className="text-center space-y-6">
+        <div className="w-24 h-24 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto">
+          <Globe className="h-12 w-12 text-red-500" />
+        </div>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Agent Not Found</h1>
+        <p className="text-slate-600 dark:text-slate-400 max-w-md mx-auto">
+          The AI agent you're looking for doesn't exist or may have been removed.
+        </p>
+        <Link href="/agent-marketplace">
+          <Button className="mt-4">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Marketplace
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -14,84 +14,119 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { toast } from "sonner";
-import { Save, Mail, Database, Shield, Palette } from "lucide-react";
+import {
+  Save,
+  Mail,
+  Database,
+  Shield,
+  Palette,
+  Globe,
+  Share2,
+  Search,
+  Settings as SettingsIcon,
+  Upload,
+  ExternalLink
+} from "lucide-react";
+import { getSiteSettings, updateSiteSettings, SiteSettings } from "@/lib/site-settings";
 
 export default function Settings() {
   const [isLoading, setIsLoading] = useState(false);
-  const [settings, setSettings] = useState({
-    // General Settings
-    siteName: "Driplare",
-    siteDescription: "AI Solutions & Software Development",
-    contactEmail: "hello@driplare.com",
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
-    // Email Settings
-    smtpHost: "",
-    smtpPort: "587",
-    smtpUser: "",
-    smtpPassword: "",
+  useEffect(() => {
+    const loadSettings = async () => {
+      setIsLoading(true);
+      try {
+        const siteSettings = await getSiteSettings();
+        if (siteSettings) {
+          setSettings(siteSettings);
+        }
+      } catch (error) {
+        console.error("Failed to load settings:", error);
+        toast.error("Failed to load settings");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    // Notification Settings
-    emailNotifications: true,
-    pushNotifications: false,
-    weeklyReports: true,
-
-    // Security Settings
-    twoFactorAuth: false,
-    sessionTimeout: "30",
-    passwordPolicy: "strong",
-
-    // Appearance Settings
-    theme: "system",
-    primaryColor: "#FF6B00",
-    language: "en",
-  });
+    loadSettings();
+  }, []);
 
   const handleSave = async () => {
-    setIsLoading(true);
+    if (!settings) return;
+
+    setIsSaving(true);
     try {
-      // Mock save - replace with real API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      toast.success("Settings saved successfully");
+      const result = await updateSiteSettings(settings);
+      if (result.success) {
+        toast.success("Settings saved successfully");
+      } else {
+        toast.error(result.error || "Failed to save settings");
+      }
     } catch (error) {
+      console.error("Failed to save settings:", error);
       toast.error("Failed to save settings");
     } finally {
-      setIsLoading(false);
+      setIsSaving(false);
     }
   };
 
-  const updateSetting = (key: string, value: any) => {
-    setSettings((prev) => ({ ...prev, [key]: value }));
+  const updateSetting = (key: keyof SiteSettings, value: string | boolean) => {
+    if (!settings) return;
+    setSettings((prev) => prev ? ({ ...prev, [key]: value }) : null);
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-2 text-muted-foreground">Loading settings...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!settings) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <div className="text-center">
+          <p className="text-muted-foreground">Failed to load settings</p>
+          <Button onClick={() => window.location.reload()} className="mt-4">
+            Retry
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">System Settings</CardTitle>
+          <CardTitle className="text-2xl font-bold flex items-center gap-2">
+            <SettingsIcon className="h-6 w-6" />
+            Site Settings
+          </CardTitle>
           <CardDescription>
-            Configure system preferences and settings
+            Configure your website settings and preferences
           </CardDescription>
         </CardHeader>
       </Card>
 
       <Tabs defaultValue="general" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="general">General</TabsTrigger>
-          <TabsTrigger value="email">Email</TabsTrigger>
-          <TabsTrigger value="notifications">Notifications</TabsTrigger>
-          <TabsTrigger value="security">Security</TabsTrigger>
-          <TabsTrigger value="appearance">Appearance</TabsTrigger>
+          <TabsTrigger value="social">Social Links</TabsTrigger>
+          <TabsTrigger value="seo">SEO & Analytics</TabsTrigger>
+          <TabsTrigger value="system">System Control</TabsTrigger>
+          <TabsTrigger value="advanced">Advanced</TabsTrigger>
         </TabsList>
 
+        {/* General Settings */}
         <TabsContent value="general" className="space-y-6">
           <Card>
             <CardHeader>
@@ -100,10 +135,10 @@ export default function Settings() {
                 General Settings
               </CardTitle>
               <CardDescription>
-                Basic site configuration and information
+                Basic site configuration and branding
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="siteName">Site Name</Label>
@@ -114,266 +149,233 @@ export default function Settings() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="contactEmail">Contact Email</Label>
+                  <Label htmlFor="siteTitle">Site Title</Label>
                   <Input
-                    id="contactEmail"
-                    type="email"
-                    value={settings.contactEmail}
-                    onChange={(e) =>
-                      updateSetting("contactEmail", e.target.value)
-                    }
+                    id="siteTitle"
+                    value={settings.siteTitle}
+                    onChange={(e) => updateSetting("siteTitle", e.target.value)}
                   />
                 </div>
               </div>
+
               <div className="space-y-2">
-                <Label htmlFor="siteDescription">Site Description</Label>
-                <Textarea
-                  id="siteDescription"
-                  value={settings.siteDescription}
-                  onChange={(e) =>
-                    updateSetting("siteDescription", e.target.value)
-                  }
+                <Label htmlFor="footerCopyright">Footer Copyright Text</Label>
+                <Input
+                  id="footerCopyright"
+                  value={settings.footerCopyright}
+                  onChange={(e) => updateSetting("footerCopyright", e.target.value)}
                 />
+              </div>
+
+              {/* Logo Upload Section */}
+              <div className="space-y-4">
+                <Label>Branding Assets</Label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="logoUrl">Logo URL</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="logoUrl"
+                        value={settings.logoUrl || ""}
+                        onChange={(e) => updateSetting("logoUrl", e.target.value)}
+                        placeholder="https://example.com/logo.png"
+                      />
+                      {settings.logoUrl && (
+                        <Button variant="outline" size="sm">
+                          <ExternalLink className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="faviconUrl">Favicon URL</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="faviconUrl"
+                        value={settings.faviconUrl || ""}
+                        onChange={(e) => updateSetting("faviconUrl", e.target.value)}
+                        placeholder="https://example.com/favicon.ico"
+                      />
+                      {settings.faviconUrl && (
+                        <Button variant="outline" size="sm">
+                          <ExternalLink className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="email" className="space-y-6">
+        {/* Social Links */}
+        <TabsContent value="social" className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Mail className="h-5 w-5" />
-                Email Configuration
+                <Share2 className="h-5 w-5" />
+                Social Media Links
               </CardTitle>
               <CardDescription>
-                SMTP settings for sending emails
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="smtpHost">SMTP Host</Label>
-                  <Input
-                    id="smtpHost"
-                    placeholder="smtp.gmail.com"
-                    value={settings.smtpHost}
-                    onChange={(e) => updateSetting("smtpHost", e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="smtpPort">SMTP Port</Label>
-                  <Input
-                    id="smtpPort"
-                    value={settings.smtpPort}
-                    onChange={(e) => updateSetting("smtpPort", e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="smtpUser">SMTP Username</Label>
-                  <Input
-                    id="smtpUser"
-                    value={settings.smtpUser}
-                    onChange={(e) => updateSetting("smtpUser", e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="smtpPassword">SMTP Password</Label>
-                  <Input
-                    id="smtpPassword"
-                    type="password"
-                    value={settings.smtpPassword}
-                    onChange={(e) =>
-                      updateSetting("smtpPassword", e.target.value)
-                    }
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="notifications" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Notification Preferences</CardTitle>
-              <CardDescription>
-                Configure when and how you receive notifications
+                Configure social media links and visibility settings
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Email Notifications</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Receive notifications via email
-                  </p>
+              {[
+                { key: "linkedin", label: "LinkedIn", showKey: "showLinkedin" as keyof SiteSettings },
+                { key: "facebook", label: "Facebook", showKey: "showFacebook" as keyof SiteSettings },
+                { key: "twitter", label: "Twitter", showKey: "showTwitter" as keyof SiteSettings },
+                { key: "instagram", label: "Instagram", showKey: "showInstagram" as keyof SiteSettings },
+                { key: "youtube", label: "YouTube", showKey: "showYouTube" as keyof SiteSettings },
+              ].map(({ key, label, showKey }) => (
+                <div key={key} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="flex-1 mr-4">
+                    <Label htmlFor={`${key}Url`} className="text-sm font-medium">
+                      {label} URL
+                    </Label>
+                    <Input
+                      id={`${key}Url`}
+                      value={(settings as unknown as Record<string, string | null>)[`${key}Url`] || ""}
+                      onChange={(e) => updateSetting(`${key}Url` as keyof SiteSettings, e.target.value)}
+                      placeholder={`https://${key}.com/your-profile`}
+                      className="mt-1"
+                    />
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Label htmlFor={`${key}Show`} className="text-sm">
+                      Show
+                    </Label>
+                    <Switch
+                      id={`${key}Show`}
+                      checked={(settings as unknown as Record<string, boolean>)[showKey]}
+                      onCheckedChange={(checked) => updateSetting(showKey, checked)}
+                    />
+                  </div>
                 </div>
-                <Switch
-                  checked={settings.emailNotifications}
-                  onCheckedChange={(checked) =>
-                    updateSetting("emailNotifications", checked)
-                  }
+              ))}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* SEO & Analytics */}
+        <TabsContent value="seo" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Search className="h-5 w-5" />
+                SEO & Analytics
+              </CardTitle>
+              <CardDescription>
+                Configure search engine optimization and analytics tracking
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="googleAnalyticsId">Google Analytics Measurement ID</Label>
+                <Input
+                  id="googleAnalyticsId"
+                  value={settings.googleAnalyticsId || ""}
+                  onChange={(e) => updateSetting("googleAnalyticsId", e.target.value)}
+                  placeholder="G-XXXXXXXXXX"
                 />
+                <p className="text-xs text-muted-foreground">
+                  Enter your Google Analytics measurement ID (e.g., G-1234567890)
+                </p>
               </div>
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Push Notifications</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Receive browser push notifications
-                  </p>
-                </div>
-                <Switch
-                  checked={settings.pushNotifications}
-                  onCheckedChange={(checked) =>
-                    updateSetting("pushNotifications", checked)
-                  }
+
+              <div className="space-y-2">
+                <Label htmlFor="metaDescription">Global Meta Description</Label>
+                <Textarea
+                  id="metaDescription"
+                  value={settings.metaDescription || ""}
+                  onChange={(e) => updateSetting("metaDescription", e.target.value)}
+                  placeholder="A brief description of your website for search engines..."
+                  rows={3}
                 />
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Weekly Reports</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Receive weekly analytics reports
-                  </p>
-                </div>
-                <Switch
-                  checked={settings.weeklyReports}
-                  onCheckedChange={(checked) =>
-                    updateSetting("weeklyReports", checked)
-                  }
-                />
+                <p className="text-xs text-muted-foreground">
+                  This description will be used as the default meta description for pages that don't have one
+                </p>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="security" className="space-y-6">
+        {/* System Control */}
+        <TabsContent value="system" className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield className="h-5 w-5" />
-                Security Settings
+                System Control
               </CardTitle>
               <CardDescription>
-                Configure security policies and authentication
+                Control system-wide settings and maintenance mode
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-4 border rounded-lg border-destructive/20 bg-destructive/5">
                 <div className="space-y-0.5">
-                  <Label>Two-Factor Authentication</Label>
+                  <Label className="text-destructive font-medium">Maintenance Mode</Label>
                   <p className="text-sm text-muted-foreground">
-                    Require 2FA for all admin accounts
+                    When enabled, public users will see a maintenance page instead of your website
                   </p>
                 </div>
                 <Switch
-                  checked={settings.twoFactorAuth}
-                  onCheckedChange={(checked) =>
-                    updateSetting("twoFactorAuth", checked)
-                  }
+                  checked={settings.maintenanceMode}
+                  onCheckedChange={(checked) => updateSetting("maintenanceMode", checked)}
                 />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="sessionTimeout">
-                    Session Timeout (minutes)
-                  </Label>
-                  <Select
-                    value={settings.sessionTimeout}
-                    onValueChange={(value) =>
-                      updateSetting("sessionTimeout", value)
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="15">15 minutes</SelectItem>
-                      <SelectItem value="30">30 minutes</SelectItem>
-                      <SelectItem value="60">1 hour</SelectItem>
-                      <SelectItem value="240">4 hours</SelectItem>
-                    </SelectContent>
-                  </Select>
+
+              {settings.maintenanceMode && (
+                <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                  <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                    <strong>Warning:</strong> Maintenance mode is currently enabled. Only administrators can access the website.
+                  </p>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="passwordPolicy">Password Policy</Label>
-                  <Select
-                    value={settings.passwordPolicy}
-                    onValueChange={(value) =>
-                      updateSetting("passwordPolicy", value)
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="basic">Basic</SelectItem>
-                      <SelectItem value="strong">Strong</SelectItem>
-                      <SelectItem value="complex">Complex</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="appearance" className="space-y-6">
+        {/* Advanced Settings */}
+        <TabsContent value="advanced" className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Palette className="h-5 w-5" />
-                Appearance Settings
+                <Globe className="h-5 w-5" />
+                Advanced Configuration
               </CardTitle>
               <CardDescription>
-                Customize the look and feel of the admin panel
+                Advanced settings for API integrations and system configuration
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="theme">Theme</Label>
-                  <Select
-                    value={settings.theme}
-                    onValueChange={(value) => updateSetting("theme", value)}
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="light">Light</SelectItem>
-                      <SelectItem value="dark">Dark</SelectItem>
-                      <SelectItem value="system">System</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="primaryColor">Primary Color</Label>
+                  <Label htmlFor="cloudinaryFolder">Cloudinary Folder</Label>
                   <Input
-                    id="primaryColor"
-                    type="color"
-                    value={settings.primaryColor}
-                    onChange={(e) =>
-                      updateSetting("primaryColor", e.target.value)
-                    }
+                    id="cloudinaryFolder"
+                    value={settings.cloudinaryFolder}
+                    onChange={(e) => updateSetting("cloudinaryFolder", e.target.value)}
+                    placeholder="portfolio"
                   />
+                  <p className="text-xs text-muted-foreground">
+                    Folder name for image uploads
+                  </p>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="language">Language</Label>
-                  <Select
-                    value={settings.language}
-                    onValueChange={(value) => updateSetting("language", value)}
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="en">English</SelectItem>
-                      <SelectItem value="es">Español</SelectItem>
-                      <SelectItem value="fr">Français</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="resendFromEmail">Resend From Email</Label>
+                  <Input
+                    id="resendFromEmail"
+                    type="email"
+                    value={settings.resendFromEmail}
+                    onChange={(e) => updateSetting("resendFromEmail", e.target.value)}
+                    placeholder="noreply@yourdomain.com"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Default sender email for notifications
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -383,9 +385,9 @@ export default function Settings() {
 
       {/* Save Button */}
       <div className="flex justify-end">
-        <Button onClick={handleSave} disabled={isLoading}>
+        <Button onClick={handleSave} disabled={isSaving}>
           <Save className="h-4 w-4 mr-2" />
-          {isLoading ? "Saving..." : "Save Settings"}
+          {isSaving ? "Saving..." : "Save Settings"}
         </Button>
       </div>
     </div>

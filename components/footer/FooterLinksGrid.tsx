@@ -2,9 +2,71 @@
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { NewsletterForm } from "./NewsletterForm";
+import { useEffect, useState } from "react";
+import { getSiteSettings, SiteSettings } from "@/lib/site-settings";
 
 export function FooterLinksGrid() {
   const { t } = useTranslation();
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    const loadSettings = async () => {
+      const siteSettings = await getSiteSettings();
+      if (siteSettings) {
+        setSettings(siteSettings);
+      }
+    };
+
+    loadSettings();
+  }, []);
+
+  const getSocialLinks = () => {
+    if (!settings) return [];
+
+    const socialLinks = [];
+
+    if (settings.showLinkedin && settings.linkedinUrl) {
+      socialLinks.push({
+        text: "LinkedIn",
+        url: settings.linkedinUrl,
+        external: true,
+      });
+    }
+
+    if (settings.showFacebook && settings.facebookUrl) {
+      socialLinks.push({
+        text: "Facebook",
+        url: settings.facebookUrl,
+        external: true,
+      });
+    }
+
+    if (settings.showTwitter && settings.twitterUrl) {
+      socialLinks.push({
+        text: "Twitter",
+        url: settings.twitterUrl,
+        external: true,
+      });
+    }
+
+    if (settings.showInstagram && settings.instagramUrl) {
+      socialLinks.push({
+        text: "Instagram",
+        url: settings.instagramUrl,
+        external: true,
+      });
+    }
+
+    if (settings.showYouTube && settings.youtubeUrl) {
+      socialLinks.push({
+        text: "YouTube",
+        url: settings.youtubeUrl,
+        external: true,
+      });
+    }
+
+    return socialLinks;
+  };
 
   const linkSections = [
     {
@@ -44,18 +106,7 @@ export function FooterLinksGrid() {
     {
       title: t("footer.sections.connect"),
       subtitle: t("footer.subtitles.socials"),
-      links: [
-        {
-          text: "LinkedIn",
-          url: "https://linkedin.com/company/driplare",
-          external: true,
-        },
-        {
-          text: "Facebook",
-          url: "https://facebook.com/driplare",
-          external: true,
-        },
-      ],
+      links: getSocialLinks(),
     },
   ];
 

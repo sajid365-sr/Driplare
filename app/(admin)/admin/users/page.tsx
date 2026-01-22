@@ -1,57 +1,22 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Loader2, Plus, Edit, Trash2, User, Shield, ChevronLeft, ChevronRight } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
 import { getUsers, deleteUser, createUser, updateUserRole, getUserById } from "@/lib/user-actions";
-
-interface User {
-  id: string;
-  clerkId: string;
-  email: string;
-  name: string | null;
-  imageUrl: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-  role: string | null;
-}
+import { User, UserRole } from "@/types/user-types";
+import { getUserPermissions, canPerformAction, getAvailableRolesForSelection } from "@/utils/user-permissions";
+import { UserManagementHeader } from "@/components/admin/user/UserManagementHeader";
+import { UserTable } from "@/components/admin/user/UserTable";
+import { UserFormDialog } from "@/components/admin/user/UserFormDialog";
+import { SystemAdminTransferDialog } from "@/components/admin/user/SystemAdminTransferDialog";
+import { DeleteConfirmationDialog } from "@/components/admin/user/DeleteConfirmationDialog";
+import { Download } from "lucide-react";
 
 export default function UserManagement() {
   const { user: clerkUser } = useUser();
@@ -60,16 +25,71 @@ export default function UserManagement() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [currentAdminUser, setCurrentAdminUser] = useState<User | null>(null);
-  const [formData, setFormData] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    role: "user" as const,
-  });
+
+  // System admin transfer state
+  const [isTransferDialogOpen, setIsTransferDialogOpen] = useState(false);
+  const [userToDeleteId, setUserToDeleteId] = useState<string | null>(null);
+  const [newSuperAdminId, setNewSuperAdminId] = useState<string | null>(null);
+
+  // Delete confirmation dialog state
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<User | null>(null);
 
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
+  // CSV Export function
+  const exportUsersToCSV = () => {
+    if (users.length === 0) {
+      return;
+    }
+
+    // Define CSV headers
+    const headers = [
+      "ID",
+      "Name",
+      "Email",
+      "Role",
+      "Created At",
+      "Last Updated"
+    ];
+
+    // Convert data to CSV rows
+    const csvRows = [
+      headers.join(","), // Header row
+      ...users.map((user) =>
+        [
+          `"${user.id}"`,
+          `"${(user.name || "").replace(/"/g, '""')}"`,
+          `"${user.email}"`,
+          `"${(user.role || "").replace("_", " ")}"`,
+          `"${user.createdAt ? new Date(user.createdAt).toLocaleDateString() : ""}"`,
+          `"${user.updatedAt ? new Date(user.updatedAt).toLocaleDateString() : ""}"`,
+        ].join(",")
+      ),
+    ];
+
+    // Create CSV content
+    const csvContent = csvRows.join("\n");
+
+    // Create and trigger download
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute(
+        "download",
+        `users_${new Date().toISOString().split("T")[0]}.csv`
+      );
+      link.style.visibility = "hidden";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
 
   useEffect(() => {
     if (clerkUser?.id) {
@@ -88,7 +108,7 @@ export default function UserManagement() {
       if (allUsers.success && allUsers.data) {
         const currentUser = allUsers.data.find(u => u.clerkId === clerkUser.id);
         if (currentUser) {
-          setCurrentAdminUser(currentUser);
+          setCurrentAdminUser(currentUser as User);
         }
       }
     } catch (error) {
@@ -101,7 +121,7 @@ export default function UserManagement() {
     try {
       const res = await getUsers();
       if (res.success && res.data) {
-        setUsers(res.data);
+        setUsers(res.data as User[]);
       } else {
         toast.error("Failed to load users");
       }
@@ -113,12 +133,17 @@ export default function UserManagement() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (data: {
+    email: string;
+    firstName: string;
+    lastName: string;
+    password: string;
+    role: UserRole;
+  }) => {
     try {
       if (editingUser) {
         // Update existing user role
-        const res = await updateUserRole(editingUser.id, formData.role);
+        const res = await updateUserRole(editingUser.id, data.role);
         if (res.success) {
           toast.success("User updated successfully");
           fetchUsers(); // Refresh data
@@ -127,12 +152,7 @@ export default function UserManagement() {
         }
       } else {
         // Create new user
-        const res = await createUser({
-          email: formData.email,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          role: formData.role,
-        });
+        const res = await createUser(data);
         if (res.success) {
           toast.success("User created successfully");
           fetchUsers(); // Refresh data
@@ -143,7 +163,6 @@ export default function UserManagement() {
 
       setIsDialogOpen(false);
       setEditingUser(null);
-      resetForm();
     } catch (error) {
       console.error("Error saving user:", error);
       toast.error("Failed to save user");
@@ -151,80 +170,93 @@ export default function UserManagement() {
   };
 
   const handleEdit = (user: User) => {
+    // Check if current user can edit this user
+    if (!canPerformAction(currentAdminUser!, user, 'edit')) {
+      toast.error("You don't have permission to edit this user");
+      return;
+    }
+
     setEditingUser(user);
-    const nameParts = user.name?.split(" ") || ["", ""];
-    setFormData({
-      email: user.email,
-      firstName: nameParts[0] || "",
-      lastName: nameParts.slice(1).join(" ") || "",
-      role: (user.role || "user") as typeof formData.role,
-    });
     setIsDialogOpen(true);
   };
 
-  const handleDelete = async (userId: string, clerkId: string) => {
-    if (confirm("Are you sure you want to delete this user? This action cannot be undone.")) {
-      try {
-        const res = await deleteUser(userId, clerkId);
-        if (res.success) {
-          toast.success("User deleted successfully");
-          fetchUsers(); // Refresh data
-        } else {
-          toast.error(res.error || "Failed to delete user");
-        }
-      } catch (error) {
-        console.error("Error deleting user:", error);
-        toast.error("Failed to delete user");
+  const handleDelete = (user: User) => {
+    // Check if trying to delete self as system admin
+    const isDeletingSelf = currentAdminUser?.id === user.id;
+    const isSystemAdmin = currentAdminUser?.role === "system_admin";
+    const permissions = getUserPermissions(currentAdminUser?.role || null);
+
+    if (isDeletingSelf && isSystemAdmin && permissions.requiresSuperAdminTransfer) {
+      // Check if there are other system admins
+      const otherSystemAdmins = users.filter(u => u.role === "system_admin" && u.id !== user.id);
+      if (otherSystemAdmins.length === 0) {
+        toast.error("You cannot delete yourself as the last system admin. Please assign another user as system admin first.");
+        return;
       }
+
+      // Open transfer dialog
+      setUserToDeleteId(user.id);
+      setIsTransferDialogOpen(true);
+      return;
+    }
+
+    // Open delete confirmation dialog
+    setUserToDelete(user);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!userToDelete) return;
+
+    try {
+      const res = await deleteUser(userToDelete.id, userToDelete.clerkId);
+      if (res.success) {
+        toast.success("User deleted successfully");
+        fetchUsers(); // Refresh data
+      } else {
+        toast.error(res.error || "Failed to delete user");
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      toast.error("Failed to delete user");
+    } finally {
+      setIsDeleteDialogOpen(false);
+      setUserToDelete(null);
     }
   };
 
-  const resetForm = () => {
-    const defaultRole = currentAdminUser?.role === "system_admin" ? "admin" :
-                       currentAdminUser?.role === "admin" ? "user" : "user";
+  const handleTransferSuperAdmin = async () => {
+    if (!newSuperAdminId || !userToDeleteId) return;
 
-    setFormData({
-      email: "",
-      firstName: "",
-      lastName: "",
-      role: defaultRole as typeof formData.role,
-    });
-  };
+    try {
+      // First, promote the selected user to system_admin
+      const promoteRes = await updateUserRole(newSuperAdminId, "system_admin");
+      if (!promoteRes.success) {
+        toast.error("Failed to transfer super admin role");
+        return;
+      }
 
-  const getRoleBadgeVariant = (role: string) => {
-    switch (role) {
-      case "system_admin":
-        return "destructive";
-      case "admin":
-        return "default";
-      case "user":
-        return "outline";
-      default:
-        return "outline";
+      // Then delete the current system admin
+      const currentUser = users.find(u => u.id === userToDeleteId);
+      if (currentUser) {
+        const deleteRes = await deleteUser(userToDeleteId, currentUser.clerkId);
+        if (deleteRes.success) {
+          toast.success("Super admin role transferred and account deleted successfully");
+          fetchUsers(); // Refresh data
+          setIsTransferDialogOpen(false);
+          setUserToDeleteId(null);
+          setNewSuperAdminId(null);
+        } else {
+          toast.error("Failed to delete account after role transfer");
+        }
+      }
+    } catch (error) {
+      console.error("Error transferring super admin role:", error);
+      toast.error("Failed to transfer super admin role");
     }
   };
 
-  // Permission Logic
-  const canDeleteUser = (targetUser: User) => {
-    if (!currentAdminUser) return false;
 
-    // System admin can delete all users
-    if (currentAdminUser.role === "system_admin") {
-      return true;
-    }
-
-    // Admin can only delete users (not admins or system_admins)
-    if (currentAdminUser.role === "admin") {
-      return targetUser.role === "user";
-    }
-
-    return false;
-  };
-
-  // Pagination Logic
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(users.length / itemsPerPage);
 
   if (isLoading) {
@@ -242,256 +274,57 @@ export default function UserManagement() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold tracking-tight">User Management</h2>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button
-              onClick={() => {
-                setEditingUser(null);
-                resetForm();
-              }}
-            >
-              <Plus className="mr-2 h-4 w-4" /> Add User
-            </Button>
-          </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <form onSubmit={handleSubmit}>
-                  <DialogHeader>
-                    <DialogTitle>
-                      {editingUser ? "Edit User" : "Add New User"}
-                    </DialogTitle>
-                    <DialogDescription>
-                      {editingUser
-                        ? "Update the user's information and permissions."
-                        : "Create a new user account with specified permissions."}
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="email" className="text-right">
-                        Email
-                      </Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData((prev) => ({
-                            ...prev,
-                            email: e.target.value,
-                          }))
-                        }
-                        className="col-span-3"
-                        required
-                        disabled={editingUser ? true : false}
-                      />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="firstName" className="text-right">
-                        First Name
-                      </Label>
-                      <Input
-                        id="firstName"
-                        value={formData.firstName}
-                        onChange={(e) =>
-                          setFormData((prev) => ({
-                            ...prev,
-                            firstName: e.target.value,
-                          }))
-                        }
-                        className="col-span-3"
-                        required
-                      />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="lastName" className="text-right">
-                        Last Name
-                      </Label>
-                      <Input
-                        id="lastName"
-                        value={formData.lastName}
-                        onChange={(e) =>
-                          setFormData((prev) => ({
-                            ...prev,
-                            lastName: e.target.value,
-                          }))
-                        }
-                        className="col-span-3"
-                        required
-                      />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="role" className="text-right">
-                        Role
-                      </Label>
-                      <Select
-                        value={formData.role}
-                        onValueChange={(value) =>
-                          setFormData((prev) => ({ ...prev, role: value as typeof prev.role }))
-                        }
-                      >
-                        <SelectTrigger className="col-span-3">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {currentAdminUser?.role === "system_admin" && (
-                            <SelectItem value="admin">Admin</SelectItem>
-                          )}
-                          {currentAdminUser?.role === "admin" && (
-                            <SelectItem value="user">User</SelectItem>
-                          )}
-                          {!currentAdminUser?.role && (
-                            <>
-                              <SelectItem value="user">User</SelectItem>
-                              <SelectItem value="admin">Admin</SelectItem>
-                              <SelectItem value="system_admin">System Admin</SelectItem>
-                            </>
-                          )}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                  <DialogFooter>
-                    <Button type="submit">
-                      {editingUser ? "Update User" : "Create User"}
-                    </Button>
-                  </DialogFooter>
-                </form>
-              </DialogContent>
-            </Dialog>
-          </div>
+      <UserManagementHeader
+        onAddUser={() => {
+          setEditingUser(null);
+          setIsDialogOpen(true);
+        }}
+        onExportUsers={exportUsersToCSV}
+      />
 
-      {/* Users Table */}
       <Card>
-        <CardHeader>
-          <CardTitle>All Users ({users.length})</CardTitle>
-          <CardDescription>
-            A list of all users and their permissions
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>User</TableHead>
-                <TableHead>Role</TableHead>
-                <TableHead>Created</TableHead>
-                <TableHead>Last Updated</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {currentItems.length > 0 ? (
-                currentItems.map((user) => (
-                  <TableRow key={user.id}>
-                    <TableCell>
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                          <User className="w-4 h-4 text-primary" />
-                        </div>
-                        <div>
-                          <div className="font-medium">{user.name || "Unnamed User"}</div>
-                          <div className="text-sm text-muted-foreground">
-                            {user.email}
-                          </div>
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={getRoleBadgeVariant(user.role || "user")}>
-                        {(user.role || "user").replace("_", " ")}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-sm">
-                      {new Date(user.createdAt).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell className="text-sm">
-                      {new Date(user.updatedAt).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex items-center gap-2 justify-end">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleEdit(user)}
-                          title="Edit"
-                        >
-                          <Edit className="h-4 w-4 text-blue-600" />
-                        </Button>
-                        {canDeleteUser(user) && (
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleDelete(user.id, user.clerkId)}
-                            className="text-red-600 hover:text-red-700"
-                            title="Delete"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        )}
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={5}
-                    className="text-center h-24 text-muted-foreground"
-                  >
-                    No users found. Start by adding one!
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-
-          {/* Pagination Controls */}
-          {totalPages > 1 && (
-            <div className="flex items-center justify-between mt-6">
-              <p className="text-sm text-muted-foreground">
-                Showing {indexOfFirstItem + 1} to{" "}
-                {Math.min(indexOfLastItem, users.length)} of{" "}
-                {users.length}
-              </p>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                >
-                  <ChevronLeft className="h-4 w-4 mr-1" /> Previous
-                </Button>
-                <div className="flex items-center gap-1 mx-2">
-                  {Array.from({ length: totalPages }, (_, i) => (
-                    <Button
-                      key={i + 1}
-                      variant={currentPage === i + 1 ? "default" : "outline"}
-                      size="sm"
-                      className="w-8 h-8 p-0"
-                      onClick={() => setCurrentPage(i + 1)}
-                    >
-                      {i + 1}
-                    </Button>
-                  ))}
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() =>
-                    setCurrentPage((p) => Math.min(totalPages, p + 1))
-                  }
-                  disabled={currentPage === totalPages}
-                >
-                  Next <ChevronRight className="h-4 w-4 ml-1" />
-                </Button>
-              </div>
-            </div>
-          )}
+        <CardContent className="pt-6">
+          <UserTable
+            users={users}
+            currentUser={currentAdminUser}
+            currentPage={currentPage}
+            itemsPerPage={itemsPerPage}
+            totalPages={Math.ceil(users.length / itemsPerPage)}
+            onEditUser={(user) => {
+              setEditingUser(user);
+              setIsDialogOpen(true);
+            }}
+            onDeleteUser={handleDelete}
+            onPageChange={setCurrentPage}
+          />
         </CardContent>
       </Card>
+
+      <UserFormDialog
+        isOpen={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+        editingUser={editingUser}
+        currentUser={currentAdminUser}
+        onSubmit={handleSubmit}
+      />
+
+      <SystemAdminTransferDialog
+        isOpen={isTransferDialogOpen}
+        onOpenChange={setIsTransferDialogOpen}
+        users={users}
+        userToDeleteId={userToDeleteId}
+        newSuperAdminId={newSuperAdminId}
+        onNewSuperAdminChange={setNewSuperAdminId}
+        onConfirmTransfer={handleTransferSuperAdmin}
+      />
+
+      <DeleteConfirmationDialog
+        isOpen={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+        userToDelete={userToDelete}
+        currentUserId={currentAdminUser?.id || null}
+        onConfirmDelete={confirmDelete}
+      />
     </div>
   );
 }

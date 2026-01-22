@@ -3,26 +3,16 @@
 import { clerkClient } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-
-interface User {
-  id: string;
-  clerkId: string;
-  email: string;
-  name: string | null;
-  imageUrl: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-  role: string | null;
-}
+import { User, UserRole } from "@/types/user-types";
 
 export async function deleteUser(userId: string, clerkId: string) {
   try {
     const client = await clerkClient();
 
-    
+
     await client.users.deleteUser(clerkId);
 
-    
+
     await prisma.user.delete({
       where: { id: userId },
     });
@@ -40,22 +30,18 @@ export async function createAdminUser(data: { email: string; firstName: string; 
   try {
     const client = await clerkClient();
 
-
     const clerkUser = await client.users.createUser({
       emailAddress: [data.email],
       firstName: data.firstName,
       lastName: data.lastName,
-      password: "TempPass123!",
       publicMetadata: { role: "admin" }
     });
-
 
     await prisma.user.create({
       data: {
         clerkId: clerkUser.id,
         email: data.email,
         role: "admin",
-        // অন্য প্রয়োজনীয় ফিল্ড
       },
     });
 
@@ -73,7 +59,7 @@ export async function getUsers(): Promise<{ success: boolean; data?: User[]; err
       orderBy: { createdAt: 'desc' }
     });
 
-    return { success: true, data: users };
+    return { success: true, data: users as User[] };
   } catch (error) {
     console.error("Error fetching users:", error);
     return { success: false, error: "Failed to fetch users" };
@@ -90,14 +76,14 @@ export async function getUserById(id: string): Promise<{ success: boolean; data?
       return { success: false, error: "User not found" };
     }
 
-    return { success: true, data: user };
+    return { success: true, data: user as User };
   } catch (error) {
     console.error("Error fetching user:", error);
     return { success: false, error: "Failed to fetch user" };
   }
 }
 
-export async function updateUserRole(userId: string, role: string): Promise<{ success: boolean; error?: string }> {
+export async function updateUserRole(userId: string, role: UserRole): Promise<{ success: boolean; error?: string }> {
   try {
     // Update in Prisma
     await prisma.user.update({
@@ -123,7 +109,7 @@ export async function updateUserRole(userId: string, role: string): Promise<{ su
   }
 }
 
-export async function createUser(data: { email: string; firstName: string; lastName: string; role?: string }): Promise<{ success: boolean; error?: string }> {
+export async function createUser(data: { email: string; firstName: string; lastName: string; password: string; role?: UserRole }): Promise<{ success: boolean; error?: string }> {
   try {
     const client = await clerkClient();
 
@@ -131,7 +117,7 @@ export async function createUser(data: { email: string; firstName: string; lastN
       emailAddress: [data.email],
       firstName: data.firstName,
       lastName: data.lastName,
-      password: "TempPass123!",
+      password: data.password,
       publicMetadata: { role: data.role || "user" }
     });
 

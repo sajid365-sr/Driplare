@@ -1,10 +1,14 @@
 import { Montserrat, Hind_Siliguri } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Metadata } from "next";
 import "./globals.css";
 import I18nProvider from "@/components/i18n-provider";
 import SyncUser from "@/components/auth/SyncUser";
 import { Toaster } from "sonner";
 import { AlertDialogProvider } from "@/components/providers/AlertDialogProvider";
+import { MaintenanceChecker } from "@/components/MaintenanceChecker";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { getSiteSettings } from "@/lib/site-settings";
 
 // Montserrat configuration
 const montserrat = Montserrat({
@@ -22,10 +26,14 @@ const hindSiliguri = Hind_Siliguri({
   display: "swap",
 });
 
-export const metadata = {
-  title: "Driplare Management",
-  description: "Administrative dashboard and client portal",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+
+  return {
+    title: settings?.siteTitle || "Driplare",
+    description: settings?.metaDescription || "AI Agent and Automation Solutions",
+  };
+}
 
 export default function RootLayout({
   children,
@@ -40,6 +48,8 @@ export default function RootLayout({
         >
           <I18nProvider>
             <AlertDialogProvider>
+              <MaintenanceChecker />
+              <GoogleAnalytics />
               <SyncUser />
 
               {children}
