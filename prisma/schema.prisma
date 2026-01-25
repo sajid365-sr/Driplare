@@ -41,20 +41,6 @@ model ChatMessage {
   @@map("chat_messages")
 }
 
-model Lead {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  email     String
-  phone     String?
-  company   String?
-  message   String
-  service   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("leads")
-}
-
 model BlogPost {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   title       String
@@ -117,25 +103,6 @@ model Review {
   updatedAt        DateTime @updatedAt
 }
 
-// model Agent {
-//   id              String   @id @default(auto()) @map("_id") @db.ObjectId
-//   name            String
-//   category        String
-//   price           Float
-//   description     String?
-//   fullDescription String?
-//   features        String[] // Array of features
-//   techStack       String[] // Array of tools/tech
-//   image           String
-//   rating          Float    @default(0.0)
-//   users           String   @default("0")
-//   createdAt       DateTime @default(now())
-//   updatedAt       DateTime @updatedAt
-
-//   @@map("agents")
-// }
-
-// এটি একটি এমবেডেড অবজেক্ট টাইপ
 type CaseContent {
   title           String
   context         String
@@ -250,4 +217,18 @@ model Agent {
   updatedAt DateTime @updatedAt
 
   @@map("agents")
+}
+
+// Lead Model for Lead Capture System
+model Lead {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  phone     String
+  email     String?
+  platform  String // e.g., "Facebook Messenger", "WhatsApp", "Both"
+  agentSlug String
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+
+  @@map("leads")
 }

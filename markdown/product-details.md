@@ -1,35 +1,45 @@
-#Goal: Visual Proof and Trust.
+# Goal: Overhaul Agent Details Page for Maximum Conversion
 
-# Page Blueprint: Solution Deep-Dive
-**Component:** `SolutionDossier`
+I have provided all the component code. I want to update the Agent Details Page and its sub-components to look like a premium, high-ticket AI agency. 
 
----
+## Key Improvements Required:
 
-## 1. The Proof Suite (Media)
-* **Screen Recording:** A "POV" video of a customer messaging the page and the AI responding instantly with perfect logic.
-* **Before/After:** A graphic showing "Manual Chaos" vs "Driplare Automated Flow."
+### 1. AgentDetailsPage (Main Wrapper)
+- **Layout:** Use a cleaner grid. Ensure the background has a subtle "AI/Tech" mesh gradient.
+- **Sticky CTA:** On mobile, add a sticky bottom bar with "Get Started" and the price, so the user can convert at any time while scrolling.
+- **Language Logic:** Ensure `langContent` is used consistently across all child components for BN/EN support.
 
----
+### 2. AgentHeader (The Hook)
+- **Typography:** Use `font-black` and `tracking-tighter` for the name.
+- **Social Proof:** Make the "Deployed" and "Rating" badges more prominent with subtle animations.
+- **Value Proposition:** Add a "Success Rate" or "Efficiency Boost" mock badge (e.g., "99% Accuracy").
+- **Visuals:** Add a "Live Demo" button that scrolls to the Media Gallery.
 
-## 2. System Capabilities (What's Inside)
-* **Bullet Points:**
-    * **Semantic Understanding:** The AI understands "intent," not just keywords.
-    * **Lead Triage:** Automatically labels "Hot Leads" vs "General Inquiries."
-    * **Human-Handoff:** Alerts you instantly when a customer needs a real person.
-    * **Seamless Integration:** We connect it to your current CRM or Google Sheets.
+### 3. AgentPricing (The Closer)
+- **Design:** Make the pricing card look like a "Premium Receipt".
+- **Checklist:** Add a "What's included" list: 
+    - Full Setup & Integration
+    - 24/7 AI Automation
+    - Human-in-the-loop fallback
+    - Weekly Analytics Report
+- **Urgency:** Add a small text: "Limited slots available for this month".
 
----
+### 4. AgentFeatures (Benefits over Features)
+- Instead of just a list, use a "Feature Card" with a hover effect.
+- Use a "Glassmorphism" effect for the cards.
+- Add a "Use Case" section or tab.
 
-## 3. The Concierge Roadmap (How We Deploy)
-**Style:** A simple, high-trust 3-step process.
+### 5. MediaGallery
+- Ensure the YouTube embed is responsive and looks like a cinematic preview.
+- Add a "zoom" effect on image thumbnails.
 
-1. **Strategy Kickoff:** After purchase, we jump on a 15-minute call to understand your brand's voice and goals.
-2. **Engineering Phase:** Our team handles all API connections, n8n logic, and prompt engineering.
-3. **Quality Assurance:** We stress-test the system and push it live once it's 100% accurate.
+## Specific Task for Cursor:
+Please refactor the following files based on these principles. Keep the logic for `LeadModal` and `getAgentBySlug` intact but transform the UI. 
 
----
+- `app/agent-marketplace/[productId]/page.tsx`
+- `components/agent-marketplace/AgentHeader.tsx`
+- `components/agent-marketplace/AgentPricing.tsx`
+- `components/agent-marketplace/AgentFeatures.tsx`
+- `components/agent-marketplace/MediaGallery.tsx`
 
-## 4. Final Action
-* **Headline:** Ready to Automate your Inbox?
-* **CTA Button:** `[ INITIATE_SETUP_CONFERENCE ]`
-* **Sub-text:** "Average deployment time: 48–72 hours after kickoff."
+Ensure the code is clean, follows Tailwind CSS best practices, and uses Framer Motion for smooth entrances.

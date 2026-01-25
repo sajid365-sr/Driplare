@@ -20,13 +20,13 @@ export default function ContactPage() {
       <AIAgentInteractive />
 
       {/* 3. The Discovery Form (Dynamic Multi-Step) */}
-      <StepByStepForm />
+      {/* <StepByStepForm /> */}
 
       {/* 4. Direct Scheduling (The Shortcut) */}
       <CalendarEmbed />
 
       {/* 5. Alternative Channels (Social Proof & Contact) */}
-      <ContactSidebar />
+      {/* <ContactSidebar /> */}
     </div>
   );
 }

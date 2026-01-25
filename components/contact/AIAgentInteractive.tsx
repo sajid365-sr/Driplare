@@ -2,9 +2,23 @@
 
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Bot, Send, User, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+
+// Dynamically import Three.js component with SSR disabled
+const AIAvatar3D = dynamic(() => import("./AIAvatar3D"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[400px] flex items-center justify-center bg-gradient-to-br from-[#FF6B00]/10 to-[#FF6B00]/5 rounded-lg">
+      <div className="text-center">
+        <div className="w-16 h-16 border-4 border-[#FF6B00] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-sm text-[#0A0A0A]/70 font-mono">Loading Avatar...</p>
+      </div>
+    </div>
+  ),
+});
 
 interface Message {
   id: string;
@@ -36,6 +50,8 @@ export function AIAgentInteractive() {
   const [answers, setAnswers] = useState<string[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [showBooking, setShowBooking] = useState(false);
+  const [currentAIMessage, setCurrentAIMessage] = useState<string>("");
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -45,6 +61,17 @@ export function AIAgentInteractive() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    // Set initial message for voice
+    if (initialMessages[0]?.type === "ai") {
+      setCurrentAIMessage(initialMessages[0].content);
+      setIsSpeaking(true);
+      setTimeout(() => {
+        setIsSpeaking(false);
+      }, initialMessages[0].content.length * 50 + 1000);
+    }
+  }, []);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
@@ -74,18 +101,32 @@ export function AIAgentInteractive() {
           timestamp: new Date(),
         };
         setMessages((prev) => [...prev, aiResponse]);
+        setCurrentAIMessage(nextQuestion);
+        setIsSpeaking(true);
         setCurrentStep((prev) => prev + 1);
+        
+        // Stop speaking after message duration
+        setTimeout(() => {
+          setIsSpeaking(false);
+        }, nextQuestion.length * 50 + 1000);
       } else {
         // All questions answered, provide booking link
+        const finalMessage = "Perfect! Based on your responses, I think we'd be a great fit. Would you like to book a technical discovery call?";
         const aiResponse: Message = {
           id: (Date.now() + 1).toString(),
           type: "ai",
-          content:
-            "Perfect! Based on your responses, I think we'd be a great fit. Would you like to book a technical discovery call?",
+          content: finalMessage,
           timestamp: new Date(),
         };
         setMessages((prev) => [...prev, aiResponse]);
+        setCurrentAIMessage(finalMessage);
+        setIsSpeaking(true);
         setShowBooking(true);
+        
+        // Stop speaking after message duration
+        setTimeout(() => {
+          setIsSpeaking(false);
+        }, finalMessage.length * 50 + 1000);
       }
       setIsTyping(false);
     }, 1500);
@@ -142,107 +183,16 @@ export function AIAgentInteractive() {
               className="relative"
             >
               <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-8 border border-[#E5E5E5] shadow-xl">
-                {/* Holographic Avatar with Breathing Animation */}
-                <div className="relative mb-8">
-                  <motion.div
-                    className="w-32 h-32 mx-auto bg-gradient-to-br from-[#FF6B00]/20 to-[#FF6B00]/5 rounded-full flex items-center justify-center relative overflow-hidden"
-                    animate={{
-                      scale: [1, 1.05, 1],
-                      boxShadow: [
-                        "0 0 20px rgba(255, 107, 0, 0.3)",
-                        "0 0 30px rgba(255, 107, 0, 0.5)",
-                        "0 0 20px rgba(255, 107, 0, 0.3)",
-                      ],
-                    }}
-                    transition={{
-                      scale: {
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      },
-                      boxShadow: {
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      },
-                    }}
-                  >
-                    {/* Animated rings */}
-                    <motion.div
-                      className="absolute inset-0 border-2 border-[#FF6B00]/30 rounded-full"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.1, 0.3],
-                        rotate: 360,
-                      }}
-                      transition={{
-                        scale: { duration: 3, repeat: Infinity },
-                        opacity: { duration: 3, repeat: Infinity },
-                        rotate: {
-                          duration: 20,
-                          repeat: Infinity,
-                          ease: "linear",
-                        },
-                      }}
-                    />
-                    <motion.div
-                      className="absolute inset-2 border border-[#FF6B00]/20 rounded-full"
-                      animate={{
-                        scale: [1, 1.1, 1],
-                        opacity: [0.2, 0.05, 0.2],
-                        rotate: -360,
-                      }}
-                      transition={{
-                        scale: { duration: 2, repeat: Infinity, delay: 0.5 },
-                        opacity: { duration: 2, repeat: Infinity, delay: 0.5 },
-                        rotate: {
-                          duration: 15,
-                          repeat: Infinity,
-                          ease: "linear",
-                        },
-                      }}
-                    />
-
-                    {/* AI Icon */}
-                    <motion.div
-                      animate={{
-                        rotate: [0, 5, -5, 0],
-                        scale: [1, 1.02, 1],
-                      }}
-                      transition={{ duration: 6, repeat: Infinity }}
-                    >
-                      <Bot className="w-16 h-16 text-[#FF6B00]" />
-                    </motion.div>
-                  </motion.div>
-
+                {/* Three.js Female AI Avatar */}
+                <div className="relative mb-4">
+                  <AIAvatar3D isSpeaking={isSpeaking} currentMessage={currentAIMessage} />
+                  
                   {/* Status Indicator */}
-                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-10">
                     <div className="flex items-center gap-2 bg-[#0A0A0A] text-white px-3 py-1 rounded-full text-xs font-mono">
-                      <div className="w-2 h-2 bg-[#FF6B00] rounded-full animate-pulse"></div>
-                      <span>ONLINE</span>
+                      <div className={`w-2 h-2 ${isSpeaking ? 'bg-[#FF6B00]' : 'bg-green-400'} rounded-full ${isSpeaking ? 'animate-pulse' : ''}`}></div>
+                      <span>{isSpeaking ? 'SPEAKING' : 'ONLINE'}</span>
                     </div>
-                  </div>
-                </div>
-
-                {/* Capabilities */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-bold text-[#0A0A0A] text-center mb-4">
-                    Capabilities
-                  </h3>
-                  <div className="grid grid-cols-1 gap-3">
-                    {[
-                      "Project Qualification",
-                      "Instant Scheduling",
-                      "Technical Assessment",
-                      "Email Integration",
-                    ].map((capability, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-[#FF6B00] rounded-full"></div>
-                        <span className="text-sm text-[#0A0A0A]/70 font-mono">
-                          {capability}
-                        </span>
-                      </div>
-                    ))}
                   </div>
                 </div>
               </div>
