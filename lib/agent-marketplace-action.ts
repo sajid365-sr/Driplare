@@ -40,7 +40,7 @@ export async function getAllAgents() {
       orderBy: { createdAt: "desc" },
     });
 
-    console.log("Database response count:", agents);
+    
     return { success: true, data: agents };
   } catch (error: unknown) {
     console.error("Error fetching agents:", error);

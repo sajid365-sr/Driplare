@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Agent, AgentContent } from "@/types/agent-marketplace";
 import LeadModal from "@/components/LeadModal";
+import LeadModal2 from "@/components/LeadModal2";
 
 interface ProductHeroProps {
   agent: Agent;
@@ -172,7 +173,7 @@ export default function ProductHero({ agent, langContent }: ProductHeroProps) {
         </div>
       </section>
 
-      <LeadModal
+      <LeadModal2
         isOpen={isLeadModalOpen}
         onClose={() => setIsLeadModalOpen(false)}
         agentSlug={agent.slug}

@@ -49,7 +49,7 @@ export default function ProductDetailsPage() {
   const langContent = agent[currentLang] || agent.en;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen mt-20 bg-background">
       {/* Hero Section with Image Gallery */}
       <ProductHero agent={agent} langContent={langContent} />
       

@@ -220,15 +220,53 @@ model Agent {
 }
 
 // Lead Model for Lead Capture System
-model Lead {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  phone     String
-  email     String?
-  platform  String // e.g., "Facebook Messenger", "WhatsApp", "Both"
-  agentSlug String
-  status    String   @default("pending")
-  createdAt DateTime @default(now())
+// model Lead {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   name      String
+//   phone     String
+//   email     String?
+//   platform  String // e.g., "Facebook Messenger", "WhatsApp", "Both"
+//   agentSlug String
+//   status    String   @default("pending")
+//   createdAt DateTime @default(now())
 
+//   @@map("leads")
+// }
+
+// Add this to your existing schema.prisma file
+
+model Lead {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  email        String
+  whatsapp     String
+  businessType String?
+  platform     String // messenger, whatsapp, both
+  requirements String?
+
+  // Agent info
+  agentSlug String
+  agentName String
+
+  // Tracking
+  source String // "product-page", "marketplace", "hero-cta"
+  status String   @default("new") // new, contacted, qualified, proposal-sent, paid, completed, closed-lost
+  notes  String[] // Array of notes
+
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  lastContactedAt DateTime?
+  qualifiedAt     DateTime?
+  paidAt          DateTime?
+  completedAt     DateTime?
+  updatedAt       DateTime  @updatedAt
+
+  @@index([status])
+  @@index([agentSlug])
+  @@index([createdAt])
   @@map("leads")
 }
+
+// After adding this model, run:
+// npx prisma generate
+// npx prisma db push

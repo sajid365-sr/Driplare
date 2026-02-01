@@ -4,83 +4,93 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Main Colors - Light Mode */
+    --background: 0 0% 100%;                    /* Pure white */
+    --foreground: 240 10% 3.9%;                 /* Almost black text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;                          /* White cards */
+    --card-foreground: 240 10% 3.9%;            /* Dark text on cards */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;                       /* White popovers */
+    --popover-foreground: 240 10% 3.9%;         /* Dark text */
 
-    --primary: 37, 100%, 50%; /* Orange - #ff8504 */
-    --primary-foreground: 210 40% 98%;
+    /* Brand Colors */
+    --primary: 258 90% 66%;                     /* Violet #7c3aed */
+    --primary-foreground: 0 0% 100%;            /* White text on violet */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217 91% 60%;                   /* Blue #3b82f6 for tech/AI */
+    --secondary-foreground: 0 0% 100%;          /* White text on blue */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 160 84% 39%;                      /* Emerald #10b981 for success */
+    --accent-foreground: 0 0% 100%;             /* White text on green */
 
-    --accent: 37, 100%, 50%; /* Orange - #ff8504 */
-    --accent-foreground: 210 40% 98%;
+    /* Neutral Colors */
+    --muted: 240 4.8% 95.9%;                    /* Light gray background */
+    --muted-foreground: 240 3.8% 46.1%;         /* Medium gray text */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;               /* Red for errors */
+    --destructive-foreground: 0 0% 100%;        /* White text on red */
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 37, 100%, 50%; /* Orange - #ff8504 */
+    /* UI Elements */
+    --border: 240 5.9% 90%;                     /* Light borders */
+    --input: 240 5.9% 90%;                      /* Input borders */
+    --ring: 258 90% 66%;                        /* Violet focus ring */
 
     --radius: 0.5rem;
 
+    /* Sidebar (Admin) */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary: 258 90% 66%;              /* Violet for sidebar */
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 258 90% 66%;                 /* Violet ring */
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Main Colors - Dark Mode */
+    --background: 240 10% 3.9%;                 /* Almost black */
+    --foreground: 0 0% 98%;                     /* Almost white text */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 10% 3.9%;                       /* Dark cards */
+    --card-foreground: 0 0% 98%;                /* Light text on cards */
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 10% 3.9%;                    /* Dark popovers */
+    --popover-foreground: 0 0% 98%;             /* Light text */
 
-    --primary: 37, 100%, 50%; /* Orange - #ff8504 */
-    --primary-foreground: 210 40% 98%;
+    /* Brand Colors (Same for consistency) */
+    --primary: 258 90% 66%;                     /* Violet #7c3aed */
+    --primary-foreground: 0 0% 100%;            /* White text on violet */
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 217 91% 60%;                   /* Blue #3b82f6 */
+    --secondary-foreground: 0 0% 100%;          /* White text on blue */
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 160 84% 39%;                      /* Emerald #10b981 */
+    --accent-foreground: 0 0% 100%;             /* White text on green */
 
-    --accent: 37, 100%, 50%; /* Orange - #ff8504 */
-    --accent-foreground: 210 40% 98%;
+    /* Neutral Colors */
+    --muted: 240 3.7% 15.9%;                    /* Dark gray background */
+    --muted-foreground: 240 5% 64.9%;           /* Light gray text */
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;               /* Darker red for errors */
+    --destructive-foreground: 0 0% 98%;         /* Light text on red */
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 37, 100%, 50%; /* Orange - #ff8504 */
+    /* UI Elements */
+    --border: 240 3.7% 15.9%;                   /* Dark borders */
+    --input: 240 3.7% 15.9%;                    /* Input borders */
+    --ring: 258 90% 66%;                        /* Violet focus ring */
 
+    /* Sidebar (Admin) */
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 258 90% 66%;              /* Violet for sidebar */
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 258 90% 66%;                 /* Violet ring */
   }
 }
 
@@ -117,5 +127,27 @@
 
   .bg-gradient {
     @apply bg-gradient-to-r from-primary/80 to-primary;
+  }
+
+  /* Violet gradient variations */
+  .bg-gradient-violet {
+    @apply bg-gradient-to-r from-primary via-primary to-secondary;
+  }
+
+  .bg-gradient-violet-to-blue {
+    @apply bg-gradient-to-br from-primary to-secondary;
+  }
+
+  .bg-gradient-success {
+    @apply bg-gradient-to-r from-accent/80 to-accent;
+  }
+
+  /* Text gradients */
+  .text-gradient-violet {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .text-gradient-success {
+    @apply bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent;
   }
 }

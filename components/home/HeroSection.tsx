@@ -1,165 +1,217 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Terminal, Box, Activity } from "lucide-react";
+import { ArrowRight, Sparkles, Zap } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useTranslation } from "react-i18next"; // হুক ইমপোর্ট করা হলো
+import { useTranslation } from "react-i18next";
 
 export function Hero() {
-  const { t } = useTranslation(); // t ফাংশনটি ইনিশিয়ালাইজ করা হলো
+  const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-screen bg-white overflow-hidden flex items-center mt-20">
-      {/* Background Graphic: The Neural Line */}
-      <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none">
-        <motion.path
-          d="M -100 500 Q 400 100 800 500 T 1800 300"
-          fill="none"
-          stroke="url(#gradient)"
-          strokeWidth="2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-        />
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#FF6B00" stopOpacity="0" />
-            <stop offset="50%" stopColor="#FF6B00" stopOpacity="1" />
-            <stop offset="100%" stopColor="#FF6B00" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-      </svg>
-
-      <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
-        {/* Left: The Vision */}
-        <div className="space-y-8">
+    <section className="relative min-h-screen bg-background overflow-hidden flex items-center pt-20">
+      {/* Animated Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-background" />
+      
+      {/* Floating Particles Effect */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(20)].map((_, i) => (
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3 text-primary font-mono text-sm tracking-widest"
-          >
-            <span className="h-px w-8 bg-primary"></span>
-            {t("hero.badge")}
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-6xl md:text-8xl font-black text-black leading-none tracking-tighter uppercase"
-          >
-            {t("hero.titlePart1")} <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">
-              {t("hero.titlePart2")}
-            </span>{" "}
-            <br />
-            {t("hero.titlePart3")}
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="text-gray-400 text-lg md:text-xl max-w-lg leading-relaxed"
-          >
-            {t("hero.description")}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-wrap gap-4"
-          >
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-white rounded-full px-8 py-7 text-lg font-bold group"
-              asChild
-            >
-              <Link href="/case-studies" className="flex items-center gap-2">
-                {t("hero.btnViewSystems")}{" "}
-                <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-black/10 bg-black text-white hover:bg-orange/5 rounded-full px-8 py-7 text-lg font-bold"
-              asChild
-            >
-              <Link href="/contact">{t("hero.btnBookConsult")}</Link>
-            </Button>
-          </motion.div>
-        </div>
-
-        {/* Right: The Engine (Terminal Card) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="relative hidden lg:block"
-        >
-          <div className="bg-[#151515] border border-white/10 rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden group">
-            <div className="flex items-center gap-2 mb-6 border-b border-white/5 pb-4">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-500/20" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
-                <div className="w-3 h-3 rounded-full bg-green-500/20" />
-              </div>
-              <div className="text-[10px] font-mono text-gray-500 ml-4 flex items-center gap-2">
-                <Terminal size={12} /> driplare_engine_v1.0.exe
-              </div>
-            </div>
-
-            <div className="space-y-4 font-mono text-xs">
-              <div className="flex gap-3 text-green-400">
-                <span className="text-gray-600">01</span>
-                <span>$ init_ai_agent --target="inbox_automation"</span>
-              </div>
-              <div className="flex gap-3 text-blue-400">
-                <span className="text-gray-600">02</span>
-                <span className="flex items-center gap-2">
-                  <Activity size={12} /> status: TRAINING_ON_CATALOG_DATA...
-                </span>
-              </div>
-              <div className="flex gap-3 text-gray-400">
-                <span className="text-gray-600">03</span>
-                <span>// Integrating Shopify & Meta APIs</span>
-              </div>
-              <div className="flex gap-3 text-primary font-bold">
-                <span className="text-gray-600">04</span>
-                <span className="animate-pulse">
-                  SYSTEM_LIVE: 24/7 AUTONOMOUS_MODE
-                </span>
-              </div>
-            </div>
-
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/40 transition-all" />
-          </div>
-
-          {/* Floating Stats */}
-          <div className="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-3">
-            <div className="bg-primary/10 p-2 rounded-lg text-primary">
-              <Box size={20} />
-            </div>
-            <div>
-              <div className="text-[10px] uppercase font-bold text-gray-400 leading-none">
-                {t("hero.efficiency")}
-              </div>
-              <div className="text-lg font-black text-black leading-none">
-                +300%
-              </div>
-            </div>
-          </div>
-        </motion.div>
+            key={i}
+            className="absolute w-2 h-2 bg-primary/20 rounded-full"
+            initial={{ 
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.2, 0.5, 0.2],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
       </div>
 
-      {/* Decorative Branding */}
-      <div className="absolute bottom-10 left-10 hidden md:block">
-        <p className="text-[10rem] font-black text-white/[0.02] pointer-events-none select-none tracking-tighter uppercase leading-none">
-          {t("hero.brandingBg")}
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Main Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2"
+            >
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm font-semibold text-foreground">
+                {t("hero.badge")}
+              </span>
+            </motion.div>
+
+            {/* Main Heading */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-black text-foreground leading-tight"
+            >
+              {t("hero.titlePart1")}{" "}
+              <span className="text-gradient-violet">
+                {t("hero.titlePart2")}
+              </span>{" "}
+              {t("hero.titlePart3")}
+            </motion.h1>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed"
+            >
+              {t("hero.description")}
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground group"
+                asChild
+              >
+                <Link href="/agent-marketplace" className="flex items-center gap-2">
+                  {t("hero.btnViewSystems")}
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2"
+                asChild
+              >
+                <Link href="/contact">{t("hero.btnBookConsult")}</Link>
+              </Button>
+            </motion.div>
+
+            {/* Trust Indicators */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-wrap items-center gap-6 pt-4"
+            >
+              <div className="flex items-center gap-2">
+                <Zap className="w-5 h-5 text-accent" />
+                <span className="text-sm text-muted-foreground">
+                  {t("hero.fastSetup")}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div
+                      key={i}
+                      className="w-8 h-8 rounded-full bg-primary/20 border-2 border-background"
+                    />
+                  ))}
+                </div>
+                <span className="text-sm text-muted-foreground">
+                  {t("hero.trustedBy")}
+                </span>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right: Visual Element */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="relative hidden lg:block"
+          >
+            <div className="relative bg-card border-2 border-border rounded-3xl p-8 shadow-2xl overflow-hidden">
+              {/* Terminal Header */}
+              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-border">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-destructive/60" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-accent/60" />
+                </div>
+                <span className="text-xs font-mono text-muted-foreground ml-4">
+                  driplare_ai_v1.0
+                </span>
+              </div>
+
+              {/* Terminal Content */}
+              <div className="space-y-4 font-mono text-sm">
+                <div className="flex gap-3">
+                  <span className="text-muted-foreground">$</span>
+                  <span className="text-accent">initialize_agent --type="sales"</span>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-muted-foreground">→</span>
+                  <span className="text-secondary">Training on your business data...</span>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-muted-foreground">→</span>
+                  <span className="text-muted-foreground">Connecting to WhatsApp...</span>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-muted-foreground">✓</span>
+                  <span className="text-primary font-bold animate-pulse">
+                    LIVE: Handling customers 24/7
+                  </span>
+                </div>
+              </div>
+
+              {/* Glow Effect */}
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl" />
+            </div>
+
+            {/* Floating Stats Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="absolute -bottom-6 -left-6 bg-card border-2 border-border rounded-2xl p-4 shadow-xl"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                  <Sparkles className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase font-semibold">
+                    {t("hero.efficiency")}
+                  </p>
+                  <p className="text-2xl font-black text-foreground">+300%</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Background Text */}
+      <div className="absolute bottom-10 left-10 hidden xl:block pointer-events-none select-none">
+        <p className="text-[10rem] font-black text-muted/5 uppercase leading-none">
+          AI
         </p>
       </div>
     </section>

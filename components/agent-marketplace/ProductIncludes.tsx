@@ -18,6 +18,7 @@ export default function ProductIncludes({ agent, langContent }: ProductIncludesP
     "1-month free support",
     "Video tutorial & documentation"
   ];
+  console.log(agent)
 
   const includes = agent.includes && agent.includes.length > 0 
     ? agent.includes 

@@ -19,15 +19,321 @@
     "technicalConsulting": "প্রযুক্তিগত পরামর্শ"
   },
   "hero": {
-    "badge": "ENGINEERING AUTONOMY",
-    "titlePart1": "তৈরি করছি",
-    "titlePart2": "ইনভিজিবল",
-    "titlePart3": "ওয়ার্কফোর্স।",
-    "description": "আমরা শুধু টুলস বানাই না। আমরা এমন অটোনোমাস সিস্টেম আর্কিটেক্ট করি যা আপনার অপারেশন, সেলস এবং ডাটা অটোমেটিক হ্যান্ডেল করবে, যাতে আপনি আপনার পরবর্তী বড় পদক্ষেপে ফোকাস করতে পারেন।",
-    "btnViewSystems": "সিস্টেমগুলো দেখুন",
-    "btnBookConsult": "কনসাল্টেশন বুক করুন",
-    "efficiency": "এফিশিয়েন্সি",
-    "brandingBg": "SYSTEMS"
+    "badge": "আপনার ব্যবসার জন্য এআই অটোমেশন",
+    "titlePart1": "এআই এজেন্ট যা",
+    "titlePart2": "কাজ করে",
+    "titlePart3": "ঘুমের মধ্যেও",
+    "description": "আনঅ্যান্সার্ড মেসেজের কারণে সেলস হারানো বন্ধ করুন। আমাদের এআই এজেন্ট কাস্টমার কুয়েরি হ্যান্ডেল করে, অর্ডার কালেক্ট করে এবং ২৪/৭ আপনার ব্যবসা বাড়ায়।",
+    "btnViewSystems": "এআই এজেন্ট দেখুন",
+    "btnBookConsult": "ফ্রি ডেমো পান",
+    "efficiency": "সময় বাঁচান",
+    "fastSetup": "১৫ মিনিট সেটআপ",
+    "trustedBy": "১২৭+ ব্যবসা"
+  },
+  "problem": {
+    "badge": "লুকানো খরচ",
+    "title": "আপনি কি সেলস হারাচ্ছেন?",
+    "subtitle": "বেশিরভাগ ব্যবসা ৬০% সম্ভাব্য কাস্টমার হারায় এই সমস্যার কারণে:",
+    "points": {
+      "slow": {
+        "title": "ধীর উত্তর",
+        "description": "কাস্টমাররা চলে যায় যখন আপনি মিনিটের মধ্যে উত্তর দেন না। তারা অন্য বিক্রেতা খুঁজে নেয় যে দ্রুত উত্তর দেয়।"
+      },
+      "sleep": {
+        "title": "আপনি ২৪/৭ কাজ করতে পারেন না",
+        "description": "ঘুমানোর সময় বা অন্য কাজে ব্যস্ত থাকার সময় সেলস মিস করছেন। কাস্টমাররা রাতে মেসেজ করে এবং কোনো উত্তর পায় না।"
+      },
+      "staff": {
+        "title": "স্টাফ ব্যয়বহুল",
+        "description": "মেসেজের উত্তর দেওয়ার জন্য লোক নিয়োগ করলে হাজার হাজার টাকা খরচ হয় প্রতি মাসে। এছাড়াও, তাদের প্রশিক্ষণ দরকার এবং তারা ভুল করে।"
+      }
+    },
+    "stats": {
+      "lostCustomers": "কাস্টমার হারিয়ে যায়",
+      "missedTime": "প্রতিদিন মিস হয়",
+      "monthlyCost": "প্রতি মাসে"
+    },
+    "cta": "আরও ভালো উপায় আছে"
+  },
+  "solution": {
+    "badge": "এআই চালিত সমাধান",
+    "title": "আপনার এআই সেলস এজেন্টের সাথে দেখা করুন",
+    "subtitle": "২৪/৭ কাজ করে। কখনও ঘুমায় না। কখনও ভুল করে না।",
+    "imageAlt": "এআই চ্যাটবট কাস্টমার কথোপকথন পরিচালনা করছে",
+    "watchDemo": "ডেমো দেখুন",
+    "liveBadge": "লাইভ ডেমো",
+    "features": {
+      "replies": {
+        "title": "তাৎক্ষণিক উত্তর",
+        "description": "দিনের যেকোনো সময় সেকেন্ডের মধ্যে কাস্টমার প্রশ্নের উত্তর দেয়"
+      },
+      "orders": {
+        "title": "অর্ডার সংগ্রহ করে",
+        "description": "কাস্টমারের নাম, ঠিকানা, ফোন নম্বর অটোমেটিক নেয়"
+      },
+      "organized": {
+        "title": "সংগঠিত থাকে",
+        "description": "সব অর্ডার সুন্দরভাবে আপনার গুগল শিটে সেভ করে"
+      },
+      "learns": {
+        "title": "আপনার ব্যবসা চেনে",
+        "description": "আপনার পণ্য, দাম এবং ডেলিভারি এলাকায় প্রশিক্ষিত"
+      }
+    },
+    "comparison": {
+      "title": "Driplare এর আগে বনাম পরে",
+      "before": {
+        "title": "এআই ছাড়া",
+        "points": [
+          "কাস্টমাররা ঘন্টার পর ঘন্টা উত্তরের জন্য অপেক্ষা করে",
+          "আপনি ম্যানুয়ালি অর্ডার ডিটেইলস সংগ্রহ করেন",
+          "আপনি ব্যস্ত বা ঘুমানোর সময় বিক্রয় হারিয়ে যায়",
+          "সর্বত্র অগোছালো মেসেজ"
+        ]
+      },
+      "after": {
+        "title": "এআই এজেন্ট সহ",
+        "points": [
+          "তাৎক্ষণিক উত্তর, ২৪/৭",
+          "অর্ডার অটোমেটিক সংগ্রহ হয়",
+          "আর কখনো বিক্রয় মিস হয় না",
+          "সব কিছু এক জায়গায় সুসংগঠিত"
+        ]
+      }
+    },
+    "cta": "আপনার এআই এজেন্ট পান"
+  },
+  "howItWorks": {
+    "badge": "সহজ প্রক্রিয়া",
+    "title": "৩টি সহজ ধাপ",
+    "subtitle": "৪৮ ঘন্টার মধ্যে আপনার এআই এজেন্ট চালু করুন",
+    "steps": {
+      "tell": {
+        "title": "আপনার ব্যবসার কথা বলুন",
+        "description": "আপনার পণ্য, দাম এবং কিভাবে কাজ করেন তা শেয়ার করুন। কোন টেক জ্ঞান লাগবে না।",
+        "details": [
+          "আপনার পণ্যের তালিকা এবং দাম",
+          "যে এলাকায় ডেলিভারি দেন",
+          "কাস্টমারদের সাধারণ প্রশ্ন",
+          "আপনার ব্যবসার সময়"
+        ]
+      },
+      "setup": {
+        "title": "আমরা আপনার এআই এজেন্ট বানাই",
+        "description": "আমাদের টিম আপনার এআই তৈরি এবং ট্রেইন করে যা আপনার মতো কথা বলবে।",
+        "details": [
+          "আপনার ব্যবসায় Custom এআই ট্রেইনিং",
+          "Facebook/WhatsApp এ সংযুক্ত",
+          "আপনার Google Sheet এর সাথে লিংক",
+          "টেস্ট করা এবং চালু করার জন্য প্রস্তুত"
+        ]
+      },
+      "launch": {
+        "title": "২৪/৭ বিক্রয় শুরু করুন",
+        "description": "আপনার এআই এজেন্ট লাইভ হয় এবং তাৎক্ষণিক কাস্টমার সামলাতে শুরু করে।",
+        "details": [
+          "মেসেজের অটোমেটিক রিপ্লাই দেয়",
+          "আপনি ঘুমানোর সময় অর্ডার সংগ্রহ করে",
+          "সব কিছু আপনার শিটে সেভ করে",
+          "আপনি সম্পূর্ণ নিয়ন্ত্রণে থাকেন"
+        ]
+      }
+    },
+    "promise": {
+      "title": "এটাই। সত্যিই।",
+      "subtitle": "কোন মাসিক ফি নেই। জটিল সেটআপ নেই। শুধু একবার পেমেন্ট আর আপনি শেষ।",
+      "features": [
+        "৪৮ ঘন্টায় সেটআপ",
+        "একবার পেমেন্ট",
+        "টেক জ্ঞান লাগবে না"
+      ]
+    },
+    "cta": "এখনই শুরু করুন",
+    "trustBadge": "১০০+ ব্যবসা ইতিমধ্যে এআই ব্যবহার করে বেশি বিক্রয় করছে"
+  },
+  "whatYouGet": {
+    "badge": "সম্পূর্ণ প্যাকেজ",
+    "title": "আপনি যা পাবেন",
+    "subtitle": "এআই দিয়ে বিক্রয় শুরু করার জন্য প্রয়োজনীয় সবকিছু। কোন লুকানো খরচ নেই।",
+    "main": {
+      "agent": {
+        "title": "আপনার এআই সেলস এজেন্ট",
+        "description": "একটি স্মার্ট সহায়ক যা আসল মানুষের মতো কাস্টমার সামলায়",
+        "items": [
+          "আপনার ব্যবসায় Custom ট্রেইনিং",
+          "তাৎক্ষণিক প্রশ্নের উত্তর দেয়",
+          "সম্পূর্ণ অর্ডার বিবরণ সংগ্রহ করে",
+          "Facebook ও WhatsApp এ কাজ করে"
+        ]
+      },
+      "sheet": {
+        "title": "Google Sheet Integration",
+        "description": "সব অর্ডার অটোমেটিক এক জায়গায় সংগঠিত",
+        "items": [
+          "Real-time অর্ডার ট্র্যাকিং",
+          "কাস্টমার ডিটেইলস তাৎক্ষণিক সেভ হয়",
+          "সহজে দেখা এবং ম্যানেজ করা যায়",
+          "যেকোনো ডিভাইস থেকে এক্সেস করুন"
+        ]
+      },
+      "support": {
+        "title": "সম্পূর্ণ Setup ও Support",
+        "description": "শুরু থেকে শেষ পর্যন্ত সবকিছু আমরা সামলাই",
+        "items": [
+          "আমাদের টিম সম্পূর্ণ setup করে দেয়",
+          "কিভাবে ব্যবহার করবেন তার Training",
+          "ফ্রি আপডেট এবং ফিক্স",
+          "যেকোনো সময় WhatsApp Support"
+        ]
+      }
+    },
+    "bonusTitle": "এছাড়াও, আপনি পাচ্ছেন",
+    "bonusSubtitle": "অতিরিক্ত ফিচার বিনামূল্যে অন্তর্ভুক্ত",
+    "bonus": {
+      "messaging": {
+        "title": "Multi-Platform Ready",
+        "description": "Facebook Messenger এবং WhatsApp Business এ কাজ করে"
+      },
+      "instant": {
+        "title": "তাৎক্ষণিক রিপ্লাই",
+        "description": "কাস্টমাররা ঘন্টা নয়, সেকেন্ডে উত্তর পায়"
+      },
+      "available": {
+        "title": "২৪/৭ উপলব্ধ",
+        "description": "আপনার এআই কখনো ঘুমায় না, বিরতি নেয় না"
+      },
+      "tracking": {
+        "title": "অর্ডার ট্র্যাকিং",
+        "description": "আপনার শিটে real-time সব অর্ডার দেখুন"
+      },
+      "secure": {
+        "title": "সুরক্ষিত ও ব্যক্তিগত",
+        "description": "আপনার ব্যবসার ডেটা নিরাপদ এবং সুরক্ষিত"
+      },
+      "mobile": {
+        "title": "Mobile Friendly",
+        "description": "আপনার ফোন থেকে সবকিছু ম্যানেজ করুন"
+      }
+    },
+    "value": {
+      "badge": "প্রকৃত মূল্য",
+      "title": "কাউকে ভাড়া করলে এটির খরচ হতো ১৫,০০০+ টাকা",
+      "subtitle": "কিন্তু আপনি সবকিছু পাচ্ছেন একবার setup ফি তে",
+      "highlights": [
+        {
+          "value": "৪৮ ঘন্টা",
+          "label": "Setup সময়"
+        },
+        {
+          "value": "২৪/৭",
+          "label": "সবসময় কাজ করে"
+        },
+        {
+          "value": "০",
+          "label": "মাসিক ফি"
+        }
+      ]
+    },
+    "cta": "এখনই আপনার এআই এজেন্ট পান",
+    "ctaSubtext": "একবার পেমেন্ট • কোন মাসিক ফি নেই • ৪৮ ঘন্টায় Setup"
+  },
+  "moreThanAI": {
+    "badge": "সম্পূর্ণ সমাধান",
+    "title": "আমরা শুধু AI Agent এর চেয়ে বেশি কিছু তৈরি করি",
+    "subtitle": "সাধারণ automation থেকে সম্পূর্ণ digital transformation পর্যন্ত—আমরা আপনার growth এর জন্য technology partner",
+    "imageAlt": "Driplare সম্পূর্ণ technology ecosystem",
+    "pillars": {
+      "ai": {
+        "title": "AI Agents",
+        "description": "২৪/৭ কাজ করে এমন স্মার্ট sales automation"
+      },
+      "automation": {
+        "title": "Workflow Automation",
+        "description": "আপনার business apps সহজে সংযুক্ত করুন"
+      },
+      "dashboard": {
+        "title": "Custom Dashboards",
+        "description": "আপনার ব্যবসার জন্য সম্পূর্ণ control center"
+      },
+      "data": {
+        "title": "Data Intelligence",
+        "description": "Automated insights এবং web scraping"
+      },
+      "consulting": {
+        "title": "Tech Consulting",
+        "description": "Strategy এবং architecture planning"
+      }
+    },
+    "learnMore": "আরও জানুন",
+    "cta": {
+      "title": "আপনার সম্পূর্ণ Solution তৈরি করতে প্রস্তুত?",
+      "subtitle": "আসুন আলোচনা করি কিভাবে Driplare সঠিক technology দিয়ে আপনার ব্যবসা transform করতে পারে",
+      "primary": "সব Solutions দেখুন",
+      "secondary": "আমাদের টিমের সাথে কথা বলুন"
+    }
+  },
+  "success": {
+    "badge": "সাফল্যের গল্প",
+    "title": "সত্যিকারের ব্যবসার সত্যিকারের ফলাফল",
+    "subtitle": "দেখুন কিভাবে আপনার মতো ব্যবসাগুলো AI automation দিয়ে জিতছে",
+    "videoTitle": "কাস্টমার সাফল্যের গল্প ভিডিও",
+    "stats": [
+      {
+        "value": "১০০+",
+        "label": "খুশি ক্লায়েন্ট"
+      },
+      {
+        "value": "৫০ হাজার+",
+        "label": "Automated অর্ডার"
+      },
+      {
+        "value": "২৪/৭",
+        "label": "AI কাজ করছে"
+      }
+    ]
+  },
+  "homepricing": {
+    "badge": "সহজ মূল্য",
+    "title": "স্বচ্ছ, কোন লুকানো খরচ নেই",
+    "subtitle": "ফ্রি ট্রায়াল দিয়ে শুরু করুন। ফলাফল দেখলে তবেই পেমেন্ট করুন।",
+    "trialBanner": "🎉 ১-২ সপ্তাহ ফ্রি ট্রায়াল • কোন ক্রেডিট কার্ড লাগবে না",
+    "popular": "সবচেয়ে জনপ্রিয়",
+    "packageName": "AI Sales Agent Starter",
+    "packageDescription": "E-commerce ব্যবসার জন্য পারফেক্ট যারা customer conversations এবং order collection automate করতে চান",
+    "setupPrice": "৳৫,০০০ - ১০,০০০",
+    "oneTime": "একবার setup খরচ",
+    "setupNote": "জটিলতা এবং ব্যবসার প্রয়োজনের উপর নির্ভর করে",
+    "monthlyPrice": "৳৫০০ - ১,০০০",
+    "perMonth": "মাসে",
+    "monthlyNote": "AI ব্যবহার, hosting এবং maintenance খরচ",
+    "ctaPrimary": "ফ্রি ট্রায়াল শুরু করুন",
+    "ctaSecondary": "সব মূল্য দেখুন",
+    "includedTitle": "যা কিছু অন্তর্ভুক্ত:",
+    "features": [
+      "১-২ সপ্তাহ ফ্রি ট্রায়াল পিরিয়ড",
+      "আপনার ব্যবসায় Custom AI agent training",
+      "Facebook ও WhatsApp integration",
+      "Google Sheet order tracking",
+      "সম্পূর্ণ setup এবং training",
+      "চলমান support এবং updates"
+    ],
+    "trustBadge": "১০০+ ব্যবসা আমাদের বিশ্বাস করে",
+    "benefits": [
+      {
+        "icon": "💰",
+        "text": "কোন লুকানো ফি নেই"
+      },
+      {
+        "icon": "🚀",
+        "text": "৪৮ ঘন্টায় setup"
+      },
+      {
+        "icon": "✅",
+        "text": "যেকোনো সময় বাতিল করুন"
+      }
+    ],
+    "additionalInfo": "Automation, custom dashboards বা data scraping প্রয়োজন?",
+    "viewAllPricing": "সব pricing অপশন দেখুন"
   },
   "infrastructure": {
     "title": "ইনফ্রাস্ট্রাকচার গ্যাপ",
@@ -106,22 +412,34 @@
       "audit": {
         "title": "অডিট",
         "desc": "আমরা আপনার কাজের বাধাগুলো চিহ্নিত করি এবং অটোমেশনের বড় সুযোগগুলো খুঁজে বের করি।",
-        "tags": ["Process Mapping", "Pain Point Analysis"]
+        "tags": [
+          "Process Mapping",
+          "Pain Point Analysis"
+        ]
       },
       "architect": {
         "title": "আর্কিটেক্ট",
         "desc": "আমরা আপনার ব্যবসার প্রয়োজন অনুযায়ী লজিক ফ্লো এবং এজেন্ট পারসোনালিটি ডিজাইন করি।",
-        "tags": ["System Design", "Architecture Planning"]
+        "tags": [
+          "System Design",
+          "Architecture Planning"
+        ]
       },
       "integrate": {
         "title": "ইন্টিগ্রেট",
         "desc": "আমরা MERN ফাউন্ডেশন তৈরি করি এবং সিকিউর API-এর মাধ্যমে আপনার সকল সিস্টেমকে সংযুক্ত করি।",
-        "tags": ["API Development", "Integration Testing"]
+        "tags": [
+          "API Development",
+          "Integration Testing"
+        ]
       },
       "scale": {
         "title": "স্কেল",
         "desc": "নিরবিচ্ছিন্ন মনিটরিং এবং অপ্টিমাইজেশন ২৪/৭ পারফরম্যান্স এবং ব্যবসার প্রবৃদ্ধি নিশ্চিত করে।",
-        "tags": ["Performance Monitoring", "Continuous Optimization"]
+        "tags": [
+          "Performance Monitoring",
+          "Continuous Optimization"
+        ]
       }
     }
   },
@@ -195,7 +513,6 @@
       "terms": "টার্মস অফ সার্ভিস"
     }
   },
-
   "services": {
     "aiAgents": {
       "hero": {
@@ -653,9 +970,18 @@
         "title": "টেকনিক্যাল রেজিলিয়েন্স",
         "description": "Anti-Bot এবং স্কেলিং — জটিলতা আমরা সামলাই। আমাদের স্ক্র্যাপারগুলো অ্যাডভান্সড অ্যান্টি-বট মেজারস বাইপাস করে ৯৯% আপটাইম নিশ্চিত করে।",
         "metrics": {
-          "success": { "label": "সাকসেস রেট", "sub": "ANTI_BOT_BYPASS" },
-          "uptime": { "label": "আপটাইম", "sub": "SYSTEM_MONITORING" },
-          "sources": { "label": "ডাটা সোর্স", "sub": "DATA_INTEGRATION" }
+          "success": {
+            "label": "সাকসেস রেট",
+            "sub": "ANTI_BOT_BYPASS"
+          },
+          "uptime": {
+            "label": "আপটাইম",
+            "sub": "SYSTEM_MONITORING"
+          },
+          "sources": {
+            "label": "ডাটা সোর্স",
+            "sub": "DATA_INTEGRATION"
+          }
         },
         "status": "ARCHITECTURE_STATUS: ENTERPRISE_GRADE | SCALING: AUTO | RELIABILITY: MAXIMUM"
       },
@@ -699,19 +1025,31 @@
             "title": "AI সম্ভাব্যতা ও রোডম্যাপ",
             "focus": "ইনভেস্টমেন্ট স্ট্র্যাটেজি",
             "desc": "সব সমস্যার সমাধান AI নয়। আমরা আপনার ওয়ার্কফ্লো অডিট করে দেখি ঠিক কোথায় AI ব্যবহার করলে আপনি সর্বোচ্চ ROI পাবেন।",
-            "stats": ["ROI পূর্বাভাস", "সম্ভাব্যতা যাচাই", "১২ মাসের রোডম্যাপ"]
+            "stats": [
+              "ROI পূর্বাভাস",
+              "সম্ভাব্যতা যাচাই",
+              "১২ মাসের রোডম্যাপ"
+            ]
           },
           "stack": {
             "title": "টেক স্ট্যাক অপ্টিমাইজেশন",
             "focus": "টেকনিক্যাল দক্ষতা",
             "desc": "আপনার বর্তমান টেক স্ট্যাক কি ব্যবসার গতি কমিয়ে দিচ্ছে? আমরা ইনফ্রাস্ট্রাকচার বিশ্লেষণ করে অপ্রয়োজনীয় জটিলতা দূর করি।",
-            "stats": ["ডেবট বিশ্লেষণ", "স্পিড অপ্টিমাইজেশন", "জটিলতা নির্মূল"]
+            "stats": [
+              "ডেবট বিশ্লেষণ",
+              "স্পিড অপ্টিমাইজেশন",
+              "জটিলতা নির্মূল"
+            ]
           },
           "automation": {
             "title": "অটোমেশন আর্কিটেকচার",
             "focus": "সিস্টেম স্কেলেবিলিটি",
             "desc": "আমরা আপনার CRM, ERP এবং AI সিস্টেমের মধ্যে এমন সমন্বয় তৈরি করি যা ডাটা ইন্টিগ্রিটি শতভাগ নিশ্চিত করে।",
-            "stats": ["ইন্টিগ্রিটি সিঙ্ক", "API ম্যাপিং", "স্কেল ভ্যালিডেশন"]
+            "stats": [
+              "ইন্টিগ্রিটি সিঙ্ক",
+              "API ম্যাপিং",
+              "স্কেল ভ্যালিডেশন"
+            ]
           }
         }
       },
@@ -778,7 +1116,11 @@
         "title_end": "নিশ্চিত করুন আমাদের সাথে।",
         "desc": "টেকনিক্যাল রোডম্যাপ নিয়ে দ্বিধা দূর করুন। যারা স্কেলেবল সিস্টেম তৈরি করেন, সেই অভিজ্ঞ আর্কিটেক্টদের পরামর্শ নিন।",
         "btn": "আর্কিটেকচার কল শিডিউল করুন",
-        "tags": ["সিস্টেম_ম্যাপিং", "ডেবট_এলিমিনেশন", "AI_সম্ভাব্যতা"]
+        "tags": [
+          "সিস্টেম_ম্যাপিং",
+          "ডেবট_এলিমিনেশন",
+          "AI_সম্ভাব্যতা"
+        ]
       }
     }
   },
@@ -972,6 +1314,292 @@
         "view_all": "সম্পূর্ণ ক্যাটালগ দেখুন"
       }
     }
+  },
+  "leadModal": {
+    "title": "আপনার এআই এজেন্ট সেটআপ করুন",
+    "subtitle": "আপনার তথ্য দিন এবং ২৪ ঘণ্টার মধ্যে অটোমেশন পান",
+    "name": "পুরো নাম",
+    "namePlaceholder": "আপনার পুরো নাম লিখুন",
+    "email": "ইমেইল অ্যাড্রেস",
+    "emailPlaceholder": "আপনার@ইমেইল.com",
+    "whatsapp": "হোয়াটসঅ্যাপ নম্বর",
+    "whatsappPlaceholder": "+৮৮০ ১XXX-XXXXXX",
+    "whatsappNote": "আমরা ২ ঘণ্টার মধ্যে এখানে যোগাযোগ করব",
+    "businessType": "ব্যবসার ধরন",
+    "businessTypePlaceholder": "আপনার ব্যবসার ধরন নির্বাচন করুন",
+    "businessTypes": {
+      "ecommerce": "ই-কমার্স স্টোর",
+      "fashion": "ফ্যাশন/পোশাক",
+      "restaurant": "রেস্তোরাঁ/খাবার",
+      "service": "সার্ভিস ব্যবসা",
+      "beauty": "বিউটি/সেলুন",
+      "retail": "রিটেইল দোকান",
+      "other": "অন্যান্য"
+    },
+    "platform": "অটোমেশন প্ল্যাটফর্ম",
+    "platformPlaceholder": "কোথায় অটোমেশন দরকার?",
+    "platforms": {
+      "messenger": "ফেসবুক মেসেঞ্জার",
+      "whatsapp": "হোয়াটসঅ্যাপ বিজনেস",
+      "both": "উভয় প্ল্যাটফর্ম"
+    },
+    "requirements": "সংক্ষিপ্ত প্রয়োজনীয়তা (ঐচ্ছিক)",
+    "requirementsPlaceholder": "আপনার প্রয়োজন সম্পর্কে বলুন...",
+    "submit": "এখনই শুরু করুন",
+    "submitting": "প্রসেস হচ্ছে...",
+    "trustBadge": "দ্রুত উত্তর • ৭ দিনের গ্যারান্টি • ফ্রি পরামর্শ",
+    "successTitle": "অনুরোধ পাওয়া গেছে! 🎉",
+    "successMessage": "আমরা ২ ঘণ্টার মধ্যে হোয়াটসঅ্যাপে যোগাযোগ করব আপনার অটোমেশন সেটআপ নিয়ে আলোচনা করতে।",
+    "yourRequest": "আপনার অনুরোধ:",
+    "agent": "এজেন্ট",
+    "chatButton": "হোয়াটসঅ্যাপে চ্যাট করুন",
+    "closeButton": "বন্ধ করুন"
+  },
+  "pricingHero": {
+    "badge": "স্বচ্ছ মূল্য",
+    "title": {
+      "line1": "সহজ মূল্য,",
+      "line2": "শক্তিশালী ফলাফল"
+    },
+    "subtitle": "আপনার ব্যবসার জন্য উপযুক্ত প্ল্যান বাছুন। ফ্রি ট্রায়াল দিয়ে শুরু করুন, বৃদ্ধির সাথে সাথে scale করুন।",
+    "props": [
+      {
+        "icon": "🎁",
+        "value": "ফ্রি ট্রায়াল",
+        "label": "১-২ সপ্তাহ ঝুঁকিমুক্ত"
+      },
+      {
+        "icon": "💰",
+        "value": "লুকানো খরচ নেই",
+        "label": "স্বচ্ছ মূল্য"
+      },
+      {
+        "icon": "🚀",
+        "value": "দ্রুত Setup",
+        "label": "৪৮ ঘন্টায় লাইভ"
+      }
+    ]
+  },
+  "pricing": {
+    "sectionTitle": "আপনার প্ল্যান বাছুন",
+    "sectionSubtitle": "সব আকারের ব্যবসার জন্য নমনীয় মূল্য",
+    "tabs": {
+      "bangladesh": "বাংলাদেশ",
+      "international": "আন্তর্জাতিক",
+      "enterprise": "Enterprise"
+    },
+    "mostPopular": "সবচেয়ে জনপ্রিয়",
+    "setupFee": "একবার Setup খরচ",
+    "monthlyFee": "মাসিক Maintenance",
+    "bangladesh": {
+      "starter": {
+        "name": "Starter",
+        "price": "৳৫,০০০ - ৭,০০০",
+        "setup": "৳৫,০০০ - ৭,০০০",
+        "monthly": "৳৫০০ - ৭০০ / মাস",
+        "description": "AI দিয়ে শুরু করা ছোট e-commerce ব্যবসার জন্য পারফেক্ট",
+        "features": [
+          "১-২ সপ্তাহ ফ্রি ট্রায়াল",
+          "১টি AI Sales Agent",
+          "Facebook বা WhatsApp (একটি platform)",
+          "Google Sheet integration",
+          "Basic product training (২০টি পর্যন্ত পণ্য)",
+          "Email support",
+          "মাসিক usage reports"
+        ],
+        "cta": "ফ্রি ট্রায়াল শুরু করুন"
+      },
+      "pro": {
+        "name": "Professional",
+        "price": "৳১০,০০০ - ১৫,০০০",
+        "setup": "৳১০,০০০ - ১৫,০০০",
+        "monthly": "৳১,০০০ - ১,৫০০ / মাস",
+        "description": "Sales automation scale করতে প্রস্তুত ক্রমবর্ধমান ব্যবসার জন্য",
+        "features": [
+          "Starter এর সবকিছু",
+          "Facebook এবং WhatsApp integration",
+          "Advanced product training (সীমাহীন পণ্য)",
+          "Custom conversation flows",
+          "Priority WhatsApp support",
+          "সাপ্তাহিক optimization calls",
+          "Custom reporting dashboard"
+        ],
+        "cta": "শুরু করুন"
+      },
+      "custom": {
+        "name": "Custom Solution",
+        "price": "Custom Quote",
+        "setup": "Custom",
+        "monthly": "Custom",
+        "description": "আপনার ব্যবসার জন্য সম্পূর্ণ customized automation ecosystem",
+        "features": [
+          "Professional এর সবকিছু",
+          "একাধিক AI agents",
+          "Custom MERN dashboard",
+          "Advanced workflow automation",
+          "Data scraping ও monitoring",
+          "Technical consulting",
+          "Dedicated account manager"
+        ],
+        "cta": "Consultation বুক করুন"
+      }
+    },
+    "international": {
+      "starter": {
+        "name": "Starter Agent",
+        "price": "$500 - 700",
+        "period": "setup",
+        "description": "ছোট ব্যবসার জন্য entry-level AI automation",
+        "features": [
+          "১টি Custom AI Agent",
+          "Basic knowledge base",
+          "Single platform integration",
+          "৭ দিনে deployment",
+          "Email support",
+          "মাসিক reporting"
+        ],
+        "cta": "শুরু করুন"
+      },
+      "pro": {
+        "name": "Professional",
+        "price": "$1,500 - 2,500",
+        "period": "setup",
+        "description": "ক্রমবর্ধমান ব্যবসার জন্য সম্পূর্ণ automation solution",
+        "features": [
+          "৩টি Interconnected AI Agents",
+          "Advanced knowledge base",
+          "Multi-platform integration",
+          "CRM ও database connections",
+          "১৪ দিনে deployment",
+          "Priority support",
+          "Custom analytics dashboard"
+        ],
+        "cta": "এখনই শুরু করুন"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Custom",
+        "period": "quote",
+        "description": "Custom infrastructure সহ সম্পূর্ণ AI workforce",
+        "features": [
+          "সীমাহীন AI agents",
+          "Custom MERN stack solutions",
+          "Advanced workflow automation",
+          "২৪/৭ system monitoring",
+          "Dedicated success manager",
+          "White-label options",
+          "SLA guarantees"
+        ],
+        "cta": "Sales এর সাথে যোগাযোগ করুন"
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise Solutions",
+      "description": "সম্পূর্ণ custom solution প্রয়োজন? আমরা আপনার অনন্য ব্যবসার প্রয়োজন অনুযায়ী একটি সম্পূর্ণ AI automation ecosystem তৈরি করব।",
+      "features": [
+        "সম্পূর্ণ AI workforce deployment",
+        "Custom MERN stack applications",
+        "Advanced data intelligence systems",
+        "Technical strategy consulting",
+        "Dedicated development team",
+        "২৪/৭ priority support"
+      ],
+      "cta": "Enterprise Consultation Schedule করুন"
+    }
+  },
+  "pricingServices": {
+    "title": "অতিরিক্ত Services",
+    "subtitle": "বিশেষায়িত solutions দিয়ে আপনার automation বাড়ান",
+    "startingAt": "শুরু",
+    "cta": "Quote নিন",
+    "note": "সব services AI Agent packages এর সাথে যুক্ত করা যায়।",
+    "contactUs": "Custom pricing এর জন্য আমাদের সাথে যোগাযোগ করুন",
+    "automation": {
+      "title": "Workflow Automation",
+      "price": "৳১৫,০০০+",
+      "description": "আপনার business apps সংযুক্ত করুন এবং manual কাজ বাদ দিন",
+      "features": [
+        "n8n workflow design",
+        "Multi-app integration",
+        "Error handling",
+        "Performance monitoring"
+      ]
+    },
+    "scraping": {
+      "title": "Data Scraping",
+      "price": "৳২,০০০/মাস",
+      "description": "Automated data collection এবং monitoring",
+      "features": [
+        "Real-time data extraction",
+        "Competitor tracking",
+        "Automated alerts",
+        "Historical storage"
+      ]
+    },
+    "mern": {
+      "title": "MERN Development",
+      "price": "৳২৫,০০০+",
+      "description": "Custom web applications এবং dashboards",
+      "features": [
+        "MongoDB database",
+        "Express API",
+        "React frontend",
+        "Node.js backend"
+      ]
+    },
+    "consulting": {
+      "title": "Tech Consulting",
+      "price": "৳৩,০০০/ঘন্টা",
+      "description": "আপনার tech সিদ্ধান্তের জন্য expert guidance",
+      "features": [
+        "Architecture design",
+        "Technology selection",
+        "Scalability planning",
+        "Performance optimization"
+      ]
+    }
+  },
+  "pricingFaq": {
+    "badge": "প্রশ্ন আছে?",
+    "title": "সচরাচর জিজ্ঞাসিত প্রশ্ন",
+    "subtitle": "আমাদের pricing সম্পর্কে যা কিছু জানা দরকার",
+    "questions": [
+      {
+        "question": "ফ্রি ট্রায়াল কিভাবে কাজ করে?",
+        "answer": "আমরা আপনার AI agent সম্পূর্ণ বিনামূল্যে ১-২ সপ্তাহের জন্য setup করে দেই। আপনি আসল কাস্টমারদের সাথে এটি টেস্ট করুন। ফলাফলে খুশি হলে setup ফি দিয়ে মাসিক maintenance চালিয়ে যান। না হলে, কোন চার্জ নেই।"
+      },
+      {
+        "question": "মাসিক maintenance ফি তে কি অন্তর্ভুক্ত?",
+        "answer": "মাসিক ফি তে AI API ব্যবহারের খরচ, hosting, নিয়মিত updates, bug fixes এবং চলমান support অন্তর্ভুক্ত। এটি নিশ্চিত করে যে আপনার AI agent ২৪/৭ সুচারুভাবে চলছে।"
+      },
+      {
+        "question": "আমি কি মাসিক subscription বাতিল করতে পারি?",
+        "answer": "হ্যাঁ, অবশ্যই। কোন দীর্ঘমেয়াদী চুক্তি নেই। আপনি ৩০ দিনের নোটিশ দিয়ে যেকোনো সময় বাতিল করতে পারেন। একবারের setup ফি ফেরতযোগ্য নয়, কিন্তু মাসিক ফি আপনার বাতিলের পিরিয়ডের পরে বন্ধ হয়।"
+      },
+      {
+        "question": "আপনারা কি payment plans দেন?",
+        "answer": "হ্যাঁ, Professional এবং Custom packages এর জন্য আমরা নমনীয় payment plans অফার করি। আপনি setup ফি ২-৩ কিস্তিতে ভাগ করতে পারেন। আপনার নির্দিষ্ট প্রয়োজন নিয়ে আলোচনা করতে আমাদের সাথে যোগাযোগ করুন।"
+      },
+      {
+        "question": "পরে upgrade করতে চাইলে কি হবে?",
+        "answer": "আপনি যেকোনো সময় upgrade করতে পারেন! আমরা আপনার প্রাথমিক setup ফি নতুন package এ credit করব। উদাহরণস্বরূপ, Starter থেকে Professional এ যেতে শুধু পার্থক্য পে করতে হবে।"
+      },
+      {
+        "question": "কোন লুকানো খরচ আছে কি?",
+        "answer": "কোন লুকানো খরচ নেই। Setup ফি এবং মাসিক maintenance ই আপনি পে করবেন। যদি আপনার ব্যবহার উল্লেখযোগ্যভাবে বৃদ্ধি পায় (১০০০+ conversations/দিন), আমরা স্বচ্ছভাবে scaling অপশন নিয়ে আলোচনা করব।"
+      }
+    ]
+  },
+  "pricingCta": {
+    "title": "আপনার ফ্রি ট্রায়াল শুরু করতে প্রস্তুত?",
+    "subtitle": "চলুন আপনার AI sales agent তৈরি করি। কোন ক্রেডিট কার্ড লাগবে না। পে করার আগে ফলাফল দেখুন।",
+    "primaryCta": "এখনই ফ্রি ট্রায়াল শুরু করুন",
+    "secondaryCta": "WhatsApp এ আমাদের সাথে কথা বলুন",
+    "trustBadges": [
+      "১-২ সপ্তাহ ফ্রি ট্রায়াল",
+      "ক্রেডিট কার্ড লাগবে না",
+      "যেকোনো সময় বাতিল করুন"
+    ]
   },
   "common": {
     "loading": "লোড হচ্ছে...",

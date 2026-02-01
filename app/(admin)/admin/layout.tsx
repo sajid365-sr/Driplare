@@ -10,6 +10,7 @@ import {
   Settings,
   FormInput,
   BellDot,
+  MessageCircle,
 } from "lucide-react";
 import { UserButton, useUser } from "@clerk/nextjs";
 
@@ -58,12 +59,17 @@ export default function AdminLayout({
 
       <div className="flex flex-1">
         {/* --- Fixed Sidebar --- */}
-        <aside className="hidden md:block w-64 border-r bg-background/50 h-[calc(100vh-64px)] sticky top-16 overflow-y-auto">
+        <aside className="hidden md:block w-64 border-r bg-background/50 h-[calc(100vh-64px)] sticky top-24 overflow-y-auto">
           <nav className="flex flex-col gap-2 p-4">
             <NavItem
               href="/admin"
               icon={<LayoutDashboard size={18} />}
               label="Overview"
+            />
+            <NavItem
+              href="/admin/leads"
+              icon={<MessageCircle size={18} />}
+              label="Leads"
             />
 
             <div className="text-xs font-semibold text-muted-foreground mt-4 mb-2 px-4">

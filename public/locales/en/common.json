@@ -19,17 +19,322 @@
     "technicalConsulting": "Technical Consulting"
   },
   "hero": {
-    "badge": "ENGINEERING AUTONOMY",
-    "titlePart1": "BUILDING",
-    "titlePart2": "INVISIBLE",
-    "titlePart3": "WORKFORCES.",
-    "description": "We don't just build tools. We architect autonomous systems that handle your operations, sales, and data while you focus on the next big move.",
-    "btnViewSystems": "View Systems",
-    "btnBookConsult": "Book a Consult",
-    "efficiency": "Efficiency",
-    "brandingBg": "SYSTEMS"
+    "badge": "AI Automation for Your Business",
+    "titlePart1": "AI Agents That",
+    "titlePart2": "Work While",
+    "titlePart3": "You Sleep",
+    "description": "Stop losing sales to unanswered messages. Our AI agents handle customer inquiries, collect orders, and grow your business 24/7.",
+    "btnViewSystems": "See AI Agents",
+    "btnBookConsult": "Get Free Demo",
+    "efficiency": "Time Saved",
+    "fastSetup": "15-min setup",
+    "trustedBy": "127+ businesses"
   },
-
+  "problem": {
+    "badge": "The Hidden Cost",
+    "title": "Are You Losing Sales?",
+    "subtitle": "Most businesses lose 60% of potential customers because of these problems:",
+    "points": {
+      "slow": {
+        "title": "Slow Replies",
+        "description": "Customers leave when you don't reply within minutes. They find another seller who responds faster."
+      },
+      "sleep": {
+        "title": "You Can't Work 24/7",
+        "description": "Missing sales while you sleep or busy with other work. Customers message at night and get no response."
+      },
+      "staff": {
+        "title": "Staff is Expensive",
+        "description": "Hiring people to reply to messages costs thousands monthly. Plus, they need training and make mistakes."
+      }
+    },
+    "stats": {
+      "lostCustomers": "customers lost",
+      "missedTime": "missed daily",
+      "monthlyCost": "per month"
+    },
+    "cta": "There's a Better Way"
+  },
+  "solution": {
+    "badge": "AI-Powered Solution",
+    "title": "Meet Your AI Sales Agent",
+    "subtitle": "Works 24/7. Never sleeps. Never makes mistakes.",
+    "imageAlt": "AI chatbot handling customer conversations",
+    "watchDemo": "Watch Demo",
+    "liveBadge": "Live Demo",
+    "features": {
+      "replies": {
+        "title": "Instant Replies",
+        "description": "Answers customer questions in seconds, any time of day"
+      },
+      "orders": {
+        "title": "Collects Orders",
+        "description": "Gets customer name, address, phone number automatically"
+      },
+      "organized": {
+        "title": "Stays Organized",
+        "description": "All orders saved neatly in your Google Sheet"
+      },
+      "learns": {
+        "title": "Knows Your Business",
+        "description": "Trained on your products, prices, and delivery areas"
+      }
+    },
+    "comparison": {
+      "title": "Before vs After Driplare",
+      "before": {
+        "title": "Without AI",
+        "points": [
+          "Customers wait hours for replies",
+          "You manually collect order details",
+          "Lost sales when you're busy or sleeping",
+          "Unorganized messages everywhere"
+        ]
+      },
+      "after": {
+        "title": "With AI Agent",
+        "points": [
+          "Instant replies, 24/7",
+          "Orders collected automatically",
+          "Never miss a sale again",
+          "Everything organized in one place"
+        ]
+      }
+    },
+    "cta": "Get Your AI Agent"
+  },
+  "howItWorks": {
+    "badge": "Simple Process",
+    "title": "3 Easy Steps",
+    "subtitle": "Get your AI agent up and running in less than 48 hours",
+    "steps": {
+      "tell": {
+        "title": "Tell Us About Your Business",
+        "description": "Share your products, prices, and how you work. No tech skills needed.",
+        "details": [
+          "Your product list and prices",
+          "Delivery areas you cover",
+          "Common customer questions",
+          "Your business hours"
+        ]
+      },
+      "setup": {
+        "title": "We Build Your AI Agent",
+        "description": "Our team creates and trains your AI to sound just like you.",
+        "details": [
+          "Custom AI trained on your business",
+          "Connected to your Facebook/WhatsApp",
+          "Linked to your Google Sheet",
+          "Tested and ready to go"
+        ]
+      },
+      "launch": {
+        "title": "Start Selling 24/7",
+        "description": "Your AI agent goes live and starts handling customers instantly.",
+        "details": [
+          "Replies to messages automatically",
+          "Collects orders while you sleep",
+          "Saves everything to your sheet",
+          "You stay in full control"
+        ]
+      }
+    },
+    "promise": {
+      "title": "That's It. Really.",
+      "subtitle": "No monthly fees. No complicated setup. Just one payment and you're done.",
+      "features": [
+        "Setup in 48 hours",
+        "One-time payment",
+        "No tech skills needed"
+      ]
+    },
+    "cta": "Get Started Now",
+    "trustBadge": "Join 100+ businesses already using AI to sell more"
+  },
+  "whatYouGet": {
+    "badge": "Complete Package",
+    "title": "What You Get",
+    "subtitle": "Everything you need to start selling with AI. No hidden costs.",
+    "main": {
+      "agent": {
+        "title": "Your AI Sales Agent",
+        "description": "A smart assistant that handles customers like a real person",
+        "items": [
+          "Custom trained on your business",
+          "Answers questions instantly",
+          "Collects complete order details",
+          "Works on Facebook & WhatsApp"
+        ]
+      },
+      "sheet": {
+        "title": "Google Sheet Integration",
+        "description": "All your orders organized in one place automatically",
+        "items": [
+          "Real-time order tracking",
+          "Customer details saved instantly",
+          "Easy to view and manage",
+          "Access from any device"
+        ]
+      },
+      "support": {
+        "title": "Full Setup & Support",
+        "description": "We handle everything from start to finish",
+        "items": [
+          "Complete setup by our team",
+          "Training on how to use it",
+          "Free updates and fixes",
+          "WhatsApp support anytime"
+        ]
+      }
+    },
+    "bonusTitle": "Plus, You Also Get",
+    "bonusSubtitle": "Extra features included at no extra cost",
+    "bonus": {
+      "messaging": {
+        "title": "Multi-Platform Ready",
+        "description": "Works on Facebook Messenger and WhatsApp Business"
+      },
+      "instant": {
+        "title": "Instant Replies",
+        "description": "Customers get answers in seconds, not hours"
+      },
+      "available": {
+        "title": "24/7 Availability",
+        "description": "Your AI never sleeps, never takes breaks"
+      },
+      "tracking": {
+        "title": "Order Tracking",
+        "description": "See all orders in real-time on your sheet"
+      },
+      "secure": {
+        "title": "Secure & Private",
+        "description": "Your business data is safe and protected"
+      },
+      "mobile": {
+        "title": "Mobile Friendly",
+        "description": "Manage everything from your phone"
+      }
+    },
+    "value": {
+      "badge": "Real Value",
+      "title": "This Would Cost 15,000+ Taka If You Hired Someone",
+      "subtitle": "But you get everything for a one-time setup fee",
+      "highlights": [
+        {
+          "value": "48hr",
+          "label": "Setup Time"
+        },
+        {
+          "value": "24/7",
+          "label": "Always Working"
+        },
+        {
+          "value": "0",
+          "label": "Monthly Fees"
+        }
+      ]
+    },
+    "cta": "Get Your AI Agent Now",
+    "ctaSubtext": "One-time payment • No monthly fees • Setup in 48 hours"
+  },
+  "moreThanAI": {
+    "badge": "Complete Solutions",
+    "title": "We Build More Than AI Agents",
+    "subtitle": "From simple automation to complete digital transformation—we're your technology partner for growth",
+    "imageAlt": "Driplare complete technology ecosystem",
+    "pillars": {
+      "ai": {
+        "title": "AI Agents",
+        "description": "Smart sales automation that works 24/7"
+      },
+      "automation": {
+        "title": "Workflow Automation",
+        "description": "Connect your business apps seamlessly"
+      },
+      "dashboard": {
+        "title": "Custom Dashboards",
+        "description": "Full control centers for your business"
+      },
+      "data": {
+        "title": "Data Intelligence",
+        "description": "Automated insights and web scraping"
+      },
+      "consulting": {
+        "title": "Tech Consulting",
+        "description": "Strategy and architecture planning"
+      }
+    },
+    "learnMore": "Learn More",
+    "cta": {
+      "title": "Ready to Build Your Complete Solution?",
+      "subtitle": "Let's discuss how Driplare can transform your business with the right technology",
+      "primary": "Explore All Solutions",
+      "secondary": "Talk to Our Team"
+    }
+  },
+  "success": {
+    "badge": "Success Stories",
+    "title": "Real Results from Real Businesses",
+    "subtitle": "See how businesses like yours are winning with AI automation",
+    "videoTitle": "Customer Success Story Video",
+    "stats": [
+      {
+        "value": "100+",
+        "label": "Happy Clients"
+      },
+      {
+        "value": "50K+",
+        "label": "Orders Automated"
+      },
+      {
+        "value": "24/7",
+        "label": "AI Working"
+      }
+    ]
+  },
+  "homepricing": {
+    "badge": "Simple Pricing",
+    "title": "Transparent, No-Surprise Pricing",
+    "subtitle": "Start with a free trial. Pay only when you see results.",
+    "trialBanner": "🎉 Free 1-2 Week Trial • No Credit Card Required",
+    "popular": "Most Popular",
+    "packageName": "AI Sales Agent Starter",
+    "packageDescription": "Perfect for e-commerce businesses ready to automate customer conversations and order collection",
+    "setupPrice": "৳5,000 - 10,000",
+    "oneTime": "One-time setup",
+    "setupNote": "Depends on complexity and business requirements",
+    "monthlyPrice": "৳500 - 1,000",
+    "perMonth": "month",
+    "monthlyNote": "Covers AI usage, hosting, and maintenance",
+    "ctaPrimary": "Start Free Trial",
+    "ctaSecondary": "View All Pricing",
+    "includedTitle": "Everything Included:",
+    "features": [
+      "Free 1-2 week trial period",
+      "Custom AI agent trained on your business",
+      "Facebook & WhatsApp integration",
+      "Google Sheet order tracking",
+      "Complete setup and training",
+      "Ongoing support and updates"
+    ],
+    "trustBadge": "Trusted by 100+ businesses",
+    "benefits": [
+      {
+        "icon": "💰",
+        "text": "No hidden fees"
+      },
+      {
+        "icon": "🚀",
+        "text": "Setup in 48 hours"
+      },
+      {
+        "icon": "✅",
+        "text": "Cancel anytime"
+      }
+    ],
+    "additionalInfo": "Need automation, custom dashboards, or data scraping?",
+    "viewAllPricing": "View all pricing options"
+  },
   "infrastructure": {
     "title": "The Infrastructure Gap",
     "description": "The hidden tax on your business isn't your software—it's the manual effort required to run it. We bridge the gap between fragmented apps and a unified, intelligent ecosystem.",
@@ -110,22 +415,34 @@
       "audit": {
         "title": "Audit",
         "desc": "We map your manual bottlenecks and identify high-impact automation opportunities.",
-        "tags": ["Process Mapping", "Pain Point Analysis"]
+        "tags": [
+          "Process Mapping",
+          "Pain Point Analysis"
+        ]
       },
       "architect": {
         "title": "Architect",
         "desc": "We design the logic flow and agent personality that matches your business needs.",
-        "tags": ["System Design", "Architecture Planning"]
+        "tags": [
+          "System Design",
+          "Architecture Planning"
+        ]
       },
       "integrate": {
         "title": "Integrate",
         "desc": "We build the MERN foundation and connect all your systems through secure APIs.",
-        "tags": ["API Development", "Integration Testing"]
+        "tags": [
+          "API Development",
+          "Integration Testing"
+        ]
       },
       "scale": {
         "title": "Scale",
         "desc": "Continuous monitoring and optimization ensures 24/7 performance and growth.",
-        "tags": ["Performance Monitoring", "Continuous Optimization"]
+        "tags": [
+          "Performance Monitoring",
+          "Continuous Optimization"
+        ]
       }
     }
   },
@@ -561,12 +878,18 @@
         "tagline": "Architecture_Lifecycle",
         "header": "The Data Pipeline",
         "steps": {
-          "targeting": { "title": "Targeting", "detail": "Anti-bot analysis" },
+          "targeting": {
+            "title": "Targeting",
+            "detail": "Anti-bot analysis"
+          },
           "extraction": {
             "title": "Extraction",
             "detail": "Residential IP rotation"
           },
-          "refining": { "title": "Refining", "detail": "Data normalization" },
+          "refining": {
+            "title": "Refining",
+            "detail": "Data normalization"
+          },
           "monitoring": {
             "title": "Monitoring",
             "detail": "Real-time API push"
@@ -666,9 +989,18 @@
         "title": "Technical Resilience",
         "description": "Anti-Bot & Scaling — We handle the complexity. Our scrapers are designed to bypass the most advanced anti-bot measures while maintaining 99% uptime.",
         "metrics": {
-          "success": { "label": "Success Rate", "sub": "ANTI_BOT_BYPASS" },
-          "uptime": { "label": "Uptime", "sub": "SYSTEM_MONITORING" },
-          "sources": { "label": "Sources", "sub": "DATA_INTEGRATION" }
+          "success": {
+            "label": "Success Rate",
+            "sub": "ANTI_BOT_BYPASS"
+          },
+          "uptime": {
+            "label": "Uptime",
+            "sub": "SYSTEM_MONITORING"
+          },
+          "sources": {
+            "label": "Sources",
+            "sub": "DATA_INTEGRATION"
+          }
         },
         "status": "ARCHITECTURE_STATUS: ENTERPRISE_GRADE | SCALING: AUTO | RELIABILITY: MAXIMUM"
       },
@@ -712,19 +1044,31 @@
             "title": "AI Feasibility & Roadmap",
             "focus": "Investment Strategy",
             "desc": "Not every problem needs an AI agent. We audit your workflows to identify where AI will provide the highest ROI.",
-            "stats": ["ROI Forecast", "Feasibility Score", "12mo Roadmap"]
+            "stats": [
+              "ROI Forecast",
+              "Feasibility Score",
+              "12mo Roadmap"
+            ]
           },
           "stack": {
             "title": "Tech Stack Optimization",
             "focus": "Technical Efficiency",
             "desc": "Is your current stack holding you back? We analyze your infrastructure to eliminate redundancies and optimize performance.",
-            "stats": ["Debt Analysis", "Speed Optimization", "Redundancy Kill"]
+            "stats": [
+              "Debt Analysis",
+              "Speed Optimization",
+              "Redundancy Kill"
+            ]
           },
           "automation": {
             "title": "Automation Architecture",
             "focus": "System Scalability",
             "desc": "We architect how your CRM, ERP, and AI systems communicate, ensuring 100% data integrity as you scale.",
-            "stats": ["Integrity Sync", "API Mapping", "Scale Validation"]
+            "stats": [
+              "Integrity Sync",
+              "API Mapping",
+              "Scale Validation"
+            ]
           }
         }
       },
@@ -791,11 +1135,14 @@
         "title_end": "of Growth.",
         "desc": "Stop guessing your technical roadmap. Get a second opinion from architects who build for scale.",
         "btn": "Schedule Architecture Call",
-        "tags": ["SYSTEMS_MAPPING", "DEBT_ELIMINATION", "AI_FEASIBILITY"]
+        "tags": [
+          "SYSTEMS_MAPPING",
+          "DEBT_ELIMINATION",
+          "AI_FEASIBILITY"
+        ]
       }
     }
   },
-
   "case_studies": {
     "hero": {
       "badge": "[ Impact_Verification_Protocol ]",
@@ -986,6 +1333,292 @@
         "view_all": "View Full Catalog"
       }
     }
+  },
+  "leadModal": {
+    "title": "Get Your AI Agent Setup",
+    "subtitle": "Fill in your details and we'll get you automated in 24 hours",
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "your@email.com",
+    "whatsapp": "WhatsApp Number",
+    "whatsappPlaceholder": "+880 1XXX-XXXXXX",
+    "whatsappNote": "We'll contact you here within 2 hours",
+    "businessType": "Business Type",
+    "businessTypePlaceholder": "Select your business type",
+    "businessTypes": {
+      "ecommerce": "E-commerce Store",
+      "fashion": "Fashion/Clothing",
+      "restaurant": "Restaurant/Food",
+      "service": "Service Business",
+      "beauty": "Beauty/Salon",
+      "retail": "Retail Shop",
+      "other": "Other"
+    },
+    "platform": "Automation Platform",
+    "platformPlaceholder": "Where do you need automation?",
+    "platforms": {
+      "messenger": "Facebook Messenger",
+      "whatsapp": "WhatsApp Business",
+      "both": "Both Platforms"
+    },
+    "requirements": "Brief Requirements (Optional)",
+    "requirementsPlaceholder": "Tell us about your needs...",
+    "submit": "Get Started Now",
+    "submitting": "Processing...",
+    "trustBadge": "Fast response • 7-day guarantee • Free consultation",
+    "successTitle": "Request Received! 🎉",
+    "successMessage": "We'll contact you on WhatsApp within 2 hours to discuss your automation setup.",
+    "yourRequest": "Your Request:",
+    "agent": "Agent",
+    "chatButton": "Chat on WhatsApp Now",
+    "closeButton": "Close"
+  },
+  "pricingHero": {
+    "badge": "Transparent Pricing",
+    "title": {
+      "line1": "Simple Pricing,",
+      "line2": "Powerful Results"
+    },
+    "subtitle": "Choose the plan that fits your business. Start with a free trial, scale as you grow.",
+    "props": [
+      {
+        "icon": "🎁",
+        "value": "Free Trial",
+        "label": "1-2 weeks risk-free"
+      },
+      {
+        "icon": "💰",
+        "value": "No Hidden",
+        "label": "Transparent costs"
+      },
+      {
+        "icon": "🚀",
+        "value": "Quick Setup",
+        "label": "Live in 48 hours"
+      }
+    ]
+  },
+  "pricing": {
+    "sectionTitle": "Choose Your Plan",
+    "sectionSubtitle": "Flexible pricing for businesses of all sizes",
+    "tabs": {
+      "bangladesh": "Bangladesh",
+      "international": "International",
+      "enterprise": "Enterprise"
+    },
+    "mostPopular": "Most Popular",
+    "setupFee": "One-time Setup",
+    "monthlyFee": "Monthly Maintenance",
+    "bangladesh": {
+      "starter": {
+        "name": "Starter",
+        "price": "৳5,000 - 7,000",
+        "setup": "৳5,000 - 7,000",
+        "monthly": "৳500 - 700 / month",
+        "description": "Perfect for small e-commerce businesses starting with AI",
+        "features": [
+          "Free 1-2 week trial",
+          "1 AI Sales Agent",
+          "Facebook OR WhatsApp (single platform)",
+          "Google Sheet integration",
+          "Basic product training (up to 20 products)",
+          "Email support",
+          "Monthly usage reports"
+        ],
+        "cta": "Start Free Trial"
+      },
+      "pro": {
+        "name": "Professional",
+        "price": "৳10,000 - 15,000",
+        "setup": "৳10,000 - 15,000",
+        "monthly": "৳1,000 - 1,500 / month",
+        "description": "For growing businesses ready to scale sales automation",
+        "features": [
+          "Everything in Starter",
+          "Facebook AND WhatsApp integration",
+          "Advanced product training (unlimited products)",
+          "Custom conversation flows",
+          "Priority WhatsApp support",
+          "Weekly optimization calls",
+          "Custom reporting dashboard"
+        ],
+        "cta": "Get Started"
+      },
+      "custom": {
+        "name": "Custom Solution",
+        "price": "Custom Quote",
+        "setup": "Custom",
+        "monthly": "Custom",
+        "description": "Fully customized automation ecosystem for your business",
+        "features": [
+          "Everything in Professional",
+          "Multiple AI agents",
+          "Custom MERN dashboard",
+          "Advanced workflow automation",
+          "Data scraping & monitoring",
+          "Technical consulting",
+          "Dedicated account manager"
+        ],
+        "cta": "Book Consultation"
+      }
+    },
+    "international": {
+      "starter": {
+        "name": "Starter Agent",
+        "price": "$500 - 700",
+        "period": "setup",
+        "description": "Entry-level AI automation for small businesses",
+        "features": [
+          "1 Custom AI Agent",
+          "Basic knowledge base",
+          "Single platform integration",
+          "7-day deployment",
+          "Email support",
+          "Monthly reporting"
+        ],
+        "cta": "Get Started"
+      },
+      "pro": {
+        "name": "Professional",
+        "price": "$1,500 - 2,500",
+        "period": "setup",
+        "description": "Complete automation solution for growing businesses",
+        "features": [
+          "3 Interconnected AI Agents",
+          "Advanced knowledge base",
+          "Multi-platform integration",
+          "CRM & database connections",
+          "14-day deployment",
+          "Priority support",
+          "Custom analytics dashboard"
+        ],
+        "cta": "Start Now"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Custom",
+        "period": "quote",
+        "description": "Full AI workforce with custom infrastructure",
+        "features": [
+          "Unlimited AI agents",
+          "Custom MERN stack solutions",
+          "Advanced workflow automation",
+          "24/7 system monitoring",
+          "Dedicated success manager",
+          "White-label options",
+          "SLA guarantees"
+        ],
+        "cta": "Contact Sales"
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise Solutions",
+      "description": "Need a fully custom solution? We'll build a complete AI automation ecosystem tailored to your unique business requirements.",
+      "features": [
+        "Full AI workforce deployment",
+        "Custom MERN stack applications",
+        "Advanced data intelligence systems",
+        "Technical strategy consulting",
+        "Dedicated development team",
+        "24/7 priority support"
+      ],
+      "cta": "Schedule Enterprise Consultation"
+    }
+  },
+  "pricingServices": {
+    "title": "Additional Services",
+    "subtitle": "Extend your automation with specialized solutions",
+    "startingAt": "Starting at",
+    "cta": "Get Quote",
+    "note": "All services can be combined with AI Agent packages.",
+    "contactUs": "Contact us for custom pricing",
+    "automation": {
+      "title": "Workflow Automation",
+      "price": "৳15,000+",
+      "description": "Connect your business apps and eliminate manual work",
+      "features": [
+        "n8n workflow design",
+        "Multi-app integration",
+        "Error handling",
+        "Performance monitoring"
+      ]
+    },
+    "scraping": {
+      "title": "Data Scraping",
+      "price": "৳2,000/mo",
+      "description": "Automated data collection and monitoring",
+      "features": [
+        "Real-time data extraction",
+        "Competitor tracking",
+        "Automated alerts",
+        "Historical storage"
+      ]
+    },
+    "mern": {
+      "title": "MERN Development",
+      "price": "৳25,000+",
+      "description": "Custom web applications and dashboards",
+      "features": [
+        "MongoDB database",
+        "Express API",
+        "React frontend",
+        "Node.js backend"
+      ]
+    },
+    "consulting": {
+      "title": "Tech Consulting",
+      "price": "৳3,000/hr",
+      "description": "Expert guidance for your tech decisions",
+      "features": [
+        "Architecture design",
+        "Technology selection",
+        "Scalability planning",
+        "Performance optimization"
+      ]
+    }
+  },
+  "pricingFaq": {
+    "badge": "Got Questions?",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about our pricing",
+    "questions": [
+      {
+        "question": "How does the free trial work?",
+        "answer": "We set up your AI agent completely free for 1-2 weeks. You test it with real customers. If you're happy with the results, you pay the setup fee and continue with monthly maintenance. If not, no charges at all."
+      },
+      {
+        "question": "What's included in the monthly maintenance fee?",
+        "answer": "Monthly fee covers AI API usage costs, hosting, regular updates, bug fixes, and ongoing support. It ensures your AI agent keeps running smoothly 24/7."
+      },
+      {
+        "question": "Can I cancel the monthly subscription?",
+        "answer": "Yes, absolutely. There's no long-term contract. You can cancel anytime with 30 days notice. The one-time setup fee is non-refundable, but monthly fees stop after your cancellation period."
+      },
+      {
+        "question": "Do you offer payment plans?",
+        "answer": "Yes, for Professional and Custom packages, we offer flexible payment plans. You can split the setup fee into 2-3 installments. Contact us to discuss your specific needs."
+      },
+      {
+        "question": "What if I need to upgrade later?",
+        "answer": "You can upgrade anytime! We'll credit your initial setup fee towards the new package. For example, moving from Starter to Professional only requires paying the difference."
+      },
+      {
+        "question": "Are there any hidden costs?",
+        "answer": "No hidden costs. The setup fee and monthly maintenance are all you pay. If your usage grows significantly (1000+ conversations/day), we'll discuss scaling options transparently."
+      }
+    ]
+  },
+  "pricingCta": {
+    "title": "Ready to Start Your Free Trial?",
+    "subtitle": "Let's build your AI sales agent. No credit card required. See results before you pay.",
+    "primaryCta": "Start Free Trial Now",
+    "secondaryCta": "Talk to Us on WhatsApp",
+    "trustBadges": [
+      "Free 1-2 week trial",
+      "No credit card needed",
+      "Cancel anytime"
+    ]
   },
   "common": {
     "loading": "Loading...",
