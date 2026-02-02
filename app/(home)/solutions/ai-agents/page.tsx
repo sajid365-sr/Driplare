@@ -6,6 +6,8 @@ import { TechnicalEdgeSection } from "@/components/services/custom-AI-Agent/Tech
 import { RoadmapSection } from "@/components/services/custom-AI-Agent/RoadmapSection";
 import { FAQSection } from "@/components/services/custom-AI-Agent/FAQSection";
 import { FinalCTASection } from "@/components/services/custom-AI-Agent/FinalCTASection";
+import { AIAgentHero } from "@/components/services/custom-AI-Agent/AIAgentHero";
+import { WhatIsAIAgent } from "@/components/services/custom-AI-Agent/WhatIsAIAgent";
 
 export const metadata: Metadata = {
   title: "Custom AI Agents Development - Intelligent Automation Solutions",
@@ -17,13 +19,17 @@ export default function AIAgents() {
   return (
     // Updated: Added dark:bg-[#0A0A0A] for main background
     <div className="min-h-screen bg-white dark:bg-[#0A0A0A] transition-colors duration-300">
-      <HeroSection />
+
+      <AIAgentHero />
+      <WhatIsAIAgent />
+
+      {/* <HeroSection />
       <ProblemSolutionSection />
       <CoreCapabilitiesSection />
       <TechnicalEdgeSection />
       <RoadmapSection />
       <FAQSection />
-      <FinalCTASection />
+      <FinalCTASection /> */}
     </div>
   );
 }

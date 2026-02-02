@@ -1,141 +1,221 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, Sparkles, Clock, Shield, Zap } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
-export function FinalCTASection() {
+export function FinalCTA() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 bg-white dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-white relative overflow-hidden transition-colors duration-300">
-      {/* Background pattern - Adapts to light/dark */}
-      <div
-        className="absolute inset-0 opacity-5 dark:opacity-10"
-        style={{
-          backgroundImage: `
-            linear-gradient(currentColor 1px, transparent 1px),
-            linear-gradient(90deg, currentColor 1px, transparent 1px)
-          `,
-          backgroundSize: "60px 60px",
-        }}
-      />
-
-      {/* Circuit animation overlay */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg className="w-full h-full opacity-20 dark:opacity-10">
-          <defs>
-            <linearGradient
-              id="pulseGradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
-              <stop offset="0%" stopColor="transparent" />
-              <stop offset="50%" stopColor="#FF6B00" />
-              <stop offset="100%" stopColor="transparent" />
-            </linearGradient>
-          </defs>
-          <motion.line
-            x1="0%"
-            y1="50%"
-            x2="100%"
-            y2="50%"
-            stroke="url(#pulseGradient)"
-            strokeWidth="2"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          />
-        </svg>
+    <section className="py-20 bg-gradient-to-br from-primary via-primary/95 to-secondary relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      {/* Animated Circles */}
+      <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="text-center max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          {/* Headline - Gradient text */}
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-[#0A0A0A] via-[#FF6B00] to-[#0A0A0A] dark:from-white dark:to-[#FF6B00] bg-clip-text text-transparent">
-            {t("cta.title")}
-          </h2>
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.1, 0.2, 0.1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] rounded-full bg-white"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.1, 0.15, 0.1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+          className="absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px] rounded-full bg-white"
+        />
+      </div>
 
-          {/* Subtext */}
-          <p className="text-xl text-[#0A0A0A]/70 dark:text-white/70 mb-8 max-w-2xl mx-auto font-mono">
-            {t("cta.subtitle")}
-          </p>
-
-          {/* CTA Button */}
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="max-w-5xl mx-auto">
+          {/* Main Content */}
           <motion.div
-            className="mb-10"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
           >
-            <Button
-              size="lg"
-              className="bg-[#FF6B00] hover:bg-[#FF6B00]/90 text-white px-8 md:px-12 py-6 md:py-8 text-lg md:text-xl font-bold rounded-xl shadow-2xl transition-all"
-              asChild
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 mb-6"
             >
-              <Link href="/contact" className="flex items-center gap-3">
-                {t("cta.button")}
-                <ArrowRight className="w-6 h-6" />
-              </Link>
-            </Button>
+              <Sparkles className="w-4 h-4 text-white" />
+              <span className="text-sm font-semibold text-white">
+                {t("finalCta.badge")}
+              </span>
+            </motion.div>
+
+            {/* Title */}
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
+              {t("finalCta.title")}
+            </h2>
+
+            {/* Subtitle */}
+            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed mb-8">
+              {t("finalCta.subtitle")}
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Button
+                size="lg"
+                className="bg-white hover:bg-white/90 text-primary font-bold text-lg px-8 py-6 rounded-2xl shadow-2xl group"
+                asChild
+              >
+                <a href="/contact" className="flex items-center gap-2">
+                  {t("finalCta.primaryCta")}
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </Button>
+
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-white/30 hover:bg-white/10 text-white font-bold text-lg px-8 py-6 rounded-2xl backdrop-blur-sm"
+                asChild
+              >
+                <a href="/pricing">{t("finalCta.secondaryCta")}</a>
+              </Button>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap items-center justify-center gap-6 text-white/80 text-sm">
+              {(t("finalCta.trustIndicators", { returnObjects: true }) as string[]).map(
+                (indicator, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-center gap-2"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                    <span className="font-medium">{indicator}</span>
+                  </motion.div>
+                )
+              )}
+            </div>
           </motion.div>
 
-          {/* Scarcity footer note */}
+          {/* Features Grid */}
           <motion.div
-            className="inline-flex items-center gap-3 bg-gray-100 dark:bg-[#1F1F1F] border border-[#FF6B00]/30 rounded-full px-6 py-3 mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="grid md:grid-cols-3 gap-6"
+          >
+            {[
+              {
+                icon: Clock,
+                title: t("finalCta.features.setup.title"),
+                description: t("finalCta.features.setup.description"),
+              },
+              {
+                icon: Shield,
+                title: t("finalCta.features.trial.title"),
+                description: t("finalCta.features.trial.description"),
+              },
+              {
+                icon: Zap,
+                title: t("finalCta.features.support.title"),
+                description: t("finalCta.features.support.description"),
+              },
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 + index * 0.1 }}
+                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-center hover:bg-white/15 transition-all"
+              >
+                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-4">
+                  <feature.icon className="w-6 h-6 text-white" strokeWidth={2} />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-white/80 leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Bottom Stats */}
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.8 }}
+            className="mt-12 pt-12 border-t border-white/20"
           >
-            <Clock className="w-5 h-5 text-[#FF6B00] shrink-0" />
-            <span className="text-[#0A0A0A]/80 dark:text-white/80 font-mono text-xs md:text-sm">
-              {t("cta.scarcity")}
-            </span>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              {(t("finalCta.stats", { returnObjects: true }) as Array<{
+                value: string;
+                label: string;
+              }>).map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.9 + index * 0.1 }}
+                >
+                  <div className="text-3xl md:text-4xl font-black text-white mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-white/70 font-medium">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
 
-          {/* Trust indicators / Stats */}
+          {/* Final Note */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto border-t border-gray-200 dark:border-white/10 pt-10"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.7 }}
+            transition={{ delay: 1.2 }}
+            className="mt-8 text-center"
           >
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#FF6B00] font-mono">
-                99.9%
-              </div>
-              <div className="text-[#0A0A0A]/60 dark:text-white/60 text-sm uppercase tracking-wider">
-                {t("cta.stats.uptime")}
-              </div>
-            </div>
-            <div className="text-center border-y md:border-y-0 md:border-x border-gray-200 dark:border-white/10 py-4 md:py-0">
-              <div className="text-3xl font-bold text-[#FF6B00] font-mono">
-                24/7
-              </div>
-              <div className="text-[#0A0A0A]/60 dark:text-white/60 text-sm uppercase tracking-wider">
-                {t("cta.stats.monitoring")}
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#FF6B00] font-mono">
-                ∞
-              </div>
-              <div className="text-[#0A0A0A]/60 dark:text-white/60 text-sm uppercase tracking-wider">
-                {t("cta.stats.scalability")}
-              </div>
-            </div>
+            <p className="text-sm text-white/60">
+              {t("finalCta.finalNote")}
+            </p>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

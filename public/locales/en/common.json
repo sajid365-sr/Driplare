@@ -515,127 +515,79 @@
     }
   },
   "services": {
-    "aiAgents": {
-      "hero": {
-        "protocol": "PROTOCOL // AGENTIC_WORKFORCE_V1",
-        "title": "Hire Digital Workers",
-        "titleHighlight": "That Never Sleep.",
-        "description": "We architect autonomous AI Agents tailored to your unique business logic. Eliminate manual bottlenecks and drive 24/7 productivity.",
-        "cta": "Book Automation Audit",
-        "viewCases": "[ VIEW_USE_CASES ]"
-      },
-      "problemSolution": {
-        "manualTitle": "Manual_Burden",
-        "advantageTitle": "Driplare_Advantage",
-        "points": {
-          "latency": {
-            "label": "LATENCY",
-            "old": "Leads wait hours for responses",
-            "new": "Instant qualification & booking"
+    "AIAgent": {
+      "aiAgentHero": {
+        "badge": "AI-Powered Sales Automation",
+        "title": {
+          "line1": "Your 24/7 Digital",
+          "line2": "Sales Employee"
+        },
+        "subtitle": "Stop losing sales to slow responses. Let AI handle customer conversations, collect orders, and save everything automatically—while you focus on growing your business.",
+        "benefits": [
+          {
+            "icon": "⚡",
+            "text": "Instant Responses"
           },
-          "capacity": {
-            "label": "CAPACITY",
-            "old": "40% of time on data entry",
-            "new": "Agents handle the busy work"
+          {
+            "icon": "💰",
+            "text": "3x More Sales"
           },
-          "precision": {
-            "label": "PRECISION",
-            "old": "Inconsistent human follow-up",
-            "new": "100% precision logic execution"
+          {
+            "icon": "🎯",
+            "text": "Zero Mistakes"
           }
-        }
+        ],
+        "primaryCta": "Try Live Demo",
+        "secondaryCta": "Watch How It Works",
+        "trustBadge": "Trusted by 100+ e-commerce businesses",
+        "stats": {
+          "available": "Available",
+          "response": "Response Time",
+          "sales": "Sales Increase"
+        },
+        "scrollText": "Scroll to learn more"
       },
-      "capabilities": {
-        "tagline": "Modules",
-        "title": "Core_Capabilities",
-        "items": {
-          "leadQual": {
-            "title": "Lead Qualification",
-            "desc": "Vet and score leads from WhatsApp or Email. Only high-value prospects reach your CRM."
-          },
-          "support": {
-            "title": "Support Agents",
-            "desc": "Agents that access your internal RAG knowledge base to solve complex user queries."
-          },
-          "research": {
-            "title": "Research & Data",
-            "desc": "Autonomous agents that scrape and summarize market insights directly to your dashboard."
-          },
-          "ops": {
-            "title": "Operations Logic",
-            "desc": "Connect your stack via n8n to trigger database updates and Slack alerts instantly."
-          }
+      "whatIsAI": {
+        "badge": "Understanding AI Agents",
+        "title": "What is an AI Sales Agent?",
+        "subtitle": "Think of it as hiring a perfect employee who never sleeps, never makes mistakes, and costs less than ৳1,000/month",
+        "explanation": {
+          "title": "In Simple Words",
+          "text": "An AI Sales Agent is like having a super-smart assistant that talks to your customers on Facebook and WhatsApp 24/7. It understands what they want, answers their questions, collects their orders, and saves everything to Google Sheets—all automatically.",
+          "points": [
+            {
+              "title": "Understands Customers",
+              "text": "Uses advanced AI (like ChatGPT) to understand what customers are asking, even if they type in Bangla, English, or Banglish"
+            },
+            {
+              "title": "Knows Your Business",
+              "text": "Trained specifically on your products, prices, delivery areas, and policies. It only talks about what YOU sell"
+            },
+            {
+              "title": "Takes Action",
+              "text": "Doesn't just chat—it collects name, phone, address, and order details, then saves them to your Google Sheet instantly"
+            },
+            {
+              "title": "Works Non-Stop",
+              "text": "Never needs breaks, never gets tired, never forgets. Handles 1 customer or 1,000 customers with the same speed and accuracy"
+            }
+          ]
+        },
+        "difference": {
+          "title": "How is this different from a chatbot?",
+          "text": "Regular chatbots follow fixed scripts and get confused easily. Our AI Agent actually UNDERSTANDS context, learns from conversations, and handles complex questions naturally—like a real person would."
+        },
+        "diagram": {
+          "customer": "Customer",
+          "customerAction": "Sends message on WhatsApp/FB",
+          "brain": "AI Brain",
+          "brainAction": "Understands & processes request",
+          "reply": "Instant Reply",
+          "replyAction": "Answers in <1 second",
+          "save": "Auto-Save",
+          "saveAction": "To Google Sheets",
+          "poweredBy": "Powered by GPT-4 & Custom Training"
         }
-      },
-      "technical": {
-        "tagline": "The_Stack",
-        "title": "Native Integration,",
-        "titleHighlight": "Not Just a Wrapper.",
-        "description": "We don't build \"GPT-wrappers.\" Driplare agents are architected into your MERN stack and n8n workflows for deep-level autonomy.",
-        "stack": {
-          "rag": {
-            "title": "RAG Architecture",
-            "desc": "Mathematically grounded in your specific data."
-          },
-          "mern": {
-            "title": "MERN Native",
-            "desc": "Seamless Node.js and MongoDB integration."
-          },
-          "workflow": {
-            "title": "Workflow Logic",
-            "desc": "Powered by n8n for 400+ third-party connections."
-          }
-        }
-      },
-      "roadmap": {
-        "tagline": "Protocol",
-        "title": "The Driplare Roadmap",
-        "steps": {
-          "step1": {
-            "title": "DISCOVERY",
-            "desc": "Audit manual friction points and identify high-ROI automation nodes.",
-            "tag": "AUDIT"
-          },
-          "step2": {
-            "title": "ARCHITECTURE",
-            "desc": "Design of RAG pipelines, agent personality, and tool-integration logic.",
-            "tag": "DESIGN"
-          },
-          "step3": {
-            "title": "DEPLOYMENT",
-            "desc": "Model training on proprietary data and secure environment staging.",
-            "tag": "LAUNCH"
-          },
-          "step4": {
-            "title": "OPTIMIZATION",
-            "desc": "Continuous logic refinement and performance scaling based on live data.",
-            "tag": "EVOLVE"
-          }
-        }
-      },
-      "faq": {
-        "title": "System_Clarifications",
-        "questions": {
-          "accuracy": {
-            "q": "Accuracy & Hallucinations?",
-            "a": "We utilize RAG (Retrieval-Augmented Generation). Your agent is mathematically grounded in your approved documentation, not general internet knowledge."
-          },
-          "legacy": {
-            "q": "Legacy Integration?",
-            "a": "Our agents connect via n8n or custom APIs to your existing CRM, ERP, and internal databases without replacing them."
-          },
-          "timeline": {
-            "q": "Deployment Timeline?",
-            "a": "An enterprise-grade agent typically moves from architecture to production in 14 to 28 days."
-          }
-        }
-      },
-      "cta": {
-        "title": "Stop Trading Hours",
-        "for": "for",
-        "tasks": "Tasks.",
-        "status": "[ STATUS: READY_FOR_ORCHESTRATION ]",
-        "button": "Engineer Your Efficiency"
       }
     },
     "workflow": {
@@ -1619,6 +1571,97 @@
       "No credit card needed",
       "Cancel anytime"
     ]
+  },
+  "homeFaq": {
+    "badge": "Got Questions?",
+    "title": "Common Questions Answered",
+    "subtitle": "Everything you need to know about our AI sales agents",
+    "questions": [
+      {
+        "question": "Will my customers know they're talking to AI?",
+        "answer": "Only if you want them to! Our AI agents are trained to sound natural and helpful. Many businesses choose to introduce it as their 'digital assistant.' The AI is so good that most customers don't realize—they just appreciate the fast, accurate responses."
+      },
+      {
+        "question": "What if the AI makes a mistake or doesn't know something?",
+        "answer": "The AI is trained specifically on YOUR business—your products, prices, and policies. For questions it can't answer, it politely asks the customer to wait while it connects them to you. You stay in control and can always review conversations."
+      },
+      {
+        "question": "Do I need any technical knowledge to use this?",
+        "answer": "Absolutely not! We handle all the technical setup. You just provide information about your products and business. Once live, you simply check the Google Sheet for new orders. It's as easy as checking messages—but everything is organized for you."
+      },
+      {
+        "question": "How long does it take to set up?",
+        "answer": "We complete the full setup in 48 hours after you provide your business information. Then you get 1-2 weeks free trial to test it. If you're happy, you continue with the monthly maintenance. If not, no charges at all."
+      },
+      {
+        "question": "Can I customize what the AI says?",
+        "answer": "Yes! During setup, we train the AI on your tone, common responses, and business policies. You can also request changes anytime during the trial period. We make sure it sounds exactly how you want."
+      },
+      {
+        "question": "What happens if I want to cancel?",
+        "answer": "You can cancel anytime with 30 days notice. The one-time setup fee is non-refundable, but there are no long-term contracts for the monthly maintenance. Your AI agent stops working after the cancellation period."
+      },
+      {
+        "question": "Will this work for my specific type of business?",
+        "answer": "If you sell products online (clothing, electronics, cosmetics, food, anything!), yes! We've successfully deployed AI agents for all types of e-commerce. During the free trial, you'll see exactly how it handles your specific products and customers."
+      },
+      {
+        "question": "How many orders can the AI handle?",
+        "answer": "There's no limit! Whether you get 10 orders or 1000 orders per day, the AI handles them all instantly. Unlike a human, it never gets tired, never takes breaks, and responds to every customer in seconds."
+      }
+    ],
+    "stillHaveQuestions": {
+      "title": "Still Have Questions?",
+      "subtitle": "Our team is here to help. Get all your questions answered before starting your free trial.",
+      "primaryCta": "Talk to Our Team",
+      "secondaryCta": "WhatsApp Us Now"
+    }
+  },
+  "finalCta": {
+    "badge": "Ready to Transform Your Business?",
+    "title": "Stop Losing Sales. Start Growing Today.",
+    "subtitle": "Join 100+ businesses already using AI to automate sales and save hours every day. Get started with a completely free trial—no credit card needed.",
+    "primaryCta": "Start Your Free Trial",
+    "secondaryCta": "See Pricing",
+    "trustIndicators": [
+      "Free 1-2 week trial",
+      "No credit card required",
+      "Setup in 48 hours",
+      "Cancel anytime"
+    ],
+    "features": {
+      "setup": {
+        "title": "Quick Setup",
+        "description": "Live in 48 hours after you provide business info"
+      },
+      "trial": {
+        "title": "Risk-Free Trial",
+        "description": "Test it free for 1-2 weeks with real customers"
+      },
+      "support": {
+        "title": "Full Support",
+        "description": "We handle everything—setup, training, maintenance"
+      }
+    },
+    "stats": [
+      {
+        "value": "100+",
+        "label": "Happy Businesses"
+      },
+      {
+        "value": "50K+",
+        "label": "Orders Automated"
+      },
+      {
+        "value": "24/7",
+        "label": "Always Working"
+      },
+      {
+        "value": "48hr",
+        "label": "Setup Time"
+      }
+    ],
+    "finalNote": "🎉 Limited slots available for free trials this month. Book yours now!"
   },
   "common": {
     "loading": "Loading...",

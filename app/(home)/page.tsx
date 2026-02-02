@@ -9,6 +9,8 @@ import { WhatYouGetSection } from "@/components/home/WhatYouGetSection";
 import { MoreThanAISection } from "@/components/home/MoreThanAISection";
 import { SuccessStoriesSection } from "@/components/home/SuccessStoriesSection";
 import { PricingSection } from "@/components/home/PricingSection";
+import { FAQSection } from "@/components/home/FAQSection";
+import { FinalCTA } from "@/components/home/FinalCTASection";
 
 export default function HomePage() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -103,7 +105,8 @@ export default function HomePage() {
         <MoreThanAISection />
         <PricingSection />
 
-
+        <FAQSection />
+        <FinalCTA />
         {/* 3. The Core Pillars */}
         {/* <CorePillarsSection /> */}
 
