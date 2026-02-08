@@ -514,127 +514,597 @@
     }
   },
   "services": {
-    "aiAgents": {
-      "hero": {
-        "protocol": "প্রটোকল // AGENTIC_WORKFORCE_V1",
-        "title": "ডিজিটাল কর্মী নিয়োগ করুন",
-        "titleHighlight": "যারা কখনো ঘুমায় না।",
-        "description": "আমরা আপনার ব্যবসার লজিক অনুযায়ী কাস্টম অটোনোমাস এআই এজেন্ট তৈরি করি। ম্যানুয়াল কাজের বাধা দূর করুন এবং ২৪/৭ প্রোডাক্টিভিটি নিশ্চিত করুন।",
-        "cta": "অটোমেশন অডিট বুক করুন",
-        "viewCases": "[ কেস স্টাডি দেখুন ]"
-      },
-      "problemSolution": {
-        "manualTitle": "ম্যানুয়াল_বোঝা",
-        "advantageTitle": "ড্রিপ্লেয়ার_সুবিধা",
-        "points": {
-          "latency": {
-            "label": "ল্যাটেন্সি",
-            "old": "লিডরা ঘন্টার পর ঘন্টা অপেক্ষা করে",
-            "new": "তাৎক্ষণিক বাছাই এবং বুকিং"
+    "AIAgent": {
+      "aiAgentHero": {
+        "badge": "AI-Powered Sales Automation",
+        "title": {
+          "line1": "আপনার ২৪/৭ Digital",
+          "line2": "Sales Employee"
+        },
+        "subtitle": "ধীর response এ বিক্রয় হারানো বন্ধ করুন। AI কে customer conversations handle করতে দিন, orders সংগ্রহ করতে দিন, এবং সবকিছু automatically save করতে দিন—যখন আপনি ব্যবসা বাড়াতে focus করুন।",
+        "benefits": [
+          {
+            "icon": "⚡",
+            "text": "তাৎক্ষণিক Responses"
           },
-          "capacity": {
-            "label": "ক্যাপাসিটি",
-            "old": "৪০% সময় ডাটা এন্ট্রিতে ব্যয় হয়",
-            "new": "এজেন্টরা জটিল কাজ সামলায়"
+          {
+            "icon": "💰",
+            "text": "৩গুণ বেশি Sales"
           },
-          "precision": {
-            "label": "নির্ভুলতা",
-            "old": "অসামঞ্জস্যপূর্ণ ফলো-আপ",
-            "new": "১০০% নির্ভুল লজিক এক্সিকিউশন"
+          {
+            "icon": "🎯",
+            "text": "Zero ভুল"
           }
+        ],
+        "primaryCta": "Live Demo চেষ্টা করুন",
+        "secondaryCta": "কিভাবে কাজ করে দেখুন",
+        "trustBadge": "১০০+ e-commerce ব্যবসা আমাদের বিশ্বাস করে",
+        "stats": {
+          "available": "উপলব্ধ",
+          "response": "Response সময়",
+          "sales": "Sales বৃদ্ধি"
+        },
+        "scrollText": "আরও জানতে scroll করুন"
+      },
+      "whatIsAI": {
+        "badge": "AI Agents বুঝুন",
+        "title": "AI Agent কি?",
+        "subtitle": "এটিকে একটি পারফেক্ট digital employee নিয়োগ দেওয়ার মতো মনে করুন যে কখনো ঘুমায় না, কখনো ভুল করে না, এবং আপনার ব্যবসার কাজ ২৪/৭ handle করে",
+        "explanation": {
+          "title": "সহজ ভাষায়",
+          "text": "একটি AI Agent হল একটি সুপার-স্মার্ট assistant থাকার মতো যা আপনার ব্যবসার জন্য automatically কাজ handle করে। এটি customers দের সাথে কথা বলতে পারে, তথ্য process করতে পারে, সিদ্ধান্ত নিতে পারে, এবং actions নিতে পারে—সবকিছু আপনাকে কিছু না করেই। এটি customer service হোক, data analysis হোক, বা workflow automation হোক, AI Agents অক্লান্তভাবে আপনার ব্যবসা বাড়াতে কাজ করে।",
+          "points": [
+            {
+              "title": "Context বোঝে",
+              "text": "Advanced AI (যেমন ChatGPT) ব্যবহার করে requests, questions এবং tasks বোঝে, এমনকি তারা জটিল হলে বা একাধিক ভাষায় লেখা হলেও"
+            },
+            {
+              "title": "আপনার ব্যবসা চেনে",
+              "text": "বিশেষভাবে আপনার products, services, processes এবং policies তে trained। এটি শুধুমাত্র আপনার ব্যবসার rules এবং guidelines এর মধ্যে কাজ করে"
+            },
+            {
+              "title": "Smart Actions নেয়",
+              "text": "শুধু তথ্য দেয় না—এটি আসলে কাজ করে যেমন customers দের respond করা, data organize করা, notifications পাঠানো, এবং systems update করা"
+            },
+            {
+              "title": "Non-Stop কাজ করে",
+              "text": "কখনো বিরতি প্রয়োজন হয় না, কখনো ক্লান্ত হয় না, কখনো ভুলে যায় না। একই গতি এবং নির্ভুলতার সাথে একটি task বা হাজারটি task handle করে, ২৪/৭/৩৬৫"
+            }
+          ]
+        },
+        "difference": {
+          "title": "এটি একটি chatbot থেকে কিভাবে আলাদা?",
+          "text": "সাধারণ chatbots fixed scripts অনুসরণ করে এবং সহজে confused হয়। আমাদের AI Agents আসলে context বোঝে, interactions থেকে শেখে, জটিল scenarios handle করে, এবং আপনার ব্যবসার systems জুড়ে আসল actions করতে পারে—যেমন একজন আসল employee করবে।"
+        },
+        "diagram": {
+          "customer": "Input",
+          "customerAction": "Customer query, data, বা task",
+          "brain": "AI Brain",
+          "brainAction": "বুদ্ধিমানের সাথে বোঝে ও process করে",
+          "reply": "Smart Response",
+          "replyAction": "উপযুক্ত action নেয়",
+          "save": "Auto-Execute",
+          "saveAction": "Automatically systems update করে",
+          "poweredBy": "GPT-4 ও Custom Training দ্বারা চালিত"
         }
       },
-      "capabilities": {
-        "tagline": "মডিউলস",
-        "title": "কোর_ক্যাপাবিলিটিস",
-        "items": {
-          "leadQual": {
-            "title": "লিড কোয়ালিফিকেশন",
-            "desc": "WhatsApp বা ইমেইল থেকে লিড যাচাই এবং স্কোর করুন। শুধুমাত্র হাই-ভ্যালু কাস্টমার আপনার CRM-এ যাবে।"
+      "benefits": {
+        "badge": "সত্যিকারের প্রভাব",
+        "title": "AI Agents কিভাবে আপনার ব্যবসা Transform করে",
+        "subtitle": "Workload কমানো, খরচ কমানো, এবং revenue বৃদ্ধির পেছনের সঠিক সংখ্যা দেখুন",
+        "workload": {
+          "label": "সুবিধা #১",
+          "title": "আপনার ৯৫% সময় ফিরে পান",
+          "description": "পুনরাবৃত্তিমূলক কাজে ঘন্টা নষ্ট করা বন্ধ করুন। AI Agents সবকিছু automatically handle করে যখন আপনি ব্যবসা বাড়াতে focus করেন।",
+          "points": [
+            "আর manual message replies নেই—AI তাৎক্ষণিকভাবে ২৪/৭ respond করে",
+            "আর data entry নেই—সবকিছু auto-save হয় আপনার systems এ",
+            "আর inquiries মিস করা নেই—কখনো একটি potential customer হারাবেন না",
+            "Strategy তে focus করুন, daily operations এ নয়"
+          ],
+          "stat": {
+            "value": "৩৮ ঘন্টা/সপ্তাহ",
+            "label": "প্রতি ব্যবসায় গড়ে সময় সাশ্রয়"
           },
-          "support": {
-            "title": "সাপোর্ট এজেন্ট",
-            "desc": "এজেন্ট যারা আপনার ইন্টারনাল RAG নলেজ বেস ব্যবহার করে জটিল প্রশ্নের সমাধান দেয়।"
-          },
-          "research": {
-            "title": "রিসার্চ ও ডাটা",
-            "desc": "অটোনোমাস এজেন্ট যারা মার্কেট ইনসাইট স্ক্র্যাপ করে সরাসরি আপনার ড্যাশবোর্ডে সামারি পাঠায়।"
-          },
-          "ops": {
-            "title": "অপারেশনাল লজিক",
-            "desc": "n8n এর মাধ্যমে আপনার স্ট্যাক কানেক্ট করে ডাটাবেস আপডেট এবং স্ল্যাক অ্যালার্ট পাঠান নিমিষেই।"
+          "chart": {
+            "title": "সাপ্তাহিক সময় তুলনা",
+            "before": "আগে (Manual কাজ)",
+            "after": "পরে (AI Agent সহ)",
+            "saved": "সাশ্রয়কৃত সময় = আরও বৃদ্ধি"
           }
+        },
+        "cost": {
+          "label": "সুবিধা #২",
+          "title": "Operating খরচ ৯০%+ কমান",
+          "description": "কেন employee বেতন দেবেন যখন AI একই কাজ আরও ভালো, দ্রুত, এবং খরচের একটি ভগ্নাংশে করে?",
+          "points": [
+            "কোন বেতন, bonus, বা benefits দিতে হবে না",
+            "কোন training সময় বা management overhead নেই",
+            "কোন অসুস্থতার ছুটি, ছুটি, বা turnover নেই",
+            "পূর্বাভাসযোগ্য মাসিক খরচ যা আপনি budget করতে পারেন"
+          ],
+          "stat": {
+            "value": "৳১,৬৮,০০০/বছর",
+            "label": "গড় বার্ষিক সাশ্রয়"
+          },
+          "chart": {
+            "title": "মাসিক খরচ তুলনা",
+            "employee": "Employee নিয়োগ",
+            "aiAgent": "AI Agent",
+            "saved": "মাসিক সাশ্রয়"
+          }
+        },
+        "sales": {
+          "label": "সুবিধা #৩",
+          "title": "৬ মাসে আপনার বিক্রয় তিনগুণ করুন",
+          "description": "আর কখনো একটি বিক্রয় মিস করবেন না। তাৎক্ষণিক responses, ২৪/৭ availability, এবং পারফেক্ট accuracy মানে আরও conversions এবং খুশি customers।",
+          "points": [
+            "তাৎক্ষণিক responses ৮০% বেশি browsers কে buyers এ রূপান্তরিত করে",
+            "২৪/৭ availability যে বিক্রয় আপনি সাধারণত মিস করতেন তা ক্যাপচার করে",
+            "পারফেক্ট accuracy ordering mistakes এবং refunds বাদ দেয়",
+            "Upselling এবং cross-selling গড় অর্ডার মূল্য বাড়ায়"
+          ],
+          "example": {
+            "label": "সত্যিকারের উদাহরণ:",
+            "business": "BeautyBox Bangladesh",
+            "result": "৬ মাসে ৫০ → ১৫০ অর্ডার/মাস"
+          },
+          "chart": {
+            "title": "সময়ের সাথে বিক্রয় বৃদ্ধি",
+            "result": "গড় বিক্রয় বৃদ্ধি"
+          }
+        },
+        "cta": "Action এ দেখুন"
+      },
+      "liveDemo": {
+        "badge": "এখনই চেষ্টা করুন",
+        "title": "AI কে Action এ অনুভব করুন",
+        "subtitle": "শুধু পড়বেন না—আমাদের AI Agent এর সাথে সত্যিই কথা বলুন। দেখুন কত দ্রুত, সঠিক, এবং স্বাভাবিক মনে হয়।",
+        "cta": "Live Demo শুরু করুন",
+        "features": [
+          {
+            "icon": "⚡",
+            "title": "তাৎক্ষণিক Responses",
+            "description": "AI ১ সেকেন্ডেরও কম সময়ে reply করে, যত customers ই থাকুক না কেন"
+          },
+          {
+            "icon": "🧠",
+            "title": "Contextual বোঝা",
+            "description": "Customers কি বোঝাতে চাচ্ছে তা বোঝে, এমনকি typos বা slang থাকলেও"
+          },
+          {
+            "icon": "🎯",
+            "title": "১০০% সঠিক",
+            "description": "কখনো product details, দাম, বা policies ভুলে যায় না"
+          }
+        ],
+        "quickQuestions": [
+          "দাম কত?",
+          "এটি কি আছে?",
+          "কখন deliver করবেন?",
+          "আমি অর্ডার করতে চাই"
+        ],
+        "chat": {
+          "agentName": "AI Sales Agent Demo",
+          "status": "Online ২৪/৭",
+          "welcome": "👋 হাই! আমি একটি AI Agent। আমাকে যেকোনো কিছু জিজ্ঞাসা করুন!",
+          "instruction": "Products, দাম, delivery সম্পর্কে জিজ্ঞাসা করুন বা order দিন",
+          "tryAsking": "চেষ্টা করুন:",
+          "placeholder": "আপনার message লিখুন...",
+          "reset": "↻ Conversation reset করুন"
+        },
+        "aiResponses": {
+          "greeting": "হ্যালো! 👋 আমাদের store এ স্বাগতম! আমি এখানে আছি আপনাকে যা প্রয়োজন তা খুঁজে পেতে সাহায্য করতে। আপনি আমাকে products, দাম, delivery সম্পর্কে জিজ্ঞাসা করতে পারেন বা সরাসরি order দিতে পারেন। আজ আমি কিভাবে সাহায্য করতে পারি?",
+          "price": "দারুণ প্রশ্ন! আমাদের products ৳৫০০ থেকে ৳৫,০০০ পর্যন্ত item এর উপর নির্ভর করে। আপনি কোন product এ আগ্রহী? আমি আপনাকে সঠিক দাম দিতে পারি এবং এমনকি বর্তমান offers ও দেখাতে পারি!",
+          "delivery": "আমরা সারা বাংলাদেশে deliver করি! 🚚\n\n• ঢাকা: ১-২ দিন (৳৬০ delivery)\n• ঢাকার বাইরে: ৩-৫ দিন (৳১২০ delivery)\n• ৳২,০০০ এর উপরে orders এ free delivery\n\nআপনার এলাকা কোথায়? আমি আপনার জন্য সঠিক delivery সময় চেক করতে পারি!",
+          "availability": "হ্যাঁ! এই item stock এ আছে এবং ship করার জন্য প্রস্তুত। 📦\n\nআপনি কি order দিতে চান? আমার শুধু প্রয়োজন:\n• আপনার নাম\n• Phone number\n• Delivery ঠিকানা\n• কত quantity চান\n\nএগিয়ে যাব?",
+          "order": "চমৎকার! চলুন আপনার order সাজাই। 🎉\n\nআমার কিছু quick details প্রয়োজন:\n১. কোন product(s) চান?\n২. আপনার পুরো নাম\n৩. Phone number\n৪. সম্পূর্ণ delivery ঠিকানা\n৫. কোন বিশেষ অনুরোধ?\n\nএগিয়ে যান এবং বলুন!",
+          "default": "এটি একটি দুর্দান্ত প্রশ্ন! যেহেতু আমি একটি demo AI (তাই আমার কাছে নির্দিষ্ট product data loaded নেই), একটি আসল AI Agent আপনার ব্যবসা সম্পর্কে সবকিছু জানবে এবং আপনাকে সঠিক উত্তর দেবে।\n\nচেষ্টা করুন জিজ্ঞাসা করতে:\n• দাম\n• Delivery\n• Stock availability\n• Order দেওয়া\n\nআর কিসে সাহায্য করতে পারি? 😊"
         }
       },
-      "technical": {
-        "tagline": "দ্য_স্ট্যাক",
-        "title": "নেটিভ ইন্টিগ্রেশন,",
-        "titleHighlight": "শুধুমাত্র একটি র‍্যাপার নয়।",
-        "description": "আমরা কোনো \"GPT-wrapper\" তৈরি করি না। ড্রিপ্লেয়ার এজেন্টগুলো আপনার MERN স্ট্যাক এবং n8n ওয়ার্কফ্লোর সাথে গভীরভাবে সংযুক্ত করা হয় যাতে তারা পূর্ণ স্বায়ত্তশাসনের সাথে কাজ করতে পারে।",
-        "stack": {
-          "rag": {
-            "title": "RAG আর্কিটেকচার",
-            "desc": "আপনার নির্দিষ্ট ডাটার উপর ভিত্তি করে গাণিতিক নির্ভুলতা।"
+      "howItWorks": {
+        "badge": "সহজ Process",
+        "title": "৪টি ধাপে Setup থেকে সফলতা পর্যন্ত",
+        "subtitle": "আমরা সবকিছু handle করি। আপনি শুধু আপনার ব্যবসার তথ্য দিন এবং আপনার AI Agent জীবন্ত হতে দেখুন।",
+        "timelineTitle": "দ্রুত Timeline",
+        "timeline": [
+          {
+            "phase": "Consultation",
+            "time": "দিন ১"
           },
-          "mern": {
-            "title": "MERN নেটিভ",
-            "desc": "Node.js এবং MongoDB-এর সাথে নিরবচ্ছিন্ন সংযোগ।"
+          {
+            "phase": "Setup",
+            "time": "দিন ২"
           },
-          "workflow": {
-            "title": "ওয়ার্কফ্লো লজিক",
-            "desc": "৪০০+ থার্ড-পার্টি কানেকশনের জন্য n8n চালিত।"
+          {
+            "phase": "Training",
+            "time": "দিন ২-৩"
+          },
+          {
+            "phase": "Go Live",
+            "time": "দিন ৩"
           }
-        }
+        ],
+        "totalTime": "⚡ আপনার AI Agent মাত্র ৪৮-৭২ ঘন্টায় live!",
+        "steps": [
+          {
+            "number": "১",
+            "title": "ফ্রি Consultation Call",
+            "description": "আমরা আপনার ব্যবসা বোঝার মাধ্যমে শুরু করি। আপনি কি বিক্রি করেন? আপনার customers কারা? তারা সবচেয়ে বেশি কি প্রশ্ন করে? এটি আমাদের আপনার জন্য নিখুঁত AI Agent ডিজাইন করতে সাহায্য করে।",
+            "duration": "৩০-৪৫ মিনিট",
+            "details": [
+              "আপনার products/services এবং ব্যবসার লক্ষ্য নিয়ে আলোচনা",
+              "সাধারণ customer প্রশ্ন এবং সমস্যা চিহ্নিত করা",
+              "আপনার বর্তমান sales process এবং অর্ডার flow পর্যালোচনা",
+              "Platforms নির্বাচন (WhatsApp, Facebook, Website, ইত্যাদি)",
+              "Pricing estimate এবং timeline confirmation পাওয়া"
+            ]
+          },
+          {
+            "number": "২",
+            "title": "AI Agent Setup ও Configuration",
+            "description": "আমাদের টিম আপনার custom AI Agent তৈরি করে। আমরা এটি আপনার platforms এ সংযুক্ত করি, আপনার product তথ্য load করি, এবং Google Sheets এ automatic অর্ডার সংগ্রহ set up করি।",
+            "duration": "২৪ ঘন্টা",
+            "details": [
+              "Custom personality এবং tone সহ আপনার AI Agent তৈরি করা",
+              "আপনার সব products, দাম, এবং policies load করা",
+              "WhatsApp, Facebook Messenger, বা আপনার website এ সংযুক্ত করা",
+              "Automatic অর্ডার সংগ্রহের জন্য Google Sheets set up করা",
+              "Delivery zones, payment methods, এবং business hours configure করা",
+              "Product images এবং catalog যোগ করা (যদি প্রযোজ্য হয়)"
+            ]
+          },
+          {
+            "number": "৩",
+            "title": "Training ও Testing",
+            "description": "আমরা আসল scenarios দিয়ে AI Agent পুঙ্খানুপুঙ্খভাবে পরীক্ষা করি। আপনি নিজে এটি চেষ্টা করতে পারেন এবং যেকোনো পরিবর্তনের অনুরোধ করতে পারেন। আমরা সবকিছু নিখুঁত না হওয়া পর্যন্ত fine-tune করি।",
+            "duration": "১২-২৪ ঘন্টা",
+            "details": [
+              "আমরা ৫০+ সাধারণ customer scenarios দিয়ে পরীক্ষা করি",
+              "আপনি নিজে AI চেষ্টা করার জন্য test credentials পান",
+              "Responses এবং behavior এ সীমাহীন পরিবর্তনের অনুরোধ করুন",
+              "আমরা tone, উত্তর, এবং অর্ডার সংগ্রহের flow পরিমার্জন করি",
+              "Live হওয়ার আগে আপনার চূড়ান্ত অনুমোদন",
+              "Orders monitor এবং manage করার উপর training session"
+            ]
+          },
+          {
+            "number": "৪",
+            "title": "Go Live + ফ্রি Trial Support",
+            "description": "আপনার AI Agent live হয়! আসল customers দের সাথে সত্যিকারের ফলাফল দেখতে আপনি ১-২ সপ্তাহ ফ্রি ট্রায়াল পাবেন। আমরা এই সময়কালে সম্পূর্ণ support প্রদান করি।",
+            "duration": "১-২ সপ্তাহ trial",
+            "details": [
+              "AI Agent আপনার platforms এ live হয়",
+              "২৪/৭ আসল customer conversations handle করা শুরু করুন",
+              "Orders automatically আপনার Google Sheet এ save হয়",
+              "Trial পিরিয়ডে WhatsApp এর মাধ্যমে সম্পূর্ণ support",
+              "Performance পর্যালোচনা করতে সাপ্তাহিক check-in calls",
+              "Trial এর পরে: মাসিক maintenance (৳৫০০-১,০০০/মাস) চালিয়ে যান বা যেকোনো সময় বাতিল করুন"
+            ]
+          }
+        ],
+        "needFromYou": {
+          "title": "আপনার কাছ থেকে আমাদের কি প্রয়োজন",
+          "subtitle": "আপনার নিখুঁত AI Agent তৈরি করতে, আমাদের শুধু আপনার ব্যবসা সম্পর্কে কিছু মৌলিক তথ্য প্রয়োজন:",
+          "items": [
+            "দাম এবং বিবরণ সহ product তালিকা",
+            "Delivery এলাকা এবং shipping চার্জ",
+            "আপনি যে payment methods গ্রহণ করেন",
+            "সাধারণ customer প্রশ্ন এবং আপনার স্বাভাবিক উত্তর",
+            "আপনার Facebook Page / WhatsApp Business এ access (integration এর জন্য)",
+            "কোন বিশেষ policies (returns, exchanges, minimum অর্ডার, ইত্যাদি)"
+          ],
+          "note": "📝 চিন্তা করবেন না যদি আপনার কাছে সবকিছু প্রস্তুত না থাকে। Consultation call এর সময় আমরা এই তথ্য সংগ্রহে আপনাকে গাইড করব।"
+        },
+        "cta": "ফ্রি Consultation বুক করুন",
+        "ctaSubtext": "কোন commitment নেই। কোন credit card নেই। শুধু আপনার ব্যবসা নিয়ে একটি বন্ধুত্বপূর্ণ কথোপকথন।"
       },
-      "roadmap": {
-        "tagline": "প্রটোকল",
-        "title": "ড্রিপ্লেয়ার রোডম্যাপ",
-        "steps": {
-          "step1": {
-            "title": "ডিসকভারি",
-            "desc": "ম্যানুয়াল কাজের বাধাগুলো চিহ্নিত করা এবং উচ্চ-ROI অটোমেশন নোড অডিট করা।",
-            "tag": "অডিট"
+      "features": {
+        "badge": "শক্তিশালী সক্ষমতা",
+        "title": "আপনার AI Agent যা যা করতে পারে",
+        "subtitle": "অত্যাধুনিক প্রযুক্তি দিয়ে নির্মিত, সত্যিকারের ব্যবসায়িক ফলাফলের জন্য ডিজাইন করা",
+        "mainFeatures": [
+          {
+            "icon": "Languages",
+            "title": "Multi-Language বোঝা",
+            "description": "বাংলা, ইংরেজি, এবং Banglish (মিশ্র ভাষা) নিখুঁতভাবে বোঝে। customers দের সাথে আর কোন ভাষার বাধা নেই।",
+            "capabilities": [
+              "বাংলা text recognition",
+              "ইংরেজি conversation handling",
+              "Banglish (মিশ্র) বোঝা",
+              "Automatic ভাষা detection"
+            ]
           },
-          "step2": {
-            "title": "আর্কিটেকচার",
-            "desc": "RAG পাইপলাইন, এজেন্টের পারসোনালিটি এবং টুল ইন্টিগ্রেশন লজিক ডিজাইন করা।",
-            "tag": "ডিজাইন"
+          {
+            "icon": "Brain",
+            "title": "Contextual Intelligence",
+            "description": "Conversation context মনে রাখে এবং customers আসলে কি বোঝাতে চাচ্ছে তা বোঝে, শুধু keywords নয়।",
+            "capabilities": [
+              "Multi-turn conversation মেমরি",
+              "Intent recognition",
+              "Follow-up প্রশ্ন handle করে",
+              "Typos এবং slang বোঝে"
+            ]
           },
-          "step3": {
-            "title": "ডেপ্লয়মেন্ট",
-            "desc": "নিজস্ব ডাটার উপর মডেল ট্রেনিং এবং নিরাপদ পরিবেশে স্টেজ করা।",
-            "tag": "লঞ্চ"
+          {
+            "icon": "ShoppingCart",
+            "title": "Smart অর্ডার সংগ্রহ",
+            "description": "Conversation এর মাধ্যমে স্বাভাবিকভাবে সম্পূর্ণ অর্ডার details সংগ্রহ করে, ঠিক যেমন একজন মানুষ করবে।",
+            "capabilities": [
+              "Product নির্বাচন সহায়তা",
+              "Variant ও size confirmation",
+              "ঠিকানা সংগ্রহ",
+              "Google Sheets এ auto-save"
+            ]
           },
-          "step4": {
-            "title": "অপ্টিমাইজেশন",
-            "desc": "লাইভ ডাটার উপর ভিত্তি করে ক্রমাগত লজিক রিফাইনমেন্ট এবং স্কেলিং করা।",
-            "tag": "ইভলভ"
+          {
+            "icon": "MessageCircle",
+            "title": "স্বাভাবিক Conversations",
+            "description": "আসল মানুষের মতো কথা বলে। বন্ধুত্বপূর্ণ, সাহায্যকারী, এবং পেশাদার—আপনার brand voice এ customized।",
+            "capabilities": [
+              "Custom personality ও tone",
+              "Emoji support",
+              "ভদ্র greetings ও closings",
+              "Small talk স্বাভাবিকভাবে handle করে"
+            ]
+          },
+          {
+            "icon": "Database",
+            "title": "Product Knowledge Base",
+            "description": "আপনার products সম্পর্কে সবকিছু জানে—দাম, variants, stock, policies—এবং কখনো ভুলে যায় না।",
+            "capabilities": [
+              "Unlimited product catalog",
+              "Real-time stock updates",
+              "দাম ও variant tracking",
+              "Policy ও FAQ responses"
+            ]
+          },
+          {
+            "icon": "BarChart3",
+            "title": "Smart Recommendations",
+            "description": "Customer preferences এর উপর ভিত্তি করে products suggest করে এবং complementary items upsell করতে পারে।",
+            "capabilities": [
+              "Product recommendations",
+              "Upselling suggestions",
+              "Bundle deals promotion",
+              "Alternative product options"
+            ]
           }
+        ],
+        "technicalTitle": "Advanced Technical Features",
+        "technicalSubtitle": "আপনার AI Agent এর পেছনের প্রযুক্তি (সহজ ভাষায়)",
+        "technicalFeatures": [
+          {
+            "title": "২৪/৭ উপলব্ধতা",
+            "description": "আপনার AI Agent কখনো ঘুমায় না, বিরতি নেয় না, বা ছুটিতে যায় না। এটি দিন বা রাতের যেকোনো সময় customers সেবা করতে সবসময় প্রস্তুত।"
+          },
+          {
+            "title": "তাৎক্ষণিক Response সময়",
+            "description": "১ সেকেন্ডেরও কম সময়ে respond করে—যেকোনো মানুষের চেয়ে অনেক দ্রুত। Customers তাৎক্ষণিকভাবে উত্তর পায়, conversion rates বৃদ্ধি পায়।"
+          },
+          {
+            "title": "Unlimited Conversations",
+            "description": "একই সময়ে ১ customer বা ১,০০০ customer handle করুন কোন slowdown ছাড়াই। কোন capacity সীমা বা waiting queues নেই।"
+          },
+          {
+            "title": "Automatic Data সংগঠন",
+            "description": "সব orders, customer info, এবং conversations automatically Google Sheets এ সংগঠিত হয়। কোন manual data entry প্রয়োজন নেই।"
+          },
+          {
+            "title": "Custom Business নিয়ম",
+            "description": "Delivery zones, minimum orders, payment methods, business hours, এবং বিশেষ policies এর জন্য আপনার নিজস্ব নিয়ম সেট করুন।"
+          },
+          {
+            "title": "Error প্রতিরোধ",
+            "description": "Built-in validation সঠিক phone numbers, ঠিকানা, এবং অর্ডার details নিশ্চিত করে। Returns এবং confusion কমায়।"
+          },
+          {
+            "title": "Multi-Platform Support",
+            "description": "WhatsApp, Facebook Messenger, Instagram DM, Telegram, এবং আপনার website এ কাজ করে—সবই একটি AI brain থেকে।"
+          },
+          {
+            "title": "Conversation History",
+            "description": "প্রতিটি conversation save হয় যাতে আপনি পর্যালোচনা করতে পারেন customers কি জিজ্ঞাসা করেছে এবং AI কিভাবে respond করেছে। সম্পূর্ণ transparency।"
+          }
+        ],
+        "platforms": {
+          "title": "আপনার পছন্দের Platforms এ কাজ করে",
+          "subtitle": "আপনার AI Agent deploy করুন যেখানে আপনার customers আছে। একটি brain, একাধিক channels।",
+          "list": [
+            "WhatsApp",
+            "Facebook",
+            "Instagram",
+            "Telegram",
+            "Website Chat",
+            "Mobile App",
+            "Email",
+            "Custom API"
+          ],
+          "note": "💡 অনুরোধে আরও integrations উপলব্ধ"
+        },
+        "bottomNote": "🔒 সব data encrypted এবং সুরক্ষিত। আমরা কখনো আপনার customer তথ্য শেয়ার করি না।"
+      },
+      "roiCalculator": {
+        "badge": "আপনার সাশ্রয় হিসাব করুন",
+        "title": "দেখুন আপনি কত সাশ্রয় করবেন",
+        "subtitle": "আপনার ব্যবসার উপর ভিত্তি করে sliders সামঞ্জস্য করুন এবং একটি AI Agent এর সাথে আপনার সঠিক মাসিক সাশ্রয় দেখুন",
+        "inputTitle": "আপনার ব্যবসা সম্পর্কে বলুন",
+        "inputs": {
+          "messagesPerDay": {
+            "label": "প্রতিদিন customer messages",
+            "unit": "/দিন",
+            "hint": "আপনি প্রতিদিন কতগুলো customer inquiries পান?"
+          },
+          "hoursSpent": {
+            "label": "Messages এ ব্যয় করা সময়",
+            "unit": "ঘন্টা/দিন",
+            "hint": "Customers দের উত্তর দিতে আপনি কত সময় ব্যয় করেন?"
+          },
+          "hourlyRate": {
+            "label": "আপনার ঘন্টায় হার (বা employee খরচ)",
+            "unit": "/ঘন্টা",
+            "hint": "আপনার সময়ের মূল্য কত? বা আপনি employees কে কত দেন?"
+          }
+        },
+        "monthlySummary": {
+          "messages": "মাসিক Messages",
+          "hours": "মাসিক ঘন্টা"
+        },
+        "results": {
+          "currentCost": {
+            "label": "বর্তমান মাসিক খরচ",
+            "description": "আপনি এখন manual customer service এ যা খরচ করছেন"
+          },
+          "withAI": {
+            "label": "AI Agent সহ",
+            "description": "সর্বোচ্চ মাসিক খরচ (setup + maintenance)"
+          },
+          "savings": {
+            "label": "আপনার মাসিক সাশ্রয়",
+            "annual": "বার্ষিক",
+            "roi": "ROI",
+            "payback": "Payback"
+          }
+        },
+        "additionalBenefits": {
+          "title": "এছাড়াও এই সুবিধাগুলো (হিসাবে অন্তর্ভুক্ত নয়):",
+          "list": [
+            "Slow response বা offline থাকার কারণে কখনো বিক্রয় মিস করবেন না",
+            "আরও মানুষ নিয়োগ না করেই ১০গুণ বেশি customers handle করুন",
+            "অর্ডার সংগ্রহে শূন্য মানবিক ত্রুটি",
+            "২৪/৭ availability বিক্রয় ২-৩গুণ বৃদ্ধি করে",
+            "Customers তাৎক্ষণিক replies পায় (উচ্চতর satisfaction)",
+            "বিক্ষিপ্ত messages এর পরিবর্তে আপনি সংগঠিত data পান"
+          ]
+        },
+        "cta": {
+          "title": "সাশ্রয় শুরু করতে প্রস্তুত?",
+          "subtitle": "এগুলো শুধু estimates নয়—এগুলো সত্যিকারের সাশ্রয় যা আমাদের clients এখনই অনুভব করছে।",
+          "button": "আপনার AI Agent পান",
+          "note": "💰 ১-২ সপ্তাহ ফ্রি ট্রায়াল দিয়ে শুরু করুন। নিজে সাশ্রয় দেখুন!"
         }
       },
       "faq": {
-        "title": "সাধারণ জিজ্ঞাসা",
-        "questions": {
-          "accuracy": {
-            "q": "নির্ভুলতা এবং হ্যালুসিনেশন?",
-            "a": "আমরা RAG (Retrieval-Augmented Generation) ব্যবহার করি। আপনার এজেন্টটি সাধারণ ইন্টারনেট জ্ঞানের পরিবর্তে আপনার অনুমোদিত ডকুমেন্টের ওপর গাণিতিকভাবে ভিত্তি করে কাজ করবে।"
+        "badge": "প্রশ্ন আছে?",
+        "title": "যা কিছু জানা দরকার",
+        "subtitle": "AI Agents সম্পর্কে সাধারণ প্রশ্ন, স্পষ্ট এবং সৎভাবে উত্তর দেওয়া হয়েছে",
+        "questions": [
+          {
+            "question": "এটি আগে দেখা chatbots থেকে কিভাবে আলাদা?",
+            "answer": "বেশিরভাগ chatbots rule-based—তারা fixed scripts অনুসরণ করে এবং সহজে ভেঙে যায়। আমাদের AI Agents advanced language models (যেমন ChatGPT) ব্যবহার করে আসলে context বোঝে, conversations মনে রাখে, এবং জটিল প্রশ্নগুলি স্বাভাবিকভাবে handle করে। তারা আপনার ব্যবসা শেখে এবং একজন আসল মানুষের মতো শোনায়, robot এর মতো নয়।"
           },
-          "legacy": {
-            "q": "লেগ্যাসি ইন্টিগ্রেশন?",
-            "a": "আমাদের এজেন্টরা n8n বা কাস্টম API-এর মাধ্যমে আপনার বিদ্যমান CRM, ERP এবং ইন্টারনাল ডাটাবেসের সাথে সংযুক্ত হয়, কোনো কিছু পরিবর্তন না করেই।"
+          {
+            "question": "আমার customers কি জানবে তারা AI এর সাথে কথা বলছে?",
+            "answer": "শুধুমাত্র যদি আপনি চান! আপনি এটিকে আপনার 'digital assistant' হিসেবে পরিচয় করিয়ে দিতে পারেন বা এটিকে স্বচ্ছভাবে কাজ করতে দিতে পারেন। AI এত স্বাভাবিক যে বেশিরভাগ customers বুঝতে পারে না—তারা শুধু দ্রুত, সাহায্যকারী responses এর প্রশংসা করে। এটি কিভাবে নিজেকে পরিচয় করিয়ে দেয় তার উপর আপনার সম্পূর্ণ নিয়ন্ত্রণ আছে।"
           },
-          "timeline": {
-            "q": "ডেপ্লয়মেন্ট টাইমলাইন?",
-            "a": "একটি এন্টারপ্রাইজ-গ্রেড এজেন্ট সাধারণত আর্কিটেকচার থেকে প্রোডাকশনে যেতে ১৪ থেকে ২৮ দিন সময় নেয়।"
+          {
+            "question": "যদি AI ভুল করে বা কিছু না জানে তাহলে কি হবে?",
+            "answer": "AI বিশেষভাবে আপনার ব্যবসার data তে trained, তাই এটি আপনার products, দাম, এবং policies ভালোভাবে জানে। যেসব প্রশ্নের উত্তর এটি নিশ্চিতভাবে দিতে পারে না, সেখানে এটি ভদ্রভাবে customer কে বলে যে এটি আপনার সাথে সংযুক্ত করবে। আপনি সব conversations পর্যালোচনা করতে পারেন এবং যেকোনো সময় responses সামঞ্জস্য করতে পারেন। আপনার জ্ঞান ছাড়া কিছু ভুল হয় না।"
+          },
+          {
+            "question": "এটি ব্যবহার করতে কি আমার টেকনিক্যাল জ্ঞান দরকার?",
+            "answer": "একেবারেই না! আমরা সব টেকনিক্যাল setup, training, এবং maintenance সামলাই। আপনি শুধু আমাদের consultation call এর সময় আপনার products এবং ব্যবসার তথ্য দিন। একবার live হলে, আপনি শুধু নতুন orders এর জন্য Google Sheet চেক করুন—আপনার messages চেক করার মতোই সহজ, কিন্তু সবকিছু আপনার জন্য সংগঠিত।"
+          },
+          {
+            "question": "Setup হতে কতক্ষণ সময় লাগে?",
+            "answer": "আমাদের প্রথম call থেকে আপনার AI live হওয়া পর্যন্ত: ৪৮-৭২ ঘন্টা। এটাই সব। আমরা ২-৩ দিনে setup, testing, এবং training সম্পূর্ণ করি। তারপর আপনি কোন commitment করার আগে আসল customers দের সাথে এটি test করতে ১-২ সপ্তাহ ফ্রি ট্রায়াল পাবেন।"
+          },
+          {
+            "question": "এটি কি বাংলায় conversations handle করতে পারে?",
+            "answer": "হ্যাঁ! AI নিখুঁতভাবে বাংলা, ইংরেজি, এবং Banglish (মিশ্র ভাষা) বোঝে। আপনার customers যেভাবে আরামদায়ক সেভাবে type করতে পারে, এবং AI স্বাভাবিকভাবে একই ভাষায় respond করে। এটি বিশেষভাবে বাংলাদেশী ব্যবসার জন্য ডিজাইন করা হয়েছে।"
+          },
+          {
+            "question": "এটি কোন platforms এ কাজ করে?",
+            "answer": "WhatsApp, Facebook Messenger, Instagram DM, Telegram, website chat, এবং আরও অনেক। আমরা এটি সংযুক্ত করি যেখানে আপনার customers আছে। আপনি একাধিক platforms জুড়ে একটি AI brain ব্যবহার করতে পারেন—customers সর্বত্র একই দুর্দান্ত অভিজ্ঞতা পায়।"
+          },
+          {
+            "question": "Conversation data এর কি হয়?",
+            "answer": "সব conversations এবং orders automatically আপনার ব্যক্তিগত Google Sheet এ save হয়। শুধুমাত্র আপনার access আছে। আমরা কখনো আপনার customer data শেয়ার বা ব্যবহার করি না। সবকিছু encrypted এবং সুরক্ষিত। আপনি আপনার data এর ১০০% মালিক।"
+          },
+          {
+            "question": "AI কি বলবে তা কি আমি customize করতে পারি?",
+            "answer": "হ্যাঁ! Setup এর সময়, আমরা AI কে আপনার পছন্দের tone, সাধারণ responses, এবং brand voice এ train করি। ট্রায়াল পিরিয়ডে আপনি সীমাহীন পরিবর্তনের অনুরোধ করতে পারেন। এটি আরও formal চান? আরও friendly? আরও casual? আমরা ঠিক যেমন আপনি চান সেভাবে adjust করব।"
+          },
+          {
+            "question": "বাতিল করতে চাইলে কি হবে?",
+            "answer": "আপনি ফ্রি ট্রায়ালের পরে মাত্র ৩০ দিনের নোটিশ দিয়ে যেকোনো সময় বাতিল করতে পারেন। একবারের setup ফি ফেরতযোগ্য নয় (কারণ আমরা আপনার custom AI তৈরি করেছি), কিন্তু মাসিক maintenance এর জন্য কোন দীর্ঘমেয়াদী চুক্তি নেই। এটি আপনার জন্য কাজ না করলে, আপনি penalty ছাড়াই বন্ধ করতে পারেন।"
+          },
+          {
+            "question": "AI কতগুলো orders handle করতে পারে?",
+            "answer": "Unlimited। আপনি প্রতিদিন ১০টি orders পান বা ১,০০০টি, AI সবগুলো তাৎক্ষণিকভাবে handle করে। একজন human employee এর বিপরীতে, এটি কখনো overwhelmed হয় না, কখনো slow হয় না, এবং একই সময়ে শত শত customers কে serve করতে পারে কোন সমস্যা ছাড়াই।"
+          },
+          {
+            "question": "এটি কি আমার নির্দিষ্ট ধরনের ব্যবসার জন্য কাজ করবে?",
+            "answer": "আপনি যদি online এ products বা services বিক্রি করেন এবং messaging platforms এর মাধ্যমে customers দের সাথে যোগাযোগ করেন, হ্যাঁ! আমরা সফলভাবে fashion stores, electronics shops, food businesses, cosmetics, home goods, এবং আরও অনেক কিছুর জন্য AI Agents deploy করেছি। ফ্রি consultation এর সময়, আমরা নিশ্চিত করব যে এটি আপনার নির্দিষ্ট ব্যবসার জন্য ভালো fit কিনা।"
           }
+        ],
+        "stillHaveQuestions": {
+          "title": "এখনও প্রশ্ন আছে?",
+          "subtitle": "আমাদের টিম সাহায্য করতে এখানে আছে। আপনার ফ্রি ট্রায়াল শুরু করার আগে সব প্রশ্নের উত্তর পান।",
+          "primaryCta": "ফ্রি Consultation বুক করুন",
+          "secondaryCta": "WhatsApp করুন এখনই"
         }
       },
-      "cta": {
-        "title": "সময়ের বিনিময়ে কাজ",
-        "for": "করা",
-        "tasks": "বন্ধ করুন।",
-        "status": "[ স্ট্যাটাস: অর্কেস্ট্রেশনের জন্য প্রস্তুত ]",
-        "button": "আপনার দক্ষতা বৃদ্ধি করুন"
+      "finalCta": {
+        "badge": "আপনার ব্যবসা Transform করতে প্রস্তুত?",
+        "title": "আপনার AI Agent ৪৮ ঘন্টা দূরে",
+        "subtitle": "১০০+ ব্যবসা ইতিমধ্যে AI ব্যবহার করে sales automate করছে, সময় সাশ্রয় করছে, এবং revenue বৃদ্ধি করছে। সম্পূর্ণ ফ্রি ট্রায়াল দিয়ে শুরু করুন—কিছু pay করার আগে ফলাফল দেখুন।",
+        "primaryCta": "ফ্রি ট্রায়াল এখনই শুরু করুন",
+        "secondaryCta": "মূল্য দেখুন",
+        "trustIndicators": [
+          "১-২ সপ্তাহ ফ্রি ট্রায়াল",
+          "ক্রেডিট কার্ড লাগবে না",
+          "৪৮-৭২ ঘন্টায় live",
+          "যেকোনো সময় বাতিল করুন"
+        ],
+        "features": {
+          "setup": {
+            "title": "দ্রুত Setup",
+            "description": "Consultation এর পর ৪৮-৭২ ঘন্টায় live"
+          },
+          "trial": {
+            "title": "ঝুঁকিমুক্ত ট্রায়াল",
+            "description": "আসল customers দের সাথে ১-২ সপ্তাহ ফ্রি test করুন"
+          },
+          "support": {
+            "title": "সম্পূর্ণ Support",
+            "description": "আমরা setup, training, এবং maintenance handle করি"
+          }
+        },
+        "whatYouGet": {
+          "title": "আজ থেকে আপনি যা পাবেন:",
+          "items": [
+            "আপনার ব্যবসায় trained custom AI Agent",
+            "WhatsApp, Facebook, বা Website এর সাথে integration",
+            "Google Sheets এ automatic অর্ডার সংগ্রহ",
+            "Unlimited conversations এবং customers",
+            "Multi-language support (বাংলা, ইংরেজি, Banglish)",
+            "Real-time conversation monitoring",
+            "সাপ্তাহিক performance reports",
+            "ট্রায়াল পিরিয়ডে unlimited changes",
+            "আমাদের টিম থেকে সম্পূর্ণ WhatsApp support",
+            "ট্রায়ালের পরে মাসিক maintenance (৳৫০০-১,০০০)"
+          ]
+        },
+        "stats": [
+          {
+            "value": "১০০+",
+            "label": "খুশি ব্যবসা"
+          },
+          {
+            "value": "৫০ হাজার+",
+            "label": "Automated অর্ডার"
+          },
+          {
+            "value": "২৪/৭",
+            "label": "সবসময় কাজ করছে"
+          },
+          {
+            "value": "৪৮ ঘন্টা",
+            "label": "Setup সময়"
+          }
+        ],
+        "finalNote": "🎉 এই মাসে ফ্রি ট্রায়ালের জন্য সীমিত স্লট উপলব্ধ। এখনই বুক করুন!"
       }
     },
     "workflow": {

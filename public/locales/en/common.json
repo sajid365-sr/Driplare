@@ -549,45 +549,563 @@
       },
       "whatIsAI": {
         "badge": "Understanding AI Agents",
-        "title": "What is an AI Sales Agent?",
-        "subtitle": "Think of it as hiring a perfect employee who never sleeps, never makes mistakes, and costs less than ৳1,000/month",
+        "title": "What is an AI Agent?",
+        "subtitle": "Think of it as hiring a perfect digital employee who never sleeps, never makes mistakes, and handles your business tasks 24/7",
         "explanation": {
           "title": "In Simple Words",
-          "text": "An AI Sales Agent is like having a super-smart assistant that talks to your customers on Facebook and WhatsApp 24/7. It understands what they want, answers their questions, collects their orders, and saves everything to Google Sheets—all automatically.",
+          "text": "An AI Agent is like having a super-smart assistant that handles tasks for your business automatically. It can talk to customers, process information, make decisions, and take actions—all without you lifting a finger. Whether it's customer service, data analysis, or workflow automation, AI Agents work tirelessly to grow your business.",
           "points": [
             {
-              "title": "Understands Customers",
-              "text": "Uses advanced AI (like ChatGPT) to understand what customers are asking, even if they type in Bangla, English, or Banglish"
+              "title": "Understands Context",
+              "text": "Uses advanced AI (like ChatGPT) to understand requests, questions, and tasks, even if they're complex or written in multiple languages"
             },
             {
               "title": "Knows Your Business",
-              "text": "Trained specifically on your products, prices, delivery areas, and policies. It only talks about what YOU sell"
+              "text": "Trained specifically on your products, services, processes, and policies. It only works within your business rules and guidelines"
             },
             {
-              "title": "Takes Action",
-              "text": "Doesn't just chat—it collects name, phone, address, and order details, then saves them to your Google Sheet instantly"
+              "title": "Takes Smart Actions",
+              "text": "Doesn't just provide information—it actually does things like responding to customers, organizing data, sending notifications, and updating systems"
             },
             {
               "title": "Works Non-Stop",
-              "text": "Never needs breaks, never gets tired, never forgets. Handles 1 customer or 1,000 customers with the same speed and accuracy"
+              "text": "Never needs breaks, never gets tired, never forgets. Handles one task or a thousand tasks with the same speed and accuracy, 24/7/365"
             }
           ]
         },
         "difference": {
           "title": "How is this different from a chatbot?",
-          "text": "Regular chatbots follow fixed scripts and get confused easily. Our AI Agent actually UNDERSTANDS context, learns from conversations, and handles complex questions naturally—like a real person would."
+          "text": "Regular chatbots follow fixed scripts and get confused easily. Our AI Agents actually UNDERSTAND context, learn from interactions, handle complex scenarios, and can perform real actions across your business systems—like a real employee would."
         },
         "diagram": {
-          "customer": "Customer",
-          "customerAction": "Sends message on WhatsApp/FB",
+          "customer": "Input",
+          "customerAction": "Customer query, data, or task",
           "brain": "AI Brain",
-          "brainAction": "Understands & processes request",
-          "reply": "Instant Reply",
-          "replyAction": "Answers in <1 second",
-          "save": "Auto-Save",
-          "saveAction": "To Google Sheets",
+          "brainAction": "Understands & processes intelligently",
+          "reply": "Smart Response",
+          "replyAction": "Takes appropriate action",
+          "save": "Auto-Execute",
+          "saveAction": "Updates systems automatically",
           "poweredBy": "Powered by GPT-4 & Custom Training"
         }
+      },
+      "benefits": {
+        "badge": "Real Impact",
+        "title": "How AI Agents Transform Your Business",
+        "subtitle": "See the exact numbers behind reduced workload, lower costs, and increased revenue",
+        "workload": {
+          "label": "Benefit #1",
+          "title": "Get 95% of Your Time Back",
+          "description": "Stop wasting hours on repetitive tasks. AI Agents handle everything automatically while you focus on growing your business.",
+          "points": [
+            "No more manual message replies—AI responds instantly 24/7",
+            "No more data entry—everything auto-saves to your systems",
+            "No more missed inquiries—never lose a potential customer again",
+            "Focus on strategy, not daily operations"
+          ],
+          "stat": {
+            "value": "38 hrs/week",
+            "label": "Average time saved per business"
+          },
+          "chart": {
+            "title": "Weekly Time Comparison",
+            "before": "Before (Manual Work)",
+            "after": "After (With AI Agent)",
+            "saved": "Time Saved = More Growth"
+          }
+        },
+        "cost": {
+          "label": "Benefit #2",
+          "title": "Slash Operating Costs by 90%+",
+          "description": "Why pay employee salaries when AI does the same work better, faster, and for a fraction of the cost?",
+          "points": [
+            "No salaries, bonuses, or benefits to pay",
+            "No training time or management overhead",
+            "No sick days, vacations, or turnover",
+            "Predictable monthly costs you can budget for"
+          ],
+          "stat": {
+            "value": "৳168,000/year",
+            "label": "Average annual savings"
+          },
+          "chart": {
+            "title": "Monthly Cost Comparison",
+            "employee": "Hiring Employee",
+            "aiAgent": "AI Agent",
+            "saved": "Monthly Savings"
+          }
+        },
+        "sales": {
+          "label": "Benefit #3",
+          "title": "Triple Your Sales in 6 Months",
+          "description": "Never miss a sale again. Instant responses, 24/7 availability, and perfect accuracy mean more conversions and happier customers.",
+          "points": [
+            "Instant responses convert 80% more browsers into buyers",
+            "24/7 availability captures sales you'd normally miss",
+            "Perfect accuracy eliminates ordering mistakes and refunds",
+            "Upselling and cross-selling increase average order value"
+          ],
+          "example": {
+            "label": "Real Example:",
+            "business": "BeautyBox Bangladesh",
+            "result": "50 → 150 orders/month in 6 months"
+          },
+          "chart": {
+            "title": "Sales Growth Over Time",
+            "result": "Average sales increase"
+          }
+        },
+        "cta": "See It in Action"
+      },
+      "liveDemo": {
+        "badge": "Try It Now",
+        "title": "Experience AI in Action",
+        "subtitle": "Don't just read about it—actually talk to our AI Agent. See how fast, accurate, and natural it feels.",
+        "cta": "Start Live Demo",
+        "features": [
+          {
+            "icon": "⚡",
+            "title": "Instant Responses",
+            "description": "AI replies in less than 1 second, no matter how many customers"
+          },
+          {
+            "icon": "🧠",
+            "title": "Contextual Understanding",
+            "description": "Understands what customers mean, even with typos or slang"
+          },
+          {
+            "icon": "🎯",
+            "title": "100% Accurate",
+            "description": "Never forgets product details, prices, or policies"
+          }
+        ],
+        "quickQuestions": [
+          "What's the price?",
+          "Is this available?",
+          "When can you deliver?",
+          "I want to order"
+        ],
+        "chat": {
+          "agentName": "AI Sales Agent Demo",
+          "status": "Online 24/7",
+          "welcome": "👋 Hi! I'm an AI Agent. Try asking me anything!",
+          "instruction": "Ask about products, prices, delivery, or place an order",
+          "tryAsking": "Try asking:",
+          "placeholder": "Type your message...",
+          "reset": "↻ Reset conversation"
+        },
+        "aiResponses": {
+          "greeting": "Hello! 👋 Welcome to our store! I'm here to help you find what you need. You can ask me about products, prices, delivery, or place an order directly. How can I assist you today?",
+          "price": "Great question! Our products range from ৳500 to ৳5,000 depending on the item. Which product are you interested in? I can give you the exact price and even show you current offers!",
+          "delivery": "We deliver across Bangladesh! 🚚\n\n• Dhaka: 1-2 days (৳60 delivery)\n• Outside Dhaka: 3-5 days (৳120 delivery)\n• Free delivery on orders above ৳2,000\n\nWhat's your area? I can check exact delivery time for you!",
+          "availability": "Yes! This item is in stock and ready to ship. 📦\n\nWould you like to place an order? I just need:\n• Your name\n• Phone number\n• Delivery address\n• Quantity you want\n\nShall we proceed?",
+          "order": "Wonderful! Let's get your order sorted. 🎉\n\nI'll need a few quick details:\n1. Which product(s) do you want?\n2. Your full name\n3. Phone number\n4. Complete delivery address\n5. Any special requests?\n\nGo ahead and tell me!",
+          "default": "That's a great question! While I'm a demo AI (so I don't have specific product data loaded), a real AI Agent would know everything about your business and give you exact answers.\n\nTry asking about:\n• Prices\n• Delivery\n• Stock availability\n• Placing an order\n\nWhat else can I help with? 😊"
+        }
+      },
+      "howItWorks": {
+        "badge": "Simple Process",
+        "title": "From Setup to Success in 4 Steps",
+        "subtitle": "We handle everything. You just provide your business info and watch your AI Agent come to life.",
+        "timelineTitle": "Quick Timeline",
+        "timeline": [
+          {
+            "phase": "Consultation",
+            "time": "Day 1"
+          },
+          {
+            "phase": "Setup",
+            "time": "Day 2"
+          },
+          {
+            "phase": "Training",
+            "time": "Day 2-3"
+          },
+          {
+            "phase": "Go Live",
+            "time": "Day 3"
+          }
+        ],
+        "totalTime": "⚡ Your AI Agent is live in just 48-72 hours!",
+        "steps": [
+          {
+            "number": "1",
+            "title": "Free Consultation Call",
+            "description": "We start by understanding your business. What do you sell? Who are your customers? What questions do they ask most? This helps us design the perfect AI Agent for you.",
+            "duration": "30-45 minutes",
+            "details": [
+              "Discuss your products/services and business goals",
+              "Identify common customer questions and pain points",
+              "Review your current sales process and order flow",
+              "Choose platforms (WhatsApp, Facebook, Website, etc.)",
+              "Get pricing estimate and timeline confirmation"
+            ]
+          },
+          {
+            "number": "2",
+            "title": "AI Agent Setup & Configuration",
+            "description": "Our team builds your custom AI Agent. We connect it to your platforms, load your product information, and set up automatic order collection to Google Sheets.",
+            "duration": "24 hours",
+            "details": [
+              "Create your AI Agent with custom personality and tone",
+              "Load all your products, prices, and policies",
+              "Connect to WhatsApp, Facebook Messenger, or your website",
+              "Set up Google Sheets for automatic order collection",
+              "Configure delivery zones, payment methods, and business hours",
+              "Add product images and catalog (if applicable)"
+            ]
+          },
+          {
+            "number": "3",
+            "title": "Training & Testing",
+            "description": "We test the AI Agent thoroughly with real scenarios. You get to try it yourself and request any changes. We fine-tune everything until it's perfect.",
+            "duration": "12-24 hours",
+            "details": [
+              "We test with 50+ common customer scenarios",
+              "You receive test credentials to try the AI yourself",
+              "Request unlimited changes to responses and behavior",
+              "We refine tone, answers, and order collection flow",
+              "Final approval from you before going live",
+              "Training session on how to monitor and manage orders"
+            ]
+          },
+          {
+            "number": "4",
+            "title": "Go Live + Free Trial Support",
+            "description": "Your AI Agent goes live! You get 1-2 weeks free trial to see real results with actual customers. We provide full support during this period.",
+            "duration": "1-2 weeks trial",
+            "details": [
+              "AI Agent goes live on your platforms",
+              "Start handling real customer conversations 24/7",
+              "Orders automatically saved to your Google Sheet",
+              "Full support via WhatsApp during trial period",
+              "Weekly check-in calls to review performance",
+              "After trial: Continue with monthly maintenance (৳500-1,000/month) or cancel anytime"
+            ]
+          }
+        ],
+        "needFromYou": {
+          "title": "What We Need From You",
+          "subtitle": "To build your perfect AI Agent, we just need some basic information about your business:",
+          "items": [
+            "Product list with prices and descriptions",
+            "Delivery areas and shipping charges",
+            "Payment methods you accept",
+            "Common customer questions and your usual answers",
+            "Access to your Facebook Page / WhatsApp Business (for integration)",
+            "Any special policies (returns, exchanges, minimum order, etc.)"
+          ],
+          "note": "📝 Don't worry if you don't have everything ready. We'll guide you through collecting this information during the consultation call."
+        },
+        "cta": "Book Free Consultation",
+        "ctaSubtext": "No commitment. No credit card. Just a friendly chat about your business."
+      },
+      "features": {
+        "badge": "Powerful Capabilities",
+        "title": "Everything Your AI Agent Can Do",
+        "subtitle": "Built with cutting-edge technology, designed for real business results",
+        "mainFeatures": [
+          {
+            "icon": "Languages",
+            "title": "Multi-Language Understanding",
+            "description": "Understands Bangla, English, and Banglish (mixed language) perfectly. No more language barriers with customers.",
+            "capabilities": [
+              "Bangla text recognition",
+              "English conversation handling",
+              "Banglish (mixed) understanding",
+              "Automatic language detection"
+            ]
+          },
+          {
+            "icon": "Brain",
+            "title": "Contextual Intelligence",
+            "description": "Remembers conversation context and understands what customers really mean, not just keywords.",
+            "capabilities": [
+              "Multi-turn conversation memory",
+              "Intent recognition",
+              "Handles follow-up questions",
+              "Understands typos and slang"
+            ]
+          },
+          {
+            "icon": "ShoppingCart",
+            "title": "Smart Order Collection",
+            "description": "Collects complete order details naturally through conversation, just like a human would.",
+            "capabilities": [
+              "Product selection assistance",
+              "Variant & size confirmation",
+              "Address collection",
+              "Auto-saves to Google Sheets"
+            ]
+          },
+          {
+            "icon": "MessageCircle",
+            "title": "Natural Conversations",
+            "description": "Talks like a real person. Friendly, helpful, and professional—customized to your brand voice.",
+            "capabilities": [
+              "Custom personality & tone",
+              "Emoji support",
+              "Polite greetings & closings",
+              "Handles small talk naturally"
+            ]
+          },
+          {
+            "icon": "Database",
+            "title": "Product Knowledge Base",
+            "description": "Knows everything about your products—prices, variants, stock, policies—and never forgets.",
+            "capabilities": [
+              "Unlimited product catalog",
+              "Real-time stock updates",
+              "Price & variant tracking",
+              "Policy & FAQ responses"
+            ]
+          },
+          {
+            "icon": "BarChart3",
+            "title": "Smart Recommendations",
+            "description": "Suggests products based on customer preferences and can upsell complementary items.",
+            "capabilities": [
+              "Product recommendations",
+              "Upselling suggestions",
+              "Bundle deals promotion",
+              "Alternative product options"
+            ]
+          }
+        ],
+        "technicalTitle": "Advanced Technical Features",
+        "technicalSubtitle": "The technology behind your AI Agent (in simple terms)",
+        "technicalFeatures": [
+          {
+            "title": "24/7 Availability",
+            "description": "Your AI Agent never sleeps, takes breaks, or goes on vacation. It's always ready to serve customers at any time of day or night."
+          },
+          {
+            "title": "Instant Response Time",
+            "description": "Responds in less than 1 second—much faster than any human. Customers get answers immediately, increasing conversion rates."
+          },
+          {
+            "title": "Unlimited Conversations",
+            "description": "Handle 1 customer or 1,000 customers simultaneously without any slowdown. No capacity limits or waiting queues."
+          },
+          {
+            "title": "Automatic Data Organization",
+            "description": "All orders, customer info, and conversations are automatically organized in Google Sheets. No manual data entry needed."
+          },
+          {
+            "title": "Custom Business Rules",
+            "description": "Set your own rules for delivery zones, minimum orders, payment methods, business hours, and special policies."
+          },
+          {
+            "title": "Error Prevention",
+            "description": "Built-in validation ensures correct phone numbers, addresses, and order details. Reduces returns and confusion."
+          },
+          {
+            "title": "Multi-Platform Support",
+            "description": "Works on WhatsApp, Facebook Messenger, Instagram DM, Telegram, and your website—all from one AI brain."
+          },
+          {
+            "title": "Conversation History",
+            "description": "Every conversation is saved so you can review what customers asked and how the AI responded. Full transparency."
+          }
+        ],
+        "platforms": {
+          "title": "Works On Your Favorite Platforms",
+          "subtitle": "Deploy your AI Agent wherever your customers are. One brain, multiple channels.",
+          "list": [
+            "WhatsApp",
+            "Facebook",
+            "Instagram",
+            "Telegram",
+            "Website Chat",
+            "Mobile App",
+            "Email",
+            "Custom API"
+          ],
+          "note": "💡 More integrations available on request"
+        },
+        "bottomNote": "🔒 All data is encrypted and secure. We never share your customer information."
+      },
+      "roiCalculator": {
+        "badge": "Calculate Your Savings",
+        "title": "See How Much You'll Save",
+        "subtitle": "Adjust the sliders based on your business and see your exact monthly savings with an AI Agent",
+        "inputTitle": "Tell Us About Your Business",
+        "inputs": {
+          "messagesPerDay": {
+            "label": "Customer messages per day",
+            "unit": "/day",
+            "hint": "How many customer inquiries do you get daily?"
+          },
+          "hoursSpent": {
+            "label": "Hours spent on messages",
+            "unit": "hrs/day",
+            "hint": "How much time do you spend replying to customers?"
+          },
+          "hourlyRate": {
+            "label": "Your hourly rate (or employee cost)",
+            "unit": "/hour",
+            "hint": "What's your time worth? Or what do you pay employees?"
+          }
+        },
+        "monthlySummary": {
+          "messages": "Monthly Messages",
+          "hours": "Monthly Hours"
+        },
+        "results": {
+          "currentCost": {
+            "label": "Current Monthly Cost",
+            "description": "What you're spending now on manual customer service"
+          },
+          "withAI": {
+            "label": "With AI Agent",
+            "description": "Maximum monthly cost (setup + maintenance)"
+          },
+          "savings": {
+            "label": "You Save Monthly",
+            "annual": "Annual",
+            "roi": "ROI",
+            "payback": "Payback"
+          }
+        },
+        "additionalBenefits": {
+          "title": "Plus These Benefits (Not Included in Calculation):",
+          "list": [
+            "Never miss a sale due to slow response or being offline",
+            "Handle 10x more customers without hiring more people",
+            "Zero human errors in order collection",
+            "24/7 availability increases sales by 2-3x",
+            "Customers get instant replies (higher satisfaction)",
+            "You get organized data instead of scattered messages"
+          ]
+        },
+        "cta": {
+          "title": "Ready to Start Saving?",
+          "subtitle": "These aren't just estimates—these are real savings our clients are experiencing right now.",
+          "button": "Get Your AI Agent",
+          "note": "💰 Start with a free 1-2 week trial. See the savings yourself!"
+        }
+      },
+      "faq": {
+        "badge": "Got Questions?",
+        "title": "Everything You Need to Know",
+        "subtitle": "Common questions about AI Agents, answered clearly and honestly",
+        "questions": [
+          {
+            "question": "How is this different from chatbots I've seen before?",
+            "answer": "Most chatbots are rule-based—they follow fixed scripts and break easily. Our AI Agents use advanced language models (like ChatGPT) to actually understand context, remember conversations, and handle complex questions naturally. They learn your business and sound like a real person, not a robot."
+          },
+          {
+            "question": "Will my customers know they're talking to AI?",
+            "answer": "Only if you want them to! You can introduce it as your 'digital assistant' or let it work transparently. The AI is so natural that most customers don't realize—they just appreciate the fast, helpful responses. You have full control over how it introduces itself."
+          },
+          {
+            "question": "What if the AI makes a mistake or doesn't know something?",
+            "answer": "The AI is trained specifically on YOUR business data, so it knows your products, prices, and policies inside out. For questions it can't answer with confidence, it politely tells the customer it will connect them with you. You can review all conversations and adjust responses anytime. Nothing goes wrong without your knowledge."
+          },
+          {
+            "question": "Do I need technical knowledge to use this?",
+            "answer": "Absolutely not! We handle all the technical setup, training, and maintenance. You just provide information about your products and business during our consultation call. Once live, you simply check the Google Sheet for new orders—as easy as checking your messages, but everything is organized for you."
+          },
+          {
+            "question": "How long does it take to set up?",
+            "answer": "From our first call to your AI going live: 48-72 hours. That's it. We complete the setup, testing, and training in 2-3 days. Then you get a 1-2 week free trial to test it with real customers before making any commitment."
+          },
+          {
+            "question": "Can it handle conversations in Bangla?",
+            "answer": "Yes! The AI perfectly understands Bangla, English, and Banglish (mixed language). Your customers can type however they're comfortable, and the AI responds naturally in the same language. This is specifically designed for Bangladeshi businesses."
+          },
+          {
+            "question": "What platforms does it work on?",
+            "answer": "WhatsApp, Facebook Messenger, Instagram DM, Telegram, website chat, and more. We connect it to wherever your customers are. You can use one AI brain across multiple platforms—customers get the same great experience everywhere."
+          },
+          {
+            "question": "What happens to the conversation data?",
+            "answer": "All conversations and orders are automatically saved to your private Google Sheet. Only you have access. We never share or use your customer data. Everything is encrypted and secure. You own 100% of your data."
+          },
+          {
+            "question": "Can I customize what the AI says?",
+            "answer": "Yes! During setup, we train the AI on your preferred tone, common responses, and brand voice. You can request unlimited changes during the trial period. Want it more formal? More friendly? More casual? We'll adjust it exactly how you want."
+          },
+          {
+            "question": "What if I want to cancel?",
+            "answer": "You can cancel anytime after the free trial with just 30 days notice. The one-time setup fee is non-refundable (because we've built your custom AI), but there are no long-term contracts for monthly maintenance. If it's not working for you, you can stop without penalty."
+          },
+          {
+            "question": "How many orders can the AI handle?",
+            "answer": "Unlimited. Whether you get 10 orders or 1,000 orders per day, the AI handles them all instantly. Unlike a human employee, it never gets overwhelmed, never slows down, and can serve hundreds of customers simultaneously without breaking a sweat."
+          },
+          {
+            "question": "Will this work for my specific type of business?",
+            "answer": "If you sell products or services online and communicate with customers via messaging platforms, yes! We've successfully deployed AI Agents for fashion stores, electronics shops, food businesses, cosmetics, home goods, and more. During the free consultation, we'll confirm if it's a good fit for your specific business."
+          }
+        ],
+        "stillHaveQuestions": {
+          "title": "Still Have Questions?",
+          "subtitle": "Our team is here to help. Get all your questions answered before starting your free trial.",
+          "primaryCta": "Book Free Consultation",
+          "secondaryCta": "WhatsApp Us Now"
+        }
+      },
+      "finalCta": {
+        "badge": "Ready to Transform Your Business?",
+        "title": "Your AI Agent is 48 Hours Away",
+        "subtitle": "Join 100+ businesses already using AI to automate sales, save time, and grow revenue. Start with a completely free trial—see the results before paying anything.",
+        "primaryCta": "Start Free Trial Now",
+        "secondaryCta": "View Pricing",
+        "trustIndicators": [
+          "Free 1-2 week trial",
+          "No credit card required",
+          "Live in 48-72 hours",
+          "Cancel anytime"
+        ],
+        "features": {
+          "setup": {
+            "title": "Quick Setup",
+            "description": "Live in 48-72 hours after consultation"
+          },
+          "trial": {
+            "title": "Risk-Free Trial",
+            "description": "Test with real customers for 1-2 weeks free"
+          },
+          "support": {
+            "title": "Full Support",
+            "description": "We handle setup, training, and maintenance"
+          }
+        },
+        "whatYouGet": {
+          "title": "What You Get Starting Today:",
+          "items": [
+            "Custom AI Agent trained on your business",
+            "Integration with WhatsApp, Facebook, or Website",
+            "Automatic order collection to Google Sheets",
+            "Unlimited conversations and customers",
+            "Multi-language support (Bangla, English, Banglish)",
+            "Real-time conversation monitoring",
+            "Weekly performance reports",
+            "Unlimited changes during trial period",
+            "Full WhatsApp support from our team",
+            "Monthly maintenance after trial (৳500-1,000)"
+          ]
+        },
+        "stats": [
+          {
+            "value": "100+",
+            "label": "Happy Businesses"
+          },
+          {
+            "value": "50K+",
+            "label": "Orders Automated"
+          },
+          {
+            "value": "24/7",
+            "label": "Always Working"
+          },
+          {
+            "value": "48hr",
+            "label": "Setup Time"
+          }
+        ],
+        "finalNote": "🎉 Limited slots available for free trials this month. Book yours now!"
       }
     },
     "workflow": {

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { HeroSection } from "@/components/services/custom-AI-Agent/HeroSection";
-import { ProblemSolutionSection } from "@/components/services/custom-AI-Agent/ProblemSolutionSection";
-import { CoreCapabilitiesSection } from "@/components/services/custom-AI-Agent/CoreCapabilitiesSection";
-import { TechnicalEdgeSection } from "@/components/services/custom-AI-Agent/TechnicalEdgeSection";
-import { RoadmapSection } from "@/components/services/custom-AI-Agent/RoadmapSection";
-import { FAQSection } from "@/components/services/custom-AI-Agent/FAQSection";
-import { FinalCTASection } from "@/components/services/custom-AI-Agent/FinalCTASection";
 import { AIAgentHero } from "@/components/services/custom-AI-Agent/AIAgentHero";
 import { WhatIsAIAgent } from "@/components/services/custom-AI-Agent/WhatIsAIAgent";
+import { BenefitsDeepDive } from "@/components/services/custom-AI-Agent/BenefitsDeepDive";
+import { LiveDemoSection } from "@/components/services/custom-AI-Agent/LiveDemoSection";
+import { HowItWorksSection } from "@/components/services/custom-AI-Agent/HowItWorksSection";
+import { FeaturesShowcaseSection } from "@/components/services/custom-AI-Agent/FeaturesShowcaseSection";
+import { ROICalculatorSection } from "@/components/services/custom-AI-Agent/ROICalculatorSection";
+import { AIAgentFinalCTA } from "@/components/services/custom-AI-Agent/AIAgentFinalCTA";
+import { AIAgentFAQSection } from "@/components/services/custom-AI-Agent/AIAgentFAQSection";
 
 export const metadata: Metadata = {
   title: "Custom AI Agents Development - Intelligent Automation Solutions",
@@ -22,14 +22,13 @@ export default function AIAgents() {
 
       <AIAgentHero />
       <WhatIsAIAgent />
-
-      {/* <HeroSection />
-      <ProblemSolutionSection />
-      <CoreCapabilitiesSection />
-      <TechnicalEdgeSection />
-      <RoadmapSection />
-      <FAQSection />
-      <FinalCTASection /> */}
+      <BenefitsDeepDive />
+      <LiveDemoSection />
+      <HowItWorksSection />
+      <FeaturesShowcaseSection />
+      <ROICalculatorSection />
+      <AIAgentFAQSection />
+      <AIAgentFinalCTA />
     </div>
   );
 }
