@@ -9,6 +9,18 @@ import { useTranslation } from "react-i18next";
 export function Hero() {
   const { t } = useTranslation();
 
+  const getRandomPosition = () => {
+    const width =
+      typeof window !== "undefined" ? window.innerWidth : 1200;
+    const height =
+      typeof window !== "undefined" ? window.innerHeight : 800;
+
+    return {
+      x: Math.random() * width,
+      y: Math.random() * height,
+    };
+  };
+
   return (
     <section className="relative min-h-screen bg-background overflow-hidden flex items-center pt-20">
       {/* Animated Background Gradient */}
@@ -21,8 +33,7 @@ export function Hero() {
             key={i}
             className="absolute w-2 h-2 bg-primary/20 rounded-full"
             initial={{ 
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              ...getRandomPosition(),
             }}
             animate={{
               y: [0, -30, 0],

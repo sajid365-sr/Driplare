@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ChevronDown, HelpCircle, CheckCircle2, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
+
 
 export function AIAgentFAQSection() {
   const { t } = useTranslation();
@@ -109,7 +109,7 @@ export function AIAgentFAQSection() {
           </div>
 
           {/* Still Have Questions Card */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -152,7 +152,7 @@ export function AIAgentFAQSection() {
                 </Button>
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </section>

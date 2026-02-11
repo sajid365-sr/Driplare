@@ -11,7 +11,7 @@ export default function MarketplaceHero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-driplare via-driplare-600 to-driplare-700 text-white">
+    <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-secondary text-white">
       {/* Premium Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -60,7 +60,7 @@ export default function MarketplaceHero() {
             transition={{ delay: 0.4 }}
             className="text-xl md:text-2xl text-white/90 text-center mb-8 max-w-3xl mx-auto leading-relaxed"
           >
-            Get AI agents that work 24/7, never sleep, and convert customers 
+            Get AI agents that work 24/7, never sleep, and convert customers
             while you focus on growing your business.
           </motion.p>
 
@@ -130,7 +130,7 @@ export default function MarketplaceHero() {
       {/* Bottom Wave */}
       <div className="absolute bottom-0 left-0 right-0">
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="currentColor" className="text-background"/>
+          <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="currentColor" className="text-background" />
         </svg>
       </div>
     </section>

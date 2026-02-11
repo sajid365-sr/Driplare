@@ -6,8 +6,9 @@ import { LiveDemoSection } from "@/components/services/custom-AI-Agent/LiveDemoS
 import { HowItWorksSection } from "@/components/services/custom-AI-Agent/HowItWorksSection";
 import { FeaturesShowcaseSection } from "@/components/services/custom-AI-Agent/FeaturesShowcaseSection";
 import { ROICalculatorSection } from "@/components/services/custom-AI-Agent/ROICalculatorSection";
-import { AIAgentFinalCTA } from "@/components/services/custom-AI-Agent/AIAgentFinalCTA";
 import { AIAgentFAQSection } from "@/components/services/custom-AI-Agent/AIAgentFAQSection";
+import { AIAgentSimpleCTA } from "@/components/services/custom-AI-Agent/AIAgentSimpleCTA";
+
 
 export const metadata: Metadata = {
   title: "Custom AI Agents Development - Intelligent Automation Solutions",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function AIAgents() {
   return (
-    // Updated: Added dark:bg-[#0A0A0A] for main background
+
     <div className="min-h-screen bg-white dark:bg-[#0A0A0A] transition-colors duration-300">
 
       <AIAgentHero />
@@ -28,7 +29,7 @@ export default function AIAgents() {
       <FeaturesShowcaseSection />
       <ROICalculatorSection />
       <AIAgentFAQSection />
-      <AIAgentFinalCTA />
+      <AIAgentSimpleCTA />
     </div>
   );
 }

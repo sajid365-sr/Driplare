@@ -18,7 +18,9 @@ export default function HomePage() {
 
   // Handle the scroll animations
   useEffect(() => {
-    if (typeof window === "undefined" || !document) return;
+    if (typeof window === "undefined" || typeof document === "undefined") {
+      return;
+    }
 
     const handleScroll = () => {
       const elements = document.querySelectorAll(".fade-in, .slide-up");

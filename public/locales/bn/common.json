@@ -806,110 +806,80 @@
         "mainFeatures": [
           {
             "icon": "Languages",
-            "title": "Multi-Language বোঝা",
-            "description": "বাংলা, ইংরেজি, এবং Banglish (মিশ্র ভাষা) নিখুঁতভাবে বোঝে। customers দের সাথে আর কোন ভাষার বাধা নেই।",
-            "capabilities": [
-              "বাংলা text recognition",
-              "ইংরেজি conversation handling",
-              "Banglish (মিশ্র) বোঝা",
-              "Automatic ভাষা detection"
+            "title": "আপনার Customers দের মতো কথা বলে",
+            "tagline": "Multi-language + সাংস্কৃতিক বোঝাপড়া",
+            "description": "বাংলা, ইংরেজি, এবং Banglish নিখুঁতভাবে বোঝে। Typos, slang, এবং মিশ্র ভাষাগুলি ঠিক মানুষের মতো handle করে। Customers দের সাথে আর কোন ভাষার বাধা নেই।",
+            "highlights": [
+              "সব ভাষায় ২৪/৭ উপলব্ধতা",
+              "১ সেকেন্ডের কম সময়ে instant responses",
+              "Context বোঝে, শুধু keywords নয়",
+              "একসাথে unlimited conversations handle করে"
             ]
           },
           {
             "icon": "Brain",
-            "title": "Contextual Intelligence",
-            "description": "Conversation context মনে রাখে এবং customers আসলে কি বোঝাতে চাচ্ছে তা বোঝে, শুধু keywords নয়।",
-            "capabilities": [
+            "title": "Conversations আসলেই মনে রাখে",
+            "tagline": "Contextual Intelligence + মেমরি",
+            "description": "শুধু keyword matching নয়। আগে কি বলা হয়েছিল তা মনে রাখে, follow-up প্রশ্ন বোঝে, এবং customers আসলে কি বোঝাতে চাচ্ছে তা জানে—এমনকি যখন তারা স্পষ্টভাবে বলে না।",
+            "highlights": [
               "Multi-turn conversation মেমরি",
-              "Intent recognition",
-              "Follow-up প্রশ্ন handle করে",
-              "Typos এবং slang বোঝে"
+              "জটিল, অস্পষ্ট প্রশ্ন handle করে",
+              "আপনার business নিয়ম কখনো ভুলে যায় না",
+              "Built-in error prevention এবং validation"
             ]
           },
           {
             "icon": "ShoppingCart",
-            "title": "Smart অর্ডার সংগ্রহ",
-            "description": "Conversation এর মাধ্যমে স্বাভাবিকভাবে সম্পূর্ণ অর্ডার details সংগ্রহ করে, ঠিক যেমন একজন মানুষ করবে।",
-            "capabilities": [
-              "Product নির্বাচন সহায়তা",
-              "Variant ও size confirmation",
-              "ঠিকানা সংগ্রহ",
-              "Google Sheets এ auto-save"
+            "title": "Orders Automatically সংগ্রহ করে",
+            "tagline": "Smart সংগ্রহ + Auto-সংগঠন",
+            "description": "Customers দের স্বাভাবিকভাবে ordering এর মাধ্যমে গাইড করে। Product, size, quantity, ঠিকানা, payment method—যা কিছু আপনার প্রয়োজন সবকিছু সংগ্রহ করে। সরাসরি Google Sheets এ save হয়, পুরোপুরি সংগঠিত।",
+            "highlights": [
+              "প্রতিটি অর্ডার Google Sheets এ auto-save",
+              "Phone numbers এবং ঠিকানা validate করে",
+              "Product variants এবং custom requests handle করে",
+              "কোন manual data entry প্রয়োজন নেই"
             ]
           },
           {
             "icon": "MessageCircle",
-            "title": "স্বাভাবিক Conversations",
-            "description": "আসল মানুষের মতো কথা বলে। বন্ধুত্বপূর্ণ, সাহায্যকারী, এবং পেশাদার—আপনার brand voice এ customized।",
-            "capabilities": [
-              "Custom personality ও tone",
-              "Emoji support",
-              "ভদ্র greetings ও closings",
-              "Small talk স্বাভাবিকভাবে handle করে"
+            "title": "আসল মানুষের মতো কথা বলে",
+            "tagline": "স্বাভাবিক Conversation + আপনার Brand Voice",
+            "description": "বন্ধুত্বপূর্ণ, সাহায্যকারী, এবং পেশাদার। ঠিক যেমন আপনি চান সেভাবে customize করা। Emojis, greetings, এবং ভদ্র closings ব্যবহার করে। Customers মনে করে না তারা একটি robot এর সাথে কথা বলছে।",
+            "highlights": [
+              "Custom personality এবং tone",
+              "Small talk স্বাভাবিকভাবে handle করে",
+              "ভদ্র, ধৈর্যশীল, কখনো অভদ্র নয়",
+              "Adjustable formality level"
             ]
           },
           {
             "icon": "Database",
-            "title": "Product Knowledge Base",
-            "description": "আপনার products সম্পর্কে সবকিছু জানে—দাম, variants, stock, policies—এবং কখনো ভুলে যায় না।",
-            "capabilities": [
-              "Unlimited product catalog",
-              "Real-time stock updates",
-              "দাম ও variant tracking",
-              "Policy ও FAQ responses"
+            "title": "আপনার সম্পূর্ণ ব্যবসা জানে",
+            "tagline": "সম্পূর্ণ Knowledge Base + Real-Time Updates",
+            "description": "আপনার সব products, দাম, variants, policies, delivery এলাকা, এবং FAQs মুখস্থ করে। কখনো ভুলে যায় না। যেকোনো সময় নতুন তথ্য দিয়ে তাৎক্ষণিকভাবে update করা যায়।",
+            "highlights": [
+              "Unlimited product catalog capacity",
+              "Real-time stock এবং price updates",
+              "সব policies এবং নিয়ম মনে রাখে",
+              "প্রতিটি conversation পর্যালোচনার জন্য save হয়"
             ]
           },
           {
             "icon": "BarChart3",
-            "title": "Smart Recommendations",
-            "description": "Customer preferences এর উপর ভিত্তি করে products suggest করে এবং complementary items upsell করতে পারে।",
-            "capabilities": [
-              "Product recommendations",
-              "Upselling suggestions",
-              "Bundle deals promotion",
-              "Alternative product options"
+            "title": "Smart Recommendations ও Upselling",
+            "tagline": "AI-Powered Suggestions + Sales Optimization",
+            "description": "Customer interests এর উপর ভিত্তি করে সম্পর্কিত products, upgrades, এবং bundle deals suggest করে। Pushy না হয়ে স্বাভাবিকভাবে average অর্ডার মূল্য বৃদ্ধি করে।",
+            "highlights": [
+              "Preferences এর উপর ভিত্তি করে product recommendations",
+              "Complementary items upsell করে",
+              "Automatically special offers promote করে",
+              "মানুষের চেয়ে ১০গুণ বেশি customers handle করে"
             ]
           }
         ],
-        "technicalTitle": "Advanced Technical Features",
-        "technicalSubtitle": "আপনার AI Agent এর পেছনের প্রযুক্তি (সহজ ভাষায়)",
-        "technicalFeatures": [
-          {
-            "title": "২৪/৭ উপলব্ধতা",
-            "description": "আপনার AI Agent কখনো ঘুমায় না, বিরতি নেয় না, বা ছুটিতে যায় না। এটি দিন বা রাতের যেকোনো সময় customers সেবা করতে সবসময় প্রস্তুত।"
-          },
-          {
-            "title": "তাৎক্ষণিক Response সময়",
-            "description": "১ সেকেন্ডেরও কম সময়ে respond করে—যেকোনো মানুষের চেয়ে অনেক দ্রুত। Customers তাৎক্ষণিকভাবে উত্তর পায়, conversion rates বৃদ্ধি পায়।"
-          },
-          {
-            "title": "Unlimited Conversations",
-            "description": "একই সময়ে ১ customer বা ১,০০০ customer handle করুন কোন slowdown ছাড়াই। কোন capacity সীমা বা waiting queues নেই।"
-          },
-          {
-            "title": "Automatic Data সংগঠন",
-            "description": "সব orders, customer info, এবং conversations automatically Google Sheets এ সংগঠিত হয়। কোন manual data entry প্রয়োজন নেই।"
-          },
-          {
-            "title": "Custom Business নিয়ম",
-            "description": "Delivery zones, minimum orders, payment methods, business hours, এবং বিশেষ policies এর জন্য আপনার নিজস্ব নিয়ম সেট করুন।"
-          },
-          {
-            "title": "Error প্রতিরোধ",
-            "description": "Built-in validation সঠিক phone numbers, ঠিকানা, এবং অর্ডার details নিশ্চিত করে। Returns এবং confusion কমায়।"
-          },
-          {
-            "title": "Multi-Platform Support",
-            "description": "WhatsApp, Facebook Messenger, Instagram DM, Telegram, এবং আপনার website এ কাজ করে—সবই একটি AI brain থেকে।"
-          },
-          {
-            "title": "Conversation History",
-            "description": "প্রতিটি conversation save হয় যাতে আপনি পর্যালোচনা করতে পারেন customers কি জিজ্ঞাসা করেছে এবং AI কিভাবে respond করেছে। সম্পূর্ণ transparency।"
-          }
-        ],
         "platforms": {
-          "title": "আপনার পছন্দের Platforms এ কাজ করে",
-          "subtitle": "আপনার AI Agent deploy করুন যেখানে আপনার customers আছে। একটি brain, একাধিক channels।",
+          "title": "যেখানে আপনার Customers আছে সেখানেই কাজ করে",
+          "subtitle": "একটি AI brain, একাধিক channels। একবার deploy করুন, সর্বত্র customers serve করুন।",
           "list": [
             "WhatsApp",
             "Facebook",
@@ -920,9 +890,12 @@
             "Email",
             "Custom API"
           ],
-          "note": "💡 অনুরোধে আরও integrations উপলব্ধ"
+          "note": "💡 অন্য platform প্রয়োজন? আমরা প্রায় যেকোনো কিছুর সাথে integrate করতে পারি।"
         },
-        "bottomNote": "🔒 সব data encrypted এবং সুরক্ষিত। আমরা কখনো আপনার customer তথ্য শেয়ার করি না।"
+        "bottomNotes": {
+          "availability": "সবসময় Online, কখনো ঘুমায় না",
+          "speed": "১ সেকেন্ডের কম সময়ে Respond করে"
+        }
       },
       "roiCalculator": {
         "badge": "আপনার সাশ্রয় হিসাব করুন",
@@ -1105,6 +1078,24 @@
           }
         ],
         "finalNote": "🎉 এই মাসে ফ্রি ট্রায়ালের জন্য সীমিত স্লট উপলব্ধ। এখনই বুক করুন!"
+      },
+      "simpleCta": {
+        "title": "আপনার ব্যবসা Transform করতে প্রস্তুত?",
+        "subtitle": "১০০+ ব্যবসা ইতিমধ্যে AI ব্যবহার করে sales automate করছে, সময় সাশ্রয় করছে, এবং revenue বৃদ্ধি করছে। সম্পূর্ণ ফ্রি ট্রায়াল দিয়ে শুরু করুন—কিছু pay করার আগে ফলাফল দেখুন।",
+        "trustBadges": [
+          "১-২ সপ্তাহ ফ্রি ট্রায়াল",
+          "ক্রেডিট কার্ড লাগবে না",
+          "৪৮-৭২ ঘন্টায় live",
+          "যেকোনো সময় বাতিল করুন"
+        ],
+        "primaryButton": "ফ্রি ট্রায়াল এখনই শুরু করুন",
+        "secondaryButton": "WhatsApp করুন এখনই",
+        "stats": {
+          "setup": "৪৮-৭২ ঘন্টা setup",
+          "trial": "১-২ সপ্তাহ ফ্রি ট্রায়াল",
+          "support": "সম্পূর্ণ support অন্তর্ভুক্ত"
+        },
+        "finalNote": "💡 এই মাসে ফ্রি ট্রায়ালের জন্য সীমিত স্লট উপলব্ধ। আজই বুক করুন!"
       }
     },
     "workflow": {

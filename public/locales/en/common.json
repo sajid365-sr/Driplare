@@ -807,110 +807,80 @@
         "mainFeatures": [
           {
             "icon": "Languages",
-            "title": "Multi-Language Understanding",
-            "description": "Understands Bangla, English, and Banglish (mixed language) perfectly. No more language barriers with customers.",
-            "capabilities": [
-              "Bangla text recognition",
-              "English conversation handling",
-              "Banglish (mixed) understanding",
-              "Automatic language detection"
+            "title": "Speaks Like Your Customers",
+            "tagline": "Multi-language + Cultural Understanding",
+            "description": "Understands Bangla, English, and Banglish perfectly. Handles typos, slang, and mixed languages just like a human would. No more language barriers with customers.",
+            "highlights": [
+              "24/7 availability in all languages",
+              "Instant responses under 1 second",
+              "Understands context, not just keywords",
+              "Handles unlimited conversations simultaneously"
             ]
           },
           {
             "icon": "Brain",
-            "title": "Contextual Intelligence",
-            "description": "Remembers conversation context and understands what customers really mean, not just keywords.",
-            "capabilities": [
+            "title": "Actually Remembers Conversations",
+            "tagline": "Contextual Intelligence + Memory",
+            "description": "Not just keyword matching. Remembers what was said earlier, understands follow-up questions, and knows what customers really mean—even when they don't say it clearly.",
+            "highlights": [
               "Multi-turn conversation memory",
-              "Intent recognition",
-              "Handles follow-up questions",
-              "Understands typos and slang"
+              "Handles complex, vague questions",
+              "Never forgets your business rules",
+              "Built-in error prevention and validation"
             ]
           },
           {
             "icon": "ShoppingCart",
-            "title": "Smart Order Collection",
-            "description": "Collects complete order details naturally through conversation, just like a human would.",
-            "capabilities": [
-              "Product selection assistance",
-              "Variant & size confirmation",
-              "Address collection",
-              "Auto-saves to Google Sheets"
+            "title": "Collects Orders Automatically",
+            "tagline": "Smart Collection + Auto-Organization",
+            "description": "Guides customers through ordering naturally. Collects product, size, quantity, address, payment method—everything you need. Saves directly to Google Sheets, perfectly organized.",
+            "highlights": [
+              "Auto-saves every order to Google Sheets",
+              "Validates phone numbers and addresses",
+              "Handles product variants and custom requests",
+              "Zero manual data entry needed"
             ]
           },
           {
             "icon": "MessageCircle",
-            "title": "Natural Conversations",
-            "description": "Talks like a real person. Friendly, helpful, and professional—customized to your brand voice.",
-            "capabilities": [
-              "Custom personality & tone",
-              "Emoji support",
-              "Polite greetings & closings",
-              "Handles small talk naturally"
+            "title": "Talks Like a Real Person",
+            "tagline": "Natural Conversation + Your Brand Voice",
+            "description": "Friendly, helpful, and professional. Customized to sound exactly like YOU want. Uses emojis, greetings, and polite closings. Customers don't feel like they're talking to a robot.",
+            "highlights": [
+              "Custom personality and tone",
+              "Handles small talk naturally",
+              "Polite, patient, never rude",
+              "Adjustable formality level"
             ]
           },
           {
             "icon": "Database",
-            "title": "Product Knowledge Base",
-            "description": "Knows everything about your products—prices, variants, stock, policies—and never forgets.",
-            "capabilities": [
-              "Unlimited product catalog",
-              "Real-time stock updates",
-              "Price & variant tracking",
-              "Policy & FAQ responses"
+            "title": "Knows Your Entire Business",
+            "tagline": "Complete Knowledge Base + Real-Time Updates",
+            "description": "Memorizes all your products, prices, variants, policies, delivery areas, and FAQs. Never forgets. Can be updated anytime with new information instantly.",
+            "highlights": [
+              "Unlimited product catalog capacity",
+              "Real-time stock and price updates",
+              "Remembers all policies and rules",
+              "Every conversation saved for review"
             ]
           },
           {
             "icon": "BarChart3",
-            "title": "Smart Recommendations",
-            "description": "Suggests products based on customer preferences and can upsell complementary items.",
-            "capabilities": [
-              "Product recommendations",
-              "Upselling suggestions",
-              "Bundle deals promotion",
-              "Alternative product options"
+            "title": "Smart Recommendations & Upselling",
+            "tagline": "AI-Powered Suggestions + Sales Optimization",
+            "description": "Suggests related products, upgrades, and bundle deals based on customer interests. Increases average order value naturally without being pushy.",
+            "highlights": [
+              "Product recommendations based on preferences",
+              "Upsells complementary items",
+              "Promotes special offers automatically",
+              "Handles 10x more customers than humans"
             ]
           }
         ],
-        "technicalTitle": "Advanced Technical Features",
-        "technicalSubtitle": "The technology behind your AI Agent (in simple terms)",
-        "technicalFeatures": [
-          {
-            "title": "24/7 Availability",
-            "description": "Your AI Agent never sleeps, takes breaks, or goes on vacation. It's always ready to serve customers at any time of day or night."
-          },
-          {
-            "title": "Instant Response Time",
-            "description": "Responds in less than 1 second—much faster than any human. Customers get answers immediately, increasing conversion rates."
-          },
-          {
-            "title": "Unlimited Conversations",
-            "description": "Handle 1 customer or 1,000 customers simultaneously without any slowdown. No capacity limits or waiting queues."
-          },
-          {
-            "title": "Automatic Data Organization",
-            "description": "All orders, customer info, and conversations are automatically organized in Google Sheets. No manual data entry needed."
-          },
-          {
-            "title": "Custom Business Rules",
-            "description": "Set your own rules for delivery zones, minimum orders, payment methods, business hours, and special policies."
-          },
-          {
-            "title": "Error Prevention",
-            "description": "Built-in validation ensures correct phone numbers, addresses, and order details. Reduces returns and confusion."
-          },
-          {
-            "title": "Multi-Platform Support",
-            "description": "Works on WhatsApp, Facebook Messenger, Instagram DM, Telegram, and your website—all from one AI brain."
-          },
-          {
-            "title": "Conversation History",
-            "description": "Every conversation is saved so you can review what customers asked and how the AI responded. Full transparency."
-          }
-        ],
         "platforms": {
-          "title": "Works On Your Favorite Platforms",
-          "subtitle": "Deploy your AI Agent wherever your customers are. One brain, multiple channels.",
+          "title": "Works Everywhere Your Customers Are",
+          "subtitle": "One AI brain, multiple channels. Deploy once, serve customers everywhere.",
           "list": [
             "WhatsApp",
             "Facebook",
@@ -921,9 +891,12 @@
             "Email",
             "Custom API"
           ],
-          "note": "💡 More integrations available on request"
+          "note": "💡 Need a different platform? We can integrate with almost anything."
         },
-        "bottomNote": "🔒 All data is encrypted and secure. We never share your customer information."
+        "bottomNotes": {
+          "availability": "Always Online, Never Sleeps",
+          "speed": "Responds in Under 1 Second"
+        }
       },
       "roiCalculator": {
         "badge": "Calculate Your Savings",
@@ -1106,6 +1079,24 @@
           }
         ],
         "finalNote": "🎉 Limited slots available for free trials this month. Book yours now!"
+      },
+      "simpleCta": {
+        "title": "Ready to Transform Your Business?",
+        "subtitle": "Join 100+ businesses already using AI to automate sales, save time, and grow revenue. Start with a completely free trial—see the results before paying anything.",
+        "trustBadges": [
+          "Free 1-2 week trial",
+          "No credit card required",
+          "Live in 48-72 hours",
+          "Cancel anytime"
+        ],
+        "primaryButton": "Start Free Trial Now",
+        "secondaryButton": "WhatsApp Us Now",
+        "stats": {
+          "setup": "48-72 hour setup",
+          "trial": "1-2 week free trial",
+          "support": "Full support included"
+        },
+        "finalNote": "💡 Limited slots available for free trials this month. Book yours today!"
       }
     },
     "workflow": {
