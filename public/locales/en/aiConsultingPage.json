@@ -1,0 +1,476 @@
+{
+    "hero": {
+        "badge": "AI Strategy & Consulting",
+        "titleLine1": "AI is Everywhere.",
+        "titleHighlight": "But Where Does It Fit",
+        "titleLine2": "In Your Business?",
+        "subtitle": "We study how your business works, identify exactly where AI can save you time and make you money, then build you a clear roadmap — no guesswork, no wasted budget.",
+        "primaryCta": "Book Free Strategy Call",
+        "secondaryCta": "See How It Works",
+        "stats": {
+            "tools": {
+                "value": "50+",
+                "label": "AI Tools Evaluated"
+            },
+            "clients": {
+                "value": "30+",
+                "label": "Businesses Consulted"
+            },
+            "success": {
+                "value": "95%",
+                "label": "Client Satisfaction"
+            }
+        },
+        "audiences": [
+            {
+                "icon": "🏢",
+                "label": "Business Owners",
+                "sub": "Strategy & operations"
+            },
+            {
+                "icon": "👤",
+                "label": "Individuals",
+                "sub": "Personal growth & branding"
+            },
+            {
+                "icon": "🚀",
+                "label": "Agencies & Teams",
+                "sub": "Workflow & efficiency"
+            }
+        ],
+        "visual": {
+            "title": "AI Readiness Audit",
+            "subtitle": "Live business analysis",
+            "live": "Analyzing...",
+            "areas": [
+                {
+                    "label": "Operations",
+                    "score": 32,
+                    "color": "from-destructive to-destructive/70"
+                },
+                {
+                    "label": "Marketing",
+                    "score": 55,
+                    "color": "from-secondary to-secondary/70"
+                },
+                {
+                    "label": "Customer Svc",
+                    "score": 20,
+                    "color": "from-destructive to-destructive/70"
+                },
+                {
+                    "label": "Content",
+                    "score": 68,
+                    "color": "from-primary to-primary/70"
+                },
+                {
+                    "label": "Sales",
+                    "score": 40,
+                    "color": "from-secondary to-accent"
+                }
+            ],
+            "recommendation": {
+                "label": "🎯 Biggest opportunity found",
+                "text": "Automating customer service could save 25+ hours/week and reduce response time by 90%."
+            }
+        },
+        "scrollText": "See what's possible"
+    },
+    "problem": {
+        "badge": "The Real Problem",
+        "title": "Why Most Businesses Get AI Wrong",
+        "subtitle": "Everyone is rushing to \"use AI\" — but without a strategy, most end up wasting time and money on tools that don't actually help.",
+        "costs": [
+            {
+                "value": "73%",
+                "label": "of businesses buy AI tools they never fully use"
+            },
+            {
+                "value": "60hrs",
+                "label": "wasted per month testing wrong tools on average"
+            },
+            {
+                "value": "৳50K+",
+                "label": "spent on subscriptions that deliver no real ROI"
+            },
+            {
+                "value": "6mo",
+                "label": "average time wasted before giving up on AI"
+            }
+        ],
+        "mistakesLabel": "Sound familiar?",
+        "mistakes": [
+            {
+                "icon": "🔀",
+                "title": "Tool Overwhelm",
+                "description": "There are 10,000+ AI tools. Without guidance, most people just pick the most popular one — which is rarely the right one for their specific situation."
+            },
+            {
+                "icon": "🎯",
+                "title": "No Clear Goal",
+                "description": "Using AI without knowing what problem you're solving first is like buying a hammer and then looking for nails. You end up with a solution looking for a problem."
+            },
+            {
+                "icon": "💸",
+                "title": "Wasted Subscriptions",
+                "description": "Most businesses are paying for 3–5 AI tools they barely use. The right 1–2 tools, properly implemented, would outperform all of them combined."
+            },
+            {
+                "icon": "🔧",
+                "title": "No Implementation Plan",
+                "description": "Knowing an AI tool exists is useless without knowing how to connect it to your actual workflow. Most people try, fail, and give up within weeks."
+            },
+            {
+                "icon": "📉",
+                "title": "Wrong Use Cases",
+                "description": "Applying AI to the wrong part of your business can actually slow you down. The highest ROI comes from automating very specific, repetitive pain points — not everything at once."
+            },
+            {
+                "icon": "🤷",
+                "title": "No One to Ask",
+                "description": "YouTube tutorials show what tools can do. But no one tells you which ones are right for your business, your budget, and your level of technical comfort."
+            }
+        ],
+        "withUs": {
+            "title": "With a proper AI strategy, everything changes.",
+            "points": [
+                "You know exactly which 1–2 tools to invest in",
+                "Every recommendation is tailored to your specific workflow",
+                "No wasted budget on tools you won't actually use",
+                "A clear step-by-step implementation order",
+                "You see ROI within the first 30 days",
+                "Ongoing support if you need help implementing"
+            ]
+        }
+    },
+    "whatIsConsulting": {
+        "badge": "What We Actually Do",
+        "title": "AI Consulting, Explained Simply",
+        "subtitle": "We don't sell you software. We don't run your ads. We study your business deeply, then tell you exactly where AI fits — and where it doesn't.",
+        "analogy": "Think of us like a doctor for your business. You don't diagnose yourself and buy random medicine — you go to a specialist who examines you properly and prescribes exactly what you need.",
+        "notTitle": "This is NOT",
+        "notList": [
+            "Selling you AI software or subscriptions",
+            "Generic advice that works for everyone",
+            "A one-size-fits-all ChatGPT tutorial",
+            "Pushing tools we earn commission from",
+            "Theory without a practical action plan"
+        ],
+        "isTitle": "This IS",
+        "isList": [
+            "A deep study of how YOUR business operates",
+            "A custom AI roadmap built around your goals",
+            "Specific tool recommendations for your budget",
+            "A prioritised implementation order",
+            "Honest advice on what will and won't work for you"
+        ],
+        "stepsLabel": "What you walk away with",
+        "steps": [
+            {
+                "emoji": "🗺️",
+                "title": "Your AI Roadmap",
+                "description": "A written document showing where AI fits in your business, what to implement first, and in what order — with reasoning for every decision."
+            },
+            {
+                "emoji": "🛠️",
+                "title": "Tool Recommendations",
+                "description": "A curated shortlist of the exact tools that match your use case, budget, and technical level. No bloat, no overkill."
+            },
+            {
+                "emoji": "📈",
+                "title": "ROI Projections",
+                "description": "Estimated time saved, cost reduced, or revenue gained per recommendation — so you can prioritise what to do first based on impact."
+            }
+        ]
+    },
+    "whatWeCover": {
+        "badge": "Audit Areas",
+        "title": "Every Part of Your Business, Examined",
+        "subtitle": "We audit 6 core areas where AI creates the biggest impact. Click any area to see the specific opportunities we look for.",
+        "expandLabel": "See opportunities",
+        "collapseLabel": "Close",
+        "opportunitiesLabel": "AI Opportunities We Identify",
+        "toolsLabel": "Tools We Evaluate",
+        "impactLabel": "Typical Impact",
+        "panelCta": "Audit This Area For Me",
+        "bottomNote": "Not all areas apply to everyone. During your consultation, we focus only on what's relevant to your specific situation.",
+        "areas": [
+            {
+                "key": "operations",
+                "title": "Operations & Workflow",
+                "tagline": "Where time gets wasted most",
+                "description": "The backbone of your business — we find every repetitive task that can run automatically.",
+                "opportunities": [
+                    "Identify repetitive manual tasks costing 10+ hours/week",
+                    "Map approval workflows that can be automated end-to-end",
+                    "Spot data entry tasks that AI can handle with 99% accuracy",
+                    "Find scheduling and coordination bottlenecks",
+                    "Evaluate internal communication overload and how to reduce it"
+                ],
+                "tools": [
+                    "n8n",
+                    "Make",
+                    "Notion AI",
+                    "Zapier",
+                    "ClickUp AI"
+                ],
+                "impact": "Most businesses save 15–30 hours per week in operational tasks after implementing our recommended automations."
+            },
+            {
+                "key": "marketing",
+                "title": "Marketing & Growth",
+                "tagline": "Reach more people with less effort",
+                "description": "From content creation to campaign management — we find where AI multiplies your marketing output.",
+                "opportunities": [
+                    "AI-assisted content calendar planning and creation",
+                    "Automated social media scheduling and cross-posting",
+                    "AI-generated ad copy variations for A/B testing",
+                    "Email campaign personalisation at scale",
+                    "SEO content optimisation using AI writing tools"
+                ],
+                "tools": [
+                    "ChatGPT",
+                    "Jasper",
+                    "Surfer SEO",
+                    "Buffer",
+                    "Mailchimp AI"
+                ],
+                "impact": "Clients typically 3–5x their content output while reducing the time spent on marketing by 40%."
+            },
+            {
+                "key": "sales",
+                "title": "Sales & Lead Generation",
+                "tagline": "Never let a hot lead go cold",
+                "description": "We map your entire sales funnel and find every point where AI can speed things up or prevent drop-off.",
+                "opportunities": [
+                    "Automated lead scoring to prioritise your best prospects",
+                    "AI follow-up sequences triggered by lead behaviour",
+                    "CRM auto-population from emails, calls, and forms",
+                    "Proposal and quote generation using AI templates",
+                    "Chatbot pre-qualification before sales calls"
+                ],
+                "tools": [
+                    "HubSpot AI",
+                    "Apollo",
+                    "Clay",
+                    "ChatGPT",
+                    "WhatsApp API"
+                ],
+                "impact": "Businesses that implement AI-assisted sales processes see 25–40% higher lead conversion rates on average."
+            },
+            {
+                "key": "support",
+                "title": "Customer Service",
+                "tagline": "24/7 support without the cost",
+                "description": "We identify exactly which customer questions AI can handle, and which require a human touch.",
+                "opportunities": [
+                    "FAQ chatbot handling 60–80% of common questions",
+                    "Ticket triage and auto-routing to the right team",
+                    "Sentiment analysis to flag unhappy customers early",
+                    "Auto-generated reply suggestions for support agents",
+                    "WhatsApp AI agent for instant customer responses"
+                ],
+                "tools": [
+                    "Intercom AI",
+                    "Tidio",
+                    "WhatsApp API",
+                    "OpenAI",
+                    "Zendesk AI"
+                ],
+                "impact": "A well-implemented AI support system can handle 60–80% of queries automatically, reducing support costs by 50%+."
+            },
+            {
+                "key": "content",
+                "title": "Content & Creative",
+                "tagline": "Create more, without burning out",
+                "description": "We audit your content workflow and find every point where AI can accelerate production without sacrificing quality.",
+                "opportunities": [
+                    "Long-form content repurposed into 10+ short-form assets",
+                    "AI image generation for social media and marketing",
+                    "Video script and caption generation from briefs",
+                    "Brand voice training so AI writes like you",
+                    "Content translation and localisation at scale"
+                ],
+                "tools": [
+                    "ChatGPT",
+                    "Midjourney",
+                    "ElevenLabs",
+                    "Descript",
+                    "Runway ML"
+                ],
+                "impact": "Content creators using AI tools typically produce 4–8x more content in the same time, with consistent brand voice."
+            },
+            {
+                "key": "personal",
+                "title": "Personal Branding",
+                "tagline": "Build your brand while you sleep",
+                "description": "For individuals, solopreneurs, and executives — we help you use AI to grow your presence without burning out.",
+                "opportunities": [
+                    "LinkedIn and Twitter/X content strategy using AI",
+                    "Personal website and portfolio AI optimisation",
+                    "Thought leadership content generation from your ideas",
+                    "Email newsletter automation and personalisation",
+                    "Speaking topic ideation and slide deck creation"
+                ],
+                "tools": [
+                    "ChatGPT",
+                    "Buffer",
+                    "Canva AI",
+                    "Taplio",
+                    "Beehiiv AI"
+                ],
+                "impact": "Individuals using an AI-assisted personal branding strategy grow their audience 3x faster with half the time investment."
+            }
+        ]
+    },
+    "howItWorks": {
+        "badge": "Our Process",
+        "title": "From First Call to Your AI Roadmap in Days",
+        "subtitle": "A simple, structured process with no jargon. You'll have a clear action plan before we're done.",
+        "deliverableLabel": "You receive",
+        "steps": [
+            {
+                "day": "Step 1",
+                "title": "Discovery Call",
+                "description": "A free 60-minute call where you walk us through your business. We ask the right questions to understand exactly how you operate, what's slowing you down, and what your goals are.",
+                "details": [
+                    "How your business currently runs",
+                    "Your biggest time and cost bottlenecks",
+                    "Your existing tools and budget",
+                    "Short-term and long-term goals"
+                ],
+                "deliverable": "A brief summary of key pain points and opportunities identified."
+            },
+            {
+                "day": "Step 2",
+                "title": "Deep Audit",
+                "description": "We study your business in detail — reviewing your workflows, tools, and processes. We identify every area where AI could create meaningful impact, then prioritise by ROI.",
+                "details": [
+                    "Full workflow and process mapping",
+                    "Tool stack analysis",
+                    "Gap identification across all 6 audit areas",
+                    "ROI estimation per opportunity"
+                ],
+                "deliverable": "A prioritised list of AI opportunities ranked by impact and effort."
+            },
+            {
+                "day": "Step 3",
+                "title": "Your AI Roadmap",
+                "description": "We compile everything into a clear, actionable written document. This is your personalised AI strategy — what to do, in what order, with which tools, and what to expect from each.",
+                "details": [
+                    "Written roadmap document (PDF)",
+                    "Specific tool recommendations",
+                    "Implementation order and timeline",
+                    "ROI projections per recommendation"
+                ],
+                "deliverable": "Full AI Roadmap document + optional 30-min Q&A walkthrough call."
+            }
+        ],
+        "timelineTitle": "Most Clients Have Their Roadmap Within 5 Days",
+        "timelineText": "The AI Clarity Session delivers same-day. The Business AI Audit takes 3–5 days. The AI Transformation Strategy takes 1–2 weeks. All timelines start from the discovery call.",
+        "ctaButton": "Book Your Free Discovery Call"
+    },
+    "pricing": {
+        "badge": "Transparent Pricing",
+        "title": "Simple Pricing, No Hidden Fees",
+        "subtitle": "Choose the level of depth you need. All plans start with a free discovery call.",
+        "toggleBD": "🇧🇩 Bangladesh",
+        "toggleIntl": "🌍 International",
+        "bdNote": "Prices shown in Bangladeshi Taka (BDT). Regional pricing for Bangladeshi clients.",
+        "intlNote": "Prices shown in USD. For clients outside Bangladesh. Payment via Wise or PayPal.",
+        "deliverablesLabel": "What you get",
+        "tiers": [
+            {
+                "name": "AI Clarity Session",
+                "badge": null,
+                "priceBD": "৳2,500",
+                "priceIntl": "$60",
+                "priceBDNote": "One-time · 60 minutes",
+                "priceIntlNote": "One-time · 60 minutes",
+                "duration": "1-day turnaround",
+                "description": "A focused 60-minute strategy session. Perfect for individuals and small businesses who need clarity on where to start.",
+                "features": [
+                    "60-minute live video session",
+                    "You ask anything — we answer honestly",
+                    "Personalised to your situation",
+                    "Recorded for future reference"
+                ],
+                "deliverables": [
+                    "Session recording",
+                    "3 prioritised AI recommendations",
+                    "Tool shortlist with links"
+                ],
+                "cta": "Book Clarity Session",
+                "highlighted": false
+            },
+            {
+                "name": "Business AI Audit",
+                "badge": "Most Popular",
+                "priceBD": "৳12,000",
+                "priceIntl": "$300",
+                "priceBDNote": "One-time · 3–5 day delivery",
+                "priceIntlNote": "One-time · 3–5 day delivery",
+                "duration": "3–5 day delivery",
+                "description": "Our core service. A deep-dive audit of your entire business with a full written AI roadmap delivered in 3–5 days.",
+                "features": [
+                    "60-min discovery call",
+                    "Full audit across all 6 business areas",
+                    "Prioritised by ROI and ease of implementation",
+                    "30-min roadmap walkthrough call included"
+                ],
+                "deliverables": [
+                    "Full written AI Roadmap (PDF)",
+                    "Tool recommendations with rationale",
+                    "Implementation timeline",
+                    "ROI projections"
+                ],
+                "cta": "Get My AI Roadmap",
+                "highlighted": true
+            },
+            {
+                "name": "AI Transformation Strategy",
+                "badge": null,
+                "priceBD": "৳35,000",
+                "priceIntl": "$1,000",
+                "priceBDNote": "One-time · 1–2 week delivery",
+                "priceIntlNote": "One-time · 1–2 week delivery",
+                "duration": "1–2 week delivery",
+                "description": "For established businesses and agencies wanting a comprehensive AI adoption strategy across every department.",
+                "features": [
+                    "Multiple deep-dive sessions",
+                    "Department-by-department audit",
+                    "Vendor comparison and vetting",
+                    "Implementation support available",
+                    "Priority response throughout"
+                ],
+                "deliverables": [
+                    "Comprehensive strategy document",
+                    "Department-level AI roadmaps",
+                    "Vendor comparison table",
+                    "ROI projections per department",
+                    "30-day follow-up call included"
+                ],
+                "cta": "Request Enterprise Audit",
+                "highlighted": false
+            }
+        ],
+        "faqs": [
+            {
+                "q": "Is the discovery call really free?",
+                "a": "Yes, completely free and no obligation. If after the call you decide not to proceed, that's completely fine."
+            },
+            {
+                "q": "Do you implement the AI tools for us?",
+                "a": "The consulting service delivers strategy and recommendations. If you want us to build and implement, we offer that as a separate service through our AI Agent and Workflow Automation packages."
+            },
+            {
+                "q": "What if the roadmap doesn't work for us?",
+                "a": "We offer a 100% satisfaction guarantee on the Business AI Audit. If the roadmap isn't what you expected, we'll revise it until it is."
+            },
+            {
+                "q": "How do I pay?",
+                "a": "Bangladeshi clients: bKash, Nagad, or bank transfer. International clients: Wise or PayPal. Payment is required upfront for the Clarity Session and 50% upfront for larger packages."
+            }
+        ]
+    }
+}

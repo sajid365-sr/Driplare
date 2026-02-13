@@ -1,0 +1,476 @@
+{
+    "hero": {
+        "badge": "AI Strategy ও Consulting",
+        "titleLine1": "AI সবখানে আছে।",
+        "titleHighlight": "কিন্তু এটি আপনার ব্যবসায়",
+        "titleLine2": "কোথায় মানানসই?",
+        "subtitle": "আমরা আপনার ব্যবসা কিভাবে চলে তা অধ্যয়ন করি, ঠিক কোথায় AI আপনার সময় বাঁচাতে ও অর্থ আয় করতে পারে তা চিহ্নিত করি, তারপর আপনাকে একটি স্পষ্ট roadmap তৈরি করে দিই — কোনো অনুমান নেই, কোনো budget নষ্ট নেই।",
+        "primaryCta": "ফ্রি Strategy Call বুক করুন",
+        "secondaryCta": "কিভাবে কাজ করে দেখুন",
+        "stats": {
+            "tools": {
+                "value": "৫০+",
+                "label": "AI Tools মূল্যায়িত"
+            },
+            "clients": {
+                "value": "৩০+",
+                "label": "Businesses পরামর্শ দেওয়া হয়েছে"
+            },
+            "success": {
+                "value": "৯৫%",
+                "label": "Client সন্তুষ্টি"
+            }
+        },
+        "audiences": [
+            {
+                "icon": "🏢",
+                "label": "Business Owners",
+                "sub": "Strategy ও operations"
+            },
+            {
+                "icon": "👤",
+                "label": "Individuals",
+                "sub": "Personal growth ও branding"
+            },
+            {
+                "icon": "🚀",
+                "label": "Agencies ও Teams",
+                "sub": "Workflow ও efficiency"
+            }
+        ],
+        "visual": {
+            "title": "AI Readiness Audit",
+            "subtitle": "Live business analysis",
+            "live": "বিশ্লেষণ করছে...",
+            "areas": [
+                {
+                    "label": "Operations",
+                    "score": 32,
+                    "color": "from-destructive to-destructive/70"
+                },
+                {
+                    "label": "Marketing",
+                    "score": 55,
+                    "color": "from-secondary to-secondary/70"
+                },
+                {
+                    "label": "Customer Svc",
+                    "score": 20,
+                    "color": "from-destructive to-destructive/70"
+                },
+                {
+                    "label": "Content",
+                    "score": 68,
+                    "color": "from-primary to-primary/70"
+                },
+                {
+                    "label": "Sales",
+                    "score": 40,
+                    "color": "from-secondary to-accent"
+                }
+            ],
+            "recommendation": {
+                "label": "🎯 সবচেয়ে বড় সুযোগ পাওয়া গেছে",
+                "text": "Customer service automate করলে প্রতি সপ্তাহে ২৫+ ঘন্টা বাঁচতে পারে এবং response time ৯০% কমতে পারে।"
+            }
+        },
+        "scrollText": "কি সম্ভব দেখুন"
+    },
+    "problem": {
+        "badge": "আসল সমস্যা",
+        "title": "বেশিরভাগ Businesses কেন AI তে ভুল করে",
+        "subtitle": "সবাই \"AI ব্যবহার করতে\" ছুটছে — কিন্তু কোনো strategy ছাড়া, বেশিরভাগ মানুষ এমন tools এ সময় ও অর্থ নষ্ট করে যা আসলে সাহায্য করে না।",
+        "costs": [
+            {
+                "value": "৭৩%",
+                "label": "businesses AI tools কেনে যা কখনো পুরোপুরি ব্যবহার করা হয় না"
+            },
+            {
+                "value": "৬০ ঘন্টা",
+                "label": "গড়ে প্রতি মাসে ভুল tools test করতে নষ্ট হয়"
+            },
+            {
+                "value": "৳৫০K+",
+                "label": "subscriptions এ খরচ হয় যা কোনো real ROI দেয় না"
+            },
+            {
+                "value": "৬ মাস",
+                "label": "গড়ে সময় নষ্ট হয় AI ছেড়ে দেওয়ার আগে"
+            }
+        ],
+        "mistakesLabel": "চেনা লাগছে?",
+        "mistakes": [
+            {
+                "icon": "🔀",
+                "title": "Tool Overwhelm",
+                "description": "১০,০০০+ AI tools আছে। গাইডেন্স ছাড়া বেশিরভাগ মানুষ সবচেয়ে popular টি বেছে নেয় — যা খুব কমই তাদের নির্দিষ্ট পরিস্থিতির জন্য সঠিক।"
+            },
+            {
+                "icon": "🎯",
+                "title": "কোনো স্পষ্ট লক্ষ্য নেই",
+                "description": "প্রথমে কোন সমস্যা সমাধান করছেন তা না জেনে AI ব্যবহার করা হাতুড়ি কিনে তারপর পেরেক খোঁজার মতো। আপনার কাছে একটি সমাধান থাকে সমস্যা খুঁজতে।"
+            },
+            {
+                "icon": "💸",
+                "title": "নষ্ট Subscriptions",
+                "description": "বেশিরভাগ businesses ৩–৫টি AI tools এর জন্য pay করে যা তারা খুব কমই ব্যবহার করে। সঠিকভাবে implemented ১–২টি সঠিক tool সবগুলো মিলিয়েও বেশি কাজ করবে।"
+            },
+            {
+                "icon": "🔧",
+                "title": "কোনো Implementation Plan নেই",
+                "description": "AI tool আছে জানা কিন্তু আপনার actual workflow এ কিভাবে connect করবেন না জানা কোনো কাজে আসে না। বেশিরভাগ মানুষ try করে, fail করে, এবং কয়েক সপ্তাহের মধ্যে ছেড়ে দেয়।"
+            },
+            {
+                "icon": "📉",
+                "title": "ভুল Use Cases",
+                "description": "আপনার ব্যবসার ভুল অংশে AI apply করলে আসলে আপনাকে ধীর করে দিতে পারে। সর্বোচ্চ ROI আসে খুব নির্দিষ্ট, repetitive pain points automate করা থেকে — সবকিছু একসাথে নয়।"
+            },
+            {
+                "icon": "🤷",
+                "title": "জিজ্ঞাসা করার কেউ নেই",
+                "description": "YouTube tutorials দেখায় tools কি করতে পারে। কিন্তু কেউ বলে না আপনার business, budget, এবং technical comfort এর জন্য কোনগুলো সঠিক।"
+            }
+        ],
+        "withUs": {
+            "title": "একটি সঠিক AI strategy দিয়ে সব বদলে যায়।",
+            "points": [
+                "আপনি ঠিক কোন ১–২টি tools এ invest করবেন তা জানেন",
+                "প্রতিটি recommendation আপনার নির্দিষ্ট workflow অনুযায়ী",
+                "যেসব tools আপনি ব্যবহার করবেন না সেগুলোতে budget নষ্ট নেই",
+                "একটি স্পষ্ট step-by-step implementation order",
+                "প্রথম ৩০ দিনের মধ্যে ROI দেখতে পাবেন",
+                "Implement করতে সাহায্যের প্রয়োজন হলে ongoing support"
+            ]
+        }
+    },
+    "whatIsConsulting": {
+        "badge": "আমরা আসলে কি করি",
+        "title": "AI Consulting, সহজভাবে ব্যাখ্যা করা",
+        "subtitle": "আমরা আপনাকে software বিক্রি করি না। আমরা আপনার ads চালাই না। আমরা আপনার ব্যবসা গভীরভাবে অধ্যয়ন করি, তারপর ঠিক কোথায় AI মানানসই — এবং কোথায় মানানসই নয় তা বলি।",
+        "analogy": "আমাদের আপনার ব্যবসার জন্য একজন ডাক্তারের মতো ভাবুন। আপনি নিজে diagnose করেন না এবং random ওষুধ কেনেন না — আপনি একজন specialist এর কাছে যান যিনি আপনাকে সঠিকভাবে পরীক্ষা করেন এবং ঠিক যা দরকার তাই prescribe করেন।",
+        "notTitle": "এটি যা নয়",
+        "notList": [
+            "আপনাকে AI software বা subscription বিক্রি করা",
+            "সবার জন্য কাজ করে এমন generic পরামর্শ",
+            "একটি one-size-fits-all ChatGPT tutorial",
+            "আমরা commission পাই এমন tools push করা",
+            "কোনো practical action plan ছাড়া theory"
+        ],
+        "isTitle": "এটি যা",
+        "isList": [
+            "আপনার ব্যবসা কিভাবে চলে তার গভীর অধ্যয়ন",
+            "আপনার লক্ষ্যকে কেন্দ্র করে তৈরি custom AI roadmap",
+            "আপনার budget এর জন্য নির্দিষ্ট tool recommendations",
+            "একটি prioritised implementation order",
+            "আপনার জন্য কি কাজ করবে এবং করবে না তার সৎ পরামর্শ"
+        ],
+        "stepsLabel": "আপনি যা নিয়ে যাবেন",
+        "steps": [
+            {
+                "emoji": "🗺️",
+                "title": "আপনার AI Roadmap",
+                "description": "একটি written document যা দেখায় আপনার ব্যবসায় AI কোথায় মানানসই, প্রথমে কি implement করতে হবে, এবং কোন ক্রমে — প্রতিটি সিদ্ধান্তের কারণ সহ।"
+            },
+            {
+                "emoji": "🛠️",
+                "title": "Tool Recommendations",
+                "description": "আপনার use case, budget, ও technical level এর সাথে মানানসই exact tools এর একটি curated shortlist। কোনো bloat নেই, কোনো overkill নেই।"
+            },
+            {
+                "emoji": "📈",
+                "title": "ROI Projections",
+                "description": "প্রতিটি recommendation এ অনুমানিত সময় সঞ্চয়, খরচ হ্রাস, বা আয় বৃদ্ধি — যাতে আপনি impact এর ভিত্তিতে প্রথমে কি করবেন তা prioritize করতে পারেন।"
+            }
+        ]
+    },
+    "whatWeCover": {
+        "badge": "Audit Areas",
+        "title": "আপনার ব্যবসার প্রতিটি অংশ, পরীক্ষা করা হয়",
+        "subtitle": "আমরা ৬টি core areas audit করি যেখানে AI সবচেয়ে বেশি impact তৈরি করে। নির্দিষ্ট opportunities দেখতে যেকোনো area তে click করুন।",
+        "expandLabel": "Opportunities দেখুন",
+        "collapseLabel": "বন্ধ করুন",
+        "opportunitiesLabel": "আমরা যেসব AI Opportunities চিহ্নিত করি",
+        "toolsLabel": "আমরা যেসব Tools মূল্যায়ন করি",
+        "impactLabel": "সাধারণ Impact",
+        "panelCta": "এই Area আমার জন্য Audit করুন",
+        "bottomNote": "সব areas সবার জন্য প্রযোজ্য নয়। আপনার consultation এর সময়, আমরা শুধুমাত্র আপনার নির্দিষ্ট পরিস্থিতির সাথে প্রাসঙ্গিক বিষয়গুলোতে focus করি।",
+        "areas": [
+            {
+                "key": "operations",
+                "title": "Operations ও Workflow",
+                "tagline": "যেখানে সবচেয়ে বেশি সময় নষ্ট হয়",
+                "description": "আপনার ব্যবসার মূল ভিত্তি — আমরা প্রতিটি repetitive task খুঁজে বের করি যা automatically চলতে পারে।",
+                "opportunities": [
+                    "প্রতি সপ্তাহে ১০+ ঘন্টা খরচ করানো repetitive manual tasks চিহ্নিত করা",
+                    "Approval workflows map করা যা end-to-end automate হতে পারে",
+                    "Data entry tasks খোঁজা যা AI ৯৯% accuracy তে handle করতে পারে",
+                    "Scheduling ও coordination bottlenecks চিহ্নিত করা",
+                    "Internal communication overload মূল্যায়ন ও কমানোর পথ খোঁজা"
+                ],
+                "tools": [
+                    "n8n",
+                    "Make",
+                    "Notion AI",
+                    "Zapier",
+                    "ClickUp AI"
+                ],
+                "impact": "বেশিরভাগ businesses আমাদের recommended automations implement করার পরে প্রতি সপ্তাহে ১৫–৩০ ঘন্টা operational tasks এ সাশ্রয় করে।"
+            },
+            {
+                "key": "marketing",
+                "title": "Marketing ও Growth",
+                "tagline": "কম effort এ বেশি মানুষের কাছে পৌঁছান",
+                "description": "Content creation থেকে campaign management পর্যন্ত — আমরা খুঁজে বের করি কোথায় AI আপনার marketing output বহুগুণ বাড়ায়।",
+                "opportunities": [
+                    "AI-assisted content calendar planning ও creation",
+                    "Automated social media scheduling ও cross-posting",
+                    "A/B testing এর জন্য AI-generated ad copy variations",
+                    "Scale এ email campaign personalisation",
+                    "AI writing tools ব্যবহার করে SEO content optimisation"
+                ],
+                "tools": [
+                    "ChatGPT",
+                    "Jasper",
+                    "Surfer SEO",
+                    "Buffer",
+                    "Mailchimp AI"
+                ],
+                "impact": "Clients সাধারণত marketing এ ব্যয় করা সময় ৪০% কমিয়ে তাদের content output ৩–৫ গুণ বাড়িয়ে নেয়।"
+            },
+            {
+                "key": "sales",
+                "title": "Sales ও Lead Generation",
+                "tagline": "কোনো hot lead ঠান্ডা হতে দেবেন না",
+                "description": "আমরা আপনার সম্পূর্ণ sales funnel map করি এবং প্রতিটি জায়গা খুঁজে বের করি যেখানে AI জিনিস দ্রুত করতে বা drop-off রোধ করতে পারে।",
+                "opportunities": [
+                    "সেরা prospects কে prioritize করতে automated lead scoring",
+                    "Lead behaviour দ্বারা triggered AI follow-up sequences",
+                    "Emails, calls, ও forms থেকে CRM auto-population",
+                    "AI templates ব্যবহার করে proposal ও quote generation",
+                    "Sales calls এর আগে chatbot pre-qualification"
+                ],
+                "tools": [
+                    "HubSpot AI",
+                    "Apollo",
+                    "Clay",
+                    "ChatGPT",
+                    "WhatsApp API"
+                ],
+                "impact": "AI-assisted sales processes implement করা businesses গড়ে ২৫–৪০% বেশি lead conversion rate দেখে।"
+            },
+            {
+                "key": "support",
+                "title": "Customer Service",
+                "tagline": "খরচ ছাড়াই ২৪/৭ support",
+                "description": "আমরা চিহ্নিত করি ঠিক কোন customer প্রশ্নগুলো AI handle করতে পারে, এবং কোনগুলোতে human touch দরকার।",
+                "opportunities": [
+                    "৬০–৮০% সাধারণ প্রশ্ন handle করা FAQ chatbot",
+                    "সঠিক team এ auto-routing সহ ticket triage",
+                    "অসন্তুষ্ট customers আগেভাগে flag করতে sentiment analysis",
+                    "Support agents এর জন্য auto-generated reply suggestions",
+                    "তাৎক্ষণিক customer responses এর জন্য WhatsApp AI agent"
+                ],
+                "tools": [
+                    "Intercom AI",
+                    "Tidio",
+                    "WhatsApp API",
+                    "OpenAI",
+                    "Zendesk AI"
+                ],
+                "impact": "ভালোভাবে implemented AI support system ৬০–৮০% queries automatically handle করতে পারে, support costs ৫০%+ কমিয়ে।"
+            },
+            {
+                "key": "content",
+                "title": "Content ও Creative",
+                "tagline": "Burn out না হয়ে আরো বেশি তৈরি করুন",
+                "description": "আমরা আপনার content workflow audit করি এবং প্রতিটি জায়গা খুঁজে বের করি যেখানে AI quality না কমিয়ে production দ্রুত করতে পারে।",
+                "opportunities": [
+                    "Long-form content ১০+ short-form assets এ repurpose করা",
+                    "Social media ও marketing এর জন্য AI image generation",
+                    "Briefs থেকে video script ও caption generation",
+                    "Brand voice training যাতে AI আপনার মতো লেখে",
+                    "Scale এ content translation ও localisation"
+                ],
+                "tools": [
+                    "ChatGPT",
+                    "Midjourney",
+                    "ElevenLabs",
+                    "Descript",
+                    "Runway ML"
+                ],
+                "impact": "AI tools ব্যবহারকারী content creators সাধারণত একই সময়ে ৪–৮ গুণ বেশি content তৈরি করেন, consistent brand voice সহ।"
+            },
+            {
+                "key": "personal",
+                "title": "Personal Branding",
+                "tagline": "ঘুমের মধ্যেও brand তৈরি করুন",
+                "description": "Individuals, solopreneurs, ও executives দের জন্য — আমরা burn out না হয়ে আপনার presence বাড়াতে AI ব্যবহার করতে সাহায্য করি।",
+                "opportunities": [
+                    "AI ব্যবহার করে LinkedIn ও Twitter/X content strategy",
+                    "Personal website ও portfolio AI optimisation",
+                    "আপনার ideas থেকে thought leadership content generation",
+                    "Email newsletter automation ও personalisation",
+                    "Speaking topic ideation ও slide deck creation"
+                ],
+                "tools": [
+                    "ChatGPT",
+                    "Buffer",
+                    "Canva AI",
+                    "Taplio",
+                    "Beehiiv AI"
+                ],
+                "impact": "AI-assisted personal branding strategy ব্যবহারকারী individuals অর্ধেক সময়ে ৩ গুণ দ্রুত audience বাড়ায়।"
+            }
+        ]
+    },
+    "howItWorks": {
+        "badge": "আমাদের Process",
+        "title": "প্রথম Call থেকে আপনার AI Roadmap পর্যন্ত মাত্র কয়েক দিনে",
+        "subtitle": "কোনো জার্গন ছাড়া একটি সহজ, structured process। শেষ হওয়ার আগেই আপনার কাছে একটি স্পষ্ট action plan থাকবে।",
+        "deliverableLabel": "আপনি পাবেন",
+        "steps": [
+            {
+                "day": "ধাপ ১",
+                "title": "Discovery Call",
+                "description": "একটি বিনামূল্যে ৬০ মিনিটের call যেখানে আপনি আমাদের আপনার ব্যবসার মধ্য দিয়ে নিয়ে যান। আমরা ঠিক কিভাবে আপনি operate করেন, কি আপনাকে ধীর করছে, এবং আপনার লক্ষ্য কি তা বোঝার জন্য সঠিক প্রশ্ন করি।",
+                "details": [
+                    "আপনার ব্যবসা বর্তমানে কিভাবে চলে",
+                    "আপনার সবচেয়ে বড় সময় ও খরচের bottlenecks",
+                    "আপনার বিদ্যমান tools ও budget",
+                    "Short-term ও long-term লক্ষ্য"
+                ],
+                "deliverable": "চিহ্নিত key pain points ও opportunities এর একটি সংক্ষিপ্ত সারসংক্ষেপ।"
+            },
+            {
+                "day": "ধাপ ২",
+                "title": "Deep Audit",
+                "description": "আমরা আপনার ব্যবসা বিস্তারিতভাবে অধ্যয়ন করি — আপনার workflows, tools, ও processes পর্যালোচনা করি। আমরা প্রতিটি জায়গা চিহ্নিত করি যেখানে AI meaningful impact তৈরি করতে পারে, তারপর ROI অনুযায়ী prioritize করি।",
+                "details": [
+                    "সম্পূর্ণ workflow ও process mapping",
+                    "Tool stack analysis",
+                    "সব ৬টি audit areas জুড়ে gap identification",
+                    "প্রতিটি opportunity তে ROI estimation"
+                ],
+                "deliverable": "Impact ও effort অনুযায়ী ranked AI opportunities এর একটি prioritised তালিকা।"
+            },
+            {
+                "day": "ধাপ ৩",
+                "title": "আপনার AI Roadmap",
+                "description": "আমরা সব কিছু একটি স্পষ্ট, actionable written document এ compile করি। এটি আপনার personalized AI strategy — কি করতে হবে, কোন ক্রমে, কোন tools দিয়ে, এবং প্রতিটি থেকে কি আশা করবেন।",
+                "details": [
+                    "Written roadmap document (PDF)",
+                    "নির্দিষ্ট tool recommendations",
+                    "Implementation order ও timeline",
+                    "প্রতিটি recommendation এ ROI projections"
+                ],
+                "deliverable": "সম্পূর্ণ AI Roadmap document + ঐচ্ছিক ৩০ মিনিটের Q&A walkthrough call।"
+            }
+        ],
+        "timelineTitle": "বেশিরভাগ Clients ৫ দিনের মধ্যে তাদের Roadmap পান",
+        "timelineText": "AI Clarity Session একই দিনে deliver হয়। Business AI Audit ৩–৫ দিন সময় নেয়। AI Transformation Strategy ১–২ সপ্তাহ নেয়। সব timelines discovery call থেকে শুরু হয়।",
+        "ctaButton": "আপনার ফ্রি Discovery Call বুক করুন"
+    },
+    "pricing": {
+        "badge": "স্বচ্ছ Pricing",
+        "title": "সহজ Pricing, কোনো Hidden Fees নেই",
+        "subtitle": "আপনার প্রয়োজনীয় গভীরতার স্তর বেছে নিন। সব plans একটি বিনামূল্যে discovery call দিয়ে শুরু হয়।",
+        "toggleBD": "🇧🇩 বাংলাদেশ",
+        "toggleIntl": "🌍 আন্তর্জাতিক",
+        "bdNote": "মূল্য বাংলাদেশি টাকায় (BDT) দেখানো হচ্ছে। বাংলাদেশি clients এর জন্য regional pricing।",
+        "intlNote": "মূল্য USD তে দেখানো হচ্ছে। বাংলাদেশের বাইরের clients এর জন্য। Wise বা PayPal এর মাধ্যমে payment।",
+        "deliverablesLabel": "আপনি যা পাবেন",
+        "tiers": [
+            {
+                "name": "AI Clarity Session",
+                "badge": null,
+                "priceBD": "৳২,৫০০",
+                "priceIntl": "$60",
+                "priceBDNote": "One-time · ৬০ মিনিট",
+                "priceIntlNote": "One-time · 60 minutes",
+                "duration": "১ দিনের মধ্যে",
+                "description": "একটি focused ৬০ মিনিটের strategy session। Individuals ও ছোট businesses এর জন্য উপযুক্ত যারা কোথা থেকে শুরু করবেন তা জানতে চান।",
+                "features": [
+                    "৬০ মিনিটের live video session",
+                    "আপনি যা চান জিজ্ঞাসা করুন — আমরা সৎভাবে উত্তর দিই",
+                    "আপনার পরিস্থিতির জন্য personalized",
+                    "ভবিষ্যৎ reference এর জন্য recorded"
+                ],
+                "deliverables": [
+                    "Session recording",
+                    "৩টি prioritised AI recommendations",
+                    "Links সহ tool shortlist"
+                ],
+                "cta": "Clarity Session বুক করুন",
+                "highlighted": false
+            },
+            {
+                "name": "Business AI Audit",
+                "badge": "সবচেয়ে জনপ্রিয়",
+                "priceBD": "৳১২,০০০",
+                "priceIntl": "$300",
+                "priceBDNote": "One-time · ৩–৫ দিনে delivery",
+                "priceIntlNote": "One-time · 3–5 day delivery",
+                "duration": "৩–৫ দিনে delivery",
+                "description": "আমাদের core service। আপনার সম্পূর্ণ ব্যবসার একটি deep-dive audit এবং ৩–৫ দিনে full written AI roadmap delivered।",
+                "features": [
+                    "৬০ মিনিটের discovery call",
+                    "সব ৬টি business areas জুড়ে full audit",
+                    "ROI ও implementation সহজতা অনুযায়ী prioritised",
+                    "৩০ মিনিটের roadmap walkthrough call included"
+                ],
+                "deliverables": [
+                    "সম্পূর্ণ written AI Roadmap (PDF)",
+                    "Rationale সহ tool recommendations",
+                    "Implementation timeline",
+                    "ROI projections"
+                ],
+                "cta": "আমার AI Roadmap নিন",
+                "highlighted": true
+            },
+            {
+                "name": "AI Transformation Strategy",
+                "badge": null,
+                "priceBD": "৳৩৫,০০০",
+                "priceIntl": "$1,000",
+                "priceBDNote": "One-time · ১–২ সপ্তাহে delivery",
+                "priceIntlNote": "One-time · 1–2 week delivery",
+                "duration": "১–২ সপ্তাহে delivery",
+                "description": "প্রতিটি department জুড়ে comprehensive AI adoption strategy চান এমন established businesses ও agencies এর জন্য।",
+                "features": [
+                    "একাধিক deep-dive sessions",
+                    "Department-by-department audit",
+                    "Vendor comparison ও vetting",
+                    "Implementation support উপলব্ধ",
+                    "Priority response throughout"
+                ],
+                "deliverables": [
+                    "Comprehensive strategy document",
+                    "Department-level AI roadmaps",
+                    "Vendor comparison table",
+                    "প্রতিটি department এ ROI projections",
+                    "৩০-দিনের follow-up call included"
+                ],
+                "cta": "Enterprise Audit Request করুন",
+                "highlighted": false
+            }
+        ],
+        "faqs": [
+            {
+                "q": "Discovery call কি সত্যিই বিনামূল্যে?",
+                "a": "হ্যাঁ, সম্পূর্ণ বিনামূল্যে এবং কোনো obligation নেই। Call এর পরে proceed না করার সিদ্ধান্ত নিলে সেটা সম্পূর্ণ ঠিক আছে।"
+            },
+            {
+                "q": "আপনারা কি আমাদের জন্য AI tools implement করেন?",
+                "a": "Consulting service strategy ও recommendations deliver করে। Build ও implement করতে চাইলে আমরা সেটি আমাদের AI Agent ও Workflow Automation packages এর মাধ্যমে separate service হিসেবে offer করি।"
+            },
+            {
+                "q": "Roadmap আমাদের জন্য কাজ না করলে কি হবে?",
+                "a": "Business AI Audit এ আমরা ১০০% satisfaction guarantee offer করি। Roadmap আপনার প্রত্যাশার মতো না হলে, আমরা এটি revise করব যতক্ষণ না হয়।"
+            },
+            {
+                "q": "আমি কিভাবে pay করব?",
+                "a": "বাংলাদেশি clients: bKash, Nagad, বা bank transfer। International clients: Wise বা PayPal। Clarity Session এর জন্য upfront payment এবং বড় packages এর জন্য ৫০% upfront প্রয়োজন।"
+            }
+        ]
+    }
+}

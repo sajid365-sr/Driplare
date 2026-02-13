@@ -502,5 +502,226 @@
                 "difficulty": "Advanced"
             }
         ]
+    },
+    "toolsIntegrations": {
+        "badge": "Tools & Integrations",
+        "title": "We Connect the Apps You Already Use",
+        "subtitle": "No need to switch tools or change how you work. We build automations around your existing stack.",
+        "tagline": "If it has an API, we can automate it",
+        "stats": [
+            {
+                "value": "24+",
+                "label": "Tools & Platforms Supported"
+            },
+            {
+                "value": "100+",
+                "label": "Automation Workflows Built"
+            },
+            {
+                "value": "48h",
+                "label": "Average Setup Time"
+            }
+        ],
+        "ctaText": "Using a tool not on the list? We can almost certainly still integrate it.",
+        "ctaButton": "Ask About Your Tools"
+    },
+    "howItWorks": {
+        "badge": "Our Process",
+        "title": "From First Call to Live Automation in Days",
+        "subtitle": "No long meetings, no confusing jargon. Just a simple process that gets you from \"I have a problem\" to \"it's running automatically\" as fast as possible.",
+        "steps": [
+            {
+                "day": "Day 1",
+                "title": "Discovery Call",
+                "description": "We start with a free 30-minute call. You tell us what's eating your time — we'll figure out exactly what needs to be automated and how.",
+                "details": [
+                    "What tasks take the most time?",
+                    "Which tools do you currently use?",
+                    "What's your expected outcome?",
+                    "Budget & timeline discussion"
+                ]
+            },
+            {
+                "day": "Day 2",
+                "title": "We Map It Out",
+                "description": "We design the full automation flow — every trigger, condition, and action — and share it with you for approval before we write a single line.",
+                "details": [
+                    "Visual workflow diagram",
+                    "Tools & connections confirmed",
+                    "Edge cases planned",
+                    "Your approval required"
+                ]
+            },
+            {
+                "day": "Day 3–6",
+                "title": "We Build & Test",
+                "description": "We build the automation in our environment, run it through real test scenarios, and fix any edge cases before showing it to you.",
+                "details": [
+                    "Built on n8n or Make",
+                    "Real data test runs",
+                    "Error handling included",
+                    "Staging preview link"
+                ]
+            },
+            {
+                "day": "Day 7",
+                "title": "Go Live & Handover",
+                "description": "We deploy everything to your account, walk you through how it works, and hand over full documentation. Plus 30 days of free support.",
+                "details": [
+                    "Deployed to your account",
+                    "Walkthrough session",
+                    "Full documentation",
+                    "30 days free support"
+                ]
+            }
+        ],
+        "timelineTitle": "Most Automations Are Live Within 7 Days",
+        "timelineText": "Simple automations (1–2 steps) can be live within 24–48 hours. Complex multi-step workflows typically take 5–7 days. We'll give you an exact timeline after the discovery call.",
+        "ctaButton": "Book Free Discovery Call"
+    },
+    "pricing": {
+        "badge": "Simple Pricing",
+        "title": "Straightforward Prices, No Surprises",
+        "subtitle": "Every plan includes a one-time setup fee and optional monthly maintenance. No hidden charges.",
+        "valueNote": "💡 Cheaper than hiring one employee for a single week",
+        "tiers": [
+            {
+                "name": "Starter",
+                "badge": null,
+                "price": "৳8,000",
+                "priceNote": "One-time setup · Optional ৳2,000/mo maintenance",
+                "description": "Perfect for individuals and small businesses who need 1–2 automations to save time on a specific task.",
+                "features": [
+                    "1–2 automation workflows",
+                    "Up to 3 app connections",
+                    "Simple trigger-action flows",
+                    "WhatsApp or email delivery",
+                    "7-day build & delivery",
+                    "14 days post-launch support",
+                    "Basic documentation"
+                ],
+                "cta": "Get Started",
+                "highlighted": false
+            },
+            {
+                "name": "Growth",
+                "badge": "Most Popular",
+                "price": "৳20,000",
+                "priceNote": "One-time setup · Optional ৳4,000/mo maintenance",
+                "description": "For growing businesses who want a connected set of workflows that automate their core operations end-to-end.",
+                "features": [
+                    "3–5 automation workflows",
+                    "Up to 8 app connections",
+                    "Multi-step logic & conditions",
+                    "Error handling & fallbacks",
+                    "WhatsApp, email & Slack delivery",
+                    "10-day build & delivery",
+                    "30 days post-launch support",
+                    "Full documentation & walkthrough"
+                ],
+                "cta": "Get Growth Plan",
+                "highlighted": true
+            },
+            {
+                "name": "Custom",
+                "badge": null,
+                "price": "Custom",
+                "priceNote": "Quoted after discovery call",
+                "description": "For agencies and businesses that need a full automation ecosystem — complex logic, custom integrations, and ongoing management.",
+                "features": [
+                    "Unlimited workflows",
+                    "Unlimited app connections",
+                    "Complex logic, loops & branches",
+                    "Custom API & webhook integrations",
+                    "AI-powered automations (OpenAI)",
+                    "Dedicated build timeline",
+                    "Priority support",
+                    "Monthly performance review"
+                ],
+                "cta": "Request a Quote",
+                "highlighted": false
+            }
+        ],
+        "faqs": [
+            {
+                "q": "What's included in monthly maintenance?",
+                "a": "Monitoring, fixing broken automations, small updates, and keeping your workflows running as connected apps change their APIs."
+            },
+            {
+                "q": "Do I pay per month or just once?",
+                "a": "You pay a one-time setup fee to build your automation. Monthly maintenance is completely optional — only needed if you want ongoing monitoring."
+            },
+            {
+                "q": "What if I need more automations later?",
+                "a": "You can add more workflows at any time. Each new automation is priced based on complexity, usually starting from ৳4,000."
+            },
+            {
+                "q": "Can I see it working before I pay in full?",
+                "a": "Yes. We build on a staging environment and you test it live before we ask for the final 50% payment."
+            }
+        ]
+    },
+    "faq": {
+        "badge": "Got Questions?",
+        "title": "Everything You Want to Know",
+        "subtitle": "Honest answers to the questions we hear most often from clients before they get started.",
+        "questions": [
+            {
+                "question": "Do I need any technical knowledge to use the automations?",
+                "answer": "None at all. Once we build and hand over your automation, it runs completely in the background. You don't need to touch any code or manage any tools. We keep it simple."
+            },
+            {
+                "question": "What tools and platforms do you use to build automations?",
+                "answer": "We primarily build on n8n and Make (formerly Integromat). Both are industry-leading automation platforms that can connect virtually any app. For AI-powered automations, we integrate OpenAI. The choice of platform depends on your specific needs and budget."
+            },
+            {
+                "question": "What happens if an automation breaks or stops working?",
+                "answer": "All our automations include error handling — if something fails, you'll get a WhatsApp or email alert immediately. Every plan includes post-launch support, and our maintenance packages include ongoing monitoring and fixing."
+            },
+            {
+                "question": "Can you automate something that isn't on your list?",
+                "answer": "Almost certainly yes. If the tools you use have an API (almost all modern apps do), we can connect them. Book a free discovery call and tell us what you need — we'll let you know if it's possible."
+            },
+            {
+                "question": "How much does it cost to maintain the automation after launch?",
+                "answer": "Monthly maintenance is optional and starts from ৳2,000/month for Starter automations. It covers monitoring, fixing issues when connected apps update their systems, and small adjustments. You can also manage without maintenance if the automation is stable."
+            },
+            {
+                "question": "Will it work with the tools I'm already using?",
+                "answer": "Yes. We build around your existing stack — we don't ask you to switch tools or change how you work. Whether you're using WhatsApp, Google Sheets, Facebook, WooCommerce, or anything else, we connect them together."
+            },
+            {
+                "question": "How do payments work?",
+                "answer": "We take 50% upfront to start the build and 50% upon delivery after you've tested and approved the automation. We accept bKash, Nagad, and bank transfer."
+            },
+            {
+                "question": "What if I want to add more automations later?",
+                "answer": "Easy. You can add individual workflows at any time. We'll scope it, quote it, and build it — typically within 3–7 days depending on complexity."
+            }
+        ],
+        "stillHaveQuestions": {
+            "title": "Still Have a Question?",
+            "subtitle": "We're happy to answer anything before you commit. No pressure, just an honest conversation.",
+            "primaryCta": "Book Free Discovery Call",
+            "secondaryCta": "WhatsApp Us"
+        }
+    },
+    "simpleCta": {
+        "title": "Ready to Stop Doing It Manually?",
+        "subtitle": "Tell us the one task that wastes the most time in your day. We'll automate it — and you'll wonder how you ever lived without it.",
+        "trustBadges": [
+            "Free discovery call",
+            "Live in 7 days",
+            "No technical knowledge needed",
+            "30 days free support"
+        ],
+        "primaryButton": "Get Free Automation Audit",
+        "secondaryButton": "See Pricing",
+        "stats": {
+            "delivery": "Live in as little as 48 hours",
+            "support": "30 days free support included",
+            "start": "Starts from ৳8,000"
+        },
+        "finalNote": "💡 Not sure what to automate? Book a free call and we'll find the biggest time-wasters in your workflow."
     }
 }
