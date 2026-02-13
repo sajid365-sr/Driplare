@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 import { getCaseStudyById } from "@/lib/case-study-action";
 
 export default function CaseStudyDetailPage() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation("caseStudiesPage");
   const params = useParams();
   const id = params?.id as string;
 
@@ -61,8 +61,6 @@ export default function CaseStudyDetailPage() {
       </div>
     );
 
-  const isBn = i18n.language.startsWith("bn");
-
   // Helper function to format YouTube URLs
   const formatYoutubeUrl = (url: string) => {
     return url
@@ -79,7 +77,7 @@ export default function CaseStudyDetailPage() {
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors"
         >
           <ArrowLeft size={18} />{" "}
-          {isBn ? "সব কেস স্টাডি" : "Back to Case Studies"}
+          {t("detail.backLink")}
         </Link>
 
         {/* Hero Section */}
@@ -110,7 +108,7 @@ export default function CaseStudyDetailPage() {
               {caseStudy.metric}
             </span>
             <p className="text-sm font-bold uppercase tracking-wider mt-2 opacity-70">
-              Project Impact
+              {t("detail.projectImpact")}
             </p>
           </div>
         </div>
@@ -120,7 +118,7 @@ export default function CaseStudyDetailPage() {
           <section className="mb-20">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               <Play className="text-primary" fill="currentColor" />{" "}
-              {isBn ? "ক্লায়েন্ট রিভিউ" : "Client Video Review"}
+              {t("detail.clientReview")}
             </h2>
             <div className="aspect-video w-full rounded-3xl overflow-hidden border border-border shadow-2xl bg-muted">
               <iframe
@@ -140,7 +138,7 @@ export default function CaseStudyDetailPage() {
               <XCircle size={60} />
             </div>
             <h3 className="text-xl font-bold text-red-500 mb-4">
-              {isBn ? "আগের সমস্যা" : "The Challenge"}
+              {t("detail.theChallenge")}
             </h3>
             <p className="text-lg leading-relaxed">{caseStudy.problem}</p>
             {caseStudy.beforeMetricValue && (
@@ -154,7 +152,7 @@ export default function CaseStudyDetailPage() {
               <CheckCircle2 size={60} />
             </div>
             <h3 className="text-xl font-bold text-green-500 mb-4">
-              {isBn ? "আধুনিক সমাধান" : "The Driplare Solution"}
+              {t("detail.theSolution")}
             </h3>
             <p className="text-lg leading-relaxed">{caseStudy.solution}</p>
             {caseStudy.afterMetricValue && (
@@ -170,13 +168,13 @@ export default function CaseStudyDetailPage() {
           <section className="mb-20">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               <LayoutDashboard className="text-primary" />{" "}
-              {isBn ? "সলিউশন ডেমো ভিডিও" : "Solution & Dashboard Demo"}
+              {t("detail.solutionDemo")}
             </h2>
             <div className="aspect-video w-full rounded-3xl overflow-hidden border border-border shadow-xl bg-muted">
               <iframe
                 className="w-full h-full"
                 src={formatYoutubeUrl(caseStudy.dashboardVideoUrl)}
-                title="Dashboard Demo"
+                title={t("detail.solutionDemo")}
                 allowFullScreen
               ></iframe>
             </div>
@@ -189,7 +187,7 @@ export default function CaseStudyDetailPage() {
             <section>
               <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
                 <Workflow className="text-primary" />{" "}
-                {isBn ? "আমার কর্মপদ্ধতি" : "The Strategic Approach"}
+                {t("detail.theApproach")}
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
                 {caseStudy.myApproach}
@@ -198,9 +196,7 @@ export default function CaseStudyDetailPage() {
             {caseStudy.failedAttempts && (
               <section className="bg-muted/30 p-8 rounded-2xl border-l-4 border-orange-400">
                 <h3 className="text-xl font-bold mb-3">
-                  {isBn
-                    ? "চ্যালেঞ্জ এবং শিক্ষা"
-                    : "Technical Challenges & Pivot"}
+                  {t("detail.challenges")}
                 </h3>
                 <p className="text-muted-foreground italic">
                   {caseStudy.failedAttempts}
@@ -213,7 +209,7 @@ export default function CaseStudyDetailPage() {
               <section className="pt-10">
                 <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
                   <ImageIcon className="text-primary" />{" "}
-                  {isBn ? "প্রজেক্ট গ্যালারি" : "Project Gallery"}
+                  {t("detail.projectGallery")}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {caseStudy.gallery.map((img: string, idx: number) => (
@@ -232,7 +228,7 @@ export default function CaseStudyDetailPage() {
           <div className="space-y-8">
             <div className="bg-card border p-8 rounded-3xl shadow-sm">
               <h3 className="font-bold mb-4 flex items-center gap-2">
-                <Code size={18} className="text-primary" /> Core Stack
+                <Code size={18} className="text-primary" /> {t("detail.coreStack")}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {caseStudy.techTags.map((tech: string) => (
@@ -250,8 +246,7 @@ export default function CaseStudyDetailPage() {
             {caseStudy.n8nDiagramUrl && (
               <div className="space-y-4">
                 <h3 className="font-bold flex items-center gap-2">
-                  <Workflow size={18} className="text-primary" /> Workflow
-                  Diagram
+                  <Workflow size={18} className="text-primary" /> {t("detail.workflowDiagram")}
                 </h3>
                 <img
                   src={caseStudy.n8nDiagramUrl}
@@ -269,7 +264,7 @@ export default function CaseStudyDetailPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-5xl font-black mb-6">
-                {isBn ? "অর্জিত ফলাফল" : "The Outcome"}
+                {t("detail.theOutcome")}
               </h2>
               <p className="text-white/70 text-lg mb-8">{caseStudy.result}</p>
               <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
@@ -293,7 +288,7 @@ export default function CaseStudyDetailPage() {
                     {caseStudy.metric}
                   </p>
                   <p className="uppercase tracking-widest text-xs mt-2">
-                    Efficiency Gained
+                    {t("detail.efficiencyGained")}
                   </p>
                 </div>
               </div>
@@ -304,9 +299,7 @@ export default function CaseStudyDetailPage() {
         {/* Final CTA */}
         <div className="text-center space-y-8 py-10">
           <h2 className="text-4xl md:text-6xl font-black tracking-tight">
-            {isBn
-              ? "আপনার ব্যবসা কি অটোমেশনের জন্য প্রস্তুত?"
-              : "Ready to Automate Your Success?"}
+            {t("detail.finalCtaTitle")}
           </h2>
           <Button
             asChild
@@ -314,7 +307,7 @@ export default function CaseStudyDetailPage() {
             className="rounded-full px-10 py-8 text-xl font-bold"
           >
             <Link href="/contact">
-              {isBn ? "ফ্রি কনসালটেশন নিন" : "Start Your Transformation"}{" "}
+              {t("detail.finalCtaBtn")}{" "}
               <ArrowRight className="ml-2" />
             </Link>
           </Button>

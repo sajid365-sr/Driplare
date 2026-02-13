@@ -1,0 +1,506 @@
+{
+    "hero": {
+        "badge": "Workflow Automation",
+        "titleLine1": "Stop Doing the Same Thing",
+        "titleHighlight": "Twice.",
+        "titleLine2": "Automate It.",
+        "subtitle": "We build custom automations that connect your apps, handle repetitive tasks, and run your business in the background — 24/7, without human error.",
+        "audiences": [
+            {
+                "icon": "🏢",
+                "label": "For Businesses & Agencies"
+            },
+            {
+                "icon": "👤",
+                "label": "For Individuals & Freelancers"
+            },
+            {
+                "icon": "🛒",
+                "label": "For E-commerce Stores"
+            }
+        ],
+        "primaryCta": "Get Free Automation Audit",
+        "secondaryCta": "See What We Automate",
+        "toolsLabel": "Powered by",
+        "flowLabel": "Automation Running Live",
+        "flowStats": {
+            "steps": "Steps Automated",
+            "time": "Execution Time",
+            "runs": "Always On"
+        },
+        "liveBadge": "✅ Workflow Active",
+        "scrollText": "Explore Solutions"
+    },
+    "whatIsAutomation": {
+        "badge": "What is Automation?",
+        "title": "Your Business on Autopilot",
+        "subtitle": "Workflow automation means connecting your apps and tools so they talk to each other and complete tasks automatically — no manual work needed.",
+        "analogy": "Think of it like hiring an invisible employee who works 24/7, never makes mistakes, costs almost nothing, and handles all your boring repetitive tasks — instantly.",
+        "before": {
+            "title": "Without Automation",
+            "items": [
+                "Manually copy-pasting data between apps every day",
+                "Forgetting to follow up with leads",
+                "Spending hours on reports you could generate in seconds",
+                "Missing important notifications while you sleep",
+                "Doing the same 10 steps every time an order comes in",
+                "Your team wasting time on tasks a computer could do"
+            ]
+        },
+        "after": {
+            "title": "With Automation",
+            "items": [
+                "Data flows automatically between all your apps",
+                "Follow-ups sent instantly without you lifting a finger",
+                "Reports generated and delivered on schedule",
+                "Get notified on WhatsApp the moment something important happens",
+                "Orders processed, confirmed, and tracked automatically",
+                "Your team focused on work that actually needs humans"
+            ]
+        },
+        "flow": {
+            "label": "How an automation works",
+            "steps": [
+                {
+                    "label": "Trigger",
+                    "sub": "Something happens"
+                },
+                {
+                    "label": "Filter",
+                    "sub": "Check conditions"
+                },
+                {
+                    "label": "Action",
+                    "sub": "Do something"
+                },
+                {
+                    "label": "Done",
+                    "sub": "Runs every time"
+                }
+            ]
+        }
+    },
+    "whoIsThisFor": {
+        "badge": "Who is This For?",
+        "title": "If You Recognize Yourself Here, You Need This",
+        "subtitle": "Automation isn't just for big companies. Anyone drowning in repetitive tasks can benefit.",
+        "painLabel": "You're probably",
+        "withAutomation": "With Automation →",
+        "audiences": [
+            {
+                "emoji": "🏢",
+                "title": "Businesses & Agencies",
+                "subtitle": "SMEs, marketing agencies, service companies",
+                "pains": [
+                    "Manually updating spreadsheets after every sale",
+                    "Chasing leads that fall through the cracks",
+                    "Your team spending half their day on admin tasks",
+                    "Clients not getting timely updates or reports"
+                ],
+                "gains": [
+                    "Sales data synced to CRM automatically",
+                    "Lead follow-ups sent the moment they sign up",
+                    "Admin work handled without your team",
+                    "Automated reports delivered to clients on schedule"
+                ],
+                "cta": "Automate My Business"
+            },
+            {
+                "emoji": "👤",
+                "title": "Individuals & Freelancers",
+                "subtitle": "Content creators, solopreneurs, remote workers",
+                "pains": [
+                    "Posting the same content on every platform manually",
+                    "Inbox overflowing with emails you never get to",
+                    "Forgetting to invoice clients on time",
+                    "Tracking tasks and deadlines across too many tools"
+                ],
+                "gains": [
+                    "One post, auto-published everywhere",
+                    "Emails auto-sorted, replied to, and flagged",
+                    "Invoices sent automatically on the right date",
+                    "All tasks synced in one place automatically"
+                ],
+                "cta": "Simplify My Life"
+            },
+            {
+                "emoji": "🛒",
+                "title": "E-commerce Stores",
+                "subtitle": "Online shops, dropshippers, product sellers",
+                "pains": [
+                    "Manually confirming every order on WhatsApp",
+                    "No system to follow up with abandoned carts",
+                    "Inventory updates done by hand across platforms",
+                    "Customer queries piling up without quick replies"
+                ],
+                "gains": [
+                    "Orders auto-confirmed with tracking details",
+                    "Abandoned cart reminders sent automatically",
+                    "Inventory synced across all sales channels",
+                    "AI handles common customer questions instantly"
+                ],
+                "cta": "Automate My Store"
+            }
+        ]
+    },
+    "whatWeAutomate": {
+        "badge": "Our Automation Solutions",
+        "title": "What We Can Automate For You",
+        "subtitle": "Click any category to see real examples. If you can describe the task, we can probably automate it.",
+        "expandLabel": "See examples",
+        "collapseLabel": "Close",
+        "examplesLabel": "Real Examples",
+        "toolsLabel": "Tools Used",
+        "panelCta": "Automate This For Me",
+        "drawerCtaTitle": "Want this automation?",
+        "drawerCtaSubtitle": "We'll have it live for you within 48 hours.",
+        "bottomText": "Don't see your use case? We build fully custom automations for any workflow.",
+        "bottomCta": "Tell Us What You Need",
+        "categories": [
+            {
+                "key": "social",
+                "title": "Social Media Automation",
+                "description": "Schedule, publish, and repurpose content across all platforms without manual effort.",
+                "examples": [
+                    "Auto-post to Instagram, Facebook & LinkedIn from one place",
+                    "Turn a blog post into 5 social media captions automatically",
+                    "Cross-post YouTube videos to all platforms with custom captions",
+                    "Schedule a week of content in one sitting"
+                ],
+                "tools": [
+                    "Make",
+                    "Buffer",
+                    "n8n",
+                    "OpenAI",
+                    "Meta API"
+                ]
+            },
+            {
+                "key": "leads",
+                "title": "Lead & CRM Automation",
+                "description": "Capture leads automatically, follow up instantly, and never let a prospect fall through the cracks.",
+                "examples": [
+                    "Facebook Lead Ad → instant WhatsApp message to the lead",
+                    "Website form → add to CRM + assign to sales rep + send welcome email",
+                    "No reply in 3 days → auto follow-up reminder",
+                    "Won deal → auto-create invoice and onboarding task"
+                ],
+                "tools": [
+                    "n8n",
+                    "HubSpot",
+                    "WhatsApp API",
+                    "Gmail",
+                    "Notion"
+                ]
+            },
+            {
+                "key": "inbox",
+                "title": "Inbox & Email Automation",
+                "description": "Sort, reply, extract, and act on emails automatically so your inbox stays under control.",
+                "examples": [
+                    "Auto-reply to common customer questions",
+                    "Extract order details from emails → save to Google Sheets",
+                    "Flag urgent emails and send a WhatsApp alert",
+                    "Auto-unsubscribe and archive promotional emails"
+                ],
+                "tools": [
+                    "Gmail API",
+                    "Outlook",
+                    "n8n",
+                    "OpenAI",
+                    "Zapier"
+                ]
+            },
+            {
+                "key": "reporting",
+                "title": "Reporting & Data Sync",
+                "description": "Generate reports, sync spreadsheets, and deliver summaries automatically on schedule.",
+                "examples": [
+                    "Daily sales summary sent to WhatsApp every morning at 9am",
+                    "Auto-sync WooCommerce orders to Google Sheets",
+                    "Weekly performance report emailed to your team every Monday",
+                    "Real-time dashboard updated as new data comes in"
+                ],
+                "tools": [
+                    "Google Sheets",
+                    "n8n",
+                    "WhatsApp",
+                    "Airtable",
+                    "Looker"
+                ]
+            },
+            {
+                "key": "ecommerce",
+                "title": "E-commerce Operations",
+                "description": "Automate your entire order lifecycle — from placement to delivery to review collection.",
+                "examples": [
+                    "New order → WhatsApp confirmation to customer",
+                    "Low stock → alert sent to manager + reorder triggered",
+                    "Order delivered → auto-request review via WhatsApp",
+                    "Abandoned cart → 3-step follow-up sequence"
+                ],
+                "tools": [
+                    "WooCommerce",
+                    "Shopify",
+                    "WhatsApp API",
+                    "n8n",
+                    "Gmail"
+                ]
+            },
+            {
+                "key": "onboarding",
+                "title": "Client Onboarding",
+                "description": "Make every new client feel welcome without doing it manually each time.",
+                "examples": [
+                    "Payment received → welcome email + contract sent automatically",
+                    "New client → create project in Notion + assign team member",
+                    "Onboarding checklist sent with due dates auto-set",
+                    "7-day check-in email sent automatically after signup"
+                ],
+                "tools": [
+                    "n8n",
+                    "Notion",
+                    "Gmail",
+                    "Slack",
+                    "DocuSign"
+                ]
+            },
+            {
+                "key": "content",
+                "title": "Content Repurposing",
+                "description": "Turn one piece of content into many, distributed everywhere, automatically.",
+                "examples": [
+                    "Blog post → Twitter thread + LinkedIn post + Instagram caption",
+                    "YouTube video → transcript → summary → social snippets",
+                    "Podcast episode → show notes + quotes + audiogram",
+                    "Newsletter → WhatsApp broadcast message"
+                ],
+                "tools": [
+                    "OpenAI",
+                    "n8n",
+                    "Make",
+                    "Buffer",
+                    "Zapier"
+                ]
+            },
+            {
+                "key": "alerts",
+                "title": "Notifications & Alerts",
+                "description": "Get the right information at the right time, delivered to where you actually look.",
+                "examples": [
+                    "New Google review → instant Slack and WhatsApp notification",
+                    "Server downtime → SMS + WhatsApp alert within seconds",
+                    "Competitor price change → daily monitoring report",
+                    "New mention of your brand online → instant alert"
+                ],
+                "tools": [
+                    "n8n",
+                    "WhatsApp API",
+                    "Slack",
+                    "Telegram",
+                    "Make"
+                ]
+            }
+        ]
+    },
+    "recipes": {
+        "badge": "Ready-Made Automations",
+        "title": "Popular Automation Recipes",
+        "subtitle": "Pre-built automation templates our clients love most. Pick one and we'll set it up for you — usually within 48 hours.",
+        "popularLabel": "Popular",
+        "getThisLabel": "Get This",
+        "bottomText": "Want something not listed? We build fully custom recipes for your exact workflow.",
+        "bottomCta": "Request a Custom Recipe",
+        "filters": [
+            "All",
+            "E-commerce",
+            "Social Media",
+            "Leads",
+            "Reporting",
+            "Operations"
+        ],
+        "items": [
+            {
+                "emoji": "📦",
+                "title": "WhatsApp Order Confirmation",
+                "description": "Every new order triggers an instant WhatsApp message to the customer with order details and estimated delivery.",
+                "steps": [
+                    "New order placed on WooCommerce/Shopify",
+                    "Order details extracted automatically",
+                    "Personalised WhatsApp message sent instantly"
+                ],
+                "tools": [
+                    "WooCommerce",
+                    "WhatsApp API",
+                    "n8n"
+                ],
+                "time": "Setup: 1-2 days",
+                "category": "E-commerce",
+                "categoryKey": "ecommerce",
+                "difficulty": "Starter",
+                "popular": true
+            },
+            {
+                "emoji": "📱",
+                "title": "Auto Social Media Poster",
+                "description": "Write one post and have it automatically published across Facebook, Instagram, and LinkedIn at the best times.",
+                "steps": [
+                    "Add content to a shared Google Sheet or Notion",
+                    "Automation formats for each platform",
+                    "Posts published at scheduled times automatically"
+                ],
+                "tools": [
+                    "Google Sheets",
+                    "Make",
+                    "Meta API",
+                    "LinkedIn API"
+                ],
+                "time": "Setup: 2-3 days",
+                "category": "Social Media",
+                "categoryKey": "social",
+                "difficulty": "Starter",
+                "popular": true
+            },
+            {
+                "emoji": "🎯",
+                "title": "Lead Capture → WhatsApp Follow-Up",
+                "description": "When someone fills your Facebook or website form, they get a WhatsApp message within seconds and are added to your CRM.",
+                "steps": [
+                    "Lead submits Facebook Lead Ad or website form",
+                    "Lead saved to Google Sheets or CRM",
+                    "Personalised WhatsApp follow-up sent in under 60 seconds"
+                ],
+                "tools": [
+                    "Facebook Ads",
+                    "WhatsApp API",
+                    "n8n",
+                    "Google Sheets"
+                ],
+                "time": "Setup: 1-2 days",
+                "category": "Leads",
+                "categoryKey": "leads",
+                "difficulty": "Starter",
+                "popular": true
+            },
+            {
+                "emoji": "📊",
+                "title": "Daily Sales Report on WhatsApp",
+                "description": "Every morning at 9am, receive a complete sales summary for the previous day — directly on WhatsApp.",
+                "steps": [
+                    "Scheduled trigger fires every morning at 9am",
+                    "Sales data pulled from WooCommerce or Sheets",
+                    "Formatted summary sent to your WhatsApp"
+                ],
+                "tools": [
+                    "Google Sheets",
+                    "WhatsApp API",
+                    "n8n"
+                ],
+                "time": "Setup: 1 day",
+                "category": "Reporting",
+                "categoryKey": "reporting",
+                "difficulty": "Starter"
+            },
+            {
+                "emoji": "🛒",
+                "title": "Abandoned Cart Recovery",
+                "description": "Customers who leave without buying get a 3-step automated follow-up over 48 hours — email, then WhatsApp.",
+                "steps": [
+                    "Cart abandoned detected after 1 hour",
+                    "Email reminder sent with cart contents",
+                    "WhatsApp follow-up sent if no purchase after 24h"
+                ],
+                "tools": [
+                    "WooCommerce",
+                    "Gmail",
+                    "WhatsApp API",
+                    "n8n"
+                ],
+                "time": "Setup: 2-3 days",
+                "category": "E-commerce",
+                "categoryKey": "ecommerce",
+                "difficulty": "Intermediate"
+            },
+            {
+                "emoji": "✍️",
+                "title": "Blog to Social Content Pipeline",
+                "description": "Publish a blog post and get AI-generated social captions for 5 platforms, ready to post or auto-scheduled.",
+                "steps": [
+                    "New blog post published on WordPress",
+                    "OpenAI generates platform-specific captions",
+                    "Posts auto-scheduled across all platforms"
+                ],
+                "tools": [
+                    "WordPress",
+                    "OpenAI",
+                    "Make",
+                    "Buffer"
+                ],
+                "time": "Setup: 3-4 days",
+                "category": "Social Media",
+                "categoryKey": "social",
+                "difficulty": "Intermediate"
+            },
+            {
+                "emoji": "🤝",
+                "title": "Client Onboarding Sequence",
+                "description": "New client payment received? Welcome email, contract, Notion workspace, and task assignments all happen automatically.",
+                "steps": [
+                    "Payment confirmed via bKash or Stripe",
+                    "Welcome email + contract sent automatically",
+                    "Notion project created and team notified on Slack"
+                ],
+                "tools": [
+                    "Notion",
+                    "Gmail",
+                    "Slack",
+                    "n8n",
+                    "DocuSign"
+                ],
+                "time": "Setup: 3-5 days",
+                "category": "Operations",
+                "categoryKey": "operations",
+                "difficulty": "Intermediate"
+            },
+            {
+                "emoji": "⭐",
+                "title": "Post-Delivery Review Request",
+                "description": "After every order is marked delivered, a personalised review request is automatically sent to the customer via WhatsApp.",
+                "steps": [
+                    "Order status updated to 'Delivered'",
+                    "3-day delay before sending",
+                    "Friendly review request sent via WhatsApp with direct link"
+                ],
+                "tools": [
+                    "WooCommerce",
+                    "WhatsApp API",
+                    "n8n"
+                ],
+                "time": "Setup: 1 day",
+                "category": "E-commerce",
+                "categoryKey": "ecommerce",
+                "difficulty": "Starter"
+            },
+            {
+                "emoji": "🔔",
+                "title": "Brand Mention Alert System",
+                "description": "Get instant WhatsApp or Slack alerts whenever your brand, product, or keywords are mentioned online.",
+                "steps": [
+                    "Web monitoring tracks mentions in real-time",
+                    "New mention detected and filtered",
+                    "Instant alert sent with source and context"
+                ],
+                "tools": [
+                    "n8n",
+                    "WhatsApp API",
+                    "Slack",
+                    "Make"
+                ],
+                "time": "Setup: 2-3 days",
+                "category": "Reporting",
+                "categoryKey": "reporting",
+                "difficulty": "Advanced"
+            }
+        ]
+    }
+}

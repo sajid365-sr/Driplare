@@ -7,10 +7,10 @@ import { useTranslation } from "react-i18next";
 
 
 export function AIAgentFAQSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("AIAgentPage");
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const faqs = t("services.AIAgent.faq.questions", { returnObjects: true }) as Array<{
+  const faqs = t("faq.questions", { returnObjects: true }) as Array<{
     question: string;
     answer: string;
   }>;
@@ -40,15 +40,15 @@ export function AIAgentFAQSection() {
           >
             <HelpCircle className="w-4 h-4 text-primary" />
             <span className="text-sm font-semibold text-primary">
-              {t("services.AIAgent.faq.badge")}
+              {t("faq.badge")}
             </span>
           </motion.div>
 
           <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-            {t("services.AIAgent.faq.title")}
+            {t("faq.title")}
           </h2>
           <p className="text-lg text-muted-foreground">
-            {t("services.AIAgent.faq.subtitle")}
+            {t("faq.subtitle")}
           </p>
         </motion.div>
 
@@ -121,10 +121,10 @@ export function AIAgentFAQSection() {
                 <MessageCircle className="w-7 h-7 text-primary" />
               </div>
               <h3 className="text-2xl font-bold text-foreground mb-3">
-                {t("services.AIAgent.faq.stillHaveQuestions.title")}
+                {t("faq.stillHaveQuestions.title")}
               </h3>
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-                {t("services.AIAgent.faq.stillHaveQuestions.subtitle")}
+                {t("faq.stillHaveQuestions.subtitle")}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button
@@ -133,7 +133,7 @@ export function AIAgentFAQSection() {
                   asChild
                 >
                   <a href="/contact">
-                    {t("services.AIAgent.faq.stillHaveQuestions.primaryCta")}
+                    {t("faq.stillHaveQuestions.primaryCta")}
                   </a>
                 </Button>
                 <Button
@@ -147,7 +147,7 @@ export function AIAgentFAQSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {t("services.AIAgent.faq.stillHaveQuestions.secondaryCta")}
+                    {t("faq.stillHaveQuestions.secondaryCta")}
                   </a>
                 </Button>
               </div>

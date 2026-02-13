@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
 export function BenefitsDeepDive() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("AIAgentPage");
 
     return (
         <section className="py-20 bg-background relative overflow-hidden">
@@ -29,15 +29,15 @@ export function BenefitsDeepDive() {
                     >
                         <CheckCircle2 className="w-4 h-4 text-accent" />
                         <span className="text-sm font-semibold text-accent">
-                            {t("services.AIAgent.benefits.badge")}
+                            {t("benefits.badge")}
                         </span>
                     </motion.div>
 
                     <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-                        {t("services.AIAgent.benefits.title")}
+                        {t("benefits.title")}
                     </h2>
                     <p className="text-lg text-muted-foreground">
-                        {t("services.AIAgent.benefits.subtitle")}
+                        {t("benefits.subtitle")}
                     </p>
                 </motion.div>
 
@@ -56,20 +56,20 @@ export function BenefitsDeepDive() {
                             <div className="inline-flex items-center gap-3 bg-primary/10 rounded-2xl px-4 py-2 mb-4">
                                 <Clock className="w-5 h-5 text-primary" />
                                 <span className="text-sm font-bold text-primary uppercase">
-                                    {t("services.AIAgent.benefits.workload.label")}
+                                    {t("benefits.workload.label")}
                                 </span>
                             </div>
 
                             <h3 className="text-3xl md:text-4xl font-black text-foreground mb-4">
-                                {t("services.AIAgent.benefits.workload.title")}
+                                {t("benefits.workload.title")}
                             </h3>
                             <p className="text-lg text-muted-foreground mb-6">
-                                {t("services.AIAgent.benefits.workload.description")}
+                                {t("benefits.workload.description")}
                             </p>
 
                             {/* Key Points */}
                             <div className="space-y-3 mb-6">
-                                {(t("services.AIAgent.benefits.workload.points", { returnObjects: true }) as string[]).map(
+                                {(t("benefits.workload.points", { returnObjects: true }) as string[]).map(
                                     (point, index) => (
                                         <motion.div
                                             key={index}
@@ -89,10 +89,10 @@ export function BenefitsDeepDive() {
                             {/* Stat Highlight */}
                             <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border-2 border-primary/30 rounded-2xl p-6">
                                 <div className="text-4xl font-black text-primary mb-2">
-                                    {t("services.AIAgent.benefits.workload.stat.value")}
+                                    {t("benefits.workload.stat.value")}
                                 </div>
                                 <div className="text-sm text-muted-foreground">
-                                    {t("services.AIAgent.benefits.workload.stat.label")}
+                                    {t("benefits.workload.stat.label")}
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@ export function BenefitsDeepDive() {
                         {/* Right: Visual Chart */}
                         <div className="bg-card border-2 border-border rounded-3xl p-8">
                             <h4 className="text-xl font-bold text-foreground mb-6 text-center">
-                                {t("services.AIAgent.benefits.workload.chart.title")}
+                                {t("benefits.workload.chart.title")}
                             </h4>
 
                             {/* Before/After Comparison */}
@@ -109,7 +109,7 @@ export function BenefitsDeepDive() {
                                 <div>
                                     <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm font-semibold text-muted-foreground">
-                                            {t("services.AIAgent.benefits.workload.chart.before")}
+                                            {t("benefits.workload.chart.before")}
                                         </span>
                                         <span className="text-lg font-black text-destructive">
                                             40 hrs/week
@@ -130,7 +130,7 @@ export function BenefitsDeepDive() {
                                 <div>
                                     <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm font-semibold text-muted-foreground">
-                                            {t("services.AIAgent.benefits.workload.chart.after")}
+                                            {t("benefits.workload.chart.after")}
                                         </span>
                                         <span className="text-lg font-black text-accent">
                                             2 hrs/week
@@ -153,7 +153,7 @@ export function BenefitsDeepDive() {
                                         38 hrs/week
                                     </div>
                                     <div className="text-sm text-muted-foreground">
-                                        {t("services.AIAgent.benefits.workload.chart.saved")}
+                                        {t("benefits.workload.chart.saved")}
                                     </div>
                                 </div>
                             </div>
@@ -172,20 +172,20 @@ export function BenefitsDeepDive() {
                             <div className="inline-flex items-center gap-3 bg-secondary/10 rounded-2xl px-4 py-2 mb-4">
                                 <DollarSign className="w-5 h-5 text-secondary" />
                                 <span className="text-sm font-bold text-secondary uppercase">
-                                    {t("services.AIAgent.benefits.cost.label")}
+                                    {t("benefits.cost.label")}
                                 </span>
                             </div>
 
                             <h3 className="text-3xl md:text-4xl font-black text-foreground mb-4">
-                                {t("services.AIAgent.benefits.cost.title")}
+                                {t("benefits.cost.title")}
                             </h3>
                             <p className="text-lg text-muted-foreground mb-6">
-                                {t("services.AIAgent.benefits.cost.description")}
+                                {t("benefits.cost.description")}
                             </p>
 
                             {/* Key Points */}
                             <div className="space-y-3 mb-6">
-                                {(t("services.AIAgent.benefits.cost.points", { returnObjects: true }) as string[]).map(
+                                {(t("benefits.cost.points", { returnObjects: true }) as string[]).map(
                                     (point, index) => (
                                         <motion.div
                                             key={index}
@@ -205,10 +205,10 @@ export function BenefitsDeepDive() {
                             {/* Stat Highlight */}
                             <div className="bg-gradient-to-br from-secondary/10 to-accent/10 border-2 border-secondary/30 rounded-2xl p-6">
                                 <div className="text-4xl font-black text-secondary mb-2">
-                                    {t("services.AIAgent.benefits.cost.stat.value")}
+                                    {t("benefits.cost.stat.value")}
                                 </div>
                                 <div className="text-sm text-muted-foreground">
-                                    {t("services.AIAgent.benefits.cost.stat.label")}
+                                    {t("benefits.cost.stat.label")}
                                 </div>
                             </div>
                         </div>
@@ -216,7 +216,7 @@ export function BenefitsDeepDive() {
                         {/* Left: Cost Comparison Chart */}
                         <div className="lg:order-1 bg-card border-2 border-border rounded-3xl p-8">
                             <h4 className="text-xl font-bold text-foreground mb-6 text-center">
-                                {t("services.AIAgent.benefits.cost.chart.title")}
+                                {t("benefits.cost.chart.title")}
                             </h4>
 
                             {/* Cost Bars */}
@@ -225,7 +225,7 @@ export function BenefitsDeepDive() {
                                 <div>
                                     <div className="flex items-center justify-between mb-3">
                                         <span className="text-sm font-semibold text-foreground">
-                                            {t("services.AIAgent.benefits.cost.chart.employee")}
+                                            {t("benefits.cost.chart.employee")}
                                         </span>
                                         <span className="text-xl font-black text-destructive">
                                             ৳15,000/mo
@@ -250,7 +250,7 @@ export function BenefitsDeepDive() {
                                 <div>
                                     <div className="flex items-center justify-between mb-3">
                                         <span className="text-sm font-semibold text-foreground">
-                                            {t("services.AIAgent.benefits.cost.chart.aiAgent")}
+                                            {t("benefits.cost.chart.aiAgent")}
                                         </span>
                                         <span className="text-xl font-black text-accent">
                                             ৳500-1,000/mo
@@ -277,7 +277,7 @@ export function BenefitsDeepDive() {
                                         ৳14,000+
                                     </div>
                                     <div className="text-sm text-muted-foreground mb-3">
-                                        {t("services.AIAgent.benefits.cost.chart.saved")}
+                                        {t("benefits.cost.chart.saved")}
                                     </div>
                                     <div className="text-xs text-muted-foreground">
                                         = ৳1,68,000 saved per year
@@ -299,20 +299,20 @@ export function BenefitsDeepDive() {
                             <div className="inline-flex items-center gap-3 bg-accent/10 rounded-2xl px-4 py-2 mb-4">
                                 <TrendingUp className="w-5 h-5 text-accent" />
                                 <span className="text-sm font-bold text-accent uppercase">
-                                    {t("services.AIAgent.benefits.sales.label")}
+                                    {t("benefits.sales.label")}
                                 </span>
                             </div>
 
                             <h3 className="text-3xl md:text-4xl font-black text-foreground mb-4">
-                                {t("services.AIAgent.benefits.sales.title")}
+                                {t("benefits.sales.title")}
                             </h3>
                             <p className="text-lg text-muted-foreground mb-6">
-                                {t("services.AIAgent.benefits.sales.description")}
+                                {t("benefits.sales.description")}
                             </p>
 
                             {/* Key Points */}
                             <div className="space-y-3 mb-6">
-                                {(t("services.AIAgent.benefits.sales.points", { returnObjects: true }) as string[]).map(
+                                {(t("benefits.sales.points", { returnObjects: true }) as string[]).map(
                                     (point, index) => (
                                         <motion.div
                                             key={index}
@@ -332,13 +332,13 @@ export function BenefitsDeepDive() {
                             {/* Real Example */}
                             <div className="bg-gradient-to-br from-accent/10 to-primary/10 border-2 border-accent/30 rounded-2xl p-6">
                                 <div className="text-sm font-semibold text-muted-foreground mb-2">
-                                    {t("services.AIAgent.benefits.sales.example.label")}
+                                    {t("benefits.sales.example.label")}
                                 </div>
                                 <div className="text-2xl font-black text-foreground mb-2">
-                                    {t("services.AIAgent.benefits.sales.example.business")}
+                                    {t("benefits.sales.example.business")}
                                 </div>
                                 <div className="text-lg text-accent font-bold">
-                                    {t("services.AIAgent.benefits.sales.example.result")}
+                                    {t("benefits.sales.example.result")}
                                 </div>
                             </div>
                         </div>
@@ -346,7 +346,7 @@ export function BenefitsDeepDive() {
                         {/* Right: Growth Chart */}
                         <div className="bg-card border-2 border-border rounded-3xl p-8">
                             <h4 className="text-xl font-bold text-foreground mb-6 text-center">
-                                {t("services.AIAgent.benefits.sales.chart.title")}
+                                {t("benefits.sales.chart.title")}
                             </h4>
 
                             {/* Monthly Progress */}
@@ -396,7 +396,7 @@ export function BenefitsDeepDive() {
                             <div className="bg-gradient-to-br from-primary to-accent rounded-2xl p-6 text-center text-white">
                                 <div className="text-5xl font-black mb-2">3x</div>
                                 <div className="text-sm font-semibold">
-                                    {t("services.AIAgent.benefits.sales.chart.result")}
+                                    {t("benefits.sales.chart.result")}
                                 </div>
                             </div>
                         </div>
@@ -416,7 +416,7 @@ export function BenefitsDeepDive() {
                         asChild
                     >
                         <a href="#demo" className="flex items-center gap-2">
-                            {t("services.AIAgent.benefits.cta")}
+                            {t("benefits.cta")}
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </a>
                     </Button>

@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 export function SolutionSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("homePage");
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const features = [

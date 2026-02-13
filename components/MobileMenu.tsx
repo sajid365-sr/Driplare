@@ -15,12 +15,10 @@ import {
   Bot,
   Workflow,
   Code2,
-  Database,
   Briefcase,
   LayoutGrid,
   TrendingUp,
   ShoppingBag,
-  Mail,
   ArrowRight,
   DollarSign,
   Brain,
@@ -92,12 +90,6 @@ export function MobileMenu() {
                       href="/web-development"
                       icon={Code2}
                       label="Web Development"
-                      onClick={closeMenu}
-                    />
-                    <MobileNavLink
-                      href="/data-scraping"
-                      icon={Database}
-                      label="Data Scraping"
                       onClick={closeMenu}
                     />
                     <MobileNavLink

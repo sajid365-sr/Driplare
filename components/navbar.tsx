@@ -161,13 +161,6 @@ export function Navbar() {
                       </span>
                       <div className="flex flex-col gap-3">
                         <Link
-                          href="/solutions/data-scraping"
-                          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                        >
-                          <Database className="h-4 w-4" />{" "}
-                          {t("navigation.dataScraping")}
-                        </Link>
-                        <Link
                           href="/solutions/b2b-consulting"
                           className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                         >

@@ -1,0 +1,615 @@
+{
+    "hero": {
+        "badge": "পেশাদার Web Development",
+        "title": "Websites যা আসলেই আপনার ব্যবসা বৃদ্ধি করে",
+        "subtitle": "Custom-built বা template-based, আমরা দ্রুত, সুন্দর, এবং conversion-focused websites তৈরি করি। E-commerce থেকে portfolios, আমরা সবকিছুই করি।",
+        "primaryCta": "ফ্রি Quote পান",
+        "secondaryCta": "মূল্য হিসাব করুন",
+        "scrollText": "Services দেখুন",
+        "trustBadges": [
+            {
+                "icon": "CheckCircle2",
+                "text": "৫০+ Websites সরবরাহ করেছি"
+            },
+            {
+                "icon": "Clock",
+                "text": "৭-দিনে দ্রুত Launch"
+            },
+            {
+                "icon": "DollarSign",
+                "text": "শুরু ৳৮,০০০ থেকে"
+            }
+        ]
+    },
+    "websiteTypes": {
+        "badge": "সম্পূর্ণ সমাধান",
+        "title": "যেকোনো ধরনের Website আপনার প্রয়োজন",
+        "subtitle": "সাধারণ landing pages থেকে জটিল e-commerce platforms পর্যন্ত, আমরা ঠিক যা আপনার ব্যবসার প্রয়োজন তা তৈরি করি",
+        "ctaButton": "শুরু করুন",
+        "bottomText": "আপনার প্রয়োজন দেখছেন না? আমরা custom solutions ও তৈরি করি।",
+        "bottomCta": "আপনার Project নিয়ে আলোচনা করুন",
+        "types": [
+            {
+                "icon": "ShoppingCart",
+                "title": "E-commerce Store (Custom)",
+                "description": "Laravel বা Next.js দিয়ে scratch থেকে তৈরি সম্পূর্ণ-বৈশিষ্ট্যযুক্ত online store। সম্পূর্ণ নিয়ন্ত্রণ, unlimited products, custom features।",
+                "features": [
+                    "Custom shopping cart ও checkout",
+                    "Payment gateway (bKash, Nagad, SSLCommerz)",
+                    "Product management dashboard",
+                    "Order tracking ও notifications",
+                    "SEO optimized product pages"
+                ],
+                "priceRange": "৳৪০K-৮০K",
+                "timeline": "২-৩ সপ্তাহ",
+                "badge": "জনপ্রিয়",
+                "imageUrl": "/images/web-dev/ecommerce-custom.png"
+            },
+            {
+                "icon": "Store",
+                "title": "E-commerce (WordPress)",
+                "description": "WooCommerce ব্যবহার করে দ্রুত-launch online store। Proven templates দিয়ে দ্রুত শুরু করার জন্য নিখুঁত।",
+                "features": [
+                    "WooCommerce setup ও customization",
+                    "Payment gateway integration",
+                    "Product import ও setup",
+                    "Inventory management",
+                    "Mobile-responsive design"
+                ],
+                "priceRange": "৳১৫K-৩০K",
+                "timeline": "৫-৭ দিন",
+                "badge": "দ্রুত Launch",
+                "imageUrl": "/images/web-dev/ecommerce-wordpress.png"
+            },
+            {
+                "icon": "Briefcase",
+                "title": "Business Website",
+                "description": "Companies, agencies, বা organizations এর জন্য পেশাদার multi-page website। Credibility তৈরি করুন এবং customers আকৃষ্ট করুন।",
+                "features": [
+                    "আপনার brand এর সাথে মিলে custom design",
+                    "৫-১৫টি pages (About, Services, Contact, ইত্যাদি)",
+                    "Contact forms ও inquiries",
+                    "Google Maps integration",
+                    "দ্রুত loading ও SEO ready"
+                ],
+                "priceRange": "৳২০K-৪০K",
+                "timeline": "৭-১০ দিন",
+                "imageUrl": "/images/web-dev/business-website.png"
+            },
+            {
+                "icon": "Zap",
+                "title": "Landing Page",
+                "description": "Visitors কে customers এ রূপান্তর করার জন্য ডিজাইন করা single-page website। Ads, campaigns, বা product launches এর জন্য নিখুঁত।",
+                "features": [
+                    "High-converting design",
+                    "Call-to-action optimization",
+                    "Lead capture forms",
+                    "Facebook Pixel ও Google Ads ready",
+                    "Mobile-first approach"
+                ],
+                "priceRange": "৳৮K-১৫K",
+                "timeline": "৩-৫ দিন",
+                "badge": "সেরা মূল্য",
+                "imageUrl": "/images/web-dev/landing-page.png"
+            },
+            {
+                "icon": "User",
+                "title": "Portfolio Website",
+                "description": "আপনার কাজ সুন্দরভাবে প্রদর্শন করুন। Designers, photographers, developers, freelancers, বা artists এর জন্য নিখুঁত।",
+                "features": [
+                    "Project/work gallery",
+                    "About ও resume section",
+                    "Contact form",
+                    "Blog (optional)",
+                    "পরিষ্কার, আধুনিক design"
+                ],
+                "priceRange": "৳১০K-২০K",
+                "timeline": "৩-৫ দিন",
+                "imageUrl": "/images/web-dev/portfolio.png"
+            },
+            {
+                "icon": "LayoutDashboard",
+                "title": "Custom Dashboard/Web App",
+                "description": "React/Next.js দিয়ে তৈরি admin panels, SaaS platforms, internal tools, বা custom web applications।",
+                "features": [
+                    "Custom features ও workflows",
+                    "User authentication ও roles",
+                    "Database integration",
+                    "API development",
+                    "Scalable architecture"
+                ],
+                "priceRange": "৳৫০K-১৫০K",
+                "timeline": "৩-৪ সপ্তাহ",
+                "imageUrl": "/images/web-dev/dashboard.png"
+            },
+            {
+                "icon": "FileText",
+                "title": "Blog/Content Website",
+                "description": "WordPress-powered blog বা content site। পরিচালনা করা সহজ, SEO-friendly, content creators এর জন্য নিখুঁত।",
+                "features": [
+                    "WordPress CMS setup",
+                    "Category ও tag organization",
+                    "Comment system",
+                    "Social media integration",
+                    "Newsletter signup"
+                ],
+                "priceRange": "৳১২K-২৫K",
+                "timeline": "৫-৭ দিন",
+                "imageUrl": "/images/web-dev/blog.png"
+            },
+            {
+                "icon": "Calendar",
+                "title": "Booking/Service Website",
+                "description": "Service businesses, salons, consultants, বা clinics এর জন্য। Online bookings accept করুন এবং appointments manage করুন।",
+                "features": [
+                    "Appointment scheduling system",
+                    "Service showcase pages",
+                    "Calendar integration",
+                    "Email confirmations",
+                    "Payment collection (optional)"
+                ],
+                "priceRange": "৳২৫K-৪৫K",
+                "timeline": "১০-১৪ দিন",
+                "imageUrl": "/images/web-dev/booking.png"
+            }
+        ]
+    },
+    "customVsTemplate": {
+        "badge": "কোনটি বেছে নেবেন বুঝতে পারছেন না?",
+        "title": "Custom Build বনাম Template",
+        "subtitle": "উভয় option এর নিজস্ব শক্তি রয়েছে। আপনার ব্যবসার জন্য সঠিকটি কীভাবে বেছে নেবেন।",
+        "bestForLabel": "সেরা যাদের জন্য",
+        "custom": {
+            "title": "Custom Built",
+            "tagline": "React, Next.js, Laravel — Scratch থেকে তৈরি",
+            "points": [
+                {
+                    "text": "১০০% unique design — অন্য কারো কাছে নেই",
+                    "positive": true
+                },
+                {
+                    "text": "আপনার workflow ও প্রয়োজন অনুযায়ী তৈরি",
+                    "positive": true
+                },
+                {
+                    "text": "ব্যবসা বৃদ্ধির সাথে unlimited scalability",
+                    "positive": true
+                },
+                {
+                    "text": "আপনি পুরো source code এর মালিক",
+                    "positive": true
+                },
+                {
+                    "text": "কোন plugin সীমাবদ্ধতা বা dependencies নেই",
+                    "positive": true
+                },
+                {
+                    "text": "বেশি খরচ (৳৪০K-১৫০K)",
+                    "positive": false
+                },
+                {
+                    "text": "বেশি সময় লাগে (২-৪ সপ্তাহ)",
+                    "positive": false
+                }
+            ],
+            "bestFor": [
+                "Unique requirements সহ ব্যবসা",
+                "Scalable e-commerce বা SaaS platforms",
+                "Custom integrations প্রয়োজন এমন কোম্পানি",
+                "দীর্ঘমেয়াদী বিনিয়োগ"
+            ]
+        },
+        "template": {
+            "title": "WordPress / Template",
+            "tagline": "WooCommerce, Elementor — দ্রুত ও proven",
+            "points": [
+                {
+                    "text": "দ্রুত delivery — ৫-৭ দিনে live",
+                    "positive": true
+                },
+                {
+                    "text": "কম খরচ (৳৮K-৩০K)",
+                    "positive": true
+                },
+                {
+                    "text": "নিজে সহজে content manage করা যায়",
+                    "positive": true
+                },
+                {
+                    "text": "Proven, battle-tested designs",
+                    "positive": true
+                },
+                {
+                    "text": "বড় plugin ecosystem",
+                    "positive": true
+                },
+                {
+                    "text": "গভীর customization সীমিত",
+                    "positive": false
+                },
+                {
+                    "text": "Plugin updates সমস্যা তৈরি করতে পারে",
+                    "positive": false
+                }
+            ],
+            "bestFor": [
+                "দ্রুত launch ও কম budget",
+                "Standard e-commerce বা blogging",
+                "Non-technical owners যারা নিজে manage করেন",
+                "Scale করার আগে idea test করা"
+            ]
+        },
+        "confused": {
+            "title": "এখনও নিশ্চিত নন?",
+            "subtitle": "আপনার ব্যবসা ও budget সম্পর্কে বলুন। আমরা সৎভাবে আপনার জন্য সেরা option সুপারিশ করব — এমনকি যদি সেটি সস্তা সমাধান হয়।",
+            "cta": "ফ্রি Recommendation পান"
+        }
+    },
+    "techStack": {
+        "badge": "আমাদের Tech Stack",
+        "title": "আধুনিক, প্রমাণিত প্রযুক্তি দিয়ে তৈরি",
+        "subtitle": "আমরা industry-standard tools ব্যবহার করি — experimental frameworks নয়। আপনার website বছরের পর বছর দ্রুত, সুরক্ষিত, এবং maintainable থাকবে।",
+        "note": "আমরা প্রতিটি কাজের জন্য সঠিক tool বেছে নিই — সবচেয়ে trendy টি নয়।",
+        "categories": [
+            {
+                "title": "Frontend",
+                "techs": [
+                    {
+                        "name": "React",
+                        "logoUrl": "/images/tech/react.svg"
+                    },
+                    {
+                        "name": "Next.js",
+                        "logoUrl": "/images/tech/nextjs.svg"
+                    },
+                    {
+                        "name": "TypeScript",
+                        "logoUrl": "/images/tech/typescript.svg"
+                    },
+                    {
+                        "name": "Tailwind CSS",
+                        "logoUrl": "/images/tech/tailwind.svg"
+                    },
+                    {
+                        "name": "Framer Motion",
+                        "logoUrl": "/images/tech/framer.svg"
+                    }
+                ]
+            },
+            {
+                "title": "Backend",
+                "techs": [
+                    {
+                        "name": "Node.js",
+                        "logoUrl": "/images/tech/nodejs.svg"
+                    },
+                    {
+                        "name": "Laravel",
+                        "logoUrl": "/images/tech/laravel.svg"
+                    },
+                    {
+                        "name": "PHP",
+                        "logoUrl": "/images/tech/php.svg"
+                    },
+                    {
+                        "name": "REST API",
+                        "logoUrl": "/images/tech/api.svg"
+                    },
+                    {
+                        "name": "GraphQL",
+                        "logoUrl": "/images/tech/graphql.svg"
+                    }
+                ]
+            },
+            {
+                "title": "Database",
+                "techs": [
+                    {
+                        "name": "MongoDB",
+                        "logoUrl": "/images/tech/mongodb.svg"
+                    },
+                    {
+                        "name": "MySQL",
+                        "logoUrl": "/images/tech/mysql.svg"
+                    },
+                    {
+                        "name": "PostgreSQL",
+                        "logoUrl": "/images/tech/postgresql.svg"
+                    },
+                    {
+                        "name": "Prisma",
+                        "logoUrl": "/images/tech/prisma.svg"
+                    }
+                ]
+            },
+            {
+                "title": "CMS ও E-commerce",
+                "techs": [
+                    {
+                        "name": "WordPress",
+                        "logoUrl": "/images/tech/wordpress.svg"
+                    },
+                    {
+                        "name": "WooCommerce",
+                        "logoUrl": "/images/tech/woocommerce.svg"
+                    },
+                    {
+                        "name": "Strapi",
+                        "logoUrl": "/images/tech/strapi.svg"
+                    },
+                    {
+                        "name": "Shopify",
+                        "logoUrl": "/images/tech/shopify.svg"
+                    }
+                ]
+            },
+            {
+                "title": "Deployment ও Hosting",
+                "techs": [
+                    {
+                        "name": "Vercel",
+                        "logoUrl": "/images/tech/vercel.svg"
+                    },
+                    {
+                        "name": "AWS",
+                        "logoUrl": "/images/tech/aws.svg"
+                    },
+                    {
+                        "name": "cPanel",
+                        "logoUrl": "/images/tech/cpanel.svg"
+                    },
+                    {
+                        "name": "Hostinger",
+                        "logoUrl": "/images/tech/hostinger.svg"
+                    },
+                    {
+                        "name": "Cloudflare",
+                        "logoUrl": "/images/tech/cloudflare.svg"
+                    }
+                ]
+            }
+        ]
+    },
+    "whatsIncluded": {
+        "badge": "কোনো লুকানো চার্জ নেই",
+        "title": "প্রতিটি Website এ যা অন্তর্ভুক্ত থাকে",
+        "subtitle": "আমরা যে প্রতিটি project deliver করি তাতে এই essentials থাকে — কোনো surprise নেই, কোনো hidden charges নেই।",
+        "includedTitle": "প্রতিটি Package এ Standard",
+        "includedSubtitle": "আমরা যে website তৈরি করি তার প্রতিটিতে অন্তর্ভুক্ত",
+        "included": [
+            "Mobile-responsive design",
+            "SEO basics (meta, sitemap, robots.txt)",
+            "SSL certificate setup",
+            "Contact form integration",
+            "Google Analytics setup",
+            "Social media links",
+            "দ্রুত page load optimization",
+            "Cross-browser compatibility",
+            "১ মাস বিনামূল্যে support",
+            "Admin panel training",
+            "Source code handover",
+            "Hosting setup সহায়তা"
+        ],
+        "addonsTitle": "ঐচ্ছিক Add-ons",
+        "addonsSubtitle": "অতিরিক্ত features দিয়ে আপনার website উন্নত করুন",
+        "addons": [
+            {
+                "name": "Advanced SEO Package",
+                "price": "৳৫,০০০"
+            },
+            {
+                "name": "bKash / Nagad Payment Gateway",
+                "price": "৳৮,০০০"
+            },
+            {
+                "name": "SSLCommerz Integration",
+                "price": "৳১০,০০০"
+            },
+            {
+                "name": "Multi-language Support",
+                "price": "৳৮,০০০"
+            },
+            {
+                "name": "Live Chat Integration",
+                "price": "৳৩,০০০"
+            },
+            {
+                "name": "Email Marketing Setup",
+                "price": "৳৫,০০০"
+            },
+            {
+                "name": "Custom Animations",
+                "price": "৳৫,০০০-১০,০০০"
+            },
+            {
+                "name": "Maintenance Package (মাসিক)",
+                "price": "৳৩,০০০-৫,০০০"
+            }
+        ],
+        "cta": {
+            "title": "কিছু specific প্রয়োজন?",
+            "subtitle": "আমরা আপনার project এ যেকোনো feature যোগ করতে পারি। Consultation এর সময় জিজ্ঞাসা করুন।",
+            "button": "আপনার Requirements আলোচনা করুন"
+        }
+    },
+    "process": {
+        "badge": "আমরা কিভাবে কাজ করি",
+        "title": "৫টি ধাপে Idea থেকে Live Website",
+        "subtitle": "কোনো surprise ছাড়া একটি স্পষ্ট, সহজ process। আপনি সবসময় জানবেন কি হচ্ছে এবং পরবর্তী কি আসছে।",
+        "ctaText": "শুরু করতে প্রস্তুত? চলুন আপনার project kick off করি।",
+        "ctaButton": "আপনার Project শুরু করুন",
+        "steps": [
+            {
+                "day": "দিন ১",
+                "title": "Discovery Call",
+                "description": "আমরা আপনার ব্যবসা, লক্ষ্য, এবং আপনার কি প্রয়োজন তা বোঝার জন্য একটি বিনামূল্যে ৩০-৪৫ মিনিটের call দিয়ে শুরু করি। কোনো technical জার্গন নেই — শুধু একটি স্পষ্ট কথোপকথন।",
+                "details": [
+                    "ব্যবসার লক্ষ্য ও target audience",
+                    "Website type ও প্রয়োজনীয় features",
+                    "Budget ও timeline আলোচনা",
+                    "Custom বা template recommendation"
+                ]
+            },
+            {
+                "day": "দিন ২-৩",
+                "title": "Proposal ও Design Mockup",
+                "description": "আপনি একটি নির্দিষ্ট মূল্য, timeline, এবং একটি design mockup সহ বিস্তারিত proposal পাবেন যাতে আমরা কিছু তৈরি করার আগেই আপনার website কেমন হবে দেখতে পাবেন।",
+                "details": [
+                    "নির্দিষ্ট মূল্যের quote (কোনো surprise নেই)",
+                    "Homepage design mockup",
+                    "Sitemap ও page structure",
+                    "Tech stack confirmation"
+                ]
+            },
+            {
+                "day": "দিন ৪-১৪",
+                "title": "Development",
+                "description": "আমরা আপনার website তৈরি করি। আপনি WhatsApp বা email এর মাধ্যমে নিয়মিত updates পান। Timeline জটিলতার উপর নির্ভর করে — landing pages ৩ দিন লাগে, custom platforms ৩ সপ্তাহ পর্যন্ত লাগতে পারে।",
+                "details": [
+                    "দৈনিক progress updates",
+                    "Preview করার জন্য staging link",
+                    "Content integration",
+                    "সব devices এ testing"
+                ]
+            },
+            {
+                "day": "দিন ১৫",
+                "title": "Review ও Revisions",
+                "description": "আপনি staging link এ সম্পূর্ণ website পর্যালোচনা করেন এবং যেকোনো পরিবর্তনের অনুরোধ করেন। এই পর্যায়ে আমরা unlimited revisions অফার করি — আপনি ১০০% খুশি না হওয়া পর্যন্ত আমরা থামি না।",
+                "details": [
+                    "সম্পূর্ণ website walkthrough",
+                    "Unlimited change requests",
+                    "Performance ও speed check",
+                    "আপনার চূড়ান্ত অনুমোদন"
+                ]
+            },
+            {
+                "day": "দিন ১৬+",
+                "title": "Launch ও Support",
+                "description": "আমরা আপনার website live deploy করি, আপনার domain ও hosting set up করি, এবং একটি training session প্রদান করি। তারপর আপনি যেকোনো সমস্যা বা ছোট updates এর জন্য ১ মাস বিনামূল্যে support পাবেন।",
+                "details": [
+                    "Domain ও hosting setup",
+                    "Admin panel training session",
+                    "১ মাস বিনামূল্যে support",
+                    "Ongoing maintenance উপলব্ধ"
+                ]
+            }
+        ]
+    },
+    "pricingCalculator": {
+        "badge": "তাৎক্ষণিক মূল্য অনুমান",
+        "title": "আপনার Website এর খরচ কত হবে?",
+        "subtitle": "আপনার project configure করুন এবং তাৎক্ষণিক আনুমানিক মূল্য পান। কোনো form নেই, কোনো অপেক্ষা নেই।",
+        "step1": "১. আপনার কোন ধরনের website দরকার?",
+        "step2": "২. Custom build নাকি template?",
+        "step3": "৩. কতটি page লাগবে?",
+        "step4": "৪. কোনো extra features?",
+        "websiteTypes": {
+            "ecommerce_custom": "E-commerce (Custom)",
+            "ecommerce_wp": "E-commerce (WordPress)",
+            "business": "Business Website",
+            "landing": "Landing Page",
+            "portfolio": "Portfolio",
+            "dashboard": "Dashboard / Web App",
+            "blog": "Blog / Content Site",
+            "booking": "Booking / Service Site"
+        },
+        "buildTypes": {
+            "custom": "Custom Built",
+            "template": "Template Based"
+        },
+        "addons": {
+            "ecommerce": "E-commerce / Shopping Cart",
+            "payment": "Payment Gateway (bKash, Nagad)",
+            "multiLang": "Multi-language Support",
+            "customDesign": "Custom UI/UX Design"
+        },
+        "result": {
+            "estimatedPrice": "আনুমানিক মূল্য সীমা",
+            "estimatedTime": "আনুমানিক Delivery",
+            "days": "দিন",
+            "disclaimer": "চূড়ান্ত quote নির্দিষ্ট requirements এর উপর নির্ভর করে। সঠিক estimate এর জন্য ফ্রি consultation বুক করুন।",
+            "summaryTitle": "আপনার Configuration:",
+            "typeLabel": "Website Type",
+            "buildLabel": "Build Type",
+            "pagesLabel": "Pages",
+            "pagesUnit": "টি page"
+        },
+        "cta": {
+            "title": "সঠিক quote চান?",
+            "subtitle": "আপনার project সম্পর্কে বলুন এবং আমরা ২৪ ঘন্টার মধ্যে বিস্তারিত proposal পাঠাব।",
+            "button": "সঠিক Quote পান"
+        }
+    },
+    "faq": {
+        "badge": "প্রশ্ন আছে?",
+        "title": "যা কিছু জানা দরকার",
+        "subtitle": "আমাদের web development সেবা সম্পর্কে সাধারণ প্রশ্ন, সৎভাবে উত্তর দেওয়া হয়েছে।",
+        "questions": [
+            {
+                "question": "Delivery এর পরে কি আমি website এর মালিক হব?",
+                "answer": "হ্যাঁ, ১০০%। Project সম্পূর্ণ হলে এবং payment চূড়ান্ত হলে আপনি সম্পূর্ণ source code এবং সব assets পাবেন। আমরা আপনাকে কোনো proprietary system এ আটকে রাখি না — website সম্পূর্ণ আপনার।"
+            },
+            {
+                "question": "Launch এর পরে কি আমি নিজে content update করতে পারব?",
+                "answer": "অবশ্যই। সব WordPress এবং template-based websites সহজ-ব্যবহারযোগ্য admin panel সহ আসে। Custom builds এর জন্য, আমরা একটি CMS বা admin dashboard প্রদান করি যাতে আপনি code ছাড়াই text, images, এবং products update করতে পারেন। Launch এর দিনে আমরা একটি training session ও দিই।"
+            },
+            {
+                "question": "Design পছন্দ না হলে কি হবে?",
+                "answer": "আমরা একটি লাইন code লেখার আগেই design mockup শেয়ার করি। আপনি সেই পর্যায়ে পরিবর্তনের অনুরোধ করতে পারেন। Design অনুমোদনের পরে build করা হলে, আমরা review পর্যায়ে unlimited revision requests অফার করি যতক্ষণ না আপনি ১০০% সন্তুষ্ট হন।"
+            },
+            {
+                "question": "আপনারা কি hosting এবং domain দেন?",
+                "answer": "আমরা সরাসরি hosting বা domain বিক্রি করি না, কিন্তু সবকিছু setup করতে সাহায্য করি। আমরা Hostinger, Namecheap, বা আপনার পছন্দের provider থেকে কেনার জন্য গাইড করব, তারপর project এর অংশ হিসেবে আপনার website configure এবং deploy করব।"
+            },
+            {
+                "question": "Launch এর পরে website maintenance সম্পর্কে কি?",
+                "answer": "প্রতিটি project এ bugs এবং ছোট updates এর জন্য ১ মাস বিনামূল্যে support অন্তর্ভুক্ত। এরপরে, আমরা ঐচ্ছিক মাসিক maintenance packages অফার করি ৳৩,০০০/মাস থেকে শুরু করে যা security updates, backups, content changes, এবং performance monitoring কভার করে।"
+            },
+            {
+                "question": "আপনারা কি আমার বিদ্যমান website redesign করতে পারবেন?",
+                "answer": "হ্যাঁ। আমরা সম্পূর্ণ redesigns এবং আংশিক overhauls handle করি। আপনার বর্তমান website শেয়ার করুন এবং কি কাজ করছে না তা বলুন — আমরা সেরা approach প্রস্তাব করব, তা fresh build হোক বা আপনার কাছে ইতিমধ্যে যা আছে তা উন্নত করা হোক।"
+            },
+            {
+                "question": "Payment কিভাবে কাজ করে?",
+                "answer": "আমরা project শুরু করতে ৫০% আগাম নিই এবং চূড়ান্ত handover এর আগে delivery তে ৫০%। আমরা bKash, Nagad, bank transfer, এবং international clients এর জন্য Wise বা PayPal এর মাধ্যমে আন্তর্জাতিক payments গ্রহণ করি।"
+            },
+            {
+                "question": "আপনারা কি আমার website এ bKash বা Nagad integrate করতে পারবেন?",
+                "answer": "হ্যাঁ। আমরা bKash, Nagad, SSLCommerz, এবং অন্যান্য Bangladeshi payment gateways integrate করি। Integration টি gateway এবং প্রয়োজনীয় জটিলতার উপর নির্ভর করে ৳৮,০০০ থেকে শুরু হয়।"
+            },
+            {
+                "question": "Project সম্পূর্ণ হতে কতক্ষণ লাগে?",
+                "answer": "এটি type এর উপর নির্ভর করে। Landing pages ৩–৫ দিন, WordPress e-commerce ৫–৭ দিন, business websites ৭–১০ দিন, এবং custom web apps ২–৪ সপ্তাহ লাগে। উপরের pricing calculator ব্যবহার করে আপনার timeline অনুমান করতে পারেন।"
+            },
+            {
+                "question": "আপনারা কি international clients দের সাথে কাজ করেন?",
+                "answer": "হ্যাঁ। আমরা worldwide clients দের সাথে remotely কাজ করি। যোগাযোগ WhatsApp, Slack, বা email এর মাধ্যমে। International clients দের কাছ থেকে Wise বা PayPal এর মাধ্যমে payments গ্রহণ করা হয়।"
+            }
+        ],
+        "stillHaveQuestions": {
+            "title": "এখনও প্রশ্ন আছে?",
+            "subtitle": "আমাদের টিম commit করার আগে যেকোনো প্রশ্নের উত্তর দিতে খুশি। কোনো চাপ নেই, শুধু সৎ পরামর্শ।",
+            "primaryCta": "ফ্রি Consultation বুক করুন",
+            "secondaryCta": "WhatsApp করুন"
+        }
+    },
+    "simpleCta": {
+        "title": "একসাথে কিছু দারুণ তৈরি করা যাক",
+        "subtitle": "একটি সাধারণ landing page থেকে সম্পূর্ণ e-commerce platform পর্যন্ত — আমরা professional দেখতে এবং আসলেই ফলাফল আনে এমন websites deliver করি।",
+        "trustBadges": [
+            "ফ্রি consultation",
+            "নির্দিষ্ট মূল্যের quotes",
+            "৭-দিনে দ্রুত launch উপলব্ধ",
+            "১ মাস বিনামূল্যে support"
+        ],
+        "primaryButton": "এখনই ফ্রি Quote পান",
+        "secondaryButton": "মূল্য হিসাব করুন",
+        "stats": {
+            "delivery": "মাত্র ৩ দিনে delivery সম্ভব",
+            "support": "১ মাস বিনামূল্যে support",
+            "quote": "২৪ ঘন্টার মধ্যে quote"
+        },
+        "finalNote": "💡 কোথা থেকে শুরু করবেন বুঝতে পারছেন না? একটি ফ্রি ৩০ মিনিটের consultation বুক করুন এবং আমরা আপনাকে guide করব।"
+    }
+}

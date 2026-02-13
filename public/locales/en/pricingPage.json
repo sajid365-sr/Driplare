@@ -1,0 +1,248 @@
+{
+  "Hero": {
+    "badge": "Transparent Pricing",
+    "title": {
+      "line1": "Simple Pricing,",
+      "line2": "Powerful Results"
+    },
+    "subtitle": "Choose the plan that fits your business. Start with a free trial, scale as you grow.",
+    "props": [
+      {
+        "icon": "🎁",
+        "value": "Free Trial",
+        "label": "1-2 weeks risk-free"
+      },
+      {
+        "icon": "💰",
+        "value": "No Hidden",
+        "label": "Transparent costs"
+      },
+      {
+        "icon": "🚀",
+        "value": "Quick Setup",
+        "label": "Live in 48 hours"
+      }
+    ]
+  },
+  "pricing": {
+    "sectionTitle": "Choose Your Plan",
+    "sectionSubtitle": "Flexible pricing for businesses of all sizes",
+    "tabs": {
+      "bangladesh": "Bangladesh",
+      "international": "International",
+      "enterprise": "Enterprise"
+    },
+    "mostPopular": "Most Popular",
+    "setupFee": "One-time Setup",
+    "monthlyFee": "Monthly Maintenance",
+    "bangladesh": {
+      "starter": {
+        "name": "Starter",
+        "price": "৳5,000 - 7,000",
+        "setup": "৳5,000 - 7,000",
+        "monthly": "৳500 - 700 / month",
+        "description": "Perfect for small e-commerce businesses starting with AI",
+        "features": [
+          "Free 1-2 week trial",
+          "1 AI Sales Agent",
+          "Facebook OR WhatsApp (single platform)",
+          "Google Sheet integration",
+          "Basic product training (up to 20 products)",
+          "Email support",
+          "Monthly usage reports"
+        ],
+        "cta": "Start Free Trial"
+      },
+      "pro": {
+        "name": "Professional",
+        "price": "৳10,000 - 15,000",
+        "setup": "৳10,000 - 15,000",
+        "monthly": "৳1,000 - 1,500 / month",
+        "description": "For growing businesses ready to scale sales automation",
+        "features": [
+          "Everything in Starter",
+          "Facebook AND WhatsApp integration",
+          "Advanced product training (unlimited products)",
+          "Custom conversation flows",
+          "Priority WhatsApp support",
+          "Weekly optimization calls",
+          "Custom reporting dashboard"
+        ],
+        "cta": "Get Started"
+      },
+      "custom": {
+        "name": "Custom Solution",
+        "price": "Custom Quote",
+        "setup": "Custom",
+        "monthly": "Custom",
+        "description": "Fully customized automation ecosystem for your business",
+        "features": [
+          "Everything in Professional",
+          "Multiple AI agents",
+          "Custom MERN dashboard",
+          "Advanced workflow automation",
+          "Data scraping & monitoring",
+          "Technical consulting",
+          "Dedicated account manager"
+        ],
+        "cta": "Book Consultation"
+      }
+    },
+    "international": {
+      "starter": {
+        "name": "Starter Agent",
+        "price": "$500 - 700",
+        "period": "setup",
+        "description": "Entry-level AI automation for small businesses",
+        "features": [
+          "1 Custom AI Agent",
+          "Basic knowledge base",
+          "Single platform integration",
+          "7-day deployment",
+          "Email support",
+          "Monthly reporting"
+        ],
+        "cta": "Get Started"
+      },
+      "pro": {
+        "name": "Professional",
+        "price": "$1,500 - 2,500",
+        "period": "setup",
+        "description": "Complete automation solution for growing businesses",
+        "features": [
+          "3 Interconnected AI Agents",
+          "Advanced knowledge base",
+          "Multi-platform integration",
+          "CRM & database connections",
+          "14-day deployment",
+          "Priority support",
+          "Custom analytics dashboard"
+        ],
+        "cta": "Start Now"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "Custom",
+        "period": "quote",
+        "description": "Full AI workforce with custom infrastructure",
+        "features": [
+          "Unlimited AI agents",
+          "Custom MERN stack solutions",
+          "Advanced workflow automation",
+          "24/7 system monitoring",
+          "Dedicated success manager",
+          "White-label options",
+          "SLA guarantees"
+        ],
+        "cta": "Contact Sales"
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise Solutions",
+      "description": "Need a fully custom solution? We'll build a complete AI automation ecosystem tailored to your unique business requirements.",
+      "features": [
+        "Full AI workforce deployment",
+        "Custom MERN stack applications",
+        "Advanced data intelligence systems",
+        "Technical strategy consulting",
+        "Dedicated development team",
+        "24/7 priority support"
+      ],
+      "cta": "Schedule Enterprise Consultation"
+    }
+  },
+  "Services": {
+    "title": "Additional Services",
+    "subtitle": "Extend your automation with specialized solutions",
+    "startingAt": "Starting at",
+    "cta": "Get Quote",
+    "note": "All services can be combined with AI Agent packages.",
+    "contactUs": "Contact us for custom pricing",
+    "automation": {
+      "title": "Workflow Automation",
+      "price": "৳15,000+",
+      "description": "Connect your business apps and eliminate manual work",
+      "features": [
+        "n8n workflow design",
+        "Multi-app integration",
+        "Error handling",
+        "Performance monitoring"
+      ]
+    },
+    "scraping": {
+      "title": "Data Scraping",
+      "price": "৳2,000/mo",
+      "description": "Automated data collection and monitoring",
+      "features": [
+        "Real-time data extraction",
+        "Competitor tracking",
+        "Automated alerts",
+        "Historical storage"
+      ]
+    },
+    "mern": {
+      "title": "MERN Development",
+      "price": "৳25,000+",
+      "description": "Custom web applications and dashboards",
+      "features": [
+        "MongoDB database",
+        "Express API",
+        "React frontend",
+        "Node.js backend"
+      ]
+    },
+    "consulting": {
+      "title": "Tech Consulting",
+      "price": "৳3,000/hr",
+      "description": "Expert guidance for your tech decisions",
+      "features": [
+        "Architecture design",
+        "Technology selection",
+        "Scalability planning",
+        "Performance optimization"
+      ]
+    }
+  },
+  "Faq": {
+    "badge": "Got Questions?",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about our pricing",
+    "questions": [
+      {
+        "question": "How does the free trial work?",
+        "answer": "We set up your AI agent completely free for 1-2 weeks. You test it with real customers. If you're happy with the results, you pay the setup fee and continue with monthly maintenance. If not, no charges at all."
+      },
+      {
+        "question": "What's included in the monthly maintenance fee?",
+        "answer": "Monthly fee covers AI API usage costs, hosting, regular updates, bug fixes, and ongoing support. It ensures your AI agent keeps running smoothly 24/7."
+      },
+      {
+        "question": "Can I cancel the monthly subscription?",
+        "answer": "Yes, absolutely. There's no long-term contract. You can cancel anytime with 30 days notice. The one-time setup fee is non-refundable, but monthly fees stop after your cancellation period."
+      },
+      {
+        "question": "Do you offer payment plans?",
+        "answer": "Yes, for Professional and Custom packages, we offer flexible payment plans. You can split the setup fee into 2-3 installments. Contact us to discuss your specific needs."
+      },
+      {
+        "question": "What if I need to upgrade later?",
+        "answer": "You can upgrade anytime! We'll credit your initial setup fee towards the new package. For example, moving from Starter to Professional only requires paying the difference."
+      },
+      {
+        "question": "Are there any hidden costs?",
+        "answer": "No hidden costs. The setup fee and monthly maintenance are all you pay. If your usage grows significantly (1000+ conversations/day), we'll discuss scaling options transparently."
+      }
+    ]
+  },
+  "Cta": {
+    "title": "Ready to Start Your Free Trial?",
+    "subtitle": "Let's build your AI sales agent. No credit card required. See results before you pay.",
+    "primaryCta": "Start Free Trial Now",
+    "secondaryCta": "Talk to Us on WhatsApp",
+    "trustBadges": [
+      "Free 1-2 week trial",
+      "No credit card needed",
+      "Cancel anytime"
+    ]
+  }
+}

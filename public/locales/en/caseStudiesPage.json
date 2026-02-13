@@ -1,0 +1,150 @@
+{
+  "hero": {
+    "badge": "[ Impact_Verification_Protocol ]",
+    "title": "Proof of",
+    "titleSpan": "Efficiency.",
+    "description": "We don't just write code; we solve bottlenecks. Explore the technical breakdown of our high-impact deployments."
+  },
+  "items": [
+    {
+      "id": "ecommerce-ai-agent",
+      "title": "24/7 Autonomous Sales & Support Agent",
+      "context": "High-Volume E-commerce Brand",
+      "problem": "Losing customers due to delayed responses; high overhead costs from manual moderators.",
+      "solution": "Custom AI Agent trained on proprietary product data to handle inquiries and close sales.",
+      "result": "Instant response time with 100% automated order confirmation.",
+      "metric": "70% Cost Reduction"
+    },
+    {
+      "id": "pricing-monitor",
+      "title": "Competitor Pricing & Market Intelligence",
+      "context": "E-commerce Enterprise",
+      "problem": "40+ manual hours/week tracking competitor shifts.",
+      "solution": "Autonomous Node.js scraper + AI Analysis Agent.",
+      "result": "98% Reduction in Manual Labor",
+      "metric": "-40hrs/wk"
+    },
+    {
+      "id": "workflow-automation",
+      "title": "Multi-Platform Automation Suite",
+      "context": "SaaS Company",
+      "problem": "Data synchronization lag between CRM & Accounting.",
+      "solution": "Custom n8n workflows with intelligent error handling.",
+      "result": "85% Faster Processing Speed",
+      "metric": "0% Errors"
+    },
+    {
+      "id": "mern-dashboard",
+      "title": "Global BI Infrastructure",
+      "context": "Manufacturing Giant",
+      "problem": "Scattered data with no unified performance view.",
+      "solution": "Full-stack MERN application with real-time Socket.io.",
+      "result": "300% Improvement in Decision Speed",
+      "metric": "3x Faster"
+    }
+  ],
+  "filter": {
+    "all": "ALL_SYSTEMS",
+    "ai": "AI_AGENTS",
+    "workflow": "WORKFLOW_AUTOMATION",
+    "mern": "MERN_INFRASTRUCTURE",
+    "status_label": "FILTER_STATUS",
+    "found_label": "PROJECTS_FOUND"
+  },
+  "case_study_card": {
+    "roi_label": "Verified ROI",
+    "sector_label": "Sector",
+    "bottleneck_label": "The Bottleneck",
+    "architecture_label": "Architecture",
+    "output_label": "Efficiency Output",
+    "pdf_btn": "PDF Report",
+    "read_btn": "Read Logic Breakdown"
+  },
+  "testimonials": {
+    "heading": "Direct Feedback from the Field",
+    "description": "Hear directly from our partners about the impact of our engineered solutions.",
+    "technical_profile": "Technical Profile",
+    "labels": {
+      "project_type": "PROJECT_TYPE",
+      "client_location": "CLIENT_LOCATION",
+      "status": "STATUS",
+      "verified": "VERIFIED"
+    },
+    "items": [
+      {
+        "id": "1",
+        "name": "Md. Farid Uddin Sarker (Shawon)",
+        "title": "HR & Admin",
+        "company": "Spark Infrastructure",
+        "projectType": "AI_IMPLEMENTATION",
+        "clientLocation": "BANGLADESH"
+      },
+      {
+        "id": "2",
+        "name": "Sarah Chen",
+        "title": "CTO",
+        "company": "TechFlow",
+        "projectType": "WORKFLOW_AUTOMATION",
+        "clientLocation": "GLOBAL"
+      },
+      {
+        "id": "3",
+        "name": "Michael Rodriguez",
+        "title": "Marketing Director",
+        "company": "InnovateNow",
+        "projectType": "MERN_INFRASTRUCTURE",
+        "clientLocation": "GLOBAL"
+      }
+    ]
+  },
+  "logic_accordion": {
+    "heading_main": "THE",
+    "heading_accent": "METHOD",
+    "subheading": "How we ensure consistent results across every project.",
+    "steps": [
+      {
+        "title": "01. Discovery & Audit",
+        "desc": "We analyze your current manual workflows and map out every data touchpoint."
+      },
+      {
+        "title": "02. Architecture Design",
+        "desc": "We build a blueprint using the MERN stack or automation tools like n8n."
+      },
+      {
+        "title": "03. Stress Testing",
+        "desc": "Every agent and automation is pushed to its limit to ensure 99.9% uptime."
+      },
+      {
+        "title": "04. Deployment & Scale",
+        "desc": "Seamless rollout with zero downtime for your existing operations."
+      }
+    ]
+  },
+  "final_cta": {
+    "bg_text": "RESULTS",
+    "title_line1": "Ready for your own",
+    "title_line2": "Case Study?",
+    "description": "Let's identify the manual labor in your business and replace it with intelligent, autonomous infrastructure.",
+    "btn_text": "Book Architecture Call"
+  },
+  "listing": {
+    "noResults": "No case studies found for this category."
+  },
+  "detail": {
+    "backLink": "Back to Case Studies",
+    "clientReview": "Client Video Review",
+    "solutionDemo": "Solution & Dashboard Demo",
+    "theChallenge": "The Challenge",
+    "theSolution": "The Driplare Solution",
+    "theApproach": "The Strategic Approach",
+    "challenges": "Technical Challenges & Pivot",
+    "projectGallery": "Project Gallery",
+    "coreStack": "Core Stack",
+    "workflowDiagram": "Workflow Diagram",
+    "projectImpact": "Project Impact",
+    "theOutcome": "The Outcome",
+    "efficiencyGained": "Efficiency Gained",
+    "finalCtaTitle": "Ready to Automate Your Success?",
+    "finalCtaBtn": "Start Your Transformation"
+  }
+}

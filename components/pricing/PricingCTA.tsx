@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
 export function PricingFinalCTA() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("pricingPage");
 
   return (
     <section className="py-20 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 relative overflow-hidden">
@@ -37,7 +37,7 @@ export function PricingFinalCTA() {
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-black text-foreground mb-6"
           >
-            {t("pricingCta.title")}
+            {t("Cta.title")}
           </motion.h2>
 
           <motion.p
@@ -47,7 +47,7 @@ export function PricingFinalCTA() {
             transition={{ delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
           >
-            {t("pricingCta.subtitle")}
+            {t("Cta.subtitle")}
           </motion.p>
 
           <motion.div
@@ -63,7 +63,7 @@ export function PricingFinalCTA() {
               asChild
             >
               <a href="/contact" className="flex items-center gap-2">
-                {t("pricingCta.primaryCta")}
+                {t("Cta.primaryCta")}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
@@ -75,7 +75,7 @@ export function PricingFinalCTA() {
               asChild
             >
               <a href="https://wa.me/your-number">
-                {t("pricingCta.secondaryCta")}
+                {t("Cta.secondaryCta")}
               </a>
             </Button>
           </motion.div>
@@ -88,7 +88,7 @@ export function PricingFinalCTA() {
             transition={{ delay: 0.6 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-2xl mx-auto"
           >
-            {(t("pricingCta.trustBadges", { returnObjects: true }) as string[]).map(
+            {(t("Cta.trustBadges", { returnObjects: true }) as string[]).map(
               (badge, index) => (
                 <div
                   key={index}

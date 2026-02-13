@@ -23,12 +23,12 @@ const mediaData: Record<string, { video: string; img: string }> = {
 };
 
 export function VideoTestimonialCarousel() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("caseStudiesPage");
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const rawData = t("case_studies.testimonials.items", { returnObjects: true });
+  const rawData = t("testimonials.items", { returnObjects: true });
   const testimonials = Array.isArray(rawData) ? rawData : [];
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export function VideoTestimonialCarousel() {
   if (testimonials.length === 0) {
     return (
       <div className="py-20 bg-[#0A0A0A] text-center text-white/20 font-mono">
-        Loading Testimonials... (Check Path: case_studies.testimonials)
+        Loading Testimonials... (Check Path: caseStudiesPage.testimonials)
       </div>
     );
   }
@@ -77,10 +77,10 @@ export function VideoTestimonialCarousel() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-[#FF6B00] mb-4">
-            {t("case_studies.testimonials.heading")}
+            {t("testimonials.heading")}
           </h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            {t("case_studies.testimonials.description")}
+            {t("testimonials.description")}
           </p>
         </motion.div>
 
@@ -139,12 +139,12 @@ export function VideoTestimonialCarousel() {
             <div className="space-y-6">
               <div className="bg-[#1F1F1F] rounded-xl p-6 border border-white/5">
                 <h3 className="text-xl font-bold text-white mb-6 uppercase tracking-tight">
-                  {t("case_studies.testimonials.technical_profile")}
+                  {t("testimonials.technical_profile")}
                 </h3>
                 <div className="space-y-5 font-mono text-sm">
                   <div className="flex flex-col gap-1">
                     <span className="text-white/30 text-[10px] uppercase tracking-widest">
-                      {t("case_studies.testimonials.labels.project_type")}
+                      {t("testimonials.labels.project_type")}
                     </span>
                     <span className="text-[#FF6B00] font-bold text-base">
                       {activeTestimonial?.projectType}
@@ -152,7 +152,7 @@ export function VideoTestimonialCarousel() {
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="text-white/30 text-[10px] uppercase tracking-widest">
-                      {t("case_studies.testimonials.labels.client_location")}
+                      {t("testimonials.labels.client_location")}
                     </span>
                     <span className="text-white font-bold text-base">
                       {activeTestimonial?.clientLocation}
@@ -160,11 +160,11 @@ export function VideoTestimonialCarousel() {
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="text-white/30 text-[10px] uppercase tracking-widest">
-                      {t("case_studies.testimonials.labels.status")}
+                      {t("testimonials.labels.status")}
                     </span>
                     <span className="text-green-400 font-bold flex items-center gap-2">
                       <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                      {t("case_studies.testimonials.labels.verified")}
+                      {t("testimonials.labels.verified")}
                     </span>
                   </div>
                 </div>

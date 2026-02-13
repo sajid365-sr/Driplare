@@ -1,0 +1,506 @@
+{
+    "hero": {
+        "badge": "Workflow Automation",
+        "titleLine1": "একই কাজ বারবার করা",
+        "titleHighlight": "বন্ধ করুন।",
+        "titleLine2": "Automate করুন।",
+        "subtitle": "আমরা custom automations তৈরি করি যা আপনার apps সংযুক্ত করে, repetitive tasks handle করে, এবং আপনার ব্যবসা background এ চালায় — ২৪/৭, কোনো human error ছাড়া।",
+        "audiences": [
+            {
+                "icon": "🏢",
+                "label": "Businesses ও Agencies এর জন্য"
+            },
+            {
+                "icon": "👤",
+                "label": "Individuals ও Freelancers এর জন্য"
+            },
+            {
+                "icon": "🛒",
+                "label": "E-commerce Stores এর জন্য"
+            }
+        ],
+        "primaryCta": "ফ্রি Automation Audit পান",
+        "secondaryCta": "আমরা কি Automate করি দেখুন",
+        "toolsLabel": "যেসব tools ব্যবহার করি",
+        "flowLabel": "Automation Live চলছে",
+        "flowStats": {
+            "steps": "টি Step Automated",
+            "time": "Execution Time",
+            "runs": "সবসময় চালু"
+        },
+        "liveBadge": "✅ Workflow সক্রিয়",
+        "scrollText": "Solutions দেখুন"
+    },
+    "whatIsAutomation": {
+        "badge": "Automation কি?",
+        "title": "আপনার ব্যবসা Autopilot এ",
+        "subtitle": "Workflow automation মানে আপনার apps ও tools সংযুক্ত করা যাতে তারা নিজেদের মধ্যে কথা বলে এবং স্বয়ংক্রিয়ভাবে কাজ সম্পন্ন করে — কোনো manual কাজ ছাড়াই।",
+        "analogy": "এটাকে এভাবে ভাবুন — একজন অদৃশ্য কর্মী নিয়োগ করা যিনি ২৪/৭ কাজ করেন, কখনো ভুল করেন না, প্রায় কোনো খরচ নেই, এবং আপনার সব বিরক্তিকর repetitive কাজ তাৎক্ষণিকভাবে handle করেন।",
+        "before": {
+            "title": "Automation ছাড়া",
+            "items": [
+                "প্রতিদিন manually apps এর মধ্যে data copy-paste করা",
+                "Leads এর সাথে follow up করতে ভুলে যাওয়া",
+                "Reports এ ঘণ্টার পর ঘণ্টা ব্যয় করা যা সেকেন্ডে তৈরি হতে পারে",
+                "ঘুমানোর সময় গুরুত্বপূর্ণ notifications মিস করা",
+                "প্রতিটি order আসলে একই ১০টি steps করা",
+                "আপনার team কম্পিউটার করতে পারে এমন কাজে সময় নষ্ট করছে"
+            ]
+        },
+        "after": {
+            "title": "Automation দিয়ে",
+            "items": [
+                "সব apps এর মধ্যে data স্বয়ংক্রিয়ভাবে flow করে",
+                "আপনি আঙুল না তুলেই তাৎক্ষণিকভাবে follow-up পাঠানো হয়",
+                "Schedule অনুযায়ী Reports তৈরি ও deliver করা হয়",
+                "গুরুত্বপূর্ণ কিছু হলে সাথে সাথে WhatsApp এ notification পান",
+                "Orders automatically process, confirm এবং track হয়",
+                "আপনার team আসলে যেসব কাজে মানুষ দরকার সেগুলোতে focused"
+            ]
+        },
+        "flow": {
+            "label": "একটি automation কিভাবে কাজ করে",
+            "steps": [
+                {
+                    "label": "Trigger",
+                    "sub": "কিছু একটা ঘটে"
+                },
+                {
+                    "label": "Filter",
+                    "sub": "শর্ত যাচাই করে"
+                },
+                {
+                    "label": "Action",
+                    "sub": "কাজটি করে"
+                },
+                {
+                    "label": "সম্পন্ন",
+                    "sub": "প্রতিবার চলে"
+                }
+            ]
+        }
+    },
+    "whoIsThisFor": {
+        "badge": "এটি কাদের জন্য?",
+        "title": "যদি আপনি এখানে নিজেকে চিনতে পারেন, আপনার এটি দরকার",
+        "subtitle": "Automation শুধু বড় কোম্পানির জন্য নয়। Repetitive tasks এ ডুবে থাকা যে কেউই উপকৃত হতে পারেন।",
+        "painLabel": "আপনি সম্ভবত",
+        "withAutomation": "Automation দিয়ে →",
+        "audiences": [
+            {
+                "emoji": "🏢",
+                "title": "Businesses ও Agencies",
+                "subtitle": "SME, marketing agencies, service companies",
+                "pains": [
+                    "প্রতিটি sale এর পরে manually spreadsheets update করছেন",
+                    "যে leads হারিয়ে যাচ্ছে তাদের পেছনে ছুটছেন",
+                    "আপনার team তাদের দিনের অর্ধেক admin tasks এ ব্যয় করছে",
+                    "Clients সময়মতো updates বা reports পাচ্ছে না"
+                ],
+                "gains": [
+                    "Sales data automatically CRM এ sync হয়",
+                    "Sign up করার মুহূর্তেই lead follow-ups পাঠানো হয়",
+                    "আপনার team ছাড়াই admin কাজ handle হয়",
+                    "Schedule অনুযায়ী clients কে automated reports deliver হয়"
+                ],
+                "cta": "আমার Business Automate করুন"
+            },
+            {
+                "emoji": "👤",
+                "title": "Individuals ও Freelancers",
+                "subtitle": "Content creators, solopreneurs, remote workers",
+                "pains": [
+                    "প্রতিটি platform এ manually একই content post করছেন",
+                    "কখনো শেষ না হওয়া emails এ inbox ভরে যাচ্ছে",
+                    "সময়মতো clients কে invoice করতে ভুলে যাচ্ছেন",
+                    "অনেক tools এ tasks ও deadlines track করছেন"
+                ],
+                "gains": [
+                    "একটি post, সর্বত্র auto-publish হয়",
+                    "Emails auto-sort, reply ও flag হয়",
+                    "সঠিক তারিখে automatically invoices পাঠানো হয়",
+                    "সব tasks automatically এক জায়গায় sync হয়"
+                ],
+                "cta": "আমার জীবন সহজ করুন"
+            },
+            {
+                "emoji": "🛒",
+                "title": "E-commerce Stores",
+                "subtitle": "Online shops, dropshippers, product sellers",
+                "pains": [
+                    "WhatsApp এ প্রতিটি order manually confirm করছেন",
+                    "Abandoned carts এর follow up করার কোনো system নেই",
+                    "Platforms জুড়ে manually inventory update করছেন",
+                    "Customer queries দ্রুত reply ছাড়াই জমে যাচ্ছে"
+                ],
+                "gains": [
+                    "Orders tracking details সহ auto-confirm হয়",
+                    "Abandoned cart reminders automatically পাঠানো হয়",
+                    "সব sales channels এ inventory sync হয়",
+                    "AI তাৎক্ষণিকভাবে সাধারণ customer প্রশ্ন handle করে"
+                ],
+                "cta": "আমার Store Automate করুন"
+            }
+        ]
+    },
+    "whatWeAutomate": {
+        "badge": "আমাদের Automation Solutions",
+        "title": "আমরা আপনার জন্য কি Automate করতে পারি",
+        "subtitle": "Real examples দেখতে যেকোনো category তে click করুন। আপনি task টি বর্ণনা করতে পারলে আমরা সম্ভবত এটি automate করতে পারব।",
+        "expandLabel": "Examples দেখুন",
+        "collapseLabel": "বন্ধ করুন",
+        "examplesLabel": "বাস্তব Examples",
+        "toolsLabel": "ব্যবহৃত Tools",
+        "panelCta": "এটি আমার জন্য Automate করুন",
+        "drawerCtaTitle": "এই automation চান?",
+        "drawerCtaSubtitle": "আমরা ৪৮ ঘন্টার মধ্যে এটি আপনার জন্য live করব।",
+        "bottomText": "আপনার use case দেখছেন না? আমরা যেকোনো workflow এর জন্য সম্পূর্ণ custom automations তৈরি করি।",
+        "bottomCta": "আপনার প্রয়োজন বলুন",
+        "categories": [
+            {
+                "key": "social",
+                "title": "Social Media Automation",
+                "description": "Manual effort ছাড়াই সব platform এ content schedule, publish ও repurpose করুন।",
+                "examples": [
+                    "এক জায়গা থেকে Instagram, Facebook ও LinkedIn এ auto-post করুন",
+                    "একটি blog post থেকে automatically ৫টি social media caption তৈরি করুন",
+                    "Custom captions সহ YouTube videos সব platforms এ cross-post করুন",
+                    "এক বসায় এক সপ্তাহের content schedule করুন"
+                ],
+                "tools": [
+                    "Make",
+                    "Buffer",
+                    "n8n",
+                    "OpenAI",
+                    "Meta API"
+                ]
+            },
+            {
+                "key": "leads",
+                "title": "Lead ও CRM Automation",
+                "description": "Automatically leads capture করুন, তাৎক্ষণিকভাবে follow up করুন, কোনো prospect যেন miss না হয়।",
+                "examples": [
+                    "Facebook Lead Ad → lead এর কাছে তাৎক্ষণিক WhatsApp message",
+                    "Website form → CRM এ add + sales rep assign + welcome email পাঠানো",
+                    "৩ দিন reply না হলে → auto follow-up reminder",
+                    "Deal জেতা → auto-create invoice এবং onboarding task"
+                ],
+                "tools": [
+                    "n8n",
+                    "HubSpot",
+                    "WhatsApp API",
+                    "Gmail",
+                    "Notion"
+                ]
+            },
+            {
+                "key": "inbox",
+                "title": "Inbox ও Email Automation",
+                "description": "Emails automatically sort, reply, extract ও act করুন যাতে আপনার inbox নিয়ন্ত্রণে থাকে।",
+                "examples": [
+                    "সাধারণ customer প্রশ্নে auto-reply করুন",
+                    "Emails থেকে order details extract → Google Sheets এ save",
+                    "Urgent emails flag করুন এবং WhatsApp alert পাঠান",
+                    "Promotional emails auto-unsubscribe ও archive করুন"
+                ],
+                "tools": [
+                    "Gmail API",
+                    "Outlook",
+                    "n8n",
+                    "OpenAI",
+                    "Zapier"
+                ]
+            },
+            {
+                "key": "reporting",
+                "title": "Reporting ও Data Sync",
+                "description": "Schedule অনুযায়ী automatically reports তৈরি করুন, spreadsheets sync করুন ও summaries deliver করুন।",
+                "examples": [
+                    "প্রতিদিন সকাল ৯টায় WhatsApp এ daily sales summary পাঠানো হয়",
+                    "WooCommerce orders automatically Google Sheets এ sync হয়",
+                    "প্রতি সোমবার আপনার team কে weekly performance report email হয়",
+                    "নতুন data আসলে real-time dashboard update হয়"
+                ],
+                "tools": [
+                    "Google Sheets",
+                    "n8n",
+                    "WhatsApp",
+                    "Airtable",
+                    "Looker"
+                ]
+            },
+            {
+                "key": "ecommerce",
+                "title": "E-commerce Operations",
+                "description": "Order placement থেকে delivery পর্যন্ত আপনার সম্পূর্ণ order lifecycle automate করুন।",
+                "examples": [
+                    "নতুন order → customer কে WhatsApp confirmation",
+                    "কম stock → manager কে alert + reorder triggered",
+                    "Order delivered → WhatsApp এ auto-review request",
+                    "Abandoned cart → ৩-step follow-up sequence"
+                ],
+                "tools": [
+                    "WooCommerce",
+                    "Shopify",
+                    "WhatsApp API",
+                    "n8n",
+                    "Gmail"
+                ]
+            },
+            {
+                "key": "onboarding",
+                "title": "Client Onboarding",
+                "description": "প্রতিটি নতুন client কে welcome করুন manually না করেই, প্রতিবার।",
+                "examples": [
+                    "Payment received → automatically welcome email + contract পাঠানো",
+                    "নতুন client → Notion এ project create + team member assign",
+                    "Due dates auto-set সহ onboarding checklist পাঠানো",
+                    "Signup এর ৭ দিন পর automatically check-in email পাঠানো"
+                ],
+                "tools": [
+                    "n8n",
+                    "Notion",
+                    "Gmail",
+                    "Slack",
+                    "DocuSign"
+                ]
+            },
+            {
+                "key": "content",
+                "title": "Content Repurposing",
+                "description": "একটি content থেকে অনেক কিছু তৈরি করুন, সর্বত্র বিতরণ করুন, automatically।",
+                "examples": [
+                    "Blog post → Twitter thread + LinkedIn post + Instagram caption",
+                    "YouTube video → transcript → summary → social snippets",
+                    "Podcast episode → show notes + quotes + audiogram",
+                    "Newsletter → WhatsApp broadcast message"
+                ],
+                "tools": [
+                    "OpenAI",
+                    "n8n",
+                    "Make",
+                    "Buffer",
+                    "Zapier"
+                ]
+            },
+            {
+                "key": "alerts",
+                "title": "Notifications ও Alerts",
+                "description": "সঠিক সময়ে সঠিক তথ্য পান, আপনি আসলে যেখানে দেখেন সেখানে deliver হয়।",
+                "examples": [
+                    "নতুন Google review → তাৎক্ষণিক Slack ও WhatsApp notification",
+                    "Server downtime → সেকেন্ডের মধ্যে SMS + WhatsApp alert",
+                    "Competitor price change → daily monitoring report",
+                    "Online এ আপনার brand এর নতুন mention → তাৎক্ষণিক alert"
+                ],
+                "tools": [
+                    "n8n",
+                    "WhatsApp API",
+                    "Slack",
+                    "Telegram",
+                    "Make"
+                ]
+            }
+        ]
+    },
+    "recipes": {
+        "badge": "Ready-Made Automations",
+        "title": "জনপ্রিয় Automation Recipes",
+        "subtitle": "আমাদের clients সবচেয়ে বেশি পছন্দ করেন এমন pre-built automation templates। একটি বেছে নিন এবং আমরা সেটি আপনার জন্য setup করব — সাধারণত ৪৮ ঘন্টার মধ্যে।",
+        "popularLabel": "জনপ্রিয়",
+        "getThisLabel": "এটি নিন",
+        "bottomText": "তালিকায় নেই এমন কিছু চান? আমরা আপনার exact workflow এর জন্য সম্পূর্ণ custom recipes তৈরি করি।",
+        "bottomCta": "Custom Recipe Request করুন",
+        "filters": [
+            "সব",
+            "E-commerce",
+            "Social Media",
+            "Leads",
+            "Reporting",
+            "Operations"
+        ],
+        "items": [
+            {
+                "emoji": "📦",
+                "title": "WhatsApp Order Confirmation",
+                "description": "প্রতিটি নতুন order customer কে order details ও estimated delivery সহ তাৎক্ষণিক WhatsApp message trigger করে।",
+                "steps": [
+                    "WooCommerce/Shopify এ নতুন order placed",
+                    "Order details automatically extracted",
+                    "তাৎক্ষণিকভাবে personalized WhatsApp message পাঠানো হয়"
+                ],
+                "tools": [
+                    "WooCommerce",
+                    "WhatsApp API",
+                    "n8n"
+                ],
+                "time": "Setup: ১-২ দিন",
+                "category": "E-commerce",
+                "categoryKey": "ecommerce",
+                "difficulty": "সহজ",
+                "popular": true
+            },
+            {
+                "emoji": "📱",
+                "title": "Auto Social Media Poster",
+                "description": "একটি post লিখুন এবং সেটি automatically Facebook, Instagram, ও LinkedIn এ সেরা সময়ে publish হয়।",
+                "steps": [
+                    "Shared Google Sheet বা Notion এ content যোগ করুন",
+                    "Automation প্রতিটি platform এর জন্য format করে",
+                    "Scheduled সময়ে automatically posts publish হয়"
+                ],
+                "tools": [
+                    "Google Sheets",
+                    "Make",
+                    "Meta API",
+                    "LinkedIn API"
+                ],
+                "time": "Setup: ২-৩ দিন",
+                "category": "Social Media",
+                "categoryKey": "social",
+                "difficulty": "সহজ",
+                "popular": true
+            },
+            {
+                "emoji": "🎯",
+                "title": "Lead Capture → WhatsApp Follow-Up",
+                "description": "কেউ আপনার Facebook বা website form পূরণ করলে সেকেন্ডের মধ্যে WhatsApp message পায় এবং CRM এ যোগ হয়।",
+                "steps": [
+                    "Lead Facebook Lead Ad বা website form submit করে",
+                    "Lead Google Sheets বা CRM এ save হয়",
+                    "৬০ সেকেন্ডের কম সময়ে personalized WhatsApp follow-up পাঠানো হয়"
+                ],
+                "tools": [
+                    "Facebook Ads",
+                    "WhatsApp API",
+                    "n8n",
+                    "Google Sheets"
+                ],
+                "time": "Setup: ১-২ দিন",
+                "category": "Leads",
+                "categoryKey": "leads",
+                "difficulty": "সহজ",
+                "popular": true
+            },
+            {
+                "emoji": "📊",
+                "title": "Daily Sales Report on WhatsApp",
+                "description": "প্রতিদিন সকাল ৯টায় আগের দিনের সম্পূর্ণ sales summary সরাসরি আপনার WhatsApp এ পান।",
+                "steps": [
+                    "প্রতিদিন সকাল ৯টায় scheduled trigger চালু হয়",
+                    "WooCommerce বা Sheets থেকে sales data pull হয়",
+                    "Formatted summary আপনার WhatsApp এ পাঠানো হয়"
+                ],
+                "tools": [
+                    "Google Sheets",
+                    "WhatsApp API",
+                    "n8n"
+                ],
+                "time": "Setup: ১ দিন",
+                "category": "Reporting",
+                "categoryKey": "reporting",
+                "difficulty": "সহজ"
+            },
+            {
+                "emoji": "🛒",
+                "title": "Abandoned Cart Recovery",
+                "description": "না কিনে চলে যাওয়া customers ৪৮ ঘন্টায় ৩-step automated follow-up পায় — email, তারপর WhatsApp।",
+                "steps": [
+                    "১ ঘন্টা পর cart abandoned detected",
+                    "Cart contents সহ email reminder পাঠানো হয়",
+                    "২৪ ঘন্টায় purchase না হলে WhatsApp follow-up"
+                ],
+                "tools": [
+                    "WooCommerce",
+                    "Gmail",
+                    "WhatsApp API",
+                    "n8n"
+                ],
+                "time": "Setup: ২-৩ দিন",
+                "category": "E-commerce",
+                "categoryKey": "ecommerce",
+                "difficulty": "মধ্যম"
+            },
+            {
+                "emoji": "✍️",
+                "title": "Blog to Social Content Pipeline",
+                "description": "একটি blog post publish করুন এবং ৫টি platform এর জন্য AI-generated social captions পান, post করার জন্য ready।",
+                "steps": [
+                    "WordPress এ নতুন blog post published",
+                    "OpenAI platform-specific captions generate করে",
+                    "সব platforms এ posts auto-scheduled হয়"
+                ],
+                "tools": [
+                    "WordPress",
+                    "OpenAI",
+                    "Make",
+                    "Buffer"
+                ],
+                "time": "Setup: ৩-৪ দিন",
+                "category": "Social Media",
+                "categoryKey": "social",
+                "difficulty": "মধ্যম"
+            },
+            {
+                "emoji": "🤝",
+                "title": "Client Onboarding Sequence",
+                "description": "নতুন client payment করলে — welcome email, contract, Notion workspace, ও task assignments সব automatically হয়।",
+                "steps": [
+                    "bKash বা Stripe এর মাধ্যমে payment confirmed",
+                    "Automatically welcome email + contract পাঠানো হয়",
+                    "Notion project created ও Slack এ team notified"
+                ],
+                "tools": [
+                    "Notion",
+                    "Gmail",
+                    "Slack",
+                    "n8n",
+                    "DocuSign"
+                ],
+                "time": "Setup: ৩-৫ দিন",
+                "category": "Operations",
+                "categoryKey": "operations",
+                "difficulty": "মধ্যম"
+            },
+            {
+                "emoji": "⭐",
+                "title": "Post-Delivery Review Request",
+                "description": "প্রতিটি order delivered হলে customer কে WhatsApp এর মাধ্যমে automatically personalized review request পাঠানো হয়।",
+                "steps": [
+                    "Order status 'Delivered' এ update হয়",
+                    "পাঠানোর আগে ৩ দিন delay",
+                    "Direct link সহ friendly review request WhatsApp এ পাঠানো হয়"
+                ],
+                "tools": [
+                    "WooCommerce",
+                    "WhatsApp API",
+                    "n8n"
+                ],
+                "time": "Setup: ১ দিন",
+                "category": "E-commerce",
+                "categoryKey": "ecommerce",
+                "difficulty": "সহজ"
+            },
+            {
+                "emoji": "🔔",
+                "title": "Brand Mention Alert System",
+                "description": "আপনার brand, product, বা keywords online এ mention হলে তাৎক্ষণিক WhatsApp বা Slack alerts পান।",
+                "steps": [
+                    "Web monitoring real-time এ mentions track করে",
+                    "নতুন mention detected ও filtered হয়",
+                    "Source ও context সহ instant alert পাঠানো হয়"
+                ],
+                "tools": [
+                    "n8n",
+                    "WhatsApp API",
+                    "Slack",
+                    "Make"
+                ],
+                "time": "Setup: ২-৩ দিন",
+                "category": "Reporting",
+                "categoryKey": "reporting",
+                "difficulty": "উন্নত"
+            }
+        ]
+    }
+}

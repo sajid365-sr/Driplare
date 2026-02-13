@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
 export function AIAgentSimpleCTA() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("AIAgentPage");
 
     return (
         <section className="py-20 bg-background relative overflow-hidden">
@@ -38,17 +38,17 @@ export function AIAgentSimpleCTA() {
 
                         {/* Title */}
                         <h2 className="text-2xl md:text-4xl font-black text-foreground mb-3">
-                            {t("services.AIAgent.simpleCta.title")}
+                            {t("simpleCta.title")}
                         </h2>
 
                         {/* Subtitle */}
                         <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-                            {t("services.AIAgent.simpleCta.subtitle")}
+                            {t("simpleCta.subtitle")}
                         </p>
 
                         {/* Trust Badges */}
                         <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-                            {(t("services.AIAgent.simpleCta.trustBadges", {
+                            {(t("simpleCta.trustBadges", {
                                 returnObjects: true
                             }) as string[]).map((badge, index) => (
                                 <motion.div
@@ -73,7 +73,7 @@ export function AIAgentSimpleCTA() {
                                 asChild
                             >
                                 <a href="/contact" className="flex items-center gap-2">
-                                    {t("services.AIAgent.simpleCta.primaryButton")}
+                                    {t("simpleCta.primaryButton")}
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </a>
                             </Button>
@@ -89,7 +89,7 @@ export function AIAgentSimpleCTA() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    {t("services.AIAgent.simpleCta.secondaryButton")}
+                                    {t("simpleCta.secondaryButton")}
                                 </a>
                             </Button>
                         </div>
@@ -105,7 +105,7 @@ export function AIAgentSimpleCTA() {
                             >
                                 <Clock className="w-5 h-5 text-primary" />
                                 <span className="text-sm font-semibold text-foreground">
-                                    {t("services.AIAgent.simpleCta.stats.setup")}
+                                    {t("simpleCta.stats.setup")}
                                 </span>
                             </motion.div>
 
@@ -118,7 +118,7 @@ export function AIAgentSimpleCTA() {
                             >
                                 <Shield className="w-5 h-5 text-accent" />
                                 <span className="text-sm font-semibold text-foreground">
-                                    {t("services.AIAgent.simpleCta.stats.trial")}
+                                    {t("simpleCta.stats.trial")}
                                 </span>
                             </motion.div>
 
@@ -131,7 +131,7 @@ export function AIAgentSimpleCTA() {
                             >
                                 <Sparkles className="w-5 h-5 text-secondary" />
                                 <span className="text-sm font-semibold text-foreground">
-                                    {t("services.AIAgent.simpleCta.stats.support")}
+                                    {t("simpleCta.stats.support")}
                                 </span>
                             </motion.div>
                         </div>
@@ -144,7 +144,7 @@ export function AIAgentSimpleCTA() {
                             transition={{ delay: 0.8 }}
                             className="text-xs text-muted-foreground mt-6"
                         >
-                            {t("services.AIAgent.simpleCta.finalNote")}
+                            {t("simpleCta.finalNote")}
                         </motion.p>
                     </motion.div>
                 </div>

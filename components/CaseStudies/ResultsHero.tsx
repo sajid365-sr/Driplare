@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 export function ResultsHero() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("caseStudiesPage");
 
   return (
     <section className="relative py-24 overflow-hidden border-b border-border/50">
@@ -17,18 +17,18 @@ export function ResultsHero() {
           className="space-y-6"
         >
           <span className="font-mono text-primary text-sm font-bold uppercase tracking-[0.3em]">
-            {t("case_studies.hero.badge")}
+            {t("hero.badge")}
           </span>
 
           <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase">
-            {t("case_studies.hero.title")}{" "}
+            {t("hero.title")}{" "}
             <span className="text-primary italic">
-              {t("case_studies.hero.titleSpan")}
+              {t("hero.titleSpan")}
             </span>
           </h1>
 
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed">
-            {t("case_studies.hero.description")}
+            {t("hero.description")}
           </p>
         </motion.div>
       </div>

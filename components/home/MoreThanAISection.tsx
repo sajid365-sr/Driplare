@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export function MoreThanAISection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("homePage");
 
   const pillars = [
     {
@@ -69,9 +69,9 @@ export function MoreThanAISection() {
     <section className="py-20 bg-muted/30 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
-      
+
       {/* Decorative Grid Pattern */}
-      <div 
+      <div
         className="absolute inset-0 opacity-5"
         style={{
           backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px), 
@@ -156,7 +156,7 @@ export function MoreThanAISection() {
                       <div className={`w-14 h-14 md:w-16 md:h-16 rounded-xl ${pillar.bgColor} border-2 border-border flex items-center justify-center shadow-lg backdrop-blur-sm`}>
                         <pillar.icon className={`w-7 h-7 md:w-8 md:h-8 ${pillar.iconColor}`} strokeWidth={2} />
                       </div>
-                      
+
                       {/* Connecting Line */}
                       <svg
                         className="absolute top-1/2 left-1/2 -z-10"
@@ -266,7 +266,7 @@ export function MoreThanAISection() {
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
               </Button>
-              
+
               <Button
                 size="lg"
                 variant="outline"

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 
 export function LiveDemoSection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("AIAgentPage");
 
 
 
@@ -29,15 +29,15 @@ export function LiveDemoSection() {
                     >
                         <Sparkles className="w-4 h-4 text-primary" />
                         <span className="text-sm font-semibold text-primary">
-                            {t("services.AIAgent.liveDemo.badge")}
+                            {t("liveDemo.badge")}
                         </span>
                     </motion.div>
 
                     <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-                        {t("services.AIAgent.liveDemo.title")}
+                        {t("liveDemo.title")}
                     </h2>
                     <p className="text-lg text-muted-foreground mb-8">
-                        {t("services.AIAgent.liveDemo.subtitle")}
+                        {t("liveDemo.subtitle")}
                     </p>
 
                     <Button
@@ -51,14 +51,14 @@ export function LiveDemoSection() {
                         className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-lg px-8 group"
                     >
                         <MessageCircle className="w-5 h-5 mr-2" />
-                        {t("services.AIAgent.liveDemo.cta")}
+                        {t("liveDemo.cta")}
                         <Sparkles className="w-4 h-4 ml-2 group-hover:rotate-12 transition-transform" />
                     </Button>
                 </motion.div>
 
                 {/* Features Grid */}
                 <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    {(t("services.AIAgent.liveDemo.features", { returnObjects: true }) as Array<{
+                    {(t("liveDemo.features", { returnObjects: true }) as Array<{
                         icon: string;
                         title: string;
                         description: string;

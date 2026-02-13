@@ -1,0 +1,61 @@
+{
+    "hero": {
+        "badge": "Ready-to-Deploy Intelligence",
+        "title_main": "Agent",
+        "title_accent": "Marketplace",
+        "description": "Browse our catalog of pre-trained AI agents designed to handle specific business workflows. Select, customize, and deploy in hours, not weeks."
+    },
+    "status": {
+        "loading": "Loading Agents...",
+        "no_results": "No agents found matching your criteria."
+    },
+    "filters": {
+        "placeholder": "Search agents...",
+        "categories": {
+            "all": "All",
+            "lead_generation": "Lead Generation",
+            "customer_support": "Customer Support",
+            "data_scraping": "Data & Scraping",
+            "e_commerce": "E-commerce"
+        }
+    },
+    "agent_card": {
+        "btn_details": "View Details"
+    },
+    "agent_details": {
+        "back_to_market": "Back to Marketplace",
+        "not_found": "Agent not found!",
+        "demo_label": "Initialize System Demo",
+        "tabs": {
+            "capabilities": "Capabilities",
+            "architecture": "System Architecture"
+        },
+        "technical": {
+            "core_stack": "Core Stack",
+            "security_title": "Security Protocol",
+            "security_desc": "Encrypted API handshakes with end-to-end data obfuscation. No personal data is stored on external LLM servers.",
+            "viz_label": "Neural Processing Visualization Hook"
+        },
+        "sidebar": {
+            "investment": "Investment",
+            "setup_time": "Setup Time",
+            "setup_value": "48-72 Hours",
+            "maintenance": "Maintenance",
+            "maintenance_value": "Lifetime Logic",
+            "access": "Access",
+            "access_value": "Global API",
+            "btn_deploy": "Deploy This Agent",
+            "btn_brief": "Schedule Technical Brief"
+        },
+        "custom_card": {
+            "title": "Need Customization?",
+            "desc": "We can tweak this agent's logic for your specific CRM."
+        },
+        "synergy": {
+            "title": "Similar",
+            "accent": "Agent",
+            "desc": "Other agents frequently deployed alongside {{name}}.",
+            "view_all": "View Full Catalog"
+        }
+    }
+}

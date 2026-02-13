@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { HeroSection } from "@/components/services/workflow-automation/HeroSection";
-import { WorkflowVisualization } from "@/components/services/workflow-automation/WorkflowVisualization";
-import { ProblemGrid } from "@/components/services/workflow-automation/ProblemGrid";
-import { ServiceIconGrid } from "@/components/services/workflow-automation/ServiceIconGrid";
-import { TechLogosSection } from "@/components/services/workflow-automation/TechLogosSection";
-import { ProcessSteps } from "@/components/services/workflow-automation/ProcessSteps";
-import { AccordionFAQ } from "@/components/services/workflow-automation/AccordionFAQ";
-import { FinalCTASection } from "@/components/services/workflow-automation/FinalCTASection";
+import { AutomationHero } from "@/components/services/workflow-automation/AutomationHero";
+import { WhatIsAutomationSection } from "@/components/services/workflow-automation/WhatIsAutomationSection";
+import { WhoIsThisForSection } from "@/components/services/workflow-automation/WhoIsThisForSection";
+import { WhatWeAutomateSection } from "@/components/services/workflow-automation/WhatWeAutomateSection";
+import { AutomationRecipesSection } from "@/components/services/workflow-automation/AutomationRecipesSection";
 
 export const metadata: Metadata = {
   title: "Workflow Automation Services - Streamline Business Operations",
@@ -17,14 +14,11 @@ export const metadata: Metadata = {
 export default function WorkflowAutomation() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#0A0A0A] transition-colors duration-300">
-      <HeroSection />
-      <WorkflowVisualization />
-      <ProblemGrid />
-      <ServiceIconGrid />
-      <TechLogosSection />
-      <ProcessSteps />
-      <AccordionFAQ />
-      <FinalCTASection />
+      <AutomationHero />
+      <WhatIsAutomationSection />
+      <WhoIsThisForSection />
+      <WhatWeAutomateSection />
+      <AutomationRecipesSection />
     </div>
   );
 }

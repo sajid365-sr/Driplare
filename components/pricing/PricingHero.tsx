@@ -5,7 +5,7 @@ import { Sparkles, TrendingUp, Shield } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export function PricingPageHero() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("pricingPage");
 
   return (
     <section className="relative min-h-[70vh] bg-background flex items-center justify-center overflow-hidden pt-20">
@@ -34,7 +34,7 @@ export function PricingPageHero() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold uppercase tracking-wider mb-6">
               <Sparkles className="w-4 h-4" />
-              {t("pricingHero.badge")}
+              {t("Hero.badge")}
             </div>
           </motion.div>
 
@@ -44,8 +44,8 @@ export function PricingPageHero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl md:text-6xl lg:text-7xl font-black text-foreground mb-6 leading-tight"
           >
-            {t("pricingHero.title.line1")}{" "}
-            <span className="text-gradient-violet">{t("pricingHero.title.line2")}</span>
+            {t("Hero.title.line1")}{" "}
+            <span className="text-gradient-violet">{t("Hero.title.line2")}</span>
           </motion.h1>
 
           <motion.p
@@ -54,7 +54,7 @@ export function PricingPageHero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-12"
           >
-            {t("pricingHero.subtitle")}
+            {t("Hero.subtitle")}
           </motion.p>
 
           {/* Value Props */}
@@ -64,7 +64,7 @@ export function PricingPageHero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto"
           >
-            {(t("pricingHero.props", { returnObjects: true }) as Array<{
+            {(t("Hero.props", { returnObjects: true }) as Array<{
               icon: string;
               value: string;
               label: string;

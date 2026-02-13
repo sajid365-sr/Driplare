@@ -12,7 +12,7 @@ import { LogicAccordion } from "@/components/CaseStudies/LogicAccordion";
 import { FinalCTA } from "@/components/CaseStudies/FinalCTA";
 
 export default function CaseStudiesPage() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation("caseStudiesPage");
   const [activeFilter, setActiveFilter] = useState("all");
   const [rawDbData, setRawDbData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -95,7 +95,7 @@ export default function CaseStudiesPage() {
 
           {processedStudies.length === 0 && (
             <div className="text-center py-20 text-muted-foreground">
-              No case studies found for this category.
+              {t("listing.noResults")}
             </div>
           )}
         </section>

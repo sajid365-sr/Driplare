@@ -5,7 +5,7 @@ import { Brain, MessageCircle, Database, Cpu, Sparkles } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export function WhatIsAIAgent() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("AIAgentPage");
 
     return (
         <section className="py-20 bg-muted/30 relative overflow-hidden">
@@ -25,15 +25,15 @@ export function WhatIsAIAgent() {
                     >
                         <Brain className="w-4 h-4 text-primary" />
                         <span className="text-sm font-semibold text-primary">
-                            {t("services.AIAgent.whatIsAI.badge")}
+                            {t("whatIsAI.badge")}
                         </span>
                     </motion.div>
 
                     <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-                        {t("services.AIAgent.whatIsAI.title")}
+                        {t("whatIsAI.title")}
                     </h2>
                     <p className="text-lg text-muted-foreground">
-                        {t("services.AIAgent.whatIsAI.subtitle")}
+                        {t("whatIsAI.subtitle")}
                     </p>
                 </motion.div>
 
@@ -47,15 +47,15 @@ export function WhatIsAIAgent() {
                     >
                         <div className="bg-card border-2 border-border rounded-3xl p-8">
                             <h3 className="text-2xl font-bold text-foreground mb-4">
-                                {t("services.AIAgent.whatIsAI.explanation.title")}
+                                {t("whatIsAI.explanation.title")}
                             </h3>
                             <p className="text-muted-foreground leading-relaxed mb-6">
-                                {t("services.AIAgent.whatIsAI.explanation.text")}
+                                {t("whatIsAI.explanation.text")}
                             </p>
 
                             {/* Simple Breakdown */}
                             <div className="space-y-4">
-                                {(t("services.AIAgent.whatIsAI.explanation.points", {
+                                {(t("whatIsAI.explanation.points", {
                                     returnObjects: true,
                                 }) as Array<{ title: string; text: string }>).map(
                                     (point, index) => (
@@ -97,10 +97,10 @@ export function WhatIsAIAgent() {
                                 <Sparkles className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
                                 <div>
                                     <h4 className="font-bold text-foreground mb-2">
-                                        {t("services.AIAgent.whatIsAI.difference.title")}
+                                        {t("whatIsAI.difference.title")}
                                     </h4>
                                     <p className="text-sm text-muted-foreground leading-relaxed">
-                                        {t("services.AIAgent.whatIsAI.difference.text")}
+                                        {t("whatIsAI.difference.text")}
                                     </p>
                                 </div>
                             </div>
@@ -139,10 +139,10 @@ export function WhatIsAIAgent() {
                                     </div>
                                     <div>
                                         <div className="font-bold text-foreground">
-                                            {t("services.AIAgent.whatIsAI.diagram.customer")}
+                                            {t("whatIsAI.diagram.customer")}
                                         </div>
                                         <div className="text-sm text-muted-foreground">
-                                            {t("services.AIAgent.whatIsAI.diagram.customerAction")}
+                                            {t("whatIsAI.diagram.customerAction")}
                                         </div>
                                     </div>
                                 </motion.div>
@@ -169,10 +169,10 @@ export function WhatIsAIAgent() {
                                     </div>
                                     <div>
                                         <div className="font-bold text-foreground">
-                                            {t("services.AIAgent.whatIsAI.diagram.brain")}
+                                            {t("whatIsAI.diagram.brain")}
                                         </div>
                                         <div className="text-sm text-muted-foreground">
-                                            {t("services.AIAgent.whatIsAI.diagram.brainAction")}
+                                            {t("whatIsAI.diagram.brainAction")}
                                         </div>
                                     </div>
                                 </motion.div>
@@ -200,10 +200,10 @@ export function WhatIsAIAgent() {
                                         </div>
                                         <div className="text-center">
                                             <div className="font-bold text-foreground text-sm">
-                                                {t("services.AIAgent.whatIsAI.diagram.reply")}
+                                                {t("whatIsAI.diagram.reply")}
                                             </div>
                                             <div className="text-xs text-muted-foreground">
-                                                {t("services.AIAgent.whatIsAI.diagram.replyAction")}
+                                                {t("whatIsAI.diagram.replyAction")}
                                             </div>
                                         </div>
                                     </motion.div>
@@ -220,10 +220,10 @@ export function WhatIsAIAgent() {
                                         </div>
                                         <div className="text-center">
                                             <div className="font-bold text-foreground text-sm">
-                                                {t("services.AIAgent.whatIsAI.diagram.save")}
+                                                {t("whatIsAI.diagram.save")}
                                             </div>
                                             <div className="text-xs text-muted-foreground">
-                                                {t("services.AIAgent.whatIsAI.diagram.saveAction")}
+                                                {t("whatIsAI.diagram.saveAction")}
                                             </div>
                                         </div>
                                     </motion.div>
@@ -239,7 +239,7 @@ export function WhatIsAIAgent() {
                                 className="mt-6 pt-6 border-t border-border flex items-center justify-center gap-2 text-xs text-muted-foreground"
                             >
                                 <Cpu className="w-4 h-4" />
-                                <span>{t("services.AIAgent.whatIsAI.diagram.poweredBy")}</span>
+                                <span>{t("whatIsAI.diagram.poweredBy")}</span>
                             </motion.div>
                         </div>
                     </motion.div>

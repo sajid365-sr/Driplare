@@ -12,9 +12,9 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
 export function HowItWorksSection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("AIAgentPage");
 
-    const steps = t("services.AIAgent.howItWorks.steps", { returnObjects: true }) as Array<{
+    const steps = t("howItWorks.steps", { returnObjects: true }) as Array<{
         number: string;
         title: string;
         description: string;
@@ -22,7 +22,7 @@ export function HowItWorksSection() {
         details: string[];
     }>;
 
-    const timeline = t("services.AIAgent.howItWorks.timeline", { returnObjects: true }) as Array<{
+    const timeline = t("howItWorks.timeline", { returnObjects: true }) as Array<{
         phase: string;
         time: string;
     }>;
@@ -57,15 +57,15 @@ export function HowItWorksSection() {
                     >
                         <Rocket className="w-4 h-4 text-secondary" />
                         <span className="text-sm font-semibold text-secondary">
-                            {t("services.AIAgent.howItWorks.badge")}
+                            {t("howItWorks.badge")}
                         </span>
                     </motion.div>
 
                     <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-                        {t("services.AIAgent.howItWorks.title")}
+                        {t("howItWorks.title")}
                     </h2>
                     <p className="text-lg text-muted-foreground">
-                        {t("services.AIAgent.howItWorks.subtitle")}
+                        {t("howItWorks.subtitle")}
                     </p>
                 </motion.div>
 
@@ -80,7 +80,7 @@ export function HowItWorksSection() {
                         <div className="flex items-center gap-3 mb-6">
                             <Clock className="w-6 h-6 text-primary" />
                             <h3 className="text-xl font-bold text-foreground">
-                                {t("services.AIAgent.howItWorks.timelineTitle")}
+                                {t("howItWorks.timelineTitle")}
                             </h3>
                         </div>
                         <div className="grid md:grid-cols-4 gap-4">
@@ -104,7 +104,7 @@ export function HowItWorksSection() {
                         </div>
                         <div className="mt-6 pt-6 border-t border-border text-center">
                             <p className="text-sm font-bold text-accent">
-                                {t("services.AIAgent.howItWorks.totalTime")}
+                                {t("howItWorks.totalTime")}
                             </p>
                         </div>
                     </div>
@@ -201,16 +201,16 @@ export function HowItWorksSection() {
                         <div className="flex items-center gap-3 mb-6">
                             <Users className="w-6 h-6 text-primary" />
                             <h3 className="text-2xl font-bold text-foreground">
-                                {t("services.AIAgent.howItWorks.needFromYou.title")}
+                                {t("howItWorks.needFromYou.title")}
                             </h3>
                         </div>
 
                         <p className="text-muted-foreground mb-6">
-                            {t("services.AIAgent.howItWorks.needFromYou.subtitle")}
+                            {t("howItWorks.needFromYou.subtitle")}
                         </p>
 
                         <div className="grid md:grid-cols-2 gap-4">
-                            {(t("services.AIAgent.howItWorks.needFromYou.items", {
+                            {(t("howItWorks.needFromYou.items", {
                                 returnObjects: true,
                             }) as string[]).map((item, index) => (
                                 <motion.div
@@ -231,7 +231,7 @@ export function HowItWorksSection() {
 
                         <div className="mt-6 pt-6 border-t border-border">
                             <p className="text-sm text-muted-foreground text-center">
-                                {t("services.AIAgent.howItWorks.needFromYou.note")}
+                                {t("howItWorks.needFromYou.note")}
                             </p>
                         </div>
                     </div>
@@ -250,12 +250,12 @@ export function HowItWorksSection() {
                         asChild
                     >
                         <a href="/contact" className="flex items-center gap-2">
-                            {t("services.AIAgent.howItWorks.cta")}
+                            {t("howItWorks.cta")}
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </a>
                     </Button>
                     <p className="text-sm text-muted-foreground mt-4">
-                        {t("services.AIAgent.howItWorks.ctaSubtext")}
+                        {t("howItWorks.ctaSubtext")}
                     </p>
                 </motion.div>
             </div>

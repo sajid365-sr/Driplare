@@ -1,0 +1,410 @@
+{
+  "hero": {
+    "badge": "AI Automation for Your Business",
+    "titlePart1": "AI Agents That",
+    "titlePart2": "Work While",
+    "titlePart3": "You Sleep",
+    "description": "Stop losing sales to unanswered messages. Our AI agents handle customer inquiries, collect orders, and grow your business 24/7.",
+    "btnViewSystems": "See AI Agents",
+    "btnBookConsult": "Get Free Demo",
+    "efficiency": "Time Saved",
+    "fastSetup": "15-min setup",
+    "trustedBy": "127+ businesses"
+  },
+  "problem": {
+    "badge": "The Hidden Cost",
+    "title": "Are You Losing Sales?",
+    "subtitle": "Most businesses lose 60% of potential customers because of these problems:",
+    "points": {
+      "slow": {
+        "title": "Slow Replies",
+        "description": "Customers leave when you don't reply within minutes. They find another seller who responds faster."
+      },
+      "sleep": {
+        "title": "You Can't Work 24/7",
+        "description": "Missing sales while you sleep or busy with other work. Customers message at night and get no response."
+      },
+      "staff": {
+        "title": "Staff is Expensive",
+        "description": "Hiring people to reply to messages costs thousands monthly. Plus, they need training and make mistakes."
+      }
+    },
+    "stats": {
+      "lostCustomers": "customers lost",
+      "missedTime": "missed daily",
+      "monthlyCost": "per month"
+    },
+    "cta": "There's a Better Way"
+  },
+  "solution": {
+    "badge": "AI-Powered Solution",
+    "title": "Meet Your AI Sales Agent",
+    "subtitle": "Works 24/7. Never sleeps. Never makes mistakes.",
+    "imageAlt": "AI chatbot handling customer conversations",
+    "watchDemo": "Watch Demo",
+    "liveBadge": "Live Demo",
+    "features": {
+      "replies": {
+        "title": "Instant Replies",
+        "description": "Answers customer questions in seconds, any time of day"
+      },
+      "orders": {
+        "title": "Collects Orders",
+        "description": "Gets customer name, address, phone number automatically"
+      },
+      "organized": {
+        "title": "Stays Organized",
+        "description": "All orders saved neatly in your Google Sheet"
+      },
+      "learns": {
+        "title": "Knows Your Business",
+        "description": "Trained on your products, prices, and delivery areas"
+      }
+    },
+    "comparison": {
+      "title": "Before vs After Driplare",
+      "before": {
+        "title": "Without AI",
+        "points": [
+          "Customers wait hours for replies",
+          "You manually collect order details",
+          "Lost sales when you're busy or sleeping",
+          "Unorganized messages everywhere"
+        ]
+      },
+      "after": {
+        "title": "With AI Agent",
+        "points": [
+          "Instant replies, 24/7",
+          "Orders collected automatically",
+          "Never miss a sale again",
+          "Everything organized in one place"
+        ]
+      }
+    },
+    "cta": "Get Your AI Agent"
+  },
+  "howItWorks": {
+    "badge": "Simple Process",
+    "title": "3 Easy Steps",
+    "subtitle": "Get your AI agent up and running in less than 48 hours",
+    "steps": {
+      "tell": {
+        "title": "Tell Us About Your Business",
+        "description": "Share your products, prices, and how you work. No tech skills needed.",
+        "details": [
+          "Your product list and prices",
+          "Delivery areas you cover",
+          "Common customer questions",
+          "Your business hours"
+        ]
+      },
+      "setup": {
+        "title": "We Build Your AI Agent",
+        "description": "Our team creates and trains your AI to sound just like you.",
+        "details": [
+          "Custom AI trained on your business",
+          "Connected to your Facebook/WhatsApp",
+          "Linked to your Google Sheet",
+          "Tested and ready to go"
+        ]
+      },
+      "launch": {
+        "title": "Start Selling 24/7",
+        "description": "Your AI agent goes live and starts handling customers instantly.",
+        "details": [
+          "Replies to messages automatically",
+          "Collects orders while you sleep",
+          "Saves everything to your sheet",
+          "You stay in full control"
+        ]
+      }
+    },
+    "promise": {
+      "title": "That's It. Really.",
+      "subtitle": "No monthly fees. No complicated setup. Just one payment and you're done.",
+      "features": [
+        "Setup in 48 hours",
+        "One-time payment",
+        "No tech skills needed"
+      ]
+    },
+    "cta": "Get Started Now",
+    "trustBadge": "Join 100+ businesses already using AI to sell more"
+  },
+  "whatYouGet": {
+    "badge": "Complete Package",
+    "title": "What You Get",
+    "subtitle": "Everything you need to start selling with AI. No hidden costs.",
+    "main": {
+      "agent": {
+        "title": "Your AI Sales Agent",
+        "description": "A smart assistant that handles customers like a real person",
+        "items": [
+          "Custom trained on your business",
+          "Answers questions instantly",
+          "Collects complete order details",
+          "Works on Facebook & WhatsApp"
+        ]
+      },
+      "sheet": {
+        "title": "Google Sheet Integration",
+        "description": "All your orders organized in one place automatically",
+        "items": [
+          "Real-time order tracking",
+          "Customer details saved instantly",
+          "Easy to view and manage",
+          "Access from any device"
+        ]
+      },
+      "support": {
+        "title": "Full Setup & Support",
+        "description": "We handle everything from start to finish",
+        "items": [
+          "Complete setup by our team",
+          "Training on how to use it",
+          "Free updates and fixes",
+          "WhatsApp support anytime"
+        ]
+      }
+    },
+    "bonusTitle": "Plus, You Also Get",
+    "bonusSubtitle": "Extra features included at no extra cost",
+    "bonus": {
+      "messaging": {
+        "title": "Multi-Platform Ready",
+        "description": "Works on Facebook Messenger and WhatsApp Business"
+      },
+      "instant": {
+        "title": "Instant Replies",
+        "description": "Customers get answers in seconds, not hours"
+      },
+      "available": {
+        "title": "24/7 Availability",
+        "description": "Your AI never sleeps, never takes breaks"
+      },
+      "tracking": {
+        "title": "Order Tracking",
+        "description": "See all orders in real-time on your sheet"
+      },
+      "secure": {
+        "title": "Secure & Private",
+        "description": "Your business data is safe and protected"
+      },
+      "mobile": {
+        "title": "Mobile Friendly",
+        "description": "Manage everything from your phone"
+      }
+    },
+    "value": {
+      "badge": "Real Value",
+      "title": "This Would Cost 15,000+ Taka If You Hired Someone",
+      "subtitle": "But you get everything for a one-time setup fee",
+      "highlights": [
+        {
+          "value": "48hr",
+          "label": "Setup Time"
+        },
+        {
+          "value": "24/7",
+          "label": "Always Working"
+        },
+        {
+          "value": "0",
+          "label": "Monthly Fees"
+        }
+      ]
+    },
+    "cta": "Get Your AI Agent Now",
+    "ctaSubtext": "One-time payment • No monthly fees • Setup in 48 hours"
+  },
+  "success": {
+    "badge": "Success Stories",
+    "title": "Real Results from Real Businesses",
+    "subtitle": "See how businesses like yours are winning with AI automation",
+    "videoTitle": "Customer Success Story Video",
+    "stats": [
+      {
+        "value": "100+",
+        "label": "Happy Clients"
+      },
+      {
+        "value": "50K+",
+        "label": "Orders Automated"
+      },
+      {
+        "value": "24/7",
+        "label": "AI Working"
+      }
+    ]
+  },
+  "moreThanAI": {
+    "badge": "Complete Solutions",
+    "title": "We Build More Than AI Agents",
+    "subtitle": "From simple automation to complete digital transformation—we're your technology partner for growth",
+    "imageAlt": "Driplare complete technology ecosystem",
+    "pillars": {
+      "ai": {
+        "title": "AI Agents",
+        "description": "Smart sales automation that works 24/7"
+      },
+      "automation": {
+        "title": "Workflow Automation",
+        "description": "Connect your business apps seamlessly"
+      },
+      "dashboard": {
+        "title": "Custom Dashboards",
+        "description": "Full control centers for your business"
+      },
+      "data": {
+        "title": "Data Intelligence",
+        "description": "Automated insights and web scraping"
+      },
+      "consulting": {
+        "title": "Tech Consulting",
+        "description": "Strategy and architecture planning"
+      }
+    },
+    "learnMore": "Learn More",
+    "cta": {
+      "title": "Ready to Build Your Complete Solution?",
+      "subtitle": "Let's discuss how Driplare can transform your business with the right technology",
+      "primary": "Explore All Solutions",
+      "secondary": "Talk to Our Team"
+    }
+  },
+  "pricing": {
+    "badge": "Simple Pricing",
+    "title": "Transparent, No-Surprise Pricing",
+    "subtitle": "Start with a free trial. Pay only when you see results.",
+    "trialBanner": "🎉 Free 1-2 Week Trial • No Credit Card Required",
+    "popular": "Most Popular",
+    "packageName": "AI Sales Agent Starter",
+    "packageDescription": "Perfect for e-commerce businesses ready to automate customer conversations and order collection",
+    "setupPrice": "৳5,000 - 10,000",
+    "oneTime": "One-time setup",
+    "setupNote": "Depends on complexity and business requirements",
+    "monthlyPrice": "৳500 - 1,000",
+    "perMonth": "month",
+    "monthlyNote": "Covers AI usage, hosting, and maintenance",
+    "ctaPrimary": "Start Free Trial",
+    "ctaSecondary": "View All Pricing",
+    "includedTitle": "Everything Included:",
+    "features": [
+      "Free 1-2 week trial period",
+      "Custom AI agent trained on your business",
+      "Facebook & WhatsApp integration",
+      "Google Sheet order tracking",
+      "Complete setup and training",
+      "Ongoing support and updates"
+    ],
+    "trustBadge": "Trusted by 100+ businesses",
+    "benefits": [
+      {
+        "icon": "💰",
+        "text": "No hidden fees"
+      },
+      {
+        "icon": "🚀",
+        "text": "Setup in 48 hours"
+      },
+      {
+        "icon": "✅",
+        "text": "Cancel anytime"
+      }
+    ],
+    "additionalInfo": "Need automation, custom dashboards, or data scraping?",
+    "viewAllPricing": "View all pricing options"
+  },
+  "Faq": {
+    "badge": "Got Questions?",
+    "title": "Common Questions Answered",
+    "subtitle": "Everything you need to know about our AI sales agents",
+    "questions": [
+      {
+        "question": "Will my customers know they're talking to AI?",
+        "answer": "Only if you want them to! Our AI agents are trained to sound natural and helpful. Many businesses choose to introduce it as their 'digital assistant.' The AI is so good that most customers don't realize—they just appreciate the fast, accurate responses."
+      },
+      {
+        "question": "What if the AI makes a mistake or doesn't know something?",
+        "answer": "The AI is trained specifically on YOUR business—your products, prices, and policies. For questions it can't answer, it politely asks the customer to wait while it connects them to you. You stay in control and can always review conversations."
+      },
+      {
+        "question": "Do I need any technical knowledge to use this?",
+        "answer": "Absolutely not! We handle all the technical setup. You just provide information about your products and business. Once live, you simply check the Google Sheet for new orders. It's as easy as checking messages—but everything is organized for you."
+      },
+      {
+        "question": "How long does it take to set up?",
+        "answer": "We complete the full setup in 48 hours after you provide your business information. Then you get 1-2 weeks free trial to test it. If you're happy, you continue with the monthly maintenance. If not, no charges at all."
+      },
+      {
+        "question": "Can I customize what the AI says?",
+        "answer": "Yes! During setup, we train the AI on your tone, common responses, and business policies. You can also request changes anytime during the trial period. We make sure it sounds exactly how you want."
+      },
+      {
+        "question": "What happens if I want to cancel?",
+        "answer": "You can cancel anytime with 30 days notice. The one-time setup fee is non-refundable, but there are no long-term contracts for the monthly maintenance. Your AI agent stops working after the cancellation period."
+      },
+      {
+        "question": "Will this work for my specific type of business?",
+        "answer": "If you sell products online (clothing, electronics, cosmetics, food, anything!), yes! We've successfully deployed AI agents for all types of e-commerce. During the free trial, you'll see exactly how it handles your specific products and customers."
+      },
+      {
+        "question": "How many orders can the AI handle?",
+        "answer": "There's no limit! Whether you get 10 orders or 1000 orders per day, the AI handles them all instantly. Unlike a human, it never gets tired, never takes breaks, and responds to every customer in seconds."
+      }
+    ],
+    "stillHaveQuestions": {
+      "title": "Still Have Questions?",
+      "subtitle": "Our team is here to help. Get all your questions answered before starting your free trial.",
+      "primaryCta": "Talk to Our Team",
+      "secondaryCta": "WhatsApp Us Now"
+    }
+  },
+  "Cta": {
+    "badge": "Ready to Transform Your Business?",
+    "title": "Stop Losing Sales. Start Growing Today.",
+    "subtitle": "Join 100+ businesses already using AI to automate sales and save hours every day. Get started with a completely free trial—no credit card needed.",
+    "primaryCta": "Start Your Free Trial",
+    "secondaryCta": "See Pricing",
+    "trustIndicators": [
+      "Free 1-2 week trial",
+      "No credit card required",
+      "Setup in 48 hours",
+      "Cancel anytime"
+    ],
+    "features": {
+      "setup": {
+        "title": "Quick Setup",
+        "description": "Live in 48 hours after you provide business info"
+      },
+      "trial": {
+        "title": "Risk-Free Trial",
+        "description": "Test it free for 1-2 weeks with real customers"
+      },
+      "support": {
+        "title": "Full Support",
+        "description": "We handle everything—setup, training, maintenance"
+      }
+    },
+    "stats": [
+      {
+        "value": "100+",
+        "label": "Happy Businesses"
+      },
+      {
+        "value": "50K+",
+        "label": "Orders Automated"
+      },
+      {
+        "value": "24/7",
+        "label": "Always Working"
+      },
+      {
+        "value": "48hr",
+        "label": "Setup Time"
+      }
+    ],
+    "finalNote": "🎉 Limited slots available for free trials this month. Book yours now!"
+  }
+}

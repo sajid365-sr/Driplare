@@ -5,7 +5,7 @@ import { Clock, Moon, DollarSign, TrendingDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export function ProblemSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("homePage");
 
   const problems = [
     {

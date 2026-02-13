@@ -1,0 +1,615 @@
+{
+    "hero": {
+        "badge": "Professional Web Development",
+        "title": "Websites That Actually Grow Your Business",
+        "subtitle": "Custom-built or template-based, we create fast, beautiful, and conversion-focused websites. From e-commerce to portfolios, we've got you covered.",
+        "primaryCta": "Get Free Quote",
+        "secondaryCta": "Calculate Price",
+        "scrollText": "Explore Services",
+        "trustBadges": [
+            {
+                "icon": "CheckCircle2",
+                "text": "50+ Websites Delivered"
+            },
+            {
+                "icon": "Clock",
+                "text": "7-Day Quick Launch"
+            },
+            {
+                "icon": "DollarSign",
+                "text": "Starting ৳8,000"
+            }
+        ]
+    },
+    "websiteTypes": {
+        "badge": "Complete Solutions",
+        "title": "Every Type of Website You Need",
+        "subtitle": "From simple landing pages to complex e-commerce platforms, we build exactly what your business needs",
+        "ctaButton": "Get Started",
+        "bottomText": "Don't see what you need? We build custom solutions too.",
+        "bottomCta": "Discuss Your Project",
+        "types": [
+            {
+                "icon": "ShoppingCart",
+                "title": "E-commerce Store (Custom)",
+                "description": "Full-featured online store built from scratch with Laravel or Next.js. Complete control, unlimited products, custom features.",
+                "features": [
+                    "Custom shopping cart & checkout",
+                    "Payment gateway (bKash, Nagad, SSLCommerz)",
+                    "Product management dashboard",
+                    "Order tracking & notifications",
+                    "SEO optimized product pages"
+                ],
+                "priceRange": "৳40K-80K",
+                "timeline": "2-3 weeks",
+                "badge": "Popular",
+                "imageUrl": "/images/web-dev/ecommerce-custom.png"
+            },
+            {
+                "icon": "Store",
+                "title": "E-commerce (WordPress)",
+                "description": "Quick-launch online store using WooCommerce. Perfect for getting started fast with proven templates.",
+                "features": [
+                    "WooCommerce setup & customization",
+                    "Payment gateway integration",
+                    "Product import & setup",
+                    "Inventory management",
+                    "Mobile-responsive design"
+                ],
+                "priceRange": "৳15K-30K",
+                "timeline": "5-7 days",
+                "badge": "Quick Launch",
+                "imageUrl": "/images/web-dev/ecommerce-wordpress.png"
+            },
+            {
+                "icon": "Briefcase",
+                "title": "Business Website",
+                "description": "Professional multi-page website for companies, agencies, or organizations. Build credibility and attract customers.",
+                "features": [
+                    "Custom design matching your brand",
+                    "5-15 pages (About, Services, Contact, etc.)",
+                    "Contact forms & inquiries",
+                    "Google Maps integration",
+                    "Fast loading & SEO ready"
+                ],
+                "priceRange": "৳20K-40K",
+                "timeline": "7-10 days",
+                "imageUrl": "/images/web-dev/business-website.png"
+            },
+            {
+                "icon": "Zap",
+                "title": "Landing Page",
+                "description": "Single-page website designed to convert visitors into customers. Perfect for ads, campaigns, or product launches.",
+                "features": [
+                    "High-converting design",
+                    "Call-to-action optimization",
+                    "Lead capture forms",
+                    "Facebook Pixel & Google Ads ready",
+                    "Mobile-first approach"
+                ],
+                "priceRange": "৳8K-15K",
+                "timeline": "3-5 days",
+                "badge": "Best Value",
+                "imageUrl": "/images/web-dev/landing-page.png"
+            },
+            {
+                "icon": "User",
+                "title": "Portfolio Website",
+                "description": "Showcase your work beautifully. Perfect for designers, photographers, developers, freelancers, or artists.",
+                "features": [
+                    "Project/work gallery",
+                    "About & resume section",
+                    "Contact form",
+                    "Blog (optional)",
+                    "Clean, modern design"
+                ],
+                "priceRange": "৳10K-20K",
+                "timeline": "3-5 days",
+                "imageUrl": "/images/web-dev/portfolio.png"
+            },
+            {
+                "icon": "LayoutDashboard",
+                "title": "Custom Dashboard/Web App",
+                "description": "Admin panels, SaaS platforms, internal tools, or custom web applications built with React/Next.js.",
+                "features": [
+                    "Custom features & workflows",
+                    "User authentication & roles",
+                    "Database integration",
+                    "API development",
+                    "Scalable architecture"
+                ],
+                "priceRange": "৳50K-150K",
+                "timeline": "3-4 weeks",
+                "imageUrl": "/images/web-dev/dashboard.png"
+            },
+            {
+                "icon": "FileText",
+                "title": "Blog/Content Website",
+                "description": "WordPress-powered blog or content site. Easy to manage, SEO-friendly, perfect for content creators.",
+                "features": [
+                    "WordPress CMS setup",
+                    "Category & tag organization",
+                    "Comment system",
+                    "Social media integration",
+                    "Newsletter signup"
+                ],
+                "priceRange": "৳12K-25K",
+                "timeline": "5-7 days",
+                "imageUrl": "/images/web-dev/blog.png"
+            },
+            {
+                "icon": "Calendar",
+                "title": "Booking/Service Website",
+                "description": "For service businesses, salons, consultants, or clinics. Accept bookings and manage appointments online.",
+                "features": [
+                    "Appointment scheduling system",
+                    "Service showcase pages",
+                    "Calendar integration",
+                    "Email confirmations",
+                    "Payment collection (optional)"
+                ],
+                "priceRange": "৳25K-45K",
+                "timeline": "10-14 days",
+                "imageUrl": "/images/web-dev/booking.png"
+            }
+        ]
+    },
+    "customVsTemplate": {
+        "badge": "Not Sure Which to Choose?",
+        "title": "Custom Build vs Template",
+        "subtitle": "Both options have their strengths. Here's how to pick the right one for your business.",
+        "bestForLabel": "Best For",
+        "custom": {
+            "title": "Custom Built",
+            "tagline": "React, Next.js, Laravel — Built from scratch",
+            "points": [
+                {
+                    "text": "100% unique design — nobody else has it",
+                    "positive": true
+                },
+                {
+                    "text": "Built exactly for your workflow and needs",
+                    "positive": true
+                },
+                {
+                    "text": "Unlimited scalability as your business grows",
+                    "positive": true
+                },
+                {
+                    "text": "You own the full source code",
+                    "positive": true
+                },
+                {
+                    "text": "No plugin limitations or dependencies",
+                    "positive": true
+                },
+                {
+                    "text": "Higher cost (৳40K-150K)",
+                    "positive": false
+                },
+                {
+                    "text": "Longer delivery time (2-4 weeks)",
+                    "positive": false
+                }
+            ],
+            "bestFor": [
+                "Businesses with unique requirements",
+                "Scalable e-commerce or SaaS platforms",
+                "Companies needing custom integrations",
+                "Long-term serious investment"
+            ]
+        },
+        "template": {
+            "title": "WordPress / Template",
+            "tagline": "WooCommerce, Elementor — Fast & proven",
+            "points": [
+                {
+                    "text": "Fast delivery — live in 5-7 days",
+                    "positive": true
+                },
+                {
+                    "text": "Lower cost (৳8K-30K)",
+                    "positive": true
+                },
+                {
+                    "text": "Easy to manage content yourself",
+                    "positive": true
+                },
+                {
+                    "text": "Proven, battle-tested designs",
+                    "positive": true
+                },
+                {
+                    "text": "Large plugin ecosystem",
+                    "positive": true
+                },
+                {
+                    "text": "Limited deep customization",
+                    "positive": false
+                },
+                {
+                    "text": "Plugin updates can cause issues",
+                    "positive": false
+                }
+            ],
+            "bestFor": [
+                "Quick launches and tight budgets",
+                "Standard e-commerce or blogging",
+                "Non-technical owners who self-manage",
+                "Testing an idea before scaling"
+            ]
+        },
+        "confused": {
+            "title": "Still Not Sure?",
+            "subtitle": "Tell us about your business and budget. We'll honestly recommend the best option for you — even if it means a cheaper solution.",
+            "cta": "Get a Free Recommendation"
+        }
+    },
+    "techStack": {
+        "badge": "Our Tech Stack",
+        "title": "Built With Modern, Proven Technologies",
+        "subtitle": "We use industry-standard tools — not experimental frameworks. Your website will be fast, secure, and maintainable for years.",
+        "note": "We choose the right tool for each job — not the trendiest one.",
+        "categories": [
+            {
+                "title": "Frontend",
+                "techs": [
+                    {
+                        "name": "React",
+                        "logoUrl": "/images/tech/react.svg"
+                    },
+                    {
+                        "name": "Next.js",
+                        "logoUrl": "/images/tech/nextjs.svg"
+                    },
+                    {
+                        "name": "TypeScript",
+                        "logoUrl": "/images/tech/typescript.svg"
+                    },
+                    {
+                        "name": "Tailwind CSS",
+                        "logoUrl": "/images/tech/tailwind.svg"
+                    },
+                    {
+                        "name": "Framer Motion",
+                        "logoUrl": "/images/tech/framer.svg"
+                    }
+                ]
+            },
+            {
+                "title": "Backend",
+                "techs": [
+                    {
+                        "name": "Node.js",
+                        "logoUrl": "/images/tech/nodejs.svg"
+                    },
+                    {
+                        "name": "Laravel",
+                        "logoUrl": "/images/tech/laravel.svg"
+                    },
+                    {
+                        "name": "PHP",
+                        "logoUrl": "/images/tech/php.svg"
+                    },
+                    {
+                        "name": "REST API",
+                        "logoUrl": "/images/tech/api.svg"
+                    },
+                    {
+                        "name": "GraphQL",
+                        "logoUrl": "/images/tech/graphql.svg"
+                    }
+                ]
+            },
+            {
+                "title": "Database",
+                "techs": [
+                    {
+                        "name": "MongoDB",
+                        "logoUrl": "/images/tech/mongodb.svg"
+                    },
+                    {
+                        "name": "MySQL",
+                        "logoUrl": "/images/tech/mysql.svg"
+                    },
+                    {
+                        "name": "PostgreSQL",
+                        "logoUrl": "/images/tech/postgresql.svg"
+                    },
+                    {
+                        "name": "Prisma",
+                        "logoUrl": "/images/tech/prisma.svg"
+                    }
+                ]
+            },
+            {
+                "title": "CMS & E-commerce",
+                "techs": [
+                    {
+                        "name": "WordPress",
+                        "logoUrl": "/images/tech/wordpress.svg"
+                    },
+                    {
+                        "name": "WooCommerce",
+                        "logoUrl": "/images/tech/woocommerce.svg"
+                    },
+                    {
+                        "name": "Strapi",
+                        "logoUrl": "/images/tech/strapi.svg"
+                    },
+                    {
+                        "name": "Shopify",
+                        "logoUrl": "/images/tech/shopify.svg"
+                    }
+                ]
+            },
+            {
+                "title": "Deployment & Hosting",
+                "techs": [
+                    {
+                        "name": "Vercel",
+                        "logoUrl": "/images/tech/vercel.svg"
+                    },
+                    {
+                        "name": "AWS",
+                        "logoUrl": "/images/tech/aws.svg"
+                    },
+                    {
+                        "name": "cPanel",
+                        "logoUrl": "/images/tech/cpanel.svg"
+                    },
+                    {
+                        "name": "Hostinger",
+                        "logoUrl": "/images/tech/hostinger.svg"
+                    },
+                    {
+                        "name": "Cloudflare",
+                        "logoUrl": "/images/tech/cloudflare.svg"
+                    }
+                ]
+            }
+        ]
+    },
+    "whatsIncluded": {
+        "badge": "No Hidden Costs",
+        "title": "What's Included in Every Website",
+        "subtitle": "Every project we deliver comes with these essentials — no surprises, no hidden charges.",
+        "includedTitle": "Standard in Every Package",
+        "includedSubtitle": "Included in every website we build",
+        "included": [
+            "Mobile-responsive design",
+            "SEO basics (meta, sitemap, robots.txt)",
+            "SSL certificate setup",
+            "Contact form integration",
+            "Google Analytics setup",
+            "Social media links",
+            "Fast page load optimization",
+            "Cross-browser compatibility",
+            "1 month free support",
+            "Admin panel training",
+            "Source code handover",
+            "Hosting setup assistance"
+        ],
+        "addonsTitle": "Optional Add-ons",
+        "addonsSubtitle": "Enhance your website with extra features",
+        "addons": [
+            {
+                "name": "Advanced SEO Package",
+                "price": "৳5,000"
+            },
+            {
+                "name": "bKash / Nagad Payment Gateway",
+                "price": "৳8,000"
+            },
+            {
+                "name": "SSLCommerz Integration",
+                "price": "৳10,000"
+            },
+            {
+                "name": "Multi-language Support",
+                "price": "৳8,000"
+            },
+            {
+                "name": "Live Chat Integration",
+                "price": "৳3,000"
+            },
+            {
+                "name": "Email Marketing Setup",
+                "price": "৳5,000"
+            },
+            {
+                "name": "Custom Animations",
+                "price": "৳5,000-10,000"
+            },
+            {
+                "name": "Maintenance Package (Monthly)",
+                "price": "৳3,000-5,000"
+            }
+        ],
+        "cta": {
+            "title": "Need something specific?",
+            "subtitle": "We can add any feature to your project. Ask us during the consultation.",
+            "button": "Discuss Your Requirements"
+        }
+    },
+    "process": {
+        "badge": "How We Work",
+        "title": "From Idea to Live Website in 5 Steps",
+        "subtitle": "A clear, simple process with no surprises. You'll always know what's happening and what's next.",
+        "ctaText": "Ready to get started? Let's kick off your project.",
+        "ctaButton": "Start Your Project",
+        "steps": [
+            {
+                "day": "Day 1",
+                "title": "Discovery Call",
+                "description": "We start with a free 30-45 minute call to understand your business, goals, and what you need. No technical jargon — just a clear conversation.",
+                "details": [
+                    "Business goals & target audience",
+                    "Website type & required features",
+                    "Budget & timeline discussion",
+                    "Custom or template recommendation"
+                ]
+            },
+            {
+                "day": "Day 2-3",
+                "title": "Proposal & Design Mockup",
+                "description": "You receive a detailed proposal with a fixed price, timeline, and a design mockup so you can see what your website will look like before we build anything.",
+                "details": [
+                    "Fixed price quote (no surprises)",
+                    "Homepage design mockup",
+                    "Sitemap & page structure",
+                    "Tech stack confirmation"
+                ]
+            },
+            {
+                "day": "Day 4-14",
+                "title": "Development",
+                "description": "We build your website. You get regular updates via WhatsApp or email. The timeline depends on complexity — landing pages take 3 days, custom platforms take up to 3 weeks.",
+                "details": [
+                    "Daily progress updates",
+                    "Staging link to preview",
+                    "Content integration",
+                    "Testing on all devices"
+                ]
+            },
+            {
+                "day": "Day 15",
+                "title": "Review & Revisions",
+                "description": "You review the complete website on a staging link and request any changes. We offer unlimited revisions during this phase — we don't stop until you're 100% happy.",
+                "details": [
+                    "Full website walkthrough",
+                    "Unlimited change requests",
+                    "Performance & speed check",
+                    "Final approval from you"
+                ]
+            },
+            {
+                "day": "Day 16+",
+                "title": "Launch & Support",
+                "description": "We deploy your website live, set up your domain and hosting, and provide a training session. Then you get 1 month of free support for any issues or small updates.",
+                "details": [
+                    "Domain & hosting setup",
+                    "Admin panel training session",
+                    "1 month free support",
+                    "Ongoing maintenance available"
+                ]
+            }
+        ]
+    },
+    "pricingCalculator": {
+        "badge": "Instant Price Estimate",
+        "title": "How Much Will Your Website Cost?",
+        "subtitle": "Configure your project and get an instant ballpark estimate. No forms, no waiting.",
+        "step1": "1. What type of website do you need?",
+        "step2": "2. Custom build or template?",
+        "step3": "3. How many pages?",
+        "step4": "4. Any extra features?",
+        "websiteTypes": {
+            "ecommerce_custom": "E-commerce (Custom)",
+            "ecommerce_wp": "E-commerce (WordPress)",
+            "business": "Business Website",
+            "landing": "Landing Page",
+            "portfolio": "Portfolio",
+            "dashboard": "Dashboard / Web App",
+            "blog": "Blog / Content Site",
+            "booking": "Booking / Service Site"
+        },
+        "buildTypes": {
+            "custom": "Custom Built",
+            "template": "Template Based"
+        },
+        "addons": {
+            "ecommerce": "E-commerce / Shopping Cart",
+            "payment": "Payment Gateway (bKash, Nagad)",
+            "multiLang": "Multi-language Support",
+            "customDesign": "Custom UI/UX Design"
+        },
+        "result": {
+            "estimatedPrice": "Estimated Price Range",
+            "estimatedTime": "Estimated Delivery",
+            "days": "days",
+            "disclaimer": "Final quote depends on exact requirements. Book a free consultation for a precise estimate.",
+            "summaryTitle": "Your Configuration:",
+            "typeLabel": "Website Type",
+            "buildLabel": "Build Type",
+            "pagesLabel": "Pages",
+            "pagesUnit": "pages"
+        },
+        "cta": {
+            "title": "Want an exact quote?",
+            "subtitle": "Tell us about your project and we'll send a detailed proposal within 24 hours.",
+            "button": "Get Exact Quote"
+        }
+    },
+    "faq": {
+        "badge": "Got Questions?",
+        "title": "Everything You Need to Know",
+        "subtitle": "Common questions about our web development services, answered honestly.",
+        "questions": [
+            {
+                "question": "Do I own the website after delivery?",
+                "answer": "Yes, 100%. Once the project is complete and payment is finalised, you receive the full source code and all assets. We don't lock you into any proprietary system — the website is entirely yours."
+            },
+            {
+                "question": "Can I update the content myself after launch?",
+                "answer": "Absolutely. All WordPress and template-based websites come with an easy-to-use admin panel. For custom builds, we provide a CMS or admin dashboard so you can update text, images, and products without touching code. We also provide a training session on launch day."
+            },
+            {
+                "question": "What if I don't like the design?",
+                "answer": "We share a design mockup before writing a single line of code. You can request changes at that stage. Once you approve the design and we build it, we offer unlimited revision requests during the review phase until you're 100% satisfied."
+            },
+            {
+                "question": "Do you provide hosting and domain?",
+                "answer": "We don't sell hosting or domains directly, but we help you set everything up. We'll guide you through purchasing from Hostinger, Namecheap, or your preferred provider, then configure and deploy your website there as part of the project."
+            },
+            {
+                "question": "What about website maintenance after launch?",
+                "answer": "Every project includes 1 month of free support for bugs and small updates. After that, we offer optional monthly maintenance packages starting from ৳3,000/month covering security updates, backups, content changes, and performance monitoring."
+            },
+            {
+                "question": "Can you redesign my existing website?",
+                "answer": "Yes. We handle full redesigns and partial overhauls. Share your current website and tell us what's not working — we'll propose the best approach, whether that's a fresh build or improving what you already have."
+            },
+            {
+                "question": "How do payments work?",
+                "answer": "We take 50% upfront to begin the project and 50% upon delivery before the final handover. We accept bKash, Nagad, bank transfer, and international payments via Wise or PayPal for international clients."
+            },
+            {
+                "question": "Can you integrate bKash or Nagad payments into my website?",
+                "answer": "Yes. We integrate bKash, Nagad, SSLCommerz, and other Bangladeshi payment gateways. The integration is an add-on starting from ৳8,000 depending on the gateway and complexity required."
+            },
+            {
+                "question": "How long does the project take?",
+                "answer": "It depends on the type. Landing pages take 3–5 days, WordPress e-commerce 5–7 days, business websites 7–10 days, and custom web apps 2–4 weeks. You can estimate your timeline using the pricing calculator above."
+            },
+            {
+                "question": "Do you work with international clients?",
+                "answer": "Yes. We work remotely with clients worldwide. Communication is via WhatsApp, Slack, or email. Payments from international clients are accepted via Wise or PayPal."
+            }
+        ],
+        "stillHaveQuestions": {
+            "title": "Still Have Questions?",
+            "subtitle": "Our team is happy to answer anything before you commit. No pressure, just honest advice.",
+            "primaryCta": "Book Free Consultation",
+            "secondaryCta": "WhatsApp Us"
+        }
+    },
+    "simpleCta": {
+        "title": "Let's Build Something Great Together",
+        "subtitle": "From a simple landing page to a full e-commerce platform — we deliver websites that look professional and actually bring results.",
+        "trustBadges": [
+            "Free consultation",
+            "Fixed price quotes",
+            "7-day quick launch available",
+            "1 month free support"
+        ],
+        "primaryButton": "Get Free Quote Now",
+        "secondaryButton": "Calculate Price",
+        "stats": {
+            "delivery": "As fast as 3-day delivery",
+            "support": "1 month free support",
+            "quote": "Quote within 24 hours"
+        },
+        "finalNote": "💡 Not sure where to start? Book a free 30-minute consultation and we'll guide you."
+    }
+}

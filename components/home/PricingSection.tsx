@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
 export function PricingSection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("homePage");
 
     return (
         <section className="py-20 bg-muted/30 relative overflow-hidden">
@@ -29,15 +29,15 @@ export function PricingSection() {
                     >
                         <Sparkles className="w-4 h-4 text-accent" />
                         <span className="text-sm font-semibold text-accent">
-                            {t("homepricing.badge")}
+                            {t("pricing.badge")}
                         </span>
                     </motion.div>
 
                     <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-                        {t("homepricing.title")}
+                        {t("pricing.title")}
                     </h2>
                     <p className="text-lg text-muted-foreground">
-                        {t("homepricing.subtitle")}
+                        {t("pricing.subtitle")}
                     </p>
                 </motion.div>
 
@@ -54,7 +54,7 @@ export function PricingSection() {
                             <div className="flex items-center justify-center gap-3 text-white">
                                 <Gift className="w-5 h-5" />
                                 <span className="font-bold text-sm md:text-base">
-                                    {t("homepricing.trialBanner")}
+                                    {t("pricing.trialBanner")}
                                 </span>
                             </div>
                         </div>
@@ -64,15 +64,15 @@ export function PricingSection() {
                                 {/* Left: Package Info */}
                                 <div>
                                     <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase mb-4">
-                                        {t("homepricing.popular")}
+                                        {t("pricing.popular")}
                                     </div>
 
                                     <h3 className="text-3xl font-black text-foreground mb-3">
-                                        {t("homepricing.packageName")}
+                                        {t("pricing.packageName")}
                                     </h3>
 
                                     <p className="text-muted-foreground mb-6 leading-relaxed">
-                                        {t("homepricing.packageDescription")}
+                                        {t("pricing.packageDescription")}
                                     </p>
 
                                     {/* Pricing */}
@@ -80,28 +80,28 @@ export function PricingSection() {
                                         <div className="mb-4">
                                             <div className="flex items-baseline gap-2 mb-2">
                                                 <span className="text-4xl font-black text-primary">
-                                                    {t("homepricing.setupPrice")}
+                                                    {t("pricing.setupPrice")}
                                                 </span>
                                                 <span className="text-sm text-muted-foreground font-medium">
-                                                    {t("homepricing.oneTime")}
+                                                    {t("pricing.oneTime")}
                                                 </span>
                                             </div>
                                             <p className="text-xs text-muted-foreground">
-                                                {t("homepricing.setupNote")}
+                                                {t("pricing.setupNote")}
                                             </p>
                                         </div>
 
                                         <div className="border-t border-border pt-4">
                                             <div className="flex items-baseline gap-2 mb-2">
                                                 <span className="text-2xl font-bold text-foreground">
-                                                    {t("homepricing.monthlyPrice")}
+                                                    {t("pricing.monthlyPrice")}
                                                 </span>
                                                 <span className="text-sm text-muted-foreground font-medium">
-                                                    / {t("homepricing.perMonth")}
+                                                    / {t("pricing.perMonth")}
                                                 </span>
                                             </div>
                                             <p className="text-xs text-muted-foreground">
-                                                {t("homepricing.monthlyNote")}
+                                                {t("pricing.monthlyNote")}
                                             </p>
                                         </div>
                                     </div>
@@ -114,7 +114,7 @@ export function PricingSection() {
                                             asChild
                                         >
                                             <a href="/contact">
-                                                {t("homepricing.ctaPrimary")}
+                                                {t("pricing.ctaPrimary")}
                                                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                             </a>
                                         </Button>
@@ -125,7 +125,7 @@ export function PricingSection() {
                                             className="border-2 font-bold flex-1"
                                             asChild
                                         >
-                                            <a href="/pricing">{t("homepricing.ctaSecondary")}</a>
+                                            <a href="/pricing">{t("pricing.ctaSecondary")}</a>
                                         </Button>
                                     </div>
                                 </div>
@@ -133,11 +133,11 @@ export function PricingSection() {
                                 {/* Right: Features List */}
                                 <div>
                                     <h4 className="text-xl font-bold text-foreground mb-6">
-                                        {t("homepricing.includedTitle")}
+                                        {t("pricing.includedTitle")}
                                     </h4>
 
                                     <div className="space-y-4">
-                                        {(t("homepricing.features", { returnObjects: true }) as string[]).map(
+                                        {(t("pricing.features", { returnObjects: true }) as string[]).map(
                                             (feature, index) => (
                                                 <motion.div
                                                     key={index}
@@ -170,7 +170,7 @@ export function PricingSection() {
                                                 ))}
                                             </div>
                                             <span className="font-medium">
-                                                {t("homepricing.trustBadge")}
+                                                {t("pricing.trustBadge")}
                                             </span>
                                         </div>
                                     </div>
@@ -181,7 +181,7 @@ export function PricingSection() {
                         {/* Bottom Benefits Bar */}
                         <div className="bg-muted/30 border-t border-border px-6 py-4">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                                {(t("homepricing.benefits", { returnObjects: true }) as Array<{
+                                {(t("pricing.benefits", { returnObjects: true }) as Array<{
                                     icon: string;
                                     text: string;
                                 }>).map((benefit, index) => (
@@ -205,12 +205,12 @@ export function PricingSection() {
                     className="text-center mt-8"
                 >
                     <p className="text-sm text-muted-foreground">
-                        {t("homepricing.additionalInfo")}{" "}
+                        {t("pricing.additionalInfo")}{" "}
                         <a
                             href="/pricing"
                             className="text-primary font-semibold hover:underline"
                         >
-                            {t("homepricing.viewAllPricing")}
+                            {t("pricing.viewAllPricing")}
                         </a>
                     </p>
                 </motion.div>

@@ -18,7 +18,7 @@ import { getReviews, type Testimonial } from "@/lib/review-action";
 import Image from "next/image";
 
 export function SuccessStoriesSection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("homePage");
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
     const [loading, setLoading] = useState(true);
     const [activeIndex, setActiveIndex] = useState(0);

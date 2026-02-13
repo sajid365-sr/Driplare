@@ -6,10 +6,10 @@ import { ChevronDown, HelpCircle, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export function FAQSection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("homePage");
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-    const faqs = t("homeFaq.questions", { returnObjects: true }) as Array<{
+    const faqs = t("Faq.questions", { returnObjects: true }) as Array<{
         question: string;
         answer: string;
     }>;
@@ -39,15 +39,15 @@ export function FAQSection() {
                     >
                         <HelpCircle className="w-4 h-4 text-primary" />
                         <span className="text-sm font-semibold text-primary">
-                            {t("homeFaq.badge")}
+                            {t("Faq.badge")}
                         </span>
                     </motion.div>
 
                     <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-                        {t("homeFaq.title")}
+                        {t("Faq.title")}
                     </h2>
                     <p className="text-lg text-muted-foreground">
-                        {t("homeFaq.subtitle")}
+                        {t("Faq.subtitle")}
                     </p>
                 </motion.div>
 
@@ -120,23 +120,23 @@ export function FAQSection() {
                                 <HelpCircle className="w-7 h-7 text-primary" />
                             </div>
                             <h3 className="text-2xl font-bold text-foreground mb-3">
-                                {t("homeFaq.stillHaveQuestions.title")}
+                                {t("Faq.stillHaveQuestions.title")}
                             </h3>
                             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-                                {t("homeFaq.stillHaveQuestions.subtitle")}
+                                {t("Faq.stillHaveQuestions.subtitle")}
                             </p>
                             <div className="flex flex-col sm:flex-row gap-3 justify-center">
                                 <a
                                     href="/contact"
                                     className="inline-flex items-center justify-center px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl transition-colors"
                                 >
-                                    {t("homeFaq.stillHaveQuestions.primaryCta")}
+                                    {t("Faq.stillHaveQuestions.primaryCta")}
                                 </a>
                                 <a
                                     href="https://wa.me/your-number"
                                     className="inline-flex items-center justify-center px-6 py-3 bg-accent hover:bg-accent/90 text-accent-foreground font-bold rounded-xl transition-colors"
                                 >
-                                    {t("homeFaq.stillHaveQuestions.secondaryCta")}
+                                    {t("Faq.stillHaveQuestions.secondaryCta")}
                                 </a>
                             </div>
                         </div>

@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 
 export function ROICalculatorSection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("AIAgentPage");
 
     // Calculator State
     const [messagesPerDay, setMessagesPerDay] = useState(50);
@@ -63,15 +63,15 @@ export function ROICalculatorSection() {
                     >
                         <Calculator className="w-4 h-4 text-accent" />
                         <span className="text-sm font-semibold text-accent">
-                            {t("services.AIAgent.roiCalculator.badge")}
+                            {t("roiCalculator.badge")}
                         </span>
                     </motion.div>
 
                     <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-                        {t("services.AIAgent.roiCalculator.title")}
+                        {t("roiCalculator.title")}
                     </h2>
                     <p className="text-lg text-muted-foreground">
-                        {t("services.AIAgent.roiCalculator.subtitle")}
+                        {t("roiCalculator.subtitle")}
                     </p>
                 </motion.div>
 
@@ -85,21 +85,21 @@ export function ROICalculatorSection() {
                     >
                         <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
                             <Users className="w-6 h-6 text-primary" />
-                            {t("services.AIAgent.roiCalculator.inputTitle")}
+                            {t("roiCalculator.inputTitle")}
                         </h3>
 
                         {/* Input 1: Messages Per Day */}
                         <div className="mb-8">
                             <div className="flex items-center justify-between mb-3">
                                 <label className="text-sm font-semibold text-foreground">
-                                    {t("services.AIAgent.roiCalculator.inputs.messagesPerDay.label")}
+                                    {t("roiCalculator.inputs.messagesPerDay.label")}
                                 </label>
                                 <div className="flex items-center gap-2">
                                     <span className="text-2xl font-black text-primary">
                                         {messagesPerDay}
                                     </span>
                                     <span className="text-sm text-muted-foreground">
-                                        {t("services.AIAgent.roiCalculator.inputs.messagesPerDay.unit")}
+                                        {t("roiCalculator.inputs.messagesPerDay.unit")}
                                     </span>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@ export function ROICalculatorSection() {
                                 className="mb-2"
                             />
                             <p className="text-xs text-muted-foreground">
-                                {t("services.AIAgent.roiCalculator.inputs.messagesPerDay.hint")}
+                                {t("roiCalculator.inputs.messagesPerDay.hint")}
                             </p>
                         </div>
 
@@ -120,14 +120,14 @@ export function ROICalculatorSection() {
                         <div className="mb-8">
                             <div className="flex items-center justify-between mb-3">
                                 <label className="text-sm font-semibold text-foreground">
-                                    {t("services.AIAgent.roiCalculator.inputs.hoursSpent.label")}
+                                    {t("roiCalculator.inputs.hoursSpent.label")}
                                 </label>
                                 <div className="flex items-center gap-2">
                                     <span className="text-2xl font-black text-secondary">
                                         {hoursSpentDaily}
                                     </span>
                                     <span className="text-sm text-muted-foreground">
-                                        {t("services.AIAgent.roiCalculator.inputs.hoursSpent.unit")}
+                                        {t("roiCalculator.inputs.hoursSpent.unit")}
                                     </span>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@ export function ROICalculatorSection() {
                                 className="mb-2"
                             />
                             <p className="text-xs text-muted-foreground">
-                                {t("services.AIAgent.roiCalculator.inputs.hoursSpent.hint")}
+                                {t("roiCalculator.inputs.hoursSpent.hint")}
                             </p>
                         </div>
 
@@ -148,14 +148,14 @@ export function ROICalculatorSection() {
                         <div className="mb-6">
                             <div className="flex items-center justify-between mb-3">
                                 <label className="text-sm font-semibold text-foreground">
-                                    {t("services.AIAgent.roiCalculator.inputs.hourlyRate.label")}
+                                    {t("roiCalculator.inputs.hourlyRate.label")}
                                 </label>
                                 <div className="flex items-center gap-2">
                                     <span className="text-2xl font-black text-accent">
                                         ৳{hourlyRate}
                                     </span>
                                     <span className="text-sm text-muted-foreground">
-                                        {t("services.AIAgent.roiCalculator.inputs.hourlyRate.unit")}
+                                        {t("roiCalculator.inputs.hourlyRate.unit")}
                                     </span>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@ export function ROICalculatorSection() {
                                 className="mb-2"
                             />
                             <p className="text-xs text-muted-foreground">
-                                {t("services.AIAgent.roiCalculator.inputs.hourlyRate.hint")}
+                                {t("roiCalculator.inputs.hourlyRate.hint")}
                             </p>
                         </div>
 
@@ -177,7 +177,7 @@ export function ROICalculatorSection() {
                             <div className="grid grid-cols-2 gap-4 text-center">
                                 <div>
                                     <div className="text-xs text-muted-foreground mb-1">
-                                        {t("services.AIAgent.roiCalculator.monthlySummary.messages")}
+                                        {t("roiCalculator.monthlySummary.messages")}
                                     </div>
                                     <div className="text-lg font-bold text-foreground">
                                         {monthlyMessages.toLocaleString()}
@@ -185,7 +185,7 @@ export function ROICalculatorSection() {
                                 </div>
                                 <div>
                                     <div className="text-xs text-muted-foreground mb-1">
-                                        {t("services.AIAgent.roiCalculator.monthlySummary.hours")}
+                                        {t("roiCalculator.monthlySummary.hours")}
                                     </div>
                                     <div className="text-lg font-bold text-foreground">
                                         {monthlyHours} hrs
@@ -210,7 +210,7 @@ export function ROICalculatorSection() {
                                 </div>
                                 <div>
                                     <div className="text-sm text-muted-foreground">
-                                        {t("services.AIAgent.roiCalculator.results.currentCost.label")}
+                                        {t("roiCalculator.results.currentCost.label")}
                                     </div>
                                     <div className="text-3xl font-black text-destructive">
                                         ৳{currentMonthlyCost.toLocaleString()}
@@ -218,7 +218,7 @@ export function ROICalculatorSection() {
                                 </div>
                             </div>
                             <p className="text-sm text-muted-foreground">
-                                {t("services.AIAgent.roiCalculator.results.currentCost.description")}
+                                {t("roiCalculator.results.currentCost.description")}
                             </p>
                         </div>
 
@@ -230,7 +230,7 @@ export function ROICalculatorSection() {
                                 </div>
                                 <div>
                                     <div className="text-sm text-muted-foreground">
-                                        {t("services.AIAgent.roiCalculator.results.withAI.label")}
+                                        {t("roiCalculator.results.withAI.label")}
                                     </div>
                                     <div className="text-3xl font-black text-accent">
                                         ৳{aiAgentCost.toLocaleString()}
@@ -238,7 +238,7 @@ export function ROICalculatorSection() {
                                 </div>
                             </div>
                             <p className="text-sm text-muted-foreground">
-                                {t("services.AIAgent.roiCalculator.results.withAI.description")}
+                                {t("roiCalculator.results.withAI.description")}
                             </p>
                         </div>
 
@@ -250,7 +250,7 @@ export function ROICalculatorSection() {
                                 </div>
                                 <div>
                                     <div className="text-sm text-white/80">
-                                        {t("services.AIAgent.roiCalculator.results.savings.label")}
+                                        {t("roiCalculator.results.savings.label")}
                                     </div>
                                     <div className="text-3xl font-black text-white">
                                         ৳{monthlySavings.toLocaleString()}
@@ -260,7 +260,7 @@ export function ROICalculatorSection() {
                             <div className="grid grid-cols-3 gap-4 pt-4 border-t border-white/20">
                                 <div>
                                     <div className="text-xs text-white/70 mb-1">
-                                        {t("services.AIAgent.roiCalculator.results.savings.annual")}
+                                        {t("roiCalculator.results.savings.annual")}
                                     </div>
                                     <div className="text-lg font-bold">
                                         ৳{(annualSavings / 1000).toFixed(0)}K
@@ -268,13 +268,13 @@ export function ROICalculatorSection() {
                                 </div>
                                 <div>
                                     <div className="text-xs text-white/70 mb-1">
-                                        {t("services.AIAgent.roiCalculator.results.savings.roi")}
+                                        {t("roiCalculator.results.savings.roi")}
                                     </div>
                                     <div className="text-lg font-bold">{roi}%</div>
                                 </div>
                                 <div>
                                     <div className="text-xs text-white/70 mb-1">
-                                        {t("services.AIAgent.roiCalculator.results.savings.payback")}
+                                        {t("roiCalculator.results.savings.payback")}
                                     </div>
                                     <div className="text-lg font-bold">{paybackDays}d</div>
                                 </div>
@@ -285,10 +285,10 @@ export function ROICalculatorSection() {
                         <div className="bg-card border-2 border-border rounded-2xl p-6">
                             <h4 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                                 <CheckCircle2 className="w-5 h-5 text-accent" />
-                                {t("services.AIAgent.roiCalculator.additionalBenefits.title")}
+                                {t("roiCalculator.additionalBenefits.title")}
                             </h4>
                             <ul className="space-y-3">
-                                {(t("services.AIAgent.roiCalculator.additionalBenefits.list", {
+                                {(t("roiCalculator.additionalBenefits.list", {
                                     returnObjects: true,
                                 }) as string[]).map((benefit, index) => (
                                     <motion.li
@@ -317,10 +317,10 @@ export function ROICalculatorSection() {
                 >
                     <div className="bg-card border-2 border-border rounded-3xl p-8 max-w-3xl mx-auto">
                         <h3 className="text-2xl font-bold text-foreground mb-3">
-                            {t("services.AIAgent.roiCalculator.cta.title")}
+                            {t("roiCalculator.cta.title")}
                         </h3>
                         <p className="text-muted-foreground mb-6">
-                            {t("services.AIAgent.roiCalculator.cta.subtitle")}
+                            {t("roiCalculator.cta.subtitle")}
                         </p>
                         <Button
                             size="lg"
@@ -328,12 +328,12 @@ export function ROICalculatorSection() {
                             asChild
                         >
                             <a href="/contact" className="flex items-center gap-2">
-                                {t("services.AIAgent.roiCalculator.cta.button")}
+                                {t("roiCalculator.cta.button")}
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </a>
                         </Button>
                         <p className="text-xs text-muted-foreground mt-4">
-                            {t("services.AIAgent.roiCalculator.cta.note")}
+                            {t("roiCalculator.cta.note")}
                         </p>
                     </div>
                 </motion.div>

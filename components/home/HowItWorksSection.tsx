@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
 export function HowItWorksSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("homePage");
 
   const steps = [
     {
@@ -45,7 +45,7 @@ export function HowItWorksSection() {
     <section className="py-20 bg-muted/30 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-      
+
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Header */}
         <motion.div

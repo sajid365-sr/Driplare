@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { Bot, Zap, TrendingUp, Clock, ArrowRight, Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+
 
 export function AIAgentHero() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("AIAgentPage");
 
     return (
         <section className="relative min-h-[90vh] bg-background flex items-center overflow-hidden pt-20">
@@ -70,26 +70,26 @@ export function AIAgentHero() {
                         >
                             <Bot className="w-4 h-4 text-primary" />
                             <span className="text-sm font-bold text-primary">
-                                {t("services.AIAgent.aiAgentHero.badge")}
+                                {t("Hero.badge")}
                             </span>
                         </motion.div>
 
                         {/* Main Title */}
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-foreground mb-6 leading-tight">
-                            {t("services.AIAgent.aiAgentHero.title.line1")}{" "}
+                            {t("Hero.title.line1")}{" "}
                             <span className="text-gradient bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                                {t("services.AIAgent.aiAgentHero.title.line2")}
+                                {t("Hero.title.line2")}
                             </span>
                         </h1>
 
                         {/* Subtitle */}
                         <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl">
-                            {t("services.AIAgent.aiAgentHero.subtitle")}
+                            {t("Hero.subtitle")}
                         </p>
 
                         {/* Key Benefits */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                            {(t("services.AIAgent.aiAgentHero.benefits", { returnObjects: true }) as Array<{
+                            {(t("Hero.benefits", { returnObjects: true }) as Array<{
                                 icon: string;
                                 text: string;
                             }>).map((benefit, index) => (
@@ -121,7 +121,7 @@ export function AIAgentHero() {
                                 asChild
                             >
                                 <a href="#demo" className="flex items-center gap-2">
-                                    {t("services.AIAgent.aiAgentHero.primaryCta")}
+                                    {t("Hero.primaryCta")}
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </a>
                             </Button>
@@ -134,7 +134,7 @@ export function AIAgentHero() {
                             >
                                 <a href="#how-it-works" className="flex items-center gap-2">
                                     <Play className="w-5 h-5" />
-                                    {t("services.AIAgent.aiAgentHero.secondaryCta")}
+                                    {t("Hero.secondaryCta")}
                                 </a>
                             </Button>
                         </motion.div>
@@ -154,7 +154,7 @@ export function AIAgentHero() {
                                     />
                                 ))}
                             </div>
-                            <span className="font-medium">{t("services.AIAgent.aiAgentHero.trustBadge")}</span>
+                            <span className="font-medium">{t("Hero.trustBadge")}</span>
                         </motion.div>
                     </motion.div>
 
@@ -204,7 +204,7 @@ export function AIAgentHero() {
                                     <div>
                                         <div className="text-2xl font-black text-foreground">24/7</div>
                                         <div className="text-xs text-muted-foreground">
-                                            {t("services.AIAgent.aiAgentHero.stats.available")}
+                                            {t("Hero.stats.available")}
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@ export function AIAgentHero() {
                                     <div>
                                         <div className="text-2xl font-black text-foreground">&lt;1s</div>
                                         <div className="text-xs text-muted-foreground">
-                                            {t("services.AIAgent.aiAgentHero.stats.response")}
+                                            {t("Hero.stats.response")}
                                         </div>
                                     </div>
                                 </div>
@@ -238,7 +238,7 @@ export function AIAgentHero() {
                                     <div>
                                         <div className="text-2xl font-black text-foreground">3x</div>
                                         <div className="text-xs text-muted-foreground">
-                                            {t("services.AIAgent.aiAgentHero.stats.sales")}
+                                            {t("Hero.stats.sales")}
                                         </div>
                                     </div>
                                 </div>
@@ -260,7 +260,7 @@ export function AIAgentHero() {
                 className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
             >
                 <span className="text-sm text-muted-foreground font-medium">
-                    {t("services.AIAgent.aiAgentHero.scrollText")}
+                    {t("Hero.scrollText")}
                 </span>
                 <motion.div
                     animate={{ y: [0, 8, 0] }}

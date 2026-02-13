@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Clock, Shield, Zap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+
 
 export function FinalCTA() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("homePage");
 
   return (
     <section className="py-20 bg-gradient-to-br from-primary via-primary/95 to-secondary relative overflow-hidden">
@@ -69,18 +69,18 @@ export function FinalCTA() {
             >
               <Sparkles className="w-4 h-4 text-white" />
               <span className="text-sm font-semibold text-white">
-                {t("finalCta.badge")}
+                {t("Cta.badge")}
               </span>
             </motion.div>
 
             {/* Title */}
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
-              {t("finalCta.title")}
+              {t("Cta.title")}
             </h2>
 
             {/* Subtitle */}
             <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed mb-8">
-              {t("finalCta.subtitle")}
+              {t("Cta.subtitle")}
             </p>
 
             {/* CTAs */}
@@ -91,7 +91,7 @@ export function FinalCTA() {
                 asChild
               >
                 <a href="/contact" className="flex items-center gap-2">
-                  {t("finalCta.primaryCta")}
+                  {t("Cta.primaryCta")}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
               </Button>
@@ -102,13 +102,13 @@ export function FinalCTA() {
                 className="border-2 border-white/30 hover:bg-white/10 text-white font-bold text-lg px-8 py-6 rounded-2xl backdrop-blur-sm"
                 asChild
               >
-                <a href="/pricing">{t("finalCta.secondaryCta")}</a>
+                <a href="/pricing">{t("Cta.secondaryCta")}</a>
               </Button>
             </div>
 
             {/* Trust Indicators */}
             <div className="flex flex-wrap items-center justify-center gap-6 text-white/80 text-sm">
-              {(t("finalCta.trustIndicators", { returnObjects: true }) as string[]).map(
+              {(t("Cta.trustIndicators", { returnObjects: true }) as string[]).map(
                 (indicator, index) => (
                   <motion.div
                     key={index}
@@ -137,18 +137,18 @@ export function FinalCTA() {
             {[
               {
                 icon: Clock,
-                title: t("finalCta.features.setup.title"),
-                description: t("finalCta.features.setup.description"),
+                title: t("Cta.features.setup.title"),
+                description: t("Cta.features.setup.description"),
               },
               {
                 icon: Shield,
-                title: t("finalCta.features.trial.title"),
-                description: t("finalCta.features.trial.description"),
+                title: t("Cta.features.trial.title"),
+                description: t("Cta.features.trial.description"),
               },
               {
                 icon: Zap,
-                title: t("finalCta.features.support.title"),
-                description: t("finalCta.features.support.description"),
+                title: t("Cta.features.support.title"),
+                description: t("Cta.features.support.description"),
               },
             ].map((feature, index) => (
               <motion.div
@@ -181,7 +181,7 @@ export function FinalCTA() {
             className="mt-12 pt-12 border-t border-white/20"
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              {(t("finalCta.stats", { returnObjects: true }) as Array<{
+              {(t("Cta.stats", { returnObjects: true }) as Array<{
                 value: string;
                 label: string;
               }>).map((stat, index) => (
@@ -212,7 +212,7 @@ export function FinalCTA() {
             className="mt-8 text-center"
           >
             <p className="text-sm text-white/60">
-              {t("finalCta.finalNote")}
+              {t("Cta.finalNote")}
             </p>
           </motion.div>
         </div>

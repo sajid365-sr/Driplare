@@ -57,7 +57,7 @@ export default function HomePage() {
 
     // Add event listeners to interactive elements
     const interactiveElements = document.querySelectorAll(
-      'button, a, [role="button"], input, textarea, select'
+      'button, a, [role="button"], input, textarea, select',
     );
     interactiveElements.forEach((element) => {
       element.addEventListener("mouseenter", handleMouseEnter);
@@ -93,25 +93,16 @@ export default function HomePage() {
       </div>
 
       <main>
-
         <Hero />
-
         <ProblemSection />
-
         <SolutionSection />
         <HowItWorksSection />
         <WhatYouGetSection />
-
         <SuccessStoriesSection />
-
         <MoreThanAISection />
         <PricingSection />
-
         <FAQSection />
         <FinalCTA />
-        {/* 3. The Core Pillars */}
-        {/* <CorePillarsSection /> */}
-
       </main>
     </div>
   );

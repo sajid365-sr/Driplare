@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function TabbedPricingSection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("pricingPage");
 
     // Bangladesh Tiers
     const bangladeshTiers = [

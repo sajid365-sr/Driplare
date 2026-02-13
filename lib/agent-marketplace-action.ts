@@ -33,14 +33,13 @@ interface UpdateAgentData extends Partial<CreateAgentData> {
 // ১. সব এজেন্ট ফেচ করা (Marketplace Main Page)
 export async function getAllAgents() {
   try {
-    const count = await prisma.agent.count();
-    console.log("Total agents in DB:", count);
+    // const count = await prisma.agent.count();
+    // console.log("Total agents in DB:", count);
     const agents = await prisma.agent.findMany({
       // where: { status: "active" },
       orderBy: { createdAt: "desc" },
     });
 
-    
     return { success: true, data: agents };
   } catch (error: unknown) {
     console.error("Error fetching agents:", error);
@@ -85,8 +84,12 @@ export async function createAgent(data: CreateAgentData) {
         },
         bn: {
           name: data.bn?.name || data.en?.name || data.name,
-          description: data.bn?.description || data.en?.description || data.description,
-          fullDescription: data.bn?.fullDescription || data.en?.fullDescription || data.fullDescription,
+          description:
+            data.bn?.description || data.en?.description || data.description,
+          fullDescription:
+            data.bn?.fullDescription ||
+            data.en?.fullDescription ||
+            data.fullDescription,
           features: data.bn?.features || data.en?.features || data.features,
         },
       },
@@ -107,12 +110,17 @@ export async function updateAgent(id: string, data: Partial<CreateAgentData>) {
     if (data.slug) updateData.slug = data.slug;
     if (data.price) updateData.price = parseFloat(data.price);
     if (data.rating) updateData.rating = parseFloat(data.rating);
-    if (data.totalSales !== undefined) updateData.totalSales = parseInt(data.totalSales);
+    if (data.totalSales !== undefined)
+      updateData.totalSales = parseInt(data.totalSales);
     if (data.category) updateData.category = data.category;
     if (data.mainImage) updateData.mainImage = data.mainImage;
-    if (data.gallery) updateData.gallery = Array.isArray(data.gallery) ? data.gallery : [];
+    if (data.gallery)
+      updateData.gallery = Array.isArray(data.gallery) ? data.gallery : [];
     if (data.videoUrl !== undefined) updateData.videoUrl = data.videoUrl;
-    if (data.techStack) updateData.techStack = Array.isArray(data.techStack) ? data.techStack : [];
+    if (data.techStack)
+      updateData.techStack = Array.isArray(data.techStack)
+        ? data.techStack
+        : [];
     if (data.difficulty) updateData.difficulty = data.difficulty;
     if (data.setupTime !== undefined) updateData.setupTime = data.setupTime;
     if (data.status) updateData.status = data.status;

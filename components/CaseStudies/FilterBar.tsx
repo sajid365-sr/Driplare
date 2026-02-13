@@ -9,13 +9,13 @@ interface FilterBarProps {
 }
 
 export function FilterBar({ activeFilter, onFilterChange }: FilterBarProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation("caseStudiesPage");
 
   const filters = [
-    { id: "all", label: t("case_studies.filter.all") },
-    { id: "ai", label: t("case_studies.filter.ai") },
-    { id: "workflow", label: t("case_studies.filter.workflow") },
-    { id: "mern", label: t("case_studies.filter.mern") },
+    { id: "all", label: t("filter.all") },
+    { id: "ai", label: t("filter.ai") },
+    { id: "workflow", label: t("filter.workflow") },
+    { id: "mern", label: t("filter.mern") },
   ];
 
   // প্রজেক্ট কাউন্ট লজিক (অরিজিনাল অনুযায়ী রাখা হয়েছে)
@@ -65,12 +65,12 @@ export function FilterBar({ activeFilter, onFilterChange }: FilterBarProps) {
           transition={{ delay: 0.5 }}
         >
           <p className="text-[#0A0A0A]/60 dark:text-white/30 text-[10px] md:text-xs font-mono uppercase tracking-widest">
-            {t("case_studies.filter.status_label")}:{" "}
+            {t("filter.status_label")}:{" "}
             <span className="text-[#FF6B00]">
               {filters.find((f) => f.id === activeFilter)?.label}
             </span>
             <span className="mx-4 text-black/10 dark:text-white/10">|</span>
-            {t("case_studies.filter.found_label")}:{" "}
+            {t("filter.found_label")}:{" "}
             <span className="text-[#FF6B00]">
               {getProjectCount(activeFilter)}
             </span>

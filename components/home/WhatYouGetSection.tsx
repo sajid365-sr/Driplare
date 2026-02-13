@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
 export function WhatYouGetSection() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("homePage");
 
   const mainDeliverables = [
     {
@@ -219,7 +219,7 @@ export function WhatYouGetSection() {
 
             {/* Value Highlights */}
             <div className="grid md:grid-cols-3 gap-6 mb-8">
-              {(t("whatYouGet.value.highlights", { returnObjects: true }) as Array<{label: string, value: string}>).map((highlight, index) => (
+              {(t("whatYouGet.value.highlights", { returnObjects: true }) as Array<{ label: string, value: string }>).map((highlight, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.9 }}

@@ -6,39 +6,39 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
 export function AdditionalServicesSection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("pricingPage");
 
     const services = [
         {
             icon: Workflow,
-            title: t("pricingServices.automation.title"),
-            price: t("pricingServices.automation.price"),
-            description: t("pricingServices.automation.description"),
-            features: t("pricingServices.automation.features", { returnObjects: true }) as string[],
+            title: t("Services.automation.title"),
+            price: t("Services.automation.price"),
+            description: t("Services.automation.description"),
+            features: t("Services.automation.features", { returnObjects: true }) as string[],
             color: "from-primary to-primary/80",
         },
         {
             icon: Database,
-            title: t("pricingServices.scraping.title"),
-            price: t("pricingServices.scraping.price"),
-            description: t("pricingServices.scraping.description"),
-            features: t("pricingServices.scraping.features", { returnObjects: true }) as string[],
+            title: t("Services.scraping.title"),
+            price: t("Services.scraping.price"),
+            description: t("Services.scraping.description"),
+            features: t("Services.scraping.features", { returnObjects: true }) as string[],
             color: "from-secondary to-secondary/80",
         },
         {
             icon: Code,
-            title: t("pricingServices.mern.title"),
-            price: t("pricingServices.mern.price"),
-            description: t("pricingServices.mern.description"),
-            features: t("pricingServices.mern.features", { returnObjects: true }) as string[],
+            title: t("Services.mern.title"),
+            price: t("Services.mern.price"),
+            description: t("Services.mern.description"),
+            features: t("Services.mern.features", { returnObjects: true }) as string[],
             color: "from-accent to-accent/80",
         },
         {
             icon: BarChart3,
-            title: t("pricingServices.consulting.title"),
-            price: t("pricingServices.consulting.price"),
-            description: t("pricingServices.consulting.description"),
-            features: t("pricingServices.consulting.features", { returnObjects: true }) as string[],
+            title: t("Services.consulting.title"),
+            price: t("Services.consulting.price"),
+            description: t("Services.consulting.description"),
+            features: t("Services.consulting.features", { returnObjects: true }) as string[],
             color: "from-primary/80 to-secondary",
         },
     ];
@@ -54,10 +54,10 @@ export function AdditionalServicesSection() {
                     viewport={{ once: true }}
                 >
                     <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-                        {t("pricingServices.title")}
+                        {t("Services.title")}
                     </h2>
                     <p className="text-lg text-muted-foreground">
-                        {t("pricingServices.subtitle")}
+                        {t("Services.subtitle")}
                     </p>
                 </motion.div>
 
@@ -83,7 +83,7 @@ export function AdditionalServicesSection() {
                             </h3>
                             <div className="flex items-baseline gap-2 mb-4">
                                 <span className="text-sm font-semibold text-muted-foreground uppercase">
-                                    {t("pricingServices.startingAt")}
+                                    {t("Services.startingAt")}
                                 </span>
                                 <span className="text-2xl font-black text-primary">
                                     {service.price}
@@ -112,7 +112,7 @@ export function AdditionalServicesSection() {
                                 asChild
                             >
                                 <a href="/contact" className="flex items-center justify-center gap-2">
-                                    {t("pricingServices.cta")}
+                                    {t("Services.cta")}
                                     <ArrowRight className="w-4 h-4" />
                                 </a>
                             </Button>
@@ -128,9 +128,9 @@ export function AdditionalServicesSection() {
                     className="text-center mt-12"
                 >
                     <p className="text-sm text-muted-foreground">
-                        {t("pricingServices.note")}{" "}
+                        {t("Services.note")}{" "}
                         <a href="/contact" className="text-primary font-semibold hover:underline">
-                            {t("pricingServices.contactUs")}
+                            {t("Services.contactUs")}
                         </a>
                     </p>
                 </motion.div>

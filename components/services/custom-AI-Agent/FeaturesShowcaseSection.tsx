@@ -17,9 +17,9 @@ import {
 import { useTranslation } from "react-i18next";
 
 export function FeaturesShowcaseSection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("AIAgentPage");
 
-    const features = t("services.AIAgent.features.mainFeatures", {
+    const features = t("features.mainFeatures", {
         returnObjects: true
     }) as Array<{
         icon: string;
@@ -62,15 +62,15 @@ export function FeaturesShowcaseSection() {
                     >
                         <Zap className="w-4 h-4 text-accent" />
                         <span className="text-sm font-semibold text-accent">
-                            {t("services.AIAgent.features.badge")}
+                            {t("features.badge")}
                         </span>
                     </motion.div>
 
                     <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-                        {t("services.AIAgent.features.title")}
+                        {t("features.title")}
                     </h2>
                     <p className="text-lg text-muted-foreground">
-                        {t("services.AIAgent.features.subtitle")}
+                        {t("features.subtitle")}
                     </p>
                 </motion.div>
 
@@ -146,16 +146,16 @@ export function FeaturesShowcaseSection() {
                         </div>
 
                         <h3 className="text-2xl md:text-3xl font-black text-foreground mb-3">
-                            {t("services.AIAgent.features.platforms.title")}
+                            {t("features.platforms.title")}
                         </h3>
 
                         <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                            {t("services.AIAgent.features.platforms.subtitle")}
+                            {t("features.platforms.subtitle")}
                         </p>
 
                         {/* Platform Grid */}
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-                            {(t("services.AIAgent.features.platforms.list", {
+                            {(t("features.platforms.list", {
                                 returnObjects: true,
                             }) as string[]).map((platform, index) => (
                                 <motion.div
@@ -172,7 +172,7 @@ export function FeaturesShowcaseSection() {
                         </div>
 
                         <p className="text-sm text-muted-foreground mt-8">
-                            {t("services.AIAgent.features.platforms.note")}
+                            {t("features.platforms.note")}
                         </p>
                     </div>
                 </motion.div>
@@ -188,14 +188,14 @@ export function FeaturesShowcaseSection() {
                         <div className="flex items-center gap-2">
                             <Clock className="w-5 h-5 text-accent" />
                             <span className="text-sm font-bold text-accent">
-                                {t("services.AIAgent.features.bottomNotes.availability")}
+                                {t("features.bottomNotes.availability")}
                             </span>
                         </div>
                         <div className="w-px h-6 bg-border" />
                         <div className="flex items-center gap-2">
                             <Sparkles className="w-5 h-5 text-accent" />
                             <span className="text-sm font-bold text-accent">
-                                {t("services.AIAgent.features.bottomNotes.speed")}
+                                {t("features.bottomNotes.speed")}
                             </span>
                         </div>
                     </div>

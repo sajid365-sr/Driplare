@@ -6,10 +6,10 @@ import { ChevronDown, HelpCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export function PricingFAQ() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("pricingPage");
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const faqs = t("pricingFaq.questions", { returnObjects: true }) as Array<{
+  const faqs = t("Faq.questions", { returnObjects: true }) as Array<{
     question: string;
     answer: string;
   }>;
@@ -30,13 +30,13 @@ export function PricingFAQ() {
         >
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-bold uppercase mb-4">
             <HelpCircle className="w-4 h-4" />
-            {t("pricingFaq.badge")}
+            {t("Faq.badge")}
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-            {t("pricingFaq.title")}
+            {t("Faq.title")}
           </h2>
           <p className="text-lg text-muted-foreground">
-            {t("pricingFaq.subtitle")}
+            {t("Faq.subtitle")}
           </p>
         </motion.div>
 

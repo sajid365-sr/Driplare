@@ -13,10 +13,10 @@ import { useTranslation } from "react-i18next";
 const ICONS = [Terminal, Settings, ShieldCheck, Workflow];
 
 export function LogicAccordion() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("caseStudiesPage");
 
   // JSON থেকে ডাটা আনা
-  const steps = t("case_studies.logic_accordion.steps", {
+  const steps = t("logic_accordion.steps", {
     returnObjects: true,
   });
   const isStepsValid = Array.isArray(steps);
@@ -25,13 +25,13 @@ export function LogicAccordion() {
     <div className="max-w-4xl mx-auto px-4">
       <div className="text-center mb-12 space-y-4">
         <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase">
-          {t("case_studies.logic_accordion.heading_main")}{" "}
+          {t("logic_accordion.heading_main")}{" "}
           <span className="text-primary">
-            {t("case_studies.logic_accordion.heading_accent")}
+            {t("logic_accordion.heading_accent")}
           </span>
         </h2>
         <p className="text-muted-foreground max-w-lg mx-auto leading-relaxed">
-          {t("case_studies.logic_accordion.subheading")}
+          {t("logic_accordion.subheading")}
         </p>
       </div>
 

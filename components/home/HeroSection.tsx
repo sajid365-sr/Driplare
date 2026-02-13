@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 
 export function Hero() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("homePage");
 
   const getRandomPosition = () => {
     const width =
@@ -25,14 +25,14 @@ export function Hero() {
     <section className="relative min-h-screen bg-background overflow-hidden flex items-center pt-20">
       {/* Animated Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-background" />
-      
+
       {/* Floating Particles Effect */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-primary/20 rounded-full"
-            initial={{ 
+            initial={{
               ...getRandomPosition(),
             }}
             animate={{
