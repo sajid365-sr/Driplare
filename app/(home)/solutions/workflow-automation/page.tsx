@@ -9,6 +9,7 @@ import { HowItWorksSection } from "@/components/services/workflow-automation/How
 import { PricingSection } from "@/components/services/workflow-automation/PricingSection";
 import { FAQSection } from "@/components/services/workflow-automation/FAQSection";
 import { SimpleCTA } from "@/components/services/workflow-automation/SimpleCTA";
+import { PageBackground } from "@/components/PageBackground";
 
 export const metadata: Metadata = {
   title: "Workflow Automation Services - Streamline Business Operations",
@@ -19,16 +20,18 @@ export const metadata: Metadata = {
 export default function WorkflowAutomation() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#0A0A0A] transition-colors duration-300">
-      <AutomationHero />
-      <WhatIsAutomationSection />
-      <WhoIsThisForSection />
-      <WhatWeAutomateSection />
-      <AutomationRecipesSection />
-      <ToolsIntegrationsSection />
-      <HowItWorksSection />
-      <PricingSection />
-      <FAQSection />
-      <SimpleCTA />
+      <PageBackground variant="blue">
+        <AutomationHero />
+        <WhatIsAutomationSection />
+        <WhoIsThisForSection />
+        <WhatWeAutomateSection />
+        <AutomationRecipesSection />
+        <ToolsIntegrationsSection />
+        <HowItWorksSection />
+        <PricingSection />
+        <FAQSection />
+        <SimpleCTA />
+      </PageBackground>
     </div>
   );
 }

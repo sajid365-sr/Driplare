@@ -111,39 +111,53 @@ type CaseContent {
   myApproach      String? // The Strategy / Story
   failedAttempts  String? // Challenges & what didn't work initially
   result          String
-  metric          String // e.g., "70% Cost Reduction"
+  metric          String // Primary headline metric e.g. "85% ROI in First Month"
   testimonial     String?
-  testimonialRole String? // e.g., "CEO", "Operations Manager"
+  testimonialRole String? // e.g. "Founder, FashionHub"
 }
 
 model CaseStudy {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  category String
+  // ── Routing ──────────────────────────────────────────────────
+  slug String @unique // URL-safe identifier e.g. "ecommerce-ai-sales-agent"
+
+  // ── Classification ───────────────────────────────────────────
+  category String // "AI Agents" | "Workflow Automation" | "Web Development" | "AI Consulting"
   techTags String[]
+  industry String? // e.g. "E-commerce" | "Healthcare" | "Real Estate"
 
-  // Client & Project Metadata
-  clientName      String?
-  clientLocation  String? // e.g., "USA", "UK", "Bangladesh"
-  industry        String? // e.g., "E-commerce", "Healthcare"
-  projectDuration String? // e.g., "3 Weeks", "2 Months"
+  // ── Visibility & Ordering ────────────────────────────────────
+  status   String  @default("draft") // "draft" | "published"
+  featured Boolean @default(false) // Pin to top of grid
 
-  // Visuals & Media
+  // ── Client Info ──────────────────────────────────────────────
+  clientName     String?
+  clientLocation String? // e.g. "USA" | "UK" | "Bangladesh"
+  clientLogo     String? // Optional client logo URL
+
+  // ── Project Meta ─────────────────────────────────────────────
+  projectDuration String? // e.g. "3 Weeks" | "2 Months"
+
+  // ── Media ────────────────────────────────────────────────────
   heroImage         String?
-  videoReviewUrl    String? // Client Testimonial Video (YouTube/Loom)
-  dashboardVideoUrl String? // Solution Demo Video
-  n8nDiagramUrl     String? // Workflow Diagram Image
-  gallery           String[] // [image1_url, image2_url, ...]
+  videoReviewUrl    String? // Client testimonial video (YouTube / Loom)
+  dashboardVideoUrl String? // Solution demo video
+  n8nDiagramUrl     String? // Workflow diagram image
+  gallery           String[] // [image1_url, image2_url, ...] — min 2 recommended
 
-  // Comparative Stats (ROI Calculator support)
-  beforeMetricValue Int? // e.g., 40 (hours)
-  afterMetricValue  Int? // e.g., 2 (hours)
-  metricUnit        String? // e.g., "hrs/week", "USD", "%"
+  // ── Metrics ──────────────────────────────────────────────────
+  beforeMetricValue Int? // e.g. 40
+  afterMetricValue  Int? // e.g. 1
+  metricUnit        String? // e.g. "hours/week" | "USD" | "%"
+  roi               String? // Headline ROI e.g. "280%" — shown as badge on card
+  secondaryMetric   String? // Second key win e.g. "Saved $1,800/mo"
 
-  // Multi-language Content (The Story)
+  // ── Localised Content ────────────────────────────────────────
   en CaseContent
   bn CaseContent
 
+  // ── Timestamps ───────────────────────────────────────────────
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

@@ -36,7 +36,7 @@ export function AutomationHero() {
     return (
         <section className="relative min-h-[90vh] flex items-center py-20 overflow-hidden bg-gradient-to-b from-background via-muted/20 to-background">
             {/* Grid background */}
-            <div className="absolute inset-0 opacity-5">
+            {/* <div className="absolute inset-0 opacity-5">
                 <div
                     className="absolute inset-0"
                     style={{
@@ -45,11 +45,11 @@ export function AutomationHero() {
                         backgroundSize: "40px 40px",
                     }}
                 />
-            </div>
+            </div> */}
 
             {/* Decorative blobs */}
-            <div className="absolute top-1/4 left-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl -z-10" />
-            <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-secondary/10 rounded-full blur-3xl -z-10" />
+            {/* <div className="absolute top-1/4 left-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl -z-10" />
+            <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-secondary/10 rounded-full blur-3xl -z-10" /> */}
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">

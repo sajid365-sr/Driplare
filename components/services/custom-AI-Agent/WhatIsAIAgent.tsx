@@ -1,5 +1,6 @@
 "use client";
 
+import { GridLayer, BRAND, DarkGridBoost } from "@/components/effects/bg-effects";
 import { motion } from "framer-motion";
 import { Brain, MessageCircle, Database, Cpu, Sparkles } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +9,9 @@ export function WhatIsAIAgent() {
     const { t } = useTranslation("AIAgentPage");
 
     return (
-        <section className="py-20 bg-muted/30 relative overflow-hidden">
+        <section className="py-20 relative overflow-hidden">
+            <GridLayer color={BRAND.violet} opacity={0.2} />
+            <DarkGridBoost />
             <div className="container mx-auto px-4 md:px-6">
                 {/* Header */}
                 <motion.div

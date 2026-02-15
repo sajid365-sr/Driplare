@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function AIAgents() {
   return (
 
-    <div className="min-h-screen bg-white dark:bg-[#0A0A0A] transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-[#0d0d14]  transition-colors duration-300">
 
       <AIAgentHero />
       <WhatIsAIAgent />

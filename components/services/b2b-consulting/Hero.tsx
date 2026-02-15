@@ -4,6 +4,14 @@ import { motion } from "framer-motion";
 import { ArrowRight, BrainCircuit, Sparkles, Building2, User } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
+import {
+    BRAND,          // Color token object
+    GridLayer,      // SVG grid lines
+    DarkGridBoost,  // Grid overlay for dark mode only
+    GlowBlob,       // Single animated glow orb
+    Particles,      // Floating animated dots
+    AccentLine,     // Vertical or horizontal gradient line
+} from "@/components/effects/bg-effects";
 
 const STATS = [
     { valueKey: "hero.stats.tools.value", labelKey: "hero.stats.tools.label" },
@@ -19,9 +27,16 @@ export function Hero() {
     }) as Array<{ icon: string; label: string; sub: string }>;
 
     return (
-        <section className="relative min-h-[90vh] flex items-center py-20 overflow-hidden bg-gradient-to-b from-background via-muted/20 to-background">
+        <section className="relative min-h-[90vh] flex items-center py-20 overflow-hidden  dark:bg-[#0d0d14] ">
+            <GridLayer opacity={0.3} color={BRAND.violet} />
+            <DarkGridBoost color={BRAND.violet} opacity={0.08} />
+            <GlowBlob color={BRAND.violet} position="top-left" size={500} opacity={0.2} />
+            <GlowBlob color={BRAND.blue} position="bottom-right" size={400} opacity={0.3} delay={4} index={2} />
+
+
+
             {/* Grid background */}
-            <div className="absolute inset-0 opacity-5">
+            {/* <div className="absolute inset-0 opacity-5">
                 <div
                     className="absolute inset-0"
                     style={{
@@ -30,7 +45,7 @@ export function Hero() {
                         backgroundSize: "40px 40px",
                     }}
                 />
-            </div>
+            </div> */}
 
             {/* Decorative blobs */}
             <div className="absolute top-1/4 left-0 w-80 h-80 bg-primary/8 rounded-full blur-3xl -z-10" />

@@ -12,6 +12,7 @@ import {
     Drawer, DrawerContent, DrawerHeader,
     DrawerTitle, DrawerDescription, DrawerFooter, DrawerClose,
 } from "@/components/ui/drawer";
+import { GridLayer } from "@/components/effects/bg-effects";
 
 /* ─── Icon + gradient map ─── */
 const AREA_META: Record<string, { icon: React.ElementType; gradient: string; glow: string }> = {
@@ -24,54 +25,54 @@ const AREA_META: Record<string, { icon: React.ElementType; gradient: string; glo
 };
 
 /* ─── Animated background: floating particles ─── */
-function Particles() {
-    const [dots, setDots] = useState<Array<{ x: number; y: number; size: number; delay: number; duration: number }>>([]);
+// function Particles() {
+//     const [dots, setDots] = useState<Array<{ x: number; y: number; size: number; delay: number; duration: number }>>([]);
 
-    useEffect(() => {
-        setDots(
-            Array.from({ length: 24 }, () => ({
-                x: Math.random() * 100,
-                y: Math.random() * 100,
-                size: Math.random() * 3 + 1,
-                delay: Math.random() * 4,
-                duration: Math.random() * 6 + 5,
-            }))
-        );
-    }, []);
+//     useEffect(() => {
+//         setDots(
+//             Array.from({ length: 24 }, () => ({
+//                 x: Math.random() * 100,
+//                 y: Math.random() * 100,
+//                 size: Math.random() * 3 + 1,
+//                 delay: Math.random() * 4,
+//                 duration: Math.random() * 6 + 5,
+//             }))
+//         );
+//     }, []);
 
-    return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {dots.map((dot, i) => (
-                <motion.div
-                    key={i}
-                    className="absolute rounded-full bg-primary/20 dark:bg-primary/30"
-                    style={{ left: `${dot.x}%`, top: `${dot.y}%`, width: dot.size, height: dot.size }}
-                    animate={{ y: [-10, 10, -10], opacity: [0.2, 0.6, 0.2] }}
-                    transition={{ duration: dot.duration, delay: dot.delay, repeat: Infinity, ease: "easeInOut" }}
-                />
-            ))}
-        </div>
-    );
-}
+//     return (
+//         <div className="absolute inset-0 overflow-hidden pointer-events-none">
+//             {dots.map((dot, i) => (
+//                 <motion.div
+//                     key={i}
+//                     className="absolute rounded-full bg-primary/20 dark:bg-primary/30"
+//                     style={{ left: `${dot.x}%`, top: `${dot.y}%`, width: dot.size, height: dot.size }}
+//                     animate={{ y: [-10, 10, -10], opacity: [0.2, 0.6, 0.2] }}
+//                     transition={{ duration: dot.duration, delay: dot.delay, repeat: Infinity, ease: "easeInOut" }}
+//                 />
+//             ))}
+//         </div>
+//     );
+// }
 
 /* ─── Animated grid lines background ─── */
-function GridLines() {
-    return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <svg className="absolute inset-0 w-full h-full opacity-[0.04] dark:opacity-[0.07]" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <pattern id="cover-grid" width="48" height="48" patternUnits="userSpaceOnUse">
-                        <path d="M 48 0 L 0 0 0 48" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.75" />
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#cover-grid)" />
-            </svg>
-            {/* Diagonal accent line */}
-            <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-primary/10 to-transparent" />
-            <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-secondary/10 to-transparent" />
-        </div>
-    );
-}
+// function GridLines() {
+//     return (
+//         <div className="absolute inset-0 overflow-hidden pointer-events-none">
+//             <svg className="absolute inset-0 w-full h-full opacity-[0.04] dark:opacity-[0.07]" xmlns="http://www.w3.org/2000/svg">
+//                 <defs>
+//                     <pattern id="cover-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+//                         <path d="M 48 0 L 0 0 0 48" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.75" />
+//                     </pattern>
+//                 </defs>
+//                 <rect width="100%" height="100%" fill="url(#cover-grid)" />
+//             </svg>
+//             {/* Diagonal accent line */}
+//             <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-primary/10 to-transparent" />
+//             <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-secondary/10 to-transparent" />
+//         </div>
+//     );
+// }
 
 type Area = {
     key: string;
@@ -102,13 +103,11 @@ export function WhatWeCoverSection() {
         <section className="py-24 relative overflow-hidden bg-background dark:bg-[#0d0d14]">
             {/* Deep gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 dark:from-primary/10 dark:via-[#0d0d14] dark:to-secondary/10" />
-
-            <GridLines />
-            <Particles />
+            <GridLayer opacity={0.3} />
 
             {/* Radial glow blobs */}
-            <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary/8 dark:bg-primary/15 blur-[120px] pointer-events-none" />
-            <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-secondary/8 dark:bg-secondary/15 blur-[120px] pointer-events-none" />
+            {/* <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary/8 dark:bg-primary/15 blur-[120px] pointer-events-none" />
+            <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-secondary/8 dark:bg-secondary/15 blur-[120px] pointer-events-none" /> */}
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
 

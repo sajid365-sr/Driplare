@@ -28,10 +28,13 @@ export default function ProductDetailsPage() {
       if (res.success && res.data) {
         setAgent(res.data as Agent);
       }
+
       setLoading(false);
     }
     loadAgent();
   }, [slug]);
+
+
 
   if (loading) return <LoadingSkeleton />;
   if (!agent) {
@@ -52,24 +55,24 @@ export default function ProductDetailsPage() {
     <div className="min-h-screen mt-20 bg-background">
       {/* Hero Section with Image Gallery */}
       <ProductHero agent={agent} langContent={langContent} />
-      
+
       {/* What You Get */}
       {agent.includes && agent.includes.length > 0 && (
         <ProductIncludes agent={agent} langContent={langContent} />
       )}
-      
+
       {/* Features & Benefits */}
       <ProductFeatures agent={agent} langContent={langContent} />
-      
+
       {/* Video Demo (if available) */}
       {agent.videoUrl && <ProductVideo videoUrl={agent.videoUrl} />}
-      
+
       {/* Social Proof */}
       <ProductTestimonial currentLang={currentLang} />
-      
+
       {/* FAQ */}
       <ProductFAQ currentLang={currentLang} />
-      
+
       {/* Final CTA */}
       <ProductCTA agent={agent} langContent={langContent} />
     </div>
@@ -90,7 +93,7 @@ function LoadingSkeleton() {
               ))}
             </div>
           </div>
-          
+
           {/* Right side - Content skeleton */}
           <div className="space-y-6">
             <Skeleton className="h-8 w-32" />

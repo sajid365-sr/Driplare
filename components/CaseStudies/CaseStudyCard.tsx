@@ -1,122 +1,208 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Cpu, Target, Zap, Download } from "lucide-react";
+import { ArrowRight, MapPin, Star, Quote, Zap } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { useTranslation } from "react-i18next";
+import { CaseStudy } from "@/types/case-study-types";
+import { BRAND } from "@/components/effects/bg-effects";
 
-export function CaseStudyCard({ study, index }: any) {
-  const { t } = useTranslation("caseStudiesPage");
+/* ── Category config ─────────────────────────────────────────── */
+export const CATEGORY_META: Record<string, {
+  dot: string;
+  label: string;
+  gradient: string;
+  accentText: string;
+  chipBg: string;
+}> = {
+  "AI Agents": { dot: BRAND.violet, label: "text-violet-500 dark:text-violet-400", gradient: "from-violet-600 to-blue-500", accentText: "text-violet-500 dark:text-violet-400", chipBg: "bg-violet-500/10 border-violet-500/20" },
+  "Workflow Automation": { dot: BRAND.blue, label: "text-blue-500 dark:text-blue-400", gradient: "from-blue-600 to-cyan-500", accentText: "text-blue-500 dark:text-blue-400", chipBg: "bg-blue-500/10 border-blue-500/20" },
+  "Web Development": { dot: BRAND.emerald, label: "text-emerald-500 dark:text-emerald-400", gradient: "from-emerald-600 to-teal-500", accentText: "text-emerald-500 dark:text-emerald-400", chipBg: "bg-emerald-500/10 border-emerald-500/20" },
+  "AI Consulting": { dot: BRAND.amber, label: "text-amber-500 dark:text-amber-400", gradient: "from-amber-500 to-orange-500", accentText: "text-amber-500 dark:text-amber-400", chipBg: "bg-amber-500/10 border-amber-500/20" },
+};
+const FALLBACK = CATEGORY_META["AI Agents"];
 
-  const handleDownloadPDF = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    window.open(`/pdfs/driplare-${study.id}-report.pdf`, "_blank");
-  };
+/* ── Helpers ─────────────────────────────────────────────────── */
+function reductionPct(before: number, after: number) {
+  return Math.round(((before - after) / before) * 100);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STORY CARD
+   One dominant result number. One line of context. One quote.
+   Client scans it in 3 seconds and wants to know more.
+═══════════════════════════════════════════════════════════════ */
+interface CaseStudyCardProps {
+  study: CaseStudy;
+  index: number;
+  locale?: "en" | "bn";
+}
+
+export function CaseStudyCard({ study, index, locale = "en" }: CaseStudyCardProps) {
+  const content = study[locale] ?? study.en;
+  const meta = CATEGORY_META[study.category] ?? FALLBACK;
+  const hasMetric = study.beforeMetricValue != null && study.afterMetricValue != null;
+  const pct = hasMetric ? reductionPct(study.beforeMetricValue!, study.afterMetricValue!) : null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 20 }}
-      transition={{ delay: index * 0.1 }}
-      className="group relative bg-card dark:bg-[#0D0D0E] border border-border/50 dark:border-white/10 rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-primary/5"
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ delay: index * 0.07, duration: 0.4 }}
+      className="group relative flex flex-col rounded-3xl overflow-hidden
+                 bg-card dark:bg-white/[0.035]
+                 border border-border dark:border-white/[0.07]
+                 hover:border-primary/30 dark:hover:border-primary/25
+                 hover:shadow-xl hover:shadow-primary/5 dark:hover:shadow-primary/8
+                 transition-all duration-300"
     >
-      <div className="flex flex-col lg:flex-row">
-        {/* Metric Sidebar - Visual Anchor */}
-        <div className="lg:w-1/4 bg-primary p-8 flex flex-col justify-center items-center text-white text-center relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10 bg-[url('/grid-white.svg')] bg-center"></div>
-          <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.2em] opacity-80 mb-2">
-            {t("case_study_card.roi_label")}
-          </span>
-          <div className="relative z-10 text-5xl font-black tracking-tighter">
-            {study.metric}
+      {/* ── Gradient header strip ─────────────────────────────── */}
+      <div className={`relative bg-gradient-to-br ${meta.gradient} px-6 pt-6 pb-7 overflow-hidden`}>
+
+        {/* Noise texture */}
+        <div className="absolute inset-0 opacity-[0.07]"
+          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")" }} />
+
+        {/* Decorative large digit ghost */}
+        {hasMetric && (
+          <div
+            className="absolute -right-3 -bottom-5 text-[100px] font-black text-white/[0.07] leading-none select-none pointer-events-none tabular-nums"
+            aria-hidden
+          >
+            {study.afterMetricValue}
           </div>
-          <Zap className="relative z-10 mt-4 opacity-50" size={32} />
+        )}
+
+        {/* Top row: category chip + optional star */}
+        <div className="relative z-10 flex items-center justify-between mb-5">
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-white/80" />
+            <span className="text-xs font-black text-white/80 tracking-wide">
+              {study.category}
+            </span>
+            {study.clientLocation && (
+              <>
+                <span className="text-white/30 text-xs">·</span>
+                <span className="text-xs text-white/60 flex items-center gap-0.5">
+                  <MapPin className="w-2.5 h-2.5" />
+                  {study.clientLocation}
+                </span>
+              </>
+            )}
+          </div>
+          {study.featured && <Star className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />}
         </div>
 
-        {/* Content Body */}
-        <div className="flex-1 p-8 lg:p-12 space-y-8 bg-gradient-to-br from-card to-background dark:from-[#0D0D0E] dark:to-[#050505]">
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono text-primary font-bold uppercase tracking-widest px-2 py-0.5 bg-primary/10 dark:bg-primary/20 rounded-md">
-                {t("case_study_card.sector_label")}:{" "}
-                {study.context}
-              </span>
-              <h3 className="text-2xl md:text-4xl font-black mt-2 tracking-tight dark:text-white">
-                {study.title}
-              </h3>
-            </div>
-
-            {/* Tech Stack - Badge Style */}
-            <div className="flex flex-wrap gap-2 justify-start md:justify-end max-w-xs">
-              {study.techTags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="px-2 py-1 bg-accent/50 dark:bg-white/5 rounded border border-border/50 dark:border-white/10 text-[9px] font-mono font-bold uppercase tracking-tighter dark:text-white/70"
-                >
-                  {tag}
+        {/* THE HERO NUMBER — what the client remembers */}
+        <div className="relative z-10">
+          {hasMetric ? (
+            <div className="flex items-end gap-2">
+              {/* Strikethrough old value — smaller */}
+              <div className="text-center mb-1">
+                <span className="text-2xl font-black text-white/35 line-through tabular-nums">
+                  {study.beforeMetricValue}
                 </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-6 border-y border-border/50 dark:border-white/5">
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground dark:text-white/40 uppercase tracking-widest">
-                <Target size={14} className="text-red-500" />{" "}
-                {t("case_study_card.bottleneck_label")}
+                <p className="text-[10px] text-white/35 mt-0.5">{study.metricUnit}</p>
               </div>
-              <p className="text-sm leading-relaxed text-muted-foreground dark:text-white/60 font-medium italic">
-                "{study.problem}"
-              </p>
-            </div>
-            <div className="space-y-3 border-l border-border/30 dark:border-white/10 pl-8 hidden md:block">
-              <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground dark:text-white/40 uppercase tracking-widest">
-                <Cpu size={14} className="text-primary" />{" "}
-                {t("case_study_card.architecture_label")}
+
+              <ArrowRight className="w-4 h-4 text-white/50 mb-3 flex-shrink-0" />
+
+              {/* New value — BIG */}
+              <div className="text-center mb-1">
+                <span className="text-5xl font-black text-white leading-none tabular-nums">
+                  {study.afterMetricValue}
+                </span>
+                <p className="text-xs text-white/70 mt-1">{study.metricUnit}</p>
               </div>
-              <p className="text-sm leading-relaxed text-muted-foreground dark:text-white/70">
-                {study.solution}
-              </p>
-            </div>
-          </div>
 
-          <div className="pt-2 flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="space-y-1">
-              <p className="text-[10px] font-bold text-muted-foreground dark:text-white/40 uppercase tracking-widest">
-                {t("case_study_card.output_label")}
-              </p>
-              <div className="text-primary font-black text-2xl tracking-tighter uppercase italic">
-                {study.result}
-              </div>
+              {/* % badge */}
+              {pct !== null && (
+                <div className="mb-2 ml-auto self-end bg-white/20 backdrop-blur-sm rounded-full px-2.5 py-1 flex items-center gap-1">
+                  <Zap className="w-3 h-3 text-white" />
+                  <span className="text-xs font-black text-white">↓{pct}%</span>
+                </div>
+              )}
             </div>
-
-            <div className="flex items-center gap-3">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleDownloadPDF}
-                className="rounded-xl border-border/50 dark:border-white/10 gap-2 hover:bg-primary/5 dark:hover:bg-white/5 transition-all hidden sm:flex dark:text-white"
-              >
-                <Download size={14} />{" "}
-                {t("case_study_card.pdf_btn")}
-              </Button>
-
-              <Link href={`/case-studies/${study.id}`}>
-                <Button
-                  size="sm"
-                  className="rounded-xl gap-2 font-bold px-6 shadow-lg shadow-primary/10"
-                >
-                  {t("case_study_card.read_btn")}{" "}
-                  <ArrowUpRight size={16} />
-                </Button>
-              </Link>
-            </div>
-          </div>
+          ) : (
+            /* Fallback: show metric string */
+            <p className="text-3xl font-black text-white">{content?.metric}</p>
+          )}
         </div>
       </div>
-    </motion.div>
+
+      {/* ── Card body ─────────────────────────────────────────── */}
+      <div className="flex flex-col flex-1 px-6 py-5 gap-4">
+
+        {/* Title + client — read in 2 seconds */}
+        <div>
+          <h3 className="text-[15px] font-black text-foreground group-hover:text-primary
+                         transition-colors leading-snug line-clamp-2 mb-1">
+            {content?.title}
+          </h3>
+          {study.clientName && (
+            <p className="text-xs text-muted-foreground font-medium">{study.clientName}</p>
+          )}
+        </div>
+
+        {/* Testimonial — the human moment */}
+        {content?.testimonial && (
+          <div className="flex gap-2.5">
+            <Quote className="w-3.5 h-3.5 text-primary/30 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-xs text-muted-foreground italic leading-relaxed line-clamp-2">
+                {content.testimonial}
+              </p>
+              {content.testimonialRole && (
+                <p className="text-[11px] text-muted-foreground/60 font-semibold not-italic mt-1">
+                  — {content.testimonialRole}
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Spacer pushes footer down */}
+        <div className="flex-1" />
+
+        {/* Tech tags — secondary info, small */}
+        {study.techTags?.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {study.techTags.slice(0, 3).map((tag) => (
+              <span
+                key={tag}
+                className="text-[10px] font-semibold bg-muted/60 dark:bg-white/[0.04]
+                           border border-border dark:border-white/[0.06]
+                           text-muted-foreground px-2 py-0.5 rounded-md"
+              >
+                {tag}
+              </span>
+            ))}
+            {study.techTags.length > 3 && (
+              <span className="text-[10px] text-muted-foreground/60 py-0.5 px-0.5 self-center">
+                +{study.techTags.length - 3}
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* Footer: duration + CTA */}
+        <div className="flex items-center justify-between pt-3.5 border-t border-border dark:border-white/[0.06]">
+          {study.projectDuration ? (
+            <span className="text-[11px] text-muted-foreground font-medium">
+              {study.projectDuration}
+            </span>
+          ) : <div />}
+
+          <Link
+            href={`/case-studies/${study.slug}`}
+            className="flex items-center gap-1 text-xs font-black text-primary
+                       hover:gap-2 transition-all duration-200 group/link"
+          >
+            Read full story
+            <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform" />
+          </Link>
+        </div>
+      </div>
+    </motion.article>
   );
 }

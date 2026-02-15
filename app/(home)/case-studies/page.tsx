@@ -1,116 +1,44 @@
-"use client";
+/**
+ * app/case-studies/page.tsx  (Server Component)
+ *
+ * Fetches data server-side, passes to client orchestrator.
+ * The CaseStudiesClient component owns filter state so the
+ * Hero filter tabs and Grid react to each other.
+ */
 
-import { useState, useEffect, useMemo } from "react";
-import { useTranslation } from "react-i18next";
-import { AnimatePresence } from "framer-motion";
-import { ResultsHero } from "@/components/CaseStudies/ResultsHero";
-import { FilterBar } from "@/components/CaseStudies/FilterBar";
-import { CaseStudyCard } from "@/components/CaseStudies/CaseStudyCard";
-import { getAllCaseStudies } from "@/lib/case-study-action";
-import { VideoTestimonialCarousel } from "@/components/CaseStudies/VideoTestimonialCarousel";
-import { LogicAccordion } from "@/components/CaseStudies/LogicAccordion";
-import { FinalCTA } from "@/components/CaseStudies/FinalCTA";
+import { CaseStudiesClient } from "@/components/CaseStudies/CaseStudiesClient";
+import { getAllCaseStudies, getCaseStudyCategories } from "@/lib/case-study-action";
 
-export default function CaseStudiesPage() {
-  const { i18n, t } = useTranslation("caseStudiesPage");
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [rawDbData, setRawDbData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  // ডাটাবেজ থেকে ডাটা ফেচ করা
-  useEffect(() => {
-    async function fetchData() {
-      const result = await getAllCaseStudies();
-      if (result.success) {
-        setRawDbData(result.data || []);
-      }
-      setLoading(false);
-    }
-    fetchData();
-  }, []);
+export const metadata = {
+    title: "Case Studies | Driplare",
+    description:
+        "Real problems, real AI, real results. Deep-dive investigations into how we've helped businesses automate, grow, and save time with AI.",
+};
 
-  // ল্যাঙ্গুয়েজ এবং ফিল্টার অনুযায়ী ডাটা প্রসেস করা
-  const processedStudies = useMemo(() => {
-    const currentLang = i18n.language.split("-")[0] as "en" | "bn";
+export default async function CaseStudiesPage() {
+    // Fetch in parallel
+    const [studiesResult, categories] = await Promise.all([
+        getAllCaseStudies(),
+        getCaseStudyCategories(),
+    ]);
 
-    return rawDbData
-      .map((item) => {
-        const langContent = item[currentLang] || item.en;
 
-        return {
-          id: item.id,
-          slug: item.slug,
-          category: item.category,
-          techTags: item.techTags,
-          // Metadata fields
-          clientName: item.clientName,
-          industry: item.industry,
-          clientLocation: item.clientLocation,
-          videoReviewUrl: item.videoReviewUrl,
-          // Language specific fields
-          title: langContent?.title || "",
-          context: langContent?.context || "",
-          problem: langContent?.problem || "",
-          solution: langContent?.solution || "",
-          result: langContent?.result || "",
-          metric: langContent?.metric || "",
-          testimonial: langContent?.testimonial || "",
-        };
-      })
-      .filter((study) => {
-        if (activeFilter === "all") return true;
-        return study.category
-          ?.toLowerCase()
-          .includes(activeFilter.toLowerCase());
-      });
-  }, [rawDbData, i18n.language, activeFilter]);
 
-  if (loading)
+    const studies = studiesResult.success ? studiesResult.data : [];
+
+    // Aggregate stats — computed server-side from real data
+    const stats = [
+        { value: `${studies.length}+`, label: "Projects Delivered" },
+        { value: `${new Set(studies.map((s: any) => s.clientLocation)).size}+`, label: "Countries Served" },
+        { value: `${new Set(studies.map((s: any) => s.category)).size}`, label: "Service Categories" },
+    ];
+
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-primary" />
-      </div>
-    );
-
-  return (
-    <div className="min-h-screen bg-background text-foreground pt-20">
-      <ResultsHero />
-
-      <div className="container mx-auto px-4">
-        <FilterBar
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
+        <CaseStudiesClient
+            studies={studies}
+            categories={categories}
+            stats={stats}
         />
-
-        <section className="py-20">
-          <div className="grid grid-cols-1 gap-12">
-            {" "}
-            {/* Gap বাড়িয়েছি কার্ডগুলোর মাঝে */}
-            <AnimatePresence mode="popLayout">
-              {processedStudies.map((study, index) => (
-                <CaseStudyCard key={study.id} study={study} index={index} />
-              ))}
-            </AnimatePresence>
-          </div>
-
-          {processedStudies.length === 0 && (
-            <div className="text-center py-20 text-muted-foreground">
-              {t("listing.noResults")}
-            </div>
-          )}
-        </section>
-      </div>
-
-      {/* ভিডিও ক্যারোজেল (এটিতে আপনার ৪টি ভিডিওর লিংক ডাটাবেজ থেকে সরাসরি ম্যাপ করতে পারবেন) */}
-      <VideoTestimonialCarousel />
-
-      <div className="bg-accent/5 py-24">
-        <div className="container mx-auto px-4">
-          <LogicAccordion />
-        </div>
-      </div>
-
-      <FinalCTA />
-    </div>
-  );
+    );
 }

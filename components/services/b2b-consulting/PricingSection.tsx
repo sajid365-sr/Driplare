@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Zap, CheckCircle2, ArrowRight, Star, Globe, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
+import { AccentLine, Particles, BRAND, GlowBlob } from "@/components/effects/bg-effects";
 
 export function PricingSection() {
     const { t } = useTranslation("aiConsultingPage");
@@ -32,9 +33,12 @@ export function PricingSection() {
     }) as Array<{ q: string; a: string }>;
 
     return (
-        <section className="py-20 bg-muted/30 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+        <section className="py-20 relative overflow-hidden">
+            {/* <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" /> */}
+            {/* <Particles /> */}
+            <AccentLine color={BRAND.violet} direction="horizontal" opacity={0.5} position="left-0 top-5" />
+            <GlowBlob opacity={0.3} position="center" color={BRAND.violet} index={5} />
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 {/* Header */}

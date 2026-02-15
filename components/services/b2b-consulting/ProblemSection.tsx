@@ -1,5 +1,6 @@
 "use client";
 
+import { Particles } from "@/components/effects/bg-effects";
 import { motion } from "framer-motion";
 import { AlertTriangle, TrendingDown, X, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -20,8 +21,9 @@ export function ProblemSection() {
     }) as string[];
 
     return (
-        <section className="py-20 bg-muted/30 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+        <section className="py-20  relative overflow-hidden">
+            <Particles count={50} minSize={5} maxSize={7} minOpacity={0.2} />
+            {/* <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" /> */}
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 {/* Header */}

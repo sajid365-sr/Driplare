@@ -472,5 +472,156 @@
                 "a": "Bangladeshi clients: bKash, Nagad, or bank transfer. International clients: Wise or PayPal. Payment is required upfront for the Clarity Session and 50% upfront for larger packages."
             }
         ]
+    },
+    "whoIsThisFor": {
+        "badge": "Who is This For?",
+        "title": "If You Recognize Yourself, This is For You",
+        "subtitle": "AI consulting isn't just for tech companies. Anyone navigating the AI landscape without a guide is a good fit.",
+        "painLabel": "Sound like you?",
+        "afterLabel": "After consulting →",
+        "bottomNote": "Not sure if you qualify? Book a free 30-min call — we'll tell you honestly.",
+        "audiences": [
+            {
+                "emoji": "🏢",
+                "title": "Business Owners & SMEs",
+                "subtitle": "Shops, agencies, service businesses, manufacturers",
+                "pains": [
+                    "Overwhelmed by AI tools but not sure which apply to you",
+                    "Competitors seem to be moving faster with technology",
+                    "Wasting budget on tools your team doesn't actually use",
+                    "No clear plan for how AI fits into your operations"
+                ],
+                "gains": [
+                    "A clear map of exactly where AI saves you the most time",
+                    "Specific tools that fit your budget and team size",
+                    "An implementation plan your team can actually follow",
+                    "Competitive advantage through smart AI adoption"
+                ],
+                "cta": "Get Business AI Strategy"
+            },
+            {
+                "emoji": "🚀",
+                "title": "Agencies & Growing Teams",
+                "subtitle": "Marketing, design, dev, and creative agencies",
+                "pains": [
+                    "Clients asking about AI but you don't have a clear answer",
+                    "Team productivity isn't keeping up with client demands",
+                    "Manually doing tasks that could easily be automated",
+                    "No structured AI workflow across your team"
+                ],
+                "gains": [
+                    "A team-wide AI adoption roadmap by role and department",
+                    "Tools that help you deliver more work in less time",
+                    "A clear AI story to present to prospective clients",
+                    "Competitive differentiation in your agency pitch"
+                ],
+                "cta": "Get Agency AI Roadmap"
+            },
+            {
+                "emoji": "👤",
+                "title": "Individuals & Freelancers",
+                "subtitle": "Consultants, coaches, creators, solopreneurs",
+                "pains": [
+                    "Spending too many hours on admin and repetitive tasks",
+                    "Struggling to scale income without working more hours",
+                    "Unsure which AI tools are worth paying for",
+                    "Losing clients to competitors who appear more efficient"
+                ],
+                "gains": [
+                    "AI tools that give you the output of a small team",
+                    "Hours back every week from automated admin",
+                    "A toolkit tailored to your specific type of work",
+                    "The ability to take on more clients without burning out"
+                ],
+                "cta": "Simplify My Workflow With AI"
+            },
+            {
+                "emoji": "✨",
+                "title": "Personal Brand Builders",
+                "subtitle": "Creators, executives, thought leaders, influencers",
+                "pains": [
+                    "Content creation takes too long to stay consistent",
+                    "Ideas are there, but turning them into content is painful",
+                    "Audience growth feels slow despite consistent effort",
+                    "No system for managing content across platforms"
+                ],
+                "gains": [
+                    "An AI-powered content system built around your voice",
+                    "Post consistently across platforms without the grind",
+                    "Turn one idea into a week of content automatically",
+                    "Grow faster by working smarter, not harder"
+                ],
+                "cta": "Build My AI Content System"
+            }
+        ]
+    },
+    "faq": {
+        "badge": "Got Questions?",
+        "title": "Honest Answers Before You Commit",
+        "subtitle": "We'd rather answer your doubts upfront than have you second-guess after booking.",
+        "questions": [
+            {
+                "question": "I'm not a tech person. Will I understand your recommendations?",
+                "answer": "Absolutely. We translate everything into plain language. Our roadmaps are written for business owners, not engineers. If you can run a business, you can follow our recommendations."
+            },
+            {
+                "question": "How is this different from just Googling 'AI tools for my business'?",
+                "answer": "Google gives you generic lists. We give you a strategy built around how your specific business works, your actual budget, and your team's capabilities. The difference is the same as a personal trainer versus a YouTube workout — both share knowledge, only one is built for you."
+            },
+            {
+                "question": "Do you only work with large businesses?",
+                "answer": "Not at all. Our most common clients are individual freelancers, small teams of 2–10 people, and single-owner businesses. The AI Clarity Session is specifically designed for people who are just getting started."
+            },
+            {
+                "question": "What if I've already tried some AI tools and they didn't work?",
+                "answer": "That's actually the most common situation we see. Usually it means the wrong tools were chosen, or they were set up without a clear workflow in mind. We audit what you've tried, explain why it didn't work, and give you a better path forward."
+            },
+            {
+                "question": "Will you implement the AI tools for me, or just recommend them?",
+                "answer": "The consulting service is strategy — you get a roadmap and recommendations. If you want us to build and implement, we offer that separately through our AI Agent and Workflow Automation services. Many clients start with consulting, then hire us to build."
+            },
+            {
+                "question": "How do I know the recommendations will actually work for my business?",
+                "answer": "We back the Business AI Audit with a 100% satisfaction guarantee. If the roadmap doesn't match your expectations, we revise it until it does — at no extra cost. We've consulted 30+ businesses and have a 95% client satisfaction rate."
+            },
+            {
+                "question": "I'm based outside Bangladesh. Can you still help me?",
+                "answer": "Yes. All sessions are held via video call. We work with clients across South Asia, Southeast Asia, Europe, and North America. International pricing is listed in USD and payment is via Wise or PayPal."
+            },
+            {
+                "question": "How soon can I book the discovery call?",
+                "answer": "Usually within 1–3 business days. Fill out the contact form and we'll respond within 24 hours with available slots. Urgent bookings can often be accommodated within 24 hours."
+            }
+        ],
+        "stillHaveQuestions": {
+            "title": "Still Not Sure?",
+            "subtitle": "Book a free 30-minute call. No pitch, no pressure — just an honest conversation about whether this is right for you.",
+            "primaryCta": "Book Free Discovery Call",
+            "secondaryCta": "WhatsApp Us"
+        }
+    },
+    "simpleCta": {
+        "title": "Ready to Finally Get AI Right?",
+        "subtitle": "Stop guessing which tools to use. Get a personalised AI strategy built around your business — and start seeing results within 30 days.",
+        "trustBadges": [
+            "Free discovery call",
+            "No technical knowledge needed",
+            "BD & international clients welcome",
+            "100% satisfaction guarantee"
+        ],
+        "primaryButton": "Book My Free Strategy Call",
+        "secondaryButton": "See Pricing First",
+        "stats": [
+            {
+                "label": "Roadmap delivered in 3–5 days"
+            },
+            {
+                "label": "100% satisfaction guarantee"
+            },
+            {
+                "label": "Starts from ৳2,500 / $60 USD"
+            }
+        ],
+        "finalNote": "💡 Not sure if consulting is right for you? The discovery call is free — use it to find out."
     }
 }

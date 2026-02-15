@@ -1,5 +1,6 @@
 "use client";
 
+import { GlowBlob } from "@/components/effects/bg-effects";
 import { motion } from "framer-motion";
 import {
     Languages,
@@ -30,7 +31,7 @@ export function FeaturesShowcaseSection() {
     }>;
 
     // Icon mapping
-    const iconMap: Record<string, any> = {
+    const iconMap: Record<string, React.ElementType> = {
         Languages,
         Brain,
         ShoppingCart,
@@ -42,9 +43,10 @@ export function FeaturesShowcaseSection() {
     };
 
     return (
-        <section className="py-20 bg-muted/30 relative overflow-hidden">
+        <section className="py-20 relative overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+            <GlowBlob position="top-left" size={700} opacity={0.4} />
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 {/* Header */}

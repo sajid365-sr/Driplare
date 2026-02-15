@@ -472,5 +472,156 @@
                 "a": "বাংলাদেশি clients: bKash, Nagad, বা bank transfer। International clients: Wise বা PayPal। Clarity Session এর জন্য upfront payment এবং বড় packages এর জন্য ৫০% upfront প্রয়োজন।"
             }
         ]
+    },
+    "whoIsThisFor": {
+        "badge": "এটি কার জন্য?",
+        "title": "যদি নিজেকে চিনতে পারেন, এটি আপনার জন্য",
+        "subtitle": "AI consulting শুধু tech companies এর জন্য নয়। যে কেউ গাইড ছাড়া AI landscape নেভিগেট করছেন তিনি এর জন্য উপযুক্ত।",
+        "painLabel": "আপনার মতো শোনাচ্ছে?",
+        "afterLabel": "Consulting এর পরে →",
+        "bottomNote": "যোগ্য কিনা নিশ্চিত নন? ফ্রি ৩০ মিনিটের call বুক করুন — আমরা সৎভাবে জানাব।",
+        "audiences": [
+            {
+                "emoji": "🏢",
+                "title": "Business Owners ও SMEs",
+                "subtitle": "দোকান, agencies, service businesses, manufacturers",
+                "pains": [
+                    "AI tools এ overwhelmed কিন্তু কোনটি আপনার জন্য প্রযোজ্য জানেন না",
+                    "Competitors প্রযুক্তিতে দ্রুত এগিয়ে যাচ্ছে বলে মনে হচ্ছে",
+                    "এমন tools এ budget নষ্ট হচ্ছে যা আপনার team আসলে ব্যবহার করে না",
+                    "AI আপনার operations এ কিভাবে মানানসই তার কোনো clear plan নেই"
+                ],
+                "gains": [
+                    "ঠিক কোথায় AI আপনার সবচেয়ে বেশি সময় বাঁচায় তার একটি clear map",
+                    "আপনার budget ও team size এর সাথে মানানসই নির্দিষ্ট tools",
+                    "একটি implementation plan যা আপনার team সত্যিই অনুসরণ করতে পারে",
+                    "Smart AI adoption এর মাধ্যমে competitive advantage"
+                ],
+                "cta": "Business AI Strategy নিন"
+            },
+            {
+                "emoji": "🚀",
+                "title": "Agencies ও Growing Teams",
+                "subtitle": "Marketing, design, dev, ও creative agencies",
+                "pains": [
+                    "Clients AI সম্পর্কে জিজ্ঞাসা করছে কিন্তু আপনার কাছে clear উত্তর নেই",
+                    "Team productivity client demands এর সাথে তাল মিলিয়ে চলতে পারছে না",
+                    "এমন tasks manually করা হচ্ছে যা সহজেই automate হতে পারত",
+                    "আপনার team জুড়ে কোনো structured AI workflow নেই"
+                ],
+                "gains": [
+                    "Role ও department অনুযায়ী team-wide AI adoption roadmap",
+                    "কম সময়ে বেশি কাজ deliver করতে সাহায্যকারী tools",
+                    "Prospective clients এর কাছে present করার জন্য একটি clear AI story",
+                    "Agency pitch এ competitive differentiation"
+                ],
+                "cta": "Agency AI Roadmap নিন"
+            },
+            {
+                "emoji": "👤",
+                "title": "Individuals ও Freelancers",
+                "subtitle": "Consultants, coaches, creators, solopreneurs",
+                "pains": [
+                    "Admin ও repetitive tasks এ অনেক বেশি ঘন্টা ব্যয় হচ্ছে",
+                    "বেশি ঘন্টা না কাজ করে income scale করতে苦労 হচ্ছে",
+                    "কোন AI tools এর জন্য pay করা worth it তা বুঝতে পারছেন না",
+                    "বেশি efficient দেখানো competitors এর কাছে clients হারাচ্ছেন"
+                ],
+                "gains": [
+                    "AI tools যা আপনাকে একটি ছোট team এর মতো output দেয়",
+                    "Automated admin থেকে প্রতি সপ্তাহে ঘন্টা ফিরে পাওয়া",
+                    "আপনার নির্দিষ্ট কাজের ধরনের জন্য তৈরি toolkit",
+                    "Burn out না হয়ে আরো বেশি clients নেওয়ার সক্ষমতা"
+                ],
+                "cta": "AI দিয়ে আমার Workflow সহজ করুন"
+            },
+            {
+                "emoji": "✨",
+                "title": "Personal Brand Builders",
+                "subtitle": "Creators, executives, thought leaders, influencers",
+                "pains": [
+                    "Consistent থাকতে content creation অনেক বেশি সময় নেয়",
+                    "Ideas আছে, কিন্তু সেগুলো content এ রূপান্তর করা কঠিন",
+                    "Consistent effort সত্ত্বেও audience growth ধীর মনে হচ্ছে",
+                    "Platforms জুড়ে content manage করার কোনো system নেই"
+                ],
+                "gains": [
+                    "আপনার voice কে কেন্দ্র করে তৈরি AI-powered content system",
+                    "Grind ছাড়াই সব platforms এ consistently post করুন",
+                    "একটি idea থেকে automatically এক সপ্তাহের content তৈরি করুন",
+                    "কঠোর পরিশ্রম নয়, স্মার্টভাবে কাজ করে দ্রুত grow করুন"
+                ],
+                "cta": "আমার AI Content System তৈরি করুন"
+            }
+        ]
+    },
+    "faq": {
+        "badge": "প্রশ্ন আছে?",
+        "title": "Commit করার আগে সৎ উত্তর",
+        "subtitle": "Book করার পরে দ্বিধায় পড়ার চেয়ে আমরা আপনার সন্দেহগুলো আগেই মিটিয়ে দিতে পছন্দ করি।",
+        "questions": [
+            {
+                "question": "আমি tech জানি না। আমি কি আপনাদের recommendations বুঝতে পারব?",
+                "answer": "অবশ্যই। আমরা সব কিছু সহজ ভাষায় বলি। আমাদের roadmaps engineers এর জন্য নয়, business owners দের জন্য লেখা হয়। আপনি যদি একটি ব্যবসা চালাতে পারেন, আমাদের recommendations অনুসরণ করতে পারবেন।"
+            },
+            {
+                "question": "Google এ 'AI tools for my business' search করার চেয়ে এটি কিভাবে আলাদা?",
+                "answer": "Google আপনাকে generic তালিকা দেয়। আমরা আপনার নির্দিষ্ট ব্যবসা কিভাবে চলে, আপনার আসল budget, ও আপনার team এর সক্ষমতাকে কেন্দ্র করে একটি strategy দিই। পার্থক্যটা personal trainer বনাম YouTube workout এর মতো — উভয়ই জ্ঞান শেয়ার করে, কিন্তু শুধু একটি আপনার জন্য তৈরি।"
+            },
+            {
+                "question": "আপনারা কি শুধু বড় businesses এর সাথে কাজ করেন?",
+                "answer": "একদমই না। আমাদের সবচেয়ে common clients হলো individual freelancers, ২–১০ জনের ছোট teams, এবং single-owner businesses। AI Clarity Session বিশেষভাবে যারা শুরু করছেন তাদের জন্য designed।"
+            },
+            {
+                "question": "আমি যদি আগে কিছু AI tools try করে থাকি এবং সেগুলো কাজ না করে?",
+                "answer": "এটি আসলে আমরা সবচেয়ে বেশি যে পরিস্থিতি দেখি। সাধারণত এর মানে ভুল tools বেছে নেওয়া হয়েছে, বা কোনো clear workflow এর কথা মাথায় না রেখে set up করা হয়েছে। আমরা আপনি কি try করেছেন তা audit করি, কেন কাজ করেনি তা ব্যাখ্যা করি, এবং আপনাকে একটি ভালো পথ দিই।"
+            },
+            {
+                "question": "আপনারা কি আমার জন্য AI tools implement করবেন, নাকি শুধু recommend করবেন?",
+                "answer": "Consulting service হলো strategy — আপনি একটি roadmap ও recommendations পান। Build ও implement করতে চাইলে আমরা সেটি আমাদের AI Agent ও Workflow Automation services এর মাধ্যমে separately offer করি। অনেক clients consulting দিয়ে শুরু করেন, তারপর আমাদের build করতে hire করেন।"
+            },
+            {
+                "question": "Recommendations আমার ব্যবসার জন্য কাজ করবে তা আমি কিভাবে জানব?",
+                "answer": "আমরা Business AI Audit এ ১০০% satisfaction guarantee দিই। Roadmap আপনার প্রত্যাশার সাথে না মিললে, আমরা বিনা খরচে revise করব। আমরা ৩০+ businesses কে consult করেছি এবং ৯৫% client satisfaction rate আছে।"
+            },
+            {
+                "question": "আমি বাংলাদেশের বাইরে থাকি। আপনারা কি আমাকে সাহায্য করতে পারবেন?",
+                "answer": "হ্যাঁ। সব sessions video call এর মাধ্যমে হয়। আমরা South Asia, Southeast Asia, Europe, ও North America জুড়ে clients এর সাথে কাজ করি। International pricing USD তে এবং payment Wise বা PayPal এর মাধ্যমে।"
+            },
+            {
+                "question": "Discovery call কত তাড়াতাড়ি book করতে পারব?",
+                "answer": "সাধারণত ১–৩ business days এর মধ্যে। Contact form পূরণ করুন এবং আমরা ২৪ ঘন্টার মধ্যে available slots সহ respond করব। Urgent bookings প্রায়ই ২৪ ঘন্টার মধ্যে accommodate করা যায়।"
+            }
+        ],
+        "stillHaveQuestions": {
+            "title": "এখনও নিশ্চিত নন?",
+            "subtitle": "একটি বিনামূল্যে ৩০ মিনিটের call বুক করুন। কোনো pitch নেই, কোনো চাপ নেই — শুধু এটি আপনার জন্য সঠিক কিনা তা নিয়ে একটি সৎ কথোপকথন।",
+            "primaryCta": "ফ্রি Discovery Call বুক করুন",
+            "secondaryCta": "WhatsApp করুন"
+        }
+    },
+    "simpleCta": {
+        "title": "অবশেষে AI সঠিকভাবে ব্যবহার করতে প্রস্তুত?",
+        "subtitle": "কোন tools ব্যবহার করবেন তা অনুমান করা বন্ধ করুন। আপনার ব্যবসাকে কেন্দ্র করে তৈরি একটি personalized AI strategy পান — এবং ৩০ দিনের মধ্যে ফলাফল দেখুন।",
+        "trustBadges": [
+            "ফ্রি discovery call",
+            "কোনো technical জ্ঞান লাগবে না",
+            "BD ও international clients স্বাগত",
+            "১০০% satisfaction guarantee"
+        ],
+        "primaryButton": "আমার ফ্রি Strategy Call বুক করুন",
+        "secondaryButton": "আগে Pricing দেখুন",
+        "stats": [
+            {
+                "label": "৩–৫ দিনে roadmap delivered"
+            },
+            {
+                "label": "১০০% satisfaction guarantee"
+            },
+            {
+                "label": "৳২,৫০০ / $৬০ USD থেকে শুরু"
+            }
+        ],
+        "finalNote": "💡 Consulting আপনার জন্য সঠিক কিনা নিশ্চিত নন? Discovery call বিনামূল্যে — জানতে এটি ব্যবহার করুন।"
     }
 }
