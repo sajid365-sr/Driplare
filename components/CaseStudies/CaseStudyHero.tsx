@@ -42,8 +42,8 @@ export function CaseStudyHero({
     return (
         <section className="relative overflow-hidden pt-24 pb-16 bg-background dark:bg-[#0a0a12]">
             {/* Background */}
-            <GridLayer color={BRAND.violet} opacity={0.04} cellSize={52} />
-            <DarkGridBoost color={BRAND.violet} opacity={0.055} cellSize={52} />
+            <GridLayer color={BRAND.violet} opacity={0.9} cellSize={52} />
+            <DarkGridBoost color={BRAND.violet} opacity={0.55} cellSize={52} />
             <GlowBlob color={BRAND.violet} position="top-left" size={600} opacity={0.06} duration={20} />
             <GlowBlob color={BRAND.blue} position="top-right" size={400} opacity={0.05} duration={24} delay={4} />
             <Particles colors={[BRAND.violet, BRAND.blue, BRAND.emerald]} count={14} minOpacity={0.08} maxOpacity={0.35} />

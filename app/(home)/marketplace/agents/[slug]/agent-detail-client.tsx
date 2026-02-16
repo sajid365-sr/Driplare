@@ -102,7 +102,7 @@ export function AgentDetailClient({ agent }: { agent: Agent }) {
                         <Bot className="w-64 h-64 text-white" />
                     </div>
 
-                    <div className="container mx-auto px-4 md:px-6 pt-8 pb-12 relative z-10">
+                    <div className="container mx-auto px-4 md:px-6 pt-24 pb-12 relative z-10">
                         <Link href="/marketplace" className="inline-flex items-center gap-1.5 text-white/60 hover:text-white text-sm font-semibold mb-8 transition-colors group">
                             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
                             All Products
@@ -222,10 +222,10 @@ export function AgentDetailClient({ agent }: { agent: Agent }) {
                         </div>
 
                         {/* ── RIGHT: Purchase sidebar ───────────────────────── */}
-                        <div className="space-y-4">
+                        <div className="space-y-4 lg:sticky lg:top-[88px] lg:self-start">
                             {/* Price card — sticky */}
                             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
-                                className="sticky top-4 rounded-2xl bg-card/80 dark:bg-white/[0.04] border border-border dark:border-white/[0.09] overflow-hidden shadow-lg">
+                                className="rounded-2xl bg-card/80 dark:bg-white/[0.04] border border-border dark:border-white/[0.09] overflow-hidden shadow-lg">
                                 <div className="p-5">
                                     <div className="flex items-end gap-1.5 mb-1">
                                         <span className="text-3xl font-black text-foreground">৳{agent.price.toLocaleString()}</span>

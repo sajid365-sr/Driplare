@@ -151,17 +151,17 @@ export function CaseStudyDetailClient({ study }: Props) {
 
             {/* Page-level bg */}
             <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-                <GridLayer color={BRAND.violet} opacity={0.03} cellSize={52} />
+                <GridLayer color={BRAND.violet} opacity={0.1} cellSize={52} />
                 <DarkGridBoost color={BRAND.violet} opacity={0.05} cellSize={52} />
-                <GlowBlob color={BRAND.violet} position="top-left" size={600} opacity={0.05} duration={22} />
-                <GlowBlob color={BRAND.blue} position="bottom-right" size={500} opacity={0.04} duration={26} delay={5} />
-                <Particles colors={[BRAND.violet, BRAND.blue]} count={12} minOpacity={0.06} maxOpacity={0.25} speed={0.6} />
+                <GlowBlob color={BRAND.violet} position="top-left" size={600} opacity={0.5} duration={22} />
+                <GlowBlob color={BRAND.blue} position="bottom-right" size={500} opacity={0.4} duration={26} delay={5} />
+                <Particles colors={[BRAND.violet, BRAND.blue]} count={12} minOpacity={0.6} maxOpacity={0.25} speed={0.6} />
             </div>
 
             <div className="relative" style={{ zIndex: 1 }}>
 
                 {/* ── HERO ─────────────────────────────────────────── */}
-                <div className={`relative bg-gradient-to-br ${meta.gradient} overflow-hidden`}>
+                <div className={`relative bg-gradient-to-br ${meta.bg} overflow-hidden`}>
                     {/* Noise */}
                     <div className="absolute inset-0 opacity-[0.06]"
                         style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")" }} />

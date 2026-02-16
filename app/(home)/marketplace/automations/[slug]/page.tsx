@@ -10,6 +10,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
+
+
     const res = await getAutomationBySlug(params.slug);
     if (!res.success || !res.data) return { title: "Not Found" };
     const item = res.data as any;

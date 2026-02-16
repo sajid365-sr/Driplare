@@ -8,6 +8,7 @@ import { FeaturesShowcaseSection } from "@/components/services/custom-AI-Agent/F
 import { ROICalculatorSection } from "@/components/services/custom-AI-Agent/ROICalculatorSection";
 import { AIAgentFAQSection } from "@/components/services/custom-AI-Agent/AIAgentFAQSection";
 import { AIAgentSimpleCTA } from "@/components/services/custom-AI-Agent/AIAgentSimpleCTA";
+import { AgentMarketplaceBanner1, AgentMarketplaceBanner2 } from "@/components/services/custom-AI-Agent/agent-marketplace-banners";
 
 
 export const metadata: Metadata = {
@@ -27,8 +28,10 @@ export default function AIAgents() {
       <LiveDemoSection />
       <HowItWorksSection />
       <FeaturesShowcaseSection />
+      <AgentMarketplaceBanner1 />
       <ROICalculatorSection />
       <AIAgentFAQSection />
+      <AgentMarketplaceBanner2 />
       <AIAgentSimpleCTA />
     </div>
   );
