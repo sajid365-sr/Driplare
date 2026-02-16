@@ -188,11 +188,11 @@ export function Navbar() {
 
               <NavigationMenuItem>
                 <Link
-                  href="/agent-marketplace"
+                  href="/marketplace"
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "bg-transparent hover:bg-primary/10",
-                    isActive("/agent-marketplace") && "text-primary font-bold"
+                    isActive("/marketplace") && "text-primary font-bold"
                   )}
                 >
                   {t("navigation.marketplace")}

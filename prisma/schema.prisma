@@ -233,22 +233,6 @@ model Agent {
   @@map("agents")
 }
 
-// Lead Model for Lead Capture System
-// model Lead {
-//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-//   name      String
-//   phone     String
-//   email     String?
-//   platform  String // e.g., "Facebook Messenger", "WhatsApp", "Both"
-//   agentSlug String
-//   status    String   @default("pending")
-//   createdAt DateTime @default(now())
-
-//   @@map("leads")
-// }
-
-// Add this to your existing schema.prisma file
-
 model Lead {
   id           String  @id @default(auto()) @map("_id") @db.ObjectId
   name         String
@@ -281,6 +265,141 @@ model Lead {
   @@map("leads")
 }
 
-// After adding this model, run:
-// npx prisma generate
-// npx prisma db push
+// ─────────────────────────────────────────────────────────────────────────────
+// ADD THESE MODELS TO YOUR EXISTING prisma/schema.prisma
+// Keep the existing Agent model — these are new additions only
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Composite type: localised text fields (reuse pattern from Agent) ──────────
+type AutomationContent {
+  name            String
+  description     String // Short — shown on card
+  fullDescription String // Long — shown on detail page
+  features        String[]
+  useCases        String[] // "Perfect for: e-commerce, HR, finance..."
+  howItWorks      String? // Step-by-step explanation
+}
+
+type WebsiteContent {
+  name            String
+  description     String
+  fullDescription String
+  features        String[]
+  idealFor        String[] // "Perfect for: restaurants, portfolios..."
+  deliverables    String[] // "What you get: 5 pages, mobile responsive..."
+}
+
+// ── AUTOMATION PRODUCT ────────────────────────────────────────────────────────
+model AutomationProduct {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  slug String @unique
+
+  // Pricing
+  price      Float
+  priceLabel String? // e.g. "One-time" | "Per Month" | "From ৳2,499"
+
+  // Classification
+  category  String // "Facebook Automation" | "WhatsApp Automation" | "Email" | "CRM" | "E-commerce"
+  platform  String[] // ["n8n", "Make.com", "Zapier"] — platforms it runs on
+  techStack String[] // ["OpenAI GPT-4", "Google Sheets", "Meta API"]
+  tags      String[] // searchable tags
+
+  // Meta
+  difficulty String  @default("Easy") // "Easy" | "Medium" | "Advanced"
+  setupTime  String? // "10 Mins Setup"
+  status     String  @default("active") // "active" | "inactive" | "coming-soon"
+  featured   Boolean @default(false)
+
+  // Media
+  mainImage  String
+  gallery    String[]
+  videoUrl   String?
+  diagramUrl String? // n8n/Make workflow diagram image
+
+  // Ratings
+  rating     Float @default(5.0)
+  totalSales Int   @default(0)
+
+  // i18n content
+  en AutomationContent
+  bn AutomationContent
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("automation_products")
+}
+
+// ── WEBSITE PACKAGE ───────────────────────────────────────────────────────────
+model WebsiteProduct {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  slug String @unique
+
+  // Pricing
+  price      Float
+  priceLabel String? // "Starting from" | "Fixed Price"
+
+  // Classification
+  category  String // "E-commerce" | "Portfolio" | "Business" | "Landing Page" | "SaaS" | "Blog"
+  techStack String[] // ["Next.js", "Tailwind", "MongoDB", "Stripe"]
+  tags      String[]
+
+  // Project meta
+  deliveryDays Int? // e.g. 14 (days to deliver)
+  pages        Int? // e.g. 5 (number of pages included)
+  revisions    Int? // e.g. 3 (rounds of revisions)
+  support      String? // e.g. "30 days post-launch"
+  status       String  @default("active")
+  featured     Boolean @default(false)
+
+  // Media
+  mainImage String
+  gallery   String[]
+  demoUrl   String? // Live demo link
+  videoUrl  String?
+
+  // Ratings
+  rating     Float @default(5.0)
+  totalSales Int   @default(0)
+
+  // i18n content
+  en WebsiteContent
+  bn WebsiteContent
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("website_products")
+}
+
+// ── MARKETPLACE LEAD (CRM form submissions) ───────────────────────────────────
+model MarketplaceLead {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  // Product reference
+  productId   String // The id of the agent/automation/website
+  productSlug String
+  productType String // "agent" | "automation" | "website"
+  productName String
+
+  // Contact info
+  fullName       String
+  email          String
+  whatsappNumber String
+  businessType   String? // "E-commerce" | "Restaurant" | "Agency" etc.
+
+  // Platform interest
+  platform String? // "Facebook" | "WhatsApp" | "Both" | "Website"
+
+  // Requirements
+  requirements String? // Free text
+
+  // Status tracking
+  status String  @default("new") // "new" | "contacted" | "converted" | "closed"
+  notes  String? // Admin notes
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("marketplace_leads")
+}
