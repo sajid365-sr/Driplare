@@ -1,0 +1,140 @@
+{
+    "websiteTypes": {
+        "badge": "আমরা যা তৈরি করি",
+        "title": "প্রতিটি ধরনের Website, নিখুঁতভাবে",
+        "subtitle": "একটি সাধারণ landing page থেকে পূর্ণ SaaS platform পর্যন্ত — আমরা যে ধরনের website তৈরি করি তার একটি ঝলক।",
+        "types": [
+            {
+                "icon": "ShoppingCart",
+                "title": "E-commerce (Custom)",
+                "badge": "জনপ্রিয়",
+                "hook": "Laravel বা Next.js দিয়ে scratch থেকে তৈরি সম্পূর্ণ-বৈশিষ্ট্যপূর্ণ online store — প্রতিটি feature-এ সম্পূর্ণ নিয়ন্ত্রণ।",
+                "highlights": [
+                    "Custom shopping cart ও checkout",
+                    "bKash, Nagad ও SSLCommerz payment",
+                    "Product management dashboard",
+                    "Order tracking ও notifications",
+                    "SEO-অপ্টিমাইজড product pages"
+                ]
+            },
+            {
+                "icon": "Store",
+                "title": "E-commerce (WordPress)",
+                "badge": "দ্রুত Launch",
+                "hook": "WooCommerce ব্যবহার করে দ্রুত-launch online store — দ্রুত শুরু করার জন্য নিখুঁত।",
+                "highlights": [
+                    "WooCommerce setup ও customisation",
+                    "Payment gateway integration",
+                    "Product import ও setup",
+                    "Inventory management",
+                    "Mobile-responsive design"
+                ]
+            },
+            {
+                "icon": "Briefcase",
+                "title": "Business Website",
+                "badge": null,
+                "hook": "পেশাদার multi-page site যা বিশ্বাস তৈরি করে এবং visitors-কে enquiry-তে রূপান্তর করে।",
+                "highlights": [
+                    "৫–১৫টি page সম্পূর্ণ ডিজাইন করা",
+                    "Contact forms ও lead capture",
+                    "Google Maps integration",
+                    "দ্রুত loading ও SEO ready",
+                    "সহজ content update-এর জন্য CMS"
+                ]
+            },
+            {
+                "icon": "Zap",
+                "title": "Landing Page",
+                "badge": "সেরা মূল্য",
+                "hook": "Lead capture বা একটি মূল action-এর জন্য তৈরি single-purpose, high-converting page।",
+                "highlights": [
+                    "Conversion-অপ্টিমাইজড layout",
+                    "Lead capture form",
+                    "WhatsApp / call CTA",
+                    "Mobile-first approach",
+                    "দ্রুত delivery"
+                ]
+            },
+            {
+                "icon": "User",
+                "title": "Portfolio Website",
+                "badge": null,
+                "hook": "আপনার কাজ সুন্দরভাবে প্রদর্শন করুন — এমন একটি site যা আপনাকে নজরে আনে।",
+                "highlights": [
+                    "Project gallery ও case studies",
+                    "About ও contact sections",
+                    "Skills ও testimonials",
+                    "পরিষ্কার, আধুনিক design",
+                    "Blog-ready (ঐচ্ছিক)"
+                ]
+            },
+            {
+                "icon": "LayoutDashboard",
+                "title": "Custom Dashboard / SaaS",
+                "badge": null,
+                "hook": "আপনার নির্দিষ্ট চাহিদা অনুযায়ী তৈরি বিশেষ web application বা internal tool।",
+                "highlights": [
+                    "Role-based access control",
+                    "Real-time data ও analytics",
+                    "API ও third-party integrations",
+                    "Scalable architecture",
+                    "Admin ও user panels"
+                ]
+            },
+            {
+                "icon": "FileText",
+                "title": "Blog / Content Site",
+                "badge": null,
+                "hook": "আপনার audience বাড়াতে এবং কর্তৃত্ব প্রতিষ্ঠার জন্য content-first website।",
+                "highlights": [
+                    "Category ও tag system",
+                    "Author profiles",
+                    "Email newsletter integration",
+                    "Social sharing",
+                    "SEO-structured markup"
+                ]
+            },
+            {
+                "icon": "Calendar",
+                "title": "Booking / Appointment Site",
+                "badge": null,
+                "hook": "Appointment system যা clients-কে ২৪/৭ self-schedule করতে দেয়।",
+                "highlights": [
+                    "Online booking calendar",
+                    "Automated confirmation emails",
+                    "Service ও staff management",
+                    "Payment collection (ঐচ্ছিক)",
+                    "WhatsApp reminders"
+                ]
+            }
+        ],
+        "bannerLabel": "Ready-Made Web Packages",
+        "bannerTitle": "Custom build ছাড়া website চান?",
+        "bannerSubtitle": "Marketplace-এ আমাদের pre-configured web packages দেখুন — নির্দিষ্ট scope, স্পষ্ট pricing, দ্রুত delivery।",
+        "bannerCta": "Web Packages দেখুন",
+        "bannerCtaSecondary": "Discovery Call বুক করুন"
+    },
+    "marketplaceBanner1": {
+        "label": "Ready-Made Web Packages",
+        "text": "সম্পূর্ণ custom site দরকার নেই?",
+        "subtext": "Pre-built web packages দেখুন — নির্দিষ্ট scope, স্পষ্ট pricing, দ্রুত delivery।",
+        "cta": "Web Packages দেখুন"
+    },
+    "marketplaceBanner2": {
+        "eyebrow": "Custom build বাদ দিন",
+        "title": "দ্রুত website দরকার?",
+        "titleAccent": "Pre-built packages মাত্র ৳১০K থেকে",
+        "subtitle": "আমাদের Marketplace-এ landing page, business site, e-commerce store ও portfolio-র জন্য ready-made web packages আছে — scoped, priced এবং discovery call ছাড়াই launch করার জন্য প্রস্তুত।",
+        "stat1Value": "৭ দিন",
+        "stat1Label": "গড় delivery",
+        "stat2Value": "৮+",
+        "stat2Label": "package ধরন",
+        "stat3Value": "৳১০K+",
+        "stat3Label": "শুরু থেকে",
+        "cta": "Web Packages দেখুন",
+        "ctaSecondary": "বিনামূল্যে discovery call বুক করুন",
+        "ctaNote": "অথবা",
+        "ctaNoteEnd": "সম্পূর্ণ custom site-এর জন্য।"
+    }
+}

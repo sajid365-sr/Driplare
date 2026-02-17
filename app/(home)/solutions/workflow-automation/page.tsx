@@ -10,6 +10,8 @@ import { PricingSection } from "@/components/services/workflow-automation/Pricin
 import { FAQSection } from "@/components/services/workflow-automation/FAQSection";
 import { SimpleCTA } from "@/components/services/workflow-automation/SimpleCTA";
 import { PageBackground } from "@/components/PageBackground";
+import { AutomationMarketplaceBanner1, AutomationMarketplaceBanner2, AutomationPricingTeaser } from "@/components/services/workflow-automation/automation-marketplace-components";
+import { AutomationRecipesShowcase } from "@/components/services/workflow-automation/automation-recipes-showcase";
 
 export const metadata: Metadata = {
   title: "Workflow Automation Services - Streamline Business Operations",
@@ -24,11 +26,15 @@ export default function WorkflowAutomation() {
         <AutomationHero />
         <WhatIsAutomationSection />
         <WhoIsThisForSection />
+        <AutomationMarketplaceBanner1 />
         <WhatWeAutomateSection />
-        <AutomationRecipesSection />
+        {/* <AutomationRecipesSection /> */}
+        <AutomationRecipesShowcase />
         <ToolsIntegrationsSection />
         <HowItWorksSection />
-        <PricingSection />
+        <AutomationMarketplaceBanner2 />
+        {/* <PricingSection /> */}
+        <AutomationPricingTeaser />
         <FAQSection />
         <SimpleCTA />
       </PageBackground>

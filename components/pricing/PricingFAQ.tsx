@@ -9,79 +9,73 @@ export function PricingFAQ() {
   const { t } = useTranslation("pricingPage");
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const faqs = t("Faq.questions", { returnObjects: true }) as Array<{
-    question: string;
-    answer: string;
+  const faqs = t("FAQ.items", { returnObjects: true }) as Array<{
+    q: string; a: string;
   }>;
 
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-20 bg-muted/30 relative overflow-hidden">
+      {/* Subtle grid */}
+      <div
+        className="absolute inset-0 opacity-[0.035] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(hsl(var(--border)) 1px, transparent 1px),
+                            linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px)`,
+          backgroundSize: "44px 44px",
+        }}
+      />
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Header */}
         <motion.div
-          className="text-center mb-12 max-w-3xl mx-auto"
+          className="text-center mb-12 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-bold uppercase mb-4">
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 px-4 py-2 rounded-full text-sm font-bold uppercase mb-4">
             <HelpCircle className="w-4 h-4" />
-            {t("Faq.badge")}
+            FAQ
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-            {t("Faq.title")}
+          <h2 className="text-3xl md:text-4xl font-black text-foreground mb-3">
+            {t("FAQ.title")}
           </h2>
-          <p className="text-lg text-muted-foreground">
-            {t("Faq.subtitle")}
-          </p>
+          <p className="text-muted-foreground">{t("FAQ.subtitle")}</p>
         </motion.div>
 
-        {/* FAQ List */}
-        <div className="max-w-3xl mx-auto space-y-4">
-          {faqs.map((faq, index) => (
+        {/* Accordion */}
+        <div className="max-w-3xl mx-auto space-y-3">
+          {faqs.map((faq, i) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: i * 0.07 }}
               className="bg-card border-2 border-border rounded-2xl overflow-hidden hover:border-primary/30 transition-colors"
             >
               <button
-                onClick={() => toggleFAQ(index)}
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full text-left p-6 hover:bg-muted/30 transition-colors"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="text-lg font-bold text-foreground pr-4">
-                    {faq.question}
-                  </h3>
-                  <motion.div
-                    animate={{ rotate: openIndex === index ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <h3 className="text-base font-bold text-foreground pr-4">{faq.q}</h3>
+                  <motion.div animate={{ rotate: openIndex === i ? 180 : 0 }} transition={{ duration: 0.25 }}>
                     <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0" />
                   </motion.div>
                 </div>
               </button>
 
               <AnimatePresence>
-                {openIndex === index && (
+                {openIndex === i && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.28 }}
                     className="border-t border-border"
                   >
-                    <div className="p-6 pt-4">
-                      <p className="text-muted-foreground leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
+                    <p className="p-6 pt-4 text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>

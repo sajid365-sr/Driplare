@@ -1,248 +1,385 @@
 {
-  "pricing": {
-    "sectionTitle": "আপনার প্ল্যান বাছুন",
-    "sectionSubtitle": "সব আকারের ব্যবসার জন্য নমনীয় মূল্য",
-    "tabs": {
-      "bangladesh": "বাংলাদেশ",
-      "international": "আন্তর্জাতিক",
-      "enterprise": "Enterprise"
-    },
-    "mostPopular": "সবচেয়ে জনপ্রিয়",
-    "setupFee": "একবার Setup খরচ",
-    "monthlyFee": "মাসিক Maintenance",
-    "bangladesh": {
-      "starter": {
-        "name": "Starter",
-        "price": "৳৫,০০০ - ৭,০০০",
-        "setup": "৳৫,০০০ - ৭,০০০",
-        "monthly": "৳৫০০ - ৭০০ / মাস",
-        "description": "AI দিয়ে শুরু করা ছোট e-commerce ব্যবসার জন্য পারফেক্ট",
-        "features": [
-          "১-২ সপ্তাহ ফ্রি ট্রায়াল",
-          "১টি AI Sales Agent",
-          "Facebook বা WhatsApp (একটি platform)",
-          "Google Sheet integration",
-          "Basic product training (২০টি পর্যন্ত পণ্য)",
-          "Email support",
-          "মাসিক usage reports"
-        ],
-        "cta": "ফ্রি ট্রায়াল শুরু করুন"
-      },
-      "pro": {
-        "name": "Professional",
-        "price": "৳১০,০০০ - ১৫,০০০",
-        "setup": "৳১০,০০০ - ১৫,০০০",
-        "monthly": "৳১,০০০ - ১,৫০০ / মাস",
-        "description": "Sales automation scale করতে প্রস্তুত ক্রমবর্ধমান ব্যবসার জন্য",
-        "features": [
-          "Starter এর সবকিছু",
-          "Facebook এবং WhatsApp integration",
-          "Advanced product training (সীমাহীন পণ্য)",
-          "Custom conversation flows",
-          "Priority WhatsApp support",
-          "সাপ্তাহিক optimization calls",
-          "Custom reporting dashboard"
-        ],
-        "cta": "শুরু করুন"
-      },
-      "custom": {
-        "name": "Custom Solution",
-        "price": "Custom Quote",
-        "setup": "Custom",
-        "monthly": "Custom",
-        "description": "আপনার ব্যবসার জন্য সম্পূর্ণ customized automation ecosystem",
-        "features": [
-          "Professional এর সবকিছু",
-          "একাধিক AI agents",
-          "Custom MERN dashboard",
-          "Advanced workflow automation",
-          "Data scraping ও monitoring",
-          "Technical consulting",
-          "Dedicated account manager"
-        ],
-        "cta": "Consultation বুক করুন"
-      }
-    },
-    "international": {
-      "starter": {
-        "name": "Starter Agent",
-        "price": "$500 - 700",
-        "period": "setup",
-        "description": "ছোট ব্যবসার জন্য entry-level AI automation",
-        "features": [
-          "১টি Custom AI Agent",
-          "Basic knowledge base",
-          "Single platform integration",
-          "৭ দিনে deployment",
-          "Email support",
-          "মাসিক reporting"
-        ],
-        "cta": "শুরু করুন"
-      },
-      "pro": {
-        "name": "Professional",
-        "price": "$1,500 - 2,500",
-        "period": "setup",
-        "description": "ক্রমবর্ধমান ব্যবসার জন্য সম্পূর্ণ automation solution",
-        "features": [
-          "৩টি Interconnected AI Agents",
-          "Advanced knowledge base",
-          "Multi-platform integration",
-          "CRM ও database connections",
-          "১৪ দিনে deployment",
-          "Priority support",
-          "Custom analytics dashboard"
-        ],
-        "cta": "এখনই শুরু করুন"
-      },
-      "enterprise": {
-        "name": "Enterprise",
-        "price": "Custom",
-        "period": "quote",
-        "description": "Custom infrastructure সহ সম্পূর্ণ AI workforce",
-        "features": [
-          "সীমাহীন AI agents",
-          "Custom MERN stack solutions",
-          "Advanced workflow automation",
-          "২৪/৭ system monitoring",
-          "Dedicated success manager",
-          "White-label options",
-          "SLA guarantees"
-        ],
-        "cta": "Sales এর সাথে যোগাযোগ করুন"
-      }
-    },
-    "enterprise": {
-      "title": "Enterprise Solutions",
-      "description": "সম্পূর্ণ custom solution প্রয়োজন? আমরা আপনার অনন্য ব্যবসার প্রয়োজন অনুযায়ী একটি সম্পূর্ণ AI automation ecosystem তৈরি করব।",
-      "features": [
-        "সম্পূর্ণ AI workforce deployment",
-        "Custom MERN stack applications",
-        "Advanced data intelligence systems",
-        "Technical strategy consulting",
-        "Dedicated development team",
-        "২৪/৭ priority support"
-      ],
-      "cta": "Enterprise Consultation Schedule করুন"
-    }
-  },
-  "Services": {
-    "title": "অতিরিক্ত Services",
-    "subtitle": "বিশেষায়িত solutions দিয়ে আপনার automation বাড়ান",
-    "startingAt": "শুরু",
-    "cta": "Quote নিন",
-    "note": "সব services AI Agent packages এর সাথে যুক্ত করা যায়।",
-    "contactUs": "Custom pricing এর জন্য আমাদের সাথে যোগাযোগ করুন",
-    "automation": {
-      "title": "Workflow Automation",
-      "price": "৳১৫,০০০+",
-      "description": "আপনার business apps সংযুক্ত করুন এবং manual কাজ বাদ দিন",
-      "features": [
-        "n8n workflow design",
-        "Multi-app integration",
-        "Error handling",
-        "Performance monitoring"
-      ]
-    },
-    "scraping": {
-      "title": "Data Scraping",
-      "price": "৳২,০০০/মাস",
-      "description": "Automated data collection এবং monitoring",
-      "features": [
-        "Real-time data extraction",
-        "Competitor tracking",
-        "Automated alerts",
-        "Historical storage"
-      ]
-    },
-    "mern": {
-      "title": "MERN Development",
-      "price": "৳২৫,০০০+",
-      "description": "Custom web applications এবং dashboards",
-      "features": [
-        "MongoDB database",
-        "Express API",
-        "React frontend",
-        "Node.js backend"
-      ]
-    },
-    "consulting": {
-      "title": "Tech Consulting",
-      "price": "৳৩,০০০/ঘন্টা",
-      "description": "আপনার tech সিদ্ধান্তের জন্য expert guidance",
-      "features": [
-        "Architecture design",
-        "Technology selection",
-        "Scalability planning",
-        "Performance optimization"
-      ]
-    }
-  },
-  "Faq": {
-    "badge": "প্রশ্ন আছে?",
-    "title": "সচরাচর জিজ্ঞাসিত প্রশ্ন",
-    "subtitle": "আমাদের pricing সম্পর্কে যা কিছু জানা দরকার",
-    "questions": [
-      {
-        "question": "ফ্রি ট্রায়াল কিভাবে কাজ করে?",
-        "answer": "আমরা আপনার AI agent সম্পূর্ণ বিনামূল্যে ১-২ সপ্তাহের জন্য setup করে দেই। আপনি আসল কাস্টমারদের সাথে এটি টেস্ট করুন। ফলাফলে খুশি হলে setup ফি দিয়ে মাসিক maintenance চালিয়ে যান। না হলে, কোন চার্জ নেই।"
-      },
-      {
-        "question": "মাসিক maintenance ফি তে কি অন্তর্ভুক্ত?",
-        "answer": "মাসিক ফি তে AI API ব্যবহারের খরচ, hosting, নিয়মিত updates, bug fixes এবং চলমান support অন্তর্ভুক্ত। এটি নিশ্চিত করে যে আপনার AI agent ২৪/৭ সুচারুভাবে চলছে।"
-      },
-      {
-        "question": "আমি কি মাসিক subscription বাতিল করতে পারি?",
-        "answer": "হ্যাঁ, অবশ্যই। কোন দীর্ঘমেয়াদী চুক্তি নেই। আপনি ৩০ দিনের নোটিশ দিয়ে যেকোনো সময় বাতিল করতে পারেন। একবারের setup ফি ফেরতযোগ্য নয়, কিন্তু মাসিক ফি আপনার বাতিলের পিরিয়ডের পরে বন্ধ হয়।"
-      },
-      {
-        "question": "আপনারা কি payment plans দেন?",
-        "answer": "হ্যাঁ, Professional এবং Custom packages এর জন্য আমরা নমনীয় payment plans অফার করি। আপনি setup ফি ২-৩ কিস্তিতে ভাগ করতে পারেন। আপনার নির্দিষ্ট প্রয়োজন নিয়ে আলোচনা করতে আমাদের সাথে যোগাযোগ করুন।"
-      },
-      {
-        "question": "পরে upgrade করতে চাইলে কি হবে?",
-        "answer": "আপনি যেকোনো সময় upgrade করতে পারেন! আমরা আপনার প্রাথমিক setup ফি নতুন package এ credit করব। উদাহরণস্বরূপ, Starter থেকে Professional এ যেতে শুধু পার্থক্য পে করতে হবে।"
-      },
-      {
-        "question": "কোন লুকানো খরচ আছে কি?",
-        "answer": "কোন লুকানো খরচ নেই। Setup ফি এবং মাসিক maintenance ই আপনি পে করবেন। যদি আপনার ব্যবহার উল্লেখযোগ্যভাবে বৃদ্ধি পায় (১০০০+ conversations/দিন), আমরা স্বচ্ছভাবে scaling অপশন নিয়ে আলোচনা করব।"
-      }
-    ]
-  },
-  "Cta": {
-    "title": "আপনার ফ্রি ট্রায়াল শুরু করতে প্রস্তুত?",
-    "subtitle": "চলুন আপনার AI sales agent তৈরি করি। কোন ক্রেডিট কার্ড লাগবে না। পে করার আগে ফলাফল দেখুন।",
-    "primaryCta": "এখনই ফ্রি ট্রায়াল শুরু করুন",
-    "secondaryCta": "WhatsApp এ আমাদের সাথে কথা বলুন",
-    "trustBadges": [
-      "১-২ সপ্তাহ ফ্রি ট্রায়াল",
-      "ক্রেডিট কার্ড লাগবে না",
-      "যেকোনো সময় বাতিল করুন"
-    ]
-  },
   "Hero": {
     "badge": "স্বচ্ছ মূল্য",
     "title": {
-      "line1": "সহজ মূল্য,",
-      "line2": "শক্তিশালী ফলাফল"
+      "line1": "সহজ মূল্য।",
+      "line2": "কোনো চমক নেই।"
     },
-    "subtitle": "আপনার ব্যবসার জন্য উপযুক্ত প্ল্যান বাছুন। ফ্রি ট্রায়াল দিয়ে শুরু করুন, বৃদ্ধির সাথে সাথে scale করুন।",
+    "subtitle": "সব কিছু একজায়গায়। প্রতিটি সেবা, প্রতিটি tier, প্রতিটি মুদ্রা — সৎ ও স্পষ্ট।",
     "props": [
       {
-        "icon": "🎁",
-        "value": "ফ্রি ট্রায়াল",
-        "label": "১-২ সপ্তাহ ঝুঁকিমুক্ত"
+        "icon": "✅",
+        "value": "লুকানো চার্জ নেই",
+        "label": "যা দেখছেন তাই দেবেন"
       },
       {
-        "icon": "💰",
-        "value": "লুকানো খরচ নেই",
-        "label": "স্বচ্ছ মূল্য"
+        "icon": "🌍",
+        "value": "BD + আন্তর্জাতিক",
+        "label": "বাংলাদেশিদের জন্য আঞ্চলিক মূল্য"
       },
       {
-        "icon": "🚀",
-        "value": "দ্রুত Setup",
-        "label": "৪৮ ঘন্টায় লাইভ"
+        "icon": "📞",
+        "value": "বিনামূল্যে call",
+        "label": "কোনো প্রতিশ্রুতির আগে discovery call"
       }
     ]
+  },
+  "tabs": {
+    "aiAgents": "AI Agents",
+    "automation": "Automation",
+    "consulting": "Consulting",
+    "webDev": "Web Dev",
+    "marketplace": "Marketplace"
+  },
+  "aiAgents": {
+    "label": "Custom AI Agents",
+    "description": "আপনার ব্যবসার জন্য সম্পূর্ণ কাস্টম AI agent তৈরি, প্রশিক্ষণ ও deploy করা হয়। মূল্য হলো এককালীন setup + ঐচ্ছিক মাসিক maintenance।",
+    "toggleBD": "🇧🇩 বাংলাদেশ (৳)",
+    "toggleIntl": "🌍 আন্তর্জাতিক ($)",
+    "tiers": [
+      {
+        "name": "Starter",
+        "badge": null,
+        "priceBD": "৳৫,০০০–৭,০০০",
+        "priceIntl": "$500–700",
+        "noteBD": "এককালীন setup · ৳৫০০–৭০০/মাস maintenance",
+        "noteIntl": "One-time setup · $15/mo maintenance",
+        "description": "ছোট e-commerce ব্যবসার জন্য যারা AI দিয়ে শুরু করতে চান।",
+        "features": [
+          "১টি custom AI agent",
+          "WhatsApp বা Facebook Messenger",
+          "সর্বোচ্চ ৫০টি পণ্যের catalogue",
+          "Google Sheets-এ order collection",
+          "বিনামূল্যে ১–২ সপ্তাহ trial",
+          "১৪ দিন post-launch support"
+        ],
+        "cta": "শুরু করুন",
+        "highlighted": false
+      },
+      {
+        "name": "Pro",
+        "badge": "সবচেয়ে জনপ্রিয়",
+        "priceBD": "৳১০,০০০–১৫,০০০",
+        "priceIntl": "$1,000–1,500",
+        "noteBD": "এককালীন setup · ৳১,০০০–১,৫০০/মাস maintenance",
+        "noteIntl": "One-time setup · $25/mo maintenance",
+        "description": "বেড়ে ওঠা ব্যবসার জন্য যারা multi-platform automation ও স্মার্ট AI চান।",
+        "features": [
+          "১–২টি custom AI agent",
+          "WhatsApp + Facebook + Website chat",
+          "সীমাহীন product catalogue",
+          "Advanced order ও CRM automation",
+          "Multi-language support",
+          "বিনামূল্যে ২ সপ্তাহ trial",
+          "৩০ দিন post-launch support"
+        ],
+        "cta": "Pro নিন",
+        "highlighted": true
+      },
+      {
+        "name": "Custom",
+        "badge": null,
+        "priceBD": "৳২০,০০০+",
+        "priceIntl": "$2,000+",
+        "noteBD": "Discovery call-এর পরে quote",
+        "noteIntl": "Quoted after discovery call",
+        "description": "Agency ও বড় ব্যবসার জন্য পূর্ণ AI ecosystem।",
+        "features": [
+          "সব platform-এ সীমাহীন agent",
+          "Custom API ও CRM integrations",
+          "AI-powered analytics dashboard",
+          "বহু বিভাগে deployment",
+          "Dedicated account manager",
+          "Priority ২৪/৭ support",
+          "Custom SLA"
+        ],
+        "cta": "কথা বলুন",
+        "highlighted": false
+      }
+    ]
+  },
+  "automation": {
+    "label": "Workflow Automation",
+    "description": "n8n ও Make দিয়ে তৈরি custom automation workflow। আপনার app গুলো connect করুন, manual কাজ দূর করুন এবং ব্যবসা নিজেই চলুক।",
+    "note": "💡 সব automation মূল্য এককালীন setup + ঐচ্ছিক মাসিক maintenance। জটিলতার উপর ভিত্তি করে চূড়ান্ত quote নির্ধারিত হয়।",
+    "tiers": [
+      {
+        "name": "Starter",
+        "badge": null,
+        "price": "৳৮,০০০",
+        "priceNote": "এককালীন setup · ঐচ্ছিক ৳২,০০০/মাস maintenance",
+        "description": "ব্যক্তি ও ছোট ব্যবসার জন্য যাদের নির্দিষ্ট কাজে ১–২টি automation দরকার।",
+        "features": [
+          "১–২টি automation workflow",
+          "সর্বোচ্চ ৩টি app connection",
+          "সহজ trigger-action flow",
+          "WhatsApp বা email delivery",
+          "৭ দিনে তৈরি ও delivery",
+          "১৪ দিন post-launch support",
+          "Basic documentation"
+        ],
+        "cta": "শুরু করুন",
+        "highlighted": false
+      },
+      {
+        "name": "Growth",
+        "badge": "সবচেয়ে জনপ্রিয়",
+        "price": "৳২০,০০০",
+        "priceNote": "এককালীন setup · ঐচ্ছিক ৳৪,০০০/মাস maintenance",
+        "description": "বেড়ে ওঠা ব্যবসার জন্য যারা মূল কাজগুলো শুরু থেকে শেষ পর্যন্ত automate করতে চান।",
+        "features": [
+          "৩–৫টি automation workflow",
+          "সর্বোচ্চ ৮টি app connection",
+          "Multi-step logic ও conditions",
+          "Error handling ও fallbacks",
+          "WhatsApp, email ও Slack delivery",
+          "১০ দিনে তৈরি ও delivery",
+          "৩০ দিন post-launch support",
+          "সম্পূর্ণ documentation ও walkthrough"
+        ],
+        "cta": "Growth Plan নিন",
+        "highlighted": true
+      },
+      {
+        "name": "Custom",
+        "badge": null,
+        "price": "Custom",
+        "priceNote": "Discovery call-এর পরে quote",
+        "description": "Agency ও ব্যবসার জন্য যাদের জটিল logic ও ongoing management সহ পূর্ণ automation ecosystem দরকার।",
+        "features": [
+          "সীমাহীন workflow",
+          "সীমাহীন app connection",
+          "জটিল logic, loops ও branches",
+          "Custom API ও webhook integrations",
+          "AI-powered automations (OpenAI)",
+          "Dedicated automation manager",
+          "Priority support"
+        ],
+        "cta": "কথা বলুন",
+        "highlighted": false
+      }
+    ]
+  },
+  "consulting": {
+    "label": "AI Strategy Consulting",
+    "description": "আমরা আপনার ব্যবসা audit করি, AI কোথায় সময় বাঁচাতে বা অর্থ আনতে পারে তা খুঁজে বের করি, তারপর নির্দিষ্ট tool ও implementation plan সহ লিখিত roadmap দিই।",
+    "toggleBD": "🇧🇩 বাংলাদেশ (৳)",
+    "toggleIntl": "🌍 আন্তর্জাতিক ($)",
+    "tiers": [
+      {
+        "name": "AI Clarity Session",
+        "badge": null,
+        "priceBD": "৳২,৫০০",
+        "priceIntl": "$60",
+        "noteBD": "এককালীন · ৬০ মিনিট",
+        "noteIntl": "One-time · 60 minutes",
+        "description": "একটি focused ৬০ মিনিটের strategy session। যারা কোথা থেকে শুরু করবেন তা নিয়ে স্পষ্টতা চান তাদের জন্য।",
+        "features": [
+          "৬০ মিনিটের live video session",
+          "যা খুশি জিজ্ঞেস করুন — সৎ উত্তর পাবেন",
+          "আপনার পরিস্থিতি অনুযায়ী personalized",
+          "ভবিষ্যতের জন্য recorded",
+          "Session recording",
+          "৩টি prioritized AI recommendation",
+          "Tool shortlist with links"
+        ],
+        "cta": "Clarity Session বুক করুন",
+        "highlighted": false
+      },
+      {
+        "name": "Business AI Audit",
+        "badge": "সবচেয়ে জনপ্রিয়",
+        "priceBD": "৳১২,০০০",
+        "priceIntl": "$300",
+        "noteBD": "এককালীন · ৩–৫ দিনে delivery",
+        "noteIntl": "One-time · 3–5 day delivery",
+        "description": "আপনার পুরো ব্যবসার গভীর audit এবং ৩–৫ দিনে সম্পূর্ণ লিখিত AI roadmap delivery।",
+        "features": [
+          "৬০ মিনিটের discovery call",
+          "৬টি ব্যবসায়িক ক্ষেত্রে সম্পূর্ণ audit",
+          "ROI ও সহজ implementation অনুযায়ী prioritized",
+          "৩০ মিনিটের roadmap walkthrough call",
+          "সম্পূর্ণ লিখিত AI Roadmap (PDF)",
+          "কারণসহ tool recommendations",
+          "Implementation timeline ও ROI projections"
+        ],
+        "cta": "আমার AI Roadmap নিন",
+        "highlighted": true
+      },
+      {
+        "name": "AI Transformation Strategy",
+        "badge": null,
+        "priceBD": "৳৩৫,০০০",
+        "priceIntl": "$1,000",
+        "noteBD": "এককালীন · ১–২ সপ্তাহে delivery",
+        "noteIntl": "One-time · 1–2 week delivery",
+        "description": "প্রতিষ্ঠিত ব্যবসার জন্য যারা প্রতিটি বিভাগে ব্যাপক AI adoption strategy চান।",
+        "features": [
+          "একাধিক গভীর session",
+          "বিভাগভিত্তিক audit",
+          "Vendor comparison ও vetting",
+          "Implementation support উপলব্ধ",
+          "সারাক্ষণ priority response",
+          "Comprehensive strategy document",
+          "বিভাগভিত্তিক action plans"
+        ],
+        "cta": "Transformation শুরু করুন",
+        "highlighted": false
+      }
+    ]
+  },
+  "webDev": {
+    "label": "Web Development",
+    "description": "Next.js, Laravel ও React দিয়ে তৈরি custom website ও web application। সঠিক quote-এর জন্য আমাদের Web Dev page-এর calculator ব্যবহার করুন।",
+    "note": "💡 মূল্য এককালীন setup। জটিলতা ও feature অনুযায়ী চূড়ান্ত quote নির্ধারিত হয়। সঠিক estimate-এর জন্য আমাদের interactive calculator ব্যবহার করুন।",
+    "calculatorCta": "Pricing Calculator ব্যবহার করুন →",
+    "types": [
+      {
+        "name": "Landing Page",
+        "badge": "সেরা মূল্য",
+        "price": "৳৮K–১৫K",
+        "priceIntl": "$150–350",
+        "timeline": "৩–৫ দিন",
+        "features": [
+          "Conversion-optimised design",
+          "Lead capture ও WhatsApp CTA",
+          "Mobile-first",
+          "Facebook Pixel ready"
+        ]
+      },
+      {
+        "name": "Business Website",
+        "badge": null,
+        "price": "৳২০K–৪০K",
+        "priceIntl": "$450–900",
+        "timeline": "৭–১০ দিন",
+        "features": [
+          "৫–১৫টি page",
+          "Update-এর জন্য CMS",
+          "Contact forms",
+          "SEO ready"
+        ]
+      },
+      {
+        "name": "E-commerce (WordPress)",
+        "badge": "দ্রুত Launch",
+        "price": "৳১৫K–৩০K",
+        "priceIntl": "$350–700",
+        "timeline": "৫–৭ দিন",
+        "features": [
+          "WooCommerce setup",
+          "Payment gateway",
+          "Product management",
+          "Mobile-responsive"
+        ]
+      },
+      {
+        "name": "E-commerce (Custom)",
+        "badge": "জনপ্রিয়",
+        "price": "৳৪০K–৮০K",
+        "priceIntl": "$900–1,800",
+        "timeline": "২–৩ সপ্তাহ",
+        "features": [
+          "Scratch থেকে তৈরি",
+          "সম্পূর্ণ custom features",
+          "bKash ও SSLCommerz",
+          "Admin dashboard"
+        ]
+      },
+      {
+        "name": "Portfolio",
+        "badge": null,
+        "price": "৳১০K–২০K",
+        "priceIntl": "$230–450",
+        "timeline": "৩–৫ দিন",
+        "features": [
+          "Project gallery",
+          "About ও contact",
+          "আধুনিক design",
+          "Blog-ready"
+        ]
+      },
+      {
+        "name": "Custom Dashboard / SaaS",
+        "badge": null,
+        "price": "৳৫০K–১৫০K",
+        "priceIntl": "$1,100–3,500",
+        "timeline": "৩–৪ সপ্তাহ",
+        "features": [
+          "Role-based access",
+          "Real-time data",
+          "API integrations",
+          "Scalable architecture"
+        ]
+      }
+    ]
+  },
+  "marketplace": {
+    "label": "Marketplace",
+    "description": "Pre-built, deploy-করার জন্য প্রস্তুত products। Discovery call দরকার নেই — যা চান বেছে নিন, একবার দিন এবং আমরা ২৪ ঘণ্টায় deploy করব।",
+    "categories": [
+      {
+        "icon": "Bot",
+        "name": "AI Agents",
+        "items": "৬+ ready-made agent",
+        "priceFrom": "৳২৯৯+",
+        "highlight": "WhatsApp, Facebook, Website — ২৪ ঘণ্টায় deployed",
+        "cta": "AI Agents দেখুন",
+        "href": "/marketplace?tab=agents"
+      },
+      {
+        "icon": "Zap",
+        "name": "Automation Packs",
+        "items": "৪+ automation pack",
+        "priceFrom": "৳২৪৯+",
+        "highlight": "WhatsApp order flow, social posting, lead follow-up — ২৪ ঘণ্টায় live",
+        "cta": "Automation Packs দেখুন",
+        "href": "/marketplace?tab=automations"
+      },
+      {
+        "icon": "Globe",
+        "name": "Web Packages",
+        "items": "Ready-made web packages",
+        "priceFrom": "৳১০K+",
+        "highlight": "Landing page, business site, e-commerce — নির্দিষ্ট scope ও price",
+        "cta": "Web Packages দেখুন",
+        "href": "/marketplace?tab=websites"
+      }
+    ],
+    "browseCta": "সম্পূর্ণ Marketplace দেখুন",
+    "browseHref": "/marketplace"
+  },
+  "FAQ": {
+    "title": "Pricing প্রশ্ন",
+    "subtitle": "আমাদের মূল্য কাঠামো সম্পর্কে সরাসরি উত্তর।",
+    "items": [
+      {
+        "q": "সম্মত হওয়ার পরে কি দাম বদলায়?",
+        "a": "না। Discovery call-এ যে quote করা হয় সেটাই চূড়ান্ত। Scope উল্লেখযোগ্যভাবে পরিবর্তন না হলে আমরা revise করি না — এবং কোনো extra কাজ করার আগে সবসময় জানাই।"
+      },
+      {
+        "q": "Setup price ও monthly maintenance-এর পার্থক্য কী?",
+        "a": "Setup হলো আপনার solution তৈরি ও deploy করার এককালীন fee। Monthly maintenance ঐচ্ছিক — এতে hosting খরচ, minor update ও priority support অন্তর্ভুক্ত। যেকোনো সময় বাতিল করা যায়।"
+      },
+      {
+        "q": "কি free trial আছে?",
+        "a": "হ্যাঁ — AI Agent client-রা maintenance-এ প্রতিশ্রুতিবদ্ধ হওয়ার আগে ১–২ সপ্তাহের বিনামূল্যে trial পান। Consulting ও development project-এ trial নেই, কিন্তু সবসময় বিনামূল্যে ৩০ মিনিটের discovery call দিয়ে শুরু হয়।"
+      },
+      {
+        "q": "কিস্তিতে দেওয়া যাবে?",
+        "a": "বড় project-এ (৳২০,০০০-এর উপরে) আমরা সাধারণত ৫০% আগে এবং ৫০% delivery-তে নিই। Discovery call-এ কাস্টম ব্যবস্থা নিয়ে আলোচনা করা যায়।"
+      },
+      {
+        "q": "আন্তর্জাতিক client-রা কীভাবে দেবেন?",
+        "a": "আন্তর্জাতিক client-রা Wise বা PayPal-এ USD-এ দেন। বাংলাদেশি client-রা bKash, Nagad বা bank transfer-এ BDT-এ দেন।"
+      }
+    ]
+  },
+  "CTA": {
+    "badge": "শুরু করতে প্রস্তুত?",
+    "title": "কোন plan আপনার জন্য সঠিক বুঝতে পারছেন না?",
+    "subtitle": "বিনামূল্যে ৩০ মিনিটের discovery call বুক করুন। আমরা আপনার ব্যবসা বুঝব এবং ঠিক কী দরকার তা বলব — কোনো sales pressure নেই, কোনো commitment নেই।",
+    "primary": "বিনামূল্যে Discovery Call বুক করুন",
+    "secondary": "Marketplace দেখুন"
   }
 }

@@ -8,6 +8,8 @@ import { DevelopmentProcessSection } from "@/components/services/web-development
 import { PricingCalculatorSection } from "@/components/services/web-development/PricingCalculatorSection";
 import { WebDevFAQSection } from "@/components/services/web-development/WebDevFAQSection";
 import { WebDevSimpleCTA } from "@/components/services/web-development/WebDevSimpleCTA";
+import { WebsiteTypesShowcase2 } from "@/components/services/web-development/WebsiteTypesShowcase2";
+import { WebDevMarketplaceBanner1, WebDevMarketplaceBanner2 } from "@/components/services/web-development/webdev-marketplace-banners";
 
 export const metadata: Metadata = {
   title: "Full-Stack Web Development Services - MERN Stack Solutions",
@@ -20,12 +22,15 @@ export default function WebDevelopment() {
     <div className="min-h-screen bg-background dark:bg-[#0A0A0A] transition-colors duration-300">
 
       <WebDevHero />
-      <WebsiteTypesShowcase />
+      {/* <WebsiteTypesShowcase /> */}
+      <WebsiteTypesShowcase2 />
       <CustomVsTemplate />
       <TechStackSection />
       <WhatsIncludedSection />
       <DevelopmentProcessSection />
+      <WebDevMarketplaceBanner1 />
       <PricingCalculatorSection />
+      <WebDevMarketplaceBanner2 />
       <WebDevFAQSection />
       <WebDevSimpleCTA />
     </div>

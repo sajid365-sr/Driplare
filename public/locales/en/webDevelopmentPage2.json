@@ -1,0 +1,140 @@
+    {
+        "websiteTypes": {
+            "badge": "What We Build",
+            "title": "Every Kind of Website, Done Right",
+            "subtitle": "From a quick landing page to a full SaaS platform — here's a look at the types of websites we deliver.",
+            "types": [
+                {
+                    "icon": "ShoppingCart",
+                    "title": "E-commerce (Custom)",
+                    "badge": "Popular",
+                    "hook": "Full-featured online store built from scratch with complete control over every feature.",
+                    "highlights": [
+                        "Custom shopping cart & checkout",
+                        "bKash, Nagad & SSLCommerz payments",
+                        "Product management dashboard",
+                        "Order tracking & notifications",
+                        "SEO-optimised product pages"
+                    ]
+                },
+                {
+                    "icon": "Store",
+                    "title": "E-commerce (WordPress)",
+                    "badge": "Quick Launch",
+                    "hook": "Quick-launch online store using WooCommerce — perfect for getting started fast.",
+                    "highlights": [
+                        "WooCommerce setup & customisation",
+                        "Payment gateway integration",
+                        "Product import & setup",
+                        "Inventory management",
+                        "Mobile-responsive design"
+                    ]
+                },
+                {
+                    "icon": "Briefcase",
+                    "title": "Business Website",
+                    "badge": null,
+                    "hook": "Professional multi-page site that builds trust and converts visitors into enquiries.",
+                    "highlights": [
+                        "5–15 pages fully designed",
+                        "Contact forms & lead capture",
+                        "Google Maps integration",
+                        "Fast loading & SEO ready",
+                        "CMS for easy content updates"
+                    ]
+                },
+                {
+                    "icon": "Zap",
+                    "title": "Landing Page",
+                    "badge": "Best Value",
+                    "hook": "Single-purpose, high-converting page built to capture leads or drive one key action.",
+                    "highlights": [
+                        "Conversion-optimised layout",
+                        "Lead capture form",
+                        "WhatsApp / call CTA",
+                        "Mobile-first approach",
+                        "Fast turnaround"
+                    ]
+                },
+                {
+                    "icon": "User",
+                    "title": "Portfolio Website",
+                    "badge": null,
+                    "hook": "Showcase your work with a clean, memorable site that gets you noticed.",
+                    "highlights": [
+                        "Project gallery & case studies",
+                        "About & contact sections",
+                        "Skills & testimonials",
+                        "Clean, modern design",
+                        "Blog-ready (optional)"
+                    ]
+                },
+                {
+                    "icon": "LayoutDashboard",
+                    "title": "Custom Dashboard / SaaS",
+                    "badge": null,
+                    "hook": "Bespoke web application or internal tool built to your exact specifications.",
+                    "highlights": [
+                        "Role-based access control",
+                        "Real-time data & analytics",
+                        "API & third-party integrations",
+                        "Scalable architecture",
+                        "Admin & user panels"
+                    ]
+                },
+                {
+                    "icon": "FileText",
+                    "title": "Blog / Content Site",
+                    "badge": null,
+                    "hook": "Content-first website designed to grow your audience and establish authority.",
+                    "highlights": [
+                        "Category & tag system",
+                        "Author profiles",
+                        "Email newsletter integration",
+                        "Social sharing",
+                        "SEO-structured markup"
+                    ]
+                },
+                {
+                    "icon": "Calendar",
+                    "title": "Booking / Appointment Site",
+                    "badge": null,
+                    "hook": "Appointment system that lets clients self-schedule around the clock.",
+                    "highlights": [
+                        "Online booking calendar",
+                        "Automated confirmation emails",
+                        "Service & staff management",
+                        "Payment collection (optional)",
+                        "WhatsApp reminders"
+                    ]
+                }
+            ],
+            "bannerLabel": "Ready-Made Web Packages",
+            "bannerTitle": "Want a website without a custom build?",
+            "bannerSubtitle": "Browse our pre-configured web packages in the Marketplace — fixed scope, clear pricing, faster delivery.",
+            "bannerCta": "Browse Web Packages",
+            "bannerCtaSecondary": "Book Discovery Call"
+        },
+        "marketplaceBanner1": {
+            "label": "Ready-Made Web Packages",
+            "text": "Don't need a fully custom site?",
+            "subtext": "Browse pre-built web packages — fixed scope, clear pricing, faster delivery.",
+            "cta": "Browse Web Packages"
+        },
+        "marketplaceBanner2": {
+            "eyebrow": "Skip the custom build",
+            "title": "Need a website fast?",
+            "titleAccent": "Pre-built packages from ৳10K",
+            "subtitle": "Our Marketplace has ready-made web packages for landing pages, business sites, e-commerce stores, and portfolios — scoped, priced, and ready to launch without a discovery call.",
+            "stat1Value": "7 days",
+            "stat1Label": "avg. delivery",
+            "stat2Value": "8+",
+            "stat2Label": "package types",
+            "stat3Value": "৳10K+",
+            "stat3Label": "starting from",
+            "cta": "Browse Web Packages",
+            "ctaSecondary": "book a free discovery call",
+            "ctaNote": "Or",
+            "ctaNoteEnd": "for a fully custom site."
+        }
+    }

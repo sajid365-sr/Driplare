@@ -1,339 +1,401 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState } from "react";
-import { Check, ArrowRight, Star, Zap, Crown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
+import {
+    Bot, Zap, Globe, Star, Crown, Check, ArrowRight,
+    ExternalLink, Calculator, CheckCircle2,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { GridLayer, GlowBlob, DarkGridBoost, BRAND } from "@/components/effects/bg-effects";
 
+// ─── shared tier card ─────────────────────────────────────────────────────────
+type TierCardProps = {
+    name: string;
+    badge?: string | null;
+    price: string;
+    priceNote: string;
+    description: string;
+    features: string[];
+    cta: string;
+    highlighted: boolean;
+    index: number;
+};
+
+function TierCard({
+    name, badge, price, priceNote, description,
+    features, cta, highlighted, index,
+}: TierCardProps) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.08, duration: 0.4 }}
+            className="relative flex flex-col h-full"
+        >
+            {highlighted && (
+                <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary via-secondary to-accent opacity-70 -z-10 blur-[2px]" />
+            )}
+            <div
+                className={`
+          flex flex-col flex-1 p-7 rounded-3xl border-2 h-full
+          ${highlighted
+                        ? "bg-gradient-to-br from-primary/[0.08] via-secondary/[0.05] to-accent/[0.06] border-primary/50 shadow-xl shadow-primary/10"
+                        : "bg-card border-border hover:border-primary/30 transition-colors"}
+        `}
+            >
+                {/* Badge */}
+                {badge && (
+                    <div className="inline-flex items-center gap-1.5 bg-accent/15 border border-accent/25 rounded-full px-3 py-1 mb-4 self-start">
+                        <Star className="w-3 h-3 text-accent" />
+                        <span className="text-xs font-black text-accent uppercase tracking-wide">{badge}</span>
+                    </div>
+                )}
+
+                {/* Name + price */}
+                <h3 className="text-xl font-black text-foreground mb-1">{name}</h3>
+                <div className="mb-1">
+                    <span className="text-3xl font-black text-primary">{price}</span>
+                </div>
+                <p className="text-xs text-muted-foreground mb-4">{priceNote}</p>
+
+                {/* Description */}
+                <p className="text-sm text-muted-foreground leading-relaxed mb-6">{description}</p>
+
+                {/* Features */}
+                <ul className="space-y-2.5 mb-8 flex-1">
+                    {features.map((f, i) => (
+                        <li key={i} className="flex items-start gap-2.5">
+                            <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                            <span className="text-sm text-foreground">{f}</span>
+                        </li>
+                    ))}
+                </ul>
+
+                {/* CTA */}
+                <Button
+                    size="lg"
+                    className={`w-full font-bold group ${highlighted
+                        ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                        : "bg-muted hover:bg-muted/80 text-foreground border border-border"
+                        }`}
+                    asChild
+                >
+                    <Link href="/contact" className="flex items-center justify-center gap-2">
+                        {cta}
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                </Button>
+            </div>
+        </motion.div>
+    );
+}
+
+// ─── BD / International toggle ────────────────────────────────────────────────
+function RegionToggle({
+    isIntl, setIsIntl, labelBD, labelIntl,
+}: { isIntl: boolean; setIsIntl: (v: boolean) => void; labelBD: string; labelIntl: string }) {
+    return (
+        <div className="flex items-center justify-center mb-10">
+            <div className="inline-flex items-center bg-muted rounded-2xl p-1 border border-border">
+                {[{ label: labelBD, val: false }, { label: labelIntl, val: true }].map(({ label, val }) => (
+                    <button
+                        key={String(val)}
+                        onClick={() => setIsIntl(val)}
+                        className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${isIntl === val
+                            ? "bg-primary text-primary-foreground shadow-sm"
+                            : "text-muted-foreground hover:text-foreground"
+                            }`}
+                    >
+                        {label}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+// ─── main component ───────────────────────────────────────────────────────────
 export function TabbedPricingSection() {
     const { t } = useTranslation("pricingPage");
+    const [agentIntl, setAgentIntl] = useState(false);
+    const [consultingIntl, setConsultingIntl] = useState(false);
 
-    // Bangladesh Tiers
-    const bangladeshTiers = [
-        {
-            name: t("pricing.bangladesh.starter.name"),
-            price: t("pricing.bangladesh.starter.price"),
-            setup: t("pricing.bangladesh.starter.setup"),
-            monthly: t("pricing.bangladesh.starter.monthly"),
-            description: t("pricing.bangladesh.starter.description"),
-            features: t("pricing.bangladesh.starter.features", {
-                returnObjects: true,
-            }) as string[],
-            cta: t("pricing.bangladesh.starter.cta"),
-            popular: false,
-            icon: Star,
-        },
-        {
-            name: t("pricing.bangladesh.pro.name"),
-            price: t("pricing.bangladesh.pro.price"),
-            setup: t("pricing.bangladesh.pro.setup"),
-            monthly: t("pricing.bangladesh.pro.monthly"),
-            description: t("pricing.bangladesh.pro.description"),
-            features: t("pricing.bangladesh.pro.features", {
-                returnObjects: true,
-            }) as string[],
-            cta: t("pricing.bangladesh.pro.cta"),
-            popular: true,
-            icon: Zap,
-        },
-        {
-            name: t("pricing.bangladesh.custom.name"),
-            price: t("pricing.bangladesh.custom.price"),
-            setup: t("pricing.bangladesh.custom.setup"),
-            monthly: t("pricing.bangladesh.custom.monthly"),
-            description: t("pricing.bangladesh.custom.description"),
-            features: t("pricing.bangladesh.custom.features", {
-                returnObjects: true,
-            }) as string[],
-            cta: t("pricing.bangladesh.custom.cta"),
-            popular: false,
-            icon: Crown,
-        },
-    ];
+    // ── AI Agents data ──
+    type AgentTier = {
+        name: string; badge?: string | null;
+        priceBD: string; priceIntl: string;
+        noteBD: string; noteIntl: string;
+        description: string; features: string[]; cta: string; highlighted: boolean;
+    };
+    const agentTiers = t("aiAgents.tiers", { returnObjects: true }) as AgentTier[];
 
-    // International Tiers
-    const internationalTiers = [
-        {
-            name: t("pricing.international.starter.name"),
-            price: t("pricing.international.starter.price"),
-            period: t("pricing.international.starter.period"),
-            description: t("pricing.international.starter.description"),
-            features: t("pricing.international.starter.features", {
-                returnObjects: true,
-            }) as string[],
-            cta: t("pricing.international.starter.cta"),
-            popular: false,
-            icon: Star,
-        },
-        {
-            name: t("pricing.international.pro.name"),
-            price: t("pricing.international.pro.price"),
-            period: t("pricing.international.pro.period"),
-            description: t("pricing.international.pro.description"),
-            features: t("pricing.international.pro.features", {
-                returnObjects: true,
-            }) as string[],
-            cta: t("pricing.international.pro.cta"),
-            popular: true,
-            icon: Zap,
-        },
-        {
-            name: t("pricing.international.enterprise.name"),
-            price: t("pricing.international.enterprise.price"),
-            period: t("pricing.international.enterprise.period"),
-            description: t("pricing.international.enterprise.description"),
-            features: t("pricing.international.enterprise.features", {
-                returnObjects: true,
-            }) as string[],
-            cta: t("pricing.international.enterprise.cta"),
-            popular: false,
-            icon: Crown,
-        },
-    ];
+    // ── Automation data ──
+    type AutoTier = {
+        name: string; badge?: string | null; price: string; priceNote: string;
+        description: string; features: string[]; cta: string; highlighted: boolean;
+    };
+    const autoTiers = t("automation.tiers", { returnObjects: true }) as AutoTier[];
+
+    // ── Consulting data ──
+    type ConsultTier = {
+        name: string; badge?: string | null;
+        priceBD: string; priceIntl: string;
+        noteBD: string; noteIntl: string;
+        description: string; features: string[]; cta: string; highlighted: boolean;
+    };
+    const consultTiers = t("consulting.tiers", { returnObjects: true }) as ConsultTier[];
+
+    // ── Web Dev data ──
+    type WebType = {
+        name: string; badge?: string | null; price: string; priceIntl: string;
+        timeline: string; features: string[];
+    };
+    const webTypes = t("webDev.types", { returnObjects: true }) as WebType[];
+
+    // ── Marketplace data ──
+    type MarketCat = {
+        icon: string; name: string; items: string; priceFrom: string;
+        highlight: string; cta: string; href: string;
+    };
+    const marketCats = t("marketplace.categories", { returnObjects: true }) as MarketCat[];
+
+    const MARKET_ICONS: Record<string, React.ElementType> = { Bot, Zap, Globe };
+
+    const TAB_KEYS = ["aiAgents", "automation", "consulting", "webDev", "marketplace"] as const;
 
     return (
-        <section className="py-20 bg-background">
-            <div className="container mx-auto px-4 md:px-6">
-                {/* Header */}
-                <motion.div
-                    className="text-center mb-12 max-w-3xl mx-auto"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                >
-                    <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4">
-                        {t("pricing.sectionTitle")}
-                    </h2>
-                    <p className="text-lg text-muted-foreground">
-                        {t("pricing.sectionSubtitle")}
-                    </p>
-                </motion.div>
+        <section className="py-20 bg-background relative overflow-hidden" id="pricing-tabs">
+            {/* Background */}
+            <div className="absolute inset-0 pointer-events-none">
+                <GridLayer color={BRAND.violet} opacity={0.05} cellSize={44} />
+                <GlowBlob color={BRAND.violet} position="top-left" size={500} opacity={0.05} duration={20} />
+                <GlowBlob color={BRAND.blue} position="bottom-right" size={450} opacity={0.04} duration={25} delay={5} />
+            </div>
 
-                {/* Tabs */}
-                <Tabs defaultValue="bangladesh" className="max-w-7xl mx-auto">
-                    <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-12 bg-muted p-1 rounded-2xl">
-                        <TabsTrigger
-                            value="bangladesh"
-                            className="rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold"
-                        >
-                            {t("pricing.tabs.bangladesh")}
-                        </TabsTrigger>
-                        <TabsTrigger
-                            value="international"
-                            className="rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold"
-                        >
-                            {t("pricing.tabs.international")}
-                        </TabsTrigger>
-                        <TabsTrigger
-                            value="enterprise"
-                            className="rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold"
-                        >
-                            {t("pricing.tabs.enterprise")}
-                        </TabsTrigger>
+            <div className="container mx-auto px-4 md:px-6 relative z-10">
+
+                {/* ── Tabs ── */}
+                <Tabs defaultValue="aiAgents" className="max-w-7xl mx-auto">
+                    <TabsList className="flex flex-wrap w-full max-w-2xl mx-auto gap-1 mb-14 bg-muted p-1.5 rounded-2xl h-auto">
+                        {TAB_KEYS.map((key) => (
+                            <TabsTrigger
+                                key={key}
+                                value={key}
+                                className="flex-1 min-w-[80px] rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-sm py-2.5 transition-all"
+                            >
+                                {t(`tabs.${key}`)}
+                            </TabsTrigger>
+                        ))}
                     </TabsList>
 
-                    {/* Bangladesh Tab */}
-                    <TabsContent value="bangladesh">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                            {bangladeshTiers.map((tier, index) => (
-                                <motion.div
-                                    key={tier.name}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className={`relative flex flex-col p-8 rounded-3xl border-2 transition-all duration-300 ${tier.popular
-                                        ? "bg-card border-primary shadow-xl scale-105 z-10"
-                                        : "bg-card/50 border-border hover:border-primary/50"
-                                        }`}
-                                >
-                                    {tier.popular && (
-                                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-xs font-bold uppercase">
-                                            {t("pricing.mostPopular")}
-                                        </div>
-                                    )}
+                    {/* ══════════════════════ AI AGENTS TAB ══════════════════════ */}
+                    <TabsContent value="aiAgents">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+                            <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-8">
+                                {t("aiAgents.description")}
+                            </p>
+                            <RegionToggle
+                                isIntl={agentIntl} setIsIntl={setAgentIntl}
+                                labelBD={t("aiAgents.toggleBD")} labelIntl={t("aiAgents.toggleIntl")}
+                            />
+                            <div className="grid md:grid-cols-3 gap-6">
+                                {agentTiers.map((tier, i) => (
+                                    <TierCard
+                                        key={tier.name}
+                                        index={i}
+                                        name={tier.name}
+                                        badge={tier.badge}
+                                        price={agentIntl ? tier.priceIntl : tier.priceBD}
+                                        priceNote={agentIntl ? tier.noteIntl : tier.noteBD}
+                                        description={tier.description}
+                                        features={tier.features}
+                                        cta={tier.cta}
+                                        highlighted={tier.highlighted}
+                                    />
+                                ))}
+                            </div>
+                        </motion.div>
+                    </TabsContent>
 
-                                    <div className="mb-6">
-                                        <div className="flex items-center gap-3 mb-3">
-                                            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                                                <tier.icon className="w-6 h-6 text-primary" />
-                                            </div>
-                                            <h3 className="text-2xl font-black text-foreground">
-                                                {tier.name}
-                                            </h3>
-                                        </div>
-                                        <p className="text-sm text-muted-foreground leading-relaxed">
-                                            {tier.description}
-                                        </p>
-                                    </div>
+                    {/* ══════════════════════ AUTOMATION TAB ══════════════════════ */}
+                    <TabsContent value="automation">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+                            <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-4">
+                                {t("automation.description")}
+                            </p>
+                            <div className="flex justify-center mb-10">
+                                <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-4 py-2 text-xs text-amber-700 dark:text-amber-400 font-medium">
+                                    {t("automation.note")}
+                                </div>
+                            </div>
+                            <div className="grid md:grid-cols-3 gap-6">
+                                {autoTiers.map((tier, i) => (
+                                    <TierCard
+                                        key={tier.name}
+                                        index={i}
+                                        name={tier.name}
+                                        badge={tier.badge}
+                                        price={tier.price}
+                                        priceNote={tier.priceNote}
+                                        description={tier.description}
+                                        features={tier.features}
+                                        cta={tier.cta}
+                                        highlighted={tier.highlighted}
+                                    />
+                                ))}
+                            </div>
+                        </motion.div>
+                    </TabsContent>
 
-                                    <div className="mb-6">
-                                        <div className="bg-muted/50 rounded-2xl p-4 space-y-3">
+                    {/* ══════════════════════ CONSULTING TAB ══════════════════════ */}
+                    <TabsContent value="consulting">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+                            <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-8">
+                                {t("consulting.description")}
+                            </p>
+                            <RegionToggle
+                                isIntl={consultingIntl} setIsIntl={setConsultingIntl}
+                                labelBD={t("consulting.toggleBD")} labelIntl={t("consulting.toggleIntl")}
+                            />
+                            <div className="grid md:grid-cols-3 gap-6">
+                                {consultTiers.map((tier, i) => (
+                                    <TierCard
+                                        key={tier.name}
+                                        index={i}
+                                        name={tier.name}
+                                        badge={tier.badge}
+                                        price={consultingIntl ? tier.priceIntl : tier.priceBD}
+                                        priceNote={consultingIntl ? tier.noteIntl : tier.noteBD}
+                                        description={tier.description}
+                                        features={tier.features}
+                                        cta={tier.cta}
+                                        highlighted={tier.highlighted}
+                                    />
+                                ))}
+                            </div>
+                        </motion.div>
+                    </TabsContent>
+
+                    {/* ══════════════════════ WEB DEV TAB ══════════════════════ */}
+                    <TabsContent value="webDev">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+                            <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-4">
+                                {t("webDev.description")}
+                            </p>
+                            <div className="flex justify-center mb-10">
+                                <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-4 py-2 text-xs text-amber-700 dark:text-amber-400 font-medium">
+                                    {t("webDev.note")}
+                                </div>
+                            </div>
+
+                            {/* Web type grid */}
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+                                {webTypes.map((type, i) => (
+                                    <motion.div
+                                        key={type.name}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.07, duration: 0.38 }}
+                                        className="bg-card border border-border rounded-3xl p-5 hover:border-primary/30 hover:shadow-lg transition-all"
+                                    >
+                                        <div className="flex items-start justify-between gap-2 mb-3">
                                             <div>
-                                                <div className="text-sm text-muted-foreground mb-1">
-                                                    {t("pricing.setupFee")}
-                                                </div>
-                                                <div className="text-3xl font-black text-primary">
-                                                    {tier.setup}
-                                                </div>
+                                                {type.badge && (
+                                                    <span className="text-[9px] font-black uppercase tracking-widest bg-accent/10 text-accent border border-accent/20 rounded-full px-2 py-0.5 mb-1.5 inline-block">
+                                                        {type.badge}
+                                                    </span>
+                                                )}
+                                                <h3 className="text-sm font-black text-foreground">{type.name}</h3>
                                             </div>
-                                            <div className="border-t border-border pt-3">
-                                                <div className="text-sm text-muted-foreground mb-1">
-                                                    {t("pricing.monthlyFee")}
-                                                </div>
-                                                <div className="text-2xl font-bold text-foreground">
-                                                    {tier.monthly}
-                                                </div>
+                                            <div className="text-right flex-shrink-0">
+                                                <div className="text-base font-black text-primary">{type.price}</div>
+                                                <div className="text-[10px] text-muted-foreground">{type.priceIntl}</div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div className="flex items-center gap-1.5 mb-3 text-xs text-muted-foreground">
+                                            <span>⏱</span>
+                                            <span>{type.timeline}</span>
+                                        </div>
+                                        <ul className="space-y-1.5">
+                                            {type.features.map((f) => (
+                                                <li key={f} className="flex items-center gap-2 text-[11px] text-foreground/80">
+                                                    <CheckCircle2 className="w-3 h-3 text-accent flex-shrink-0" />
+                                                    {f}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </motion.div>
+                                ))}
+                            </div>
 
-                                    <ul className="space-y-3 mb-8 flex-grow">
-                                        {tier.features.map((feature, i) => (
-                                            <li key={i} className="flex items-start gap-3">
-                                                <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                                                <span className="text-sm text-foreground">{feature}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    <Button
-                                        className={`w-full py-6 rounded-2xl font-bold ${tier.popular
-                                            ? "bg-primary hover:bg-primary/90 text-primary-foreground"
-                                            : "bg-accent hover:bg-accent/90 text-accent-foreground"
-                                            }`}
-                                        asChild
-                                    >
-                                        <a href="/contact" className="flex items-center justify-center gap-2">
-                                            {tier.cta}
-                                            <ArrowRight className="w-5 h-5" />
-                                        </a>
-                                    </Button>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </TabsContent>
-
-                    {/* International Tab */}
-                    <TabsContent value="international">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                            {internationalTiers.map((tier, index) => (
-                                <motion.div
-                                    key={tier.name}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className={`relative flex flex-col p-8 rounded-3xl border-2 transition-all duration-300 ${tier.popular
-                                        ? "bg-card border-primary shadow-xl scale-105 z-10"
-                                        : "bg-card/50 border-border hover:border-primary/50"
-                                        }`}
+                            {/* Calculator CTA */}
+                            <div className="text-center">
+                                <Link
+                                    href="/solutions/web-development#calculator"
+                                    className="inline-flex items-center gap-2 bg-secondary/10 hover:bg-secondary/20 border border-secondary/20 text-secondary dark:text-secondary font-bold text-sm rounded-2xl px-6 py-3 transition-all group"
                                 >
-                                    {tier.popular && (
-                                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-xs font-bold uppercase">
-                                            {t("pricing.mostPopular")}
-                                        </div>
-                                    )}
-
-                                    <div className="mb-6">
-                                        <div className="flex items-center gap-3 mb-3">
-                                            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                                                <tier.icon className="w-6 h-6 text-primary" />
-                                            </div>
-                                            <h3 className="text-2xl font-black text-foreground">
-                                                {tier.name}
-                                            </h3>
-                                        </div>
-                                        <p className="text-sm text-muted-foreground leading-relaxed">
-                                            {tier.description}
-                                        </p>
-                                    </div>
-
-                                    <div className="mb-6">
-                                        <div className="flex items-baseline gap-2">
-                                            <span className="text-4xl font-black text-primary">
-                                                {tier.price}
-                                            </span>
-                                            <span className="text-sm text-muted-foreground">
-                                                / {tier.period}
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <ul className="space-y-3 mb-8 flex-grow">
-                                        {tier.features.map((feature, i) => (
-                                            <li key={i} className="flex items-start gap-3">
-                                                <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                                                <span className="text-sm text-foreground">{feature}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    <Button
-                                        className={`w-full py-6 rounded-2xl font-bold ${tier.popular
-                                            ? "bg-primary hover:bg-primary/90 text-primary-foreground"
-                                            : "bg-accent hover:bg-accent/90 text-accent-foreground"
-                                            }`}
-                                        asChild
-                                    >
-                                        <a href="/contact" className="flex items-center justify-center gap-2">
-                                            {tier.cta}
-                                            <ArrowRight className="w-5 h-5" />
-                                        </a>
-                                    </Button>
-                                </motion.div>
-                            ))}
-                        </div>
+                                    <Calculator className="w-4 h-4" />
+                                    {t("webDev.calculatorCta")}
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                                </Link>
+                            </div>
+                        </motion.div>
                     </TabsContent>
 
-                    {/* Enterprise Tab */}
-                    <TabsContent value="enterprise">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="max-w-4xl mx-auto"
-                        >
-                            <div className="bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 border-2 border-primary/30 rounded-3xl p-12 text-center">
-                                <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto mb-6">
-                                    <Crown className="w-8 h-8 text-primary" />
-                                </div>
+                    {/* ══════════════════════ MARKETPLACE TAB ══════════════════════ */}
+                    <TabsContent value="marketplace">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+                            <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12">
+                                {t("marketplace.description")}
+                            </p>
 
-                                <h3 className="text-3xl md:text-4xl font-black text-foreground mb-4">
-                                    {t("pricing.enterprise.title")}
-                                </h3>
-                                <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                                    {t("pricing.enterprise.description")}
-                                </p>
-
-                                <div className="grid md:grid-cols-2 gap-6 mb-8">
-                                    {(t("pricing.enterprise.features", {
-                                        returnObjects: true,
-                                    }) as string[]).map((feature, i) => (
-                                        <div
-                                            key={i}
-                                            className="flex items-center gap-3 bg-card/50 rounded-2xl p-4 border border-border"
+                            <div className="grid md:grid-cols-3 gap-6 mb-10 max-w-5xl mx-auto">
+                                {marketCats.map((cat, i) => {
+                                    const Icon = MARKET_ICONS[cat.icon] ?? Zap;
+                                    return (
+                                        <motion.div
+                                            key={cat.name}
+                                            initial={{ opacity: 0, y: 24 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: i * 0.1, duration: 0.4 }}
+                                            className="bg-card border-2 border-border rounded-3xl p-7 hover:border-primary/40 hover:shadow-xl transition-all group flex flex-col gap-4"
                                         >
-                                            <Check className="w-5 h-5 text-accent flex-shrink-0" />
-                                            <span className="text-sm font-medium text-foreground">
-                                                {feature}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
+                                            <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+                                                <Icon className="w-6 h-6 text-primary" />
+                                            </div>
+                                            <div>
+                                                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-0.5">{cat.items}</p>
+                                                <h3 className="text-xl font-black text-foreground">{cat.name}</h3>
+                                                <div className="text-2xl font-black text-primary mt-1">{cat.priceFrom}</div>
+                                            </div>
+                                            <p className="text-sm text-muted-foreground leading-relaxed flex-1">{cat.highlight}</p>
+                                            <Link
+                                                href={cat.href}
+                                                className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-sm rounded-xl px-5 py-2.5 transition-all group/btn w-full justify-center"
+                                            >
+                                                {cat.cta}
+                                                <ExternalLink className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
+                                            </Link>
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
 
-                                <Button
-                                    size="lg"
-                                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-12"
-                                    asChild
+                            <div className="text-center">
+                                <Link
+                                    href={t("marketplace.browseHref")}
+                                    className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-semibold text-sm transition-colors group"
                                 >
-                                    <a href="/contact" className="flex items-center gap-2">
-                                        {t("pricing.enterprise.cta")}
-                                        <ArrowRight className="w-5 h-5" />
-                                    </a>
-                                </Button>
+                                    {t("marketplace.browseCta")}
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                                </Link>
                             </div>
                         </motion.div>
                     </TabsContent>
