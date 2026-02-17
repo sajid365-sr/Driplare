@@ -18,39 +18,42 @@
     "technicalConsulting": "Technical Consulting"
   },
   "footer": {
-    "tagline": "Architecting Autonomy",
-    "status": "SYSTEM_STATUS: OPERATIONAL",
-    "lastSync": "LST_SYNC",
-    "initiate": "Initiate Project",
-    "rights": "DRIPLARE_LABS // INFRA_VERIFIED",
-    "architectedBy": "Architected_By",
-    "sections": {
-      "ecosystem": "ECOSYSTEM",
-      "intelligence": "INTELLIGENCE",
-      "identity": "IDENTITY",
-      "connect": "CONNECT"
+    "tagline": "We build AI systems that work while you sleep — so you can focus on growing your business.",
+    "cta": {
+      "headline": "Currently taking on new clients",
+      "sub": "Free 30-min discovery call. No commitment, no pressure — just clarity on what AI can do for you.",
+      "primary": "Book Discovery Call"
     },
-    "subtitles": {
-      "services": "(SERVICES)",
-      "resources": "(RESOURCES)",
-      "driplare": "(DRIPLARE)",
-      "socials": "(SOCIALS)"
+    "newsletter": {
+      "label": "Newsletter",
+      "description": "AI tips, automation ideas, and Driplare updates — straight to your inbox.",
+      "placeholder": "your@email.com",
+      "success": "You're in! We'll be in touch.",
+      "error": "Something went wrong. Please try again."
+    },
+    "sections": {
+      "services": "Services",
+      "resources": "Resources",
+      "company": "Company",
+      "connect": "Connect"
     },
     "links": {
       "aiAgents": "Custom AI Agents",
       "workflow": "Workflow Automation",
-      "mern": "MERN Infrastructure",
-      "data": "Data Monitoring",
-      "consulting": "Technical Consulting",
-      "results": "Engineered Results",
-      "insights": "Intelligence Hub",
-      "docs": "System Documentation",
-      "security": "FAQ & Security",
-      "about": "About the Architecture",
-      "methodology": "Our Methodology",
-      "contact": "Contact the Architect",
-      "strategy": "Book a Strategy Call"
-    }
+      "webDev": "Web Development",
+      "consulting": "AI Consulting",
+      "marketplace": "Marketplace",
+      "caseStudies": "Case Studies",
+      "insights": "Insights",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "about": "About Us",
+      "contact": "Contact",
+      "strategy": "Book Strategy Call",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "builtWith": "Built with ♥ in Bangladesh"
   },
   "services": {
     "consulting": {
@@ -77,31 +80,19 @@
             "title": "AI Feasibility & Roadmap",
             "focus": "Investment Strategy",
             "desc": "Not every problem needs an AI agent. We audit your workflows to identify where AI will provide the highest ROI.",
-            "stats": [
-              "ROI Forecast",
-              "Feasibility Score",
-              "12mo Roadmap"
-            ]
+            "stats": ["ROI Forecast", "Feasibility Score", "12mo Roadmap"]
           },
           "stack": {
             "title": "Tech Stack Optimization",
             "focus": "Technical Efficiency",
             "desc": "Is your current stack holding you back? We analyze your infrastructure to eliminate redundancies and optimize performance.",
-            "stats": [
-              "Debt Analysis",
-              "Speed Optimization",
-              "Redundancy Kill"
-            ]
+            "stats": ["Debt Analysis", "Speed Optimization", "Redundancy Kill"]
           },
           "automation": {
             "title": "Automation Architecture",
             "focus": "System Scalability",
             "desc": "We architect how your CRM, ERP, and AI systems communicate, ensuring 100% data integrity as you scale.",
-            "stats": [
-              "Integrity Sync",
-              "API Mapping",
-              "Scale Validation"
-            ]
+            "stats": ["Integrity Sync", "API Mapping", "Scale Validation"]
           }
         }
       },
@@ -168,11 +159,7 @@
         "title_end": "of Growth.",
         "desc": "Stop guessing your technical roadmap. Get a second opinion from architects who build for scale.",
         "btn": "Schedule Architecture Call",
-        "tags": [
-          "SYSTEMS_MAPPING",
-          "DEBT_ELIMINATION",
-          "AI_FEASIBILITY"
-        ]
+        "tags": ["SYSTEMS_MAPPING", "DEBT_ELIMINATION", "AI_FEASIBILITY"]
       }
     }
   },

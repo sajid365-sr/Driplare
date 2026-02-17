@@ -316,6 +316,36 @@
     "additionalInfo": "Need automation, custom dashboards, or data scraping?",
     "viewAllPricing": "View all pricing options"
   },
+  "homePricingTeaser": {
+    "badge": "Transparent Pricing",
+    "title": "Clear Pricing for Every Service",
+    "subtitle": "No hidden fees. No surprises. Every service starts with a free discovery call.",
+    "anchors": [
+      {
+        "service": "AI Agents",
+        "from": "৳5,000",
+        "note": "One-time setup · optional monthly maintenance"
+      },
+      {
+        "service": "Automation",
+        "from": "৳8,000",
+        "note": "One-time setup · scales with complexity"
+      },
+      {
+        "service": "AI Consulting",
+        "from": "৳2,500",
+        "note": "One-time · 60-min clarity session"
+      },
+      {
+        "service": "Web Development",
+        "from": "৳8,000",
+        "note": "One-time · landing pages to full apps"
+      }
+    ],
+    "cta": "See Full Pricing",
+    "ctaSecondary": "Browse Marketplace",
+    "trustNote": "Free discovery call before any commitment. Fixed price agreed upfront — no surprises."
+  },
   "Faq": {
     "badge": "Got Questions?",
     "title": "Common Questions Answered",

@@ -123,11 +123,7 @@
     "promise": {
       "title": "এটাই। সত্যিই।",
       "subtitle": "কোন মাসিক ফি নেই। জটিল সেটআপ নেই। শুধু একবার পেমেন্ট আর আপনি শেষ।",
-      "features": [
-        "৪৮ ঘন্টায় সেটআপ",
-        "একবার পেমেন্ট",
-        "টেক জ্ঞান লাগবে না"
-      ]
+      "features": ["৪৮ ঘন্টায় সেটআপ", "একবার পেমেন্ট", "টেক জ্ঞান লাগবে না"]
     },
     "cta": "এখনই শুরু করুন",
     "trustBadge": "১০০+ ব্যবসা ইতিমধ্যে এআই ব্যবহার করে বেশি বিক্রয় করছে"
@@ -315,6 +311,36 @@
     ],
     "additionalInfo": "Automation, custom dashboards বা data scraping প্রয়োজন?",
     "viewAllPricing": "সব pricing অপশন দেখুন"
+  },
+  "homePricingTeaser": {
+    "badge": "স্বচ্ছ মূল্য",
+    "title": "প্রতিটি সেবার স্পষ্ট মূল্য",
+    "subtitle": "কোনো লুকানো চার্জ নেই। কোনো চমক নেই। প্রতিটি সেবা বিনামূল্যে discovery call দিয়ে শুরু হয়।",
+    "anchors": [
+      {
+        "service": "AI Agents",
+        "from": "৳৫,০০০",
+        "note": "এককালীন setup · ঐচ্ছিক মাসিক maintenance"
+      },
+      {
+        "service": "Automation",
+        "from": "৳৮,০০০",
+        "note": "এককালীন setup · জটিলতার সাথে বাড়ে"
+      },
+      {
+        "service": "AI Consulting",
+        "from": "৳২,৫০০",
+        "note": "এককালীন · ৬০ মিনিটের clarity session"
+      },
+      {
+        "service": "Web Development",
+        "from": "৳৮,০০০",
+        "note": "এককালীন · landing page থেকে full app পর্যন্ত"
+      }
+    ],
+    "cta": "সম্পূর্ণ মূল্য দেখুন",
+    "ctaSecondary": "Marketplace দেখুন",
+    "trustNote": "কোনো প্রতিশ্রুতির আগে বিনামূল্যে discovery call। আগেই নির্দিষ্ট মূল্য নির্ধারণ — কোনো চমক নেই।"
   },
   "Faq": {
     "badge": "প্রশ্ন আছে?",

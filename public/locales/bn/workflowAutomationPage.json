@@ -1,727 +1,679 @@
 {
-    "hero": {
-        "badge": "Workflow Automation",
-        "titleLine1": "একই কাজ বারবার করা",
-        "titleHighlight": "বন্ধ করুন।",
-        "titleLine2": "Automate করুন।",
-        "subtitle": "আমরা custom automations তৈরি করি যা আপনার apps সংযুক্ত করে, repetitive tasks handle করে, এবং আপনার ব্যবসা background এ চালায় — ২৪/৭, কোনো human error ছাড়া।",
-        "audiences": [
-            {
-                "icon": "🏢",
-                "label": "Businesses ও Agencies এর জন্য"
-            },
-            {
-                "icon": "👤",
-                "label": "Individuals ও Freelancers এর জন্য"
-            },
-            {
-                "icon": "🛒",
-                "label": "E-commerce Stores এর জন্য"
-            }
-        ],
-        "primaryCta": "ফ্রি Automation Audit পান",
-        "secondaryCta": "আমরা কি Automate করি দেখুন",
-        "toolsLabel": "যেসব tools ব্যবহার করি",
-        "flowLabel": "Automation Live চলছে",
-        "flowStats": {
-            "steps": "টি Step Automated",
-            "time": "Execution Time",
-            "runs": "সবসময় চালু"
-        },
-        "liveBadge": "✅ Workflow সক্রিয়",
-        "scrollText": "Solutions দেখুন"
+  "hero": {
+    "badge": "Workflow Automation",
+    "titleLine1": "একই কাজ বারবার করা",
+    "titleHighlight": "বন্ধ করুন।",
+    "titleLine2": "Automate করুন।",
+    "subtitle": "আমরা custom automations তৈরি করি যা আপনার apps সংযুক্ত করে, repetitive tasks handle করে, এবং আপনার ব্যবসা background এ চালায় — ২৪/৭, কোনো human error ছাড়া।",
+    "audiences": [
+      {
+        "icon": "🏢",
+        "label": "Businesses ও Agencies এর জন্য"
+      },
+      {
+        "icon": "👤",
+        "label": "Individuals ও Freelancers এর জন্য"
+      },
+      {
+        "icon": "🛒",
+        "label": "E-commerce Stores এর জন্য"
+      }
+    ],
+    "primaryCta": "ফ্রি Automation Audit পান",
+    "secondaryCta": "আমরা কি Automate করি দেখুন",
+    "toolsLabel": "যেসব tools ব্যবহার করি",
+    "flowLabel": "Automation Live চলছে",
+    "flowStats": {
+      "steps": "টি Step Automated",
+      "time": "Execution Time",
+      "runs": "সবসময় চালু"
     },
-    "whatIsAutomation": {
-        "badge": "Automation কি?",
-        "title": "আপনার ব্যবসা Autopilot এ",
-        "subtitle": "Workflow automation মানে আপনার apps ও tools সংযুক্ত করা যাতে তারা নিজেদের মধ্যে কথা বলে এবং স্বয়ংক্রিয়ভাবে কাজ সম্পন্ন করে — কোনো manual কাজ ছাড়াই।",
-        "analogy": "এটাকে এভাবে ভাবুন — একজন অদৃশ্য কর্মী নিয়োগ করা যিনি ২৪/৭ কাজ করেন, কখনো ভুল করেন না, প্রায় কোনো খরচ নেই, এবং আপনার সব বিরক্তিকর repetitive কাজ তাৎক্ষণিকভাবে handle করেন।",
-        "before": {
-            "title": "Automation ছাড়া",
-            "items": [
-                "প্রতিদিন manually apps এর মধ্যে data copy-paste করা",
-                "Leads এর সাথে follow up করতে ভুলে যাওয়া",
-                "Reports এ ঘণ্টার পর ঘণ্টা ব্যয় করা যা সেকেন্ডে তৈরি হতে পারে",
-                "ঘুমানোর সময় গুরুত্বপূর্ণ notifications মিস করা",
-                "প্রতিটি order আসলে একই ১০টি steps করা",
-                "আপনার team কম্পিউটার করতে পারে এমন কাজে সময় নষ্ট করছে"
-            ]
+    "liveBadge": "✅ Workflow সক্রিয়",
+    "scrollText": "Solutions দেখুন"
+  },
+  "whatIsAutomation": {
+    "badge": "Automation কি?",
+    "title": "আপনার ব্যবসা Autopilot এ",
+    "subtitle": "Workflow automation মানে আপনার apps ও tools সংযুক্ত করা যাতে তারা নিজেদের মধ্যে কথা বলে এবং স্বয়ংক্রিয়ভাবে কাজ সম্পন্ন করে — কোনো manual কাজ ছাড়াই।",
+    "analogy": "এটাকে এভাবে ভাবুন — একজন অদৃশ্য কর্মী নিয়োগ করা যিনি ২৪/৭ কাজ করেন, কখনো ভুল করেন না, প্রায় কোনো খরচ নেই, এবং আপনার সব বিরক্তিকর repetitive কাজ তাৎক্ষণিকভাবে handle করেন।",
+    "before": {
+      "title": "Automation ছাড়া",
+      "items": [
+        "প্রতিদিন manually apps এর মধ্যে data copy-paste করা",
+        "Leads এর সাথে follow up করতে ভুলে যাওয়া",
+        "Reports এ ঘণ্টার পর ঘণ্টা ব্যয় করা যা সেকেন্ডে তৈরি হতে পারে",
+        "ঘুমানোর সময় গুরুত্বপূর্ণ notifications মিস করা",
+        "প্রতিটি order আসলে একই ১০টি steps করা",
+        "আপনার team কম্পিউটার করতে পারে এমন কাজে সময় নষ্ট করছে"
+      ]
+    },
+    "after": {
+      "title": "Automation দিয়ে",
+      "items": [
+        "সব apps এর মধ্যে data স্বয়ংক্রিয়ভাবে flow করে",
+        "আপনি আঙুল না তুলেই তাৎক্ষণিকভাবে follow-up পাঠানো হয়",
+        "Schedule অনুযায়ী Reports তৈরি ও deliver করা হয়",
+        "গুরুত্বপূর্ণ কিছু হলে সাথে সাথে WhatsApp এ notification পান",
+        "Orders automatically process, confirm এবং track হয়",
+        "আপনার team আসলে যেসব কাজে মানুষ দরকার সেগুলোতে focused"
+      ]
+    },
+    "flow": {
+      "label": "একটি automation কিভাবে কাজ করে",
+      "steps": [
+        {
+          "label": "Trigger",
+          "sub": "কিছু একটা ঘটে"
         },
-        "after": {
-            "title": "Automation দিয়ে",
-            "items": [
-                "সব apps এর মধ্যে data স্বয়ংক্রিয়ভাবে flow করে",
-                "আপনি আঙুল না তুলেই তাৎক্ষণিকভাবে follow-up পাঠানো হয়",
-                "Schedule অনুযায়ী Reports তৈরি ও deliver করা হয়",
-                "গুরুত্বপূর্ণ কিছু হলে সাথে সাথে WhatsApp এ notification পান",
-                "Orders automatically process, confirm এবং track হয়",
-                "আপনার team আসলে যেসব কাজে মানুষ দরকার সেগুলোতে focused"
-            ]
+        {
+          "label": "Filter",
+          "sub": "শর্ত যাচাই করে"
         },
-        "flow": {
-            "label": "একটি automation কিভাবে কাজ করে",
-            "steps": [
-                {
-                    "label": "Trigger",
-                    "sub": "কিছু একটা ঘটে"
-                },
-                {
-                    "label": "Filter",
-                    "sub": "শর্ত যাচাই করে"
-                },
-                {
-                    "label": "Action",
-                    "sub": "কাজটি করে"
-                },
-                {
-                    "label": "সম্পন্ন",
-                    "sub": "প্রতিবার চলে"
-                }
-            ]
+        {
+          "label": "Action",
+          "sub": "কাজটি করে"
+        },
+        {
+          "label": "সম্পন্ন",
+          "sub": "প্রতিবার চলে"
         }
-    },
-    "whoIsThisFor": {
-        "badge": "এটি কাদের জন্য?",
-        "title": "যদি আপনি এখানে নিজেকে চিনতে পারেন, আপনার এটি দরকার",
-        "subtitle": "Automation শুধু বড় কোম্পানির জন্য নয়। Repetitive tasks এ ডুবে থাকা যে কেউই উপকৃত হতে পারেন।",
-        "painLabel": "আপনি সম্ভবত",
-        "withAutomation": "Automation দিয়ে →",
-        "audiences": [
-            {
-                "emoji": "🏢",
-                "title": "Businesses ও Agencies",
-                "subtitle": "SME, marketing agencies, service companies",
-                "pains": [
-                    "প্রতিটি sale এর পরে manually spreadsheets update করছেন",
-                    "যে leads হারিয়ে যাচ্ছে তাদের পেছনে ছুটছেন",
-                    "আপনার team তাদের দিনের অর্ধেক admin tasks এ ব্যয় করছে",
-                    "Clients সময়মতো updates বা reports পাচ্ছে না"
-                ],
-                "gains": [
-                    "Sales data automatically CRM এ sync হয়",
-                    "Sign up করার মুহূর্তেই lead follow-ups পাঠানো হয়",
-                    "আপনার team ছাড়াই admin কাজ handle হয়",
-                    "Schedule অনুযায়ী clients কে automated reports deliver হয়"
-                ],
-                "cta": "আমার Business Automate করুন"
-            },
-            {
-                "emoji": "👤",
-                "title": "Individuals ও Freelancers",
-                "subtitle": "Content creators, solopreneurs, remote workers",
-                "pains": [
-                    "প্রতিটি platform এ manually একই content post করছেন",
-                    "কখনো শেষ না হওয়া emails এ inbox ভরে যাচ্ছে",
-                    "সময়মতো clients কে invoice করতে ভুলে যাচ্ছেন",
-                    "অনেক tools এ tasks ও deadlines track করছেন"
-                ],
-                "gains": [
-                    "একটি post, সর্বত্র auto-publish হয়",
-                    "Emails auto-sort, reply ও flag হয়",
-                    "সঠিক তারিখে automatically invoices পাঠানো হয়",
-                    "সব tasks automatically এক জায়গায় sync হয়"
-                ],
-                "cta": "আমার জীবন সহজ করুন"
-            },
-            {
-                "emoji": "🛒",
-                "title": "E-commerce Stores",
-                "subtitle": "Online shops, dropshippers, product sellers",
-                "pains": [
-                    "WhatsApp এ প্রতিটি order manually confirm করছেন",
-                    "Abandoned carts এর follow up করার কোনো system নেই",
-                    "Platforms জুড়ে manually inventory update করছেন",
-                    "Customer queries দ্রুত reply ছাড়াই জমে যাচ্ছে"
-                ],
-                "gains": [
-                    "Orders tracking details সহ auto-confirm হয়",
-                    "Abandoned cart reminders automatically পাঠানো হয়",
-                    "সব sales channels এ inventory sync হয়",
-                    "AI তাৎক্ষণিকভাবে সাধারণ customer প্রশ্ন handle করে"
-                ],
-                "cta": "আমার Store Automate করুন"
-            }
-        ]
-    },
-    "whatWeAutomate": {
-        "badge": "আমাদের Automation Solutions",
-        "title": "আমরা আপনার জন্য কি Automate করতে পারি",
-        "subtitle": "Real examples দেখতে যেকোনো category তে click করুন। আপনি task টি বর্ণনা করতে পারলে আমরা সম্ভবত এটি automate করতে পারব।",
-        "expandLabel": "Examples দেখুন",
-        "collapseLabel": "বন্ধ করুন",
-        "examplesLabel": "বাস্তব Examples",
-        "toolsLabel": "ব্যবহৃত Tools",
-        "panelCta": "এটি আমার জন্য Automate করুন",
-        "drawerCtaTitle": "এই automation চান?",
-        "drawerCtaSubtitle": "আমরা ৪৮ ঘন্টার মধ্যে এটি আপনার জন্য live করব।",
-        "bottomText": "আপনার use case দেখছেন না? আমরা যেকোনো workflow এর জন্য সম্পূর্ণ custom automations তৈরি করি।",
-        "bottomCta": "আপনার প্রয়োজন বলুন",
-        "categories": [
-            {
-                "key": "social",
-                "title": "Social Media Automation",
-                "description": "Manual effort ছাড়াই সব platform এ content schedule, publish ও repurpose করুন।",
-                "examples": [
-                    "এক জায়গা থেকে Instagram, Facebook ও LinkedIn এ auto-post করুন",
-                    "একটি blog post থেকে automatically ৫টি social media caption তৈরি করুন",
-                    "Custom captions সহ YouTube videos সব platforms এ cross-post করুন",
-                    "এক বসায় এক সপ্তাহের content schedule করুন"
-                ],
-                "tools": [
-                    "Make",
-                    "Buffer",
-                    "n8n",
-                    "OpenAI",
-                    "Meta API"
-                ]
-            },
-            {
-                "key": "leads",
-                "title": "Lead ও CRM Automation",
-                "description": "Automatically leads capture করুন, তাৎক্ষণিকভাবে follow up করুন, কোনো prospect যেন miss না হয়।",
-                "examples": [
-                    "Facebook Lead Ad → lead এর কাছে তাৎক্ষণিক WhatsApp message",
-                    "Website form → CRM এ add + sales rep assign + welcome email পাঠানো",
-                    "৩ দিন reply না হলে → auto follow-up reminder",
-                    "Deal জেতা → auto-create invoice এবং onboarding task"
-                ],
-                "tools": [
-                    "n8n",
-                    "HubSpot",
-                    "WhatsApp API",
-                    "Gmail",
-                    "Notion"
-                ]
-            },
-            {
-                "key": "inbox",
-                "title": "Inbox ও Email Automation",
-                "description": "Emails automatically sort, reply, extract ও act করুন যাতে আপনার inbox নিয়ন্ত্রণে থাকে।",
-                "examples": [
-                    "সাধারণ customer প্রশ্নে auto-reply করুন",
-                    "Emails থেকে order details extract → Google Sheets এ save",
-                    "Urgent emails flag করুন এবং WhatsApp alert পাঠান",
-                    "Promotional emails auto-unsubscribe ও archive করুন"
-                ],
-                "tools": [
-                    "Gmail API",
-                    "Outlook",
-                    "n8n",
-                    "OpenAI",
-                    "Zapier"
-                ]
-            },
-            {
-                "key": "reporting",
-                "title": "Reporting ও Data Sync",
-                "description": "Schedule অনুযায়ী automatically reports তৈরি করুন, spreadsheets sync করুন ও summaries deliver করুন।",
-                "examples": [
-                    "প্রতিদিন সকাল ৯টায় WhatsApp এ daily sales summary পাঠানো হয়",
-                    "WooCommerce orders automatically Google Sheets এ sync হয়",
-                    "প্রতি সোমবার আপনার team কে weekly performance report email হয়",
-                    "নতুন data আসলে real-time dashboard update হয়"
-                ],
-                "tools": [
-                    "Google Sheets",
-                    "n8n",
-                    "WhatsApp",
-                    "Airtable",
-                    "Looker"
-                ]
-            },
-            {
-                "key": "ecommerce",
-                "title": "E-commerce Operations",
-                "description": "Order placement থেকে delivery পর্যন্ত আপনার সম্পূর্ণ order lifecycle automate করুন।",
-                "examples": [
-                    "নতুন order → customer কে WhatsApp confirmation",
-                    "কম stock → manager কে alert + reorder triggered",
-                    "Order delivered → WhatsApp এ auto-review request",
-                    "Abandoned cart → ৩-step follow-up sequence"
-                ],
-                "tools": [
-                    "WooCommerce",
-                    "Shopify",
-                    "WhatsApp API",
-                    "n8n",
-                    "Gmail"
-                ]
-            },
-            {
-                "key": "onboarding",
-                "title": "Client Onboarding",
-                "description": "প্রতিটি নতুন client কে welcome করুন manually না করেই, প্রতিবার।",
-                "examples": [
-                    "Payment received → automatically welcome email + contract পাঠানো",
-                    "নতুন client → Notion এ project create + team member assign",
-                    "Due dates auto-set সহ onboarding checklist পাঠানো",
-                    "Signup এর ৭ দিন পর automatically check-in email পাঠানো"
-                ],
-                "tools": [
-                    "n8n",
-                    "Notion",
-                    "Gmail",
-                    "Slack",
-                    "DocuSign"
-                ]
-            },
-            {
-                "key": "content",
-                "title": "Content Repurposing",
-                "description": "একটি content থেকে অনেক কিছু তৈরি করুন, সর্বত্র বিতরণ করুন, automatically।",
-                "examples": [
-                    "Blog post → Twitter thread + LinkedIn post + Instagram caption",
-                    "YouTube video → transcript → summary → social snippets",
-                    "Podcast episode → show notes + quotes + audiogram",
-                    "Newsletter → WhatsApp broadcast message"
-                ],
-                "tools": [
-                    "OpenAI",
-                    "n8n",
-                    "Make",
-                    "Buffer",
-                    "Zapier"
-                ]
-            },
-            {
-                "key": "alerts",
-                "title": "Notifications ও Alerts",
-                "description": "সঠিক সময়ে সঠিক তথ্য পান, আপনি আসলে যেখানে দেখেন সেখানে deliver হয়।",
-                "examples": [
-                    "নতুন Google review → তাৎক্ষণিক Slack ও WhatsApp notification",
-                    "Server downtime → সেকেন্ডের মধ্যে SMS + WhatsApp alert",
-                    "Competitor price change → daily monitoring report",
-                    "Online এ আপনার brand এর নতুন mention → তাৎক্ষণিক alert"
-                ],
-                "tools": [
-                    "n8n",
-                    "WhatsApp API",
-                    "Slack",
-                    "Telegram",
-                    "Make"
-                ]
-            }
-        ]
-    },
-    "recipes": {
-        "badge": "Ready-Made Automations",
-        "title": "জনপ্রিয় Automation Recipes",
-        "subtitle": "আমাদের clients সবচেয়ে বেশি পছন্দ করেন এমন pre-built automation templates। একটি বেছে নিন এবং আমরা সেটি আপনার জন্য setup করব — সাধারণত ৪৮ ঘন্টার মধ্যে।",
-        "popularLabel": "জনপ্রিয়",
-        "getThisLabel": "এটি নিন",
-        "bottomText": "তালিকায় নেই এমন কিছু চান? আমরা আপনার exact workflow এর জন্য সম্পূর্ণ custom recipes তৈরি করি।",
-        "bottomCta": "Custom Recipe Request করুন",
-        "filters": [
-            "সব",
-            "E-commerce",
-            "Social Media",
-            "Leads",
-            "Reporting",
-            "Operations"
-        ],
-        "items": [
-            {
-                "emoji": "📦",
-                "title": "WhatsApp Order Confirmation",
-                "description": "প্রতিটি নতুন order customer কে order details ও estimated delivery সহ তাৎক্ষণিক WhatsApp message trigger করে।",
-                "steps": [
-                    "WooCommerce/Shopify এ নতুন order placed",
-                    "Order details automatically extracted",
-                    "তাৎক্ষণিকভাবে personalized WhatsApp message পাঠানো হয়"
-                ],
-                "tools": [
-                    "WooCommerce",
-                    "WhatsApp API",
-                    "n8n"
-                ],
-                "time": "Setup: ১-২ দিন",
-                "category": "E-commerce",
-                "categoryKey": "ecommerce",
-                "difficulty": "সহজ",
-                "popular": true
-            },
-            {
-                "emoji": "📱",
-                "title": "Auto Social Media Poster",
-                "description": "একটি post লিখুন এবং সেটি automatically Facebook, Instagram, ও LinkedIn এ সেরা সময়ে publish হয়।",
-                "steps": [
-                    "Shared Google Sheet বা Notion এ content যোগ করুন",
-                    "Automation প্রতিটি platform এর জন্য format করে",
-                    "Scheduled সময়ে automatically posts publish হয়"
-                ],
-                "tools": [
-                    "Google Sheets",
-                    "Make",
-                    "Meta API",
-                    "LinkedIn API"
-                ],
-                "time": "Setup: ২-৩ দিন",
-                "category": "Social Media",
-                "categoryKey": "social",
-                "difficulty": "সহজ",
-                "popular": true
-            },
-            {
-                "emoji": "🎯",
-                "title": "Lead Capture → WhatsApp Follow-Up",
-                "description": "কেউ আপনার Facebook বা website form পূরণ করলে সেকেন্ডের মধ্যে WhatsApp message পায় এবং CRM এ যোগ হয়।",
-                "steps": [
-                    "Lead Facebook Lead Ad বা website form submit করে",
-                    "Lead Google Sheets বা CRM এ save হয়",
-                    "৬০ সেকেন্ডের কম সময়ে personalized WhatsApp follow-up পাঠানো হয়"
-                ],
-                "tools": [
-                    "Facebook Ads",
-                    "WhatsApp API",
-                    "n8n",
-                    "Google Sheets"
-                ],
-                "time": "Setup: ১-২ দিন",
-                "category": "Leads",
-                "categoryKey": "leads",
-                "difficulty": "সহজ",
-                "popular": true
-            },
-            {
-                "emoji": "📊",
-                "title": "Daily Sales Report on WhatsApp",
-                "description": "প্রতিদিন সকাল ৯টায় আগের দিনের সম্পূর্ণ sales summary সরাসরি আপনার WhatsApp এ পান।",
-                "steps": [
-                    "প্রতিদিন সকাল ৯টায় scheduled trigger চালু হয়",
-                    "WooCommerce বা Sheets থেকে sales data pull হয়",
-                    "Formatted summary আপনার WhatsApp এ পাঠানো হয়"
-                ],
-                "tools": [
-                    "Google Sheets",
-                    "WhatsApp API",
-                    "n8n"
-                ],
-                "time": "Setup: ১ দিন",
-                "category": "Reporting",
-                "categoryKey": "reporting",
-                "difficulty": "সহজ"
-            },
-            {
-                "emoji": "🛒",
-                "title": "Abandoned Cart Recovery",
-                "description": "না কিনে চলে যাওয়া customers ৪৮ ঘন্টায় ৩-step automated follow-up পায় — email, তারপর WhatsApp।",
-                "steps": [
-                    "১ ঘন্টা পর cart abandoned detected",
-                    "Cart contents সহ email reminder পাঠানো হয়",
-                    "২৪ ঘন্টায় purchase না হলে WhatsApp follow-up"
-                ],
-                "tools": [
-                    "WooCommerce",
-                    "Gmail",
-                    "WhatsApp API",
-                    "n8n"
-                ],
-                "time": "Setup: ২-৩ দিন",
-                "category": "E-commerce",
-                "categoryKey": "ecommerce",
-                "difficulty": "মধ্যম"
-            },
-            {
-                "emoji": "✍️",
-                "title": "Blog to Social Content Pipeline",
-                "description": "একটি blog post publish করুন এবং ৫টি platform এর জন্য AI-generated social captions পান, post করার জন্য ready।",
-                "steps": [
-                    "WordPress এ নতুন blog post published",
-                    "OpenAI platform-specific captions generate করে",
-                    "সব platforms এ posts auto-scheduled হয়"
-                ],
-                "tools": [
-                    "WordPress",
-                    "OpenAI",
-                    "Make",
-                    "Buffer"
-                ],
-                "time": "Setup: ৩-৪ দিন",
-                "category": "Social Media",
-                "categoryKey": "social",
-                "difficulty": "মধ্যম"
-            },
-            {
-                "emoji": "🤝",
-                "title": "Client Onboarding Sequence",
-                "description": "নতুন client payment করলে — welcome email, contract, Notion workspace, ও task assignments সব automatically হয়।",
-                "steps": [
-                    "bKash বা Stripe এর মাধ্যমে payment confirmed",
-                    "Automatically welcome email + contract পাঠানো হয়",
-                    "Notion project created ও Slack এ team notified"
-                ],
-                "tools": [
-                    "Notion",
-                    "Gmail",
-                    "Slack",
-                    "n8n",
-                    "DocuSign"
-                ],
-                "time": "Setup: ৩-৫ দিন",
-                "category": "Operations",
-                "categoryKey": "operations",
-                "difficulty": "মধ্যম"
-            },
-            {
-                "emoji": "⭐",
-                "title": "Post-Delivery Review Request",
-                "description": "প্রতিটি order delivered হলে customer কে WhatsApp এর মাধ্যমে automatically personalized review request পাঠানো হয়।",
-                "steps": [
-                    "Order status 'Delivered' এ update হয়",
-                    "পাঠানোর আগে ৩ দিন delay",
-                    "Direct link সহ friendly review request WhatsApp এ পাঠানো হয়"
-                ],
-                "tools": [
-                    "WooCommerce",
-                    "WhatsApp API",
-                    "n8n"
-                ],
-                "time": "Setup: ১ দিন",
-                "category": "E-commerce",
-                "categoryKey": "ecommerce",
-                "difficulty": "সহজ"
-            },
-            {
-                "emoji": "🔔",
-                "title": "Brand Mention Alert System",
-                "description": "আপনার brand, product, বা keywords online এ mention হলে তাৎক্ষণিক WhatsApp বা Slack alerts পান।",
-                "steps": [
-                    "Web monitoring real-time এ mentions track করে",
-                    "নতুন mention detected ও filtered হয়",
-                    "Source ও context সহ instant alert পাঠানো হয়"
-                ],
-                "tools": [
-                    "n8n",
-                    "WhatsApp API",
-                    "Slack",
-                    "Make"
-                ],
-                "time": "Setup: ২-৩ দিন",
-                "category": "Reporting",
-                "categoryKey": "reporting",
-                "difficulty": "উন্নত"
-            }
-        ]
-    },
-    "toolsIntegrations": {
-        "badge": "Tools ও Integrations",
-        "title": "আপনি যেসব Apps ব্যবহার করেন তা আমরা Connect করি",
-        "subtitle": "Tools পরিবর্তন করতে বা কাজের ধরন বদলাতে হবে না। আমরা আপনার বিদ্যমান stack এর চারপাশে automations তৈরি করি।",
-        "tagline": "যদি এটির একটি API থাকে, আমরা এটি automate করতে পারি",
-        "stats": [
-            {
-                "value": "২৪+",
-                "label": "Tools ও Platforms সমর্থিত"
-            },
-            {
-                "value": "১০০+",
-                "label": "Automation Workflows তৈরি"
-            },
-            {
-                "value": "৪৮ ঘন্টা",
-                "label": "গড় Setup সময়"
-            }
-        ],
-        "ctaText": "তালিকায় নেই এমন tool ব্যবহার করছেন? আমরা প্রায় নিশ্চিতভাবে এটি integrate করতে পারব।",
-        "ctaButton": "আপনার Tools সম্পর্কে জিজ্ঞাসা করুন"
-    },
-    "howItWorks": {
-        "badge": "আমাদের Process",
-        "title": "প্রথম Call থেকে Live Automation পর্যন্ত মাত্র কয়েক দিনে",
-        "subtitle": "লম্বা meetings নেই, confusing জার্গন নেই। শুধু একটি সহজ process যা আপনাকে \"আমার একটি সমস্যা আছে\" থেকে \"এটি স্বয়ংক্রিয়ভাবে চলছে\" তে যত দ্রুত সম্ভব নিয়ে যায়।",
-        "steps": [
-            {
-                "day": "দিন ১",
-                "title": "Discovery Call",
-                "description": "আমরা একটি বিনামূল্যে ৩০ মিনিটের call দিয়ে শুরু করি। আপনি বলুন কোন কাজগুলো আপনার সময় নষ্ট করছে — আমরা বের করব ঠিক কি automate করতে হবে এবং কিভাবে।",
-                "details": [
-                    "কোন tasks সবচেয়ে বেশি সময় নেয়?",
-                    "আপনি বর্তমানে কোন tools ব্যবহার করেন?",
-                    "আপনার প্রত্যাশিত ফলাফল কি?",
-                    "Budget ও timeline আলোচনা"
-                ]
-            },
-            {
-                "day": "দিন ২",
-                "title": "আমরা Plan করি",
-                "description": "আমরা সম্পূর্ণ automation flow design করি — প্রতিটি trigger, condition, ও action — এবং একটি লাইন লেখার আগেই আপনার অনুমোদনের জন্য শেয়ার করি।",
-                "details": [
-                    "Visual workflow diagram",
-                    "Tools ও connections confirmed",
-                    "Edge cases planned",
-                    "আপনার অনুমোদন প্রয়োজন"
-                ]
-            },
-            {
-                "day": "দিন ৩–৬",
-                "title": "আমরা Build ও Test করি",
-                "description": "আমরা আমাদের environment এ automation তৈরি করি, real test scenarios এ run করি, এবং আপনাকে দেখানোর আগে যেকোনো edge cases ঠিক করি।",
-                "details": [
-                    "n8n বা Make এ তৈরি",
-                    "Real data test runs",
-                    "Error handling included",
-                    "Staging preview link"
-                ]
-            },
-            {
-                "day": "দিন ৭",
-                "title": "Go Live ও Handover",
-                "description": "আমরা সব আপনার account এ deploy করি, কিভাবে কাজ করে তা আপনাকে walkthrough করি, এবং সম্পূর্ণ documentation হস্তান্তর করি। Plus ৩০ দিনের বিনামূল্যে support।",
-                "details": [
-                    "আপনার account এ deployed",
-                    "Walkthrough session",
-                    "সম্পূর্ণ documentation",
-                    "৩০ দিন বিনামূল্যে support"
-                ]
-            }
-        ],
-        "timelineTitle": "বেশিরভাগ Automations ৭ দিনের মধ্যে Live",
-        "timelineText": "সহজ automations (১–২ steps) ২৪–৪৮ ঘন্টার মধ্যে live হতে পারে। জটিল multi-step workflows সাধারণত ৫–৭ দিন সময় নেয়। Discovery call এর পরে আমরা আপনাকে সঠিক timeline দেব।",
-        "ctaButton": "ফ্রি Discovery Call বুক করুন"
-    },
-    "pricing": {
-        "badge": "সহজ Pricing",
-        "title": "সরল মূল্য, কোনো চমক নেই",
-        "subtitle": "প্রতিটি plan এ একটি one-time setup fee এবং ঐচ্ছিক মাসিক maintenance অন্তর্ভুক্ত। কোনো hidden charge নেই।",
-        "valueNote": "💡 একজন কর্মচারী একটি সপ্তাহ নিয়োগ করার চেয়ে সস্তা",
-        "tiers": [
-            {
-                "name": "Starter",
-                "badge": null,
-                "price": "৳৮,০০০",
-                "priceNote": "One-time setup · ঐচ্ছিক ৳২,০০০/মাস maintenance",
-                "description": "Individuals ও ছোট businesses এর জন্য উপযুক্ত যারা একটি নির্দিষ্ট কাজে সময় বাঁচাতে ১–২টি automation চান।",
-                "features": [
-                    "১–২টি automation workflows",
-                    "৩টি পর্যন্ত app connections",
-                    "সহজ trigger-action flows",
-                    "WhatsApp বা email delivery",
-                    "৭ দিনে build ও delivery",
-                    "Launch এর পরে ১৪ দিন support",
-                    "Basic documentation"
-                ],
-                "cta": "শুরু করুন",
-                "highlighted": false
-            },
-            {
-                "name": "Growth",
-                "badge": "সবচেয়ে জনপ্রিয়",
-                "price": "৳২০,০০০",
-                "priceNote": "One-time setup · ঐচ্ছিক ৳৪,০০০/মাস maintenance",
-                "description": "Growing businesses এর জন্য যারা তাদের core operations end-to-end automate করতে connected workflows এর একটি set চান।",
-                "features": [
-                    "৩–৫টি automation workflows",
-                    "৮টি পর্যন্ত app connections",
-                    "Multi-step logic ও conditions",
-                    "Error handling ও fallbacks",
-                    "WhatsApp, email ও Slack delivery",
-                    "১০ দিনে build ও delivery",
-                    "Launch এর পরে ৩০ দিন support",
-                    "সম্পূর্ণ documentation ও walkthrough"
-                ],
-                "cta": "Growth Plan নিন",
-                "highlighted": true
-            },
-            {
-                "name": "Custom",
-                "badge": null,
-                "price": "Custom",
-                "priceNote": "Discovery call এর পরে quote করা হবে",
-                "description": "Agencies ও businesses এর জন্য যাদের সম্পূর্ণ automation ecosystem দরকার — complex logic, custom integrations, ও ongoing management।",
-                "features": [
-                    "Unlimited workflows",
-                    "Unlimited app connections",
-                    "Complex logic, loops ও branches",
-                    "Custom API ও webhook integrations",
-                    "AI-powered automations (OpenAI)",
-                    "Dedicated build timeline",
-                    "Priority support",
-                    "মাসিক performance review"
-                ],
-                "cta": "Quote Request করুন",
-                "highlighted": false
-            }
-        ],
-        "faqs": [
-            {
-                "q": "মাসিক maintenance এ কি অন্তর্ভুক্ত?",
-                "a": "Monitoring, broken automations ঠিক করা, ছোট updates, এবং connected apps তাদের APIs পরিবর্তন করলে আপনার workflows চালু রাখা।"
-            },
-            {
-                "q": "আমি কি প্রতি মাসে নাকি শুধু একবার pay করি?",
-                "a": "আপনার automation build করতে একটি one-time setup fee দিতে হয়। মাসিক maintenance সম্পূর্ণ ঐচ্ছিক — শুধুমাত্র ongoing monitoring চাইলে প্রয়োজন।"
-            },
-            {
-                "q": "পরে আরো automations লাগলে কি হবে?",
-                "a": "যেকোনো সময় আরো workflows যোগ করতে পারবেন। প্রতিটি নতুন automation complexity অনুযায়ী মূল্য নির্ধারিত হয়, সাধারণত ৳৪,০০০ থেকে শুরু।"
-            },
-            {
-                "q": "সম্পূর্ণ payment এর আগে কি আমি এটি কাজ করতে দেখতে পাব?",
-                "a": "হ্যাঁ। আমরা staging environment এ build করি এবং চূড়ান্ত ৫০% payment চাওয়ার আগে আপনি live test করেন।"
-            }
-        ]
-    },
-    "faq": {
-        "badge": "প্রশ্ন আছে?",
-        "title": "যা জানতে চান সব কিছু",
-        "subtitle": "শুরু করার আগে clients এর কাছ থেকে সবচেয়ে বেশি শোনা প্রশ্নগুলোর সৎ উত্তর।",
-        "questions": [
-            {
-                "question": "Automations ব্যবহার করতে কি আমার কোনো technical জ্ঞান দরকার?",
-                "answer": "একদমই না। আমরা আপনার automation build করে হস্তান্তর করলে এটি সম্পূর্ণ background এ চলে। আপনাকে কোনো code স্পর্শ করতে বা কোনো tool পরিচালনা করতে হবে না। আমরা সহজ রাখি।"
-            },
-            {
-                "question": "Automations build করতে আপনারা কোন tools ও platforms ব্যবহার করেন?",
-                "answer": "আমরা প্রাথমিকভাবে n8n ও Make (পূর্বে Integromat) তে build করি। উভয়ই industry-leading automation platforms যা কার্যত যেকোনো app connect করতে পারে। AI-powered automations এর জন্য আমরা OpenAI integrate করি। Platform এর পছন্দ আপনার নির্দিষ্ট প্রয়োজন ও budget এর উপর নির্ভর করে।"
-            },
-            {
-                "question": "Automation ভেঙে গেলে বা কাজ করা বন্ধ হলে কি হবে?",
-                "answer": "আমাদের সব automations এ error handling অন্তর্ভুক্ত — কিছু fail হলে আপনি তাৎক্ষণিকভাবে WhatsApp বা email alert পাবেন। প্রতিটি plan এ post-launch support অন্তর্ভুক্ত, এবং আমাদের maintenance packages এ ongoing monitoring ও fixing অন্তর্ভুক্ত।"
-            },
-            {
-                "question": "আপনাদের তালিকায় নেই এমন কিছু কি আপনারা automate করতে পারবেন?",
-                "answer": "প্রায় নিশ্চিতভাবে হ্যাঁ। আপনি যেসব tools ব্যবহার করেন তাদের API থাকলে (প্রায় সব আধুনিক apps এ আছে), আমরা সেগুলো connect করতে পারি। একটি বিনামূল্যে discovery call বুক করুন এবং আমাদের বলুন আপনার কি দরকার — আমরা বলব এটি সম্ভব কিনা।"
-            },
-            {
-                "question": "Launch এর পরে automation maintain করতে কত খরচ হবে?",
-                "answer": "মাসিক maintenance ঐচ্ছিক এবং Starter automations এর জন্য ৳২,০০০/মাস থেকে শুরু। এটি monitoring, connected apps তাদের systems update করলে issues ঠিক করা, এবং ছোট adjustments কভার করে। Automation stable থাকলে maintenance ছাড়াও manage করতে পারবেন।"
-            },
-            {
-                "question": "আমি বর্তমানে যেসব tools ব্যবহার করি সেগুলোর সাথে কি এটি কাজ করবে?",
-                "answer": "হ্যাঁ। আমরা আপনার বিদ্যমান stack এর চারপাশে build করি — আমরা tools পরিবর্তন করতে বা কাজের ধরন বদলাতে বলি না। WhatsApp, Google Sheets, Facebook, WooCommerce, বা অন্য যাই হোক, আমরা সেগুলো একসাথে connect করি।"
-            },
-            {
-                "question": "Payment কিভাবে কাজ করে?",
-                "answer": "Build শুরু করতে আমরা ৫০% আগাম নিই এবং আপনি automation test ও approve করার পরে delivery তে ৫০%। আমরা bKash, Nagad, ও bank transfer গ্রহণ করি।"
-            },
-            {
-                "question": "পরে আরো automations যোগ করতে চাইলে কি হবে?",
-                "answer": "সহজ। যেকোনো সময় individual workflows যোগ করতে পারবেন। আমরা scope করব, quote করব, এবং build করব — সাধারণত complexity অনুযায়ী ৩–৭ দিনের মধ্যে।"
-            }
-        ],
-        "stillHaveQuestions": {
-            "title": "এখনও প্রশ্ন আছে?",
-            "subtitle": "Commit করার আগে আমরা যেকোনো প্রশ্নের উত্তর দিতে খুশি। কোনো চাপ নেই, শুধু সৎ কথোপকথন।",
-            "primaryCta": "ফ্রি Discovery Call বুক করুন",
-            "secondaryCta": "WhatsApp করুন"
-        }
-    },
-    "simpleCta": {
-        "title": "Manually করা বন্ধ করতে প্রস্তুত?",
-        "subtitle": "আমাদের বলুন আপনার দিনে কোন একটি কাজ সবচেয়ে বেশি সময় নষ্ট করে। আমরা সেটি automate করব — এবং আপনি ভাববেন এটি ছাড়া কিভাবে বাঁচতেন।",
-        "trustBadges": [
-            "ফ্রি discovery call",
-            "৭ দিনে live",
-            "কোনো technical জ্ঞান লাগবে না",
-            "৩০ দিন বিনামূল্যে support"
-        ],
-        "primaryButton": "ফ্রি Automation Audit নিন",
-        "secondaryButton": "Pricing দেখুন",
-        "stats": {
-            "delivery": "মাত্র ৪৮ ঘন্টায় live সম্ভব",
-            "support": "৩০ দিন বিনামূল্যে support",
-            "start": "৳৮,০০০ থেকে শুরু"
-        },
-        "finalNote": "💡 কি automate করবেন বুঝতে পারছেন না? একটি ফ্রি call বুক করুন এবং আমরা আপনার workflow এ সবচেয়ে বড় সময় নষ্টকারী গুলো খুঁজে বের করব।"
+      ]
     }
+  },
+  "whoIsThisFor": {
+    "badge": "এটি কাদের জন্য?",
+    "title": "যদি আপনি এখানে নিজেকে চিনতে পারেন, আপনার এটি দরকার",
+    "subtitle": "Automation শুধু বড় কোম্পানির জন্য নয়। Repetitive tasks এ ডুবে থাকা যে কেউই উপকৃত হতে পারেন।",
+    "painLabel": "আপনি সম্ভবত",
+    "withAutomation": "Automation দিয়ে →",
+    "audiences": [
+      {
+        "emoji": "🏢",
+        "title": "Businesses ও Agencies",
+        "subtitle": "SME, marketing agencies, service companies",
+        "pains": [
+          "প্রতিটি sale এর পরে manually spreadsheets update করছেন",
+          "যে leads হারিয়ে যাচ্ছে তাদের পেছনে ছুটছেন",
+          "আপনার team তাদের দিনের অর্ধেক admin tasks এ ব্যয় করছে",
+          "Clients সময়মতো updates বা reports পাচ্ছে না"
+        ],
+        "gains": [
+          "Sales data automatically CRM এ sync হয়",
+          "Sign up করার মুহূর্তেই lead follow-ups পাঠানো হয়",
+          "আপনার team ছাড়াই admin কাজ handle হয়",
+          "Schedule অনুযায়ী clients কে automated reports deliver হয়"
+        ],
+        "cta": "আমার Business Automate করুন"
+      },
+      {
+        "emoji": "👤",
+        "title": "Individuals ও Freelancers",
+        "subtitle": "Content creators, solopreneurs, remote workers",
+        "pains": [
+          "প্রতিটি platform এ manually একই content post করছেন",
+          "কখনো শেষ না হওয়া emails এ inbox ভরে যাচ্ছে",
+          "সময়মতো clients কে invoice করতে ভুলে যাচ্ছেন",
+          "অনেক tools এ tasks ও deadlines track করছেন"
+        ],
+        "gains": [
+          "একটি post, সর্বত্র auto-publish হয়",
+          "Emails auto-sort, reply ও flag হয়",
+          "সঠিক তারিখে automatically invoices পাঠানো হয়",
+          "সব tasks automatically এক জায়গায় sync হয়"
+        ],
+        "cta": "আমার জীবন সহজ করুন"
+      },
+      {
+        "emoji": "🛒",
+        "title": "E-commerce Stores",
+        "subtitle": "Online shops, dropshippers, product sellers",
+        "pains": [
+          "WhatsApp এ প্রতিটি order manually confirm করছেন",
+          "Abandoned carts এর follow up করার কোনো system নেই",
+          "Platforms জুড়ে manually inventory update করছেন",
+          "Customer queries দ্রুত reply ছাড়াই জমে যাচ্ছে"
+        ],
+        "gains": [
+          "Orders tracking details সহ auto-confirm হয়",
+          "Abandoned cart reminders automatically পাঠানো হয়",
+          "সব sales channels এ inventory sync হয়",
+          "AI তাৎক্ষণিকভাবে সাধারণ customer প্রশ্ন handle করে"
+        ],
+        "cta": "আমার Store Automate করুন"
+      }
+    ]
+  },
+  "whatWeAutomate": {
+    "badge": "আমাদের Automation Solutions",
+    "title": "আমরা আপনার জন্য কি Automate করতে পারি",
+    "subtitle": "Real examples দেখতে যেকোনো category তে click করুন। আপনি task টি বর্ণনা করতে পারলে আমরা সম্ভবত এটি automate করতে পারব।",
+    "expandLabel": "Examples দেখুন",
+    "collapseLabel": "বন্ধ করুন",
+    "examplesLabel": "বাস্তব Examples",
+    "toolsLabel": "ব্যবহৃত Tools",
+    "panelCta": "এটি আমার জন্য Automate করুন",
+    "drawerCtaTitle": "এই automation চান?",
+    "drawerCtaSubtitle": "আমরা ৪৮ ঘন্টার মধ্যে এটি আপনার জন্য live করব।",
+    "bottomText": "আপনার use case দেখছেন না? আমরা যেকোনো workflow এর জন্য সম্পূর্ণ custom automations তৈরি করি।",
+    "bottomCta": "আপনার প্রয়োজন বলুন",
+    "categories": [
+      {
+        "key": "social",
+        "title": "Social Media Automation",
+        "description": "Manual effort ছাড়াই সব platform এ content schedule, publish ও repurpose করুন।",
+        "examples": [
+          "এক জায়গা থেকে Instagram, Facebook ও LinkedIn এ auto-post করুন",
+          "একটি blog post থেকে automatically ৫টি social media caption তৈরি করুন",
+          "Custom captions সহ YouTube videos সব platforms এ cross-post করুন",
+          "এক বসায় এক সপ্তাহের content schedule করুন"
+        ],
+        "tools": ["Make", "Buffer", "n8n", "OpenAI", "Meta API"]
+      },
+      {
+        "key": "leads",
+        "title": "Lead ও CRM Automation",
+        "description": "Automatically leads capture করুন, তাৎক্ষণিকভাবে follow up করুন, কোনো prospect যেন miss না হয়।",
+        "examples": [
+          "Facebook Lead Ad → lead এর কাছে তাৎক্ষণিক WhatsApp message",
+          "Website form → CRM এ add + sales rep assign + welcome email পাঠানো",
+          "৩ দিন reply না হলে → auto follow-up reminder",
+          "Deal জেতা → auto-create invoice এবং onboarding task"
+        ],
+        "tools": ["n8n", "HubSpot", "WhatsApp API", "Gmail", "Notion"]
+      },
+      {
+        "key": "inbox",
+        "title": "Inbox ও Email Automation",
+        "description": "Emails automatically sort, reply, extract ও act করুন যাতে আপনার inbox নিয়ন্ত্রণে থাকে।",
+        "examples": [
+          "সাধারণ customer প্রশ্নে auto-reply করুন",
+          "Emails থেকে order details extract → Google Sheets এ save",
+          "Urgent emails flag করুন এবং WhatsApp alert পাঠান",
+          "Promotional emails auto-unsubscribe ও archive করুন"
+        ],
+        "tools": ["Gmail API", "Outlook", "n8n", "OpenAI", "Zapier"]
+      },
+      {
+        "key": "reporting",
+        "title": "Reporting ও Data Sync",
+        "description": "Schedule অনুযায়ী automatically reports তৈরি করুন, spreadsheets sync করুন ও summaries deliver করুন।",
+        "examples": [
+          "প্রতিদিন সকাল ৯টায় WhatsApp এ daily sales summary পাঠানো হয়",
+          "WooCommerce orders automatically Google Sheets এ sync হয়",
+          "প্রতি সোমবার আপনার team কে weekly performance report email হয়",
+          "নতুন data আসলে real-time dashboard update হয়"
+        ],
+        "tools": ["Google Sheets", "n8n", "WhatsApp", "Airtable", "Looker"]
+      },
+      {
+        "key": "ecommerce",
+        "title": "E-commerce Operations",
+        "description": "Order placement থেকে delivery পর্যন্ত আপনার সম্পূর্ণ order lifecycle automate করুন।",
+        "examples": [
+          "নতুন order → customer কে WhatsApp confirmation",
+          "কম stock → manager কে alert + reorder triggered",
+          "Order delivered → WhatsApp এ auto-review request",
+          "Abandoned cart → ৩-step follow-up sequence"
+        ],
+        "tools": ["WooCommerce", "Shopify", "WhatsApp API", "n8n", "Gmail"]
+      },
+      {
+        "key": "onboarding",
+        "title": "Client Onboarding",
+        "description": "প্রতিটি নতুন client কে welcome করুন manually না করেই, প্রতিবার।",
+        "examples": [
+          "Payment received → automatically welcome email + contract পাঠানো",
+          "নতুন client → Notion এ project create + team member assign",
+          "Due dates auto-set সহ onboarding checklist পাঠানো",
+          "Signup এর ৭ দিন পর automatically check-in email পাঠানো"
+        ],
+        "tools": ["n8n", "Notion", "Gmail", "Slack", "DocuSign"]
+      },
+      {
+        "key": "content",
+        "title": "Content Repurposing",
+        "description": "একটি content থেকে অনেক কিছু তৈরি করুন, সর্বত্র বিতরণ করুন, automatically।",
+        "examples": [
+          "Blog post → Twitter thread + LinkedIn post + Instagram caption",
+          "YouTube video → transcript → summary → social snippets",
+          "Podcast episode → show notes + quotes + audiogram",
+          "Newsletter → WhatsApp broadcast message"
+        ],
+        "tools": ["OpenAI", "n8n", "Make", "Buffer", "Zapier"]
+      },
+      {
+        "key": "alerts",
+        "title": "Notifications ও Alerts",
+        "description": "সঠিক সময়ে সঠিক তথ্য পান, আপনি আসলে যেখানে দেখেন সেখানে deliver হয়।",
+        "examples": [
+          "নতুন Google review → তাৎক্ষণিক Slack ও WhatsApp notification",
+          "Server downtime → সেকেন্ডের মধ্যে SMS + WhatsApp alert",
+          "Competitor price change → daily monitoring report",
+          "Online এ আপনার brand এর নতুন mention → তাৎক্ষণিক alert"
+        ],
+        "tools": ["n8n", "WhatsApp API", "Slack", "Telegram", "Make"]
+      }
+    ]
+  },
+  "recipes": {
+    "badge": "Ready-Made Automations",
+    "title": "জনপ্রিয় Automation Recipes",
+    "subtitle": "আমাদের clients সবচেয়ে বেশি পছন্দ করেন এমন pre-built automation templates। একটি বেছে নিন এবং আমরা সেটি আপনার জন্য setup করব — সাধারণত ৪৮ ঘন্টার মধ্যে।",
+    "popularLabel": "জনপ্রিয়",
+    "getThisLabel": "এটি নিন",
+    "bottomText": "তালিকায় নেই এমন কিছু চান? আমরা আপনার exact workflow এর জন্য সম্পূর্ণ custom recipes তৈরি করি।",
+    "bottomCta": "Custom Recipe Request করুন",
+    "filters": [
+      "সব",
+      "E-commerce",
+      "Social Media",
+      "Leads",
+      "Reporting",
+      "Operations"
+    ],
+    "items": [
+      {
+        "emoji": "📦",
+        "title": "WhatsApp Order Confirmation",
+        "description": "প্রতিটি নতুন order customer কে order details ও estimated delivery সহ তাৎক্ষণিক WhatsApp message trigger করে।",
+        "steps": [
+          "WooCommerce/Shopify এ নতুন order placed",
+          "Order details automatically extracted",
+          "তাৎক্ষণিকভাবে personalized WhatsApp message পাঠানো হয়"
+        ],
+        "tools": ["WooCommerce", "WhatsApp API", "n8n"],
+        "time": "Setup: ১-২ দিন",
+        "category": "E-commerce",
+        "categoryKey": "ecommerce",
+        "difficulty": "সহজ",
+        "popular": true
+      },
+      {
+        "emoji": "📱",
+        "title": "Auto Social Media Poster",
+        "description": "একটি post লিখুন এবং সেটি automatically Facebook, Instagram, ও LinkedIn এ সেরা সময়ে publish হয়।",
+        "steps": [
+          "Shared Google Sheet বা Notion এ content যোগ করুন",
+          "Automation প্রতিটি platform এর জন্য format করে",
+          "Scheduled সময়ে automatically posts publish হয়"
+        ],
+        "tools": ["Google Sheets", "Make", "Meta API", "LinkedIn API"],
+        "time": "Setup: ২-৩ দিন",
+        "category": "Social Media",
+        "categoryKey": "social",
+        "difficulty": "সহজ",
+        "popular": true
+      },
+      {
+        "emoji": "🎯",
+        "title": "Lead Capture → WhatsApp Follow-Up",
+        "description": "কেউ আপনার Facebook বা website form পূরণ করলে সেকেন্ডের মধ্যে WhatsApp message পায় এবং CRM এ যোগ হয়।",
+        "steps": [
+          "Lead Facebook Lead Ad বা website form submit করে",
+          "Lead Google Sheets বা CRM এ save হয়",
+          "৬০ সেকেন্ডের কম সময়ে personalized WhatsApp follow-up পাঠানো হয়"
+        ],
+        "tools": ["Facebook Ads", "WhatsApp API", "n8n", "Google Sheets"],
+        "time": "Setup: ১-২ দিন",
+        "category": "Leads",
+        "categoryKey": "leads",
+        "difficulty": "সহজ",
+        "popular": true
+      },
+      {
+        "emoji": "📊",
+        "title": "Daily Sales Report on WhatsApp",
+        "description": "প্রতিদিন সকাল ৯টায় আগের দিনের সম্পূর্ণ sales summary সরাসরি আপনার WhatsApp এ পান।",
+        "steps": [
+          "প্রতিদিন সকাল ৯টায় scheduled trigger চালু হয়",
+          "WooCommerce বা Sheets থেকে sales data pull হয়",
+          "Formatted summary আপনার WhatsApp এ পাঠানো হয়"
+        ],
+        "tools": ["Google Sheets", "WhatsApp API", "n8n"],
+        "time": "Setup: ১ দিন",
+        "category": "Reporting",
+        "categoryKey": "reporting",
+        "difficulty": "সহজ"
+      },
+      {
+        "emoji": "🛒",
+        "title": "Abandoned Cart Recovery",
+        "description": "না কিনে চলে যাওয়া customers ৪৮ ঘন্টায় ৩-step automated follow-up পায় — email, তারপর WhatsApp।",
+        "steps": [
+          "১ ঘন্টা পর cart abandoned detected",
+          "Cart contents সহ email reminder পাঠানো হয়",
+          "২৪ ঘন্টায় purchase না হলে WhatsApp follow-up"
+        ],
+        "tools": ["WooCommerce", "Gmail", "WhatsApp API", "n8n"],
+        "time": "Setup: ২-৩ দিন",
+        "category": "E-commerce",
+        "categoryKey": "ecommerce",
+        "difficulty": "মধ্যম"
+      },
+      {
+        "emoji": "✍️",
+        "title": "Blog to Social Content Pipeline",
+        "description": "একটি blog post publish করুন এবং ৫টি platform এর জন্য AI-generated social captions পান, post করার জন্য ready।",
+        "steps": [
+          "WordPress এ নতুন blog post published",
+          "OpenAI platform-specific captions generate করে",
+          "সব platforms এ posts auto-scheduled হয়"
+        ],
+        "tools": ["WordPress", "OpenAI", "Make", "Buffer"],
+        "time": "Setup: ৩-৪ দিন",
+        "category": "Social Media",
+        "categoryKey": "social",
+        "difficulty": "মধ্যম"
+      },
+      {
+        "emoji": "🤝",
+        "title": "Client Onboarding Sequence",
+        "description": "নতুন client payment করলে — welcome email, contract, Notion workspace, ও task assignments সব automatically হয়।",
+        "steps": [
+          "bKash বা Stripe এর মাধ্যমে payment confirmed",
+          "Automatically welcome email + contract পাঠানো হয়",
+          "Notion project created ও Slack এ team notified"
+        ],
+        "tools": ["Notion", "Gmail", "Slack", "n8n", "DocuSign"],
+        "time": "Setup: ৩-৫ দিন",
+        "category": "Operations",
+        "categoryKey": "operations",
+        "difficulty": "মধ্যম"
+      },
+      {
+        "emoji": "⭐",
+        "title": "Post-Delivery Review Request",
+        "description": "প্রতিটি order delivered হলে customer কে WhatsApp এর মাধ্যমে automatically personalized review request পাঠানো হয়।",
+        "steps": [
+          "Order status 'Delivered' এ update হয়",
+          "পাঠানোর আগে ৩ দিন delay",
+          "Direct link সহ friendly review request WhatsApp এ পাঠানো হয়"
+        ],
+        "tools": ["WooCommerce", "WhatsApp API", "n8n"],
+        "time": "Setup: ১ দিন",
+        "category": "E-commerce",
+        "categoryKey": "ecommerce",
+        "difficulty": "সহজ"
+      },
+      {
+        "emoji": "🔔",
+        "title": "Brand Mention Alert System",
+        "description": "আপনার brand, product, বা keywords online এ mention হলে তাৎক্ষণিক WhatsApp বা Slack alerts পান।",
+        "steps": [
+          "Web monitoring real-time এ mentions track করে",
+          "নতুন mention detected ও filtered হয়",
+          "Source ও context সহ instant alert পাঠানো হয়"
+        ],
+        "tools": ["n8n", "WhatsApp API", "Slack", "Make"],
+        "time": "Setup: ২-৩ দিন",
+        "category": "Reporting",
+        "categoryKey": "reporting",
+        "difficulty": "উন্নত"
+      }
+    ]
+  },
+  "toolsIntegrations": {
+    "badge": "Tools ও Integrations",
+    "title": "আপনি যেসব Apps ব্যবহার করেন তা আমরা Connect করি",
+    "subtitle": "Tools পরিবর্তন করতে বা কাজের ধরন বদলাতে হবে না। আমরা আপনার বিদ্যমান stack এর চারপাশে automations তৈরি করি।",
+    "tagline": "যদি এটির একটি API থাকে, আমরা এটি automate করতে পারি",
+    "stats": [
+      {
+        "value": "২৪+",
+        "label": "Tools ও Platforms সমর্থিত"
+      },
+      {
+        "value": "১০০+",
+        "label": "Automation Workflows তৈরি"
+      },
+      {
+        "value": "৪৮ ঘন্টা",
+        "label": "গড় Setup সময়"
+      }
+    ],
+    "ctaText": "তালিকায় নেই এমন tool ব্যবহার করছেন? আমরা প্রায় নিশ্চিতভাবে এটি integrate করতে পারব।",
+    "ctaButton": "আপনার Tools সম্পর্কে জিজ্ঞাসা করুন"
+  },
+  "howItWorks": {
+    "badge": "আমাদের Process",
+    "title": "প্রথম Call থেকে Live Automation পর্যন্ত মাত্র কয়েক দিনে",
+    "subtitle": "লম্বা meetings নেই, confusing জার্গন নেই। শুধু একটি সহজ process যা আপনাকে \"আমার একটি সমস্যা আছে\" থেকে \"এটি স্বয়ংক্রিয়ভাবে চলছে\" তে যত দ্রুত সম্ভব নিয়ে যায়।",
+    "steps": [
+      {
+        "day": "দিন ১",
+        "title": "Discovery Call",
+        "description": "আমরা একটি বিনামূল্যে ৩০ মিনিটের call দিয়ে শুরু করি। আপনি বলুন কোন কাজগুলো আপনার সময় নষ্ট করছে — আমরা বের করব ঠিক কি automate করতে হবে এবং কিভাবে।",
+        "details": [
+          "কোন tasks সবচেয়ে বেশি সময় নেয়?",
+          "আপনি বর্তমানে কোন tools ব্যবহার করেন?",
+          "আপনার প্রত্যাশিত ফলাফল কি?",
+          "Budget ও timeline আলোচনা"
+        ]
+      },
+      {
+        "day": "দিন ২",
+        "title": "আমরা Plan করি",
+        "description": "আমরা সম্পূর্ণ automation flow design করি — প্রতিটি trigger, condition, ও action — এবং একটি লাইন লেখার আগেই আপনার অনুমোদনের জন্য শেয়ার করি।",
+        "details": [
+          "Visual workflow diagram",
+          "Tools ও connections confirmed",
+          "Edge cases planned",
+          "আপনার অনুমোদন প্রয়োজন"
+        ]
+      },
+      {
+        "day": "দিন ৩–৬",
+        "title": "আমরা Build ও Test করি",
+        "description": "আমরা আমাদের environment এ automation তৈরি করি, real test scenarios এ run করি, এবং আপনাকে দেখানোর আগে যেকোনো edge cases ঠিক করি।",
+        "details": [
+          "n8n বা Make এ তৈরি",
+          "Real data test runs",
+          "Error handling included",
+          "Staging preview link"
+        ]
+      },
+      {
+        "day": "দিন ৭",
+        "title": "Go Live ও Handover",
+        "description": "আমরা সব আপনার account এ deploy করি, কিভাবে কাজ করে তা আপনাকে walkthrough করি, এবং সম্পূর্ণ documentation হস্তান্তর করি। Plus ৩০ দিনের বিনামূল্যে support।",
+        "details": [
+          "আপনার account এ deployed",
+          "Walkthrough session",
+          "সম্পূর্ণ documentation",
+          "৩০ দিন বিনামূল্যে support"
+        ]
+      }
+    ],
+    "timelineTitle": "বেশিরভাগ Automations ৭ দিনের মধ্যে Live",
+    "timelineText": "সহজ automations (১–২ steps) ২৪–৪৮ ঘন্টার মধ্যে live হতে পারে। জটিল multi-step workflows সাধারণত ৫–৭ দিন সময় নেয়। Discovery call এর পরে আমরা আপনাকে সঠিক timeline দেব।",
+    "ctaButton": "ফ্রি Discovery Call বুক করুন"
+  },
+  "pricing": {
+    "badge": "সহজ Pricing",
+    "title": "সরল মূল্য, কোনো চমক নেই",
+    "subtitle": "প্রতিটি plan এ একটি one-time setup fee এবং ঐচ্ছিক মাসিক maintenance অন্তর্ভুক্ত। কোনো hidden charge নেই।",
+    "valueNote": "💡 একজন কর্মচারী একটি সপ্তাহ নিয়োগ করার চেয়ে সস্তা",
+    "tiers": [
+      {
+        "name": "Starter",
+        "badge": null,
+        "price": "৳৮,০০০",
+        "priceNote": "One-time setup · ঐচ্ছিক ৳২,০০০/মাস maintenance",
+        "description": "Individuals ও ছোট businesses এর জন্য উপযুক্ত যারা একটি নির্দিষ্ট কাজে সময় বাঁচাতে ১–২টি automation চান।",
+        "features": [
+          "১–২টি automation workflows",
+          "৩টি পর্যন্ত app connections",
+          "সহজ trigger-action flows",
+          "WhatsApp বা email delivery",
+          "৭ দিনে build ও delivery",
+          "Launch এর পরে ১৪ দিন support",
+          "Basic documentation"
+        ],
+        "cta": "শুরু করুন",
+        "highlighted": false
+      },
+      {
+        "name": "Growth",
+        "badge": "সবচেয়ে জনপ্রিয়",
+        "price": "৳২০,০০০",
+        "priceNote": "One-time setup · ঐচ্ছিক ৳৪,০০০/মাস maintenance",
+        "description": "Growing businesses এর জন্য যারা তাদের core operations end-to-end automate করতে connected workflows এর একটি set চান।",
+        "features": [
+          "৩–৫টি automation workflows",
+          "৮টি পর্যন্ত app connections",
+          "Multi-step logic ও conditions",
+          "Error handling ও fallbacks",
+          "WhatsApp, email ও Slack delivery",
+          "১০ দিনে build ও delivery",
+          "Launch এর পরে ৩০ দিন support",
+          "সম্পূর্ণ documentation ও walkthrough"
+        ],
+        "cta": "Growth Plan নিন",
+        "highlighted": true
+      },
+      {
+        "name": "Custom",
+        "badge": null,
+        "price": "Custom",
+        "priceNote": "Discovery call এর পরে quote করা হবে",
+        "description": "Agencies ও businesses এর জন্য যাদের সম্পূর্ণ automation ecosystem দরকার — complex logic, custom integrations, ও ongoing management।",
+        "features": [
+          "Unlimited workflows",
+          "Unlimited app connections",
+          "Complex logic, loops ও branches",
+          "Custom API ও webhook integrations",
+          "AI-powered automations (OpenAI)",
+          "Dedicated build timeline",
+          "Priority support",
+          "মাসিক performance review"
+        ],
+        "cta": "Quote Request করুন",
+        "highlighted": false
+      }
+    ],
+    "faqs": [
+      {
+        "q": "মাসিক maintenance এ কি অন্তর্ভুক্ত?",
+        "a": "Monitoring, broken automations ঠিক করা, ছোট updates, এবং connected apps তাদের APIs পরিবর্তন করলে আপনার workflows চালু রাখা।"
+      },
+      {
+        "q": "আমি কি প্রতি মাসে নাকি শুধু একবার pay করি?",
+        "a": "আপনার automation build করতে একটি one-time setup fee দিতে হয়। মাসিক maintenance সম্পূর্ণ ঐচ্ছিক — শুধুমাত্র ongoing monitoring চাইলে প্রয়োজন।"
+      },
+      {
+        "q": "পরে আরো automations লাগলে কি হবে?",
+        "a": "যেকোনো সময় আরো workflows যোগ করতে পারবেন। প্রতিটি নতুন automation complexity অনুযায়ী মূল্য নির্ধারিত হয়, সাধারণত ৳৪,০০০ থেকে শুরু।"
+      },
+      {
+        "q": "সম্পূর্ণ payment এর আগে কি আমি এটি কাজ করতে দেখতে পাব?",
+        "a": "হ্যাঁ। আমরা staging environment এ build করি এবং চূড়ান্ত ৫০% payment চাওয়ার আগে আপনি live test করেন।"
+      }
+    ]
+  },
+  "faq": {
+    "badge": "প্রশ্ন আছে?",
+    "title": "যা জানতে চান সব কিছু",
+    "subtitle": "শুরু করার আগে clients এর কাছ থেকে সবচেয়ে বেশি শোনা প্রশ্নগুলোর সৎ উত্তর।",
+    "questions": [
+      {
+        "question": "Automations ব্যবহার করতে কি আমার কোনো technical জ্ঞান দরকার?",
+        "answer": "একদমই না। আমরা আপনার automation build করে হস্তান্তর করলে এটি সম্পূর্ণ background এ চলে। আপনাকে কোনো code স্পর্শ করতে বা কোনো tool পরিচালনা করতে হবে না। আমরা সহজ রাখি।"
+      },
+      {
+        "question": "Automations build করতে আপনারা কোন tools ও platforms ব্যবহার করেন?",
+        "answer": "আমরা প্রাথমিকভাবে n8n ও Make (পূর্বে Integromat) তে build করি। উভয়ই industry-leading automation platforms যা কার্যত যেকোনো app connect করতে পারে। AI-powered automations এর জন্য আমরা OpenAI integrate করি। Platform এর পছন্দ আপনার নির্দিষ্ট প্রয়োজন ও budget এর উপর নির্ভর করে।"
+      },
+      {
+        "question": "Automation ভেঙে গেলে বা কাজ করা বন্ধ হলে কি হবে?",
+        "answer": "আমাদের সব automations এ error handling অন্তর্ভুক্ত — কিছু fail হলে আপনি তাৎক্ষণিকভাবে WhatsApp বা email alert পাবেন। প্রতিটি plan এ post-launch support অন্তর্ভুক্ত, এবং আমাদের maintenance packages এ ongoing monitoring ও fixing অন্তর্ভুক্ত।"
+      },
+      {
+        "question": "আপনাদের তালিকায় নেই এমন কিছু কি আপনারা automate করতে পারবেন?",
+        "answer": "প্রায় নিশ্চিতভাবে হ্যাঁ। আপনি যেসব tools ব্যবহার করেন তাদের API থাকলে (প্রায় সব আধুনিক apps এ আছে), আমরা সেগুলো connect করতে পারি। একটি বিনামূল্যে discovery call বুক করুন এবং আমাদের বলুন আপনার কি দরকার — আমরা বলব এটি সম্ভব কিনা।"
+      },
+      {
+        "question": "Launch এর পরে automation maintain করতে কত খরচ হবে?",
+        "answer": "মাসিক maintenance ঐচ্ছিক এবং Starter automations এর জন্য ৳২,০০০/মাস থেকে শুরু। এটি monitoring, connected apps তাদের systems update করলে issues ঠিক করা, এবং ছোট adjustments কভার করে। Automation stable থাকলে maintenance ছাড়াও manage করতে পারবেন।"
+      },
+      {
+        "question": "আমি বর্তমানে যেসব tools ব্যবহার করি সেগুলোর সাথে কি এটি কাজ করবে?",
+        "answer": "হ্যাঁ। আমরা আপনার বিদ্যমান stack এর চারপাশে build করি — আমরা tools পরিবর্তন করতে বা কাজের ধরন বদলাতে বলি না। WhatsApp, Google Sheets, Facebook, WooCommerce, বা অন্য যাই হোক, আমরা সেগুলো একসাথে connect করি।"
+      },
+      {
+        "question": "Payment কিভাবে কাজ করে?",
+        "answer": "Build শুরু করতে আমরা ৫০% আগাম নিই এবং আপনি automation test ও approve করার পরে delivery তে ৫০%। আমরা bKash, Nagad, ও bank transfer গ্রহণ করি।"
+      },
+      {
+        "question": "পরে আরো automations যোগ করতে চাইলে কি হবে?",
+        "answer": "সহজ। যেকোনো সময় individual workflows যোগ করতে পারবেন। আমরা scope করব, quote করব, এবং build করব — সাধারণত complexity অনুযায়ী ৩–৭ দিনের মধ্যে।"
+      }
+    ],
+    "stillHaveQuestions": {
+      "title": "এখনও প্রশ্ন আছে?",
+      "subtitle": "Commit করার আগে আমরা যেকোনো প্রশ্নের উত্তর দিতে খুশি। কোনো চাপ নেই, শুধু সৎ কথোপকথন।",
+      "primaryCta": "ফ্রি Discovery Call বুক করুন",
+      "secondaryCta": "WhatsApp করুন"
+    }
+  },
+  "simpleCta": {
+    "title": "Manually করা বন্ধ করতে প্রস্তুত?",
+    "subtitle": "আমাদের বলুন আপনার দিনে কোন একটি কাজ সবচেয়ে বেশি সময় নষ্ট করে। আমরা সেটি automate করব — এবং আপনি ভাববেন এটি ছাড়া কিভাবে বাঁচতেন।",
+    "trustBadges": [
+      "ফ্রি discovery call",
+      "৭ দিনে live",
+      "কোনো technical জ্ঞান লাগবে না",
+      "৩০ দিন বিনামূল্যে support"
+    ],
+    "primaryButton": "ফ্রি Automation Audit নিন",
+    "secondaryButton": "Pricing দেখুন",
+    "stats": {
+      "delivery": "মাত্র ৪৮ ঘন্টায় live সম্ভব",
+      "support": "৩০ দিন বিনামূল্যে support",
+      "start": "৳৮,০০০ থেকে শুরু"
+    },
+    "finalNote": "💡 কি automate করবেন বুঝতে পারছেন না? একটি ফ্রি call বুক করুন এবং আমরা আপনার workflow এ সবচেয়ে বড় সময় নষ্টকারী গুলো খুঁজে বের করব।"
+  },
+  "marketplaceBanner1": {
+    "label": "Ready-Made Automation Packs",
+    "text": "সম্পূর্ণ custom কিছু দরকার নেই?",
+    "subtext": "Pre-built automation packs দেখুন — মাত্র ৳২৪৯ থেকে, ২৪ ঘণ্টায় live।",
+    "cta": "Automation Packs দেখুন"
+  },
+  "pricingTeaser": {
+    "label": "স্বচ্ছ মূল্য",
+    "title": "জটিলতার সাথে automation মূল্য বাড়ে",
+    "cta": "সম্পূর্ণ মূল্য দেখুন",
+    "note": "💡 মূল্য এককালীন setup + ঐচ্ছিক মাসিক maintenance। কোনো লুকানো চার্জ নেই।",
+    "noteLink": "সম্পূর্ণ বিবরণ দেখুন →",
+    "anchors": [
+      {
+        "label": "সহজ (১–২ workflow)",
+        "from": "৳৮,০০০"
+      },
+      {
+        "label": "Growth (৩–৫ workflow)",
+        "from": "৳২০,০০০"
+      },
+      {
+        "label": "জটিল / Custom",
+        "from": "Custom quote"
+      }
+    ]
+  },
+  "marketplaceBanner2": {
+    "eyebrow": "Custom build বাদ দিন",
+    "title": "দ্রুত automation দরকার?",
+    "titleAccent": "Ready-made packs মাত্র ৳২৪৯ থেকে",
+    "subtitle": "আমাদের Marketplace-এ Facebook comment, WhatsApp order confirmation, Google review reply এবং abandoned cart recovery-র জন্য pre-built automation packs আছে — পরীক্ষিত, প্রমাণিত, এবং discovery call ছাড়াই আজই আপনার ব্যবসায় deploy করার জন্য প্রস্তুত।",
+    "stat1Value": "২৪ ঘণ্টা",
+    "stat1Label": "setup সময়",
+    "stat2Value": "৪+",
+    "stat2Label": "ready pack",
+    "stat3Value": "৳২৪৯+",
+    "stat3Label": "শুরু থেকে",
+    "cta": "Automation Packs দেখুন",
+    "ctaNote": "অথবা",
+    "ctaSecondary": "বিনামূল্যে discovery call বুক করুন",
+    "ctaNoteEnd": "সম্পূর্ণ custom workflow-এর জন্য।"
+  }
 }

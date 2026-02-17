@@ -1,4 +1,5 @@
 "use client";
+
 import { ArrowRight, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -20,6 +21,8 @@ export function FooterTop() {
     <div className="border-b border-black/5 dark:border-white/5 py-12 transition-colors">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+
+          {/* Logo + tagline */}
           <div className="flex flex-col items-center md:items-start">
             <Link
               href="/"
@@ -32,6 +35,7 @@ export function FooterTop() {
             </p>
           </div>
 
+          {/* System status */}
           <div className="flex flex-col items-center group">
             <div className="inline-flex items-center gap-3 bg-black/5 dark:bg-white/5 border border-transparent group-hover:border-primary/20 px-6 py-2.5 rounded-2xl transition-all">
               <Activity className="w-4 h-4 text-primary animate-pulse" />
@@ -44,6 +48,7 @@ export function FooterTop() {
             </div>
           </div>
 
+          {/* CTA */}
           <div>
             <Button
               asChild
@@ -55,6 +60,7 @@ export function FooterTop() {
               </Link>
             </Button>
           </div>
+
         </div>
       </div>
     </div>

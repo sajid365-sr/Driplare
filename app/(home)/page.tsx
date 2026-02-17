@@ -11,6 +11,7 @@ import { SuccessStoriesSection } from "@/components/home/SuccessStoriesSection";
 import { PricingSection } from "@/components/home/PricingSection";
 import { FAQSection } from "@/components/home/FAQSection";
 import { FinalCTA } from "@/components/home/FinalCTASection";
+import { PricingTeaser } from "@/components/home/PricingTeaser";
 
 export default function HomePage() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -100,7 +101,8 @@ export default function HomePage() {
         <WhatYouGetSection />
         <SuccessStoriesSection />
         <MoreThanAISection />
-        <PricingSection />
+        <PricingTeaser />
+        {/* <PricingSection /> */}
         <FAQSection />
         <FinalCTA />
       </main>

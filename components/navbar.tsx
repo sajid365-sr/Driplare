@@ -123,7 +123,8 @@ export function Navbar() {
                     <li>
                       <Link
                         href="/solutions/workflow-automation"
-                        className="block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-all hover:bg-primary/10 hover:translate-x-1 group"
+                        className={`block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-all hover:bg-primary/10 hover:translate-x-1 group ${isActive("/solutions/workflow-automation") && "bg-primary/10 text-primary"}`}
+
                       >
                         <div className="flex items-center gap-2">
                           <Workflow className="h-5 w-5 text-primary" />
@@ -140,7 +141,7 @@ export function Navbar() {
                     <li>
                       <Link
                         href="/solutions/web-development"
-                        className="block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-all hover:bg-primary/10 hover:translate-x-1 group"
+                        className={`block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-all hover:bg-primary/10 hover:translate-x-1 group ${isActive("/solutions/web-development") && "bg-primary/10 text-primary"}`}
                       >
                         <div className="flex items-center gap-2">
                           <Code2 className="h-5 w-5 text-primary" />
@@ -162,7 +163,7 @@ export function Navbar() {
                       <div className="flex flex-col gap-3">
                         <Link
                           href="/solutions/b2b-consulting"
-                          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                          className={`flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors ${isActive("/solutions/b2b-consulting") && "text-primary"}`}
                         >
                           <Briefcase className="h-4 w-4" />{" "}
                           {t("navigation.technicalConsulting")}
