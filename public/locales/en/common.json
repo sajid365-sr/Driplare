@@ -245,5 +245,31 @@
     "missionDesc": "To democratize access to enterprise-grade AI solutions and automation tools for businesses of all sizes.",
     "visionTitle": "Our Vision",
     "visionDesc": "A world where every business can leverage AI to focus on what matters most - innovation and growth."
+  },
+  "insights": {
+    "badge": "Insights & Ideas",
+    "title": "Practical AI",
+    "titleAccent": "Knowledge",
+    "subtitle": "Real lessons from building AI systems, automating businesses, and deploying workflows that actually work.",
+    "postCount": "articles published",
+    "searchPlaceholder": "Search articles...",
+    "emptyTitle": "No articles found",
+    "emptySub": "Try a different search or category filter.",
+    "backToInsights": "Back to Insights",
+    "readArticle": "Read article",
+    "readFullArticle": "Read full article",
+    "featured": "Featured",
+    "articleInfo": "Article Info",
+    "category": "Category",
+    "readTime": "Read time",
+    "published": "Published",
+    "relatedArticles": "Related Articles",
+    "ctaTitle": "Want AI like this for your business?",
+    "ctaSub": "We build and deploy custom AI systems for BD and international businesses.",
+    "ctaButton": "Book a discovery call",
+    "share": "Share",
+    "prev": "Previous",
+    "next": "Next",
+    "minRead": "min read"
   }
 }

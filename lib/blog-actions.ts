@@ -9,6 +9,63 @@ import {
 } from "@/types/blog-types";
 import { revalidatePath } from "next/cache";
 
+
+/**
+ * Get Blog Post by Slug
+ * Used by the /insights/[slug] detail page.
+ * Optionally filter by locale (after migration adds the locale field).
+ */
+export async function getBlogPostBySlug(
+  slug: string,
+  locale?: string
+): Promise<BlogPostDetails | null> {
+  try {
+    // Build where clause — locale is optional until migration runs
+    const where: Record<string, unknown> = { slug, published: true };
+    if (locale) where.locale = locale;
+
+    const post = await prisma.blogPost.findFirst({ where });
+    if (!post) return null;
+
+    const localeFilter = locale ? { locale } : {};
+
+    // Related posts — same category, same locale
+    const relatedPosts = await prisma.blogPost.findMany({
+      where: {
+        category: post.category,
+        id: { not: post.id },
+        published: true,
+        ...localeFilter,
+      },
+      take: 2,
+      select: { id: true, title: true, cover_image: true, slug: true },
+    });
+
+    // Prev / next navigation
+    const prevPost = await prisma.blogPost.findFirst({
+      where: { createdAt: { lt: post.createdAt }, published: true, ...localeFilter },
+      orderBy: { createdAt: "desc" },
+      select: { id: true, title: true, slug: true },
+    });
+
+    const nextPost = await prisma.blogPost.findFirst({
+      where: { createdAt: { gt: post.createdAt }, published: true, ...localeFilter },
+      orderBy: { createdAt: "asc" },
+      select: { id: true, title: true, slug: true },
+    });
+
+    return {
+      post: JSON.parse(JSON.stringify(post)) as BlogPost,
+      relatedPosts: JSON.parse(JSON.stringify(relatedPosts)) as RelatedPost[],
+      prevPost: prevPost ? JSON.parse(JSON.stringify(prevPost)) as PostNavigationInfo : null,
+      nextPost: nextPost ? JSON.parse(JSON.stringify(nextPost)) as PostNavigationInfo : null,
+    };
+  } catch (error) {
+    console.error("getBlogPostBySlug error:", error);
+    return null;
+  }
+}
+
 /**
  * Get Blog Post Details
  * Fetches a single blog post with related posts and navigation
@@ -135,13 +192,17 @@ export async function getAllBlogsForAdmin() {
 }
 
 /**
- * Get All Published Blog Posts
- * Fetches all published blog posts for public display
+ * Get All Published Blogs — with optional locale filter
+ * Replace your existing getAllPublishedBlogs with this version.
+ * Pass locale="en" or locale="bn" to filter; omit for all posts (admin use).
  */
-export async function getAllPublishedBlogs() {
+export async function getAllPublishedBlogs(locale?: string) {
   try {
+    const where: Record<string, unknown> = { published: true };
+    if (locale) where.locale = locale;
+
     const blogs = await prisma.blogPost.findMany({
-      where: { published: true },
+      where,
       orderBy: { createdAt: "desc" },
     });
     return {
@@ -149,7 +210,7 @@ export async function getAllPublishedBlogs() {
       data: JSON.parse(JSON.stringify(blogs)) as BlogPost[],
     };
   } catch (error) {
-    console.error("Fetch Error:", error);
+    console.error("getAllPublishedBlogs error:", error);
     return { success: false, data: [] };
   }
 }

@@ -245,5 +245,31 @@
     "missionDesc": "সমস্ত আকারের ব্যবসার জন্য এন্টারপ্রাইজ-গ্রেড এআই সমাধান এবং অটোমেশন টুলগুলিতে অ্যাক্সেস গণতান্ত্রিক করা।",
     "visionTitle": "আমাদের দৃষ্টি",
     "visionDesc": "এমন একটি বিশ্ব যেখানে প্রতিটি ব্যবসা উদ্ভাবন এবং বৃদ্ধিতে ফোকাস করার জন্য AI-কে লিভারেজ করতে পারে।"
+  },
+  "insights": {
+    "badge": "Insights ও আইডিয়া",
+    "title": "AI-এর ব্যবহারিক",
+    "titleAccent": "জ্ঞানভান্ডার",
+    "subtitle": "AI সিস্টেম তৈরি, ব্যবসা automate করা এবং কার্যকর workflow deploy করার বাস্তব অভিজ্ঞতা।",
+    "postCount": "টি আর্টিকেল প্রকাশিত",
+    "searchPlaceholder": "আর্টিকেল খুঁজুন...",
+    "emptyTitle": "কোনো আর্টিকেল পাওয়া যায়নি",
+    "emptySub": "অন্য search বা category filter ব্যবহার করুন।",
+    "backToInsights": "Insights-এ ফিরুন",
+    "readArticle": "আর্টিকেল পড়ুন",
+    "readFullArticle": "সম্পূর্ণ আর্টিকেল পড়ুন",
+    "featured": "ফিচার্ড",
+    "articleInfo": "আর্টিকেল তথ্য",
+    "category": "ক্যাটাগরি",
+    "readTime": "পড়ার সময়",
+    "published": "প্রকাশিত",
+    "relatedArticles": "সম্পর্কিত আর্টিকেল",
+    "ctaTitle": "আপনার ব্যবসায় এরকম AI চান?",
+    "ctaSub": "আমরা বাংলাদেশ ও আন্তর্জাতিক ব্যবসার জন্য custom AI সিস্টেম তৈরি ও deploy করি।",
+    "ctaButton": "Discovery Call বুক করুন",
+    "share": "শেয়ার করুন",
+    "prev": "আগের পোস্ট",
+    "next": "পরের পোস্ট",
+    "minRead": "মিনিট"
   }
 }
