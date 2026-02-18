@@ -1,0 +1,114 @@
+{
+    "about": {
+        "hero": {
+            "badge": "Driplare সম্পর্কে",
+            "title": "আমরা ব্যবসা automate করি,",
+            "titleAccent": "শুধু chatbot বানাই না",
+            "subtitle": "আমরা বাংলাদেশ-ভিত্তিক একটি AI automation agency যা SME গুলোকে নতুন মানুষ নিয়োগ ছাড়াই scale করতে সাহায্য করে। স্মার্ট sales agent থেকে সম্পূর্ণ workflow automation পর্যন্ত — আমরা এমন সিস্টেম তৈরি, deploy ও maintain করি যা আসলেই কাজ করে।",
+            "cta": "আমাদের সাথে কাজ করুন",
+            "ctaSecondary": "আমাদের কাজ দেখুন"
+        },
+        "origin": {
+            "badge": "আমাদের গল্প",
+            "title": "একটি বাস্তব সমস্যা থেকে শুরু যা আমরা এড়াতে পারিনি",
+            "p1": "আমরা Driplare শুরু করেছি একই pattern বারবার দেখার পর: বাংলাদেশি e-commerce ব্যবসাগুলো প্রতিদিন ১২+ ঘণ্টা হাতে Facebook comment, WhatsApp message-এ reply করছে এবং messy spreadsheet-এ order সামলাচ্ছে।",
+            "p2": "আন্তর্জাতিক AI tool গুলো ছিল অনেক দামি, জটিল, এবং BD ব্যবসার কাজের ধরণের জন্য তৈরি নয়। আমরা জানতাম আরও ভালো উপায় আছে — সাশ্রয়ী, দ্রুত deploy করা যায় এমন, এবং local workflow-এর জন্য তৈরি।",
+            "p3": "তাই আমরা নিজেরাই বানিয়েছি। আজ আমরা বাংলাদেশ ও আন্তর্জাতিকভাবে ব্যবসাগুলোকে তাদের কাজ automate করতে, সময় বাঁচাতে, এবং রাজস্ব বাড়াতে সাহায্য করছি — enterprise দাম বা ৬ মাসের implementation timeline ছাড়াই।"
+        },
+        "mission": {
+            "badge": "আমাদের মিশন",
+            "title": "AI জটিলতা ও ব্যবসায়িক বাস্তবতার মধ্যে সেতু তৈরি করা",
+            "subtitle": "আমরা বিশ্বাস করি প্রতিটি ব্যবসা — শুধু Fortune 500 নয় — intelligent automation পাওয়ার যোগ্য। আমাদের মিশন হলো SME-দের জন্য AI deployment সহজ, সাশ্রয়ী এবং পরিমাপযোগ্য করা।"
+        },
+        "services": {
+            "title": "আমরা কী করি",
+            "subtitle": "চারটি pillar। একটি লক্ষ্য: আপনার ব্যবসা automate করা।",
+            "items": {
+                "aiAgents": {
+                    "name": "Custom AI Agent",
+                    "desc": "WhatsApp ও Facebook-এর জন্য স্মার্ট chatbot যা ২৪/৭ বিক্রয়, সাহায্য এবং lead qualify করে।",
+                    "link": "/solutions/ai-agents"
+                },
+                "automation": {
+                    "name": "Workflow Automation",
+                    "desc": "n8n দিয়ে আপনার tool connect করুন। Order, review, follow-up এবং reporting automate করুন।",
+                    "link": "/solutions/workflow-automation"
+                },
+                "webDev": {
+                    "name": "Web Development",
+                    "desc": "Next.js ও React দিয়ে তৈরি custom website, dashboard এবং e-commerce platform।",
+                    "link": "/solutions/web-development"
+                },
+                "consulting": {
+                    "name": "AI Consulting",
+                    "desc": "Strategy session ও audit। আমরা খুঁজে বের করি কোথায় AI আপনার সময় ও টাকা বাঁচায় — তারপর roadmap বানাই।",
+                    "link": "/solutions/ai-consulting"
+                }
+            }
+        },
+        "team": {
+            "title": "টিমের সাথে পরিচয়",
+            "subtitle": "একটি ছোট টিম যারা automation, পরিষ্কার code, এবং ব্যবসা বাড়ানোতে মগ্ন।",
+            "members": [
+                {
+                    "name": "Founder",
+                    "role": "CEO ও Lead Architect",
+                    "bio": "বন্ধুর e-commerce store-এর জন্য প্রথম AI agent বানিয়েছিলাম। কাজ করেছিল। এখন সবার জন্য বানাই।"
+                },
+                {
+                    "name": "Tech Lead",
+                    "role": "AI ও Backend",
+                    "bio": "জটিল business logic-কে পরিষ্কার automation workflow-এ পরিণত করেন। n8n, OpenAI-তে expert এবং সব কিছু ঠিকমতো চালু করান।"
+                },
+                {
+                    "name": "Developer",
+                    "role": "Frontend ও Integration",
+                    "bio": "Interface তৈরি করেন এবং নিশ্চিত করেন সব কিছু একে অপরের সাথে কথা বলছে — dashboard, form, API, সব কিছু।"
+                }
+            ]
+        },
+        "values": {
+            "title": "আমরা যা বিশ্বাস করি",
+            "subtitle": "এই নীতিগুলো আমাদের প্রতিটি প্রজেক্টকে পরিচালনা করে।",
+            "items": {
+                "transparency": {
+                    "name": "স্বচ্ছ মূল্য",
+                    "desc": "কোনো লুকানো ফি নেই। কোনো surprise charge নেই। এককালীন setup, ঐচ্ছিক maintenance। ব্যস।"
+                },
+                "quality": {
+                    "name": "মান প্রথম",
+                    "desc": "আমরা অর্ধেক করা solution পাঠাই না। প্রতিটি সিস্টেম test করা, documented এবং যত্ন সহকারে deploy করা হয়।"
+                },
+                "results": {
+                    "name": "ফলাফল-কেন্দ্রিক",
+                    "desc": "আমরা সাফল্য পরিমাপ করি সময় বাঁচানো, রাজস্ব তৈরি এবং আসলে সমস্যা সমাধানে — vanity metric-এ নয়।"
+                }
+            }
+        },
+        "stats": {
+            "items": [
+                {
+                    "value": "৫০+",
+                    "label": "প্রজেক্ট সম্পন্ন"
+                },
+                {
+                    "value": "৳২৪৯",
+                    "label": "শুরুর মূল্য"
+                },
+                {
+                    "value": "২৪ ঘণ্টা",
+                    "label": "গড় Deploy সময়"
+                },
+                {
+                    "value": "১০০%",
+                    "label": "BD + আন্তর্জাতিক"
+                }
+            ]
+        },
+        "cta": {
+            "title": "আপনার ব্যবসা automate করতে প্রস্তুত?",
+            "subtitle": "বিনামূল্যে ৩০ মিনিটের discovery call বুক করুন। আমরা আপনার বর্তমান workflow দেখব, bottleneck খুঁজব, এবং ঠিক কী AI আপনার জন্য করতে পারে তা দেখাব — কোনো sales pitch নয়, শুধু স্পষ্টতা।",
+            "button": "Discovery Call বুক করুন"
+        }
+    }
+}

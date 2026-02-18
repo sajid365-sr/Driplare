@@ -1,0 +1,114 @@
+{
+    "about": {
+        "hero": {
+            "badge": "About Driplare",
+            "title": "We automate businesses,",
+            "titleAccent": "not just build chatbots",
+            "subtitle": "We're a Bangladesh-based AI automation agency helping SMEs scale without hiring more people. From intelligent sales agents to full workflow automation — we build, deploy, and maintain systems that actually work.",
+            "cta": "Work With Us",
+            "ctaSecondary": "See Our Work"
+        },
+        "origin": {
+            "badge": "Our Story",
+            "title": "Started from a real problem we couldn't ignore",
+            "p1": "We started Driplare after seeing the same pattern over and over: Bangladeshi e-commerce businesses spending 12+ hours a day manually replying to Facebook comments, WhatsApp messages, and juggling orders in messy spreadsheets.",
+            "p2": "International AI tools were too expensive, too complex, and not built for how BD businesses actually operate. We knew there had to be a better way — something affordable, deployed fast, and built for local workflows.",
+            "p3": "So we built it. Today, we help businesses across Bangladesh and internationally automate their operations, save time, and grow revenue — without the enterprise price tag or the 6-month implementation timelines."
+        },
+        "mission": {
+            "badge": "Our Mission",
+            "title": "Bridge the gap between AI complexity and business reality",
+            "subtitle": "We believe every business — not just Fortune 500 companies — deserves access to intelligent automation. Our mission is to make AI deployment simple, affordable, and measurable for SMEs."
+        },
+        "services": {
+            "title": "What We Do",
+            "subtitle": "Four pillars. One goal: automate your business.",
+            "items": {
+                "aiAgents": {
+                    "name": "Custom AI Agents",
+                    "desc": "Intelligent chatbots for WhatsApp and Facebook that sell, support, and qualify leads 24/7.",
+                    "link": "/solutions/ai-agents"
+                },
+                "automation": {
+                    "name": "Workflow Automation",
+                    "desc": "Connect your tools with n8n. Automate orders, reviews, follow-ups, and reporting.",
+                    "link": "/solutions/workflow-automation"
+                },
+                "webDev": {
+                    "name": "Web Development",
+                    "desc": "Custom websites, dashboards, and e-commerce platforms built with Next.js and React.",
+                    "link": "/solutions/web-development"
+                },
+                "consulting": {
+                    "name": "AI Consulting",
+                    "desc": "Strategy sessions and audits. We identify where AI saves you time and money — then build the roadmap.",
+                    "link": "/solutions/ai-consulting"
+                }
+            }
+        },
+        "team": {
+            "title": "Meet the Team",
+            "subtitle": "A small team obsessed with automation, clean code, and helping businesses grow.",
+            "members": [
+                {
+                    "name": "Founder",
+                    "role": "CEO & Lead Architect",
+                    "bio": "Built the first AI agent for a friend's e-commerce store. It worked. Now we build them for everyone."
+                },
+                {
+                    "name": "Tech Lead",
+                    "role": "AI & Backend",
+                    "bio": "Turns messy business logic into clean automation workflows. Expert in n8n, OpenAI, and making things just work."
+                },
+                {
+                    "name": "Developer",
+                    "role": "Frontend & Integration",
+                    "bio": "Builds the interfaces and makes sure everything talks to everything else — dashboards, forms, APIs, you name it."
+                }
+            ]
+        },
+        "values": {
+            "title": "What We Stand For",
+            "subtitle": "These principles guide every project we take on.",
+            "items": {
+                "transparency": {
+                    "name": "Transparent Pricing",
+                    "desc": "No hidden fees. No surprise charges. One-time setup, optional maintenance. That's it."
+                },
+                "quality": {
+                    "name": "Quality First",
+                    "desc": "We don't ship half-baked solutions. Every system is tested, documented, and deployed with care."
+                },
+                "results": {
+                    "name": "Results-Driven",
+                    "desc": "We measure success in hours saved, revenue generated, and problems actually solved — not vanity metrics."
+                }
+            }
+        },
+        "stats": {
+            "items": [
+                {
+                    "value": "50+",
+                    "label": "Projects Delivered"
+                },
+                {
+                    "value": "৳249",
+                    "label": "Starting Price"
+                },
+                {
+                    "value": "24hrs",
+                    "label": "Avg. Deploy Time"
+                },
+                {
+                    "value": "100%",
+                    "label": "BD + Global"
+                }
+            ]
+        },
+        "cta": {
+            "title": "Ready to automate your business?",
+            "subtitle": "Book a free 30-minute discovery call. We'll walk through your current workflow, identify bottlenecks, and show you exactly what AI can do for you — no sales pitch, just clarity.",
+            "button": "Book Discovery Call"
+        }
+    }
+}
