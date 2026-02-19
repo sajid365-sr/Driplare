@@ -1,0 +1,85 @@
+{
+    "contact": {
+        "hero": {
+            "badge": "আসুন কথা বলি",
+            "title": "বিনামূল্যে",
+            "titleAccent": "Discovery Call বুক করুন",
+            "subtitle": "কোনো commitment নেই, কোনো pitch নেই — শুধু ৩০ মিনিট আপনার workflow বুঝতে, bottleneck চিহ্নিত করতে, এবং ঠিক কী AI automate করতে পারে তা দেখাতে।"
+        },
+        "paths": {
+            "calendar": {
+                "title": "Calendar-এ বুক করুন",
+                "desc": "উপলব্ধ সময় দেখুন ও তাৎক্ষণিক বুক করুন"
+            },
+            "whatsapp": {
+                "title": "এখনই WhatsApp করুন",
+                "desc": "সরাসরি message পাঠান (BD preferred)"
+            },
+            "form": {
+                "title": "Message পাঠান",
+                "desc": "বিস্তারিতভাবে আপনার project বর্ণনা করুন"
+            }
+        },
+        "whatsapp": {
+            "defaultMessage": "হাই! আমি Driplare-এর সাথে একটি AI automation project নিয়ে আলোচনা করতে চাই।"
+        },
+        "social": {
+            "response": "গড় response: ২ ঘণ্টা",
+            "countries": "BD + ১২টি দেশে সেবা",
+            "rating": "৫০+ client থেকে ৪.৯/৫"
+        },
+        "alt": {
+            "email": {
+                "label": "Email করুন"
+            },
+            "phone": {
+                "label": "Call / WhatsApp"
+            },
+            "location": {
+                "label": "অবস্থান",
+                "value": "ঢাকা, বাংলাদেশ (GMT+6)"
+            }
+        },
+        "form": {
+            "title": "আপনার Project সম্পর্কে বলুন",
+            "subtitle": "আমরা ২ ঘণ্টার মধ্যে পরবর্তী পদক্ষেপ জানিয়ে reply করব।",
+            "name": "পুরো নাম",
+            "email": "Email ঠিকানা",
+            "phone": "Phone (ঐচ্ছিক)",
+            "company": "কোম্পানির নাম (ঐচ্ছিক)",
+            "service": "আগ্রহী",
+            "message": "Project বিবরণ",
+            "submit": "Message পাঠান",
+            "submitting": "পাঠানো হচ্ছে...",
+            "successTitle": "Message পেয়েছি!",
+            "successMessage": "আমরা ২ ঘণ্টার মধ্যে যোগাযোগ করব। আপনার email-এ confirmation ও calendar link চেক করুন।",
+            "error": "কিছু সমস্যা হয়েছে। অনুগ্রহ করে WhatsApp বা email করুন।"
+        },
+        "faq": {
+            "title": "যোগাযোগের আগে প্রশ্ন?",
+            "subtitle": "সাধারণ প্রশ্নের দ্রুত উত্তর",
+            "items": [
+                {
+                    "q": "Discovery call কি সত্যিই বিনামূল্যে?",
+                    "a": "হ্যাঁ। শূন্য খরচ, শূন্য বাধ্যবাধকতা। আমরা আপনার workflow দেখব, কী automate করা যায় তা চিহ্নিত করব, এবং স্পষ্ট roadmap দেব — আপনি আমাদের সাথে কাজ করুন বা না করুন।"
+                },
+                {
+                    "q": "AI agent বানাতে কত সময় লাগে?",
+                    "a": "বেশিরভাগ AI agent ৭-১৪ দিনের মধ্যে deploy হয়। সহজ workflow (Facebook comment reply, WhatsApp order confirmation) ২৪-৪৮ ঘণ্টায় live হতে পারে।"
+                },
+                {
+                    "q": "আন্তর্জাতিক client-দের সাথে কাজ করেন?",
+                    "a": "অবশ্যই। আমরা বাংলাদেশ, USA, UK, Canada, Australia এবং আরও অনেক দেশে client সেবা দিই। সব মূল্য স্বচ্ছ — BDT ও USD উভয়ে।"
+                },
+                {
+                    "q": "আমি নিশ্চিত নই আমার কী দরকার?",
+                    "a": "এজন্যই discovery call। আমরা আপনার সবচেয়ে বড় সময়-অপচয়কারী, manual কাজ এবং repetitive work নিয়ে জিজ্ঞাসা করব — তারপর AI কী সমাধান করতে পারে তা map করব।"
+                },
+                {
+                    "q": "আপনার কাজের উদাহরণ দেখতে পারি?",
+                    "a": "হ্যাঁ! আমাদের Case Studies page-এ আসল project, ফলাফল এবং client testimonial দেখুন। অথবা discovery call-এ জিজ্ঞাসা করুন এবং আমরা live demo দেখাব।"
+                }
+            ]
+        }
+    }
+}

@@ -388,7 +388,7 @@ function AboutCTA() {
     return (
         <section className="py-16 border-t border-border relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none">
-                <GlowBlob color={BRAND.primary} position="center" size={500} opacity={0.06} />
+                <GlowBlob color={BRAND.emerald} position="center" size={500} opacity={0.3} />
             </div>
 
             <div className="container mx-auto px-4 md:px-8 relative z-10">
@@ -428,7 +428,7 @@ export default function AboutPage() {
                 <GridLayer color={BRAND.violet} opacity={0.5} cellSize={44} style="dots" />
                 <DarkGridBoost color={BRAND.violet} opacity={0.055} cellSize={44} />
                 <GlowBlob color={BRAND.violet} position="top-left" size={500} opacity={0.7} duration={22} />
-                <GlowBlob color={BRAND.blue} position="bottom-right" size={420} opacity={0.04} duration={26} delay={8} />
+                <GlowBlob color={BRAND.blue} position="bottom-right" size={420} opacity={0.4} duration={26} delay={8} />
             </div>
 
             <div className="relative z-10">

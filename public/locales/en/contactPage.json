@@ -1,0 +1,85 @@
+{
+    "contact": {
+        "hero": {
+            "badge": "Let's Talk",
+            "title": "Book a Free",
+            "titleAccent": "Discovery Call",
+            "subtitle": "No commitment, no pitch deck — just 30 minutes to understand your workflow, identify bottlenecks, and show you exactly what AI can automate."
+        },
+        "paths": {
+            "calendar": {
+                "title": "Book on Calendar",
+                "desc": "See available slots & book instantly"
+            },
+            "whatsapp": {
+                "title": "WhatsApp Now",
+                "desc": "Message us directly (BD preferred)"
+            },
+            "form": {
+                "title": "Send Message",
+                "desc": "Describe your project in detail"
+            }
+        },
+        "whatsapp": {
+            "defaultMessage": "Hi! I'd like to discuss an AI automation project with Driplare."
+        },
+        "social": {
+            "response": "Avg. response: 2 hours",
+            "countries": "Serving BD + 12 countries",
+            "rating": "4.9/5 from 50+ clients"
+        },
+        "alt": {
+            "email": {
+                "label": "Email Us"
+            },
+            "phone": {
+                "label": "Call / WhatsApp"
+            },
+            "location": {
+                "label": "Location",
+                "value": "Dhaka, Bangladesh (GMT+6)"
+            }
+        },
+        "form": {
+            "title": "Tell Us About Your Project",
+            "subtitle": "We'll reply within 2 hours with next steps.",
+            "name": "Full Name",
+            "email": "Email Address",
+            "phone": "Phone (optional)",
+            "company": "Company Name (optional)",
+            "service": "Interested In",
+            "message": "Project Details",
+            "submit": "Send Message",
+            "submitting": "Sending...",
+            "successTitle": "Message Received!",
+            "successMessage": "We'll reach out within 2 hours. Check your email for a confirmation and calendar link.",
+            "error": "Something went wrong. Please try WhatsApp or email instead."
+        },
+        "faq": {
+            "title": "Questions Before You Reach Out?",
+            "subtitle": "Quick answers to common questions",
+            "items": [
+                {
+                    "q": "Is the discovery call really free?",
+                    "a": "Yes. Zero cost, zero obligation. We walk through your workflow, identify what can be automated, and give you a clear roadmap — whether you work with us or not."
+                },
+                {
+                    "q": "How long does it take to build an AI agent?",
+                    "a": "Most AI agents are deployed within 7-14 days. Simple workflows (Facebook comment replies, WhatsApp order confirmations) can go live in 24-48 hours."
+                },
+                {
+                    "q": "Do you work with international clients?",
+                    "a": "Absolutely. We serve clients across Bangladesh, USA, UK, Canada, Australia, and more. All pricing is transparent — both BDT and USD."
+                },
+                {
+                    "q": "What if I'm not sure what I need?",
+                    "a": "That's exactly what the discovery call is for. We'll ask about your biggest time-wasters, manual tasks, and repetitive work — then map out what AI can solve."
+                },
+                {
+                    "q": "Can I see examples of your work?",
+                    "a": "Yes! Check our Case Studies page for real projects, results, and client testimonials. Or ask during the discovery call and we'll show you live demos."
+                }
+            ]
+        }
+    }
+}
