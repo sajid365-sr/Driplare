@@ -9,12 +9,13 @@ export function FooterBrand() {
 
     return (
         <div className="flex flex-col gap-6 col-span-2 md:col-span-1">
-            {/* Logo */}
+            {/* Brand Logo */}
             <Link
                 href="/"
-                className="text-2xl font-black tracking-tighter text-foreground hover:text-primary transition-colors w-fit"
+                className="relative z-10 -ml-3 hover:opacity-80 transition-opacity"
             >
-                DRIPLARE<span className="text-primary">.</span>
+                <img src="/header-logo-black.png" alt="Driplare" width={170} className="dark:hidden block" />
+                <img src="/header-logo-white.png" alt="Driplare" width={170} className="hidden dark:block" />
             </Link>
 
             {/* Tagline */}

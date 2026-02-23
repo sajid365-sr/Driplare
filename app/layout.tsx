@@ -43,6 +43,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning={true}>
+
         <body
           className={`${montserrat.variable} ${hindSiliguri.variable} antialiased font-sans`}
         >
