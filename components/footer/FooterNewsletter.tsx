@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Send, CheckCircle2, Loader2 } from "lucide-react";
+import { subscribeNewsletter } from "@/lib/form-action";
+import { toast } from "sonner";
 
 export function FooterNewsletter() {
     const { t } = useTranslation();
@@ -16,13 +18,19 @@ export function FooterNewsletter() {
 
         setStatus("loading");
         try {
-            // Replace with your actual newsletter endpoint
-            await new Promise((res) => setTimeout(res, 1200));
-            setStatus("success");
-            setEmail("");
+            const response = await subscribeNewsletter(email)
+
+            if (response.success) {
+                setStatus("success");
+                setEmail("");
+            } else {
+                toast.error(response.error);
+                setStatus("idle")
+                setEmail("")
+            }
         } catch {
             setStatus("error");
-            setTimeout(() => setStatus("idle"), 3000);
+
         }
     };
 

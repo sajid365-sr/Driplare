@@ -1,47 +1,32 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  Star,
-  ChevronLeft,
-  ChevronRight,
-  Edit,
-  ExternalLink,
-  Loader2,
-  Plus,
-  Trash2,
-  User,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Loader2, Plus } from "lucide-react";
 import { toast } from "sonner";
-import { deleteReview, getReviews } from "@/lib/review-action";
-import { useEffect, useState } from "react";
 import { useAlertDialog } from "@/hooks/use-alert-dialog";
+import {
+  deleteReview,
+  getAllReviews,
+  approveReview,
+  rejectReview,
+  toggleFeaturedReview,
+} from "@/lib/review-action";
 import { Review } from "@/types/review-types";
+import { ReviewPagination } from "@/components/admin/review/ReviewPagination";
+import { ReviewsTable } from "@/components/admin/review/ReviewTables";
 
 export default function ReviewsPage() {
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const [allReviews, setAllReviews] = useState<Review[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
   const { showAlert } = useAlertDialog();
 
-  // Pagination State
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
 
   useEffect(() => {
     fetchReviews();
@@ -50,9 +35,9 @@ export default function ReviewsPage() {
   const fetchReviews = async () => {
     setIsLoading(true);
     try {
-      const res = await getReviews(1, 100);
+      const res = await getAllReviews();
       if (res && res.data) {
-        setReviews(res.data as any);
+        setAllReviews(res.data as Review[]);
       } else {
         toast.error("Failed to load reviews");
       }
@@ -64,11 +49,62 @@ export default function ReviewsPage() {
     }
   };
 
+  const handleApprove = async (id: string) => {
+    try {
+      const res = await approveReview(id);
+      if (res.success) {
+        toast.success("Review approved successfully");
+        fetchReviews();
+      } else {
+        toast.error("Failed to approve review");
+      }
+    } catch (error) {
+      toast.error("Error approving review");
+    }
+  };
+
+  const handleReject = async (id: string) => {
+    const confirmed = await showAlert({
+      title: "Reject this review?",
+      description: "This will mark the review as rejected. You can still approve it later.",
+      confirmText: "Reject",
+      cancelText: "Cancel",
+      variant: "destructive",
+    });
+
+    if (confirmed) {
+      try {
+        const res = await rejectReview(id);
+        if (res.success) {
+          toast.success("Review rejected");
+          fetchReviews();
+        } else {
+          toast.error("Failed to reject review");
+        }
+      } catch (error) {
+        toast.error("Error rejecting review");
+      }
+    }
+  };
+
+  const handleToggleFeatured = async (id: string, currentStatus: boolean) => {
+    try {
+      const res = await toggleFeaturedReview(id, !currentStatus);
+      if (res.success) {
+        toast.success(currentStatus ? "Removed from featured" : "Marked as featured");
+        fetchReviews();
+      } else {
+        toast.error("Failed to update featured status");
+      }
+    } catch (error) {
+      toast.error("Error updating featured status");
+    }
+  };
+
   const handleDelete = async (id: string) => {
     const confirmed = await showAlert({
       title: "Are you absolutely sure?",
-      description:
-        "This action cannot be undone. This will permanently delete this review and remove all associated data from our servers.",
+      description: "This action cannot be undone. This will permanently delete this review.",
       confirmText: "Delete",
       cancelText: "Cancel",
       variant: "destructive",
@@ -89,42 +125,20 @@ export default function ReviewsPage() {
     }
   };
 
-  const renderStars = (rating: number) => {
-    return (
-      <div className="flex items-center gap-0.5">
-        {Array.from({ length: 5 }, (_, i) => (
-          <Star
-            key={i}
-            className={`h-3 w-3 ${i < rating
-                ? "text-yellow-400 fill-yellow-400"
-                : "text-gray-300 fill-gray-300"
-              }`}
-          />
-        ))}
-      </div>
-    );
-  };
+  // Filter and paginate
+  const filteredReviews = activeTab === "all"
+    ? allReviews
+    : allReviews.filter((r) => r.status === activeTab);
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "approved":
-        return (
-          <Badge className="bg-green-500 hover:bg-green-600">Approved</Badge>
-        );
-      case "pending":
-        return <Badge variant="secondary">Pending</Badge>;
-      case "rejected":
-        return <Badge variant="destructive">Rejected</Badge>;
-      default:
-        return <Badge variant="outline">{status}</Badge>;
-    }
-  };
-
-  // Pagination Logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = reviews.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(reviews.length / itemsPerPage);
+  const currentItems = filteredReviews.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredReviews.length / itemsPerPage);
+
+  // Counts
+  const pendingCount = allReviews.filter((r) => r.status === "pending").length;
+  const approvedCount = allReviews.filter((r) => r.status === "approved").length;
+  const rejectedCount = allReviews.filter((r) => r.status === "rejected").length;
 
   if (isLoading) {
     return (
@@ -150,147 +164,43 @@ export default function ReviewsPage() {
         </Link>
       </div>
 
-      <div className="border rounded-lg p-8 text-center text-muted-foreground">
-        <Card>
-          <CardHeader>
-            <CardTitle>All Reviews ({reviews.length})</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Client Info</TableHead>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Rating</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Created At</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {currentItems.length > 0 ? (
-                  currentItems.map((review) => (
-                    <TableRow key={review.id}>
-                      <TableCell>
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-blue-500/10 rounded-full flex items-center justify-center">
-                            <User className="w-4 h-4 text-blue-600" />
-                          </div>
-                          <div>
-                            <div className="font-medium">{review.name}</div>
-                            <div className="text-sm text-muted-foreground">
-                              {review.designation} at {review.company}
-                            </div>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="max-w-[250px]">
-                          <div className="font-medium truncate">
-                            {review.testimonialTitle}
-                          </div>
-                          <div className="text-sm text-muted-foreground line-clamp-1">
-                            {review.complement}
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex flex-col gap-1">
-                          {renderStars(review.rating)}
-                          <span className="text-xs text-muted-foreground">
-                            {review.rating}/5
-                          </span>
-                        </div>
-                      </TableCell>
-                      <TableCell>{getStatusBadge(review.status)}</TableCell>
-                      <TableCell className="text-sm">
-                        {new Date(review.createdAt).toLocaleDateString()}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex items-center gap-2 justify-end">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            asChild
-                            title="Edit"
-                          >
-                            <Link href={`/admin/reviews/edit/${review.id}`}>
-                              <Edit className="h-4 w-4 text-blue-600" />
-                            </Link>
-                          </Button>
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList>
+          <TabsTrigger value="all">All ({allReviews.length})</TabsTrigger>
+          <TabsTrigger value="pending">Pending ({pendingCount})</TabsTrigger>
+          <TabsTrigger value="approved">Approved ({approvedCount})</TabsTrigger>
+          <TabsTrigger value="rejected">Rejected ({rejectedCount})</TabsTrigger>
+        </TabsList>
 
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleDelete(review.id)}
-                            className="text-red-600 hover:text-red-700"
-                            title="Delete"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell
-                      colSpan={6}
-                      className="text-center h-24 text-muted-foreground"
-                    >
-                      No reviews found. Start by adding one!
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+        <TabsContent value={activeTab} className="mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                {activeTab === "all"
+                  ? `All Reviews (${allReviews.length})`
+                  : `${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Reviews (${filteredReviews.length})`}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ReviewsTable
+                reviews={currentItems}
+                onApprove={handleApprove}
+                onReject={handleReject}
+                onToggleFeatured={handleToggleFeatured}
+                onDelete={handleDelete}
+              />
 
-            {/* Pagination Controls */}
-            {totalPages > 1 && (
-              <div className="flex items-center justify-between mt-6">
-                <p className="text-sm text-muted-foreground">
-                  Showing {indexOfFirstItem + 1} to{" "}
-                  {Math.min(indexOfLastItem, reviews.length)} of{" "}
-                  {reviews.length}
-                </p>
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                    disabled={currentPage === 1}
-                  >
-                    <ChevronLeft className="h-4 w-4 mr-1" /> Previous
-                  </Button>
-                  <div className="flex items-center gap-1 mx-2">
-                    {Array.from({ length: totalPages }, (_, i) => (
-                      <Button
-                        key={i + 1}
-                        variant={currentPage === i + 1 ? "default" : "outline"}
-                        size="sm"
-                        className="w-8 h-8 p-0"
-                        onClick={() => setCurrentPage(i + 1)}
-                      >
-                        {i + 1}
-                      </Button>
-                    ))}
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      setCurrentPage((p) => Math.min(totalPages, p + 1))
-                    }
-                    disabled={currentPage === totalPages}
-                  >
-                    Next <ChevronRight className="h-4 w-4 ml-1" />
-                  </Button>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+              <ReviewPagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                totalItems={filteredReviews.length}
+                itemsPerPage={itemsPerPage}
+                onPageChange={setCurrentPage}
+              />
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 // app/marketplace/page.tsx  — Server Component
 import { getAllMarketplaceProducts } from "@/lib/marketplace-action";
-import { MarketplaceClient } from "@/components/agent-marketplace/MarketplaceClient";
+import { MarketplaceClient } from "@/components/marketplace/MarketplaceClient";
 
 export const metadata = {
   title: "Marketplace | Driplare — AI Agents, Automations & Websites",
@@ -10,6 +10,8 @@ export const metadata = {
 
 export default async function MarketplacePage() {
   const { agents, automations, websites } = await getAllMarketplaceProducts();
+
+
   return (
     <MarketplaceClient
       agents={agents}

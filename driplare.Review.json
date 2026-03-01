@@ -1,0 +1,117 @@
+[
+  {
+    "_id": {
+      "$oid": "697da682e27ecb359adb1fc4"
+    },
+    "name": "Nadia Rahman",
+    "designation": "Founder & CEO",
+    "company": "BeautyBox BD",
+    "testimonialTitle": "Our sales doubled in just 2 months!",
+    "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200",
+    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "complement": "Before Driplare, I was manually replying to hundreds of Facebook messages every day. Now the AI handles everything—collects orders, answers questions, even remembers customer preferences. I finally have time to focus on growing my business instead of just managing messages.",
+    "testimonial": "Before Driplare, I was manually replying to hundreds of Facebook messages every day. Now the AI handles everything—collects orders, answers questions, even remembers customer preferences. I finally have time to focus on growing my business instead of just managing messages.",
+    "timeSaved": "35+ Hours/Week",
+    "efficiencyGain": "120% More Orders",
+    "rating": 5,
+    "status": "approved",
+    "createdAt": {
+      "$date": "2024-12-15T10:30:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2024-12-15T10:30:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "697da682e27ecb359adb1fc7"
+    },
+    "name": "Mehedi Hassan",
+    "designation": "Managing Director",
+    "company": "HomeEssentials Ltd",
+    "testimonialTitle": "Best investment I made for my business",
+    "imageUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200",
+    "videoUrl": "",
+    "complement": "We were spending 15,000 taka per month on someone to manage customer messages. With Driplare's one-time fee, we got a better system that works 24/7 and never makes mistakes. The ROI was obvious within the first month. Highly recommend!",
+    "testimonial": "We were spending 15,000 taka per month on someone to manage customer messages. With Driplare's one-time fee, we got a better system that works 24/7 and never makes mistakes. The ROI was obvious within the first month. Highly recommend!",
+    "timeSaved": "30+ Hours/Week",
+    "efficiencyGain": "₹15K Monthly Savings",
+    "rating": 5,
+    "status": "approved",
+    "createdAt": {
+      "$date": "2025-01-10T11:45:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2025-01-10T11:45:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "697da682e27ecb359adb1fc9"
+    },
+    "name": "Kamal Uddin",
+    "designation": "Proprietor",
+    "company": "Fresh Grocers Dhaka",
+    "testimonialTitle": "From chaos to organized in 48 hours",
+    "imageUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200",
+    "videoUrl": "",
+    "complement": "Before, customer orders were scattered across WhatsApp, Messenger, and phone calls. I was losing track and making mistakes. Now everything is in one Google Sheet—name, phone, address, items, everything! My delivery process is 10x smoother.",
+    "testimonial": "Before, customer orders were scattered across WhatsApp, Messenger, and phone calls. I was losing track and making mistakes. Now everything is in one Google Sheet—name, phone, address, items, everything! My delivery process is 10x smoother.",
+    "timeSaved": "18+ Hours/Week",
+    "efficiencyGain": "Zero Order Errors",
+    "rating": 5,
+    "status": "approved",
+    "createdAt": {
+      "$date": "2025-01-20T08:00:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2025-01-20T08:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "697da682e27ecb359adb1fc8"
+    },
+    "name": "Sabrina Khan",
+    "designation": "E-commerce Manager",
+    "company": "BabyShop Bangladesh",
+    "testimonialTitle": "Customers love the instant replies!",
+    "imageUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200",
+    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "complement": "Our customer satisfaction went through the roof! People love getting instant answers about product sizes, colors, and delivery. The AI even remembers returning customers and greets them by name. It feels so personal, nobody realizes it's automated.",
+    "testimonial": "Our customer satisfaction went through the roof! People love getting instant answers about product sizes, colors, and delivery. The AI even remembers returning customers and greets them by name. It feels so personal, nobody realizes it's automated.",
+    "timeSaved": "40+ Hours/Week",
+    "efficiencyGain": "150% Customer Satisfaction",
+    "rating": 5,
+    "status": "approved",
+    "createdAt": {
+      "$date": "2025-01-15T16:30:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2025-01-15T16:30:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "697da682e27ecb359adb1fc5"
+    },
+    "name": "Rafiq Ahmed",
+    "designation": "Owner",
+    "company": "Fashion Hub Dhaka",
+    "testimonialTitle": "No more missed orders while sleeping!",
+    "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200",
+    "videoUrl": "",
+    "complement": "I used to lose so many late-night orders because I couldn't reply fast enough. Now customers get instant responses 24/7, and every order is automatically saved in my Google Sheet. It's like having a full-time employee who never sleeps!",
+    "testimonial": "I used to lose so many late-night orders because I couldn't reply fast enough. Now customers get instant responses 24/7, and every order is automatically saved in my Google Sheet. It's like having a full-time employee who never sleeps!",
+    "timeSaved": "20+ Hours/Week",
+    "efficiencyGain": "80% Faster Response",
+    "rating": 5,
+    "status": "approved",
+    "createdAt": {
+      "$date": "2024-12-20T14:20:00.000Z"
+    },
+    "updatedAt": {
+      "$date": "2024-12-20T14:20:00.000Z"
+    }
+  }
+]

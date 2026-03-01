@@ -9,18 +9,18 @@ import { ContactAlternatives } from "@/components/contact/ContactAlternatives";
 import { ContactFAQ } from "@/components/contact/ContactFAQ";
 
 export default function ContactPage() {
-    const { t } = useTranslation();
+    const { t } = useTranslation("contactPage");
     const [formOpen, setFormOpen] = useState(false);
 
     // Replace with your actual contact details
-    const whatsappNumber = "+8801XXXXXXXXX";
+    const whatsappNumber = "+8801305792949";
     const whatsappMessage = encodeURIComponent(
-        t("contact.whatsapp.defaultMessage")
+        t("whatsapp.defaultMessage")
     );
     const calendarUrl = "https://cal.com/driplare";
     const email = "hello@driplare.com";
     const phone = "+880 1305792949";
-    const location = t("contact.alt.location.value");
+    const location = t("alt.location.value");
 
     return (
         <div className="min-h-screen bg-background relative overflow-x-hidden">

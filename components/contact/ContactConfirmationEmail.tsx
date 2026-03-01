@@ -1,4 +1,4 @@
-// components/email/ContactConfirmationEmail.tsx
+"use client"
 
 interface ContactConfirmationEmailProps {
     name: string;
@@ -9,6 +9,10 @@ export function ContactConfirmationEmail({
     name,
     message,
 }: ContactConfirmationEmailProps) {
+    // Replace these with your actual contact details
+    const calendarUrl = "https://cal.com/driplare/30min";
+    const whatsappNumber = "+8801305792929";
+
     return (
         <div style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', maxWidth: '600px', margin: '0 auto' }}>
             <div style={{ background: 'linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)', color: 'white', padding: '30px 20px', borderRadius: '12px 12px 0 0', textAlign: 'center' }}>
@@ -35,7 +39,7 @@ export function ContactConfirmationEmail({
                 </div>
 
                 <div style={{ textAlign: 'center', margin: '20px 0' }}>
-                    <a href="https://cal.com/driplare" style={{ display: 'inline-block', background: '#7c3aed', color: 'white', padding: '12px 24px', textDecoration: 'none', borderRadius: '8px', fontWeight: 600 }}>
+                    <a href={calendarUrl} style={{ display: 'inline-block', background: '#7c3aed', color: 'white', padding: '12px 24px', textDecoration: 'none', borderRadius: '8px', fontWeight: 600 }}>
                         📅 Book Your Discovery Call Now
                     </a>
                 </div>
@@ -43,7 +47,7 @@ export function ContactConfirmationEmail({
                 <div style={{ background: '#f9fafb', borderRadius: '8px', padding: '15px', margin: '20px 0' }}>
                     <p style={{ margin: '8px 0' }}><strong>Questions in the meantime?</strong></p>
                     <p style={{ margin: '8px 0' }}>📧 Email: <a href="mailto:hello@driplare.com" style={{ color: '#7c3aed', textDecoration: 'none' }}>hello@driplare.com</a></p>
-                    <p style={{ margin: '8px 0' }}>💬 WhatsApp: <a href="https://wa.me/+8801305792949" style={{ color: '#10b981', textDecoration: 'none' }}>+880 1XXX-XXXXXX</a></p>
+                    <p style={{ margin: '8px 0' }}>💬 WhatsApp: <a href={`https://wa.me/${whatsappNumber}`} style={{ color: '#10b981', textDecoration: 'none' }}>{whatsappNumber}</a></p>
                     <p style={{ margin: '8px 0' }}>⏰ Response time: Usually within 2 hours (GMT+6)</p>
                 </div>
 

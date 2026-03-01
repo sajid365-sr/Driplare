@@ -70,7 +70,7 @@ export default function ReviewMediaStep<TFormValues extends Record<string, any>>
       );
 
       if (url) {
-        form.setValue("imageUrl", url);
+        form.setValue("clientPhoto", url);
         toast.success("Client photo uploaded successfully!");
         // Clean up local preview
         URL.revokeObjectURL(localPreview);
@@ -97,7 +97,7 @@ export default function ReviewMediaStep<TFormValues extends Record<string, any>>
    * Clears form value and local preview
    */
   const handleRemoveImage = () => {
-    form.setValue("imageUrl", "");
+    form.setValue("clientPhoto", "");
     if (previewUrl) {
       URL.revokeObjectURL(previewUrl);
       setPreviewUrl(null);
@@ -120,10 +120,10 @@ export default function ReviewMediaStep<TFormValues extends Record<string, any>>
             Upload client's profile picture or company logo (max 10MB)
           </FormDescription>
           <div className="flex gap-4 items-center flex-wrap">
-            {form.watch("imageUrl") || previewUrl ? (
+            {form.watch("clientPhoto") || previewUrl ? (
               <div className="relative w-32 h-32 rounded-full border overflow-hidden bg-muted">
                 <Image
-                  src={previewUrl || form.watch("imageUrl") || ""}
+                  src={previewUrl || form.watch("clientPhoto") || ""}
                   fill
                   className="object-cover"
                   alt="Client Photo"

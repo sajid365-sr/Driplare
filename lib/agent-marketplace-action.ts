@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { AgentContent } from "@/types/agent-marketplace";
+import { AgentContent } from "@/types/marketplace-types";
 
 // Types for agent operations
 interface CreateAgentData {

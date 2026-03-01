@@ -114,7 +114,7 @@ export function GetStartedModal({
     productType,
     productName,
     price,
-    whatsappNumber = "8801XXXXXXXXX", // ← replace with your real number
+    whatsappNumber = "8801305792949",
 }: GetStartedModalProps) {
     const [step, setStep] = useState<Step>("form");
     const [form, setForm] = useState(EMPTY_FORM);

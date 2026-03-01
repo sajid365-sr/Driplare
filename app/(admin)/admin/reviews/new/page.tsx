@@ -1,3 +1,5 @@
+/* /admin/reviews / new/page.tsx */
+
 import ReviewForm from "@/components/admin/review/ReviewForm";
 
 /**

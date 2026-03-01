@@ -18,6 +18,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { User, Star } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
+import { Textarea } from "@/components/ui/textarea";
 
 interface ReviewInfoStepProps<TFormValues> {
   form: UseFormReturn<TFormValues>;
@@ -31,6 +32,8 @@ interface ReviewInfoStepProps<TFormValues> {
 export default function ReviewInfoStep<TFormValues extends Record<string, any>>({
   form,
 }: ReviewInfoStepProps<TFormValues>) {
+
+  const reviewTextLength = form.watch("reviewText")?.length || 0;
   return (
     <Card className="block w-full">
       <CardHeader>
@@ -38,12 +41,12 @@ export default function ReviewInfoStep<TFormValues extends Record<string, any>>(
           <User size={18} /> Client Information
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <CardContent className="space-y-4 flex flex-row gap-5">
+        <div className="flex flex-1 flex-col gap-4">
           {/* Client Name */}
           <FormField
             control={form.control}
-            name="name"
+            name="clientName"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -60,7 +63,7 @@ export default function ReviewInfoStep<TFormValues extends Record<string, any>>(
           {/* Designation */}
           <FormField
             control={form.control}
-            name="designation"
+            name="clientRole"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -75,7 +78,7 @@ export default function ReviewInfoStep<TFormValues extends Record<string, any>>(
           />
 
           {/* Company */}
-          <FormField
+          {/* <FormField
             control={form.control}
             name="company"
             render={({ field }) => (
@@ -89,7 +92,7 @@ export default function ReviewInfoStep<TFormValues extends Record<string, any>>(
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
           {/* Rating */}
           <FormField
@@ -121,6 +124,37 @@ export default function ReviewInfoStep<TFormValues extends Record<string, any>>(
                   </SelectContent>
                 </Select>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+
+
+        </div>
+
+        <div className="flex-1">
+
+          {/* Client review */}
+          <FormField
+            control={form.control}
+            name="reviewText"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-base font-semibold">
+                  Review Content *
+                </FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Write the client's detailed testimonial here..."
+                    className="min-h-[200px] text-base resize-none"
+                    {...field}
+                  />
+                </FormControl>
+                <div className="flex justify-between items-center">
+                  <FormMessage />
+                  <p className="text-sm text-muted-foreground">
+                    {reviewTextLength}/500 characters (min 20)
+                  </p>
+                </div>
               </FormItem>
             )}
           />

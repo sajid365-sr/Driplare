@@ -31,7 +31,7 @@ export function ContactHero({
           <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20
                           rounded-full px-3 py-1.5 mb-6">
             <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span className="text-[11px] font-black text-primary uppercase tracking-widest">
+            <span className="text-sm font-semibold text-primary">
               {t("hero.badge")}
             </span>
           </div>
@@ -132,7 +132,7 @@ export function ContactHero({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-muted-foreground"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs md:text-base text-muted-foreground"
           >
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />

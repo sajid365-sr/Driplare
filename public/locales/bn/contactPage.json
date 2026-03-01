@@ -12,7 +12,7 @@
         },
         "whatsapp": {
             "title": "এখনই WhatsApp করুন",
-            "desc": "সরাসরি message পাঠান (BD preferred)"
+            "desc": "সরাসরি message পাঠান "
         },
         "form": {
             "title": "Message পাঠান",
@@ -55,6 +55,7 @@
         "error": "কিছু সমস্যা হয়েছে। অনুগ্রহ করে WhatsApp বা email করুন।"
     },
     "faq": {
+        "badge": "প্রশ্ন আছে?",
         "title": "যোগাযোগের আগে প্রশ্ন?",
         "subtitle": "সাধারণ প্রশ্নের দ্রুত উত্তর",
         "items": [

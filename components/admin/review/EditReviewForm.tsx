@@ -1,3 +1,6 @@
+/* Edit Review Form */
+
+
 "use client";
 
 import { useState } from "react";
@@ -15,15 +18,13 @@ import { toast } from "sonner";
 import { Loader2, Save, User, FileText, ImageIcon, TrendingUp } from "lucide-react";
 
 // Types, Schema & Actions
-import { Review } from "@/types/review-types";
+import { Review, SaveReviewData } from "@/types/review-types";
 import { ReviewFormValues, reviewFormSchema } from "./reviewFormSchema";
-import { saveReview, type SaveReviewData } from "@/lib/review-action";
+import { saveReview } from "@/lib/review-action";
 
 // Step Components
 import ReviewInfoStep from "./ReviewInfoStep";
-import ReviewContentStep from "./ReviewContentStep";
 import ReviewMediaStep from "./ReviewMediaStep";
-import ReviewMetricsStep from "./ReviewMetricsStep";
 
 interface EditReviewFormProps {
   initialData: Review;
@@ -42,15 +43,11 @@ const EditReviewForm = ({ initialData }: EditReviewFormProps) => {
   const form = useForm<ReviewFormValues>({
     resolver: zodResolver(reviewFormSchema),
     defaultValues: {
-      name: initialData.name,
-      designation: initialData.designation,
-      company: initialData.company,
-      testimonialTitle: initialData.testimonialTitle,
-      complement: initialData.complement,
-      imageUrl: initialData.imageUrl ?? "",
+      clientName: initialData.clientName,
+      clientRole: initialData.clientRole,
+      reviewText: initialData.reviewText,
+      clientPhoto: initialData.clientPhoto ?? "",
       videoUrl: initialData.videoUrl ?? "",
-      timeSaved: initialData.timeSaved ?? "",
-      efficiencyGain: initialData.efficiencyGain ?? "",
       rating: initialData.rating,
       status: initialData.status as "pending" | "approved" | "rejected",
     },
@@ -66,15 +63,11 @@ const EditReviewForm = ({ initialData }: EditReviewFormProps) => {
     try {
       // Prepare data for server action
       const reviewData: SaveReviewData = {
-        name: data.name,
-        designation: data.designation,
-        company: data.company,
-        testimonialTitle: data.testimonialTitle,
-        complement: data.complement,
-        imageUrl: data.imageUrl || undefined,
+        clientName: data.clientName,
+        clientRole: data.clientRole,
+        reviewText: data.reviewText,
+        clientPhoto: data.clientPhoto || undefined,
         videoUrl: data.videoUrl || undefined,
-        timeSaved: data.timeSaved || undefined,
-        efficiencyGain: data.efficiencyGain || undefined,
         rating: data.rating,
         status: data.status,
       };
@@ -137,16 +130,10 @@ const EditReviewForm = ({ initialData }: EditReviewFormProps) => {
           <Tabs defaultValue="info" className="w-full">
             <TabsList className="grid w-full grid-cols-4 mb-8 h-12">
               <TabsTrigger value="info" className="text-base">
-                <User className="w-4 h-4 mr-2" /> Client Info
-              </TabsTrigger>
-              <TabsTrigger value="content" className="text-base">
-                <FileText className="w-4 h-4 mr-2" /> Content
+                <User className="w-4 h-4 mr-2" /> Client Info & Content
               </TabsTrigger>
               <TabsTrigger value="media" className="text-base">
                 <ImageIcon className="w-4 h-4 mr-2" /> Media
-              </TabsTrigger>
-              <TabsTrigger value="metrics" className="text-base">
-                <TrendingUp className="w-4 h-4 mr-2" /> Metrics
               </TabsTrigger>
             </TabsList>
 
@@ -155,19 +142,9 @@ const EditReviewForm = ({ initialData }: EditReviewFormProps) => {
               <ReviewInfoStep form={form} />
             </TabsContent>
 
-            {/* Step 2: Review Content */}
-            <TabsContent value="content">
-              <ReviewContentStep form={form} />
-            </TabsContent>
-
-            {/* Step 3: Media & Assets */}
+            {/* Step 2: Media & Assets */}
             <TabsContent value="media">
               <ReviewMediaStep form={form} />
-            </TabsContent>
-
-            {/* Step 4: Metrics & Status */}
-            <TabsContent value="metrics">
-              <ReviewMetricsStep form={form} />
             </TabsContent>
           </Tabs>
         </form>

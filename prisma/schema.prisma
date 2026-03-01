@@ -92,20 +92,35 @@ model Newsletter {
 }
 
 model Review {
-  id               String   @id @default(auto()) @map("_id") @db.ObjectId
-  name             String
-  designation      String
-  company          String
-  testimonialTitle String
-  imageUrl         String
-  videoUrl         String?
-  complement       String // বড় টেক্সটের জন্য @db.Text ব্যবহার করা ভালো
-  timeSaved        String?
-  efficiencyGain   String?
-  rating           Int      @default(5)
-  status           String   @default("approved") // pending, approved, rejected
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  clientName  String
+  clientEmail String
+  clientRole  String? // e.g., "CEO at ABC Corp"
+  clientPhoto String? // Cloudinary URL
+  reviewText  String
+  rating      Int // 1-5
+  projectType String // "AI Agents" | "Workflow Automation" | "Web Development" | "AI Consulting"
+  videoUrl    String? // YouTube/Vimeo embed URL
+
+  // Status & moderation
+  status           String  @default("pending") // "pending" | "approved" | "rejected"
+  featured         Boolean @default(false) // Show in homepage hero section
+  submissionSource String // "client_form" | "admin_manual"
+
+  // Spam prevention
+  ip String? // Client IP address (only for client_form submissions)
+
+  // Metadata
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  approvedAt      DateTime?
+  approvedBy      String? // Admin user ID from Clerk (optional)
+  rejectionReason String? // Why rejected (optional, for your internal tracking)
+
+  @@index([status])
+  @@index([featured])
+  @@index([clientEmail])
+  @@index([createdAt])
 }
 
 type CaseContent {

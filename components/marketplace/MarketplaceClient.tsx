@@ -9,8 +9,7 @@ import {
     SlidersHorizontal, ChevronDown, Package, Filter,
     CheckCircle2, ShoppingBag, ExternalLink,
 } from "lucide-react";
-import { Agent } from "@/types/agent-marketplace";
-import { AutomationProduct, WebsiteProduct, DIFFICULTY_META } from "@/types/marketplace-types";
+import { Agent, AutomationProduct, WebsiteProduct, DIFFICULTY_META, ProcessedAgent } from "@/types/marketplace-types";
 import { GridLayer, DarkGridBoost, GlowBlob, Particles, BRAND } from "@/components/effects/bg-effects";
 
 // ─── Category accent config ───────────────────────────────────────────────────
@@ -216,7 +215,7 @@ function SectionHeader({ type, count }: { type: keyof typeof SECTION_META; count
 
 // ─── MAIN CLIENT COMPONENT ────────────────────────────────────────────────────
 interface Props {
-    agents: Agent[];
+    agents: ProcessedAgent[];
     automations: AutomationProduct[];
     websites: WebsiteProduct[];
 }

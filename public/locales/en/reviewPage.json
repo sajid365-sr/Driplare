@@ -1,0 +1,20 @@
+{
+    "submit": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "role": "Your Role (optional)",
+        "projectType": "Project Type",
+        "rating": "Your Rating",
+        "reviewText": "Your Review",
+        "photo": "Your Photo (optional)",
+        "uploadPhoto": "Click to upload photo",
+        "videoUrl": "Video Testimonial URL (optional)",
+        "videoHint": "YouTube or Vimeo link only",
+        "submit": "Submit Review",
+        "submitting": "Submitting...",
+        "disclaimer": "Your review will be published within 24 hours after approval.",
+        "successTitle": "Thank You!",
+        "successMessage": "Your review has been submitted successfully. We'll review and publish it within 24 hours. Check your email for confirmation.",
+        "backToHome": "Back to Homepage"
+    }
+}

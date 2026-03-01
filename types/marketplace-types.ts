@@ -1,11 +1,80 @@
 // types/marketplace.ts
-// ─────────────────────────────────────────────────────────────────────────────
-// Re-exports Agent types + adds Automation, Website, Lead types
-// ─────────────────────────────────────────────────────────────────────────────
 
-// ── Re-export Agent types (keep existing file intact) ─────────────────────────
-export type { Agent, AgentContent, ProcessedAgent } from "./agent-marketplace";
-export { AGENT_CATEGORIES } from "./agent-marketplace";
+// Categories
+export const AGENT_CATEGORIES = [
+  "All",
+  "E-commerce Automation",
+  "Customer Support",
+  "Lead Generation",
+  "Data Scraping",
+  "Workflow Automation",
+  "Content Creation",
+  "Analytics & Reporting",
+] as const;
+
+export interface AgentContent {
+  name: string;
+  description: string;
+  fullDescription: string;
+  features: string[];
+  benefits?: string[];
+  howItHelps?: string;
+}
+
+// Main Agent Interface (MongoDB Schema)
+export interface Agent {
+  id: string;
+  slug: string;
+  price: number;
+  rating: number;
+  totalSales: number;
+  category: string;
+  mainImage: string;
+  gallery: string[];
+  videoUrl?: string;
+  techStack: string[];
+  difficulty: "Easy" | "Medium" | "Advanced";
+  setupTime: string;
+  status: "active" | "inactive" | "coming-soon";
+
+  // Enhanced conversion fields
+  guarantee?: string;
+  includes?: string[];
+
+  // Language content
+  en: AgentContent;
+  bn: AgentContent;
+
+  createdAt: Date | string;
+  updatedAt: Date | string;
+}
+
+// Processed Agent (for marketplace listing with active language)
+export interface ProcessedAgent {
+  id: string;
+  slug: string;
+  category: string;
+  price: number;
+  rating: number;
+  totalSales: number;
+  mainImage: string;
+  gallery: string[];
+  videoUrl?: string;
+  techStack: string[];
+  difficulty: "Easy" | "Medium" | "Advanced";
+  setupTime: string;
+  status: "active" | "inactive" | "coming-soon";
+  createdAt: Date | string;
+  updatedAt: Date | string;
+
+  // Active language content
+  name: string;
+  description: string;
+  fullDescription: string;
+  features: string[];
+  benefits?: string[];
+  howItHelps?: string;
+}
 
 // ── Automation ────────────────────────────────────────────────────────────────
 export interface AutomationContent {
@@ -99,7 +168,7 @@ export interface MarketplaceLead {
 
 // ── Unified product union type (for shared filter/search logic) ───────────────
 export type MarketplaceProduct =
-  | ({ productType: "agent" } & import("./agent-marketplace").Agent)
+  | ({ productType: "agent" } & Agent)
   | ({ productType: "automation" } & AutomationProduct)
   | ({ productType: "website" } & WebsiteProduct);
 

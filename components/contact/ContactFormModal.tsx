@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { X, Send, Loader2, CheckCircle2 } from "lucide-react";
-import { submitContactForm } from "@/lib/contact-action";
 import type { ContactFormData } from "@/types/contact-types";
 
 interface ContactFormModalProps {
@@ -30,9 +29,21 @@ export function ContactFormModal({ open, onClose }: ContactFormModalProps) {
         setStatus("submitting");
         setErrorMessage("");
 
-        const result = await submitContactForm(formData);
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
 
-        if (result.success) {
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.error || "Failed to submit form");
+            }
+
             setStatus("success");
             setTimeout(() => {
                 setFormData({
@@ -46,9 +57,10 @@ export function ContactFormModal({ open, onClose }: ContactFormModalProps) {
                 setStatus("idle");
                 onClose();
             }, 3000);
-        } else {
+        } catch (error: any) {
+            console.error("Form submission error:", error);
             setStatus("error");
-            setErrorMessage(result.error || "Failed to submit form");
+            setErrorMessage(error.message || "Failed to submit form. Please try again.");
             setTimeout(() => setStatus("idle"), 3000);
         }
     };
@@ -198,7 +210,6 @@ export function ContactFormModal({ open, onClose }: ContactFormModalProps) {
                                                     {t("form.service")} *
                                                 </label>
                                                 <select
-                                                    title="Select the service you want."
                                                     name="service"
                                                     required
                                                     value={formData.service}

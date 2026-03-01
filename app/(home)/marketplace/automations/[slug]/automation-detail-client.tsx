@@ -40,7 +40,7 @@ function Gallery({ images }: { images: string[] }) {
                 <img src={images[active]} alt="" className="w-full h-full object-cover" />
                 {images.length > 1 && (
                     <>
-                        <button onClick={() => setActive(i => (i - 1 + images.length) % images.length)}
+                        <button title="button" onClick={() => setActive(i => (i - 1 + images.length) % images.length)}
                             className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-xl bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-colors">
                             <ChevronLeft className="w-4 h-4" />
                         </button>

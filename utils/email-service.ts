@@ -10,7 +10,8 @@ import { ContactConfirmationEmail } from "@/components/email/ContactConfirmation
 
 // Create a resend instance based on available API key
 const createResendInstance = () => {
-  const apiKey = getResendApiKey() || "Test Key";
+  const apiKey = process.env.RESEND_API_KEY;
+  console.log("API Key ==================", apiKey);
   return new Resend(apiKey);
 };
 

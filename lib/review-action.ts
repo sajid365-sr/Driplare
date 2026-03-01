@@ -2,156 +2,263 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { auth } from "@clerk/nextjs/server";
+import type { Review, ReviewStats, SaveReviewData } from "@/types/review-types";
 
-export interface Testimonial {
-  id: string;
-  name: string;
-  title: string;
-  designation: string;
-  company: string;
-  testimonial: string;
-  testimonialTitle: string;
-  imageUrl: string;
-  complement: string;
-  videoUrl?: string; // ইতিমধ্যেই অপশনাল
-  timeSaved?: string; // ইতিমধ্যেই অপশনাল
-  efficiencyGain?: string; // ইতিমধ্যেই অপশনাল
-  createdAt: Date; // ইতিমধ্যেই অপশনাল
-  clientName: string;
-  rating: number;
-  review: string;
-  project: string;
-  status: "pending" | "approved" | "rejected";
+/**
+ * Get All Reviews (Admin)
+ * Fetches all reviews with optional status filter
+ */
+export async function getAllReviews(
+  status?: "pending" | "approved" | "rejected",
+) {
+  try {
+    const where = status ? { status } : {};
+
+    const reviews = await prisma.review.findMany({
+      where,
+      orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
+    });
+
+    return {
+      success: true,
+      data: JSON.parse(JSON.stringify(reviews)) as Review[],
+    };
+  } catch (error) {
+    console.error("Failed to fetch reviews:", error);
+    return {
+      success: false,
+      data: [],
+    };
+  }
 }
 
-// ১. Fetch a single review by ID
-export const getReview = async (id: string) => {
+/**
+ * Get Single Review by ID (Admin)
+ * Used for edit page
+ */
+export async function getReview(id: string) {
   try {
     const review = await prisma.review.findUnique({
       where: { id },
     });
-    return review;
+
+    if (!review) {
+      return null;
+    }
+
+    return JSON.parse(JSON.stringify(review)) as Review;
   } catch (error) {
-    console.error("Get review error:", error);
+    console.error("Failed to fetch review:", error);
     return null;
   }
-};
-
-// ২. Fetch reviews with pagination
-export const getReviews = async (page: number = 1, pageSize: number = 10) => {
-  try {
-    const skip = (page - 1) * pageSize;
-
-    const [reviews, count] = await Promise.all([
-      prisma.review.findMany({
-        skip,
-        take: pageSize,
-        orderBy: { createdAt: "desc" },
-      }),
-      prisma.review.count(),
-    ]);
-
-    // Prisma এর ডাটাকে Testimonial ইন্টারফেসের সাথে সামঞ্জস্যপূর্ণ করা
-    const formattedData: Testimonial[] = reviews.map((r: any) => ({
-      ...r,
-      videoUrl: r.videoUrl || undefined,
-      timeSaved: r.timeSaved || undefined,
-      efficiencyGain: r.efficiencyGain || undefined,
-      title: r.designation, // designation কে title হিসেবে ম্যাপ করা হলো UI এর জন্য
-    }));
-
-    return {
-      data: formattedData,
-      count,
-      page,
-      pageSize,
-    };
-  } catch (error) {
-    console.error("List review error:", error);
-    return { data: [], count: 0, page, pageSize };
-  }
-};
-
-// Interface for saving reviews
-export interface SaveReviewData {
-  name: string;
-  designation: string;
-  company: string;
-  testimonialTitle: string;
-  complement: string;
-  imageUrl?: string;
-  videoUrl?: string;
-  timeSaved?: string;
-  efficiencyGain?: string;
-  rating?: number;
-  status?: string;
 }
 
-// ৩. Create or Update review
-export const saveReview = async (review: SaveReviewData, reviewId?: string) => {
+/**
+ * Get Approved Reviews Only (Public)
+ * For frontend display
+ */
+export async function getApprovedReviews() {
   try {
-    if (reviewId) {
-      const updated = await prisma.review.update({
-        where: { id: reviewId },
-        data: {
-          name: review.name,
-          designation: review.designation,
-          company: review.company,
-          testimonialTitle: review.testimonialTitle,
-          videoUrl: review.videoUrl || null,
-          imageUrl: review.imageUrl || "",
-          complement: review.complement,
-          timeSaved: review.timeSaved || null,
-          efficiencyGain: review.efficiencyGain || null,
-          rating: review.rating || 5,
-          status: review.status || "approved",
-        },
-      });
-      revalidatePath("/");
-      return {
-        success: true,
-        id: updated.id,
-        message: "Review updated successfully",
-      };
-    } else {
-      const created = await prisma.review.create({
-        data: {
-          name: review.name,
-          designation: review.designation,
-          company: review.company,
-          testimonialTitle: review.testimonialTitle,
-          videoUrl: review.videoUrl || null,
-          imageUrl: review.imageUrl || "",
-          complement: review.complement,
-          timeSaved: review.timeSaved || null,
-          efficiencyGain: review.efficiencyGain || null,
-          rating: review.rating || 5,
-          status: review.status || "approved",
-        },
-      });
-      revalidatePath("/");
-      return {
-        success: true,
-        id: created.id,
-        message: "Review created successfully",
-      };
-    }
-  } catch (error) {
-    console.error("Review save error:", error);
-    return { success: false, message: "Failed to save Review" };
-  }
-};
+    const reviews = await prisma.review.findMany({
+      where: { status: "approved" },
+      orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
+    });
 
-// ৪. Delete a review
-export const deleteReview = async (id: string) => {
+    return {
+      success: true,
+      data: JSON.parse(JSON.stringify(reviews)) as Review[],
+    };
+  } catch (error) {
+    console.error("Failed to fetch approved reviews:", error);
+    return {
+      success: false,
+      data: [],
+    };
+  }
+}
+
+/**
+ * Get Review Stats (Admin Dashboard)
+ */
+export async function getReviewStats(): Promise<ReviewStats> {
   try {
+    const [total, pending, approved, rejected, featured] = await Promise.all([
+      prisma.review.count(),
+      prisma.review.count({ where: { status: "pending" } }),
+      prisma.review.count({ where: { status: "approved" } }),
+      prisma.review.count({ where: { status: "rejected" } }),
+      prisma.review.count({ where: { status: "approved", featured: true } }),
+    ]);
+
+    return { total, pending, approved, rejected, featured };
+  } catch (error) {
+    console.error("Failed to fetch review stats:", error);
+    return { total: 0, pending: 0, approved: 0, rejected: 0, featured: 0 };
+  }
+}
+
+/**
+ * Save Review (Create or Update)
+ * Your existing saveReview function with hybrid support
+ */
+export async function saveReview(data: SaveReviewData, id?: string) {
+  try {
+    const { userId } = await auth();
+    if (!userId) {
+      return { success: false, message: "Unauthorized" };
+    }
+
+    const reviewData = {
+      clientName: data.clientName,
+      clientRole: data.clientRole,
+      reviewText: data.reviewText,
+      clientPhoto: data.clientPhoto || null,
+      videoUrl: data.videoUrl || null,
+      rating: data.rating,
+      status: data.status,
+      featured: data.featured || false,
+      submissionSource: "admin_manual" as const,
+      approvedBy: data.status === "approved" ? userId : null,
+      approvedAt: data.status === "approved" ? new Date() : null,
+    };
+
+    if (id) {
+      // Update existing review
+      await prisma.review.update({
+        where: { id },
+        data: reviewData,
+      });
+    } else {
+      // Create new review
+      await prisma.review.create({
+        data: reviewData,
+      });
+    }
+
+    revalidatePath("/admin/reviews");
+    revalidatePath("/"); // Revalidate homepage
+
+    return {
+      success: true,
+      message: id
+        ? "Review updated successfully"
+        : "Review created successfully",
+    };
+  } catch (error) {
+    console.error("Failed to save review:", error);
+    return {
+      success: false,
+      message: "Failed to save review",
+    };
+  }
+}
+
+/**
+ * Delete Review
+ */
+export async function deleteReview(id: string) {
+  try {
+    const { userId } = await auth();
+    if (!userId) {
+      return { success: false, message: "Unauthorized" };
+    }
+
     await prisma.review.delete({
       where: { id },
     });
+
+    revalidatePath("/admin/reviews");
     revalidatePath("/");
-    return { success: true, message: "Review deleted successfully" };
+
+    return { success: true };
   } catch (error) {
-    console.error("Delete error:", error);
-    return { success: false, message: "Failed to delete review" };
+    console.error("Failed to delete review:", error);
+    return { success: false };
   }
-};
+}
+
+/**
+ * Approve Review (For client submissions)
+ * Quick approve action from pending reviews
+ */
+export async function approveReview(reviewId: string) {
+  try {
+    const { userId } = await auth();
+    if (!userId) {
+      return { success: false, error: "Unauthorized" };
+    }
+
+    await prisma.review.update({
+      where: { id: reviewId },
+      data: {
+        status: "approved",
+        approvedAt: new Date(),
+        approvedBy: userId,
+      },
+    });
+
+    revalidatePath("/admin/reviews");
+    revalidatePath("/");
+
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to approve review:", error);
+    return { success: false, error: "Failed to approve review" };
+  }
+}
+
+/**
+ * Reject Review (For client submissions)
+ */
+export async function rejectReview(reviewId: string, reason?: string) {
+  try {
+    const { userId } = await auth();
+    if (!userId) {
+      return { success: false, error: "Unauthorized" };
+    }
+
+    await prisma.review.update({
+      where: { id: reviewId },
+      data: {
+        status: "rejected",
+        rejectionReason: reason || null,
+      },
+    });
+
+    revalidatePath("/admin/reviews");
+
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to reject review:", error);
+    return { success: false, error: "Failed to reject review" };
+  }
+}
+
+/**
+ * Toggle Featured Status
+ */
+export async function toggleFeaturedReview(
+  reviewId: string,
+  featured: boolean,
+) {
+  try {
+    const { userId } = await auth();
+    if (!userId) {
+      return { success: false, error: "Unauthorized" };
+    }
+
+    await prisma.review.update({
+      where: { id: reviewId },
+      data: { featured },
+    });
+
+    revalidatePath("/admin/reviews");
+    revalidatePath("/");
+
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to toggle featured status:", error);
+    return { success: false, error: "Failed to update review" };
+  }
+}
