@@ -2,8 +2,14 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 // অ্যাডমিন রাউট এবং সাধারণ প্রটেক্টেড রাউট আলাদা করা হয়েছে
-const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
-const isProtectedRoute = createRouteMatcher(["/admin(.*)", "/checkout(.*)"]);
+const isAdminRoute = createRouteMatcher(["/admin(.*)", "/api/admin(.*)"]);
+const isProtectedRoute = createRouteMatcher([
+  "/admin(.*)",
+  "/checkout(.*)",
+  "/dashboard(.*)",
+  "/invoice(.*)",
+  "/api/admin(.*)",
+]);
 
 export default clerkMiddleware(async (auth, req) => {
   const { userId, sessionClaims, redirectToSignIn } = await auth();

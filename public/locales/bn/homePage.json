@@ -123,7 +123,11 @@
     "promise": {
       "title": "এটাই। সত্যিই।",
       "subtitle": "কোন মাসিক ফি নেই। জটিল সেটআপ নেই। শুধু একবার পেমেন্ট আর আপনি শেষ।",
-      "features": ["৪৮ ঘন্টায় সেটআপ", "একবার পেমেন্ট", "টেক জ্ঞান লাগবে না"]
+      "features": [
+        "৪৮ ঘন্টায় সেটআপ",
+        "একবার পেমেন্ট",
+        "টেক জ্ঞান লাগবে না"
+      ]
     },
     "cta": "এখনই শুরু করুন",
     "trustBadge": "১০০+ ব্যবসা ইতিমধ্যে এআই ব্যবহার করে বেশি বিক্রয় করছে"
@@ -251,10 +255,6 @@
       "dashboard": {
         "title": "Custom Dashboards",
         "description": "আপনার ব্যবসার জন্য সম্পূর্ণ control center"
-      },
-      "data": {
-        "title": "Data Intelligence",
-        "description": "Automated insights এবং web scraping"
       },
       "consulting": {
         "title": "Tech Consulting",

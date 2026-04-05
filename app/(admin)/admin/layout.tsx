@@ -11,6 +11,8 @@ import {
   FormInput,
   BellDot,
   MessageCircle,
+  CreditCard,
+  KeyRound,
 } from "lucide-react";
 import { UserButton, useUser } from "@clerk/nextjs";
 
@@ -71,6 +73,11 @@ export default function AdminLayout({
               icon={<MessageCircle size={18} />}
               label="Leads"
             />
+            <NavItem
+              href="/admin/invoices"
+              icon={<CreditCard size={18} />}
+              label="Invoices"
+            />
 
             <div className="text-xs font-semibold text-muted-foreground mt-4 mb-2 px-4">
               CONTENT
@@ -113,6 +120,11 @@ export default function AdminLayout({
               href="/admin/settings"
               icon={<Settings size={18} />}
               label="Settings"
+            />
+            <NavItem
+              href="/admin/api-keys"
+              icon={<KeyRound size={18} />}
+              label="Client API Keys"
             />
           </nav>
         </aside>

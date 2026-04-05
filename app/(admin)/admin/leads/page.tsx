@@ -1,5 +1,6 @@
 import React from "react";
-import { getAllLeads, getLeadStats } from "@/lib/lead-actions";
+import { getLeadStats } from "@/lib/lead-actions";
+import { getAllLeads } from "@/lib/marketplace-action"
 import LeadsTable from "@/components/admin/leads/LeadsTable";
 import LeadStats from "@/components/admin/leads/LeadStats";
 

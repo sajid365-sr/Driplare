@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Bot, Zap, TrendingUp, Clock, ArrowRight, Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
+import { AIAgentChatDemo } from "./AIAgentChatDemo";
 
 
 export function AIAgentHero() {
@@ -167,31 +168,7 @@ export function AIAgentHero() {
                     >
                         {/* Main Visual Card */}
                         <div className="relative aspect-square bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 rounded-3xl border-2 border-border overflow-hidden shadow-2xl">
-                            {/* 
-                VISUAL RECOMMENDATION:
-                - AI chatbot interface mockup
-                - Chat bubbles showing conversation
-                - Product images, order details
-                - Animated typing indicator
-                
-                Placeholder for now - replace with actual illustration
-              */}
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <motion.div
-                                    animate={{
-                                        scale: [1, 1.05, 1],
-                                    }}
-                                    transition={{
-                                        duration: 3,
-                                        repeat: Infinity,
-                                        ease: "easeInOut",
-                                    }}
-                                    className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-2xl"
-                                >
-                                    <Bot className="w-16 h-16 text-white" strokeWidth={2} />
-                                </motion.div>
-                            </div>
-
+                            <AIAgentChatDemo />
                             {/* Floating Stat Cards */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}

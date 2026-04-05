@@ -113,6 +113,10 @@ function ProductCard(p: ProductCardProps) {
                 <div className={`absolute top-3 left-3 text-[10px] font-black border rounded-full px-2.5 py-1 backdrop-blur-sm ${meta.chipBg}`}>
                     {p.category}
                 </div>
+                {/* Setup badge */}
+                <div className="absolute bottom-3 left-3 text-[10px] font-black bg-background/90 dark:bg-[#0a0a12]/80 border border-border dark:border-white/[0.10] rounded-full px-2.5 py-1">
+                    Setup Required
+                </div>
             </div>
 
             {/* Body */}

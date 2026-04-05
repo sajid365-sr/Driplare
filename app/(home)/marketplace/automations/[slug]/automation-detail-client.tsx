@@ -65,12 +65,16 @@ function Gallery({ images }: { images: string[] }) {
     );
 }
 
-export function AutomationDetailClient({ automation }: { automation: AutomationProduct }) {
+export function AutomationDetailClient({ automation, pendingInvoice }: { automation: AutomationProduct; pendingInvoice?: any | null }) {
     const { i18n } = useTranslation();
     const locale = i18n.language?.startsWith("bn") ? "bn" : "en";
     const content = automation[locale as "en" | "bn"] ?? automation.en;
     const [modalOpen, setModalOpen] = useState(false);
     const diff = automation.difficulty ? DIFFICULTY_META[automation.difficulty] : null;
+    const totalPaid = pendingInvoice?.payments
+        ? pendingInvoice.payments.filter((p: any) => p.status === "paid").reduce((s: number, p: any) => s + p.amount, 0)
+        : 0;
+    const amountDue = pendingInvoice ? Math.max(0, pendingInvoice.totalAmount - totalPaid) : 0;
     const videoId = ytId(automation.videoUrl);
 
     const guarantees = [
@@ -268,10 +272,26 @@ export function AutomationDetailClient({ automation }: { automation: AutomationP
                                     </div>
                                     <p className="text-xs text-muted-foreground mb-5 leading-relaxed">{content.description}</p>
 
-                                    <Button onClick={() => setModalOpen(true)}
-                                        className="w-full bg-primary hover:bg-primary/90 font-black text-white shadow-lg shadow-primary/20 h-11 group mb-3">
-                                        Get Started <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
-                                    </Button>
+                                    {pendingInvoice ? (
+                                        <Link
+                                            href={`/invoice/${pendingInvoice.id}`}
+                                            className="w-full inline-flex items-center justify-center bg-primary hover:bg-primary/90 font-black text-white shadow-lg shadow-primary/20 h-11 rounded-xl group mb-3"
+                                        >
+                                            Continue Payment
+                                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                                        </Link>
+                                    ) : (
+                                        <Button onClick={() => setModalOpen(true)}
+                                            className="w-full bg-primary hover:bg-primary/90 font-black text-white shadow-lg shadow-primary/20 h-11 group mb-3">
+                                            Schedule Free Call <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                                        </Button>
+                                    )}
+
+                                    {pendingInvoice && (
+                                        <div className="text-xs text-muted-foreground mb-3">
+                                            Pending balance: ৳{amountDue.toLocaleString()}
+                                        </div>
+                                    )}
 
                                     <div className="space-y-2.5 pt-4 border-t border-border dark:border-white/[0.07]">
                                         {[

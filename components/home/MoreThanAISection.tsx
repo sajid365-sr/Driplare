@@ -5,14 +5,13 @@ import {
   Bot,
   Workflow,
   LayoutDashboard,
-  Radar,
   Lightbulb,
   ArrowRight,
   Sparkles,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { EcosystemDiagram } from "./EcosystemDiagram";
 
 export function MoreThanAISection() {
   const { t } = useTranslation("homePage");
@@ -43,25 +42,16 @@ export function MoreThanAISection() {
       color: "from-accent to-accent/80",
       iconColor: "text-accent",
       bgColor: "bg-accent/10",
-      link: "/solutions/mern-solutions",
-    },
-    {
-      icon: Radar,
-      title: t("moreThanAI.pillars.data.title"),
-      description: t("moreThanAI.pillars.data.description"),
-      color: "from-primary/80 to-secondary",
-      iconColor: "text-primary",
-      bgColor: "bg-primary/10",
-      link: "/solutions/data-intelligence",
+      link: "/solutions/web-development",
     },
     {
       icon: Lightbulb,
       title: t("moreThanAI.pillars.consulting.title"),
       description: t("moreThanAI.pillars.consulting.description"),
-      color: "from-accent/80 to-primary/60",
-      iconColor: "text-accent",
-      bgColor: "bg-accent/10",
-      link: "/solutions/tech-consulting",
+      color: "from-primary/70 to-accent/70",
+      iconColor: "text-primary",
+      bgColor: "bg-primary/10",
+      link: "/solutions/ai-consulting",
     },
   ];
 
@@ -108,104 +98,20 @@ export function MoreThanAISection() {
           </p>
         </motion.div>
 
-        {/* Ecosystem Visual */}
+        {/* Ecosystem Visual - Animated SVG */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className="max-w-5xl mx-auto mb-16"
         >
-          <div className="relative aspect-[16/9] md:aspect-[21/9] bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 rounded-3xl border-2 border-border overflow-hidden">
-            {/* Placeholder for Ecosystem Illustration */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              {/* Central Hub */}
-              <div className="relative">
-                <motion.div
-                  animate={{
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-2xl"
-                >
-                  <Sparkles className="w-12 h-12 md:w-16 md:h-16 text-white" />
-                </motion.div>
-
-                {/* Orbiting Icons */}
-                {pillars.map((pillar, index) => {
-                  const angle = (index * 360) / pillars.length;
-                  const radius = 120; // Distance from center
-                  const x = Math.cos((angle * Math.PI) / 180) * radius;
-                  const y = Math.sin((angle * Math.PI) / 180) * radius;
-
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.15 }}
-                      className="absolute top-1/2 left-1/2"
-                      style={{
-                        transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
-                      }}
-                    >
-                      <div className={`w-14 h-14 md:w-16 md:h-16 rounded-xl ${pillar.bgColor} border-2 border-border flex items-center justify-center shadow-lg backdrop-blur-sm`}>
-                        <pillar.icon className={`w-7 h-7 md:w-8 md:h-8 ${pillar.iconColor}`} strokeWidth={2} />
-                      </div>
-
-                      {/* Connecting Line */}
-                      <svg
-                        className="absolute top-1/2 left-1/2 -z-10"
-                        style={{
-                          width: Math.abs(x) * 2,
-                          height: Math.abs(y) * 2,
-                          transform: 'translate(-50%, -50%)',
-                        }}
-                      >
-                        <line
-                          x1={x > 0 ? 0 : Math.abs(x) * 2}
-                          y1={y > 0 ? 0 : Math.abs(y) * 2}
-                          x2={x > 0 ? Math.abs(x) * 2 : 0}
-                          y2={y > 0 ? Math.abs(y) * 2 : 0}
-                          stroke="hsl(var(--primary))"
-                          strokeWidth="2"
-                          strokeDasharray="4 4"
-                          opacity="0.2"
-                        />
-                      </svg>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Image Placeholder Comment */}
-            {/* 
-              RECOMMENDED IMAGE/ILLUSTRATION:
-              - Concept: 5 connected nodes around central hub (ecosystem diagram)
-              - Style: Isometric tech illustration or animated SVG
-              - Colors: Primary (violet), Secondary (blue), Accent (green)
-              - Tools: Figma, Illustrator, or use Blush.design
-              - Dimensions: 1400x600px (21:9 ratio)
-              - Alt: "Driplare complete technology ecosystem"
-              
-              To add custom image:
-              <Image
-                src="/images/ecosystem-diagram.svg"
-                alt={t("moreThanAI.imageAlt")}
-                fill
-                className="object-contain p-8"
-              />
-            */}
+          <div className="relative aspect-[2/1] bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 rounded-3xl border-2 border-border overflow-hidden p-8">
+            <EcosystemDiagram />
           </div>
         </motion.div>
 
         {/* Pillars Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12">
           {pillars.map((pillar, index) => (
             <motion.a
               key={index}

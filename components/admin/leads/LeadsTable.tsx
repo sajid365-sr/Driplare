@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { format } from "date-fns";
-import { MessageCircle, Mail, ExternalLink } from "lucide-react";
+import { MessageCircle, Mail } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -39,7 +40,7 @@ export default function LeadsTable({ initialLeads }: LeadsTableProps) {
 
   const handleStatusChange = async (leadId: string, newStatus: LeadStatus) => {
     const result = await updateLead({ id: leadId, status: newStatus });
-    
+
     if (result.success) {
       setLeads((prev) =>
         prev.map((lead) =>
@@ -163,15 +164,23 @@ export default function LeadsTable({ initialLeads }: LeadsTableProps) {
                       </Select>
                     </TableCell>
                     <TableCell>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => openWhatsApp(lead.whatsapp, lead.name)}
-                        className="bg-[#25D366] hover:bg-[#20BA5A] text-white border-0"
-                      >
-                        <MessageCircle className="h-4 w-4 mr-1" />
-                        WhatsApp
-                      </Button>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => openWhatsApp(lead.whatsapp, lead.name)}
+                          className="bg-[#25D366] hover:bg-[#20BA5A] text-white border-0"
+                        >
+                          <MessageCircle className="h-4 w-4 mr-1" />
+                          WhatsApp
+                        </Button>
+                        <Link
+                          href={`/admin/invoices/new?name=${encodeURIComponent(lead.name)}&email=${encodeURIComponent(lead.email)}&productName=${encodeURIComponent(lead.agentName)}&productType=agent`}
+                          className="text-sm font-semibold text-primary"
+                        >
+                          Create Invoice
+                        </Link>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))

@@ -9,7 +9,7 @@ import {
     ChevronLeft, ChevronRight, Bot, ShieldCheck, ArrowRight,
     Package, Layers,
 } from "lucide-react";
-import { Agent } from "@/types/agent-marketplace";
+import { Agent } from "@/types/marketplace-types";
 import { DIFFICULTY_META } from "@/types/marketplace-types";
 import { GetStartedModal } from "@/components/agent-marketplace/get-started-modal";
 import { GridLayer, DarkGridBoost, GlowBlob, Particles, BRAND } from "@/components/effects/bg-effects";
@@ -65,12 +65,16 @@ function Gallery({ images }: { images: string[] }) {
     );
 }
 
-export function AgentDetailClient({ agent }: { agent: Agent }) {
+export function AgentDetailClient({ agent, pendingInvoice }: { agent: Agent; pendingInvoice?: any | null }) {
     const { i18n } = useTranslation();
     const locale = i18n.language?.startsWith("bn") ? "bn" : "en";
     const content = agent[locale] ?? agent.en;
     const [modalOpen, setModalOpen] = useState(false);
     const diff = agent.difficulty ? DIFFICULTY_META[agent.difficulty] : null;
+    const totalPaid = pendingInvoice?.payments
+        ? pendingInvoice.payments.filter((p: any) => p.status === "paid").reduce((s: number, p: any) => s + p.amount, 0)
+        : 0;
+    const amountDue = pendingInvoice ? Math.max(0, pendingInvoice.totalAmount - totalPaid) : 0;
     const videoId = ytId(agent.videoUrl);
 
     // Enhanced agent data additions for client-friendliness
@@ -233,13 +237,29 @@ export function AgentDetailClient({ agent }: { agent: Agent }) {
                                     </div>
                                     <p className="text-xs text-muted-foreground mb-5 leading-relaxed">{content.description}</p>
 
-                                    <Button
-                                        onClick={() => setModalOpen(true)}
-                                        className="w-full bg-primary hover:bg-primary/90 font-black text-white shadow-lg shadow-primary/20 h-11 group mb-3"
-                                    >
-                                        Get Started
-                                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
-                                    </Button>
+                                    {pendingInvoice ? (
+                                        <Link
+                                            href={`/invoice/${pendingInvoice.id}`}
+                                            className="w-full inline-flex items-center justify-center bg-primary hover:bg-primary/90 font-black text-white shadow-lg shadow-primary/20 h-11 rounded-xl group mb-3"
+                                        >
+                                            Continue Payment
+                                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                                        </Link>
+                                    ) : (
+                                        <Button
+                                            onClick={() => setModalOpen(true)}
+                                            className="w-full bg-primary hover:bg-primary/90 font-black text-white shadow-lg shadow-primary/20 h-11 group mb-3"
+                                        >
+                                            Schedule Free Call
+                                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                                        </Button>
+                                    )}
+
+                                    {pendingInvoice && (
+                                        <div className="text-xs text-muted-foreground mb-3">
+                                            Pending balance: ৳{amountDue.toLocaleString()}
+                                        </div>
+                                    )}
 
                                     <div className="space-y-2.5 pt-4 border-t border-border dark:border-white/[0.07]">
                                         {[

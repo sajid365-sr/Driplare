@@ -1,6 +1,9 @@
 // app/marketplace/agents/[slug]/page.tsx
 import { notFound } from "next/navigation";
+import { currentUser } from "@clerk/nextjs/server";
 import { getAgentBySlug, getAllAgents } from "@/lib/agent-marketplace-action";
+import { getDbUser } from "@/lib/auth-action";
+import { getPendingInvoiceForProduct } from "@/lib/billing-actions";
 import { AgentDetailClient } from "./agent-detail-client";
 
 export async function generateStaticParams() {
@@ -22,5 +25,21 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function AgentDetailPage({ params }: { params: { slug: string } }) {
     const res = await getAgentBySlug(params.slug);
     if (!res.success || !res.data) notFound();
-    return <AgentDetailClient agent={res.data as any} />;
+
+    const user = await currentUser();
+    const email = user?.emailAddresses?.[0]?.emailAddress;
+    const dbUser = user ? await getDbUser(user.id) : null;
+    const pending = await getPendingInvoiceForProduct({
+        userId: dbUser?.id,
+        email: email ?? undefined,
+        productType: "agent",
+        productSlug: params.slug,
+    });
+
+    return (
+        <AgentDetailClient
+            agent={res.data as any}
+            pendingInvoice={pending.success ? (pending.data as any) : null}
+        />
+    );
 }

@@ -25,6 +25,13 @@ export interface SiteSettings {
     maintenanceMode: boolean;
     cloudinaryFolder: string;
     resendFromEmail: string;
+    companyAddress?: string | null;
+    companyPhone?: string | null;
+    companyEmail?: string | null;
+    companyWebsite?: string | null;
+    companyVatNumber?: string | null;
+    paymentInstructions?: string | null;
+    invoiceFooterNote?: string | null;
     updatedAt: Date;
 }
 
@@ -48,6 +55,13 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
                     maintenanceMode: false,
                     cloudinaryFolder: "portfolio",
                     resendFromEmail: "onboarding@resend.dev",
+                    companyAddress: null,
+                    companyPhone: null,
+                    companyEmail: null,
+                    companyWebsite: null,
+                    companyVatNumber: null,
+                    paymentInstructions: null,
+                    invoiceFooterNote: null,
                 },
             });
 
@@ -101,6 +115,13 @@ export async function updateSiteSettings(
                     maintenanceMode: updateData.maintenanceMode ?? false,
                     cloudinaryFolder: updateData.cloudinaryFolder || "portfolio",
                     resendFromEmail: updateData.resendFromEmail || "onboarding@resend.dev",
+                    companyAddress: updateData.companyAddress ?? null,
+                    companyPhone: updateData.companyPhone ?? null,
+                    companyEmail: updateData.companyEmail ?? null,
+                    companyWebsite: updateData.companyWebsite ?? null,
+                    companyVatNumber: updateData.companyVatNumber ?? null,
+                    paymentInstructions: updateData.paymentInstructions ?? null,
+                    invoiceFooterNote: updateData.invoiceFooterNote ?? null,
                 },
             });
         }

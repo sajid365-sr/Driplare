@@ -22,6 +22,7 @@ import {
   Briefcase,
   Bell,
   ShieldCheck,
+  LayoutDashboard,
 } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./language-switcher";
@@ -225,17 +226,6 @@ export function Navbar() {
                   {t("navigation.insights")}
                 </Link>
               </NavigationMenuItem>
-              <NavigationMenuItem>
-                {isAdmin && (
-                  <Link
-                    href="/admin"
-                    className="flex items-center gap-1 text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-full font-medium hover:bg-primary/20 transition-all"
-                  >
-                    <ShieldCheck size={14} />
-                    Admin Panel
-                  </Link>
-                )}
-              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 
@@ -258,24 +248,35 @@ export function Navbar() {
             </SignedOut>
 
             <SignedIn>
-              <UserButton />
+              <UserButton>
+                <UserButton.MenuItems>
+                  {
+
+                    !isAdmin && <UserButton.Link
+                      label="Dashboard"
+                      href="/dashboard"
+                      labelIcon={<LayoutDashboard className="h-4 w-4" />}
+                    />
+                  }
+
+
+                </UserButton.MenuItems>
+                <UserButton.MenuItems>
+                  {isAdmin && (
+                    <UserButton.Link
+                      href="/admin"
+                      label="Admin Panel"
+                      labelIcon={<ShieldCheck size={14} className="h-4 w-4" />}
+
+                    />
+
+
+                  )}
+                </UserButton.MenuItems>
+              </UserButton>
             </SignedIn>
 
-            {/* <div className="relative">
-              <button
-                type="button"
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="p-2 rounded-full hover:bg-primary/10 relative"
-                aria-label="Toggle notifications"
-              >
-                <Bell size={20} />
-              </button>
-              {showNotifications && (
-                <NotificationsDropdown
-                  onClose={() => setShowNotifications(false)}
-                />
-              )}
-            </div> */}
+
 
             <LanguageSwitcher />
             <ThemeToggle />

@@ -19,7 +19,12 @@ model User {
   role      String?  @default("user")
 
   // Relations
-  chatMessages ChatMessage[]
+  chatMessages  ChatMessage[]
+  projects      Project[]
+  invoices      Invoice[]
+  payments      Payment[]
+  apiUsages     ApiUsage[]
+  clientApiKeys ClientApiKey[]
 
   @@map("users")
 }
@@ -214,6 +219,15 @@ model SiteSettings {
   // API Config (Non-sensitive only)
   cloudinaryFolder String @default("portfolio")
   resendFromEmail  String @default("onboarding@resend.dev")
+
+  // Invoice Branding
+  companyAddress      String?
+  companyPhone        String?
+  companyEmail        String?
+  companyWebsite      String?
+  companyVatNumber    String?
+  paymentInstructions String?
+  invoiceFooterNote   String?
 
   updatedAt DateTime @updatedAt
 
@@ -422,4 +436,164 @@ model MarketplaceLead {
   updatedAt DateTime @updatedAt
 
   @@map("marketplace_leads")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SERVICE DELIVERY & BILLING
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Project {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  // Client linkage (can be attached later after sign-up)
+  userId        String? @db.ObjectId
+  customerName  String
+  customerEmail String
+
+  // Product reference
+  productId   String?
+  productSlug String?
+  productType String // "agent" | "automation" | "website" | "custom"
+  productName String
+
+  // Project status
+  status       String  @default("active") // "active" | "paused" | "delivered" | "closed"
+  scopeSummary String?
+  timeline     String? // e.g. "2 weeks"
+  nextAction   String?
+
+  // Optional link to marketplace lead
+  leadId String?
+
+  // Relations
+  user     User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  invoices Invoice[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([customerEmail])
+  @@index([status])
+  @@map("projects")
+}
+
+model Invoice {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  invoiceNumber String @unique
+
+  projectId String @db.ObjectId
+
+  // Client linkage (optional until user signs up)
+  userId        String? @db.ObjectId
+  customerName  String
+  customerEmail String
+
+  // Amounts
+  currency        String @default("BDT")
+  totalAmount     Float
+  depositPercent  Int    @default(50)
+  depositAmount   Float
+  remainingAmount Float
+
+  // Terms & scope
+  scopeSummary    String?
+  timelineSummary String?
+  termsNote       String?
+  refundNote      String?
+
+  // Status lifecycle
+  status      String    @default("sent") // "draft" | "sent" | "deposit_paid" | "paid" | "overdue" | "cancelled"
+  issuedAt    DateTime  @default(now())
+  dueDate     DateTime?
+  deliveredAt DateTime?
+
+  // Relations
+  project  Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user     User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  payments Payment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([customerEmail])
+  @@index([status])
+  @@index([projectId])
+  @@map("invoices")
+}
+
+model InvoiceCounter {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  year Int    @unique
+  seq  Int    @default(0)
+
+  @@map("invoice_counters")
+}
+
+model Payment {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  invoiceId String  @db.ObjectId
+  userId    String? @db.ObjectId
+
+  amount        Float
+  currency      String  @default("BDT")
+  status        String  @default("pending") // "pending" | "paid" | "failed" | "cancelled"
+  method        String  @default("sslcommerz")
+  gatewayRef    String? // gateway reference
+  transactionId String?
+
+  paidAt    DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  // Relations
+  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  user    User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([invoiceId])
+  @@index([status])
+  @@map("payments")
+}
+
+model ApiUsage {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  userId String @db.ObjectId
+  period String // "YYYY-MM"
+
+  messageCount Int    @default(0)
+  tokenCount   Int    @default(0)
+  cost         Float  @default(0)
+  currency     String @default("BDT")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, period])
+  @@index([period])
+  @@map("api_usage")
+}
+
+model ClientApiKey {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  userId       String @db.ObjectId
+  provider     String @default("openai")
+  encryptedKey String
+  keyLast4     String
+  status       String @default("active") // "active" | "revoked"
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, provider])
+  @@index([userId])
+  @@map("client_api_keys")
 }
